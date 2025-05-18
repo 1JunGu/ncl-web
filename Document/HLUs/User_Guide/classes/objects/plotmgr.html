@@ -1,0 +1,575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/User_Guide/classes/objects/plotmgr.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 18:42:03 GMT -->
+<head>
+<title>PlotManager class</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../../../index-2.html">Documentation ></a>
+<a class=crumb href="../../../index.html">HLUs ></a>
+<a class=crumb href="../../index-2.html">User Guide </a>
+
+<br>
+<h1>PlotManager class</h1>
+
+<p>In order to use the PlotManager effectively, it is helpful to
+understand what is being managed. The PlotManager manages <em>plot
+objects</em>.  What, then, are plot objects?
+
+<h2>Plot objects</h2>
+
+Plot objects are used to create plots, that is, graphical
+representations of data accompanied by annotations like labelled
+tickmarks that give a context to the data and help reveal its
+meaning. Think of a plot object as an organized collection of View
+objects that you can draw with a single call. Its focus is a
+rectangular space within which the data is visualized. This space is
+called the data coordinate space and is the viewport of a Transform
+object. By itself, a Transform object is not a plot object, because
+although it contains a representation of the data, it has no means of
+placing the data in context. This is where the PlotManager comes in.
+
+<p>You create a basic plot object whenever you instantiate a Transform
+object with an active PlotManager. Normally, you do not even need to
+be aware that you are doing this, because, by default, the PlotManager
+is activated whenever you instantiate one of the composite Transform
+classes that can be used as a plot object. These include XyPlot,
+ContourPlot, MapPlot, LogLinPlot, and IrregularPlot.
+
+<h2>Role of the PlotManager</h2>
+
+<p> The PlotManager operates for the most part behind the scenes. One
+of its basic roles is to manage the built-in annotations that provide
+a context for the data. These built-in annotations (known as intrinsic
+annotations) include titles, tickmarks, a labelbar, and a legend; they
+are available to any of the plot object classes that choose to use
+them. The PlotManager does not concern itself with the content of
+these annotations; its role is limited to turning them on and off,
+positioning and sizing them relative to the plot object's current
+viewport, and ensuring that they do not overlap.
+
+<p>The PlotManager provides a number of resources for controlling
+these attributes. For instance, the resource <a href="../../../../Graphics/Resources/pm.html#pmLabelBarDisplayMode"><em>pmLabelBarDisplayMode</em></a> determines when the
+LabelBar should be displayed; and the resource <a href="../../../../Graphics/Resources/pm.html#pmLabelBarSide"><em>pmLabelBarSide</em></a> determines the side of the
+coordinate space viewport on which the LabelBar is to appear. Since
+the PlotManager is a composite member of the plot object, its
+resources are set as if they belonged directly to the plot object
+itself. As an example, to display the LabelBar on the left side of the
+viewport of a ContourPlot you are creating, you could execute:
+
+<pre>
+C:
+    NhlRLClear(rlist);
+    NhlRLSetString(rlist,"pmLabelBarDisplayMode","always");
+    NhlRLSetString(rlist,"pmLabelBarSide","left");
+    NhlCreate(&cnid,"Contour1",NhlcontourPlotClass,wid,rlist);
+
+Fortran:
+    call NhlFRLClear(srlist)
+    call NhlFRLSetString(rlist,'pmLabelBarDisplayMode','always',ierr);
+    call NhlFRLSetString(rlist,'pmLabelBarSide','left',ierr);
+    call NhlFCreate(cnid,'Contour1',NhlfcontourPlotClass,wid,rlist,ierr)
+</pre>
+
+<p>Besides managing the built-in annotations, the PlotManager has a
+number of other capabilities. It allows you to overlay other Transform
+objects into the data coordinate space of the plot object.  It also
+allows you to add any number of independently-created View objects as
+external annotations. These overlays and annotations are called "plot
+members", and they function very much as if they are an integral part
+of the plot object. Drawing the plot object causes the plot members to
+be drawn as well; changing the plot object's size or position causes
+proportional changes to the plot members.
+
+<h2>Overlays</h2>
+
+<p>Since an overlay must be a Transform object, it is interesting to
+note that the overlay might itself be a plot object. Most classes of
+plot object can perform either role, that of providing the data
+coordinate space on which Transform objects are overlaid, or that of
+becoming overlays themselves. A plot object that provides the data
+coordinate space is called a "base plot object". All plot objects are
+base plot objects when they are first created. When a plot object
+becomes an overlay, its PlotManager cedes its management responsibilities
+to the base plot object's PlotManager. Also note that the base plot
+determines the boundaries of the coordinate space. If the overlay's
+data coordinate space extends outside these boundaries, it is clipped.
+
+<p>A common use of overlays would be to render a contour plot of
+scalar data, such as temperature, projected onto a plot of the region
+of the earth to which the data values apply. You accomplish this by
+overlaying a ContourPlot object on a MapPlot object. First you
+independently create both the ContourPlot and the MapPlot, supplying
+the appropriate data to the ContourPlot and the appropriate limits and
+the desired projection to the MapPlot. Then when you execute the
+following call:
+
+<pre>
+C:
+    NhlAddOverlay(mapplotid,contourplotid,-1);
+
+Fortran:
+    call NhlfAddOverlay(mapplotid,contourplotid,-1,ierr)
+</pre>
+
+the ContourPlot becomes an overlay of the MapPlot. Essentially, the
+ContourPlot and the MapPlot are merged into a single plot under
+control of the MapPlot's PlotManager. The ContourPlot's coordinate
+space is transformed into the data space of the MapPlot, as defined by
+one of the ten MapPlot projections and the current projection limits.
+You can no longer draw the ContourPlot as an independent object, but
+when you draw the MapPlot the contour data appears properly located
+within the MapPlot viewport. 
+
+<p>If you want to draw the ContourPlot independently again, you must
+first remove it from the plot on which it is overlaid. This you would do
+using the NhlRemoveOverlay function.
+
+<p>You can look at the C example mp03c.c or the Fortran example mp03f.f
+to see a working example of a ContourPlot overlaid on a
+MapPlot. The command "ng4ex -n mp03c" will deposit the C code
+in your working directory.  Substitute mp03f to get the Fortran code.
+
+<p>
+<H2>Multiple overlays</H2>
+<p>
+
+You can overlay more than one Transform object on the data coordinate
+space of a base plot. You could, for instance, display one dataset
+using filled contours, some related datasets using line contours
+with distinctive line styles, and, in addition, perhaps locate some
+important features using markers drawn by XyPlot. All of these components
+of the final graphic can be drawn on top of each other in a prescribed
+order controlled by the PlotManager.
+<p>
+If all of the graphical components are line drawings the order in which
+they are overlaid is not as important as it is when some of the objects
+are solid filled.  For example, contour lines would have to be placed on top
+of a filled geographic map or they would disappear.  Likewise a geographic
+continental outline would have to be placed on top of a set of filled
+contours or it would disappear.
+
+<p> The order in which the overlays are drawn is based on the overlay
+sequence, which you can determine by getting the value of the array
+resource, <a href="../../../../Graphics/Resources/pm.html#pmOverlaySequenceIds"><em>pmOverlaySequenceIds</em></a>.
+By default, the contents of the base plot are drawn first, followed by
+each overlay in the order it was added, but you can control the
+sequence of overlays by manipulating the third parameter of the
+NhlAddOverlay function. However, the PlotManager also uses a
+three-phase draw sequence. If the plot object class also supports draw
+phases, you can gain a greater control over when particular elements
+of a plot are drawn by manipulating their draw phase.  Currently only
+the ContourPlot and MapPlot have draw phase capabilities.
+
+<h2>Managing the location of annotations</h2>
+<p>
+
+The PlotManager uses a scheme based on a series of concentric areas
+surrounding the plot object's viewport for positioning annotations.
+Built-in annotations like titles and labelbars, annotations created by
+plot objects, and external annotations created by the user are all
+treated alike. Each concentric area is an "annotation zone". Zones are
+numbered consecutively and except for zones 0 and 1, each zone is
+shaped like a rectilinear doughnut surrounding the zone preceding
+it. If no annotation objects are placed in a zone, it will have no
+area, meaning that its exterior boundary will be coincident with its
+interior boundary. There is no upper limit to the number of zones
+used.
+
+<p>
+The viewport of the plot object, for example, an XyPlot, defines
+the outer boundary of zone 1. Unlike the outer zones, zone
+1 has no "hole" in the middle, because zone 0 is simply a point at
+the center of the viewport. The boundaries of zone 1 are
+defined by the viewport resources, vpXF, vpYF, vpWidthF, and
+vpHeightF, according to:
+<p>
+<ul>
+<li>vpXF is the left edge of the viewport in NDC space (0.2 default).<br>
+<li>vpYF is the top edge of the viewport in NDC space (0.8 default).<br>
+<li>vpHeightF is the height of the viewport in NDC space (0.6 default).<br>
+<li>vpWidthF is the width of the viewport in NDC space (0.6 default).<br>
+</ul>
+
+<p>In the default case, 40% of the drawable viewspace is available for
+the outer concentric zones in which titles, legends, labelbars, and
+other annotations can be placed.
+
+In the example below, we put titles for the X and Y Axes into zone 2.
+Then a main title and a legend are put in zone 3.
+<p>
+<pre>
+	-------------------------------
+	| [Zone 3]                    |
+	|MAIN TITLE EXTENDS TO HERE   |
+	|    -------------------------|
+	|    |  Y   [Zone 2]          |
+	|    |                        |
+	|    |  A ---------------     |
+	|    |  X | [Zone 1]    |     |
+	|    |  I |             |     |
+	|    |  S |  (X vs Y    |     |
+	|    |    |  plot here) |     |
+	|    |  T |             |     |
+	|    |  I ---------------     |
+	|    |  T  X AXIS TITLE EXTENT|
+        |    |  L                     |
+        |    |  E                     |
+	|    -------------------------|
+	|       *  #  @  +            |
+	|   (Curve legend here)       |
+	-------------------------------
+</pre>
+<p>
+
+The important thing to note about this diagram is that the extent of
+the annotations occupying a zone determines the area of the zone. In
+other words the bounding box (the smallest containing rectangle) of
+the annotations in a zone defines its exterior boundary, as well as
+the interior boundary of the next higher numbered zone.  So, for
+example, since the X Axis title in zone 2 extends further to the right
+than the Main Axis title in zone 3, the right boundaries of zones 2
+and 3 are colinear, and equal to the right boundary of the bounding
+box of the X Axis title.
+
+<p>The advantage of this scheme is that you can position annotations
+without specifying the location in NDC space. Simply by placing
+annotations in different zones you can ensure that they do not overlap
+each other. For exact placement relative to the previous zone's boundary,
+numerical offset resources are available.
+
+<p>Annotation zones are discussed further in the description of the
+<a href="../../../Classes/PlotManager.html">PlotManager Location Control
+Model</a>.
+
+<h2>External annotations</h2>
+
+When you add an independently-created View object as an annotation to
+a plot object, the PlotManager creates an AnnoManager object that you
+use to specify locational and size attributes. The <a href="annomanager.html">AnnoManager class module</a> discusses
+how to create and manage external annotations and under what
+circumstances you might want to make annotations out of independent
+View objects.
+
+<p>
+<H2>Terminology</H2>
+
+The glossary contains definitions of the terms used to describe the
+PlotManager's capabilities. The most significant are:
+
+<ul>
+<li><a href="../../../../glossary.html#PlotObject">plot object</a>
+<li><a href="../../../../glossary.html#BasePlot">base plot</a>
+<li><a href="../../../../glossary.html#PlotMember">plot member</a>
+<li><a href="../../../../glossary.html#Overlay">overlay</a>
+<li><a href="../../../../glossary.html#Annotation">annotation</a>
+<li><a href="../../../../glossary.html#OverlaySequence">overlay sequence</a>
+<li><a href="../../../../glossary.html#OverlayFunctions">overlay functions</a>
+<li><a href="../../../../glossary.html#AnnotationFunctions">annotation functions</a>
+</ul>
+<p>
+<H3>See also:</H3>
+<p>
+<ul>
+<li><a href="annomanager.html">AnnoManager class module</a>
+<li><a href="../../../Classes/PlotManager.html">PlotManager Location Control
+Model</a>.
+<li><a href="../../../Classes/index.html">HLU classes</a>
+<li><a href="../../../API/index.html">HLU API</a>
+
+</ul>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/User_Guide/classes/objects/plotmgr.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 18:42:03 GMT -->
+</html>
+
+

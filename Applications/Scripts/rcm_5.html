@@ -1,0 +1,96 @@
+;********************************************************************
+; rcm_5.ncl
+;
+; Concepts illustrated:
+;   - Read a specified variable
+;   - Extract date information via 'cd_calendar'
+;   - Explore the variable's  statistical distribution  
+;   - Use 'ind' to determine the index corresponding to a user specified 'time'
+;   - Plotting RCM 'dust' data
+;   - Illustrate different contour options
+;   - Extract plot parameters from the input file's attributes
+;   - Drawing color-filled contours on a Cartesian background    
+;********************************************************************
+;
+  diri = "./"
+  fili = "dust2018.nc"
+  pthi = diri+fili
+  f    = addfile(pthi,"r")
+
+  vName= "emflx"       ; variable
+
+  x    = f->$vName$
+  printVarSummary(x)   ; (time, iy, jx)
+  printMinMax(x,0)
+  print("-----")
+
+  dimx = dimsizes(x)   
+  ntim = dimx(0)
+  nlat = dimx(1)
+  mlon = dimx(2)
+
+;---Extract dates: yyyymmddhh
+
+  ymdh = cd_calendar(x&time, -3)
+  print(ymdh)
+
+;---Explore data: examine distribution
+
+  opt_sd = True
+  opt_sd@PrintStat = True
+  stat_x = stat_dispersion(x, opt_sd )
+  print("-----")
+
+;---PLOT: Use "Cartesian" coordinates 'iy', 'ix'
+;         Use contour levels based upon data distribution. 
+;         This may require iteration to find what is best.
+
+  YMDH = 2018052912                    ; desired date
+  nt   = ind(YMDH.eq.ymdh)             ; time index corresponding to the requested data
+
+  pltTyp = "png"                       ; png, x11, pdf, ...
+  pltDir = "./"
+  pltFil = "rcm_"+YMDH
+  pltFil = "rcm"
+  pltPth = pltDir+pltFil  
+
+;;wks  = gsn_open_wks(pltTyp,"rcm_"+YMDH)
+  wks  = gsn_open_wks(pltTyp,"rcm")
+  
+  res                      = True      ; plot mods desired
+  res@gsnMaximize          = True      ; maximize plot size
+  res@gsnAddCyclic         = False     ; data are regional   
+  res@cnFillOn             = False     ; turn on color
+  res@cnFillOn             = True      ; turn on color fill
+  res@cnLinesOn            = False     ; turn off contour lines
+  res@cnLineLabelsOn       = False     ; turn off contour line labels
+ ;res@cnFillPalette        = "BlAqGrYeOrRe"
+  res@cnFillPalette        = "WhiteBlueGreenYellowRed"
+  res@cnFillMode           = "RasterFill"       ; Raster Mode
+
+ ;res@lbOrientation        = "Vertical"
+  res@lbBoxLinesOn         = False     ; Turn off labelbar box lines 
+  res@tiMainString         = "ITCP: RCM: "+YMDH         
+
+;---NCL automatic contours
+
+  plot = gsn_csm_contour(wks,x(nt,:,:),res) ; default contour resources
+
+;---NCL manually specified  contours
+
+  res@cnLevelSelectionMode = "ManualLevels"     ; set manual contour levels
+  res@cnMinLevelValF       =   50.0             ; set min contour level
+  res@cnMaxLevelValF       =  9000.0            ; set max contour level
+  res@cnLevelSpacingF      =  50.0              ; set contour spacing
+  plot = gsn_csm_contour(wks,x(nt,:,:),res) ; contour the variable
+
+;---NCL manually specified  contours
+
+  res@cnLevelSelectionMode = "ExplicitLevels"
+  res@cnLevels             = (/   100,  250,  500,  750, 1000, 2000\
+                              ,  3000, 4000, 5000, 6000, 7000, 8000\
+                              ,  9000,10000,11000,12000,13000,14000\
+                              , 15000,17250,20000,25000,30000,40000\
+                              , 50000,60000,75000 /)               
+;;delete(res@cnLevelSpacingF)
+  plot = gsn_csm_contour(wks,x(nt,:,:),res) ; contour the variable

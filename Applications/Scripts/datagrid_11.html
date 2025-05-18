@@ -1,0 +1,93 @@
+;======================================================================
+; datagrid_11.ncl
+;
+; Concepts illustrated:
+;   - Drawing the edges of a subsetted ICON mesh using gsn_coordinates
+;======================================================================
+; NCL Version 6.6.0 or later is required for this capability.
+;======================================================================
+; The triangular mesh is drawn using lines for the edges and dots for
+; the centers. The mesh is large (2949120 cells), so only part of it
+; is drawn by setting min/max values for the lat/lon area of interest.
+
+; See datagrid_10.ncl, which draws the full mesh of a smaller ICON
+; grid with only 20,480 cells.
+;======================================================================
+
+
+begin
+;---Open ICON file and read some data
+  icon_file = "ICON.nc"
+  f = addfile(icon_file,"r")
+  dims = getfilevardimsizes(f,"clat")
+
+;---Open PNG file to write graphics to. PS file will be too large
+  wks = gsn_open_wks("png","datagrid")
+
+;
+; Area of interest to use for drawing triangular mesh. Drawing the 
+; whole mesh takes a long time and is too dense.  The values below
+; result in 1950 triangles (information printed by gsnCoordsDebug
+; setting below).
+;
+  minlat =   20
+  maxlat =   25
+  minlon = -105
+  maxlon = -100
+
+;---Settings for graphics options
+  res                     = True              ; Plot modes desired.
+
+  res@gsnMaximize             = True              ; Maximize plot
+  res@gsnDraw                 = False
+  res@gsnFrame                = False
+
+  res@mpFillOn                = False
+
+  res@tiMainString            = "Original ICON mesh : " + dims(0) +  " triangles~C~" + \
+                                "Subsetted mesh : 1950 triangles"
+  res@tiMainFont              = "helvetica"
+  res@tiMainFontHeightF       = 0.02
+
+  res@mpLimitMode             = "LatLon"
+  res@mpMinLatF               = minlat
+  res@mpMaxLatF               = maxlat
+  res@mpMinLonF               = minlon
+  res@mpMaxLonF               = maxlon
+  res@pmTickMarkDisplayMode   = "Always"   ; Nicer tickmark labels
+
+  res@mpOutlineBoundarySets   = "AllBoundaries"
+  res@mpDataBaseVersion       = "MediumRes"
+  res@mpDataSetName           = "Earth..4"
+  res@mpCountyLineThicknessF  = 2.0
+  res@mpUSStateLineThicknessF = 2.0
+  res@mpUSStateLineColor      = "blue3"
+  res@mpCountyLineColor       = "blue3"
+
+;---Create the map, but don't draw it yet.
+  map = gsn_csm_map(wks,res)
+
+;---Set resources for drawing the ICON edges and centers
+  opt = True
+  opt@gsnCoordsMinLat            = minlat      ; Limit the edges to a small lat/lon
+  opt@gsnCoordsMaxLat            = maxlat      ; area of interest to speed things up
+  opt@gsnCoordsMinLon            = minlon      ; and make the mesh less dense.
+  opt@gsnCoordsMaxLon            = maxlon
+  opt@gsnCoordsMeshClosePolygons = True
+  opt@gsnCoordsConvertRad2Deg    = True
+  opt@gsnCoordsMeshLatBounds     = f->clat_bnds
+  opt@gsnCoordsMeshLonBounds     = f->clon_bnds
+  opt@gsnCoordsDebug             = True
+  opt@gsnCoordsMeshLatCenter     = f->clat     ; lat/lon centers will be 
+  opt@gsnCoordsMeshLonCenter     = f->clon     ; as markers
+
+  opt@gsLineColor                = "DarkGoldenRod"
+  opt@gsLineThicknessF           = 3.0
+  opt@gsMarkerSizeF              = 3.0
+  opt@gsnCoordsAttach            = True     ; this attachs the lines and dots; you'll need to draw map later
+
+  gsn_coordinates(wks,map,f->u(0,0,:),opt)   ; the f->u doesn't get used, since we provided all the data via opt.
+
+  draw(map)        ; this draws the map and the attached lines and markers
+  frame(wks)
+end

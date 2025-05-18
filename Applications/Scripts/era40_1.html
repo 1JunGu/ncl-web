@@ -1,0 +1,38 @@
+;************************************************
+; era40_1.ncl
+;
+; Concepts illustrated:
+;   - Reading GRIB data
+;   - Plotting ERA40 data
+;   - Spanning the full color map for contour fill
+;   - Drawing color-filled contours over a cylindrical equidistant map
+;   - Selecting a different color map
+;
+;*************************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"  
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"  
+;************************************************
+begin
+;************************************************
+; create pointer to file and read in data
+;************************************************
+  in = addfile("ers40_u01276.grb","r")
+  T = in->T_GDS0_ISBL_S123
+;************************************************
+; create default plot
+;************************************************
+  wks = gsn_open_wks("png","era40")              ; send graphics to PNG file
+  gsn_define_colormap(wks,"BlAqGrYeOrRe")        ; choose colormap
+
+  res                       = True               ; plot mods desired
+  res@cnFillOn              = True               ; turn on color fill
+  res@cnFillPalette         = "BlAqGrYeOrRe"     ; set color map
+  res@cnLinesOn             = False              ; turn off contour lines
+
+  plot = gsn_csm_contour_map(wks,T(0,0,:,:),res)     
+end
+
+
+

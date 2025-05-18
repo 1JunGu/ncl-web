@@ -1,0 +1,53 @@
+/;
+ ; task_parallelism_seq_3.ncl
+ ;
+ ; A straight-forward sequential version of a script to generate plots as frames for an animation.
+ ; Provided as contrast to a task-parallel version for this example application.
+ ;
+ ;/
+begin
+  ;
+  ; determine the number of timesteps for the variable...
+  ;
+  f = addfile("sst8292.nc", "r")
+  sst = f->SST 
+  time = f->time
+
+  wks = gsn_open_wks("png", "sst") 
+
+  res                          = True
+
+  res@gsnMaximize              = True
+  res@cnFillOn                 = True
+  res@cnFillPalette            = "rainbow"
+
+  res@tmYROn                   = False
+
+  res@lbOrientation            = "Vertical"
+  res@pmLabelBarOrthogonalPosF = -0.02
+
+  startPlotTime = systemfunc("date")
+
+  ;
+  ; iterate over the timesteps...
+  ;
+  do i=0, dimsizes(time)-1
+    print("working on frame: " + i)
+    yyyymm = cd_calendar(time(i), 0)
+    res@tiMainString = sprinti("%02d", floattoint(yyyymm(0,1))) + "/" + sprinti("%4d", floattoint(yyyymm(0,0)))
+
+    plot = gsn_csm_contour_map_ce(wks,sst(i,:,:),res)
+  end do
+
+  wallClockElapseTime(startPlotTime, "done generating plot frames", 0)
+
+  ;
+  ; use Imagemagick to create the animation from the *png frames...
+  ; 
+  startAnimateTime = systemfunc("date")
+  system("convert -delay 100 -loop 0 sst*.png sst.gif")
+
+  wallClockElapseTime(startAnimateTime, "done generating animation", 0)
+    
+end
+

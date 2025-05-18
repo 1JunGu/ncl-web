@@ -1,0 +1,124 @@
+;----------------------------------------------------------------------
+; mpas_9.ncl
+;
+; Concepts illustrated:
+;   - Comparing data on two MPAS meshes using paneled plots
+;   - Using get_cpu_time to calculate timings for various parts of the script
+;----------------------------------------------------------------------
+; This script creates a filled contour of the same variable read off
+; two different resolutions of an MPAS file.
+;
+; The lower resolution file is a quasi-uniform 15 km global forecast 
+; file that has 2.6 million cells. 
+;
+; The higher resolution file is a mixed-resolution mesh of 15 km and 
+; 3 km cells, where the 3 km region is over the United States.
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+;----------------------------------------------------------------------
+; Prints elapsed time given a start and end time, and a title.
+;----------------------------------------------------------------------
+procedure print_elapsed_time(start_time,end_time,title)
+begin
+  print("----------------------------------------------------------------------")
+  print("Elapsed time : " + title + " : " + (end_time-start_time) + " CPU seconds.")
+  print("----------------------------------------------------------------------")
+end
+
+;----------------------------------------------------------------------
+; Main code
+;----------------------------------------------------------------------
+begin
+  start_code = get_cpu_time()   
+
+;---Directories containing the two resolutions of MPAS data files.
+  dirs  = (/"../Data/2017082400_uni/","../Data/2017082400_hwt/"/)
+  ndir = dimsizes(dirs)
+
+  mpas_init_file = "init.nc"
+  mpas_diag_file = "diag.2017-08-24_12.00.00.nc"
+  varname        = "relhum_700hPa"     ; variable name to plot
+
+;---Start the graphics
+  wks = gsn_open_wks("png","mpas")
+
+  res                       = True              ; Plot mods desired.
+
+  res@gsnMaximize           = True              ; Maximize plot
+  res@gsnDraw               = False             ; Will panel later
+  res@gsnFrame              = False
+
+  res@gsnAddCyclic          = False             ; don't add a longitude cyclic point
+
+  res@cnFillOn              = True              ; color plot desired
+  res@cnFillMode            = "RasterFill"      ; USES LESS MEMORY AND IS FASTER
+
+  res@cnFillPalette         = "BlGrYeOrReVi200"
+  res@cnLevelSelectionMode  = "ExplicitLevels"  ; hard-code the levels, may need to change this if you
+  res@cnLevels              = ispan(1,133,1)    ; change the variable being plotted.
+
+  res@cnLinesOn             = False             ; turn off contour lines
+  res@cnLineLabelsOn        = False             ; turn off contour labels
+  res@lbLabelBarOn          = False             ; turn off individual labelbar
+  res@cnInfoLabelOn         = False             ; turn off info label
+  res@pmLabelBarWidthF      = 0.8               ; increase width of labelbar
+
+  res@mpFillOn              = False             ; turn off map fill
+  res@pmTickMarkDisplayMode = "Always"          ; nicer map tickmark labels
+
+  res@tiMainFont             = "helvetica"      ; default is helvetica-bol
+  res@tiMainFontHeightF      = 0.018            ; make title smaller
+  res@pmTitleZone            = 4                ; move title down
+  res@gsnRightStringOrthogonalPosF = 0.02  
+  res@gsnLeftStringOrthogonalPosF  = 0.02  
+  res@gsnStringFontHeightF         = 0.014
+
+  plots = new(ndir,graphic)
+  do nf=0,ndir-1
+    fi = addfile(dirs(nf)+mpas_init_file,"r")
+    fd = addfile(dirs(nf)+mpas_diag_file,"r")
+
+    data := fd->$varname$(0,:)     ; Grab first time step
+
+;---Read lat/lon and convert from radians to degrees
+    latCell := fi->latCell
+    lonCell := fi->lonCell
+    RAD2DEG = get_r2d(typeof(lonCell))      ; Radian to Degree
+    lonCell = lonCell*RAD2DEG
+    latCell = latCell*RAD2DEG
+    ncells  = dimsizes(latCell)
+
+;---Print some information, look at your data!
+    print("==================================================")
+    print("Directory  : " + dirs(nf))
+    print("Diag file  : " + mpas_diag_file)
+    print("Init file  : " + mpas_init_file)
+    print("Variable   : " + varname)
+    print("# cells    : " + ncells)
+    printMinMax(data,0)
+
+    res@sfXArray     := lonCell           ; necessary for plotting MPAS
+    res@sfYArray     := latCell
+    res@tiMainString = dirs(nf) + mpas_diag_file + " (" + ncells + " cells)"
+
+    start_graphics = get_cpu_time()   
+
+    plots(nf) = gsn_csm_contour_map(wks,data,res)  
+
+    print_elapsed_time(start_graphics,get_cpu_time(),"plotting data")
+  end do
+ 
+;---Panel both plots on one page for easier comparison
+  pres                    = True
+  pres@gsnPanelMainString = "Comparing MPAS resolutions"
+  pres@gsnPanelMainFont   = "helvetica-bold"
+  pres@gsnMaximize        = True       ; maximize plot
+  pres@gsnPanelLabelBar   = True       ; turn on common labelbar
+  pres@lbBoxLinesOn       = False      ; turn off labelbar box lines
+  gsn_panel(wks,plots,(/2,1/),pres)
+
+  print_elapsed_time(start_code,get_cpu_time(),get_script_prefix_name()) 
+end

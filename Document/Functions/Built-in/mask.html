@@ -1,0 +1,556 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:46 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (array manipulators)">
+<meta name="keywords" content="mask">
+<title>mask</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../array_manip.html">Array manipulators</a>
+<br>
+<h1>mask</h1>
+
+<p>
+Masks a multi-dimensional array against another given a single mask value.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function mask (
+		array   ,    
+		marray  ,    
+		mvalue       
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="dimsizes.html"><strong>dimsizes</strong></a>(array)] :  <a href="typeof.html"><strong>typeof</strong></a>(array)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>array</em>
+<p class=indent>Main array of any type and dimensionality, but must be a super set
+of the dimensionality of <em>marray</em>
+</p>
+<em>marray</em>
+<p class=indent>Mask array of any type and dimensionality, but must have at most the
+same dimensionality as <em>array</em>, and its dimension sizes must
+correspond to <em>array</em> as defined below.
+</p>
+<em>mvalue</em>
+<p class=indent>A scalar mask value which must be the same type as <em>marray</em>, or
+coercible to that type.
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+<strong>mask</strong> masks ("protects") the argument <em>array</em>
+against the mask array <em>marray</em> at locations
+where <em>marray</em> is equal to the argument <em>mvalue</em>.
+<p>
+
+Missing values are placed in the output array in locations where
+<em>marray</em> is <b>not</b> equal to the mask value,
+<em>mvalue</em>. The missing value used will be
+<em>array</em>@<a href="../../Language/fillval.html">_FillValue</a> if it is set, or the default missing value
+associated with the type of <em>array</em> if the _FillValue attribute
+is not set.<p>
+
+If <em>array</em> has <i>n</i> dimensions, and <em>marray</em> has
+<i>m</i> dimensions, then the dimensionality restrictions are as
+follows:
+
+<pre>
+    <i>m</i> is less-than-or-equal-to <i>n</i>
+    The dimension sizes of <em>marray</em> must be equal to 
+    dimensions <i>n</i>-<i>m</i> through <i>n</i>-1 of <em>array</em>
+</PRE>
+<p>
+
+Another way to put it is the dimensions of <em>marray</em> must be
+equal to the rightmost dimensions of <em>array</em>. Some valid
+dimension sizes for <em>array</em> and <em>marray</em> would be:
+<p>
+
+<table cellpadding=5 border=1>
+<th align=center>array <th align=center>marray
+<tr>
+<td align=right>10 x 20 <td align=right>10 x 20
+<tr>
+<td align=right>10 x 20 <td align=right>20 
+<tr>
+<td align=right>18 x 64 x 128 <td align=right>18 x 64 x 128
+<tr>
+<td align=right>18 x 64 x 128 <td align=right>64 x 128
+<tr>
+<td align=right>18 x 64 x 128 <td align=right>128
+</table>
+<p>
+
+The best way to  understand the <strong>mask</strong> function is
+to see the examples below!
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Shea_util/landsea_mask.html"><strong>landsea_mask</strong></a>,
+<a href="where.html"><strong>where</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<b>Example 1</b><p>
+
+The following demonstrates how <strong>mask</strong> works in
+addition to showing how to reshape <em>array</em> such that the
+dimensionality restrictions are met:
+
+<pre>
+;
+; Create array a and fill with integer values
+;
+    a = <a href="onedtond.html"><strong>onedtond</strong></a>(<a href="ispan.html"><strong>ispan</strong></a>(1,120,1),(/4,5,6/))
+    a!0 = "time"
+    a!1 = "x"
+    a!2 = "y"
+;
+; Create mask arrays:
+; ma0 has the same dimension sizes as dimensions 1 and 2 
+; of a respectively.
+; ma1 has the same dimension sizes as dimensions 2 and 0 
+; of a respectively.
+;
+    ma0 = <a href="onedtond.html"><strong>onedtond</strong></a>( (/1,1,2,2,3,3/), (/5,6/))
+    ma1 = <a href="onedtond.html"><strong>onedtond</strong></a>( (/1,2,2,3/), (/6,4/))
+
+;
+; Simple case mask a at locations where ma0 is equal-to 2
+;
+    out0 = <strong>mask</strong>( a, ma0, 2)  ; The default missing value 
+;                                               ; for an integer is used
+                                 ; since one wasn't set explicitly.
+;
+; More advanced case mask a at locations where ma0 is not-equal-to 2
+;
+    out1 = <strong>mask</strong>( a, (ma0.ne.2), True)
+
+;
+; Now reshape a to mask a at locations where ma1 is equal-to 2
+; using Named Subscripting
+;
+    out2 = <strong>mask</strong>( a( x | : , y | :,  time | :), ma1, 2)
+
+;
+; Same masking as above but it reshapes output of mask to 
+; original dimensionality
+;
+    out2!0 = "x"
+    out2!1 = "y"
+    out2!2 = "time"
+
+    out2a = out2( time | :, x | : , y | :)
+</pre>
+<p>
+
+<b>Example 2</b><p>
+
+Assume <em>x</em> is a multi-dimensional array with a _FillValue
+attribute (<em>x</em>@_FillValue) set. Assume that all values
+less than 100 are to be "masked":
+
+<pre>
+    x = <strong>mask</strong>(x, x.lt.100,False) 
+</pre>
+<p>
+     
+or
+
+<pre>
+    y = x                        ; transfer metadata
+    y = <strong>mask</strong>(x, x.lt.100,False)
+</pre>     
+<p>
+
+Either code snippet will set all values in <em>x</em> that are less to
+100 to the _FillValue.<P>
+
+<b>Example 3</b><p>
+
+Assume that <em>oro</em> is a two-dimensional array dimensioned
+<em>lat</em> x <em>lon</em> defining land and ocean points.  When
+<em>mvalue</em>=1, the land is masked out leaving the ocean;
+similarly, when <em>mvalue</em>=0, the ocean is masked out
+leaving the land.  Assume <em>x</em> is a two-dimensional array also
+dimensioned <em>lat</em> x <em>lon</em>. Then:
+
+<pre>
+    xLand  =  <strong>mask</strong>(x, oro, 1)
+    xOcean =  <strong>mask</strong>(x, oro, 0)
+</pre>
+<p>
+     
+Users may want to transfer metadata information by the following
+assignments prior to using the above functions:
+
+<pre>
+    xLand  = x
+    xOcean = x
+    xLand  =  <strong>mask</strong>(x, oro, 1)
+    xOcean =  <strong>mask</strong>(x, oro, 0)
+</pre>
+<p>
+      
+<b>Example 4</b><p>
+
+Assume <em>x</em> is a multi-dimensional array dimensioned
+<em>time</em> x <em>lat</em> x <em>lon</em> or <em>time</em> x
+<em>lev</em> x <em>lat</em> x <em>lon</em>. Assume <em>oro</em> is
+dimensioned <em>lat</em> x <em>lon</em>:
+
+<pre>
+    xLand  = x                      ; 3D
+    xLand  = <strong>mask</strong> (x, <a href="conform.html"><strong>conform</strong></a>(x, oro, (/1,2/)), 1)
+      
+    XLand  = X                      ; 4D
+    XLand  = <strong>mask</strong> (X, <a href="conform.html"><strong>conform</strong></a>(X, oro, (/2,3/)), 1)
+</pre>
+<p>
+
+Here the <a href="conform.html"><strong>conform</strong></a> function is used to temporarily
+expand <em>oro</em> to match the dimensions of the <em>x</em> and
+<em>X</em> variables.<p>
+
+<b>Example 5</b><p>
+
+Assume <em>x</em> is a two-dimensional array with two-dimensional
+coordinate arrays. To set all values outside some user-specified
+region as specified by <em>latMin</em>, <em>latMax</em>,
+<em>lonMin</em>, and <em>lonMax</em>, use:
+
+<pre>
+    x = f->X
+    x@lat2d = f->latitude    ; 2D coordinate arrays
+    x@lon2d = f->longitude
+   
+    latMin  = -20
+    latMax  =  60
+    lonMin  = 110
+    lonMax  = 270
+    
+    x = <strong>mask</strong>(x,(x@lat2d.ge.latMin .and. x@lat2d.le.latMax  .and. \
+                x@lon2d.ge.lonMin .and. x@lon2d.le.lonMax), True)
+</pre>
+<p>
+
+<b>Example 6</b><p>
+
+This example is the same as example 5, but with <em>x</em> being 3D or
+4D:
+
+<pre>
+                          ; 3D
+    x   = <strong>mask</strong> (x, <a href="conform.html"><strong>conform</strong></a>(x, (x@lat2d.ge.latMin .and. \
+                               x@lat2d.le.latMax .and. \
+                               x@lon2d.ge.lonMin .and. \
+                               x@lon2d.le.lonMax), (/1,2/)), True)
+      
+                          ; 4D
+    x   = <strong>mask</strong> (x, <a href="conform.html"><strong>conform</strong></a>(x, (x@lat2d.ge.latMin .and. \
+                               x@lat2d.le.latMax .and. \
+                               x@lon2d.ge.lonMin .and. \
+                               x@lon2d.le.lonMax), (/2,3/)), True)
+</pre>
+<p>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:46 GMT -->
+</html>

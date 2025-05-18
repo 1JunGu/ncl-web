@@ -1,0 +1,1218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/polyg.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:18:20 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+the use of polygons, polymarkers, polylines.">
+<meta name="keywords" content="NCL, graphics, visualization, polygons,
+polymarkers, polylines">
+<TITLE>NCL Graphics: Polygons, Polymarkers, Polylines, Text</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+    <h1>NCL Graphics: Polygons, Polymarkers, Polylines, Text</h1>
+
+    <div class=mainimage>
+    <img src="Images/polyg_18_2_lg.png" align=left border=0></a>
+    </div>
+
+    <div class=text>
+
+This page describes how to use
+various <a href="../Document/glossary.html#Primitive">primitive</a> drawing
+routines to add markers, lines, filled areas (polygons), and text on
+an existing plot or anywhere outside a plot (known as
+"<a href="../Document/glossary.html#NDC">NDC space</a>" or the "frame").
+<p>
+
+<b>Drawing primivites on a plot</b><p>
+
+To draw primitives on top of a plot, you must use the plot's data
+space.  On a map plot, for example, you would use lat/lon 
+values to position the primitives. The routines for drawing
+primitives on a plot are:
+<p>
+
+<table cellpadding=5>
+
+<tr>
+<td><a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>
+<td>&nbsp;
+<td><a href="../Document/Graphics/Interfaces/gsn_polyline.html"><strong>gsn_polyline</strong></a>
+
+<tr>
+<td><a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a>
+<td>&nbsp;
+<td><a href="../Document/Graphics/Interfaces/gsn_polymarker.html"><strong>gsn_polymarker</strong></a>
+
+<tr>
+<td><a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>
+<td>&nbsp;
+<td><a href="../Document/Graphics/Interfaces/gsn_polygon.html"><strong>gsn_polygon</strong></a>
+
+<tr>
+<td><a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a>
+<td>&nbsp;
+<td><a href="../Document/Graphics/Interfaces/gsn_text.html"><strong>gsn_text</strong></a>
+</table>
+<p>
+
+The difference between the "add" versions of these routines (which are
+functions) and the other routines (which are procedures) is that the
+"add" functions actually attach the primitive to the existing plot,
+and you won't see the primitive until you actually draw the plot. If
+the plot is resized, the primitive will be resized accordingly. This
+can be useful if you plan to
+use <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> to panel the plot
+later and want the primitives to be resized.
+<p>
+
+<b>Important note:</b> since these are functions, you need to make
+sure that every return value is unique.  If you reuse the same
+variable to add primitives to a plot, then only the last primitive
+that you add will be visible. See example "polyg_4.ncl" below.</b>
+<p>
+
+The <i>procedural</i> versions of these routines simply draw the
+primitive when you call procedure, and do not attach the primitive to
+the plot. These routines are a little easier to use because you don't
+have to worry about the return value. They can also be faster if you
+are drawing tons of primitives, because less memory is used.
+<p>
+
+<b>Drawing primivites on the NDC square</b><p>
+
+To draw primitives on the NDC square or frame, you must use values
+from 0.0 to 1.0 for the location of the primitive(s). Location (0,0)
+represents the lower left corner of the square, and (1,1) represents
+the upper right corner of the square. The procedures for drawing in
+NDC space are:
+<p>
+
+<table cellpadding=5>
+
+<tr>
+<td><a href="../Document/Graphics/Interfaces/gsn_polyline_ndc.html"><strong>gsn_polyline_ndc</strong></a>
+
+<tr>
+<td><a href="../Document/Graphics/Interfaces/gsn_polymarker_ndc.html"><strong>gsn_polymarker_ndc</strong></a>
+
+<tr>
+<td><a href="../Document/Graphics/Interfaces/gsn_polygon_ndc.html"><strong>gsn_polygon_ndc</strong></a>
+
+<tr>
+<td><a href="../Document/Graphics/Interfaces/gsn_text_ndc.html"><strong>gsn_text_ndc</strong></a>
+
+</table>
+<p>
+
+Note that there are no "add" versions of these routines, because there
+is nothing for which to attach the primitives.
+<p>
+
+Useful tip: the <a href="../Document/Functions/Shea_util/drawNDCGrid.html"><strong>drawNDCGrid</strong></a>
+procedure draws a grid and labels the NDC locations. This is very
+useful to help you position primitives in the NDC square. See example
+"polyg_18.ncl".
+<p>
+
+<b>Potential backwards-incompatible change</b><p>
+
+There is a potential incompatible change
+with <a href="../Document/Graphics/Interfaces/gsn_polyline.html"><strong>gsn_polyline</strong></a>,
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>,
+<a href="../Document/Graphics/Interfaces/gsn_polygon.html"><strong>gsn_polygon</strong></a>,
+and <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> in NCL
+version <a href="../prev_releases.html#6.2.0">6.2.0</a> and later, when
+attaching lines or polygons to a map.
+<p>
+
+Previously, drawing a polyline around the equator, for example, could
+be specified using 2-element arrays. For example:
+
+<pre>
+    lnid = <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>(wks,map,(/0,360/),(/0,0/),lnres)
+</pre>
+<p>
+
+Now, however, in order to eliminate a number of ambiguous    situations and to make user code simpler in most cases, a new    behavior has been introduced: the line between two points on the    globe always follows the shortest path. In the example above, the    behavior in NCL V6.2.0 leads to a 0-length line. The recommended    approach now for drawing a line around the equator is to use four    points, such that the distance from one to the next is always less    than 180 degrees. For example:<p>
+
+<pre>
+    lnid = <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>(wks,map,(/0,120,240,360/),(/0,0,0,0/),lnres)
+</pre>
+
+</div>
+
+    <div class=ex>
+    <!--Polyg_1-->
+    <a name=ex1></a>
+    <a href="Images/polyg_1_lg.png">
+    <img src="Images/polyg_1_sm.png" align=left border=2></a>
+    <a href="Scripts/polyg_1.html">polyg_1.ncl</a>: 
+    This code comes from Mark Stevens of CGD NCAR.  To teach himself
+    NCL, he decided to try and plot the climate divisions that are used
+    by the NCDC.  Outstanding job Mark!  By the way this is the most
+    exciting plot to watch as it draws.  Each state is done separately.
+    Can you name each state as it draws?
+    <br><br>
+    <a href="../Document/Graphics/Interfaces/gsn_polygon_ndc.html"><strong>gsn_polygon_ndc</strong></a> will add polygons in ndc(page) coordinates while
+    <a href="../Document/Graphics/Interfaces/gsn_polygon.html"><strong>gsn_polygon</strong></a> will add them in plot coordinates.
+    <br><br>
+    The "climdiv_polygons.nc" netCDF file used in this script is available
+    <a href="Data/cdf/climdiv_polygons.nc">here</a> (767440 bytes).
+    </div>
+
+    <div class=ex>
+    <!--Polyg_2-->
+    <a name=ex2></a>
+    <a href="Images/polyg_2_lg.png">
+    <img src="Images/polyg_2_sm.png" align=left border=2></a>
+    <a href="Scripts/polyg_2.html">polyg_2.ncl</a>: 
+    This is the same code as example one, except that Mark is now
+    coloring each polygon with a precipitation value.
+    <br><br>
+    <a href="../Document/Graphics/Resources/mp.html#mpGridAndLimbOn"><em>mpGridAndLimbOn</em></a> = False, turns off the lat/lon grid.
+    <br><br>
+    <a href="../Document/Graphics/Resources/mp.html#mpAreaMaskingOn"><em>mpAreaMaskingOn</em></a> = True, enables area masking. This then allows the 
+    map to be divided into different areas by setting the resource
+    <a href="../Document/Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>, e.g. (/"Water","Land"/). These designated areas
+    can then be filled by setting the resource
+    <a href="../Document/Graphics/Resources/mp.html#mpSpecifiedFillColors"><em>mpSpecifiedFillColors</em></a> to various colors. In this case, they were 
+    set to zero to mask them entirely.
+    <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Polygons/NCL_polyg_2.html#sphx-glr-gallery-polygons-ncl-polyg-2-py">here</a>.
+    </div>
+
+    <div class=ex>
+    <!--Polyg_3-->
+    <a name=ex3></a>
+    <a href="Images/polyg_3_lg.png">
+    <img src="Images/polyg_3_sm.png" align=left border=2></a>
+    <a href="Scripts/polyg_3.html">polyg_3.ncl</a>: 
+    A plot with poly markers added.  You would be able to panel this
+    plot. There are numerous 
+    <a href="../Document/Graphics/marker_styles.html">marker styles</a> to choose from.
+    <br><br>
+    <a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a> is the plot interface that will add polymarkers 
+    to a plot so that they can be paneled. There is also
+    <a href="../Document/Graphics/Interfaces/gsn_polymarker.html"><strong>gsn_polymarker</strong></a> and 
+    <a href="../Document/Graphics/Interfaces/gsn_polymarker_ndc.html"><strong>gsn_polymarker_ndc</strong></a> 
+    which adds the polymarkers in page coordinates.
+    <br><br>
+    IMPORTANT: note the syntax on the use of this function:<br>
+    <em>dum1    = gsn_add_polymarker(wks,plot,glon(inds),glat(inds),polyres)
+    </em>.  With this function, you need to set it equal to some sort of 
+    dummy variable. Do not set it equal to plot like we do in all other
+    cases.  Also, if you do panel this type of plot, do not delete that
+    dummy variable or over write it.
+    </div>
+
+    <div class=ex>
+    <!--Polyg_4-->
+    <a name=ex4></a>
+    <a href="Images/polyg_4_1_lg.png">
+    <img src="Images/polyg_4_1_sm.png" align=left border=3></a>
+    <a href="Images/polyg_4_2_lg.png">
+    <img src="Images/polyg_4_2_sm.png" align=left border=3></a>
+    <a href="Scripts/polyg_4.html">polyg_4.ncl</a>: 
+    Draw and fill a box using polylines and polygons
+    <br><br>
+    <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a> is the plot interface that adds polylines to a 
+    plot, and <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> is the plot interface that adds polygons to a 
+    plot. This version allows for panelling. There is also
+    <a href="../Document/Graphics/Interfaces/gsn_polyline.html"><strong>gsn_polyline</strong></a> and 
+    <a href="../Document/Graphics/Interfaces/gsn_polyline_ndc.html"><strong>gsn_polyline_ndc</strong></a> which adds polylines in page coordinates.
+    <br><br>
+    <a href="../Document/Graphics/Resources/gs.html#gsLineColor"><em>gsLineColor</em></a> = "red", changes the line color to red.<br>
+    <a href="../Document/Graphics/Resources/gs.html#gsLineThicknessF"><em>gsLineThicknessF</em></a> = 2.0, changes the thickness of the line.<br>
+    <a href="../Document/Graphics/Resources/gs.html#gsFillIndex"><em>gsFillIndex</em></a> &gt; 0 changes the <a href="../Document/Graphics/fill_patterns.html">fill pattern</a> to a pattern (rather than a solid).<br>
+    <a href="../Document/Graphics/Resources/gs.html#gsFillScale"><em>gsFillScale</em></a> changes the density of the fill pattern.<br>
+    <a href="../Document/Graphics/Resources/gs.html#gsLineLabelString"><em>gsLineLabelString</em></a> = "test", is one method of labeling a box of this 
+    type. <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Polygons/NCL_polyg_4.html#sphx-glr-gallery-polygons-ncl-polyg-4-py">here</a>.
+    </div>
+
+    <div class=ex>
+    <!--Polyg_5-->
+    <a name=ex5></a>
+    <a href="Images/polyg_5_lg.png">
+    <img src="Images/polyg_5_sm.png" align=left border=2></a>
+    <a href="Scripts/polyg_5.html">polyg_5.ncl</a>: 
+    Demonstrates the use of a polygon to shade an xy curve.
+    </div>
+
+    <div class=ex>
+    <!--Polyg_6-->
+    <a name=ex6></a>
+    <a href="Images/polyg_6_lg.png">
+    <img src="Images/polyg_6_sm.png" align=left border=2></a>
+    <a href="Scripts/polyg_6.html">polyg_6.ncl</a>: 
+    Demonstrates adding polylines.
+    <br><br>
+    The trick with this plot is to create an array of dummy graphic
+    variables. When you use 
+    <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>, 
+    the result must be a graphic variable. In a loop, 
+    you must not over write the dummy variable, which is why we need an 
+    array.
+    </div>
+
+    <div class=ex>
+    <!--Polyg_7-->
+    <a name=ex7></a>
+    <a href="Images/polyg_7_lg.png">
+    <img src="Images/polyg_7_sm.png" align=left border=2></a>
+    <a href="Scripts/polyg_7.html">polyg_7.ncl</a>: 
+    Demonstrates how to create your own polymarker.
+    <br><br>
+    As of NCL version 4.2.0.a030, you can make your own marker using 
+    <a href="../Document/Functions/Built-in/NhlNewMarker.html"><strong>NhlNewMarker</strong></a>. You give the function the character and font table you
+    want the marker taken from, and provide sizing and placement values. The
+    function returns a marker index that can be used with 
+    <a href="../Document/Graphics/Resources/xy.html#xyMarkerColor"><em>xyMarkerColor</em></a>.
+    </div>
+    
+    <div class=ex>
+    <!--polyg_8-->
+    <a name=ex8></a>
+    <a href="Images/polyg_8_lg.png">
+    <img src="Images/polyg_8_sm.png" align=left border=2></a>
+    <a href="Scripts/polyg_8.html">polyg_8.ncl</a>:
+
+    This example shows how to plot values at station locations using
+    different colors and marker sizes for each station point. The station
+    values are grouped depending on which range of values they fall in,
+    and then every marker in this group gets the same color and size.
+    <p>
+    A legend is added at the bottom, using calls to <a href="../Document/Graphics/Interfaces/gsn_polymarker.html"><strong>gsn_polymarker</strong></a> and <a href="../Document/Graphics/Interfaces/gsn_text_ndc.html"><strong>gsn_text_ndc</strong></a>.
+    <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Polygons/NCL_polyg_8.html#sphx-glr-gallery-polygons-ncl-polyg-8-py">here</a>.
+    </div>    
+    
+    <div class=ex>
+    <!--polyg_8_lbar-->
+    <a name=ex8lbar></a>
+    <a href="Images/polyg_8_lbar_lg.png">
+    <img src="Images/polyg_8_lbar_sm.png" align=left border=2></a>
+    <a href="Scripts/polyg_8_lbar.html">polyg_8_lbar.ncl</a>: This example is
+    very similar to the previous one, except a labelbar is drawn instead of 
+    a legend.
+    <p>
+
+    The <a href="../Document/Graphics/Interfaces/gsn_create_labelbar.html"><strong>gsn_create_labelbar</strong></a> and
+    <a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a> functions are used
+    to create the labelbar and then attach it as an annotation. This allows you
+    to use it in a call to <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> if desired.
+    <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Polygons/NCL_polyg_8_lbar.html#sphx-glr-gallery-polygons-ncl-polyg-8-lbar-py">here</a>.
+    </div>    
+
+
+    <div class=ex>
+    <!--polyg_9-->
+    <a name=ex9></a>
+    <a href="Images/polyg_9_1_lg.png">
+    <img src="Images/polyg_9_1_sm.png" align=left border=2></a>
+    <a href="Images/polyg_9_2_lg.png">
+    <img src="Images/polyg_9_2_sm.png" align=left border=2></a>
+    <a href="Images/polyg_shp_9_lg.png">
+    <img src="Images/polyg_shp_9_sm.png" align=left border=2></a>
+    <a href="Scripts/polyg_9.html">polyg_9.ncl</a> /  <a href="Scripts/polyg_shp_9.html">polyg_shp_9.ncl</a>
+    This example shows how to draw the Meteorological Subdivisions of
+    India.  The first script draws the subdivisions given the boundary
+    coordinates for each subdivision in an ASCII file. The second
+    script draws the subdivisions from a shapefile.
+    <p>
+
+    In the first script, the left plot
+    uses <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a> to attach
+    the subdivision outlines to the base map. The right panel
+    uses <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> add filled
+    subdivisions.
+    <p>
+    The first script produces two images: the first image uses NCL's
+    map outlines to draw the states of India
+    (USE_SHAPEFILE_OUTLINES=False).  The second image uses outlines
+    from a shapefile (USE_SHAPEFILE_OUTLINES=True).
+    <p>
+
+    In the second script, the left panel
+    uses <a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polylines.html"><strong>gsn_add_shapefile_polylines</strong></a>
+    to add the subdivision outlines and the right panel
+    uses <a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polygons.html"><strong>gsn_add_shapefile_polygons</strong></a>
+    to add filled subdivisions. It draws India outlines from the same
+    shapefile as the second frame of the first script.
+    <p>
+    The third image with the India outlines and subdivisions coming
+    from shapefiles seems to be the best "match" between the two sets
+    of outlines.
+  </div>
+    
+    <div class=ex>
+    <!--polyg_10-->
+    <a name=ex10></a>
+    <a href="Images/polyg_10_lg.png">
+    <img src="Images/polyg_10_sm.png" align=left border=2></a>
+    <a href="Scripts/polyg_10.html">polyg_10.ncl</a>:
+
+    This example shows how to draw various polylines and polygons on a
+    several generic tickmark backgrounds to create a series of bar
+    charts. The <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a> and
+    <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> functions are
+    used to create the polylines and polygons and <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> is used to panel all the plots
+    on one frame.
+
+    </div> 
+    
+    <div class=ex>
+    <!--polyg_11-->
+    <a name=ex11></a>
+    <a href="Images/polyg_11_lg.png">
+    <img src="Images/polyg_11_sm.png" align=left border=2></a>
+
+    <a href="Scripts/polyg_11.html">polyg_11.ncl</a>: This example
+    shows how to draw the political divisions of Brazil. It was
+    contributed to us by Mateus da Silva Teixeira from IPMet, who
+    gave us permission to include it and the data files. It is based
+    on <a href="#ex9">example 9</a> that draws the Indian
+    subdivisions.
+    <p>
+    The data files can be downloaded via the <a
+    href="Data/asc/estados_brasil.tar">estados_brasil.tar</a> tar file.
+    You need to type "tar -xvf estados_brasil.tar" to extract the files.
+    <p>
+  
+    In version <a href="../prev_releases.html#5.1.0">5.1.0</a>, you
+    will be able to generate the states of Brazil using a new NCL map
+    database. See <a href="maponly.html#ex16">example
+    16</a> on the "maps only" page.
+
+    </div>
+
+    <div class=ex>
+    <!--polyg_12-->
+    <a name=ex12></a>
+    <a href="Images/polyg_12_lg.png">
+    <img src="Images/polyg_12_sm.png" align=left border=2></a>
+
+    <a href="Scripts/polyg_12.html">polyg_12.ncl</a>: An example of "layering" 
+    different plot objects to get a particular effect. 
+    <p>As the extratropical polygons (red/blue) require the ocean to overlay the polygons,
+    and the tropical polygons (green/yellow) require the land to overlay the polygons, 
+    the only way to get the desired effect is to draw two plots, and to set
+    <a href="../Document/Graphics/Resources/tf.html#tfPolyDrawOrder"><em>tfPolyDrawOrder</em></a> equal to Draw.</p>
+    <p> A third blank plot is drawn over the previous two to draw the border
+    correctly.</p>
+    <p>This is a reproduction of figure 1b from Kutzbach et al. 2008, Climate Dynamics, 30:567-579.</p>
+
+    </div>
+
+    <div class=ex>
+    <!--polyg_13-->
+    <a name=ex13></a>
+    <a href="Images/polyg_13_1_lg.png">
+    <img src="Images/polyg_13_1_sm.png" align=left border=2></a>
+    <a href="Images/polyg_13_2_lg.png">
+    <img src="Images/polyg_13_2_sm.png" align=left border=2></a>
+    <a href="Images/polyg_13_3_lg.png">
+    <img src="Images/polyg_13_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/polyg_13.html">polyg_13.ncl</a>: An example showing
+how to overlay filled boxes on a map using different methods:
+<p>
+
+<ul>
+
+<li><a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> - curved edges,
+can attach box to map
+
+<li><a href="../Document/Graphics/Interfaces/gsn_polygon_ndc.html"><strong>gsn_polygon_ndc</strong></a> - straight
+edges, can't attach box to map
+
+<li><a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> and
+<a href="../Document/Functions/Built-in/gc_latlon.html"><strong>gc_latlon</strong></a> - straight edges, can attach box to map
+
+</ul>
+
+The third method is the preferred one if you want straight edges for
+your polygon and you want to be able to attach the box to your map
+(for paneling or resizing later).
+
+</div>
+
+    <div class=ex>
+    <!--polyg_14-->
+    <a name=ex14></a>
+    <a href="Images/polyg_14_1_lg.png">
+    <img src="Images/polyg_14_1_sm.png" align=left border=2></a>
+    <a href="Images/polyg_14_2_lg.png">
+    <img src="Images/polyg_14_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/polyg_14.html">polyg_14.ncl</a>: Draws a line on an
+existing map between two points on the globe using two different
+methods: (a)
+Setting <a href="../Document/Graphics/Resources/mp.html#mpGreatCircleLinesOn"><em>mpGreatCircleLinesOn</em></a>=True,
+(b) using
+<a href="../Document/Functions/Built-in/gc_latlon.html"><strong>gc_latlon</strong></a> to create a great circle path between two
+locations. Uses <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a> to
+add the polyline. Any map projection can be used.
+<p>
+
+</div>
+
+    <div class=ex>
+    <!--polyg_15-->
+    <a name=ex15></a>
+    <a href="Images/polyg_15_lg.png">
+    <img src="Images/polyg_15_sm.png" align=left border=2></a>
+
+    <a href="Scripts/polyg_15.html">polyg_15.ncl</a>: This is a 
+    minimal script to plot the location of stations on a map background. 
+
+    </div>
+
+    <div class=ex>
+    <!--polyg_16-->
+    <a name=ex16></a>
+    <a href="Images/polyg_16_lg.png">
+    <img src="Images/polyg_16_sm.png" align=left border=2></a>
+
+    <a href="Scripts/polyg_16.html">polyg_16.ncl</a>: This is a 
+    simple script to color plot the location of stations on a map background
+    and manually add a legend. (Donated by Lisi Pei.)
+
+    </div>
+
+<div class=ex>
+<!--newcolor_4-->
+<a name=ex4></a>
+<a href="Images/newcolor_4_1_lg.png">
+<img src="Images/newcolor_4_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_4_2_lg.png">
+<img src="Images/newcolor_4_2_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_4.html">newcolor_4.ncl</a>: This example
+shows how to draw partially transparent markers, using
+the <a href="../Document/Graphics/Resources/gs.html#gsMarkerOpacityF"><em>gsMarkerOpacityF</em></a> resource
+introduced in NCL <a href="../prev_releases.html#6.1.0">6.1.0</a>.
+<p>
+
+The first frame is drawn with fully opaque markers
+(<a href="../Document/Graphics/Resources/gs.html#gsMarkerOpacityF"><em>gsMarkerOpacityF</em></a>=1.0), and the
+second frame is drawn with slightly transparent markers
+(<a href="../Document/Graphics/Resources/gs.html#gsMarkerOpacityF"><em>gsMarkerOpacityF</em></a>=0.7).
+
+</div>
+
+<div class=ex>
+<!--newcolor_12-->
+<a name=ex12></a>
+<a href="Images/newcolor_12_lg.png">
+<img src="Images/newcolor_12_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_12.html">newcolor_12.ncl</a>:  
+This example shows how to draw partially transparent filled polygons
+using the <a href="../Document/Graphics/Resources/gs.html#gsFillOpacityF"><em>gsFillOpacityF</em></a> resource
+introduced in NCL <a href="../prev_releases.html#6.1.0">6.1.0</a>.
+<p>
+
+The point of this example is to show how various boxes look when they
+overlaid in a different order. The middle column was drawn starting
+with the red box starting first.  The right column was drawn with the
+yellow box starting first.
+</div> 
+
+    <div class=ex>
+    <!--polyg_17-->
+    <a name=ex17></a>
+    <a href="Images/polyg_17_lg.png">
+    <img src="Images/polyg_17_sm.png" align=left border=2></a>
+
+    <a href="Scripts/polyg_17.html">polyg_17.ncl</a>: This script
+    was written mainly to show how to read an ASCII file with groupings
+    of headers and data.<p>
+
+    It then creates a map of color-coded surface wind speed values
+    based on an array of levels. A new function
+    called <a href="../Document/Functions/Built-in/span_color_indexes.html"><strong>span_color_indexes</strong></a> is used to select a
+    nice span of colors through the given color map.  This function
+    was added in NCL
+    version <a href="../prev_releases.html#6.2.0">6.2.0</a>.
+
+    </div>
+
+    <div class=ex>
+    <!--Scatter_10-->
+    <a name=ex10></a>
+    <a href="Images/scatter_10_lg.png">
+    <img src="Images/scatter_10_sm.png" align=left border=2></a>
+
+    <a href="Scripts/scatter_10.html">scatter_10.ncl</a>: Demonstrates how to 
+    overlay a scatter plot (of filled squares) on a map plot, when the
+    scatter plot is not in lat/lon space.  The key is to use
+    <a href="../Document/Graphics/Interfaces/gsn_csm_blank_plot.html"><strong>gsn_csm_blank_plot</strong></a> to create a 
+    canvas for drawing the filled polygons, making sure that the four
+    corners of the blank plot correspond with the four corners of the
+    cylindrical equidistant map plot that is created. 
+     <p>
+    You then set <a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> to
+    True to make sure that when the blank plot is overlaid on the map
+    plot using the <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> procedure, it simply
+    lines up the corners of the two plots and does the draw.
+    <p>
+    In this example, the blank plot goes from 0,ny+1 in the Y direction,
+    and 0,nx+1 in the x direction. This corresponds to the following
+    lat/lon locations:<p>
+    <pre>
+     x = 0    --> lon = -180
+     x = nx+1 --> lon =  180
+     y = 0    --> lon =  -90
+     y = ny+1 --> lon =   90
+   </pre>
+</div>
+
+<div class=ex>
+<!--polyg_18-->
+<a name=ex18></a>
+<a href="Images/polyg_18_1_lg.png">
+<img src="Images/polyg_18_1_sm.png" align=left border=2></a>
+<a href="Images/polyg_18_2_lg.png">
+<img src="Images/polyg_18_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/polyg_18.html">polyg_18.ncl</a>: This script
+is an overall demonstration of the various primitive drawing
+routines, both for adding or drawing primitives on a plot, and
+for drawing primitives in NDC space.
+<p>
+
+The first frame shows primitives drawn using the map plot's data space
+(lat/lon values).
+<p>
+
+Note the use of <a href="../Document/Functions/Built-in/unique_string.html"><strong>unique_string</strong></a> to
+generate a unique attribute name, which is then attached to the
+existing map variable as a way of creating a unique name for each
+marker primitive.
+<p>
+
+An NDC grid is drawn using
+<a href="../Document/Functions/Shea_util/drawNDCGrid.html"><strong>drawNDCGrid</strong></a>.  This was used to
+determine the NDC locations for the primitives in the second frame of
+this script.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Polygons/NCL_polyg_18.html#sphx-glr-gallery-polygons-ncl-polyg-18-py">here</a>.
+
+</div>
+
+<div class=ex>
+<!--polyg_19-->
+<a name=ex19></a>
+<a href="Images/polyg_19_lg.png">
+<img src="Images/polyg_19_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_19.html">polyg_19.ncl</a>: This script
+shows how to draw a map of mainland United States with Alaska, Hawaii,
+and Puerto Rico added as annotations at the bottom. Each state is
+colored based on population in 2014, using shapefiles downloaded
+from <a href="http://www.gadm.org/">gadm.org</a>. The "states.shp" set
+of files is available on our <a href="Data/index.html">data page</a>.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Polygons/NCL_polyg_19.html#sphx-glr-gallery-polygons-ncl-polyg-19-py">here</a>.
+</div>
+
+<div class=ex>
+<!--polyg_20-->
+<a name=ex20></a>
+<a href="Images/polyg_20_lg.png">
+<img src="Images/polyg_20_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_20.html">polyg_20.ncl</a>: This script
+shows how to draw a larger map with a smaller map as an annotation.
+Each map is customized by drawing various outlines, turning
+tickmarks on/off, and adding text strings and markers.
+<p>
+
+The USA_adm2.shp shapefile downloaded from
+<a href="http://www.gadm.org/">gadm.org</a> is used to specifically
+draw the counties of Colorado only, while the USA_adm1.shp shapefile
+is used to draw the remaining state outlines.
+</div>
+
+<div class=ex>
+<!--polyg_21-->
+<a name=ex21></a>
+<a href="Images/polyg_21_1_lg.png">
+<img src="Images/polyg_21_1_sm.png" align=left border=2></a>
+<a href="Images/polyg_21_2_lg.png">
+<img src="Images/polyg_21_2_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_21.html">polyg_21.ncl</a>: This script shows how
+to draw large, smooth, hollow circles on a plot.
+If you try to draw large circles using <a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a>
+and a <a href="../Document/Graphics/Images/markers.png">marker index of 4</a>, they will
+look blocky.
+<p>
+
+The first plot draws a single circle on a map
+using <a href="../Document/Functions/Built-in/nggcog.html"><strong>nggcog</strong></a> to create the circle and
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a> to add the circle
+to the map. A hollow circle using marker index 4
+and <a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a> and is also
+drawn for comparison.
+<p>
+
+The second plot draws circles and ellipses using an unadvertised
+function called "circle_ll" contributed by Arindam Chakraborty.  The
+circles are added to the plot using
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>.
+<p>
+
+See example poly_22.ncl for another way to draw smoother hollow circles,
+using NCL's font tables.
+</div>
+
+<div class=ex>
+<!--polyg_22-->
+<a name=ex22></a>
+<a href="Images/polyg_22_lg.png">
+<img src="Images/polyg_22_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_22.html">polyg_22.ncl</a>: This script shows
+another way to draw large, smooth, hollow circles on a plot, using
+hollow circle markers defined
+in <a href="../Document/Graphics/font_tables.html">NCL's font
+tables</a> <a href="../Document/Graphics/Images/font19.png">#19</a>
+and <a href="../Document/Graphics/Images/font19.png">#37</a>.
+<p>
+
+See example poly_21.ncl for an example of how to create your own hollow circles.
+
+</div>
+
+<div class=ex>
+<!--Table_6-->
+<a name=ex6></a>
+<a href="Images/table_6_lg.png">
+<img src="Images/table_6_sm.png" align=left border=2></a>
+<a href="Scripts/table_6.html">table_6.ncl</a>: 
+
+This example draws a table of filled triangles. The triangles are
+filled based on a range of values.<p>
+
+The <a href="../Document/Graphics/Interfaces/gsn_csm_blank_plot.html"><strong>gsn_csm_blank_plot</strong></a> function was
+used to create a blank plot, and the filled triangles were added using
+<a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> 
+and
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--Table_8-->
+<a name=ex8></a>
+<a href="Images/table_8_lg.png">
+<img src="Images/table_8_sm.png" align=left border=2></a>
+<a href="Images/table_text_8_lg.png">
+<img src="Images/table_text_8_sm.png" align=left border=2></a>
+<a href="Scripts/table_8.html">table_8.ncl</a>: 
+
+This example is similar to table_6.ncl, except it draws four triangles
+per each quadrant. The bottom triangles represent the minimum of the
+values, the top triangles represent the maximum of the values, the
+left triangles represent the average, and the right triangles the
+standard deviation. Each set of triangles has their own color map,
+illustrated by the four labelbars.
+<p>
+
+The second image is from running the script with nvars=5, nmodels=5, and ADD_TEXT=True.
+This is just for debugging purposes, so you can see what each triangle value is equal
+to.
+<p>
+
+Dummy data is used, which is generated by the script.
+<p>
+
+</div>
+<div class=ex>
+<!--polyg_23-->
+<a name=ex23></a>
+<a href="Images/polyg_23_1_lg.png">
+<img src="Images/polyg_23_1_sm.png" align=left border=2></a>
+<a href="Images/polyg_23_2_lg.png">
+<img src="Images/polyg_23_2_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_23.html">polyg_23.ncl</a>: This script shows how to
+add arrows to a plot, using an "arrow" function contributed by Arindam Chakraborty.
+<p>
+
+This function uses
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a> under the hood,
+which means you can
+use <a href="../Document/Graphics/Resources/gs.html">gsLine<i>XXXX</i></a>
+resources to customize the arrows.
+
+</div>
+
+<div class=ex>
+<!--polyg_24-->
+<a name=ex24></a>
+<a href="Images/polyg_24_lg.png">
+<img src="Images/polyg_24_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_24.html">polyg_24.ncl</a>:
+Use <a href="../Document/Functions/Contributed/geolocation_circle.html"><strong>geolocation_circle</strong></a>
+to generate concentric latitude/longitude locations about a central location.
+Draw multiple 'circles' around a central location. 
+Ths script uses radii specified in kilometers. 
+Each radius is colored differently and has different line thicknesses.
+A <b>+</b> polymarker is used to show the location.
+<p>
+This function uses <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>. 
+Each circle 'object' must be given a unique attribute identifier.
+</div>
+
+<div class=ex>
+<!--polyg_25-->
+<a name=ex25></a>
+<a href="Images/polyg_25_lg.png">
+<img src="Images/polyg_25_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_25.html">polyg_25.ncl</a>:
+Use <a href="../Document/Functions/Contributed/geolocation_circle.html"><strong>geolocation_circle</strong></a>
+to generate concentric latitude/longitude locations about a central location.
+Draw multiple 'circles' around multiple central locations. 
+Ths script uses radii specified in degrees ('great circle distances'). 
+Each radius is colored differently and has different line thicknesses.
+A 'filled-circle'  polymarker is used to show the locations.
+<p>
+This function uses <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>. 
+Each circle 'object' must be given a unique attribute identifier.
+<p>
+Please see examples <b>polyg_29</b>, <b>polyg_30</b> and <b>polyg_31</b> for examples that use data masking.
+</div>
+
+<div class=ex>
+<!--wrf_gsn_5-->
+<a name=ex5></a>
+<a href="Images/wrf_nogsn_poly_5_lg.png">
+<img src="Images/wrf_nogsn_poly_5_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_nogsn_poly_5.html">wrf_nogsn_poly_5.ncl</a>:
+
+This example shows how to add text and markers to an existing WRF-ARW
+plot that was created using <a href="../Document/Functions/WRF_arw/wrf_contour.html"><strong>wrf_contour</strong></a>
+and <a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a>.
+<p>
+
+The key is to set "pltres@PanelPlot = True", telling this function
+that you plan to do something with the plot later. This
+causes <a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a> to not
+draw the plot and to not remove all the overlain features, allowing
+you to put more annotations on the plot before drawing it yourself.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a> and
+<a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a> are used to add the
+dots and text strings to the WRF plot.
+
+</div>
+
+<div class=ex>
+<!--polyg_26-->
+<a name=ex26></a>
+<a href="Images/polyg_26_1_lg.png">
+<img src="Images/polyg_26_1_sm.png" align=left border=2></a>
+<a href="Images/polyg_26_2_lg.png">
+<img src="Images/polyg_26_2_sm.png" align=left border=2></a>
+<a href="Images/polyg_26_3_lg.png">
+<img src="Images/polyg_26_3_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_26.html">polyg_26.ncl</a>:
+
+This example illustrates how to mask portions of an XY plot, using 
+solid-fill polygons, hatch patterns, or both.
+<p>
+The <a href="../Document/Graphics/Resources/gs.html#gsFillColor"><em>gsFillColor</em></a> resource is used to set the color of the 
+polygons or the hatch patterns. However, in order to have both solid fill and hatching
+in the same polygon, you must call <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> twice: once
+to get the solid fill and again to get the hatch pattern on top. The 
+<a href="../Document/Graphics/Resources/gs.html#gsFillIndex"><em>gsFillIndex</em></a> resource is used to specify which type of fill is desired.
+<p>
+You can choose the desired hatch (or stipple) pattern from the 
+<a href="../Document/Graphics/Images/fillpatterns.png">fill pattern table</a> and the desired color 
+from the list of <a href="../Document/Graphics/named_colors.html">named colors</a>.
+<p>
+To further customize the hatch patterns, you can change the thickness of the lines 
+using <a href="../Document/Graphics/Resources/gs.html#gsFillLineThicknessF"><em>gsFillLineThicknessF</em></a> and the density 
+using <a href="../Document/Graphics/Resources/gs.html#gsFillScaleF"><em>gsFillScaleF</em></a>. 
+</div>
+
+<div class=ex>
+<!--polyg_27-->
+<a name=ex27></a>
+<a href="Images/polyg_27_lg.png">
+<img src="Images/polyg_27_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_27.html">polyg_27.ncl</a>:
+
+The purpose of this script is to demonstrate that using floating
+point and double precision values with <a href="../Document/Functions/Built-in/nggcog.html"><strong>nggcog</strong></a>
+and <a href="../Document/Functions/Built-in/gc_onarc.html"><strong>gc_onarc</strong></a>, while also varying the number of
+great circle arcs to approximate a circle can yield differing results.
+<p>
+For illustrative purposes, a quadruply nested do loop is used in
+this example. Generally, it is recommended to minimize the number
+of nested do loops in order to maximize performance.
+<p>
+Note that more points are considered to be "on arc" when double
+precision types are used.
+</div>
+
+<div class=ex>
+<!--polyg_28-->
+<a name=ex28></a>
+<a href="Images/polyg_28_1_lg.png">
+<img src="Images/polyg_28_1_sm.png" align=left border=2></a>
+<a href="Images/polyg_28_2_lg.png">
+<img src="Images/polyg_28_2_sm.png" align=left border=2></a>
+<a href="Images/polyg_28_3_lg.png">
+<img src="Images/polyg_28_3_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_28.html">polyg_28.ncl</a>:
+
+This script illustrates using the following procedures: 
+<a href="../Document/Graphics/Interfaces/gsn_polygon.html"><b>gsn_polygon</b></a>,
+<a href="../Document/Graphics/Interfaces/gsn_polyline.html"><b>gsn_polyline</b></a> and
+<a href="../Document/Graphics/Interfaces/gsn_polymarker.html"><b>gsn_polymarker</b></a>.
+Further, it illustrates using the the following resources: 
+<a href="../Document/Graphics/Resources/sf.html#sfXArray"><b>sfXArray</b></a>,
+<a href="../Document/Graphics/Resources/sf.html#sfYArray"><b>sfYArray</b></a> and
+<a href="../Document/Graphics/Resources/tr.html#trGridType"><b>trGridType</b></a>
+to contour irregularly spaced grid points or observations. 
+</div>
+
+<div class=ex>
+<!--polyg_29-->
+<a name=ex29></a>
+<a href="Images/polyg_29_lg.png">
+<img src="Images/polyg_29_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_29.html">polyg_29.ncl</a>:
+Use <a href="../Document/Functions/Contributed/geolocation_circle.html"><strong>geolocation_circle</strong></a> to generate concentric latitude/longitude locations about three central locations. 
+Use <a href="../Document/Functions/Built-in/gc_inout.html"><strong>gc_inout</strong></a> to mask grid points outside the circles.  A consistent map backround is used.
+</div>
+
+<div class=ex>
+<!--polyg_30-->
+<a name=ex30></a>
+<a href="Images/polyg_30_lg.png">
+<img src="Images/polyg_30_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_30.html">polyg_30.ncl</a>:
+Hurricane Sandy locations at 0300GMT on 8 days (23-30 October 2012): 
+use <a href="../Document/Functions/Contributed/geolocation_circle.html"><strong>geolocation_circle</strong></a> to create areas spanning 750km
+on each day and plot the total daily precipitation for each day. The title indicate the date, the central
+location and the central pressure and maximum wind speed (mph).
+A consistent map backround is used.
+</div>
+
+<div class=ex>
+<!--polyg_31-->
+<a name=ex31></a>
+<a href="Images/polyg_31_lg.png">
+<img src="Images/polyg_31_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_31.html">polyg_31.ncl</a>:
+Similar to <b>polyg_30</b> except the background map is allowed to change with each storm location.
+</div>
+
+
+
+
+					</div>
+
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/polyg.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:19:06 GMT -->
+</html>
+
+

@@ -1,0 +1,84 @@
+;----------------------------------------------------------------------
+; tm_12.ncl
+;
+; Concepts illustrated:
+;   - Creating your own tickmark labels using gsn_text_ndc
+;   - Setting the background fill color for tickmark labels to yellow
+;----------------------------------------------------------------------
+; This script shows how to customize tickmarks by creating your
+; own using gsn_text_ndc. In this script, the tickmarks are drawn
+; with a background fill color of yellow, which you cannot do with
+; regular tickmark labels.
+;----------------------------------------------------------------------
+
+;----------------------------------------------------------------------
+; This procedure replaces a plot's X/Y tickmark labels with custom
+; labels created by drawing individual text strings.
+;----------------------------------------------------------------------
+procedure replace_tickmark_labels(wks,plot)
+local txres, xlabels, ylabels, xmin, ymin, xfonth, yfonth
+begin
+;---Turn off plot's X and Y tickmark labels
+  setvalues plot
+    "tmXBLabelsOn"  : False
+    "tmYLLabelsOn"  : False
+  end setvalues
+    
+;---Retrieve some values so we can reconstruct the labels
+  getvalues plot
+    "tmXBLabels"              : xlabels
+    "tmYLLabels"              : ylabels
+    "tmXBValues"              : xvalues
+    "tmYLValues"              : yvalues
+    "trXMinF"                 : xmin
+    "trYMinF"                 : ymin
+    "tmYLMajorOutwardLengthF" : ylength
+    "tmXBMajorOutwardLengthF" : xlength
+    "tmXBLabelFontHeightF"    : xfont_height
+    "tmYLLabelFontHeightF"    : yfont_height
+  end getvalues
+
+;---Get the NDC locations for the new tickmark labels
+  xvalues_ndc = new(dimsizes(xvalues),float)
+  yvalues_ndc = new(dimsizes(yvalues),float)
+  xmin_ndc    = new(1,float)
+  ymin_ndc    = new(1,float)
+  datatondc(plot,xvalues,yvalues,xvalues_ndc,yvalues_ndc)
+  datatondc(plot,xmin,ymin,xmin_ndc,ymin_ndc)
+
+;---Make sure the tickmark labels don't touch the tickmarks.
+  xmin_ndc = xmin_ndc-(1.8*ylength)     
+  ymin_ndc = ymin_ndc-(1.8*xlength)
+
+  txres = True
+  txres@txBackgroundFillColor = "yellow"
+  txres@txFontHeightF         = xfont_height
+
+;---Draw the X labels
+  txres@txJust                = "CenterRight"
+  gsn_text_ndc(wks,ylabels,xmin_ndc,yvalues_ndc,txres)
+
+;---Draw the Y labels
+  txres@txFontHeightF         = yfont_height
+  txres@txJust                = "TopCenter"
+  gsn_text_ndc(wks,xlabels,xvalues_ndc,ymin_ndc,txres)
+end
+
+;----------------------------------------------------------------------
+; Main code for creating a dummy plot and changing the tickmark 
+; labels.
+;----------------------------------------------------------------------
+begin
+  wks = gsn_open_wks("png","tm")
+
+  res = True
+  res@tiMainString = "Standard tickmark labels"
+  plot = gsn_csm_blank_plot(wks,res)
+  frame(wks)
+
+  res@tiMainString = "Background-filled tickmark labels"
+  plot = gsn_csm_blank_plot(wks,res)
+  replace_tickmark_labels(wks,plot)
+  draw(plot)
+  frame(wks)
+end

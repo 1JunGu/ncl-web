@@ -1,0 +1,573 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/static_energy_atm.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:13 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (meteorology)">
+<meta name="keywords" content="static_energy_atm">
+<title>static_energy_atm</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../meteo.html">Meteorology</a>
+<br>
+<h1>static_energy_atm</h1>
+
+<p>
+Compute the atmospheric moist and dry static energy.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.5.0">version 6.5.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function static_energy_atm (
+		t          : numeric,  ; float, double, integer only
+		q          : numeric,  
+		z          : numeric,  
+		iounit [2] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(<em>z</em>)] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>t</em>
+<p class=indent>A scalar or array containing temperature (units: degC, degK, degF).
+If <em>t</em>,  <em>q</em> and <em>z</em> are arrays they must be the same size and shape.
+</p>
+<em>q</em>
+<p class=indent>A scalar or array containing specific humidity (units: kg/kg, g/kg).
+</p>
+<em>z</em>
+<p class=indent>A scalar or array containing height (m).
+</p>
+<em>iounit</em>
+<p class=indent>An integer array of length 2 which specifies the units of the input <em>t</em> and <em>q</em>.
+<ul>
+<li> <em>iounit(0)</em>=0 input <em>t</em> are degrees Celcius (degC)
+<li> <em>iounit(0)</em>=1 input <em>t</em> are degrees Kelvin  (degK)
+<li> <em>iounit(0)</em>=2 input <em>t</em> are degrees Farenheit (degF)
+</p>
+<p class=indent>
+<li> <em>iounit(1)</em>=0 input <em>q</em> are kg/kg
+<li> <em>iounit(1)</em>=1 input <em>q</em> are  g/kg
+</ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A variable of type 'list' which comtains 3 derived variables: <b>[/</b>MSE, DSE, LSE </b>/]</b>
+The returned units are <b>J/kg</b>.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<p>
+The static energy is a combination of an air parcel's :
+<pre>
+          Latent heat: Lv*<b>q</b>          ; Lv - latent heat of vaporization of water 
+          Dry Air Enthalpy: Cp*<b>t</b>     ; Cp - specific heat of dry air at constant pressure 
+          Potential Energy: g*<b>z</b>      ; g  - gravity
+</pre>
+<p>
+The atmosphere's total static energy is composed of two components: 
+<b>Dry Static Energy (DSE)</b> and <b>Latent Static Energy (LSE)</b>. 
+Specifically:
+<pre>
+          DSE = Cp*<b>t</b> + g*<b>z</b> 
+</pre>
+and
+<pre>
+          LSE = Lv*<b>q</b>           
+</pre>
+<ol>
+The sum of (DSE+LSE) is commonly called <b>Moist Static Energy (MSE)</b>: 
+<pre>
+
+          <b>MSE = DSE + LSE</b>
+</pre>
+<p>
+<ul>
+<li> The MSE is a thermodynamic variable that describes the state of an air parcel.  
+It is similar to the equivalent potential temperature.  As noted in Yano and Ambaum (2017): 
+"MSE is conserved under moist adiabatic processes and under hydrostatic balance, 
+thus it is a useful quantity to understand moist convection."
+<p>
+<li> The DSE [aka: Montgomery Streamfunction] is a thermodynamic variable similar to 
+potential temperature, except that the concept of static energy assumes that any 
+kinetic energy is locally dissipated into heat.
+</ul>
+<p>
+<pre>
+<b>Reference:</b> 
+   Holton, J. R. (1992): An Introduction the Dynamic Meteorology. Academic Press.
+
+   Wikipedia: <a href="https://en.wikipedia.org/wiki/Moist_static_energy"><b>Moist Static Energy</b></a>
+
+   Yano, J.-I. and Ambaum, M. H. P. (2017):
+    <a href="http://onlinelibrary.wiley.com/doi/10.1002/qj.3121/abstract">
+    <b>Moist static energy: definition, reference constants, a conservation law and effects on buoyancy</b></a> 
+    Q.J.R. Meteorol. Soc, 143: 2727-2734. 
+</pre>
+
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+<B>Example 1:</B>
+<pre>
+   t  = 27.3       ; C         iounit(0)=0
+   q  = 14.4       ; g/kg      iounit(1)=1
+   z  = 275        ; m         elevation above the ground        
+
+   SE = <strong>static_energy_atm</strong>(t, q, z, <b>(/</b>0,1<b>/)</b>
+
+                                   ; clarity: explicitly extract each variable from list
+   MSE = SE<b>[</b>0<b>]</b>       ; MSE = 341007  J/kg
+   DSE = SE<b>[</b>1<b>]</b>       ; DSE = 304858  J/kg
+   LSE = SE<b>[</b>2<b>]</b>       ; LSE = 36149.8 J/kg
+   <a href="../Built-in/delete.html"><strong>delete</strong></a>(SE)   ; no longer needed
+
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(MSE)
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(DSE)
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(LSE)
+</pre>
+<p>
+<B>Example 2</B>: 
+<pre>
+   a    = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>("cam35.h0.0008-07.nc", "r") 
+   T    = a->T              ; K         iounit(0)=1   (time,lev,lat,lon)
+   Q    = a->Q              ; kg/kg     iounit(1)=0
+   ZG   = a->Z3             ; m         Geopotential Height (above sea level)
+   PHIS = a->PHIS           ; m2/s2     Surface geopotential (time,lat,lon) 
+   PHIS = PHIS/9.8          ; m
+   phis = conform(ZG, PHIS, (/0,2,3/))        ;  (time,lev,lat,lon)
+   Z    = ZG-phis           ; m         Height above the surface
+   <a href="copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(ZG, Z)
+
+   SE = <strong>static_energy_atm</strong>(t, q, z, <b>(/</b>1,0 <b>/)</b>
+
+                                   ; for clarity: explicitly extract each variable from list
+   MSE = SE<b>[</b>0<b>]</b>
+   DSE = SE<b>[</b>1<b>]</b>
+   LSE = SE<b>[</b>2<b>]</b>
+   <a href="../Built-in/delete(SE).html"><strong>delete(SE)</strong></a>   ; no longer needed
+
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(MSE)
+   <a href="../Built-in/printMinMax.html"><strong>printMinMax</strong></a>(MSE,0)
+
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(DSE)
+   <a href="../Built-in/printMinMax.html"><strong>printMinMax</strong></a>(DSE,0)
+
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(LSE)
+   <a href="../Built-in/printMinMax.html"><strong>printMinMax</strong></a>(LSE,0)
+
+;--- print an arbitrary location and time
+
+   hyam = a->hyam ; read from a file the mid-layer coef
+   hybm = a->hybm ; read from a file
+   ps   = a->PS   ; surface pressure [Pa]
+   p0   = 100000. ; since ps is in Pa or [ f->P0]
+   pm   = <a href="../Built-in/pres_hybrid_ccm.html"><strong>pres_hybrid_ccm</strong></a>(ps,p0,hyam,hybm)
+   <a href="copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(T, pm)
+   pm   = pm*0.01 ; convert to hPa
+   pm@long_name = "pressure level"
+   pm@units     = "hPa"
+
+   nt  = 0      
+   LAT = 5
+   LON = 120
+   print(<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%8.1f", pm(nt,:,{LAT},{LON}))+"  " \
+        +sprintf("%8.1f",  T(nt,:,{LAT},{LON}))+"  " \
+        +sprintf("%8.6f",  Q(nt,:,{LAT},{LON}))+"  " \
+        +sprintf("%8.1f",  Z(nt,:,{LAT},{LON}))+"  " \
+        +sprintf("%8.1f",MSE(nt,:,{LAT},{LON}))+"  " \
+        +sprintf("%8.1f",DSE(nt,:,{LAT},{LON}))+"  " \
+        +sprintf("%8.1f",LSE(nt,:,{LAT},{LON})) )
+
+</pre>
+The edited output is:
+<pre>
+
+   Variable: <b>MSE</b>
+   Type: float
+   Total Size: 1437696 bytes
+               359424 values
+   Number of Dimensions: 4
+   Dimensions and sizes:	[time | 1] x [lev | 26] x [lat | 96] x [lon | 144]
+   Coordinates: 
+               time: [3132..3132]
+               lev: [3.54463800000001..992.5560999999998]
+               lat: [ -90..89.99999999999999]
+               lon: [   0..357.5]
+   Number Of Attributes: 4
+     long_name :	Moist Static Energy
+     units :	J/kg
+     info :	MSE = (Cp*t + g*z)+Lv*q
+     short_name :	MSE
+   (0)	Moist Static Energy (J/kg) : min=487256   max=915394
+   (0)	=========
+   
+   Variable: <b>DSE</b>
+   Type: float
+   Total Size: 1437696 bytes
+               359424 values
+   Number of Dimensions: 4
+   Dimensions and sizes:	[time | 1] x [lev | 26] x [lat | 96] x [lon | 144]
+   Coordinates: 
+               time: [3132..3132]
+               lev: [3.54463800000001..992.5560999999998]
+               lat: [ -90..89.99999999999999]
+               lon: [   0..357.5]
+   Number Of Attributes: 4
+     long_name :	Dry Static Energy
+     units :	J/kg
+     info :	DSE = (Cp*t + g*z)
+     short_name :	DSE
+   (0)	Dry Static Energy (J/kg) : min=487256   max=915394
+   (0)	=========
+
+   Variable: <b>LSE</b>
+   Type: float
+   Total Size: 1437696 bytes
+               359424 values
+   Number of Dimensions: 4
+   Dimensions and sizes:	[time | 1] x [lev | 26] x [lat | 96] x [lon | 144]
+   Coordinates: 
+               time: [3132..3132]
+               lev: [3.54463800000001..992.5560999999998]
+               lat: [ -90..89.99999999999999]
+               lon: [   0..357.5]
+   Number Of Attributes: 4
+     long_name :	moist static energy
+     units :	J/kg
+     info :	lse = Lv*q
+     short_name :	mse
+   (0)	latent static energy (J/kg) : min=0.00124475   max=55.3337
+
+
+       <b>   P        T         Q        Z        MSE       DSE        LSE     </b>
+          3.5     230.3  0.000002   37852.7  602605.8  602601.1       4.7
+          7.4     222.1  0.000002   32957.0  546323.9  546319.2       4.7
+         14.0     224.2  0.000002   28764.5  507375.8  507371.1       4.7
+         23.9     220.1  0.000002   25230.7  468661.8  468657.1       4.6
+         37.2     215.2  0.000002   22394.1  435906.7  435902.1       4.5
+         53.1     208.9  0.000002   20171.9  407830.0  407825.5       4.5
+         70.1     201.2  0.000002   18495.8  383577.0  383572.3       4.7
+         85.5     192.2  0.000002   17339.5  363277.1  363272.3       4.8
+        100.6     191.3  0.000002   16424.7  353367.9  353363.8       4.2
+        118.4     194.4  0.000003   15504.9  347460.5  347454.1       6.4
+        139.3     200.1  0.000005   14564.2  344022.9  344009.2      13.7
+        164.0     207.8  0.000013   13591.6  342251.0  342218.3      32.7
+        192.9     216.5  0.000035   12580.3  341127.1  341040.4      86.6
+        227.0     225.6  0.000084   11526.9  340020.2  339809.9     210.3
+        267.1     234.9  0.000174   10430.0  338845.9  338408.2     437.7
+        314.3     244.2  0.000310    9288.8  337416.7  336637.8     778.8
+        369.8     253.1  0.000601    8104.0  335519.8  334011.3    1508.5
+        435.1     262.0  0.001239    6876.7  334030.8  330920.5    3110.3
+        511.9     269.0  0.003729    5610.5  334897.1  325536.5    9360.6
+        602.3     275.4  0.005283    4311.0  332521.2  319258.8   13262.4
+        698.9     281.7  0.007350    3091.8  332011.0  313559.5   18451.5
+        790.1     286.4  0.009778    2065.1  332812.6  308266.9   24545.6
+        869.9     291.6  0.011405    1245.7  334101.3  305470.9   28630.4
+        932.6     295.1  0.015777     642.6  342658.3  303051.3   39607.0
+        973.6     298.1  0.017377     264.7  346017.2  302394.7   43622.5
+        995.7     299.8  0.017613      66.3  346386.1  302169.2   44216.9
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/static_energy_atm.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:14 GMT -->
+</html>

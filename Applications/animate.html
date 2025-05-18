@@ -1,0 +1,556 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/animate.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:11:51 GMT -->
+<head>
+<meta name="description" content="Use of NCL to create animations.">
+<meta name="keywords" content="NCL, graphics, visualization, animations">
+<TITLE>NCL Graphics: Animations</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL Graphics: Animations</h1>
+
+<div class=text>
+<p class=justEX>
+
+This page shows how to create animations with NCL.
+<p>
+
+If you just want to view the animation quickly and don't need to share
+it with somebody else, then you can send the graphical output to an
+NCGM file (using "ncgm" as the first argument
+to <a href="../Document/Graphics/Interfaces/gsn_open_wks.html"><strong>gsn_open_wks</strong></a>), and then
+use <a href="../Document/Tools/idt.html">idt</a> to animate it.
+<p>
+
+If you want to share the animation with other people, then you can
+convert from a series of NCL PNG/EPS files (or a single PS file) to an
+animated GIF or MPEG file using the popular "convert" tool
+from <a href="http://www.imagemagick.org/">ImageMagick</a>, a
+graphical suite for image manipulation.
+<p>
+
+For example, to convert a series of PNG images to an animated GIF with
+a delay of half a second between frames (50/100):<p>
+
+<pre>
+   convert -delay 50 *.png anim.gif
+</pre>
+<p>
+
+You can then display "anim.gif" in your browser or other suitable viewer.
+<p>
+
+For more information, see:
+<blockquote>
+<a href="http://www.imagemagick.org/Usage/anim_basics/">http://www.imagemagick.org/Usage/anim_basics/</a>
+</blockquote>
+<p>
+
+To convert to an mpeg file, you will need to first download the
+program "mpeg2encode"
+from <a href="http://www.mpeg.org/">http://www.mpeg.org/</a>, and then
+you can use "convert" again:
+
+<pre>
+   convert file.ps file.mpg
+</pre>
+
+</div>
+
+<div class=ex>
+<!--animate_1-->
+<a name=ex1></a>
+<a href="Images/animate_1_1_lg.png">
+<img src="Images/animate_1_1_sm.png" align=left border=2></a>
+<a href="Scripts/animate_1.html">animate_1.ncl</a>:
+
+Demonstrates how to efficiently create an animation with NCL. Instead
+of calling <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a> every
+time inside the "do" loop, you can use a <a
+href="../Document/Manuals/Ref_Manual/NclStatements.html#setvalues">setvalues</a>
+call to just change the data and the title.
+<p>
+
+This example creates a file called "animate.ncgm".
+You can use <a href="../Document/Tools/idt.html">idt</a> to animate it.
+
+<pre>
+   idt animate.ncgm
+</pre>
+
+Three panels should pop up, and one of them has an "animate" button.
+Click on this, and each frame will be loaded into memory.  When this
+is done, click the ">>" or "<<" button to play the animation.  Use
+"delay" to slow down the animation, or "loop" to repeat it.
+<p>
+
+[<a href="Images/animate_1.mpeg">View the animation.</a>]
+</div>
+
+<div class=ex>
+<!--animate_2-->
+<a name=ex2></a>
+<a href="Images/animate_2_1_lg.png">
+<img src="Images/animate_2_1_sm.png" align=left border=2></a>
+<a href="Images/animate_2_2_lg.png">
+<img src="Images/animate_2_2_sm.png" align=left border=2></a>
+<a href="Images/animate_2_3_lg.png">
+<img src="Images/animate_2_3_sm.png" align=left border=2></a>
+<a href="Scripts/animate_2.html">animate_2.ncl</a>:
+
+Demonstrates how to create an animated GIF from WRF data.
+<p>
+
+Note that it's important set the contours to a fixed set of levels,
+otherwise the contour levels will be recalculated for each frame,
+based on the range of the data for that frame.
+<p>
+
+The output is sent to a series of PNG files, and then the following command
+is executed in the NCL script to produce the animation:
+<p>
+<pre>
+  convert -delay 25 animate*.png animate_2.gif
+</pre>
+<p>
+
+[<a href="Images/animate_2.gif">View the animation.</a>]
+</div>
+
+<div class=ex>
+<a name=ex3></a>
+<a href="Images/NCL_spinning_globes_MeanTempChange_2005_2060_HD720p.qt">
+<img src="Images/NCL_spinning_globes_MeanTempChange_2005_2060_HD720p.still.png" align=left border=2></a>
+<a href="Scripts/two_spinning_globes_Mean_Temp_Change_max_16to9_less_tsteps.html">The NCL script</a>:
+
+This animation script was contributed by Karin Meier-Fleischer
+of <a href="https://www.dkrz.de/">Deutsche Klimarechenzentrum</a>
+(DKRZ). It shows a mean temperature change animation of CMIP5 data. It
+is similar to
+an <a href="http://www.dkrz.de/Klimaforschung/konsortial/ipcc-ar5/ergebnisse/2m-temperatur">Avizo
+animation</a>, also created by DKRZ.
+<p>
+
+The images were generated as a series of PNG files, which were then
+converted to a ".mov" file using Adobe Photoshop Premiere. Further
+details on how the animation was created are included in the comments
+at the top of the script.
+<p>
+
+Click on the image to view the animation.<p>
+
+</div>
+
+<div class=ex>
+<!--animate_3-->
+<a name=ex3></a>
+<a href="Images/animate_3_1_lg.png">
+<img src="Images/animate_3_1_sm.png" align=left border=2></a>
+<a href="Images/animate_3_3_lg.png">
+<img src="Images/animate_3_3_sm.png" align=left border=2></a>
+<a href="Images/animate_3_3_lg.png">
+<img src="Images/animate_3_3_sm.png" align=left border=2></a>
+<a href="Images/animate_3_4_lg.png">
+<img src="Images/animate_3_4_sm.png" align=left border=2></a>
+<a href="Scripts/animate_3_1.html">animate_3_1.ncl</a> / <br>
+<a href="Scripts/animate_3_2.html">animate_3_2.ncl</a> / <br>
+<a href="Scripts/animate_3_3.html">animate_3_3.ncl</a>:
+<p>
+
+This example shows three ways to create a 97-frame animation in NCL,
+with tips on how to speed things up.
+<p>
+
+The animation is filled contours of WRF reflectivity across time,
+overlaid on a WRF terrain plot.  The terrain plot is the same for each
+iteration, while the reflectivity plot and the title change for each
+time step.
+<p>
+
+<a href="Scripts/animate_3_1.html">animate_3_1.ncl</a> - this script
+shows the traditional and "easy" way to do this, but also potentially
+slower, by calling
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour.html"><strong>gsn_csm_contour</strong></a>, 
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>,
+and <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> each time in the loop.
+<p>
+
+<a href="Scripts/animate_3_2.html">animate_3_2.ncl</a> - this script
+shows how to speed this up a little by reusing the terrain plot.<p>
+
+<a href="Scripts/animate_3_3.html">animate_3_3.ncl</a> - this script
+shows how to speed this up even more, by
+using <a href="../Document/Manuals/Ref_Manual/NclStatements.html#Setvalues">setvalues</a> to simply change the data and the
+title.
+<p>
+
+The timings on a Mac system were as follows:<br>
+<blockquote>
+"animate_3_1.ncl" - 98.34 seconds<br>
+"animate_3_2.ncl" - 92.83 seconds<br>
+"animate_3_3.ncl" - 84.85 seconds
+</blockquote>
+<p>
+
+<font size=-1><i>Click on thumbnail image for an animation</i></font><br>
+<a href="Images/animate_3.gif"><img src="Images/animate_3_1_sm.png" align=left border=2></a><p>
+
+The animation was created by generating a series of PNG images, and then
+calling:
+<pre>
+convert animate*.00*png animate_3.gif</a>
+
+</div>
+
+<div class=ex>
+<!--animate_4-->
+<a name=ex4></a>
+<a href="Images/animate_4_lg.png">
+<img src="Images/animate_4_sm.png" align=left border=2></a>
+<a href="Scripts/animate_4_1.html">animate_4_1.ncl</a> / <br>
+<a href="Scripts/animate_4_2.html">animate_4_2.ncl</a>:
+<p>
+
+This example shows two ways to create a 97-frame 4-panel animation
+in NCL, with tips on how to speed things up. It's based on the script
+from the previous example, except now four plots are animated per page.
+<p>
+
+The animation is filled contours of WRF reflectivity (across time and
+four selected level indexes) overlaid on a WRF terrain plot.  The
+terrain plot is the same for each iteration, while the reflectivity
+plots change for each time and level.
+<p>
+
+<a href="Scripts/animate_4_1.html">animate_4_1.ncl</a> - this script
+shows the traditional and "easy" way to do this, but also potentially
+slower, by calling
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour.html"><strong>gsn_csm_contour</strong></a>, 
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>,
+and <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> each time in the loop.
+<p>
+
+<a href="Scripts/animate_4_2.html">animate_4_2.ncl</a> - this script
+shows how to speed this up a little by using "setvalues" on existing
+reflectivity plots to simply change the data.<p>
+
+The timings on a Mac system were as follows:<br>
+<blockquote>
+"animate_4_1.ncl" - 163.0 seconds<br>
+"animate_4_2.ncl" - 129.8 seconds<br>
+</blockquote>
+<p>
+
+<font size=-1><i>Click on thumbnail image for an animation</i></font><br>
+<a href="Images/animate_4.gif"><img src="Images/animate_4_sm.png" align=left border=2></a><p>
+
+The animation was created by generating a series of PNG images, and then
+calling:
+<pre>
+convert animate*.00*png animate_4.gif</a>
+
+</div>
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/animate.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:11:58 GMT -->
+</html>
+
+

@@ -1,0 +1,670 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/filter.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:08:15 GMT -->
+<head>
+<meta name="description" content="NCL data analysis example page. 
+Demonstrates the use of filters.">
+<meta name="keywords" content="NCL,filters">
+<TITLE>NCL: Filters</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+<h1>NCL: Filters</h1>
+
+<div class=text>
+<b>Lanczos Filter Weights</b>
+<p>
+Filters require that a set of weights be applied to data.
+The weights may be applied in the spatial 
+(<i>eg</i>, <a href="../Document/Functions/Built-in/smth9.html"><strong>smth9</strong></a>) or time domains. The focus
+of the following examples will be on application to the temporal domain.  
+<p>
+The <a href="../Document/Functions/Built-in/filwgts_lanczos.html"><strong>filwgts_lanczos</strong></a> function may be used to
+create a set of weights that have characteristics specified
+by the user. The <a href="../Document/Functions/Built-in/wgt_runave.html"><strong>wgt_runave</strong></a> or 
+<a href="../Document/Functions/Contributed/wgt_runave_Wrap.html"><strong>wgt_runave_Wrap</strong></a> functions
+can be used to apply the weights. The use of <a href="../Document/Functions/Built-in/wgt_runave.html"><strong>wgt_runave</strong></a>
+or <a href="../Document/Functions/Contributed/wgt_runave_Wrap.html"><strong>wgt_runave_Wrap</strong></a>  
+will result in the loss of data at the beginning and end of
+the series being filtered. There is no way to avoid this data loss.
+<p>
+Each Lanczos filter will have an associated <i>response function</i>. 
+This shows how weights which are applied in the (say) 
+time domain will affect amplitudes in the frequency domain. 
+Often, the phrase <i>half-power point</i> is used to describe the 
+overall effectivesness of a filter. This is the  
+frequency (period) at which the power or variance 
+is 50% of maximum. This is the frequency (period)  
+at which the amplitude response is 0.707 [0.707^2=0.5]. 
+<b>Note:</b> Be aware that the frequency at which the
+amplitude response is 0.5 is sometimes referred to as 
+the half-power point. This is not correct.  
+<p>
+In response to a question posted to ncl-talk.ucar.edu, Dave Allured (CU/CIRES),
+posted the following:
+<blockquote>
+
+NCL's filter functions operate over discrete time steps in a time
+series.  Their time metric is time steps, *not* calendar time or real
+time.  This is a common point of confusion about digital filters.
+<p>
+
+Therefore, the filters *do not care* about your time units or time
+coordinate variable.  To get correct filter parameters, you must
+manually (or with clever programming) express your time domain
+parameters in terms of *time steps*.
+<p>
+
+For example, if the desired filter is 10 to 50 days, and the time 
+series is on 3-day time steps, then:
+<p>
+
+<pre>
+    dt = 3 days per time step
+    t1 = 50 days  (low frequency cutoff, expressed in time domain)
+    t2 = 10 days  (high frequency cutoff, expressed in time domain)
+
+    fca = dt/t1 = 3./50. = 0.06 time steps  (low frequency cutoff)
+    fcb = dt/t2 = 3./10. = 0.30 time steps  (high frequency cutoff)
+
+See Example 7.
+</pre>
+</div>
+<p>
+<div class=text>
+<a href="http://en.wikipedia.org/wiki/Butterworth_filter"><b>Butterworth Bandpass Filter</b></a>
+<p>
+The Butterworth filter is a signal processing filter designed to have
+as flat a frequency response as possible in the passband. NCL has a
+function <a href="../Document/Functions/Built-in/bw_bandpass_filter.html"><strong>bw_bandpass_filter</strong></a> which is optimized for
+narrow band applications.
+<p>
+<pre>
+Reference:
+
+    Electronic Supplement to Development of a Time-Domain, Variable-Period 
+    Surface Wave Magnitude Procedure for Application at Regional and 
+    Teleseismic Distances, Part I: Theory; David R. Russell
+    Bulletin of the Seismological Society of America
+
+    http://www.seismosoc.org/publications/BSSA_html/bssa_96-2/05055-esupp/
+</pre>
+</div>
+
+<p>
+<div class=text>
+<b>Lanczos and Butterworth Response Functions</b>
+<p>
+Figures which show the response functions of Lanczos or 
+Butterworth (V6.3.0) filters also show the ideal filter response 
+in the frequency domain.  For band-pass filters, this ideal response 
+is sometimes referred to as the 'boxcar' response. 
+<p>
+Lanczos Response Function: 
+The <a href="Scripts/filters_8.html"><b>filters_8.ncl</b></a> 
+script will generate one or more response functions for different 
+Lanczos filter lengths. See Example 8. 
+<p>
+Butterworth Response Function (6.3.0): 
+The <a href="Scripts/filters_9.html"><b>filters_9.ncl</b></a>
+script will generate one or more response functions for different 
+Butterworth pole values. 
+</div>
+
+
+<div class=ex>
+<!--Filters_1-->
+<a name=ex1></a>
+<a href="Images/filters_1_lg.png">
+<img src="Images/filters_1_sm.png" align=left border=2></a>
+<a href="Scripts/filters_1.html">filter_1.ncl</a>: Reads in a variable 
+from a netCDF file, averages all latitudes between 15S and 15N,
+applies a user specified filter on the "time" dimension, 
+and creates a color Hovmueller diagram.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_hov.html"><strong>gsn_csm_hov</strong></a> is the graphical
+interface that creates <a href="time_lon.html">Hovmueller
+diagrams</a>.
+
+</div>
+
+<div class=ex>
+<!--Filters_2-->
+<a name=ex2></a>
+<a href="Images/filters_2_lg.png">
+<img src="Images/filters_2_sm.png" align=left border=2></a>
+<a href="Scripts/filters_2.html">filters_2.ncl</a>: <b>Low pass filters via <a href="../Document/Functions/Built-in/filwgts_lanczos.html"><strong>filwgts_lanczos</strong></a>:</b>
+<p>
+
+<ul>
+<li>Read the monthly Southern Oscillation Index (Darwin only)
+
+<li>Using different filter lengths (49 [solid], 121 [dashed]),
+generate two low pass filters that (ideally) will remove fluctuations
+less than 24 months (2 years).
+
+<li>Using different filter lengths (121 [solid], 241 [dashed]),
+generate two low pass filters that (ideally) will remove fluctuations
+less than 120 months (10 years).
+</ul>
+
+The blue (49 weights) and red (121 weights) curves are for the
+24-month filter. In this case, not much was gained by using much
+longer filter (121 vs 49). Also, using the 49-point filter returned
+more data at the ends.
+<p>
+
+The green (121 weights) and black (241 weights) curves are for the
+120-month filter.  The response functions are not much different and,
+as a result, the decadal curves are not much different.
+
+</div>
+
+<div class=ex>
+<!--Filters_3-->
+<a name=ex3></a>
+<a href="Images/filters_3_1_lg.png">
+<img src="Images/filters_3_1_sm.png" align=left border=2></a>
+<a href="Images/filters_3_2_lg.png">
+<img src="Images/filters_3_2_sm.png" align=left border=2></a>
+<a href="Scripts/filters_3.html">filters_3.ncl</a>: <b>Band pass filters via <a href="../Document/Functions/Built-in/filwgts_lanczos.html"><strong>filwgts_lanczos</strong></a>:</b>
+<p>
+Generate and apply a 20-100 day band pass filter using 201 weights.
+The response function for the filter is also shown.
+<p>
+The Lanczos filter weights are applied to the entire 
+daily series spanning 1980-2005.
+The plotted values do not have any missing points 
+'end-points' because the plotted time period (1995-1998) 
+is a subset of the entire series.
+</div>
+
+<div class=ex>
+<!--Filters_4--> <a name=ex4></a>
+<a href="Images/filters_4_1_lg.png">
+<img src="Images/filters_4_1_sm.png" align=left border=2></a>
+<a href="Images/filters_4_2_lg.png">
+<img src="Images/filters_4_2_sm.png" align=left border=2></a>
+<a href="Scripts/filters_4.html">filters_4.ncl</a>: <b>Comparison: band pass filters via <a href="../Document/Functions/Built-in/filwgts_lanczos.html"><strong>filwgts_lanczos</strong></a> and via FFT:</b>
+<p>
+This example compares results returned using 
+<a href="../Document/Functions/Built-in/filwgts_lanczos.html"><strong>filwgts_lanczos</strong></a> and  FFTs [<a href="../Document/Functions/Built-in/ezfftf.html"><strong>ezfftf</strong></a> and <a href="../Document/Functions/Built-in/ezfftb.html"><strong>ezfftb</strong></a>].
+The band pass period for this example is 30-to-60 days.
+The FFT filtering is performed by applying a 'boxcar' cutoff
+in frequency space (1/30 and 1/60) while the Lanczos 
+weights are applied in time.  The Lanczos band pass filter in this example is 731 points. 
+This means that exactly one year of data will be
+'lost' at the beginning and end of the series to which the Lanczos filter is applied.
+
+<pre>
+<b>(a)</b> Read entire 1980-2005 daily anomaly data [here, anomolous zonal wind] 
+    for a specific location [0,100E]
+<b>(b)</b> Apply the Lanczos filter weights to the entire 1980-2005 series. The loss
+    of data at the end points will affect 1980 and 2005. [<b>BPF</b>, black line]
+<b>(c)</b> Select a four year [1995-1998] temporal window to demonstrate
+    how using a segment of an infinitely long [well, ok, 1980-2005 :-) ]
+    would compare.
+<b>(d)</b> Apply the Lanczos filter to the 4-year temporal window only. The filtered
+    series for 1995 and 1998 will be set to missing. [<b>bpf</b>, red line]
+<b>(e)</b> Perform a Fourier analysis (<a href="../Document/Functions/Built-in/ezfftf.html"><strong>ezfftf</strong></a>) on the input anomalies for the 
+    4-year temporal window; set the Fourier coefficents outside the 
+    desired frequency band to zero (boxcar); perform a Fourier synthesis (<a href="../Document/Functions/Built-in/ezfftb.html"><strong>ezfftb</strong></a>) 
+    to return to temporal window space. [<b>FFT</b>, blue line]
+    For simplicity, no tapering (<a href="../Document/Functions/Built-in/taper.html"><strong>taper</strong></a>) or detrending (<a href="../Document/Functions/Built-in/dtrend.html"><strong>dtrend</strong></a>) was performed. 
+</pre>
+If the <b>BPF</b> line is considered "truth", then, <font color=red><i> in this case</i></font> (a fairly broad band pass), the <b>FFT</b> approach yields similar results to the <b>BPF</b> over the temporal window subperiod. There are some minor phase differences 
+outside at the 'ends' and one issue in 1997 but, overall, pretty good agreement.
+In addition, there is apparently no loss of data at the beginning and end of the
+sub-period. Why not use the FFT approach all the time? 
+If the number of weights had been kept the same, but the band pass period
+was much shorter, then the fourier synthesis would likely show more
+distinct differences.
+</div>
+
+<div class=ex>
+<!--Filters_5-->
+<a name=ex5></a>
+<a href="Images/filters_5_lg.png">
+<img src="Images/filters_5_sm.png" align=left border=2></a>
+<a href="Scripts/filters_5.html">filters_5.ncl</a>: <b>Band pass filters via FFTs: End point problems:</b>
+<p>
+This demonstrates one 'problem' with using boxcar type truncation
+of Fourier coefficients in the frequency domain. Consider a series of 
+length N (here, N=1000 days) which will have N/2 frequencies (0 to 0.5 cycles/day).
+In this example, the 20-100 day band pass period suggested by MJO Clivar will be used.
+<pre>
+<b>(a)</b> Create Fourier coefficients (real and imaginary) which are 1.0 in the 
+    frequency band of interest and 0.0 elsewhere. This is the boxcar response in 
+    frequency space (top figure).  In temporal space, it would take an infinite 
+    number of weights to yield the boxcar frequency response. 
+<b>(b)</b> Perform a Fourier synthesis (<a href="../Document/Functions/Built-in/ezfftb.html"><strong>ezfftb</strong></a>) on (a) to return to temporal 
+    space (middle figure).
+<b>(c)</b> Generate Lanczos weighting using 201 weights; 'map' the Lanczos response function into FFT 
+    frequency space via linear interpolation; apply the mapped weights to the
+    boxcar Fourier coefficients in the frequency domain; perform a Fourier 
+    synthesis (bottom figure).
+</pre>
+
+The middle figure shows that a Fourier synthesis of the boxcar Fourier coefficients yields
+spurious and significant 'end-effects' and, in this idealized case, minor ripples at
+all times. In the real world, the real and imaginary coefficients
+are not all equal [here, 1.0], the synthesis can have additional unwanted effects. 
+The reconstructed series can reflect local and, possibly,  significant (in time) occurring features. 
+<p>
+Is there a way to use an FFT and get the desirable and predictable characteristics 
+Lanczos weighting? Weighting the boxcar Fourier coefficients by the Lanczos responses
+yields slightly smaller ripples and end-effects (bottom figure). 
+<p>
+<b>Punch line:</b> The Fourier approach yields values but you are not
+quite sure of what you are getting.  At least with the 
+Lanczos filter approach, you know what you are getting.
+</div>
+
+<div class=ex>
+<!--Filters_6-->
+<a name=ex6></a>
+<a href="Images/filters_6_lg.png">
+<img src="Images/filters_6_sm.png" align=left border=2></a>
+<a href="Scripts/filters_6.html">filters_6.ncl</a>: <b>FFT speed and Lanczos clarity:</b>
+<pre>
+<b>(a)</b> Develop a Lanczos filter that has good characteristics
+<b>(b)</b> Map the Lanczos response function into FFT frequency space 
+    via linear interpolation
+<b>(c)</b> Apply the mapped weights to the Fourier coefficients.
+<b>(d)</b> Perform the Fourier synthesis.
+<b>(e)</b> In the time domain, manually set the end-points to missing. 
+    There is no way around this!!!!
+</pre>
+</div>
+
+<div class=ex>
+<!--Filters_7-->
+<a name=ex7></a>
+<a href="Images/filters_7_lg.png">
+<img src="Images/filters_7_sm.png" align=left border=2></a>
+<a href="Scripts/filters_7.html">filters_7.ncl</a>: 
+<b>Matching data with different sampling intervals.</b><p>
+A user had daily data which was treated with a 10-50 day
+band pass filter. A different series was availble but 
+values were available every 3rd day.  How to create a filter 
+that will operate on the latter series which will 'match' that used
+on the daily data. (See the above comments by Dave Allured.) 
+<p>
+The figure shows a comparison. Do they match exactly? Of course not!
+(a) Information was lost by sampling every 3rd day. There is no way
+to recover this lost information; (b) the sereies are not plotted
+at the exact same time points.
+<p>
+Does the new filtered series capture the essentials of the
+fully samples series? Yes! 
+</div>
+
+<div class=ex>
+<!--Filters_8-->
+<a name=ex8></a>
+<a href="Images/filters_8_1_lg.png">
+<img src="Images/filters_8_1_sm.png" align=left border=2></a>
+<a href="Images/filters_8_2_lg.png">
+<img src="Images/filters_8_2_sm.png" align=left border=2></a>
+<a href="Scripts/filters_8.html">filters_8.ncl</a>: 
+<b>Lanczos Response Functions</b><p>
+This  script will generate one or more response functions for different 
+Lanczos filter lengths. This allows users to assess which filter length 
+is acceptable for their application. There is a trade-off 
+amongst bandwidth, filter length and response.
+<p>
+This example was run twice to get the 2 figures.
+</div>
+
+<div class=ex>
+<!--Filters_9-->
+<a name=ex9></a>
+<a href="Images/filters_9_1_lg.png">
+<img src="Images/filters_9_1_sm.png" align=left border=2></a>
+<a href="Images/filters_9_2_lg.png">
+<img src="Images/filters_9_2_sm.png" align=left border=2></a>
+<a href="Scripts/filters_9.html">filters_9.ncl</a>: 
+<b>Butterworth Response Functions (V6.3.0)</b><p>
+This  script will generate one or more response functions for different 
+Butterworth pole values. The left figure shows the bandpass relative to the full
+frequency span. The right figure shows a blowup of the region of interest.
+</div>
+
+<div class=ex>
+<!--bfband_1-->
+<a name=ex1></a>
+<a href="Images/bfband_1_lg.png">
+<img src="Images/bfband_1_sm.png" align=left border=2></a>
+<a href="Scripts/bfband_1.html">bfband_1.ncl</a>: 
+This  script reads a time series at a user specified grid point. It applies 
+a Butterworth band Pass filter (<a href="../Document/Functions/Built-in/bw_bandpass_filter.html"><strong>bw_bandpass_filter</strong></a>) to the series. 
+The raw (top) and filtered/envelope (bottom) series illustrates usage and results.  
+</div>
+
+<div class=ex>
+<!--bfband_2-->
+<a name=ex2></a>
+<a href="Images/bfband_2_1_lg.png">
+<img src="Images/bfband_2_1_sm.png" align=left border=2></a>
+<a href="Images/bfband_2_2_lg.png">
+<img src="Images/bfband_2_2_sm.png" align=left border=2></a>
+<a href="Scripts/bfband_2.html">bfband_2.ncl</a>: 
+Use Lanczos filter (<a href="../Document/Functions/Built-in/filwgts_lanczos.html"><strong>filwgts_lanczos</strong></a>) with 1461 weights (=4*365+1) to filter a 
+long time series. Basically 2 years of daily data are lost at <b>each</b> end of the series.
+Also, apply a Butterworth filter (<a href="../Document/Functions/Built-in/bw_bandpass_filter.html"><strong>bw_bandpass_filter</strong></a>). No data are lost.
+The rightmost figure shows the beginning of the full time series.
+</div>
+
+<div class=ex>
+<!--bfband_3-->
+<a name=ex3></a>
+<a href="Images/bfband_3_lg.png">
+<img src="Images/bfband_3_sm.png" align=left border=2></a>
+<a href="Scripts/bfband_3.html">bfband_3.ncl</a>: 
+Plot spatial patterns of 40-50 day Butterworth band passed data every 5 days.
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/filter.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:08:28 GMT -->
+</html>
+
+

@@ -1,0 +1,51 @@
+netcdf GFED4.1s_BB {
+dimensions:
+	time = UNLIMITED ; // (228 currently)
+	lat = 720 ;
+	lon = 1440 ;
+variables:
+	double time(time) ;
+		string time:units = "hours since 1997-01-01 00:00:00" ;
+		string time:calendar = "standard" ;
+		string time:info = "time corresponds to the 1st day of current month" ;
+	int yyyymm(time) ;
+		string yyyymm:long_name = "current year and month: YYYYMM" ;
+	float lat(lat) ;
+		string lat:units = "degrees_north" ;
+	float lon(lon) ;
+		string lon:units = "degrees_east" ;
+	ubyte BASIS_REGIONS(lat, lon) ;
+		string BASIS_REGIONS:lonFlip = "longitude coordinate variable has been reordered via lonFlip" ;
+		string BASIS_REGIONS:long_name = "Basis-regions used for GFED analyses" ;
+		string BASIS_REGIONS:class_9 = "SHAF (Southern Hemisphere Africa)" ;
+		string BASIS_REGIONS:class_8 = "NHAF (Northern Hemisphere Africa)" ;
+		string BASIS_REGIONS:class_7 = "MIDE (Middle East)" ;
+		string BASIS_REGIONS:class_6 = "EURO (Europe)" ;
+		string BASIS_REGIONS:class_5 = "SHSA (Southern Hemisphere South America)" ;
+		string BASIS_REGIONS:class_4 = "NHSA (Northern Hemisphere South America)" ;
+		string BASIS_REGIONS:class_3 = "CEAM (Central America)" ;
+		string BASIS_REGIONS:class_2 = "TENA (Temperate North America" ;
+		string BASIS_REGIONS:class_14 = "AUST (Australia and New Zealand)" ;
+		string BASIS_REGIONS:class_13 = "EQAS (Equatorial Asia)" ;
+		string BASIS_REGIONS:class_12 = "SEAS (Southeast Asia)" ;
+		string BASIS_REGIONS:class_11 = "CEAS (Central Asia)" ;
+		string BASIS_REGIONS:class_10 = "BOAS (Boreal Asia)" ;
+		string BASIS_REGIONS:class_1 = "BONA (Boreal North America)" ;
+		string BASIS_REGIONS:class_0 = "Ocean" ;
+	float GRID_CELL_AREA(lat, lon) ;
+		string GRID_CELL_AREA:lonFlip = "longitude coordinate variable has been reordered via lonFlip" ;
+		string GRID_CELL_AREA:units = "m^2" ;
+		string GRID_CELL_AREA:long_name = "Grid cell area (0.25 degree global grid)" ;
+	float BB(time, lat, lon) ;
+		string BB:units = "g C / m^2 / month" ;
+		string BB:long_name = "Biomass burning carbon emissions based on the CASA-GFED4s framework" ;
+		string BB:lonFlip = "longitude coordinate variable has been reordered via lonFlip" ;
+
+// global attributes:
+		:_NCProperties = "version=1|netcdflibversion=4.4.1.1|hdf5libversion=1.8.14" ;
+		string :creation_date = "Wed Feb  8 23:09:05 MST 2017" ;
+		string :NCL = "6.4.0-08Feb2017_0113" ;
+		string :Conventions = "CF-1.0" ;
+		string :GFED_WWW = "http://www.globalfiredata.org/" ;
+		string :title = "GFED: Global Fire Emissions DataBase" ;
+}

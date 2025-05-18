@@ -1,0 +1,84 @@
+;----------------------------------------------------------------------
+; wrf_interp_2.ncl
+;----------------------------------------------------------------------
+; Concepts illustrated:
+;   - Interpolating a horizontal slice from a 3D WRF-ARW field.
+;----------------------------------------------------------------------
+; wrf_user_vert_cross and wrf_user_interp_level replace the 
+; deprecated wrf_user_intrp3d function. 
+;
+; NCL V6.6.0 or higher is required to run this example.
+;----------------------------------------------------------------------
+
+begin
+  filename = "wrf_files/wrfout_d01_2010-06-04_00:00:00.nc"
+  a = addfile(filename,"r")
+
+  time = 0
+  z         = wrf_user_getvar(a, "z",time)/10.               ; grid point height
+  p         = wrf_user_getvar(a, "pressure",time)            ; total pressure
+  ua        = wrf_user_getvar(a, "ua",time)*1.94384          ; m/s --> kts
+  va        = wrf_user_getvar(a, "va",time)*1.94384          ; m/s --> kts
+  wspd_wdir = wrf_user_getvar(a, "wspd_wdir",time)*1.94384   ; m/s --> kts
+  wspd      = wspd_wdir(0,:,:,:)   ; (1,:,:,:) is wdir
+
+  opt       = True
+  ht_500    = wrf_user_interp_level(z,    p, 500, opt)
+  u_500     = wrf_user_interp_level(ua,   p, 500, opt)
+  v_500     = wrf_user_interp_level(va,   p, 500, opt)
+  wspd_500  = wrf_user_interp_level(wspd, p, 500, opt)
+
+  wks = gsn_open_wks("png","wrf_interp")
+
+;---Set some common resources
+  res                       = True
+  res@gsnMaximize           = True            ; maximize plot in frame
+  res@gsnDraw               = False           ; will overlay later
+  res@gsnFrame              = False           ; will overlay later
+  res@tfDoNDCOverlay        = True
+  res@gsnAddCyclic          = False
+
+;---Resources for a contour line plot
+  cnres = res
+  cnres@cnLineThicknessF      = 5
+  cnres@cnLineLabelsOn        = False
+  cnres@cnLineColor           = "white"
+  cnres@cnLevelSelectionMode  = "ExplicitLevels"
+  cnres@cnLevels              = ispan(526,574,6)
+  cnres@cnInfoLabelJust          = "BottomLeft"
+  cnres@cnInfoLabelParallelPosF  = 0.
+  cnres@cnInfoLabelOrthogonalPosF= -0.08
+
+  plot_line = gsn_csm_contour(wks,ht_500,cnres)
+
+;---Resources for a filled contour plot over a map
+  cnres = wrf_map_resources(a,cnres)
+  cnres@cnFillPalette     = "MPL_rainbow"
+  cnres@cnFillOn          = True            ; Turn on color fill
+  cnres@cnLinesOn         = False
+  cnres@cnLevels          := (/30, 35, 40, 50, 60, 70, 80, 90, 100, 110/)
+  cnres@lbOrientation     = "Vertical" 
+  cnres@gsnLeftString     = "filled contours (wind speed)~C~" + \
+                            "line contour (hgt)~C~wind barbs (u/v)"
+  cnres@tiMainFontHeightF = 0.025
+
+  plot_fill = gsn_csm_contour_map(wks,wspd_500,cnres)
+
+;---Resources for a vector plot
+  vcres                          = res
+  vcres@vcGlyphStyle             = "WindBarb"
+  vcres@vcRefAnnoOrthogonalPosF  = -0.12
+  vcres@vcRefAnnoJust            = "BottomRight"
+  vcres@vcRefLengthF             = 0.03
+  vcres@vcRefMagnitudeF          = 6.0
+  vcres@vcWindBarbLineThicknessF = 5.0
+
+  istep = 20
+  plot_vector = gsn_csm_vector(wks,ua(0,::istep,::istep),va(0,::istep,::istep),vcres)
+
+  overlay(plot_fill,plot_line)
+  overlay(plot_fill,plot_vector)
+  draw(plot_fill)
+  frame(wks)
+
+end

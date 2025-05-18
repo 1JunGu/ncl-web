@@ -1,0 +1,474 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/wrfvapor.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:11:41 GMT -->
+<head>
+<meta name="description" content="Using NCL with VAPOR to analyze WRF-ARW data in 3D">
+<meta name="keywords" content="VAPOR, graphics, visualization, WRF">
+<TITLE>Using NCL with VAPOR to analyze WRF-ARW data in 3D</TITLE> </head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_models.html">Models</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>Using NCL with VAPOR to analyze WRF-ARW data in 3D</h1>
+
+<div class=mainimage>
+<a href="https://www.ncl.ucar.edu/Images/jangmiClouds.JPG">
+<img src="https://www.ncl.ucar.edu/Images/jangmiClouds.md.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+As a result of a collaboration between the NCL and VAPOR teams at
+NCAR, users can now display NCL plots of WRF output in 3D, combined
+with satellite images, political boundaries and other images from Web
+mapping services.  There's a <a
+href="https://www.vapor.ucar.edu/sites/default/files/docs/VAPOR-WRF-NCL.pdf">short
+tutorial</a> to help users use this feature.
+<p>
+This page illustrates three different ncl scripts (these are originally from the <a href="http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Graphics/NCL/NCL_examples.htm"> WRF NCL graphics example page</a>.  Each of these scripts is modified to produce one image per timestep, and then the script is modified to output a georeferenced tiff image.  The georeferenced tiff image can then be inserted in a 3D VAPOR scene at the appropriate coordinates.  Additional data can be visualized in the same scene.
+<p>
+The three scripts illustrate (1) use of a horizontal cross-section plot (based on wrf_Height.ncl) at a particular height,
+(2) use of a horizontal plot (based on wrf_Precip.ncl) that is appropriately placed at any height or mapped to the terrain, and
+(3) use of a vertical cross sectional plot (based on wrf_CrossSection2.ncl).
+<p>
+The data used for these images and scripts can be downloaded as a  
+<a href="ftp://ftp.ucar.edu/vapor/data/jangmiWrfout.zip">zip file </a>
+or a 
+<a href="ftp://ftp.ucar.edu/vapor/data/jangmiWrfout.tar.gz">gzipped tar file.</a>
+<p>
+For downloads and documentation on VAPOR, check the 
+ <a href="http://www.vapor.ucar.edu/">VAPOR home page.  </a> 
+More information about georeferenced images in VAPOR can be found in the 
+<a href="https://www.vapor.ucar.edu/sites/default/files/docs/WRFsupport.pdf">VAPOR/WRF Data and Image Preparation Guide.</a> 
+<p> 
+We would like to hear your feedback: Is this feature useful?  Is it
+easy enough to use?  Is the documentation OK?  Please send your
+comments to <a
+href="http://mailman.ucar.edu/mailman/listinfo/ncl-talk">ncl-talk</a>.
+<p>
+
+</div>
+
+<div class=ex>
+<!--WRF_VAPOR_1-->
+<a name=ex1></a>
+<a href="Images/wrf_height.png">
+<img src="Images/small_wrf_height.png" align=left border=2></a>
+<a href="Scripts/wrf_Height.html">[wrf_Height.ncl]</a>:
+Original wrf_Height script from WRF-NCL website.  This script calculates relative humidity, pressure, temperature, and wind barbs at two different heights, 250m and 2000m.
+</div>
+<div class=ex>
+<!--WRF_VAPOR_2-->
+<a name=ex2></a>
+<a href="Images/plt_HeightLevel.jpg">
+<img src="Images/small_plt_HeightLevel.jpg" align=left border=2></a>
+<a href="Scripts/wrf_Height_FirstMod.html">[wrf_Height_FirstMod.ncl]</a>:
+This is a modification of the above script.  It now uses the Jangmi typhoon dataand it produces only one image per time step.
+The displayed plot is a horizontal cross-section at 5km.
+</div>
+<div class=ex>
+<!--WRF_VAPOR_3-->
+<a name=ex1></a>
+<a href="Images/height_vapor.png">
+<img src="Images/small_height_vapor.png" align=left border=2></a>
+<a href="Scripts/wrf_Height_Final.html">[wrf_Height_Final.ncl]</a>:
+Additional changes to the wrf_Height script were made to produce georeferenced tiff images as output.  The changes are described in <a>
+
+<a href="https://www.vapor.ucar.edu/sites/default/files/docs/VAPOR-WRF-NCL.pdf">the VAPOR-WRF-NCL tutorial.</a>
+The wrf_Height script is modified to produce tiff images.  
+Then these images are inserted into a VAPOR 3D visualization. 
+The georeferencing in the image is used to position the plot at the correct world coordinates.  
+The height of the plot (5000m) is set so that VAPOR positions the plot at the correct height in the scene. 
+</div>
+<div class=ex>
+<!--WRF_VAPOR_4-->
+<a name=ex1></a>
+<a href="Images/height_vapor_scene.png">
+<img src="Images/small_height_vapor_scene.png" align=left border=2></a>
+<a href="Scripts/height.vss">[height.vss]</a>:
+Additional images, both 2D and 3D, can be combined in the VAPOR scene to provide a context for the NCL plot.  
+The VAPOR session file "height.vss" can be read by VAPOR to set up the visualization shown in this image.  The WRF QCLOUD variable is volume rendered, providing an indication of the extent of the typhoon.
+The larger geographic context is shown by including a terrain image (obtained using the VAPOR application getWMSImage.sh). 
+Note that the 3D visualization requires the typhoon Jangmi in VAPOR format.  
+The typhoon data is available in vapor format for download from 
+<a href="https://www.vapor.ucar.edu/internal/downloads/example-data">the VAPOR example data download page.</a>
+</div>
+<div class=ex>
+<!--WRF_VAPOR_5-->
+<a name=ex1></a>
+<a href="Images/wrf_precip.png">
+<img src="Images/small_wrf_precip.png" align=left border=2></a>
+<a href="Scripts/wrf_Precip.html">[wrf_Precip.ncl]</a>:
+The original wrf_Precip.ncl script plots precipitation tendency as well as isobars of sea-level pressure.  There are two other images produced by this script that will not be used here. 
+</div>
+<div class=ex>
+<!--WRF_VAPOR_6-->
+<a name=ex2></a>
+<a href="Images/plt_Precip.jpg">
+<img src="Images/small_plt_Precip.jpg" align=left border=2></a>
+<a href="Scripts/wrf_Precip_FirstMod.html">[wrf_Precip_FirstMod.ncl]</a>:
+The wrf_Precip Script is modified to produce one image per timestep.  
+The script is also modified so that it reads typhoon Jangmi data files.
+</div>
+<div class=ex>
+<!--WRF_VAPOR_7-->
+<a name=ex1></a>
+<a href="Images/precip_vapor.png">
+<img src="Images/small_precip_vapor.png" align=left border=2></a>
+<a href="Scripts/wrf_Precip_Final.html">[wrf_Precip_Final.ncl]</a>:
+To provide a sequence of images to display in VAPOR, the
+wrf_Precip.ncl script was modified to produce a tiff image at each timestep. 
+These images are then loaded into VAPOR.  The images are applied to the terrain; the increased elevation of Taiwan is apparent near the center of the storm.
+</div>
+<div class=ex>
+<!--WRF_VAPOR_8-->
+<a name=ex1></a>
+<a href="Images/precip_vapor_scene.png">
+<img src="Images/small_precip_vapor_scene.png" align=left border=2></a>
+<a href="Scripts/precip.vss">[precip.vss]</a>:
+The wrf_Precip image is combined with a satellite image of the terrain surface and an isosurface of the QRAIN variable.  
+The isosurface is colored according to temperature.  
+The vapor session file (precip.vss) can be read by VAPOR to establish the parameter settings used in this visualization. 
+Note that the 3D visualization requires the typhoon Jangmi in VAPOR format.
+The typhoon data can be converted from the wrf output or it is
+is available for download from
+<a href="http://www.vapor.ucar.edu/downloads/index.php?id=binary">the VAPOR download page.</a>
+
+</div>
+<div class=ex>
+<!--WRF_VAPOR_9-->
+<a name=ex1></a>
+<a href="Images/wrf_CrossSection.png">
+<img src="Images/small_wrf_CrossSection.png" align=left border=2></a>
+<a href="Scripts/wrf_CrossSection2.html">[wrf_CrossSection2.ncl]</a>:
+We start with the wrf_CrossSection2.ncl script from WRF-NCL website.  
+This script results in a vertical cross section plot of temperature and humidity.
+</div>
+<div class=ex>
+<!--WRF_VAPOR_10-->
+<a name=ex2></a>
+<a href="Images/plt_CrossSection2.jpg">
+<img src="Images/small_plt_CrossSection2.jpg" align=left border=2></a>
+<a href="Scripts/wrf_CrossSection2_FirstMod.html">[wrf_CrossSection2_FirstMod.ncl]</a>:
+The wrf_CrossSection2.ncl Script was modified to produce one image per timestep, based on typhoon Jangmi.  
+The vertical slice has been set to be the full X-Z size of the domain,at y-coordinate 84.
+</div>
+<div class=ex>
+<!--WRF_VAPOR_11-->
+<a name=ex1></a>
+<a href="Images/crossSection2_vapor.png">
+<img src="Images/small_crossSection2_vapor.png" align=left border=2></a>
+<a href="Scripts/wrf_CrossSection2_Final.html">[wrf_CrossSection2_Final.ncl]</a>:
+The wrf_CrossSection2.ncl script is then modified to produce tiff image at each timestep. 
+Note that, because this is a vertical slice, there is no georeferencing.  
+Then the resulting images are inserted into VAPOR scene, at the corresponding y-coordinate. 
+</div>
+<div class=ex>
+<!--WRF_VAPOR_12-->
+<a name=ex1></a>
+<a href="Images/crossSection2_vapor_scene.png">
+<img src="Images/small_crossSection2_vapor_scene.png" align=left border=2></a>
+<a href="Scripts/crossSection2.vss">[crossSection2.vss]</a>:
+The wrf_CrossSection2.ncl tiff image is combined with a satellite image and a volume rendering of QCLOUD in a vapor scene.  The vapor session file "crossSection2.vss" can be used to specify the VAPOR settings for this scene.
+</div>
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/wrfvapor.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:11:48 GMT -->
+</html>
+
+

@@ -1,0 +1,726 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/MapTransformation.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:31 GMT -->
+<head>
+<title>MapTransformation class</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index.html">HLUs ></a>
+<a class=crumb href="index-2.html">Classes </a>
+
+<br>
+
+<h1>MapTransformation class</h1>
+The <strong>MapTransformation</strong> manages forward and reverse
+transformations in the coordinate space defined by various map projections.
+<hr>
+<h2>Synopsis</h2>
+
+<pre>
+Header file:		ncarg/hlu/MapTransformation.h
+Class name:		mapTransformationClass
+Class pointer:		&lt;<em>Not referenceable</em>&gt;
+Fortran class function:	&lt;<em>Not referenceable</em>&gt;
+Supeclass:		<a href="Transformation.html">Transformation</a>
+Composite classes:	&lt;<em>None</em>&gt;
+</pre>
+<p>
+<h3>Class-defined types</h3><p>
+<pre>
+Type name:		<a name="NhlTMapLimitMode">NhlTMapLimitMode</a>
+Definition:
+typedef enum _NhlMapLimitMode {
+	NhlMAXIMALAREA	= 0,	/* "MaximalArea" */ 
+	NhlLATLON	= 1,	/* "LatLon"	 */ 
+	NhlANGLES	= 2,	/* "Angles"	 */ 
+	NhlNPC		= 3,	/* "NPC"	 */
+	NhlNDC		= 4,	/* "NDC"	 */
+	NhlCORNERS	= 5,	/* "Corners"	 */ 
+	NhlPOINTS	= 6,	/* "Points"	 */
+	NhlWINDOW	= 7	/* "Window"	 */ 
+} NhlMapLimitMode;
+
+Type name:		<a name="NhlTProjection">NhlTProjection</a>
+Definition:
+typedef enum _NhlProjection {
+	NhlORTHOGRAPHIC		  = 0, /* "Orthographic"	   */
+	NhlSTEREOGRAPHIC	  = 1, /* "Stereographic"	   */
+	NhlLAMBERTEQUALAREA	  = 2, /* "LambertEqualArea"	   */
+	NhlGNOMONIC		  = 3, /* "Gnomonic"		   */
+	NhlAZIMUTHALEQUIDISTANT	  = 4, /* "AzimuthalEquidistant"   */
+	NhlSATELLITE		  = 5, /* "Satellite"		   */
+	NhlPSEUDOMOLLWEIDE	  = 6, /* "PseudoMollweide"	   */
+	NhlMERCATOR		  = 7, /* "Mercator"		   */
+	NhlCYLINDRICALEQUIDISTANT = 8, /* "CylindricalEquidistant" */
+	NhlLAMBERTCONFORMAL	  = 9, /* "LambertConformal"	   */
+	NhlROBINSON		  = 10 /* "Robinson"		   */
+        NhlCYLINDRICALEQUALAREA   = 11 /* "CylindricalEqualArea"   */
+	NhlROTATEDMERCATOR        = 12 /* "RotatedMercator"        */
+        NhlAITOFF                 = 13 /* "Aitoff"                 */
+        NhlHAMMER                 = 14 /* "Hammer"                 */
+        NhlMOLLWEIDE              = 15 /* "Molleweide"             */
+        NhlWINKELTRIPEL           = 16 /* "WinkelTripel"           */
+} NhlProjection;
+</pre>
+<hr>
+
+<h2>Resources</h2>
+<p>
+<h3>Local resources</h3><p>
+
+You may access <strong>MapTransformation</strong> resources only
+through objects that instantiate a <strong>MapTransformation</strong>
+child object. These include:
+
+<ul>
+<li><a href="MapPlot.html"><strong>MapPlot</strong></a> object
+</ul>
+ 
+<pre>
++---------------------------------------------------------------+
+|			<A name="MapTransformation.res">MapTransformation Resource Set</a>		|
+|---------------------------------------------------------------|
+| NAME				TYPE			ACCESS	|
+|	CLASS				DEFAULT			|
+|===============================================================|
+| <a href="../../Graphics/Resources/mp.html#mpProjection"><em>mpProjection</em></a>                  <A href="MapTransformation.html#NhlTProjection">NhlTProjection</a>          RCSG    |
+|       MpProjection                  "CylindricalEquidistant"  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLeftMapPosF"><em>mpLeftMapPosF</em></a>                 <A href="Base.html#NhlTFloat">NhlTFloat</a>               G       |
+|       MpLeftMapPosF                   &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpRightMapPosF"><em>mpRightMapPosF</em></a>                <A href="Base.html#NhlTFloat">NhlTFloat</a>               G       |
+|       MpRightMapPosF                  &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpBottomMapPosF"><em>mpBottomMapPosF</em></a>               <A href="Base.html#NhlTFloat">NhlTFloat</a>               G       |
+|       MpBottomMapPosF                 &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpTopMapPosF"><em>mpTopMapPosF</em></a>                  <A href="Base.html#NhlTFloat">NhlTFloat</a>               G       |
+|       MpTopMapPosF                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpCenterLatF"><em>mpCenterLatF</em></a>                  <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpCenterLatF                    0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpCenterLonF"><em>mpCenterLonF</em></a>                  <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpCenterLonF                    0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpCenterRotF"><em>mpCenterRotF</em></a>                  <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpCenterRotF                    0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLimitMode"><em>mpLimitMode</em></a>                   <A href="MapTransformation.html#NhlTMapLimitMode">NhlTMapLimitMode</a>        RCSG    |
+|       MpLimitMode                     "MaximalArea"           |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpMinLatF"><em>mpMinLatF</em></a>                     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpMinLatF                       -90.0                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpMaxLatF"><em>mpMaxLatF</em></a>                     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpMaxLatF                       90.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpMinLonF"><em>mpMinLonF</em></a>                     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpMinLonF                       -180.0                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpMaxLonF"><em>mpMaxLonF</em></a>                     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpMaxLonF                       180.0                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpRelativeCenterLat"><em>mpRelativeCenterLat</em></a>           <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpRelativeCenterLat             False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpRelativeCenterLon"><em>mpRelativeCenterLon</em></a>           <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpRelativeCenterLon             False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLeftAngleF"><em>mpLeftAngleF</em></a>                  <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpLeftAngleF                    80.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpRightAngleF"><em>mpRightAngleF</em></a>                 <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpRightAngleF                   80.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpBottomAngleF"><em>mpBottomAngleF</em></a>                <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpBottomAngleF                  80.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpTopAngleF"><em>mpTopAngleF</em></a>                   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpTopAngleF                     80.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLeftNPCF"><em>mpLeftNPCF</em></a>                    <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpLeftNPCF                      0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpRightNPCF"><em>mpRightNPCF</em></a>                   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpRightNPCF                     1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpBottomNPCF"><em>mpBottomNPCF</em></a>                  <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpBottomNPCF                    0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpTopNPCF"><em>mpTopNPCF</em></a>                     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpTopNPCF                       1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLeftNDCF"><em>mpLeftNDCF</em></a>                    <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpLeftNDCF                      &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpRightNDCF"><em>mpRightNDCF</em></a>                   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpRightNDCF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpBottomNDCF"><em>mpBottomNDCF</em></a>                  <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpBottomNDCF                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpTopNDCF"><em>mpTopNDCF</em></a>                     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpTopNDCF                       &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLeftCornerLatF"><em>mpLeftCornerLatF</em></a>              <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpLeftCornerLatF                0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLeftCornerLonF"><em>mpLeftCornerLonF</em></a>              <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpLeftCornerLonF                0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpRightCornerLatF"><em>mpRightCornerLatF</em></a>             <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpRightCornerLatF               0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpRightCornerLonF"><em>mpRightCornerLonF</em></a>             <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpRightCornerLonF               0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLeftPointLatF"><em>mpLeftPointLatF</em></a>               <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpLeftPointLatF                 0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLeftPointLonF"><em>mpLeftPointLonF</em></a>               <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpLeftPointLonF                 0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpRightPointLatF"><em>mpRightPointLatF</em></a>              <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpRightPointLatF                0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpRightPointLonF"><em>mpRightPointLonF</em></a>              <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpRightPointLonF                0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpBottomPointLatF"><em>mpBottomPointLatF</em></a>             <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpBottomPointLatF               0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpBottomPointLonF"><em>mpBottomPointLonF</em></a>             <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpBottomPointLonF               0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpTopPointLatF"><em>mpTopPointLatF</em></a>                <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpTopPointLatF                  0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpTopPointLonF"><em>mpTopPointLonF</em></a>                <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpTopPointLonF                  0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLeftWindowF"><em>mpLeftWindowF</em></a>                 <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpLeftWindowF                   0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpRightWindowF"><em>mpRightWindowF</em></a>                <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpRightWindowF                  0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpBottomWindowF"><em>mpBottomWindowF</em></a>               <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpBottomWindowF                 0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpTopWindowF"><em>mpTopWindowF</em></a>                  <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpTopWindowF                    0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLambertParallel1F"><em>mpLambertParallel1F</em></a>           <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpLambertParallel1F             .001                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLambertParallel2F"><em>mpLambertParallel2F</em></a>           <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpLambertParallel2F             89.999                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLambertMeridianF"><em>mpLambertMeridianF</em></a>            <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpLambertMeridianF              0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpSatelliteDistF"><em>mpSatelliteDistF</em></a>              <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpSatelliteDistF                1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpSatelliteAngle1F"><em>mpSatelliteAngle1F</em></a>            <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpSatelliteAngle1F              0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpSatelliteAngle2F"><em>mpSatelliteAngle2F</em></a>            <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpSatelliteAngle2F              0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpEllipticalBoundary"><em>mpEllipticalBoundary</em></a>          <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpEllipticalBoundary            False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGreatCircleLinesOn"><em>mpGreatCircleLinesOn</em></a>          <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpGreatCircleLinesOn            False                   |
++---------------------------------------------------------------+
+</pre>
+<p>
+<h3>Composite resources</h3><p>
+
+The <strong>MapTransformation</strong> class has no composite class objects.
+
+<A name="Transformation.res"></a>
+<p>
+<h3>Superclass resources</h3><p>
+
+<strong>MapTransformation</strong> disables access to all the <A
+href="Transformation.html#Transformation.res">resources</a> of
+its <a href="Transformation.html"><strong>Transformation</strong></a> superclass.
+
+<hr>
+<h2>Description</h2>
+
+The <strong>MapTransformation</strong> object manages forward
+and reverse transformations between a two-dimensional
+rectangular data coordinate space representing latitude along the
+vertical axis and longitude along the horizontal axis and any of its 10
+supported map projections. The data space extent may
+coincide with, encompass, or arbitrarily intersect the projected extent.
+<p>
+<h3>Creation and access to resources</h3> <p>
+
+<p>You do not create objects
+of the <strong>MapTransformation</strong> class directly. You may,
+however, set its resources via objects that instantiate a
+<strong>MapTransformation</strong> child. Currently, the
+<a href="MapPlot.html"><strong>MapPlot</strong></a> object is the only HLU library object with a
+<strong>MapTransformation</strong> child; it allows access to all
+resources of the <strong>MapTransformation</strong> class, depending
+on it to provide transformations of data representing geophysical and
+political regions of the earth. Using the
+<a href="MapPlot.html"><strong>MapPlot</strong></a> as a <a href="../../glossary.html#BasePlot">base plot</a>, you can
+provide map transformations for data associated with other <a href="../../glossary.html#PlotObject">plot object</a>
+types. In addition, you can transform graphics primitives defined in
+lat-lon data space into any of the map projections.
+<p>
+<h3>Setting the projection and map boundaries</h3><p>
+
+<p>You define a map transformation by setting the <a href="../../Graphics/Resources/mp.html#mpProjection"><em>mpProjection</em></a> resource, and then in
+most cases, choosing a center of projection and a rotation angle using
+the resources, <a href="../../Graphics/Resources/mp.html#mpCenterLatF"><em>mpCenterLatF</em></a>, <a href="../../Graphics/Resources/mp.html#mpCenterLonF"><em>mpCenterLonF</em></a>, and <a href="../../Graphics/Resources/mp.html#mpCenterRotF"><em>mpCenterRotF</em></a>. Then you
+choose a method for defining the visible extent of the global surface
+using the <a href="../../Graphics/Resources/mp.html#mpLimitMode"><em>mpLimitMode</em></a> resource. This
+resource has eight possible settings:
+
+<ul>
+
+<li><code>MaximalArea</code> mode shows the maximum possible
+visible area depending on the projection. The
+<strong>MapTransformation</strong> ignores all other extent limiting
+resources when this mode is set.
+
+<li><code>LatLon</code> mode defines a rectangular area bounded by
+minimum and maximum latitudes and longitudes, and shows as much of
+this area as possible given the projection and the current projection
+center. Set the latitude boundaries using <a href="../../Graphics/Resources/mp.html#mpMinLatF"><em>mpMinLatF</em></a> and <a href="../../Graphics/Resources/mp.html#mpMaxLatF"><em>mpMaxLatF</em></a> and the longitude
+boundaries using <a href="../../Graphics/Resources/mp.html#mpMinLonF"><em>mpMinLonF</em></a>
+and <a href="../../Graphics/Resources/mp.html#mpMaxLonF"><em>mpMaxLonF</em></a>. Two other
+resources apply only when using <code>LatLon</code> limit mode. These
+are the boolean resources <a href="../../Graphics/Resources/mp.html#mpRelativeCenterLon"><em>mpRelativeCenterLon</em></a> and <a href="../../Graphics/Resources/mp.html#mpRelativeCenterLat"><em>mpRelativeCenterLat</em></a>.  When <a href="../../Graphics/Resources/mp.html#mpRelativeCenterLon"><em>mpRelativeCenterLon</em></a> is set True the
+value of the <a href="../../Graphics/Resources/mp.html#mpCenterLonF"><em>mpCenterLonF</em></a>
+resource is interpreted as an offset in degrees from the longitude
+halfway between <a href="../../Graphics/Resources/mp.html#mpMinLonF"><em>mpMinLonF</em></a>
+and <a href="../../Graphics/Resources/mp.html#mpMaxLonF"><em>mpMaxLonF</em></a>. Setting
+<a href="../../Graphics/Resources/mp.html#mpRelativeCenterLat"><em>mpRelativeCenterLat</em></a> True
+similarly modifies the interpretation of the <em>mpCenterLatF</em>
+resource.
+
+<li><code>Angles</code> mode limits the area based on positive angular
+distance in degrees away from the projection center in the four
+directions parallel to a side of the viewport (<em>not
+necessarily</em> parallel to lines of latitude and longitude). Use the
+resources <a href="../../Graphics/Resources/mp.html#mpLeftAngleF"><em>mpLeftAngleF</em></a>,
+<a href="../../Graphics/Resources/mp.html#mpRightAngleF"><em>mpRightAngleF</em></a>, <a href="../../Graphics/Resources/mp.html#mpBottomAngleF"><em>mpBottomAngleF</em></a>, and <a href="../../Graphics/Resources/mp.html#mpTopAngleF"><em>mpTopAngleF</em></a> to set angular
+limits. You cannot use this mode for the 
+<code>LambertConformal</code> or <code>RotatedMercator</code> projections. 
+Also, if <a href="../../Graphics/Resources/mp.html#mpProjection"><em>mpProjection</em></a> has the value
+<code>Satellite</code>, the <strong>MapTransformation</strong>
+interprets the angles as deviations from the line of sight of the
+viewing satellite.
+
+<li><code>NPC</code> mode limits the area based on Normalized
+Projection Coordinates", which map the maximal area of the projection
+into a rectangle bounded by 0.0 and 1.0 horizontally and
+vertically. Use the resources <a href="../../Graphics/Resources/mp.html#mpLeftNPCF"><em>mpLeftNPCF</em></a>, <a href="../../Graphics/Resources/mp.html#mpRightNPCF"><em>mpRightNPCF</em></a>, <a href="../../Graphics/Resources/mp.html#mpBottomNPCF"><em>mpBottomNPCF</em></a>, and <a href="../../Graphics/Resources/mp.html#mpTopNPCF"><em>mpTopNPCF</em></a> to set normalized
+projection coordinate limits. Note that the
+<strong>MapTransformation</strong> keeps the NPC resources updated
+to their current value no matter which map limit mode is currently in
+effect.
+
+<li><code>NDC</code> mode limits the area based on the current
+location of the projected map in <a href="../../glossary.html#NDC">Normalized Device
+Coordinates</a>. Use the resources <a href="../../Graphics/Resources/mp.html#mpLeftNDCF"><em>mpLeftNDCF</em></a>, <a href="../../Graphics/Resources/mp.html#mpRightNDCF"><em>mpRightNDCF</em></a>, <a href="../../Graphics/Resources/mp.html#mpBottomNDCF"><em>mpBottomNDCF</em></a>, and <a href="../../Graphics/Resources/mp.html#mpTopNDCF"><em>mpTopNDCF</em></a> to set normalized device
+coordinate limits. Note that each time these resources are applied
+using a SetValues call the mapping between NDC and the projected area
+changes. At the completion of a SetValues call, the
+<strong>MapTransformation</strong> internally sets the value of
+each of these resources to the new location of the original projected
+coordinate: that is, to one of the boundaries of the projected area.
+
+<li><code>Corners</code> mode limits the area to a rectangle with
+corners defined by the values of the resources <a href="../../Graphics/Resources/mp.html#mpLeftCornerLatF"><em>mpLeftCornerLatF</em></a>, <a href="../../Graphics/Resources/mp.html#mpLeftCornerLonF"><em>mpLeftCornerLonF</em></a>, <a href="../../Graphics/Resources/mp.html#mpRightCornerLatF"><em>mpRightCornerLatF</em></a>, and <a href="../../Graphics/Resources/mp.html#mpLeftCornerLonF"><em>mpLeftCornerLonF</em></a>.
+
+<li><code>Points</code> mode limits the area to a rectangle containing the
+four points defined by the values of the resources 
+<a href="../../Graphics/Resources/mp.html#mpLeftPointLatF"><em>mpLeftPointLatF</em></a>, 
+<a href="../../Graphics/Resources/mp.html#mpLeftPointLonF"><em>mpLeftPointLonF</em></a>, 
+<a href="../../Graphics/Resources/mp.html#mpRightPointLatF"><em>mpRightPointLatF</em></a>, 
+<a href="../../Graphics/Resources/mp.html#mpRightPointLonF"><em>mpRightPointLonF</em></a>, 
+<a href="../../Graphics/Resources/mp.html#mpBottomPointLatF"><em>mpBottomPointLatF</em></a>, 
+<a href="../../Graphics/Resources/mp.html#mpBottomPointLonF"><em>mpBottomPointLonF</em></a>, 
+<a href="../../Graphics/Resources/mp.html#mpTopPointLatF"><em>mpTopPointLatF</em></a>, and
+<a href="../../Graphics/Resources/mp.html#mpTopPointLonF"><em>mpTopPointLonF</em></a>
+
+<li><code>Window</code> mode limits the area based on the intermediate
+"window" coordinate system used by the low level utilities. You set
+window coordinate limits using the resources <a href="../../Graphics/Resources/mp.html#mpLeftWindowF"><em>mpLeftWindowF</em></a>, <a href="../../Graphics/Resources/mp.html#mpRightWindowF"><em>mpRightWindowF</em></a>, <a href="../../Graphics/Resources/mp.html#mpBottomWindowF"><em>mpBottomWindowF</em></a>, and <a href="../../Graphics/Resources/mp.html#mpTopWindowF"><em>mpTopWindowF</em></a>. The
+<strong>MapTransformation</strong> keeps the window coordinate system
+resources updated to their current values no matter which map limit
+mode is currently in effect.
+
+</ul>
+
+<h4><code>LambertConformal</code> projection resources</h4>
+
+When the conic projection <code>LambertConformal</code> is set, the
+<strong>MapTransformation</strong> ignores the projection center and
+rotation resources.  Instead, use <a href="../../Graphics/Resources/mp.html#mpLambertParallel1F"><em>mpLambertParallel1F</em></a>
+and <a href="../../Graphics/Resources/mp.html#mpLambertParallel2F"><em>mpLambertParallel2F</em></a>
+to set the two latitudinal edges of the cone, and use <a href="../../Graphics/Resources/mp.html#mpLambertMeridianF"><em>mpLambertMeridianF</em></a>
+to set its longitudinal center. 
+
+<h4><code>Satellite</code> projection resources</h4>
+If the projection is <code>Satellite</code>, the
+<strong>MapTransformation</strong> provides several additional resources for
+controlling the perspective effect. <a href="../../Graphics/Resources/mp.html#mpSatelliteDistF"><em>mpSatelliteDistF</em></a>
+defines the distance of the viewing satellite from the center of the
+globe in multiples of the global radius. <a href="../../Graphics/Resources/mp.html#mpSatelliteAngle1F"><em>mpSatelliteAngle1F</em></a>
+defines the angular deviation of the line of sight from a line between
+the satellite position and the center of the globe. <a href="../../Graphics/Resources/mp.html#mpSatelliteAngle2F"><em>mpSatelliteAngle2F</em></a>
+defines the direction of the angular deviation of the line of sight as
+a rotation from the horizontal axis of the viewplane.
+
+<h4>Elliptical boundary</h4> <p> For any of the projections, you can
+set a resource, <a href="../../Graphics/Resources/mp.html#mpEllipticalBoundary"><em>mpEllipticalBoundary</em></a>, that
+limits the perimeter of the viewable area to an ellipse inscribed
+within the rectangular viewport.
+<p>
+<h3>Graphic primitive transformations</h3><p>
+
+<strong>MapTransformation</strong> supports transformation into
+any of the map projections of graphic primitives using the data space
+primitive drawing routines <a href="../API/NhlDataPolygon.html"><strong>NhlDataPolygon</strong></a>, <a href="../API/NhlDataPolyline.html"><strong>NhlDataPolyline</strong></a>, and <a href="../API/NhlDataPolymarker.html"><strong>NhlDataPolymarker</strong></a>.  Depending on the
+setting of the boolean resource <a href="../../Graphics/Resources/mp.html#mpGreatCircleLinesOn"><em>mpGreatCircleLinesOn</em></a>, lines or
+edges spanning the space between the user-supplied points of a
+polyline or polygon may be transformed in two different ways. One
+treats the lat-lon grid as a cartesian system; the other calculates
+the great circle route (the shortest distance on the surface of the
+globe) between each set of points.
+
+
+<h2>Support functions</h2>
+
+The <strong>MapTransformation</strong> object does not define any support
+functions, but inherits all the support functions available to its
+superclass.
+
+<hr>
+<h2>Status</h2>
+
+<p><A name="Status.2">2.</a> Range checking is inadequate for a number
+of the <strong>MapTransformation</strong> resources including
+<a href="../../Graphics/Resources/mp.html#mpLambertMeridianF"><em>mpLambertMeridianF</em></a>, <a href="../../Graphics/Resources/mp.html#mpLambertParallel2F"><em>mpLambertParallel2F</em></a>, <a href="../../Graphics/Resources/mp.html#mpLambertParallel1F"><em>mpLambertParallel1F</em></a>, <a href="../../Graphics/Resources/mp.html#mpCenterLatF"><em>mpCenterLatF</em></a>, and <a href="../../Graphics/Resources/mp.html#mpCenterLonF"><em>mpCenterLonF</em></a>.
+
+<p><A name="Status.3">3.</a> When <a href="../../Graphics/Resources/mp.html#mpCenterRotF"><em>mpCenterRotF</em></a> has a non-zero value
+and <a href="../../Graphics/Resources/mp.html#mpLimitMode"><em>mpLimitMode</em></a> is set
+to NhlANGLES, it is possible that errors may occur even when the angle
+values are within the documented limits. This occurs in certain
+situations that have so far proved to be difficult to pin down. More
+work is required.
+
+<hr>
+<h2>See also</h2>
+<ul>
+<li><a href="MapPlot.html"><strong>MapPlot</strong></a> object
+<li><a href="PlotManager.html"><strong>PlotManager</strong></a> object
+<li><a href="Transformation.html"><strong>Transformation</strong></a> object
+<li><a href="Obj.html"><strong>Obj</strong></a> object
+</ul>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/MapTransformation.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:31 GMT -->
+</html>
+

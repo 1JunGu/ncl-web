@@ -1,0 +1,174 @@
+;***************************************************************
+; cloudsat_2.ncl
+;
+; Concepts illustrated:
+;   - Read CLOUDSAT 'cloud_scenario' from a HDF-EOS2 file 
+;   - Explore heght variable (min, max); eliminate negative (bogus)  values
+;   - Use 'dim_gbits' to extract information
+;   - Explore the statistical distribution od cloud scenario types
+;   - Plot the vertical profile at each time step 
+;===============================================================
+; Open the file: ncl_filedump showed it is HDF-EOS with .hdf extension
+; %> ncl_filedump 2010153190053_21792_CS_2B-CLDCLASS_GRANULE_P_R04_E03.hdf | less
+;
+; Better: add '.he2' on the command line:
+; %> ncl_filedump 2010153190053_21792_CS_2B-CLDCLASS_GRANULE_P_R04_E03.hdf.he2 | less
+;
+;  dimensions:
+;     nray_2B_CLDCLASS = 37082
+;     scalar_2B_CLDCLASS = 1
+;     nbin_2B_CLDCLASS = 125
+;  [SNIP]
+; short cloud_scenario_2B_CLDCLASS ( nray_2B_CLDCLASS, nbin_2B_CLDCLASS )
+;        hdfeos_name :  cloud_scenario
+;        valid_range :  ( 0, 32767 )  <=== should be ( 0, 8 )  
+;        units :        none
+;        long_name :    Cloud scenario
+;  [SNIP]
+;  1-4    Cloud scenario [type]    ; See Table 5 in PDF below
+;  0000 = No cloud    (0)
+;  0001 = cirrus      (1)
+;  0010 = Altostratus (2)
+;  0011 = Altocumulus (3)
+;  0100 = St          (4)
+;  0101 = Sc          (5)
+;  0110 = Cumulus     (6)          ; Cu: including cumulus congestus
+;  0111 = Ns          (7)          ; Nimbostratus
+;  1000 = Deep Convection (8)      ; Deep convective (cumulonimbus) 
+;                                  ; or high (cirrus and cirrostratus)
+;===============================================================
+; http://www.cloudsat.cira.colostate.edu/sites/default/files/products/files/2B-CLDCLASS_PDICD.P_R04.20070724.pdf
+; See Tables 1 and 2 and 5
+;===============================================================
+;---Read variabless
+;===============================================================
+
+  diri    = "./"
+  fili	  = "2010153190053_21792_CS_2B-CLDCLASS_GRANULE_P_R04_E03.html"
+  varname = "cloud_scenario_2B_CLDCLASS"
+  f       = addfile (diri+fili+".he2", "r")     ; open file as hdf-eos2
+
+  cs      = f->$varname$
+  lat     = f->Latitude_2B_CLDCLASS                      ; (nray_2B_CLDCLASS) => (nray)
+  lon     = f->Longitude_2B_CLDCLASS                     ; (nray_2B_CLDCLASS) => (nray)
+  time    = f->Profile_time_2B_CLDCLASS                  ; (nray_2B_CLDCLASS) => (nray)
+  hgt     = f->Height_2B_CLDCLASS                        ; (nray_2B_CLDCLASS,nbin_2B_CLDCLASS )
+
+  printVarSummary(cs)                   ; (nray_2B_CLDCLASS,nbin_2B_CLDCLASS)
+  print("-----")
+
+;=============================================================================
+;--Variable ranges and sizes
+;=============================================================================
+
+  printVarSummary(lat)
+  print("lat: min="+min(lat)+"  max="+max(lat)) 
+  printVarSummary(lon)
+  print("lon: min="+min(lon)+"  max="+max(lon)) 
+  printVarSummary(hgt)
+  print("hgt: min="+min(hgt)+"  max="+max(hgt))  
+
+  dimcs   = dimsizes(cs)                
+  nray    = dimcs(0)                    ; nray_2B_CLDCLASS: corresponds to 'time'
+  nbin    = dimcs(1)                    ; nbin_2B_CLDCLASS: 125 [fixed size]: 
+  N       = nray*nbin                   ; total array size
+
+;=============================================================================
+; Unpack: Commented code is for unpacking ALL the packed information
+;=============================================================================
+  cstyp   = dim_gbits(cs,11,4,12,nbin)   ; 1-4    Cloud scenario [type]
+  cstyp@long_name = "Cloud Type"
+  copy_VarCoords(cs,cstyp)
+
+  printVarSummary(cstyp)
+  printMinMax(cstyp,0)
+  print("-----")
+
+;=====================================================================
+; Information only: Explore statistical distribution of cloud types
+;=====================================================================
+
+  opt = True
+  opt@PrintStat = True
+  cstyp_distribution = stat_dispersion(cstyp, opt )      ; explore variable                    
+  print("-----")
+
+;=====================================================================
+;---Graphics
+;=====================================================================
+; Eliminate negative values and very high levels for subsequent plotting reasons
+; Not necessary
+;=====================================================================
+  hgtMax = 20000
+  hgt    = where(hgt.lt.0 .or. hgt.gt.hgtMax, hgt@_FillValue, hgt)         
+  print("hgt: min="+min(hgt)+"  max="+max(hgt))       
+
+  cstyp@_FillValue = toshort(-1)                         ; create an appropriate _FillValue
+  cstyp = where(ismissing(hgt), cstyp@_FillValue, cstyp) ; eliminate cstyp associated 
+                                                         ; with  negative hgt values
+
+;=====================================================================
+;---Colors and labels for each cloud scenario type: cstyp 
+;---          noCld, cirrus , A-st, A-cu   ,  St
+;---          Sc   , Cumulus , Ns    , DeepC
+;=====================================================================
+
+  colors = (/"snow","purple","red","yellow","green" \
+            ,"blue","skyblue","brown","black"/)
+  ntyp   = dimsizes(colors)
+
+  labels = (/"Clear","Cirrus","Alto-Strat","Alto-Cu","Stratus" \
+            ,"StratoCu", "Cum", "Ns", "DeepCon"/) 
+
+;=====================================================================
+;---The following is not necessary but I like to use these  
+;=====================================================================
+
+  maxYlev   = 18
+  mnmxYint = nice_mnmxintvl( min(hgt), max(hgt), maxYlev, False)
+  maxXlev   = 10
+  mnmxXint = nice_mnmxintvl( min(time), max(time), maxXlev, False)
+
+;=====================================================================
+;---PLOT
+;=====================================================================
+
+  pltDir  = "./"
+  pltName = "cloudsat"
+  pltType = "png"
+  pltPath =  pltDir+pltName
+ 
+  wks     = gsn_open_wks(pltType,pltPath) 
+
+  res                  = True
+  res@gsnMaximize      = True
+
+  res@sfYArray         = hgt                     ; 2D
+  res@sfXArray         = conform(hgt, time, 0)   ; 2D
+  res@trGridType       = "TriangularMesh"  
+  res@cnFillMode       = "RasterFill"           
+
+  res@cnFillOn         = True
+  res@cnFillPalette    = colors         ; set color map
+  res@cnLevelSelectionMode = "ExplicitLevels"
+  res@cnLevels         = ispan(1,8,1)
+  res@cnLinesOn        = False
+  res@cnLineLabelsOn   = False
+
+  res@lbOrientation    = "vertical"     ; default is horizontal
+  res@cnExplicitLabelBarLabelsOn = True
+  res@lbLabelStrings   =  labels
+  res@lbLabelAlignment = "BoxCenters"   ; label orientation
+
+
+  res@tiXAxisString    = "elapsed time"
+  res@tiYAxisString    = "Height (m)"
+  res@tiMainString     = str_get_field(fili,1,"_")+str_get_field(fili,2,"_") \
+                       + str_get_field(fili,3,"_")+str_get_field(fili,4,"_")
+
+  res@trXMinF          = mnmxXint(0)
+  res@trXMaxF          = mnmxXint(1)
+  res@trYMinF          = mnmxYint(0)
+  res@trYMaxF          = mnmxYint(1)
+
+  plot  = gsn_csm_contour (wks, cstyp, res) 

@@ -1,0 +1,142 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+procedure set_colormap(wks)
+local c
+begin
+  c = (/ (/    1,    1,     1/), \
+         (/    0,    0,     0/), \
+         (/   0.2431373,   0.1058824,    0.427451/), \
+         (/   0.3137255,   0.09411765,    0.3490196/), \
+         (/   0.427451,   0.09019608,    0.2627451/), \
+         (/   0.5333334,   0.1098039,    0.1921569/), \
+         (/   0.6627451,   0.1254902,    0.145098/), \
+         (/   0.7294118,   0.1254902,    0.145098/), \
+         (/   0.7333333,   0.1647059,    0.1490196/), \
+         (/   0.7490196,   0.2235294,    0.1490196/), \
+         (/  0.7647059,  0.3058824,   0.1490196/), \
+         (/  0.7921569,  0.4313726,   0.1568628/), \
+         (/  0.8313726,  0.5529412,   0.1647059/), \
+         (/  0.8745098,  0.6588235,   0.1686275/), \
+         (/  0.8941177,  0.7333333,   0.1686275/), \
+         (/  0.9137255,  0.8078431,   0.172549/), \
+         (/  0.9372549,  0.8980392,   0.1764706/), \
+         (/  0.9372549,  0.9294118,   0.2117647/), \
+         (/  0.8313726,  0.8784314,   0.1921569/), \
+         (/  0.6901961,  0.8078431,   0.2156863/), \
+         (/  0.5490196,  0.7372549,   0.2313726/), \
+         (/  0.4509804,  0.6901961,   0.2470588/), \
+         (/  0.3764706,  0.6588235,   0.2509804/), \
+         (/  0.345098,  0.6470588,   0.2509804/), \
+         (/  0.3803922,  0.6588235,   0.2588235/), \
+         (/  0.4117647,  0.6745098,   0.3960784/), \
+         (/  0.4509804,  0.7019608,   0.5372549/), \
+         (/  0.4901961,  0.7215686,   0.682353/), \
+         (/  0.5176471,  0.7490196,   0.8392157/), \
+         (/  0.4313726,  0.7098039,   0.9333333/), \
+         (/  0.3333333,  0.4470588,   0.7254902/), \
+         (/  0.2627451,  0.3176471,   0.6196079/), \
+         (/  0.227451,  0.2509804,   0.572549/)/)
+
+  gsn_define_colormap(wks,c)
+end
+
+begin
+; Dummy data.
+  arr1 = generate_2d_array(20, 10, 0, 550, 0, (/500,1000/))
+  arr2 = generate_2d_array(10, 20, 0, 550, 0, (/50,100/))
+  arr3 = generate_2d_array( 5, 12, 0, 550, 0, (/500,1000/))
+  arr4 = generate_2d_array( 9, 10, 0, 550, 0, (/50,100/))
+
+  wks = gsn_open_wks("x11","panellab")
+  set_colormap(wks)
+
+  plot = new(4,graphic)
+
+  res                        = True
+  res@gsnFrame               = False
+  res@gsnDraw                = False
+  res@cnRasterModeOn         = True
+  res@cnLinesOn              = False          ; Turn off contour lines.
+  res@cnFillOn               = True           ; Turn on contour line fill.
+  res@cnLineLabelsOn         = False          ; Turn off line labels.
+  res@cnInfoLabelOn          = False          ; Turn off informational label.
+  res@lbLabelBarOn           = False
+
+  res@mpOutlineBoundarySets  = "National"
+
+  res@mpLimitMode            = "Corners"            ; choose range of map
+
+  res@tfDoNDCOverlay         = True 
+  res@mpProjection           = "LambertConformal"
+  res@mpLambertParallel1F    = 30.
+  res@mpLambertParallel2F    = 60.
+  res@mpLambertMeridianF     = 11
+ ;-------------------------Plot 1--------------------------------------
+  res1                         = res
+  res1@tiMainString            = " "
+  res1@mpRightCornerLonF       =   18.92471
+  res1@mpRightCornerLatF       =   49.78167
+  res1@mpLeftCornerLonF        =    4.037801
+  res1@mpLeftCornerLatF        =    42.74934
+  res1@cnLevelSelectionMode    = "ExplicitLevels"
+  res1@cnLevels                = (/5,25,50,100,200,400,500/)
+  res1@cnFillColors            = (/26,27,28,29,30,32,2,3/)
+ ;-------------------------Plot 2--------------------------------------
+  res2                         = res
+  res2@tiMainString            = " "
+  res2@mpRightCornerLonF       =   18.92471
+  res2@mpRightCornerLatF       =   49.78167
+  res2@mpLeftCornerLonF        =    4.141622
+  res2@mpLeftCornerLatF        =    42.83995
+  res2@cnLevelSelectionMode    = "ExplicitLevels"
+  res2@cnLevels                = (/5,25,50,100,200,400,500/)
+  res2@cnFillColors            = (/26,27,28,29,30,32,2,3/)
+
+;-------------------------Plot 3--------------------------------------
+  res3                         = res
+  res3@tiMainString            = " "
+  res3@mpRightCornerLonF       =   18.92471
+  res3@mpRightCornerLatF       =   49.78167
+  res3@mpLeftCornerLonF        =    4.037801
+  res3@mpLeftCornerLatF        =    42.74934
+  res3@cnLevelSelectionMode   = "ExplicitLevels"
+  res3@cnLevels               = (/-10,-8,-6,-4,-2,0,2,4,6,8,10,12,14,16,18,20,22,24,26/)
+;-------------------------Plot 4--------------------------------------
+  res4                         = res
+  res4@tiMainString            = " "
+  res4@mpRightCornerLonF       =   18.92471
+  res4@mpRightCornerLatF       =   49.78167
+  res4@mpLeftCornerLonF        =    4.141622
+  res4@mpLeftCornerLatF        =    42.83995
+  res4@cnLevelSelectionMode    = "ExplicitLevels"
+  res4@cnLevels                = (/-10,-8,-6,-4,-2,0,2,4,6,8,10,12,14,16,18,20,22,24,26/)
+
+  plot(0)  = gsn_csm_contour_map(wks,arr1, res1)
+  plot(1)  = gsn_csm_contour_map(wks,arr2, res2)
+  plot(2)  = gsn_csm_contour_map(wks,arr3-273.15, res3)
+  plot(3)  = gsn_csm_contour_map(wks,arr4-273.15, res4)
+
+;-----------------Panel Resources---------------------------
+ resP1                                  = True
+ resP1@gsnFrame                         = False
+ resP1@lbOrientation                    = "vertical"
+ resP1@gsnPanelLabelBar                 = True
+ resP1@gsnPanelBottom                   = 0.5
+ resP1@txString                         = "First set of plots"
+
+ resP2                                  = True
+ resP2@gsnFrame                         = False
+ resP2@lbOrientation                    = "vertical"
+ resP2@gsnPanelLabelBar                 = True
+ resP2@gsnPanelBottom                   = 0.0
+ resP2@gsnPanelTop                      = 0.5
+ resP2@txString                         = "Second set of plots - different labelbar"
+
+  gsn_panel(wks,plot(0:1),(/1,2/),resP1)
+  gsn_panel(wks,plot(2:3),(/1,2/),resP2)
+
+  frame(wks)
+
+
+ end

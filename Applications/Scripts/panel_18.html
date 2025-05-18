@@ -1,0 +1,95 @@
+;----------------------------------------------------------------------
+; panel_18.ncl
+;
+; Concepts illustrated:
+;   - Combining two sets of paneled plots on one page
+;   - Maximizing plots after they've been created
+;   - Using cnFillPalette to assign a color palette to contours
+;----------------------------------------------------------------------
+; This script is similar to panel_18_old.ncl, except a function called
+; "panel_two_sets" was used to make it easier to panel two sets of
+; plots.
+;
+; This function enables you to panel two sets of contour plots on the
+; same page, each with its own labelbar. The function will determine
+; whether to use horizontal or vertical labelars, depending on how
+; the two sets of plots are laid out in terms of rows and columns.
+;----------------------------------------------------------------------
+; You must download panel_two_sets.ncl for this script to run.
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;----------------------------------------------------------------------
+load "./panel_two_sets.ncl"
+
+begin
+;---Read data
+    fl_mdl  = addfile("TS.cam3.toga_ENS.1950-2000.nc","r")
+
+    yr0 = fl_mdl->TS(12,:,:)
+    yr1 = fl_mdl->TS(600,:,:)
+    yr0 = yr0-273.15                        ; convert to degrees C
+    yr1 = yr1-273.15                        ; convert to degrees C
+    yr0@units = "C"
+    yr1@units = "C"
+;---Calculate difference
+    diff                    = yr1           ; trick to create array with coordinate info
+    diff                    = yr1 - yr0     ; over write values with differences
+    diff@long_name          =  "1999-1951 TS field differences"
+    print("========================================")
+    printVarSummary(diff)   
+    print(" min="+min(diff)+"   max="+max(diff))
+
+;---Plot
+    wks  = gsn_open_wks("png","panel")         ; send graphics to PNG file
+    
+    res                     = True
+    res@gsnDraw             = False
+    res@gsnFrame            = False
+    res@mpFillOn            = False            ; no need   
+    res@cnLevelSelectionMode= "ManualLevels"   ; manual set levels
+    res@cnMinLevelValF      = -3.0
+    res@cnMaxLevelValF      = 27.0
+    res@cnLevelSpacingF     = 1.5              ; 20 contour levels        
+    res@cnFillOn            = True             ; color fill plot
+    res@cnFillPalette       = "BlAqGrYeOrRe"
+    res@cnLinesOn           = False
+    res@cnLineLabelsOn      = False
+    res@cnInfoLabelOn       = False
+    res@lbLabelBarOn        = False            ; turn off individual label bars
+;
+; Formatting the labelbar strings helps make the two sets of labelbars
+; match better. Even though the labelbar is turned off, it is internally
+;  still generated.
+;
+    res@lbLabelStrings      = sprintf("%4.1f",ispan(-30,370,15)*0.1)
+
+    plot = new(2,graphic)    
+    
+    res@gsnLeftString       = "TS"
+    res@gsnRightString      = "~S~o~N~C"
+
+    res@gsnCenterString     = "Jan. 1999"
+    plot(0) = gsn_csm_contour_map(wks,yr1,res)
+
+    res@gsnCenterString     = "Jan. 1951"
+    plot(1) = gsn_csm_contour_map(wks,yr0,res)
+    
+    res@cnMinLevelValF      = -4.
+    res@cnMaxLevelValF      =  4.
+    res@cnLevelSpacingF     =  1.
+    res@cnFillPalette       = "BlueWhiteOrangeRed"    ; select a color map with white in the middle
+    res@gsnCenterString     = "Difference: Jan 1999 - Jan 1951"
+
+;---Formatting the labelbar strings helps make the two sets of labelbars match better
+    res@lbLabelStrings      := sprintf("%4.1f",ispan(-4,4,1))
+    plot2 = gsn_csm_contour_map(wks, diff ,res)
+    
+;---Panel the two sets of plots. Note no special resources need to be set.
+    pres1 = True
+    pres2 = True
+    pres  = True
+    panel_two_sets(wks,plot,plot2,(/2,1/),(/1,1/),pres1,pres2,pres)
+end
+    

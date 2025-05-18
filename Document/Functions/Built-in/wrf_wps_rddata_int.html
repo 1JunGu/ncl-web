@@ -1,0 +1,636 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/wrf_wps_rddata_int.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:25 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (file io)">
+<meta name="keywords" content="wrf_wps_rddata_int">
+<title>wrf_wps_rddata_int</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../wrf.html">WRF</a>,
+<a class=crumb href="../io.html">File I/O</a>
+<br>
+<h1>wrf_wps_rddata_int</h1>
+
+<p>
+Reads a 2D field from an open WPS intermediate file.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.3.0">version 6.3.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function wrf_wps_rddata_int (
+		istatus [1] : integer,  
+		nx      [1] : integer,  
+		ny      [1] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<i>ny</i>][<i>nx</i>] :  float
+</pre>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function reads the 2D data field for the current field of an
+open <a href="http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Basics/IM_files/">WPS
+intermediate file</a>. It is meant to be used as part of a 3-step
+process for reading data off a WPS intermediate file:
+<p>
+
+<ol>
+<li><a href="wrf_wps_open_int.html"><strong>wrf_wps_open_int</strong></a> - open a WPS file
+<li><a href="wrf_wps_rdhead_int.html"><strong>wrf_wps_rdhead_int</strong></a> - read header info for current field 
+<li><strong>wrf_wps_rddata_int</strong> - read data for current field 
+</ol>
+<p>
+
+Steps #2 and #3 are meant to be called continuously in an NCL "do
+while" loop. The <em>istatus</em> variable will be set to 0 by this
+procedure to indicate the data was read successfully, and that you can
+now attempt to read another field using
+<a href="wrf_wps_rdhead_int.html"><strong>wrf_wps_rdhead_int</strong></a>.  If <em>istatus</em> is
+not equal to 0, then no more fields can be read off the file.
+<p>
+
+To read a WPS file with a single function call,
+see <a href="wrf_wps_read_int.html"><strong>wrf_wps_read_int</strong></a>.  The examples below
+illustrate both methods for reading a WPS file.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="wrf_wps_open_int.html"><strong>wrf_wps_open_int</strong></a>,
+<a href="wrf_wps_rdhead_int.html"><strong>wrf_wps_rdhead_int</strong></a>,
+<strong>wrf_wps_rddata_int</strong>,
+<a href="wrf_wps_read_int.html"><strong>wrf_wps_read_int</strong></a>,
+<a href="wrf_wps_write_int.html"><strong>wrf_wps_write_int</strong></a>,
+<a href="wrf_wps_close_int.html"><strong>wrf_wps_close_int</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<b>Example 1</b><p>
+
+This example shows how to use the three-step process of reading a WPS
+intermediate file using 1) <a href="wrf_wps_open_int.html"><strong>wrf_wps_open_int</strong></a>,
+2) <a href="wrf_wps_rdhead_int.html"><strong>wrf_wps_rdhead_int</strong></a>, and
+3) <strong>wrf_wps_rddata_int</strong>.
+<p>
+
+See example 2 below for a script that
+uses <a href="wrf_wps_read_int.html"><strong>wrf_wps_read_int</strong></a> to read the file in one step.
+<p>
+
+<pre>
+  wps_filename = "NNRP:2006-04-10_00"
+
+;---Preallocate variables for header
+  header      = new(14,float)
+  field       = new(1,string)
+  date        = new(1,string)
+  units       = new(1,string)
+  map_source  = new(1,string)
+  description = new(1,string)
+  
+  istatus =  wrf_wps_open_int(wps_filename)
+  if(istatus.ne.0) then
+    print("Error opening " + wps_filename)
+    exit
+  end if
+
+;---Continuously read data from WPS file until istatus != 0.
+  nfields = 0
+
+  do while (istatus.eq.0)
+
+;---Read header
+    wrf_wps_rdhead_int(istatus,header,field,date,units,\
+                       map_source,description)
+    if(istatus.ne.0) then
+      continue
+    end if
+
+    nx = toint(header(3))
+    ny = toint(header(4))
+
+;---Read data
+    slab := wrf_wps_rddata_int(istatus,nx,ny)
+    if(istatus.ne.0) then
+      continue
+    end if
+
+;---Print information about each slab
+    print("Field #" + (nfields+1))
+    print("  name          : '" + field + "'")
+    print("  description   : '" + description + "'")
+    print("  units         : '" + units + "'")
+    print("  min/max value : "  + min(slab) + " / " + max(slab))
+    print("  date          : '" + date + "'")
+    print("  map source    : '" + map_source + "'")
+    print("  version       : " + header(0))
+    print("  forecast hour : " + header(1))
+    print("  level         : " + header(2))
+    print("  ny x nx       : " + header(4) + " x " + header(3))
+    print("  projection    : " + header(5))
+    if(header(5).eq.0) then
+      print("  startlat      : " + header(6))
+      print("  startlon      : " + header(7))
+      print("  deltalat      : " + header(8))
+      print("  deltalon      : " + header(9))
+      print("  earth_radius  : " + header(10))
+    else if(header(5).eq.1) then
+      print("  startlat      : " + header(6))
+      print("  startlon      : " + header(7))
+      print("  dy x dx       : " + header(9) + " x " + header(8))
+      print("  truelat1      : " + header(10))
+      print("  earth_radius  : " + header(11))
+    else if(header(5).eq.3) then
+      print("  startlat      : " + header(6))
+      print("  startlon      : " + header(7))
+      print("  dy x dx       : " + header(9) + " x " + header(8))
+      print("  center lon    : " + header(10))
+      print("  truelat1      : " + header(11))
+      print("  truelat2      : " + header(12))
+      print("  earth_radius  : " + header(13))
+    else if(header(5).eq.4) then
+      print("  startlat      : " + header(6))
+      print("  startlon      : " + header(7))
+      print("  nlats         : " + header(8))
+      print("  deltalon      : " + header(9))
+      print("  earth_radius  : " + header(10))
+    else if(header(5).eq.5) then
+      print("  startlat      : " + header(6))
+      print("  startlon      : " + header(7))
+      print("  dy x dx       : " + header(9) + " x " + header(8))
+      print("  center lon    : " + header(10))
+      print("  truelat1      : " + header(11))
+      print("  earth_radius  : " + header(12))
+    end if
+    end if
+    end if
+    end if
+    end if
+    nfields = nfields + 1
+  end do
+
+  print("There were " + nfields + " fields in the " + wps_filename + " WPS file.")
+
+</pre>
+<p>
+
+Output: (run with "-n" option to remove annoying "(0)")
+
+<pre>
+Field #1
+  name          : 'PMSL'
+  description   : 'Sea-level Pressure'
+  units         : 'Pa'
+  min/max value : 95120 / 107780
+  date          : '2006-04-10_00:00:00'
+  map source    : 'unknown model from NCEP GRID   2'
+  version       : 5
+  forecast hour : 0
+  level         : 201300
+  ny x nx       : 73 x 144
+  projection    : 0
+  startlat      : 90
+  startlon      : 0
+  deltalat      : -2.5
+  deltalon      : 2.5
+  earth_radius  : 6371.23
+  .
+  .
+  .
+Field #100
+  name          : 'HGT'
+  description   : 'Height'
+  units         : 'm'
+  min/max value : 29479 / 31173
+  date          : '2006-04-10_00:00:00'
+  map source    : 'unknown model from NCEP GRID   2'
+  version       : 5
+  forecast hour : 0
+  level         : 1000
+  ny x nx       : 73 x 144
+  projection    : 0
+  startlat      : 90
+  startlon      : 0
+  deltalat      : -2.5
+  deltalon      : 2.5
+  earth_radius  : 6371.23
+There were 100 fields in the NNRP:2006-04-10_00 WPS file.
+
+</pre>
+<p>
+
+<b>Example 2</b><p>
+
+This example shows how to use <a href="wrf_wps_read_int.html"><strong>wrf_wps_read_int</strong></a> to
+read a WPS intermediate file in one step.
+<p>
+
+<pre>
+  wps_filename = "NNRP:2006-04-10_00"
+
+  slabs = wrf_wps_read_int(wps_filename)
+
+  slabs_dims = dimsizes(slabs)
+  header     = slabs@rhead          ; Read into memory so we can subscript it
+  nfields    = slabs_dims(0)
+
+  print("There are " + nfields + " fields in the " + wps_filename + " WPS file.")
+
+  do nf=0,nfields-1
+;---Print information about each slab
+    print("Field #" + (nf+1))
+    print("  name          : '" + slabs@field(nf) + "'")
+    print("  description   : '" + slabs@description(nf) + "'")
+    print("  units         : '" + slabs@units(nf) + "'")
+    print("  min/max value : "  + min(slabs(nf,:,:)) + " / " + max(slabs(nf,:,:)))
+    print("  date          : '" + slabs@hdate(nf) + "'")
+    print("  map source    : '" + slabs@map_source(nf) + "'")
+    print("  version       : " + header(nf,0))
+    print("  forecast hour : " + header(nf,1))
+    print("  level         : " + header(nf,2))
+    print("  ny x nx       : " + header(nf,4) + " x " + header(nf,3))
+    print("  projection    : " + header(nf,5))
+    if(header(nf,5).eq.0) then
+      print("startlat        : " + header(nf,6))
+      print("  startlon      : " + header(nf,7))
+      print("  deltalat      : " + header(nf,8))
+      print("  deltalon      : " + header(nf,9))
+      print("  earth_radius  : " + header(nf,10))
+    else if(header(nf,5).eq.1) then
+      print("  startlat      : " + header(nf,6))
+      print("  startlon      : " + header(nf,7))
+      print("  dy x dx       : " + header(nf,9) + " x " + header(nf,8))
+      print("  truelat1      : " + header(nf,10))
+      print("  earth_radius  : " + header(nf,11))
+    else if(header(nf,5).eq.3) then
+      print("  startlat      : " + header(nf,6))
+      print("  startlon      : " + header(nf,7))
+      print("  dy x dx       : " + header(nf,9) + " x " + header(nf,8))
+      print("  center lon    : " + header(nf,10))
+      print("  truelat1      : " + header(nf,11))
+      print("  truelat2      : " + header(nf,12))
+      print("  earth_radius  : " + header(nf,13))
+    else if(header(nf,5).eq.4) then
+      print("  startlat      : " + header(nf,6))
+      print("  startlon      : " + header(nf,7))
+      print("  nlats         : " + header(nf,8))
+      print("  deltalon      : " + header(nf,9))
+      print("  earth_radius  : " + header(nf,10))
+    else if(header(nf,5).eq.5) then
+      print("  startlat      : " + header(nf,6))
+      print("  startlon      : " + header(nf,7))
+      print("  dy x dx       : " + header(nf,9) + " x " + header(nf,8))
+      print("  center lon    : " + header(nf,10))
+      print("  truelat1      : " + header(nf,11))
+      print("  earth_radius  : " + header(nf,12))
+    end if
+    end if
+    end if
+    end if
+    end if
+  end do
+</pre>
+<p>
+
+Output: (run with "-n" option to remove annoying "(0)")
+
+<pre>
+There are 100 fields in the NNRP:2006-04-10_00 WPS file.
+
+Field #1
+  name          : 'PMSL'
+  description   : 'Sea-level Pressure'
+  units         : 'Pa'
+  min/max value : 0 / 107780
+  date          : '2006-04-10_00:00:00'
+  map source    : 'unknown model from NCEP GRID   2'
+  version       : 5
+  forecast hour : 0
+  level         : 201300
+  ny x nx       : 73 x 144
+  projection    : 0
+  startlat      : 90
+  startlon      : 0
+  deltalat      : -2.5
+  deltalon      : 2.5
+  earth_radius  : 6371.23
+  .
+  .
+  .
+Field #100
+  name          : 'HGT'
+  description   : 'Height'
+  units         : 'm'
+  min/max value : 0 / 31173
+  date          : '2006-04-10_00:00:00'
+  map source    : 'unknown model from NCEP GRID   2'
+  version       : 5
+  forecast hour : 0
+  level         : 1000
+  ny x nx       : 73 x 144
+  projection    : 0
+  startlat      : 90
+  startlon      : 0
+  deltalat      : -2.5
+  deltalon      : 2.5
+  earth_radius  : 6371.23
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/wrf_wps_rddata_int.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:25 GMT -->
+</html>

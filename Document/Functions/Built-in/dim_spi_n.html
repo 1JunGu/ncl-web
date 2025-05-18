@@ -1,0 +1,869 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/dim_spi_n.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:22 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (drought)">
+<meta name="keywords" content="dim_spi_n">
+<title>dim_spi_n</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../drought.html">Drought</a>
+<br>
+<h1>dim_spi_n</h1>
+
+<p>
+Calculates the standardized precipitation index (SPI) by fitting a
+gamma or a Pearson Type III distribution to monthly precipitation values.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.1.0">version 6.1.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function dim_spi_n (
+		x        : numeric,  ; float, double
+		nrun [1] : integer,  
+		opt      : logical,  
+		dims [*] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent><i>Monthly precipitation</i> of type 'float' or 'double' and any dimensionality. 
+The size of the specified <em>dims</em> must be divisible by 12.
+Since a distribution is being fit, there should be a 'reasonably' large sample size. 
+<b>At least 30 years of monthly data (360=12*30) is recommended.</b>
+</p>
+<em>nrun</em>
+<p class=indent>A scalar that specifies the number of months over which the standardized precipitation index
+is to be calculated.  Common values are 3, 6, 12, 24,36.
+</p>
+<em>opt</em>
+<p class=indent>Options parameter.
+</p>
+<p class=indent>
+
+As of NCL <a href="../../../prev_releases.html#6.3.0">version 6.3.0</a>,
+if <em>opt</em>=True, you can set <b><em>opt</em>@spi_type</b> = 3 to have
+this function calculate the standardized precipitation index (SPI)
+using the Pearson type III distribution.
+</p>
+<em>dims</em>
+<p class=indent>The dimension(s) of <em>x</em> to be used to estimate the SPI. 
+Usually, this is the record ('time') dimension.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The returned SPI will be the same shape, size and type as <em>x</em>.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function calculates the <b>Standardized Precipitation Index (SPI)</b>, 
+a probability (ie., statistical) index that gives a representation of
+abnormal wetness and dryness. It is an alternative to the (more
+complicated) physically based
+<a href="http://climatedataguide.ucar.edu/guidance/palmer-drought-severity-index-pdsi">
+<b>Palmer Severe Drought Index (PSDI)</b></a> which uses a simple water balance model.  
+<p>
+In 2009, the World Meteorological Organization (WMO) approved the 
+<a href="http://www.wmo.int/pages/prog/wcp/agm/meetings/wies09/documents/Lincoln_Declaration_Drought_Indices.pdf">
+<b>Lincoln Declaration on Drought Indices (LDDI)</b></a>. The LDDI recommends that 
+"the Standardized Precipitation Index (SPI) be used to characterize the meteorological
+droughts around the world", in addition to other drought indices that were in use in their service. 
+In support of this recommendation, it was suggested that a
+"<a href="https://library.wmo.int/pmb_ged/wmo_1090_en.pdf"><b>comprehensive  user  manual</b></a>"
+describing the SPI  should  be  developed. The manual provides  a  description  of  the  index,  
+the  computation  methods,  specific  examples  of  where  it  is  
+currently being used, the strengths and limitations and mapping capabilities.
+<p>
+Some advantages of the SPI: 
+<ul>
+<li> It requires only monthly precipitation.
+<li> It can be compared across regions with markedly different climates. 
+<li> The standardization of the SPI allows the index to determine the rarity of a current drought. 
+<li> It can be created for differing periods of 1-to-36 months.
+</ul>
+<p>
+A shortcoming of the SPI, as noted by <a href="http://www.nature.com/nclimate/journal/v4/n1/full/nclimate2067.html">Trenberth et al (2014)</a>: 
+<p>
+<pre>
+    "the SPI are based on precipitation alone and provide a measure only for water supply. 
+     They are very useful as a measure of precipitation deficits or meteorological drought 
+     but are limited because they do not deal with the ET [evapotranspiration] side of the issue."
+</pre>
+<p>
+As of NCL <a href="../../../prev_releases.html#6.3.0">version 6.3.0</a>, 
+this function will calculate the SPI using two possible methods:
+<p>
+
+<ol>
+
+<li>Applying a 2-parameter gamma distribution fit (default).
+<p>
+
+<li>Applying a Pearson type III distribution (<b><em>opt</em>@spi_type</b> = 3).
+
+</ol>
+<p>
+
+The default implementation of <strong>dim_spi_n</strong> uses a
+2-parameter gamma distribution fit (<a href="dim_gamfit_n.html"><strong>dim_gamfit_n</strong></a>)
+where the shape and scale parameters are maximum likelihood estimates
+as described in
+<pre>
+
+        A Note on the Gamma Distribution
+        Thom (1958): Monthly Weather Review, pp 117-122.
+                     specifically: eqn 22 for gamma; just above eqn 21
+
+</pre>
+ 
+However, there is some variation in the methods used to derive the
+SPI.  Guttman (1998, 1999) recommends that the Pearson III
+distribution be used, which is available in NCL V6.3.0 by
+setting <b><em>opt</em>@spi_type</b>=3.  This option uses code made available
+at the National Climate Data Center
+(NCDC). See <a href="http://www1.ncdc.noaa.gov/pub/data/software/palmer/spi.f"><b>spi.f</b></a>
+<p>
+Note: In 2015, the NCDC was merged with the National Geophysical Data Center (NGDC) 
+and the National Oceanic Data Center (NODC) into the National Centers for Environmental Information (<b>NCEI</b>).
+<p>
+
+Generally, the Pearson III distribution is likely to give essentially
+equivalent results to the 2-parameter gamma distribution fit. In some
+instances, where monthly and seasonal precipitation of zero is common,
+it will give slightly better results.
+<p>
+
+Generally, monthly precipitation is not normally distributed so a transformation 
+is performed such that the derived SPI values follow a normal distribution.  
+The SPI is the number of standard deviations that the observed value 
+would deviate from the long-term mean, for a normally distributed random variable.
+<a href="http://lwf.ncdc.noaa.gov/oa/climate/research/prelim/drought/spi.html">
+<b>One interpretation of the resultant values</b></a> is:
+<pre>
+
+         [+,-]2.00 and above/below: exceptionally [wet,dry] 
+         [+,-]1.60 to 1.99: extremely [wet,dry]
+         [+,-]1.30 to 1.59: severely [wet,dry] 
+         [+,-]0.80 to 1.29: moderately [wet,dry] 
+         [+,-]0.51 to 0.79: abnormally [wet,dry] 
+         [+,-]0.50:  near normal
+
+</pre>
+
+An  <a href="http://www.in.gov/dnr/water/4864.htm">
+<b>explanation of the SPI at different lengths</b> </a>  and
+<a href="http://lwf.ncdc.noaa.gov/oa/climate/research/prelim/drought/spi.html"><b>sample spatial pattterns
+over the USA</b></a> at different run times are available.
+<p>
+More information can be obtained at the 
+<a href="http://climatedataguide.ucar.edu/guidance/standardized-precipitation-index-spi">
+<b>ClimateDataGuide</b></a>.
+<p>
+
+<pre>
+<b>References:</b>
+
+      McKee, T.B., N.J. Doesken, and J. Kleist, 1993. 
+      The relationship of drought frequency and duration ot time scales. 
+      Eighth Conference on Applied Climatology, American Meteorological Society 
+      Jan 17-23, 1993, Anaheim CA, pp. 179-186.
+
+      McKee, T.B., N.J. Doesken, and J. Kleist, 1995. 
+      Drought monitoring with multiple time scales. 
+      Ninth Conference on Applied Climatology, American Meteorological Society 
+      Jan 15-20, 1995, Dallas TX, pp. 233-236.
+
+      Guttman, N.B., 1998. 
+      Comparing the Palmer Drought Index and the Standardized Precipitation Index. 
+      Journal of the American Water Resources Association, 34(1), 113-121.
+
+      Guttman, N.B., 1999. Accepting the Standardized Precipitation Index: A calculation algorithm. 
+      Journal of the American Water Resources Association, 35(2), 311-322.
+
+      Trenberth et al (2014)
+      Global warming and changes in drought
+      Nature Climate Change 4, 17-22;   doi:10.1038/nclimate2067
+</pre>
+<pre>
+
+<b>WMO:</b>
+      <a href="https://library.wmo.int/pmb_ged/wmo_1173_en.pdf"><b>Handbook of Drought Indicators</b></a>
+      <a href="http://www.wmo.int/pages/prog/wcp/agm/meetings/wies09/documents/Lincoln_Declaration_Drought_Indices.pdf"><b>Lincoln Declaration on Drought Indices</b></a>
+      <a href="https://public.wmo.int/en/resources/library/standardized-precipitation-index-user-guide"><b>Standardized Precipitation Index User Guide</b></a>
+
+</pre>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="dim_gamfit_n.html"><strong>dim_gamfit_n</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+Several applications of the SPI with figures are 
+<a href="../../../Applications/spi.html"><b>HERE</b></a>.
+<p>
+
+<B>Example 1</B><P>
+Read an ASCII file containing  117 years of monthly precipitation at Boulder, Colorado (source:
+http://www.esrl.noaa.gov/psd/boulder/). Compute 12-month estimates of the SPI. 
+<pre>
+   diri   = "./"
+   fili   = "Boulder.precip.1894-2010.txt"
+   
+   ncol   = 14
+   nrow   = <a href="../Contributed/numAsciiRow.html"><strong>numAsciiRow</strong></a>(diri+fili)      ; contributed.ncl
+   data   = <a href="asciiread.html"><strong>asciiread</strong></a>(diri+fili,(/nrow,ncol/), "float") 
+
+   prc           = <a href="ndtooned.html"><strong>ndtooned</strong></a>(data(:,1:ncol-2))   ; make one dimensional
+   prc@units     = "inches"
+   prc@long_name = "Boulder Precipitation"
+
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(prc)
+   <a href="print.html"><strong>print</strong></a>("min="+<a href="min.html"><strong>min</strong></a>(prc)+"  max="+<a href="max.html"><strong>max</strong></a>(prc))
+
+   nprc   = <a href="dimsizes.html"><strong>dimsizes</strong></a>(prc)              ; check size
+   if ((nprc%12).ne.0) then
+        <a href="print.html"><strong>print</strong></a>("prc size must be divisible by 12")         ; full 12-month years only
+        exit
+   end if
+
+   spi    = <strong>dim_spi_n</strong>(prc, <b>12</b>, False, 0)
+
+          ; create a yyyymm array for printing purposes
+
+   year   = <a href="toint.html"><strong>toint</strong></a>(data(:,0))
+   nyear  = <a href="dimsizes.html"><strong>dimsizes</strong></a>(year)
+   yrStrt = year(0)
+   yrLast = year(nyear-1)                                         
+   yyyymm = <a href="../Contributed/yyyymm_time.html"><strong>yyyymm_time</strong></a>(yrStrt, yrLast, "integer")   ; contributed.ncl
+
+   <a href="print.html"><strong>print</strong></a>(yyyymm+<a href="sprintf.html"><strong>sprintf</strong></a>("%8.2f", prc)+sprintf("%8.2f", spi))
+</pre>
+The output has _FillValue at the beginning (<em>nrun</em>-1) temporal locations.
+<pre>
+
+<b>        yyyymm       12     </b>
+
+(0)     189401    -999.00
+(1)     189402    -999.00
+(2)     189403    -999.00
+(3)     189404    -999.00
+(4)     189405    -999.00
+(5)     189406    -999.00
+(6)     189407    -999.00
+(7)     189408    -999.00
+(8)     189409    -999.00
+(9)     189410    -999.00
+(10)    189411    -999.00
+(11)    189412      -0.39
+(12)    189501      -0.34
+(13)    189502      -0.39
+(14)    189503      -0.24
+(15)    189504      -0.33
+(16)    189505      -0.37
+(17)    189506       0.30
+<b>[SNIP]</b>
+(1391)  200912       0.80
+(1392)  201001       0.72
+(1393)  201002       0.96
+(1394)  201003       1.21
+(1395)  201004       0.75
+(1396)  201005       0.67
+(1397)  201006       0.83
+(1398)  201007       1.04
+(1399)  201008       1.23
+(1400)  201009       1.20
+(1401)  201010       0.67
+(1402)  201011       0.59
+(1403)  201012       0.39
+</pre>
+
+<B>Example 2</B><P>
+Same as Example 1 but (i) use a netCDF version of the file and (ii) compute SPI for 3, 6, 12, 24, 36 and 48 lengths.
+<pre>
+   diri   = "./"
+   fili   = "Boulder.precip.1894-2010.nc"
+   f      = <a href="addfile.html"><strong>addfile</strong></a>(diri+fili, "r")
+   prc    = f->PRECIP                               ; PRECIP(time)  
+
+   nprc   = dimsizes(prc)                           ; # monthly precipitation values
+   if ((nprc<b>%</b>12).ne.0) then                         ; <b>%</b> is NCL syntax for the 'mod' function
+        print("prc size must be divisible by 12")   ; full 12-month years only
+        exit
+   end if
+
+   len    = (/3, 6, 12, 24, 36, 48 /)
+   klen   =  <a href="dimsizes.html"><strong>dimsizes</strong></a>(len)
+   spi    =  <a href="new.html"><strong>new</strong></a>( (/klen, nprc/) , <a href="typeof.html"><strong>typeof</strong></a>(prc), prc@_FillValue)
+ 
+   do k=0,klen-1
+      spi(k,:) = <strong>dim_spi_n</strong>(prc, <b>len(k)</b>, False, 0)   ; spi(nlen,nprc)
+   end do
+   
+   <a href="print.html"><strong>print</strong></a>(yyyymm+<a href="sprintf.html"><strong>sprintf</strong></a>("%8.2f", prc)   \
+               +sprintf("%8.2f", spi(0,:))+sprintf("%8.2f", spi(1,:)) \
+               +sprintf("%8.2f", spi(2,:))+sprintf("%8.2f", spi(3,:)) \
+               +sprintf("%8.2f", spi(4,:))+sprintf("%8.2f", spi(5,:)) )
+</pre>
+The output has _FillValue at the beginning (<em>nrun</em>-1) temporal locations.
+<pre>
+
+<b>        yyyymm    prc      3       6      12      24      36      48 </b>
+
+(0)     189401    0.16 -999.00 -999.00 -999.00 -999.00 -999.00 -999.00
+(1)     189402    0.82 -999.00 -999.00 -999.00 -999.00 -999.00 -999.00
+(2)     189403    1.40   -0.45 -999.00 -999.00 -999.00 -999.00 -999.00
+(3)     189404    2.30   -0.15 -999.00 -999.00 -999.00 -999.00 -999.00
+(4)     189405    4.50    0.41 -999.00 -999.00 -999.00 -999.00 -999.00
+(5)     189406    0.80    0.13   -0.14 -999.00 -999.00 -999.00 -999.00
+(6)     189407    3.08    0.71    0.38 -999.00 -999.00 -999.00 -999.00
+<b>[SNIP]</b>
+(1398)  201007    2.31    0.71    1.39    1.04    1.42    0.98    0.92
+(1399)  201008    1.07    0.67    1.03    1.23    1.16    0.88    0.88
+(1400)  201009    0.25   -0.54    0.30    1.20    0.95    0.68    0.78
+(1401)  201010    0.95   -1.17   -0.13    0.67    0.89    0.60    0.46
+(1402)  201011    0.61   -1.29   -0.14    0.59    0.94    0.60    0.44
+(1403)  201012    0.48   -0.76   -0.87    0.39    0.81    0.40    0.14
+
+</pre>
+<p>
+<B>Example 3</B><P>
+Consider prc(<b>time</b>,lat,lon) and PRC(lat,lon,<b>time</b>), calculate a 12-month SPI. 
+Note that the <em>dims</em> changes depending upon order of the variable dimensions. 
+<pre>
+   prc    = f->prc                   ; prc(<b>time</b>,lat,lon)     => (<b>0</b>,1,2) 
+   run    = 12
+   spi    = <strong>dim_spi_n</strong>(prc, run, False, <b>0</b>) => (ntim,nlat,mlon) 
+
+   PRC    = f->PRC                   ; PRC(lat,lon,<b>time</b>)     => (0,1,<b>2</b>)
+   SPI    = <strong>dim_spi_n</strong>(PRC, run, False, <b>2</b>) => (nlat,mlon,ntim)
+
+; optional ... add meta data
+
+   spi@long_name = "spi: run="+run
+   <a href="../Contributed/copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(prc, spi)          ; contributed.ncl
+
+   SPI@long_name = "SPI: run="+run
+   <a href="../Contributed/copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(PRC, SPI)          ; contributed.ncl
+
+</pre>
+<p>
+<B>Example 4</B><P>
+An example of the SPI derived from <a href="http://precip.gsfc.nasa.gov/">
+Global Precipitation Climatology Project (GPCP)</a> data spanning 1979-2010
+is <a href="../../../Applications/spi.html"> here</a>.
+<p>
+
+<B>Example 5</B><P>
+Consider a file which contains time spanning more than full years. The last full year with data is 2013. 
+Use the <a href="ind.html"><strong>ind</strong></a> function to directly read in only the year-months specified.
+<pre>
+   diri   = "./"
+   fili   = "precip.mon.mean.v22.197901-201405.nc"        ; 5 additional months
+   f      = <a href="addfile.html"><strong>addfile</strong></a>(diri+fili,"r")
+
+   YYYYMM = <a href="cd_calendar.html"><strong>cd_calendar</strong></a>(f->time, -1)   ; ALL dates on file 
+   ymStrt = 197901
+   ymLast = 201312                     ; last full year
+   ntStrt = <a href="ind.html"><strong>ind</strong></a>(YYYYMM.eq.ymStrt)      ; index of ymStrt
+   ntLast = <a href="ind.html"><strong>ind</strong></a>(YYYYMM.eq.ymLast)      ; index of ymLast
+   <a href="delete.html"><strong>delete</strong></a>(YYYYMM)                      ; no longer needed
+                                       ; read full year subset using appropriate index values
+   prc    = f->precip(ntStrt:ntLast,:,:) ; PREC(time,lat,lon)
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(prc)
+
+   dimp   = <a href="dimsizes.html"><strong>dimsizes</strong></a>(prc)              ; # monthly precipitation values
+   ntim   = dimp(0)                                       ; 420
+   nlat   = dimp(1)
+   mlon   = dimp(2)
+
+   len    = (/3, 6, 12, 24, 36, 48 /)
+   klen   =  <a href="dimsizes.html"><strong>dimsizes</strong></a>(len)
+   spi    =  <a href="new.html"><strong>new</strong></a>((/klen,ntim,nlat,mlon/) ,float,prc@_FillValue)
+
+   do k=0,klen-1
+      spi(k,:,:,:) = <strong>dim_spi_n</strong>(prc, len(k), False, 0)
+   end do
+
+   <a href="../Contributed/copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(prc,spi(0,:,:,:))
+   spi@long_name = "SPI"
+   spi!0         = "len"
+   spi&len       =  len 
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(spi)    ; <b>[len | 6] x [time | 420] x [lat | 72] x [lon | 144]</b>
+   
+; print values at one location; Change _FillValue from -9.96921e+36f to -999.9 for nicer print 
+
+   LAT = 45.5
+   LON = 292.5
+   prc@_FillValue = -999.0
+   spi@_FillValue = -999.0
+
+   yyyymm = <a href="cd_calendar.html"><strong>cd_calendar</strong></a>(f->time, -1)  ; time@units = "days since ..."
+
+   <a href="print.html"><strong>print</strong></a>(yyyymm+<a href="sprintf.html"><strong>sprintf</strong></a>("%8.2f", prc(:,{LAT},{LON}))   \   
+               +sprintf("%8.2f", spi(0,:,{LAT},{LON}))   \   
+               +sprintf("%8.2f", spi(1,:,{LAT},{LON}))   \   
+               +sprintf("%8.2f", spi(2,:,{LAT},{LON}))   \   
+               +sprintf("%8.2f", spi(3,:,{LAT},{LON}))   \   
+               +sprintf("%8.2f", spi(4,:,{LAT},{LON}))   \   
+               +sprintf("%8.2f", spi(5,:,{LAT},{LON}))   )   
+
+</pre>
+The output:
+<pre>
+Variable: spi
+Type: float
+Total Size: 104509440 bytes
+            26127360 values
+Number of Dimensions: 4
+Dimensions and sizes:   [len | 6] x [time | 420] x [lat | 72] x [lon | 144]
+Coordinates: 
+            len: [3..48]
+            time: [65378..78131]
+            lat: [88.75..-88.75]
+            lon: [1.25..358.75]
+Number Of Attributes: 2
+  long_name :   SPI
+  _FillValue :  -9.96921e+36
+(0)     197901    6.87 -999.00 -999.00 -999.00 -999.00 -999.00 -999.00
+(1)     197902    2.69 -999.00 -999.00 -999.00 -999.00 -999.00 -999.00
+(2)     197903    4.46    1.97 -999.00 -999.00 -999.00 -999.00 -999.00
+(3)     197904    4.16    1.10 -999.00 -999.00 -999.00 -999.00 -999.00
+(4)     197905    4.80    1.66 -999.00 -999.00 -999.00 -999.00 -999.00
+(5)     197906    2.43    0.76    1.81 -999.00 -999.00 -999.00 -999.00
+(6)     197907    2.63   -0.17    0.67 -999.00 -999.00 -999.00 -999.00
+(7)     197908    4.36   -0.57    1.09 -999.00 -999.00 -999.00 -999.00
+(8)     197909    3.57    0.22    0.70 -999.00 -999.00 -999.00 -999.00
+(9)     197910    3.47    0.49    0.26 -999.00 -999.00 -999.00 -999.00
+(10)    197911    3.38   -0.02   -0.37 -999.00 -999.00 -999.00 -999.00
+(11)    197912    2.98   -0.23   -0.13    1.03 -999.00 -999.00 -999.00
+(12)    198001    1.77   -0.85   -0.21    0.18 -999.00 -999.00 -999.00
+(13)    198002    1.17   -1.91   -0.98   -0.10 -999.00 -999.00 -999.00
+(14)    198003    3.44   -1.25   -0.92   -0.29 -999.00 -999.00 -999.00
+(15)    198004    3.08   -0.53   -0.90   -0.51 -999.00 -999.00 -999.00
+(16)    198005    1.43   -0.51   -1.52   -1.14 -999.00 -999.00 -999.00
+(17)    198006    2.76   -1.24   -1.68   -1.03 -999.00 -999.00 -999.00
+(18)    198007    4.78   -0.66   -0.85   -0.60 -999.00 -999.00 -999.00
+(19)    198008    2.62   -0.11   -0.51   -0.90 -999.00 -999.00 -999.00
+(20)    198009    4.24    0.80   -0.41   -0.86 -999.00 -999.00 -999.00
+(21)    198010    3.24    0.02   -0.45   -0.92 -999.00 -999.00 -999.00
+(22)    198011    3.64    0.24    0.10   -0.97 -999.00 -999.00 -999.00
+(23)    198012    3.12   -0.18    0.19   -0.84    0.17 -999.00 -999.00
+(24)    198101    2.06   -0.55   -0.36   -0.78   -0.43 -999.00 -999.00
+(25)    198102    3.72   -0.25   -0.00   -0.29   -0.30 -999.00 -999.00
+(26)    198103    2.58   -0.23   -0.32   -0.46   -0.49 -999.00 -999.00
+(27)    198104    2.77    0.14   -0.31   -0.53   -0.66 -999.00 -999.00
+(28)    198105    3.49   -0.10   -0.23   -0.10   -0.80 -999.00 -999.00
+(29)    198106    3.95    0.24   -0.04    0.11   -0.63 -999.00 -999.00
+(30)    198107    3.37    0.32    0.26   -0.14   -0.52 -999.00 -999.00
+(31)    198108    5.45    1.37    0.70    0.33   -0.42 -999.00 -999.00
+(32)    198109    5.52    2.13    1.57    0.57   -0.20 -999.00 -999.00
+(33)    198110    5.91    2.16    2.11    1.06    0.09 -999.00 -999.00
+(34)    198111    2.80    1.29    1.79    1.00    0.02 -999.00 -999.00
+(35)    198112    4.63    0.82    1.57    1.10    0.22    0.69 -999.00
+(36)    198201    3.64    0.31    1.58    1.38    0.43    0.38 -999.00
+(37)    198202    3.36    0.96    1.32    1.35    0.68    0.44 -999.00
+(38)    198203    2.70    0.35    0.82    1.42    0.59    0.28 -999.00
+(39)    198204    3.13    0.20    0.31    1.55    0.61    0.20 -999.00
+(40)    198205    0.75   -1.21   -0.09    1.00    0.52   -0.16 -999.00
+(41)    198206    3.79   -1.02   -0.41    0.92    0.60   -0.05 -999.00
+(42)    198207    2.46   -1.88   -1.03    0.74    0.35   -0.06 -999.00
+(43)    198208    3.63   -0.28   -1.14    0.44    0.48   -0.13 -999.00
+(44)    198209    3.41   -0.40   -1.09    0.09    0.39   -0.14 -999.00
+(45)    198210    1.48   -0.61   -1.74   -0.74    0.19   -0.33 -999.00
+(46)    198211    5.10   -0.19   -0.36   -0.34    0.39   -0.17 -999.00
+(47)    198212    2.72   -0.41   -0.55   -0.67    0.33   -0.21    0.28
+(48)    198301    3.49    0.40   -0.14   -0.69    0.49   -0.04    0.03
+(49)    198302    3.15   -0.02   -0.17   -0.74    0.41    0.14    0.07
+[SNIP]
+(413)   201306    4.98    0.66   -0.52   -0.98   -0.59   -0.08   -0.20
+(414)   201307    3.82    1.50    0.05   -0.45   -0.57    0.01   -0.28
+(415)   201308    4.25    1.52    0.58   -0.20   -0.79    0.24   -0.16
+(416)   201309    4.34    1.20    1.24   -0.16   -0.71    0.15    0.01
+(417)   201310    1.65    0.07    0.97   -0.82   -0.91   -0.04   -0.20
+(418)   201311    3.52   -0.39    0.50   -0.36   -0.73   -0.11   -0.19
+(419)   201312    2.88   -0.88   -0.12   -0.42   -0.74   -0.41   -0.27
+</pre>
+<p>
+<B>Example 6</B><P>
+
+Same as Example 1 but specify a Pearson-III vi the <b>opt@spi_type</b> option
+<pre>
+
+   fili   = "Boulder.precip.1894-2010.txt"
+   
+   ncol   = 14
+   nrow   = <a href="../Contributed/numAsciiRow.html"><strong>numAsciiRow</strong></a>(diri+fili)      ; contributed.ncl
+   data   = <a href="asciiread.html"><strong>asciiread</strong></a>(diri+fili,(/nrow,ncol/), "float") 
+
+   prc           = <a href="ndtooned.html"><strong>ndtooned</strong></a>(data(:,1:ncol-2))   ; make one dimensional
+   prc@units     = "inches"
+   prc@long_name = "Boulder Precipitation"
+
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(prc)
+   <a href="print.html"><strong>print</strong></a>("min="+<a href="min.html"><strong>min</strong></a>(prc)+"  max="+<a href="max.html"><strong>max</strong></a>(prc))
+
+   nprc   = <a href="dimsizes.html"><strong>dimsizes</strong></a>(prc)              ; check size
+   if ((nprc%12).ne.0) then
+        print("prc size must be divisible by 12")         ; full 12-month years only
+        exit
+   end if
+
+   <b>opt = True 
+   opt@spi_type = 3 ; calculate using Pearson III distribution</b>
+
+   spi    = <strong>dim_spi_n</strong>(prc, <b>12</b>, opt, 0)
+
+          ; create a yyyymm array for printing purposes
+
+   year   = <a href="toint.html"><strong>toint</strong></a>(data(:,0))
+   nyear  = <a href="dimsizes.html"><strong>dimsizes</strong></a>(year)
+   yrStrt = year(0)
+   yrLast = year(nyear-1)                                         
+   yyyymm = <a href="../Contributed/yyyymm_time.html"><strong>yyyymm_time</strong></a>(yrStrt, yrLast, "integer")   ; contributed.ncl
+
+   <a href="print.html"><strong>print</strong></a>(yyyymm+<a href="sprintf.html"><strong>sprintf</strong></a>("%8.2f", prc)+sprintf("%8.2f", spi))
+</pre>
+The output has _FillValue at the beginning (<em>nrun</em>-1) temporal locations.
+<pre>
+
+<b>        yyyymm       12     </b>
+
+(0)     189401   -999
+(1)     189402   -999
+(2)     189403   -999
+(3)     189404   -999
+(4)     189405   -999
+(5)     189406   -999
+(6)     189407   -999
+(7)     189408   -999
+(8)     189409   -999
+(9)     189410   -999
+(10)    189411   -999
+(11)    189412   -0.35
+(12)    189501   -0.30
+(13)    189502   -0.37
+(14)    189503   -0.19
+(15)    189504   -0.36
+(16)    189505   -0.45
+(17)    189506    0.24
+<b>[SNIP]</b>
+(1391)  200912   0.80
+(1392)  201001   0.72
+(1393)  201002   0.94
+(1394)  201003   1.19
+(1395)  201004   0.72
+(1396)  201005   0.63
+(1397)  201006   0.81
+(1398)  201007   1.05
+(1399)  201008   1.25
+(1400)  201009   1.20
+(1401)  201010   0.68
+(1402)  201011   0.60
+(1403)  201012   0.41
+
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/dim_spi_n.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:22 GMT -->
+</html>

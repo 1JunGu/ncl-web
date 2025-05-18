@@ -1,0 +1,2276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/ContourPlot.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:30 GMT -->
+<head>
+<title>ContourPlot class</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index.html">HLUs ></a>
+<a class=crumb href="index-2.html">Classes </a>
+
+<br>
+
+<h1>ContourPlot class</h1>
+The <strong>ContourPlot</strong> class draws line or filled contours
+with labels and annotations.
+
+
+<hr>
+<h2>Synopsis</h2>
+
+<pre>
+Header file:		ncarg/hlu/ContourPlot.h
+Class name:		contourPlotClass
+Class pointer:		NhlcontourPlotClass
+Fortran class function:	NHLFCONTOURPLOTCLASS
+Superclass:		<a href="DataComm.html">DataComm</a>
+Composite classes:	<a href="LogLinTransformation.html">LogLinTransformation</a>, 
+			<a href="IrregularTransformation.html">IrregularTransformation</a>,
+			<a href="CurvilinearTransformation.html">CurvilinearTransformation</a>, 
+			<a href="SphericalTransformation.html">SphericalTransformation</a>,
+			<a href="TriangularMeshTransformation.html">TriangularMeshTransformation</a>,
+			<a href="PlotManager.html">PlotManager</a>
+
+Data specific class
+Class name:		contourPlotDataDepClass
+Class pointer:		NhlcontourPlotDataDepClass
+Fortran class function:	NHLFCONTOURPLOTDATADEPCLASS
+Superclass:		<a href="DataComm.html">DataSpec</a>
+</pre>
+
+<h3>Class-defined types</h3><p>
+
+<pre>
+
+Type name:		<a name="NhlTcnLevelUseMode">NhlTcnLevelUseMode</a>
+Definition:
+typedef enum _NhlcnLevelUseMode {
+	NhlNOLINE		= 0,	/* "NoLine"	  	*/
+	NhlLINEONLY		= 1,	/* "LineOnly"	  	*/
+	NhlLABELONLY		= 2,	/* "LabelOnly"	  	*/
+	NhlLINEANDLABEL		= 3	/* "LineAndLabel"	*/
+} NhlcnLevelUseMode;
+
+Type name:		<a name="NhlTcnLevelUseModeGenArray">NhlTcnLevelUseModeGenArray</a>
+Definition:		An array of NhlTcnLevelUseMode elements.
+
+
+Type name:		<a name="NhlTcnLineLabelPlacementMode">NhlTcnLineLabelPlacementMode</a>
+Definition:
+typedef enum _NhlcnLineLabelSpacingMode {
+	NhlCONSTANT		= 0,	/* "Constant"		*/
+	NhlRANDOMIZED		= 1,	/* "Randomized"		*/
+	NhlCOMPUTED		= 2	/* "Computed"		*/
+} NhlcnLineLabelSpacingMode;
+
+Type name:		<a name="NhlTcnHighLowLabelOverlapMode">NhlTcnHighLowLabelOverlapMode</a>
+Definition:
+typedef enum _NhlcnHighLowLabelOverlapMode {
+	NhlIGNOREOVERLAP	= 0,1	/* "IgnoreOverlap"	*/
+	NhlOMITOVERHL		= 2,3	/* "OmitOverHL" 	*/
+	NhlOMITOVERVP		= 4,5	/* "OmitOverVP"		*/
+	NhlOMITOVERVPANDHL	= 6,7	/* "OmitOverVPAndHL"	*/
+	NhlADJUSTVP		= 8,9	/* "AdjustVP"		*/
+	NhlADJUSTVPOMITOVERHL	= 10,11	/* "AdjustVPOmitOverHL"	*/
+} NhlcnHighLowLabelOverlapMode;
+
+Type name:		<a name="NhlTcnFillMode">NhlTcnFillMode</a>
+Definition:
+typedef enum _NhlcnFillMode {
+	NhlAREAFILL		= 0,	/* "AreaFill"		*/
+	NhlRASTERFILL		= 1,	/* "RasterFill"		*/
+	NhlCELLFILL		= 2	/* "CellFill"		*/
+} NhlcnFillMode;
+</pre>
+
+<hr>
+<h2>Resources</h2>
+<h3>Local resources</h3>
+<pre>
++---------------------------------------------------------------+
+|		<A name="ContourPlot.res">ContourPlot Resource Set</a>			|
+|---------------------------------------------------------------|
+| NAME				TYPE			ACCESS	|
+|	CLASS				DEFAULT			|
+|===============================================================|
+| <a href="../../Graphics/Resources/cn.html#cnScalarFieldData"><em>cnScalarFieldData</em></a>             <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       CnScalarFieldData               &lt;None&gt;                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLevelSelectionMode"><em>cnLevelSelectionMode</em></a>          <A href="DataComm.html#NhlTLevelSelectionMode">NhlTLevelSelectionMode</a>  RCSG    |
+|       LevelSelectionMode              "AutomaticLevels"       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLevelCount"><em>cnLevelCount</em></a>                  <A href="Base.html#NhlTInteger">NhlTInteger</a>                G    |
+|       CnLevelCount                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMaxLevelCount"><em>cnMaxLevelCount</em></a>               <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       MaxLevelCount                   16                      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLevelSpacingF"><em>cnLevelSpacingF</em></a>               <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LevelSpacingF                   5.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMinLevelValF"><em>cnMinLevelValF</em></a>                <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MinLevelValF                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMaxLevelValF"><em>cnMaxLevelValF</em></a>                <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MaxLevelValF                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLevels"><em>cnLevels</em></a>                      <A href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>       RCSG    |
+|       Levels                          &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMonoLevelFlag"><em>cnMonoLevelFlag</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnMonoLevelFlag                 False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLevelFlag"><em>cnLevelFlag</em></a>                   <A href="ContourPlot.html#NhlTcnLevelUseMode">NhlTcnLevelUseMode</a>      RCSG    |
+|       CnLevelFlags                    "LineOnly"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLevelFlags"><em>cnLevelFlags</em></a>                  <A href="ContourPlot.html#NhlTcnLevelUseModeGenArray">NhlTcnLevelUseModeGenArray</a> RCSG |
+|       CnLevelFlags                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLinesOn"><em>cnLinesOn</em></a>                     <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnLinesOn                       True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineDrawOrder"><em>cnLineDrawOrder</em></a>               <A href="View.html#NhlTDrawOrder">NhlTDrawOrder</a>           RCSG    |
+|       CnLineDrawOrder                 "Draw"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMonoLineColor"><em>cnMonoLineColor</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnMonoLineColor                 True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineColor"><em>cnLineColor</em></a>                   <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       LineColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnSpanLinePalette"><em>cnSpanLinePalette</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnSpanLinePalette                 True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLinePalette"><em>cnLinePalette</em></a>                  <A href="Workstation.html#NhlTColorDefinitionGenArray">NhlTColorDefinitionGenArray</a>  RCSG    |
+|       CnLinePalette                    &lt;None&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineColors"><em>cnLineColors</em></a>                  <A href="Workstation.html#NhlTColorIndexGenArray">NhlTColorIndexGenArray</a>  RCSG    |
+|       CnLineColors                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMonoLineDashPattern"><em>cnMonoLineDashPattern</em></a>         <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnMonoLineDashPattern           True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineDashPattern"><em>cnLineDashPattern</em></a>             <A href="Workstation.html#NhlTDashIndex">NhlTDashIndex</a>           RCSG    |
+|       LineDashPattern                 "SolidLine"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineDashPatterns"><em>cnLineDashPatterns</em></a>            <A href="Workstation.html#NhlTDashIndexGenArray">NhlTDashIndexGenArray</a>   RCSG    |
+|       CnLineDashPatterns              &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMonoLineThickness"><em>cnMonoLineThickness</em></a>           <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnMonoLineThickness             True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineThicknessF"><em>cnLineThicknessF</em></a>              <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineThicknessF                 	1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineThicknesses"><em>cnLineThicknesses</em></a>             <A href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>       RCSG    |
+|       CnLineThicknesses               1.0 for all elements    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineDashSegLenF"><em>cnLineDashSegLenF</em></a>             <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineDashSegLenF                 0.15                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillOn"><em>cnFillOn</em></a>                      <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnFillOn                        False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a>                    <A href="ContourPlot.html#NhlTcnFillMode">NhlTcnFillMode</a>          RCSG    |
+|       CnFillMode                      False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillDrawOrder"><em>cnFillDrawOrder</em></a>               <A href="View.html#NhlTDrawOrder">NhlTDrawOrder</a>           RCSG    |
+|       CnFillDrawOrder                 "Draw"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillBackgroundColor"><em>cnFillBackgroundColor</em></a>         <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillBackgroundColor             "Transparent"           |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMonoFillColor"><em>cnMonoFillColor</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnMonoFillColor                 False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillColor"><em>cnFillColor</em></a>                   <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnSpanFillColor"><em>cnSpanFillColor</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnSpanFillColor                 True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a>                  <A href="Workstation.html#NhlTColorDefinitionGenArray">NhlTColorDefinitionGenArray</a>  RCSG    |
+|       CnFillPalette                    &lt;None&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillColors"><em>cnFillColors</em></a>                  <A href="Workstation.html#NhlTColorIndexGenArray">NhlTColorIndexGenArray</a>  RCSG    |
+|       CnFillColors                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMonoFillPattern"><em>cnMonoFillPattern</em></a>             <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnMonoFillPattern               True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillPattern"><em>cnFillPattern</em></a>                 <A href="Workstation.html#NhlTFillIndex">NhlTFillIndex</a>           RCSG    |
+|       FillPattern                     "SolidFill"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillPatterns"><em>cnFillPatterns</em></a>                <A href="Workstation.html#NhlTFillIndexGenArray">NhlTFillIndexGenArray</a>   RCSG    |
+|       CnFillPatterns                  &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillDotSizeF"><em>cnFillDotSizeF</em></a>                <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       DotSizeF                        0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMonoFillScale"><em>cnMonoFillScale</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnMonoFillScale                 True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillScaleF"><em>cnFillScaleF</em></a>                  <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FillScaleF                      1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFillScales"><em>cnFillScales</em></a>                  <A href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>       RCSG    |
+|       CnFillScales                    1.0 for all elements    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnCellFillEdgeColor"><em>cnCellFillEdgeColor</em></a>           <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Transparent"           |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnCellFillMissingValEdgeColor"><em>cnCellFillMissingValEdgeColor</em></a> <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Transparent"           |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnRasterModeOn"><em>cnRasterModeOn</em></a>		<A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnRasterModeOn                  False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnRasterSmoothingOn"><em>cnRasterSmoothingOn</em></a>		<A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnRasterSmoothingOn             False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnRasterMinCellSizeF"><em>cnRasterMinCellSizeF</em></a>          <A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG    |
+|       CnRasterMinCellSizeF            0.001                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnRasterSampleFactorF"><em>cnRasterSampleFactorF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG    |
+|       CnRasterSampleFactorF           False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnRasterCellSizeF"><em>cnRasterCellSizeF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG    |
+|       CnRasterCellSizeF               &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLabelDrawOrder"><em>cnLabelDrawOrder</em></a>              <A href="View.html#NhlTDrawOrder">NhlTDrawOrder</a>           RCSG    |
+|       CnLabelDrawOrder                "Draw"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLabelMasking"><em>cnLabelMasking</em></a>                <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnLabelMasking                  False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowUseHighLabelRes"><em>cnLowUseHighLabelRes</em></a>          <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnLowUseHighLabelRes            False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighUseLineLabelRes"><em>cnHighUseLineLabelRes</em></a>         <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnHighUseLineLabelRes           False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFUseInfoLabelRes"><em>cnConstFUseInfoLabelRes</em></a>       <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnConstFUseInfoLabelRes         False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLowLabelOverlapMode"><em>cnHighLowLabelOverlapMode</em></a> <A href="ContourPlot.html#NhlTcnHighLowLabelOverlapMode">NhlTcnHighLowLabelOverlapMode</a> RCSG  |
+|       CnHighLowLabelOverlapMode       "IgnoreOverlap"         |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLabelScalingMode"><em>cnLabelScalingMode</em></a>            <A href="DataComm.html#NhlTScalingMode">NhlTScalingMode</a>         RCSG    |
+|       CnLabelScalingMode              "ScaleFactor"           |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLabelScaleValueF"><em>cnLabelScaleValueF</em></a>            <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       CnLabelScaleValueF              1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLabelScaleFactorF"><em>cnLabelScaleFactorF</em></a>           <A href="Base.html#NhlTFloat">NhlTFloat</a>                  G    |
+|       CnLabelScaleFactorF             &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMaxDataValueFormat"><em>cnMaxDataValueFormat</em></a>          <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       CnMaxDataValueFormat            NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelsOn"><em>cnLineLabelsOn</em></a>                <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       PlotLabelsOn                    True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnExplicitLineLabelsOn"><em>cnExplicitLineLabelsOn</em></a>	<A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnExplicitLineLabelsOn		False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelPlacementMode"><em>cnLineLabelPlacementMode</em></a> <A href="ContourPlot.html#NhlTcnLineLabelPlacementMode">NhlTcnLineLabelPlacementMode</a>    RCSG |
+|       CnLineLabelPlacementMode        "Randomized"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelDensityF"><em>cnLineLabelDensityF</em></a>           <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|      CnLineLabelDensityF              0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelInterval"><em>cnLineLabelInterval</em></a>           <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       CnLineLabelInterval             2                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelCount"><em>cnLineLabelCount</em></a>              <A href="Base.html#NhlTInteger">NhlTInteger</a>                G    |
+|       CnLineLabelCount                0                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelStrings"><em>cnLineLabelStrings</em></a>            <A href="Base.html#NhlTStringGenArray">NhlTStringGenArray</a>      RCSG    |
+|       CnLineLabelStrings              &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMonoLineLabelFontColor"><em>cnMonoLineLabelFontColor</em></a>      <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnMonoLineLabelFontColor        True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelFontColor"><em>cnLineLabelFontColor</em></a>          <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FontColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelFontColors"><em>cnLineLabelFontColors</em></a>         <A href="Workstation.html#NhlTColorIndexGenArray">NhlTColorIndexGenArray</a>  RCSG    |
+|       CnLineLabelFontColors           &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelFormat"><em>cnLineLabelFormat</em></a>             <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       NumberFormat                    "*+g"                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelFontHeightF"><em>cnLineLabelFontHeightF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontHeightF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelFont"><em>cnLineLabelFont</em></a>               <A href="Base.html#NhlTFont">NhlTFont</a>                RCSG    |
+|       Font                            "pwritx"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelFontAspectF"><em>cnLineLabelFontAspectF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontAspectF                     1.3125                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelFontThicknessF"><em>cnLineLabelFontThicknessF</em></a>     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelFontQuality"><em>cnLineLabelFontQuality</em></a>	<A href="TextItem.html#NhlTFontQuality">NhlTFontQuality</a>		RCSG	|
+|       FontQuality                     "High"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelConstantSpacingF"><em>cnLineLabelConstantSpacingF</em></a>   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextConstantSpacingF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelAngleF"><em>cnLineLabelAngleF</em></a>             <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       CnLineLabelAngleF               -1.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelFuncCode"><em>cnLineLabelFuncCode</em></a>           <A href="Base.html#NhlTCharacter">NhlTCharacter</a>           RCSG    |
+|       TextFuncCode                    ':'                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelBackgroundColor"><em>cnLineLabelBackgroundColor</em></a>    <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillBackgroundColor             "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelPerimOn"><em>cnLineLabelPerimOn</em></a>            <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       EdgesOn                         True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelPerimSpaceF"><em>cnLineLabelPerimSpaceF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeBorderWidthF                0.33                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelPerimColor"><em>cnLineLabelPerimColor</em></a>         <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLineLabelPerimThicknessF"><em>cnLineLabelPerimThicknessF</em></a>    <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelsOn"><em>cnHighLabelsOn</em></a>                <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       PlotLabelsOn                    False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelCount"><em>cnHighLabelCount</em></a>              <A href="Base.html#NhlTInteger">NhlTInteger</a>                G    |
+|       CnHighLabelCount                0                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelString"><em>cnHighLabelString</em></a>             <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       CnHighLabelString               NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelFormat"><em>cnHighLabelFormat</em></a>             <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       NumberFormat                    "*+g"                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelFontHeightF"><em>cnHighLabelFontHeightF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontHeightF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelFont"><em>cnHighLabelFont</em></a>               <A href="Base.html#NhlTFont">NhlTFont</a>                RCSG    |
+|       Font                            "pwritx"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelFontColor"><em>cnHighLabelFontColor</em></a>          <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FontColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelFontAspectF"><em>cnHighLabelFontAspectF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontAspectF                     1.3125                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelFontThicknessF"><em>cnHighLabelFontThicknessF</em></a>     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelFontQuality"><em>cnHighLabelFontQuality</em></a>	<A href="TextItem.html#NhlTFontQuality">NhlTFontQuality</a>		RCSG	|
+|       FontQuality                     "High"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelConstantSpacingF"><em>cnHighLabelConstantSpacingF</em></a>   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextConstantSpacingF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelAngleF"><em>cnHighLabelAngleF</em></a>             <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextAngleF                      0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelFuncCode"><em>cnHighLabelFuncCode</em></a>           <A href="Base.html#NhlTCharacter">NhlTCharacter</a>           RCSG    |
+|       TextFuncCode                    ':'                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelBackgroundColor"><em>cnHighLabelBackgroundColor</em></a>    <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillBackgroundColor             "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelPerimOn"><em>cnHighLabelPerimOn</em></a>            <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       EdgesOn                         True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelPerimSpaceF"><em>cnHighLabelPerimSpaceF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeBorderWidthF                0.33                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelPerimColor"><em>cnHighLabelPerimColor</em></a>         <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnHighLabelPerimThicknessF"><em>cnHighLabelPerimThicknessF</em></a>    <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelsOn"><em>cnLowLabelsOn</em></a>                 <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       PlotLabelsOn                    False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelCount"><em>cnLowLabelCount</em></a>               <A href="Base.html#NhlTInteger">NhlTInteger</a>                G    |
+|       CnLowLabelCount                 0                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelString"><em>cnLowLabelString</em></a>              <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       CnLowLabelString                NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelFormat"><em>cnLowLabelFormat</em></a>              <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       NumberFormat                    "*+g"                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelFontHeightF"><em>cnLowLabelFontHeightF</em></a>         <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontHeightF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelFont"><em>cnLowLabelFont</em></a>                <A href="Base.html#NhlTFont">NhlTFont</a>                RCSG    |
+|       Font                            "pwritx"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelFontColor"><em>cnLowLabelFontColor</em></a>           <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FontColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelFontAspectF"><em>cnLowLabelFontAspectF</em></a>         <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontAspectF                     1.3125                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelFontThicknessF"><em>cnLowLabelFontThicknessF</em></a>      <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelFontQuality"><em>cnLowLabelFontQuality</em></a>		<A href="TextItem.html#NhlTFontQuality">NhlTFontQuality</a>		RCSG	|
+|       FontQuality                     "High"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelConstantSpacingF"><em>cnLowLabelConstantSpacingF</em></a>    <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextConstantSpacingF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelAngleF"><em>cnLowLabelAngleF</em></a>              <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextAngleF                      0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelFuncCode"><em>cnLowLabelFuncCode</em></a>            <A href="Base.html#NhlTCharacter">NhlTCharacter</a>           RCSG    |
+|       TextFuncCode                    ':'                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelBackgroundColor"><em>cnLowLabelBackgroundColor</em></a>     <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillBackgroundColor             "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelPerimOn"><em>cnLowLabelPerimOn</em></a>             <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       EdgesOn                         True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelPerimSpaceF"><em>cnLowLabelPerimSpaceF</em></a>         <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeBorderWidthF                0.33                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelPerimColor"><em>cnLowLabelPerimColor</em></a>          <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLowLabelPerimThicknessF"><em>cnLowLabelPerimThicknessF</em></a>     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelOn"><em>cnInfoLabelOn</em></a>                 <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       AnnotationLabelsOn              True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelString"><em>cnInfoLabelString</em></a>             <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       CnInfoLabelString               NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelFormat"><em>cnInfoLabelFormat</em></a>             <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       NumberFormat                    "*+g"                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelFontHeightF"><em>cnInfoLabelFontHeightF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontHeightF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelTextDirection"><em>cnInfoLabelTextDirection</em></a>      <A href="TextItem.html#NhlTTextDirection">NhlTTextDirection</a>       RCSG    |
+|       TextDirection                   "Across"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelFont"><em>cnInfoLabelFont</em></a>               <A href="Base.html#NhlTFont">NhlTFont</a>                RCSG    |
+|       Font                            "pwritx"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelFontColor"><em>cnInfoLabelFontColor</em></a>          <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FontColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelFontAspectF"><em>cnInfoLabelFontAspectF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontAspectF                     1.3125                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelFontThicknessF"><em>cnInfoLabelFontThicknessF</em></a>     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelFontQuality"><em>cnInfoLabelFontQuality</em></a>	<A href="TextItem.html#NhlTFontQuality">NhlTFontQuality</a>		RCSG	|
+|       FontQuality                     "High"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelConstantSpacingF"><em>cnInfoLabelConstantSpacingF</em></a>   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextConstantSpacingF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelAngleF"><em>cnInfoLabelAngleF</em></a>             <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextAngleF                      0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelFuncCode"><em>cnInfoLabelFuncCode</em></a>           <A href="Base.html#NhlTCharacter">NhlTCharacter</a>           RCSG    |
+|       TextFuncCode                    ':'                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelBackgroundColor"><em>cnInfoLabelBackgroundColor</em></a>    <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillBackgroundColor             "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelPerimOn"><em>cnInfoLabelPerimOn</em></a>            <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       EdgesOn                         True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelPerimSpaceF"><em>cnInfoLabelPerimSpaceF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeBorderWidthF                0.33                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelPerimColor"><em>cnInfoLabelPerimColor</em></a>         <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelPerimThicknessF"><em>cnInfoLabelPerimThicknessF</em></a>    <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelZone"><em>cnInfoLabelZone</em></a>               <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       CnInfoLabelZone                 3                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelSide"><em>cnInfoLabelSide</em></a>               <A href="View.html#NhlTPosition">NhlTPosition</a>            RCSG    |
+|       CnInfoLabelSide                 "Bottom"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelJust"><em>cnInfoLabelJust</em></a>               <A href="View.html#NhlTJustification">NhlTJustification</a>       RCSG    |
+|       CnInfoLabelJust                 "TopRight"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelParallelPosF"><em>cnInfoLabelParallelPosF</em></a>       <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       CnInfoLabelParallelPosF         1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnInfoLabelOrthogonalPosF"><em>cnInfoLabelOrthogonalPosF</em></a>     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       CnInfoLabelOrthogonalPosF       0.02                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnNoDataLabelOn"><em>cnNoDataLabelOn</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       AnnotationLabelsOn              True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnNoDataLabelString"><em>cnNoDataLabelString</em></a>           <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       CnNoDataLabelString             NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelOn"><em>cnConstFLabelOn</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       AnnotationLabelsOn              True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelString"><em>cnConstFLabelString</em></a>           <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       CnConstFLabelString             NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelFormat"><em>cnConstFLabelFormat</em></a>           <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       NumberFormat                    "*+g"                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelFontHeightF"><em>cnConstFLabelFontHeightF</em></a>      <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontHeightF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelTextDirection"><em>cnConstFLabelTextDirection</em></a>    <A href="TextItem.html#NhlTTextDirection">NhlTTextDirection</a>       RCSG    |
+|       TextDirection                   "Across"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelFont"><em>cnConstFLabelFont</em></a>             <A href="Base.html#NhlTFont">NhlTFont</a>                RCSG    |
+|       Font                            "pwritx"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelFontColor"><em>cnConstFLabelFontColor</em></a>        <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FontColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelFontAspectF"><em>cnConstFLabelFontAspectF</em></a>      <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontAspectF                     1.3125                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelFontThicknessF"><em>cnConstFLabelFontThicknessF</em></a>   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelFontQuality"><em>cnConstFLabelFontQuality</em></a>	<A href="TextItem.html#NhlTFontQuality">NhlTFontQuality</a>		RCSG	|
+|       FontQuality                     "High"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelConstantSpacingF"><em>cnConstFLabelConstantSpacingF</em></a> <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextConstantSpacingF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelAngleF"><em>cnConstFLabelAngleF</em></a>           <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextAngleF                      0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelFuncCode"><em>cnConstFLabelFuncCode</em></a>         <A href="Base.html#NhlTCharacter">NhlTCharacter</a>           RCSG    |
+|       TextFuncCode                    ':'                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelBackgroundColor"><em>cnConstFLabelBackgroundColor</em></a>  <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillBackgroundColor             "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelPerimOn"><em>cnConstFLabelPerimOn</em></a>          <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       EdgesOn                         True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelPerimSpaceF"><em>cnConstFLabelPerimSpaceF</em></a>      <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeBorderWidthF                0.33                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelPerimColor"><em>cnConstFLabelPerimColor</em></a>       <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelPerimThicknessF"><em>cnConstFLabelPerimThicknessF</em></a>  <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelZone"><em>cnConstFLabelZone</em></a>             <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       CnConstFLabelZone               0                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelSide"><em>cnConstFLabelSide</em></a>             <A href="View.html#NhlTPosition">NhlTPosition</a>            RCSG    |
+|       CnConstFLabelSide               "Bottom"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelJust"><em>cnConstFLabelJust</em></a>             <A href="View.html#NhlTJustification">NhlTJustification</a>       RCSG    |
+|       CnConstFLabelJust               "CenterCenter"          |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelParallelPosF"><em>cnConstFLabelParallelPosF</em></a>     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       CnConstFLabelParallelPosF       0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConstFLabelOrthogonalPosF"><em>cnConstFLabelOrthogonalPosF</em></a>   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       CnConstFLabelOrthogonalPosF     0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMissingValPerimOn"><em>cnMissingValPerimOn</em></a>           <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       EdgesOn                         False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMissingValPerimGridBoundOn"><em>cnMissingValPerimGridBoundOn</em></a>  <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnMissingValPerimGridBoundOn    False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMissingValPerimThicknessF"><em>cnMissingValPerimThicknessF</em></a>   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMissingValPerimDashPattern"><em>cnMissingValPerimDashPattern</em></a>  <A href="Workstation.html#NhlTDashIndex">NhlTDashIndex</a>           RCSG    |
+|       EdgeDashPattern                 "SolidLine"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMissingValPerimColor"><em>cnMissingValPerimColor</em></a>        <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMissingValFillColor"><em>cnMissingValFillColor</em></a>         <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillColor                       "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMissingValFillPattern"><em>cnMissingValFillPattern</em></a>       <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       FillPattern                     "HollowFill"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMissingValFillScaleF"><em>cnMissingValFillScaleF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FillScaleF                      1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnGridBoundPerimOn"><em>cnGridBoundPerimOn</em></a>            <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       EdgesOn                         False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnGridBoundPerimThicknessF"><em>cnGridBoundPerimThicknessF</em></a>    <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnGridBoundPerimDashPattern"><em>cnGridBoundPerimDashPattern</em></a>   <A href="Workstation.html#NhlTDashIndex">NhlTDashIndex</a>           RCSG    |
+|       EdgeDashPattern                 "SolidLine"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnGridBoundPerimColor"><em>cnGridBoundPerimColor</em></a>         <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnOutOfRangePerimOn"><em>cnOutOfRangePerimOn</em></a>           <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       EdgesOn                         False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnOutOfRangePerimThicknessF"><em>cnOutOfRangePerimThicknessF</em></a>   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnOutOfRangePerimDashPattern"><em>cnOutOfRangePerimDashPattern</em></a>  <A href="Workstation.html#NhlTDashIndex">NhlTDashIndex</a>           RCSG    |
+|       EdgeDashPattern                 "SolidLine"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnOutOfRangePerimColor"><em>cnOutOfRangePerimColor</em></a>        <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnSmoothingOn"><em>cnSmoothingOn</em></a>                 <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnSmoothingOn                   False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnSmoothingTensionF"><em>cnSmoothingTensionF</em></a>           <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       CnSmoothingTensionF             -2.5                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnSmoothingDistanceF"><em>cnSmoothingDistanceF</em></a>          <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       CnSmoothingDistanceF            0.01                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnMaxPointDistanceF"><em>cnMaxPointDistanceF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       CnMaxPointDistanceF		0.05                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnExplicitLabelBarLabelsOn"><em>cnExplicitLabelBarLabelsOn</em></a>    <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnExplicitLabelBarLabelsOn      False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLabelBarEndLabelsOn"><em>cnLabelBarEndLabelsOn</em></a>         <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnLabelBarEndLabelsOn           False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLabelBarEndStyle"><em>cnLabelBarEndStyle</em></a>            <A href="DataComm.html#NhlTLabelBarEndStyle">NhlTLabelBarEndStyle</a>    RCSG    |
+|       CnLabelBarEndStyle              "IncludeOuterBoxes"     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnExplicitLegendLabelsOn"><em>cnExplicitLegendLabelsOn</em></a>	<A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       CnExplicitLegendLabelsOn        False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnLegendLevelFlags"><em>cnLegendLevelFlags</em></a>            <A href="ContourPlot.html#NhlTcnLevelUseModeGenArray">NhlTcnLevelUseModeGenArray</a> RCSG |
+|       CnLegendLevelFlags              NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnConpackParams"><em>cnConpackParams</em></a>               <A href="Base.html#NhlTStringGenArray">NhlTStringGenArray</a>      RCS     |
+|       CnConpackParams                 NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/cn.html#cnFixFillBleed"><em>cnFixFillBleed</em></a>                <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCS     |
+|       CnFixFillBleed                  NULL                    |
++---------------------------------------------------------------+
+</pre>
+
+<h3>Data specific resources</h3><p>
+
+The <strong>ContourPlot</strong> class does not currently use any 
+data specific resources.
+ 
+<h3>Composite resources</h3><p>
+
+<A name="Transformation.res"></a>
+<h4><A href="Transformation.html#Transformation.res">Transformation
+resources</a></h4>
+
+<a href="Transformation.html"><strong>Transformation</strong></a> class resources specify the extent,
+direction and grid type of the data coordinate system. The
+<a href="Transformation.html"><strong>Transformation</strong></a> class is the superclass of all classes
+used to perform data transformations, and you can access all its
+resources. However, note that <strong>ContourPlot</strong> intercepts
+its resources, as follows:
+
+<ul>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXMinF"><em>trXMinF</em></a>
+
+<dd>By default <em>trXMinF</em> is set to the minimum data coordinate
+value along the X Axis, as determined from the contents of the
+<a href="ScalarField.html"><strong>ScalarField</strong></a> object.
+
+</dl>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXMaxF"><em>trXMaxF</em></a>
+
+<dd>By default <em>trXMaxF</em> is set to the maximum data coordinate
+value along the X Axis, as determined from the contents of the
+<a href="ScalarField.html"><strong>ScalarField</strong></a> object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXReverse"><em>trXReverse</em></a>
+
+<dd>By default <em>trXReverse</em> is set based on the direction of
+the X Axis implied by the contents of the <a href="ScalarField.html"><strong>ScalarField</strong></a>
+object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYMinF"><em>trYMinF</em></a>
+
+<dd>By default <em>trYMinF</em> is set to the minimum data coordinate
+value along the Y Axis, as determined from the contents of the
+<a href="ScalarField.html"><strong>ScalarField</strong></a> object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYMaxF"><em>trYMaxF</em></a>
+
+<dd>By default <em>trYMaxF</em> is set to the maximum data coordinate
+value along the Y Axis, as determined from the contents of the
+<a href="ScalarField.html"><strong>ScalarField</strong></a> object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYReverse"><em>trYReverse</em></a>
+
+<dd>By default <em>trYReverse</em> is set based on the direction of
+the Y Axis implied by the contents of the <a href="ScalarField.html"><strong>ScalarField</strong></a>
+object.
+
+</dl>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a>
+
+<dd>If <em>trGridType</em> is set to <code>TriangularMesh</code>
+<strong>ContourPlot</strong> does not alter the set value. If
+<em>cnScalarFieldData</em> is set using a
+<a href="MeshScalarField.html"><strong>MeshScalarField</strong></a> object, <em>trGridType</em> is forced
+to <code>TriangularMesh</code>.  Otherwise, If
+<em>cnScalarFieldData</em> is set using a regular
+<a href="ScalarField.html"><strong>ScalarField</strong></a> object, <em>trGridType</em> is forced to
+<code>LogLin</code> if <em>sfXArray</em> and <em>sfYArray</em> both
+have <code>NULL</code> values.  It is forced to <code>Irregular</code>
+if <em>sfXArray</em> and/or <em>sfYArray</em> contain 1D coordinate
+arrays.  If <em>sfXArray</em> and <em>sfYArray</em> contain 2D
+coordinate arrays, <em>trGridType</em> defaults to
+<code>Spherical</code> but it can optionally be set to
+<code>Curvilinear</code> or <code>TriangularMesh</code>.
+
+</dl>
+
+</ul>
+
+<A name="LogLinTransformation.res"></a>
+<h4><A href="LogLinTransformation.html#LogLinTransformation.res">LogLinTransformation
+resources</a></h4>
+
+The <strong>ContourPlot</strong> class uses the
+<a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> to handle its transformations as
+long as neither of the <a href="ScalarField.html"><strong>ScalarField</strong></a> array resources,
+<em>sfXArray</em> or <em>sfYArray</em>, is
+set. <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> has resources for selecting
+between linear and logarithmic coordinates for each axis.
+
+<p>You can access all <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> resources. 
+However, note that <strong>ContourPlot</strong> intercepts
+<a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> resources, as follows:
+
+<ul>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXLog"><em>trXLog</em></a>
+
+<dd><strong>ContourPlot</strong> issues a warning if <em>trXLog</em>
+is set True when the set value of <em>trXMinF</em> is less than or
+equal to 0.0. In this case it resets <em>trXLog</em> to False.  If the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> resource <em>trXAxisType</em>
+is set, <strong>ContourPlot</strong> sets <em>trXLog</em> True if
+<em>trXAxisType</em> is set to <code>LogAxis</code>. If
+<em>trXAxisType</em> is set to any other value, it sets
+<em>trXLog</em> False.
+
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYLog"><em>trYLog</em></a>
+
+<dd><strong>ContourPlot</strong> issues a warning if <em>trYLog</em>
+is set True when the set value of <em>trYMinF</em> is less than or
+equal to 0.0. In this case it resets <em>trYLog</em> to False.  If the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> resource <em>trYAxisType</em>
+is set, <strong>ContourPlot</strong> sets <em>trYLog</em> True if
+<em>trYAxisType</em> is set to <code>LogAxis</code>. If
+<em>trYAxisType</em> is set to any other value, it sets
+<em>trYLog</em> False.
+
+</dl>
+</ul>
+
+<A name="IrregularTransformation.res"></a>
+<h4><A href="IrregularTransformation.html#IrregularTransformation.res">IrregularTransformation
+resources</a></h4>
+
+<strong>ContourPlot</strong> automatically uses the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> 
+to handle its transformations if
+the <a href="ScalarField.html"><strong>ScalarField</strong></a> array resources <em>sfXArray</em> and/or
+<em>sfYArray</em> are set with one-dimensional arrays, implying
+that one or both of the coordinate axes is irregularly spaced.
+
+<p>All <a href="Transformation.html"><strong>Transformation</strong></a> superclass
+resources are accessible. However, <strong>ContourPlot</strong> blocks
+access to all resources specific to the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> except for:
+
+<ul>
+<li><a href="../../Graphics/Resources/tr.html#trXTensionF"><em>trXTensionF</em></a>
+<li><a href="../../Graphics/Resources/tr.html#trYTensionF"><em>trYTensionF</em></a>
+</ul>
+
+and for the following intercepted resources:
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXAxisType"><em>trXAxisType</em></a>
+
+<dd>If the <a href="ScalarField.html"><strong>ScalarField</strong></a> resource <em>sfXArray</em> is
+non-<code>NULL</code> and <em>trXAxisType</em> is set to any value
+other than <code>IrregularAxis</code>, <strong>ContourPlot</strong>
+switches to a coordinate extent bounded by 0 and the length of the
+X-Axis dimension minus one.  If <em>trXAxisType</em> is not set, but
+the <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> resource <em>trXLog</em> is
+set, <strong>ContourPlot</strong> sets <em>trXAxisType</em> to
+<code>LogAxis</code> if <em>trXLog</em> is True; if <em>trXLog</em> is
+False, it changes <em>trXAxisType</em> to <code>LinearAxis</code> if
+it had been set to <code>LogAxis</code> and leaves it unchanged
+otherwise. <em>trXAxisType</em> can be set to <code>LogAxis</code>
+without error only when the X-Axis coordinate extent as passed from
+the <a href="ScalarField.html"><strong>ScalarField</strong></a> is entirely positive. If this is not
+the case, <em>trXAxisType</em> will default to <code>LinearAxis</code>.
+
+<p><A href="ContourPlot.html#Status.1">V4.1 Status Note 1</a>
+</dl>
+
+<p>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYAxisType"><em>trYAxisType</em></a>
+
+<dd>If the <a href="ScalarField.html"><strong>ScalarField</strong></a> resource <em>sfYArray</em> is
+non-<code>NULL</code> and <em>trYAxisType</em> is set to any value
+other than <code>IrregularAxis</code>, <strong>ContourPlot</strong>
+switches to a coordinate extent bounded by 0 and the length of the
+Y-Axis dimension minus one. If <em>trYAxisType</em> is not set, but
+the <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> resource <em>trYLog</em> is
+set, <strong>ContourPlot</strong> sets <em>trYAxisType</em> to
+<code>LogAxis</code> if <em>trYLog</em> is True; if <em>trYLog</em> is
+False, it changes <em>trYAxisType</em> to <code>LinearAxis</code> if
+it had been set to <code>LogAxis</code> and leaves it unchanged
+otherwise. <em>trYAxisType</em> can be set to <code>LogAxis</code>
+without error only when the Y-Axis coordinate extent as passed from
+the <a href="ScalarField.html"><strong>ScalarField</strong></a> is entirely positive.  If this is not
+the case, <em>trYAxisType</em> will default to <code>LinearAxis</code>.
+
+<p><A href="ContourPlot.html#Status.1">V4.1 Status Note 1</a>
+</dl>
+</ul>
+
+<A name="CurvilinearTransformation.res"></a>
+<h4><A
+href="CurvilinearTransformation.html#CurvilinearTransformation.res">CurvilinearTransformation
+resources</a></h4>
+
+<strong>ContourPlot</strong> uses the
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> to handle its
+transformations if the <a href="ScalarField.html"><strong>ScalarField</strong></a> array resources
+<em>sfXArray</em> and <em>sfYArray</em> are set with two-dimensional
+arrays and the Transformation class resource
+<a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is set to
+<code>Curvilinear</code>.  The
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> class has no
+user-accessible resources.<p>
+
+<A name="SphericalTransformation.res"></a>
+<h4><A href="SphericalTransformation.html#SphericalTransformation.res">SphericalTransformation
+resources</a></h4>
+
+<strong>ContourPlot</strong> uses the
+<a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a> to handle its transformations
+if the <a href="ScalarField.html"><strong>ScalarField</strong></a> array resources <em>sfXArray</em>
+and <em>sfYArray</em> are set with two-dimensional arrays and the
+Transformation class resource <a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is set to
+<code>Spherical</code>.  The <a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a>
+class has no user-accessible resources.<p>
+
+<A name="TriangularMeshTransformation.res"></a>
+<h4><A href="TriangularMeshTransformation.html#TriangularMeshTransformation.res">TriangularMeshTransformation
+resources</a></h4>
+
+<strong>ContourPlot</strong> uses the
+<a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a> to handle its
+transformations if <em>cnScalarFieldData</em> is set using a
+MeshScalarField object, or otherwise if the Transformation class
+resource <a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is
+explicitly set to <code>TriangularMesh</code>. The
+<a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a> class has no
+user-accessible resources.<p>
+
+
+<A name="PlotManager.res"></a>
+<A href="PlotManager.html#PlotManager.res"><h4>PlotManager resources</h4></a>
+
+If <em>tfPlotManagerOn</em> is True when a <strong>ContourPlot</strong> object
+is created, you can access all <a href="PlotManager.html"><strong>PlotManager</strong></a> resources.
+However, note that <strong>ContourPlot</strong> intercepts certain
+<a href="PlotManager.html"><strong>PlotManager</strong></a> resources, as follows:
+
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/pm.html#pmLegendDisplayMode"><em>pmLegendDisplayMode</em></a>
+
+<dd>The default value of <em>pmLegendDisplayMode</em> is set to
+<code>Never</code>.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/pm.html#pmLabelBarDisplayMode"><em>pmLabelBarDisplayMode</em></a>
+
+<dd>The default value of <em>pmLabelBarDisplayMode</em> is set to
+<code>Never</code>.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/pm.html#pmTickMarkDisplayMode"><em>pmTickMarkDisplayMode</em></a>
+
+<dd>The default value of <em>pmTickMarkDisplayMode</em> is set to
+<code>Conditional</code>.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/pm.html#pmTitleDisplayMode"><em>pmTitleDisplayMode</em></a>
+
+<dd>The default value of <em>pmTitleDisplayMode</em> is set to
+<code>Conditional</code>.
+
+
+</dl>
+</ul>
+
+You can also access resources for any of composite classes of the <a href="PlotManager.html"><strong>PlotManager</strong></a> class. However, the
+<a href="PlotManager.html"><strong>PlotManager</strong></a> class modifies the access and behavior of
+some of the resources belonging to these classes, as follows:
+
+<ul>
+
+<li><A href="PlotManager.html#TickMark.res">TickMark resources as modified by
+PlotManager</a>
+
+<li><A href="PlotManager.html#Title.res">Title resources as modified by
+PlotManager</a>
+
+<li><A href="PlotManager.html#LabelBar.res">LabelBar resources as modified by
+PlotManager</a>
+
+<li><A href="PlotManager.html#Legend.res">Legend resources as modified by
+PlotManager</a>
+
+</ul>
+
+The <strong>ContourPlot</strong> class itself also modifies the access and
+behavior of a number of <a href="LabelBar.html"><strong>LabelBar</strong></a> and
+<a href="Legend.html"><strong>Legend</strong></a> resources.
+
+<A name="LabelBar.res"></a>
+<h5>Additional modifications to <a href="LabelBar.html"><strong>LabelBar</strong></a> resources</h5>
+
+The <strong>ContourPlot</strong> class disables a number of
+<a href="LabelBar.html"><strong>LabelBar</strong></a> resources, since it sets them automatically
+based on the current values of certain relevant <strong>ContourPlot</strong>
+resources. The disabled resources include:
+
+<ul>
+<li><a href="../../Graphics/Resources/lb.html#lbBoxCount"><em>lbBoxCount</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbMonoFillColor"><em>lbMonoFillColor</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillColor"><em>lbFillColor</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillColors"><em>lbFillColors</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbMonoFillPattern"><em>lbMonoFillPattern</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillPattern"><em>lbFillPattern</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillPatterns"><em>lbFillPatterns</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbMonoFillScale"><em>lbMonoFillScale</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillScaleF"><em>lbFillScaleF</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillScales"><em>lbFillScales</em></a>
+</ul>
+
+In addition, the <strong>ContourPlot</strong> class intercepts certain
+<a href="LabelBar.html"><strong>LabelBar</strong></a> resources, as follows:
+
+
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lb.html#lbLabelStrings"><em>lbLabelStrings</em></a>
+
+<dd>Any set value of this resource is ignored unless the
+<strong>ContourPlot</strong> resource <a href="../../Graphics/Resources/cn.html#cnExplicitLabelBarLabelsOn"><em>cnExplicitLabelBarLabelsOn</em></a>
+is set True.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lb.html#lbLabelFuncCode"><em>lbLabelFuncCode</em></a>
+
+<dd>Any set value of this resource is ignored unless the
+<strong>ContourPlot</strong> resource <a href="../../Graphics/Resources/cn.html#cnExplicitLabelBarLabelsOn"><em>cnExplicitLabelBarLabelsOn</em></a>
+is set True.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lb.html#lbLabelAlignment"><em>lbLabelAlignment</em></a>
+
+<dd>Any set value of this resource is ignored unless the
+<strong>ContourPlot</strong> resource <a href="../../Graphics/Resources/cn.html#cnExplicitLabelBarLabelsOn"><em>cnExplicitLabelBarLabelsOn</em></a>
+is set True.
+
+</dl>
+
+</ul>
+
+<A name="Legend.res"></a>
+<h5>Additional modifications to <a href="Legend.html"><strong>Legend</strong></a> resources</h5>
+
+The <strong>ContourPlot</strong> object disables a number of
+<a href="Legend.html"><strong>Legend</strong></a> resources, since it sets them automatically
+based on the current values of certain relevant <strong>ContourPlot</strong>
+resources. The disabled resources include:
+
+<ul>
+<li><a href="../../Graphics/Resources/lg.html#lgItemCount"><em>lgItemCount</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoItemType"><em>lgMonoItemType</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgItemType"><em>lgItemType</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgItemTypes"><em>lgItemTypes</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoDashIndex"><em>lgMonoDashIndex</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgDashIndex"><em>lgDashIndex</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgDashIndexes"><em>lgDashIndexes</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoLineColor"><em>lgMonoLineColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineColor"><em>lgLineColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineColors"><em>lgLineColors</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoLineThickness"><em>lgMonoLineThickness</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineThicknessF"><em>lgLineThicknessF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineThicknesses"><em>lgLineThicknesses</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoLineDashSegLen"><em>lgMonoLineDashSegLen</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineDashSegLenF"><em>lgLineDashSegLenF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineDashSegLens"><em>lgLineDashSegLens</em></a>
+
+<li><a href="../../Graphics/Resources/lg.html#lgMonoMarkerIndex"><em>lgMonoMarkerIndex</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerIndex"><em>lgMarkerIndex</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerIndexes"><em>lgMarkerIndexes</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoMarkerColor"><em>lgMonoMarkerColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerColor"><em>lgMarkerColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerColors"><em>lgMarkerColors</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoMarkerThickness"><em>lgMonoMarkerThickness</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerThicknessF"><em>lgMarkerThicknessF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerThicknesses"><em>lgMarkerThicknesses</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoMarkerSize"><em>lgMonoMarkerSize</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerSizeF"><em>lgMarkerSizeF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerSizes"><em>lgMarkerSizes</em></a>
+
+<li><a href="../../Graphics/Resources/lg.html#lgMonoLineLabelFontHeight"><em>lgMonoLineLabelFontHeight</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontHeightF"><em>lgLineLabelFontHeightF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontHeights"><em>lgLineLabelFontHeights</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoLineLabelFontColor"><em>lgMonoLineLabelFontColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontColor"><em>lgLineLabelFontColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontColors"><em>lgLineLabelFontColors</em></a>
+
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelStrings"><em>lgLineLabelStrings</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontAspectF"><em>lgLineLabelFontAspectF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontThicknessF"><em>lgLineLabelFontThicknessF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontQuality"><em>lgLineLabelFontQuality</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelConstantSpacingF"><em>lgLineLabelConstantSpacingF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFuncCode"><em>lgLineLabelFuncCode</em></a>
+</ul>
+
+
+In addition, the <strong>ContourPlot</strong> class intercepts two
+<a href="Legend.html"><strong>Legend</strong></a> resources, as follows:
+
+
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lg.html#lgLabelStrings"><em>lgLabelStrings</em></a>
+
+<dd>Any set value of this resource is ignored unless the
+<strong>ContourPlot</strong> resource <a href="../../Graphics/Resources/cn.html#cnExplicitLabelBarLabelsOn"><em>cnExplicitLabelBarLabelsOn</em></a>
+is set True.
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lg.html#lgLabelFuncCode"><em>lgLabelFuncCode</em></a>
+
+<dd>Any set value of this resource is ignored unless the
+<strong>ContourPlot</strong> resource <a href="../../Graphics/Resources/cn.html#cnExplicitLabelBarLabelsOn"><em>cnExplicitLabelBarLabelsOn</em></a>
+is set True.
+
+</dl>
+
+</ul>
+
+<h3>Superclass resources</h3><p>
+
+You can set all resources defined by the superclasses of the
+<strong>ContourPlot</strong> object class, including:
+
+<ul>
+<li><A href="DataComm.html#DataComm.res"><strong>DataComm</strong>
+resources</a>
+<li><A href="Transform.html#Transform.res"><strong>Transform</strong>
+resources</a>
+<li><A href="View.html#View.res"><strong>View</strong>
+resources</a>
+</ul>
+
+<hr> 
+<h2>Description</h2>
+
+The <strong>ContourPlot</strong> object draws a contour plot from
+two-dimensional data provided by an object belonging to the
+<a href="ScalarField.html"><strong>ScalarField</strong></a> class. The plot may consist only of
+lines, or may be filled using color and/or fill patterns to
+distinguish the various contour regions. You can control how the
+contour levels are selected. Selected contour levels, as well as
+regional high and low points, may be labeled. You can cause a number
+of annotational items to appear, including an informational label,
+tick marks, titles, a labelbar, and a line legend. These items
+automatically adjust themselves to the current state of the
+<strong>ContourPlot</strong> object. You may also differentiate
+certain special areas with unique lines or fill, and control to some
+extent the algorithms used to generate the contour lines.
+
+<p>The <strong>ContourPlot</strong> object provides what may seem like
+an overwhelming number of resources, but keep in mind that generally
+you will need to use only a few of them. In fact, there is
+only one resource you need to set explicitly in order to generate a
+meaningful contour plot. You need to focus only on resources that modify
+the features of the <strong>ContourPlot</strong> object that are
+important to you. All the others will default to generally usable
+values. Moreover, resources that provide control over related
+attributes of the various <strong>ContourPlot</strong> elements have
+related names.  As an example, all resources that specify the color of
+the text used for the various labels available in the
+<strong>ContourPlot</strong> object have names of the form
+<em>cn...LabelFontColor(s)</em>, where the plural form is used for
+resources that represent arrays.<p>
+
+<h3>Data input</h3><p>
+
+The only resource you must set in order to generate an actual contour
+plot is <a href="../../Graphics/Resources/cn.html#cnScalarFieldData"><em>cnScalarFieldData</em></a>. This
+resource specifies the id of a pre-existing object belonging to the
+<a href="ScalarField.html"><strong>ScalarField</strong></a> class or its sub-class
+<a href="MeshScalarField.html"><strong>MeshScalarField</strong></a>.  Note that both regular
+<a href="ScalarField.html"><strong>ScalarField</strong></a> and <a href="MeshScalarField.html"><strong>MeshScalarField</strong></a>
+objects belong to the <a href="ScalarField.html"><strong>ScalarField</strong></a> class.  Therefore
+they are both <a href="ScalarField.html"><strong>ScalarField</strong></a> objects.
+
+<p>Use a regular <a href="ScalarField.html"><strong>ScalarField</strong></a> object for topologically
+rectangular gridded data. This is data that can
+be specified using a two-dimensional array with the common property
+that, for any interior element of the array <em>e[j,i]</em>, a line through
+the location of the 8 elements <em>e[j +/- 1, i +/- 1]</em> would separate the element e[j,i] from the locations in data space of all other elements.
+You may define the coordinate
+space of the <a href="ScalarField.html"><strong>ScalarField</strong></a> data array using 1 or 2
+dimensional coordinate arrays, or simply by setting the start and end
+locations along each axis. If you do not set any coordinate array
+resources the coordinate space defaults to the the array index
+extents.
+
+<p>Use a <a href="MeshScalarField.html"><strong>MeshScalarField</strong></a> if the data cannot be
+specified using a two-dimensional array as described above, but you
+can specify the location of each data element explicitly.  You must
+set each data value and its location along the X and Y Axes as the
+corresponding elements of three one-dimensional arrays. You may
+explicitly or implicitly specify the mesh to be created from the data
+nodes using <a href="MeshScalarField.html"><strong>MeshScalarField</strong></a> resources. If you do
+not specify the mesh, <strong>ContourPlot</strong> generates it
+by calculating a Delauney triangulation in the projection plane,
+using <a href="http://www-2.cs.cmu.edu/~quake/triangle.html">
+<strong>Jonathan Shewchuk's Triangle</strong></a> package.
+A <a href="ScalarField.html"><strong>ScalarField</strong></a> object accepts data in a variety of
+types and configurations and allows you to specify how it is to be
+interpreted. As received by the <strong>ContourPlot</strong> object,
+the data are accompanied by information specifying the extents of the
+data in the data coordinate system and the minimum and maximum data
+values. <p>
+
+
+<h3>Coordinate transformations</h3><p>
+
+<strong>ContourPlot</strong> intrinsically supports linear,
+logarithmic, and irregular rectangular gridded data coordinate spaces.
+
+<p><strong>ContourPlot</strong> also supports topologically
+rectangular grids defined using 2D coordinate arrays.
+
+<p>If the <em>cnScalarFieldData</em> is set using a
+<a href="MeshScalarField.html"><strong>MeshScalarField</strong></a> object,
+<strong>ContourPlot</strong> supports non-rectangular data
+spaces. These may include pre-defined triangular meshes or simply
+consist of singly-dimensioned data and location arrays.
+
+<p><strong>ContourPlot</strong> instantiates child objects to
+manage transformations between the data coordinate system and NDC
+space. The <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> manages linear
+and logarithmic transformations, and the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> manages the
+transformation if one or both axes are irregularly spaced.  If the
+grid is defined using 2D coordinate arrays,
+<strong>ContourPlot</strong> instantiates either the
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> or the
+<a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a> to handle the
+transformations. <strong>ContourPlot</strong> uses the
+<a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a> to manage
+transformations for non-rectangular data meshes.  Optionally, the
+<a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a></a> can be used for
+rectangular grids as well.
+
+
+<p>By default the data coordinate extents are based on the extents of the
+supplied <a href="ScalarField.html"><strong>ScalarField</strong></a> object data, but you may adjust
+them using resources belonging to the <a href="Transformation.html"><strong>Transformation</strong></a>
+super-class.
+
+<h4>Use of the <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> object</h4>
+
+<strong>ContourPlot</strong> uses a
+<a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> object as long as the
+<a href="ScalarField.html"><strong>ScalarField</strong></a> resources <a href="../../Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> and <a href="../../Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> are both <code>NULL</code>. The
+coordinate extents of a linear axis may arbitrarily intersect or
+encompass the data extent. If you set a logarithmic axis, then the
+coordinate extent of that axis must be entirely positive, but
+otherwise may intersect or extend beyond the data extent.
+
+<h4>Use of the <a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> object</h4>
+
+If either of the <a href="ScalarField.html"><strong>ScalarField</strong></a> coordinate array
+resources <a href="../../Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> and <a href="../../Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> are
+non-<code>NULL</code> and they are not set with 2D arrays, <strong>ContourPlot</strong> uses an
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> object. Note that
+<strong>ContourPlot</strong> treats an axis with an associated
+coordinate array as irregular even if the coordinate array actually
+has evenly spaced values. <strong>ContourPlot</strong> represents an
+irregular axis not by stretching and compressing various regions of the plot,
+but by displaying it with irregularly spaced tick marks.
+
+<p>In addition to a small performance penalty, there are some
+restrictions associated with use of the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> object. Although you may
+limit the coordinate extent to a subspace of the data coordinate
+extent of the <a href="ScalarField.html"><strong>ScalarField</strong></a> object data, you are not
+allowed to define a coordinate range that extends outside the range of
+the data coordinates of an irregular axis. Using the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> resources <a href="../../Graphics/Resources/tr.html#trXAxisType"><em>trXAxisType</em></a> or
+<a href="../../Graphics/Resources/tr.html#trYAxisType"><em>trYAxisType</em></a>,
+it is possible to set an irregular axis to <code>LinearAxis</code> or
+even, under certain conditions, to <code>LogAxis</code>, but the
+results are probably not what you want. Since
+<strong>ContourPlot</strong> does not intrinsically support a
+linearization transformation for irregularly spaced data, it can only
+switch to a linear system by replacing the data coordinates with array
+index coordinates, which are, in fact, linearly spaced. To properly
+transform irregularly spaced data into a linear or logarithmic
+coordinate system, you must use the overlay mechanism (<A
+href="ContourPlot.html#Status.1">V4.1 Status Note 1</a>).
+
+<h4>Use of the <a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> object</h4>
+
+If both the <a href="ScalarField.html"><strong>ScalarField</strong></a> coordinate array
+resources <a href="../../Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> and <a href="../../Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> are set using 2D coordinate
+arrays and the <a href="Transformation.html"><strong>Transformation</strong></a> class resource <a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is set to
+<code>Curvilinear</code> <strong>ContourPlot</strong> uses a
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> object. As with the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> you cannot set the
+coordinate range outside, the range of the data. Also, since X and Y
+coordinate locations both vary along the grid edges, tickmarks are
+disabled. In order to place the the data in context, you need to
+overlay the <strong>ContourPlot</strong> on another plot such as a
+<strong>mapplot</strong>.
+
+
+<h4>Use of the <a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a> object</h4>
+
+If both the <a href="ScalarField.html"><strong>ScalarField</strong></a> coordinate array resources <a href="../../Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> and <a href="../../Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> are set
+using 2D coordinate arrays and the <a href="Transformation.html"><strong>Transformation</strong></a>
+class resource <a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is
+set to <code>Spherical</code> <strong>ContourPlot</strong> uses a
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> object. As with the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> you cannot set the coordinate
+range outside the range of the data.  Also, since X and Y coordinate
+locations both vary along the grid edges, tickmarks are disabled. In
+order to place the the data in context, you need to overlay the
+<strong>ContourPlot</strong> on another plot such as a
+<strong>mapplot</strong>.
+
+<h4>Use of the <a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a> object</h4>
+
+If you set <em>cnScalarFieldData</em> using a
+<a href="MeshScalarField.html"><strong>MeshScalarField</strong></a> object,
+<strong>ContourPlot</strong> uses the
+<a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a> to perform
+transformations from data space into the plotting space.  Optionally,
+if you set the <a href="Transformation.html"><strong>Transformation</strong></a> resource <a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> to
+<code>TriagularMesh</code>, <strong>ContourPlot</strong> can use
+the <a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a> for normal
+<a href="ScalarField.html"><strong>ScalarField</strong></a> data as well.
+
+The <a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a> always transforms
+the data space into a linear cartesian coordinate space, meaning it
+will linearize irregularly gridded or non-rectangular mesh data
+without requiring an overlay.  In contrast to the behavior of
+<a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a> and
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a>, tickmarks are enabled for
+the <a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a>.  You can overlay a
+<strong>ContourPlot</strong> that uses the
+<a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a> in the normal way.
+
+<p>Besides its primary use as the transformation engine for
+non-rectangular mesh data, the
+<a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a> may have performance
+advantages for some types of rectangular grids. Also, it can be used for for
+certain grids, such as 2D grids with missing values in the coordinate
+arrays, when the other <a href="Transformation.html"><strong>Transformation</strong></a> classes would
+fail.
+
+<p>Currently, there are a few unresolved issues with the
+<a href="TriangularMeshTransformation.html"><strong>TriangularMeshTransformation</strong></a>. When overlaid on a
+<strong>mapplot</strong>, for certain projections, the edges of the
+plot may have a ragged appearance and not completely fill the
+projected data boundaries. This is particularly true when
+<em>cnFillMode</em> is set to <code>RasterFill</code>, but can also be
+the case for <code>AreaFill</code> if <em>cnScalarFieldData</em> is
+set with a <a href="MeshScalarField.html"><strong>MeshScalarField</strong></a> object. 
+
+<p>Prior to version <a href="../../../prev_releases.html#6.2.0">6.2.0</a>, when a
+</classref>MeshScalarField</classref> object provided the data, the
+<code>CellFill</code> mode was unavailable. Now it is possible to use the
+<code>CellFill</code> mode provided the vertices of each cell are specified
+using the <a href="../../Graphics/Resources/sf.html#sfXCellBounds"><em>sfXCellBounds</em></a> and  
+<a href="../../Graphics/Resources/sf.html#sfYCellBounds"><em>sfYCellBounds</em></a> resources.
+
+
+<h4>Overlays</h4>
+
+<p>By overlaying a <strong>ContourPlot</strong> on various types
+of <a href="../../glossary.html#BasePlot">base
+plot</a>, it is possible to map contours of arbitrary
+<a href="ScalarField.html"><strong>ScalarField</strong></a> data into a variety of coordinate
+spaces. You can overlay a <strong>ContourPlot</strong> on a
+<strong>mapplot</strong> to transform the data into any of 10
+different map projections. You can overlay contours of irregularly
+gridded data on a <a href="LogLinPlot.html"><strong>loglinplot</strong></a>
+to have the data appear in a linear or logarithmic coordinate
+space. You can also overlay any contoured data on an <a href="IrregularPlot.html"><strong>irregularplot</strong></a>, either to project
+regularly gridded data into an irregular coordinate space, or perhaps
+to overcome the data extent limitations of the
+<strong>ContourPlot</strong>'s intrinsic
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> object. You can overlay a
+<strong>ContourPlot</strong> on any type of base plot in a
+one-step operation using the <a href="../API/NhlAddOverlay.html"><strong>NhlAddOverlay</strong></a> function.<p>
+
+<h3>Controlling draw order</h3><p>
+
+The <strong>ContourPlot</strong> object allows you to control the order in
+which its major elements are drawn. You may separately control the
+drawing order for lines, fill, and labels using the resources <a href="../../Graphics/Resources/cn.html#cnLineDrawOrder"><em>cnLineDrawOrder</em></a>, <a href="../../Graphics/Resources/cn.html#cnFillDrawOrder"><em>cnFillDrawOrder</em></a>, and
+<a href="../../Graphics/Resources/cn.html#cnLabelDrawOrder"><em>cnLabelDrawOrder</em></a>.
+There are three drawing phases: the <em>predraw</em> phase, the
+<em>draw</em> phase, and the <em>postdraw</em> phase. By default,
+<strong>ContourPlot</strong> draws all plot elements during the
+draw phase: first the fill, then the lines, and finally the
+labels. When a <strong>ContourPlot</strong> is drawn by itself, this is
+usually a reasonable order that results in the important features of
+the plot being visible. However, when a <strong>ContourPlot</strong>
+object is overlaid over a base plot, particularly when masking
+is involved, you often need to adjust the drawing order to ensure that
+the features you want to see remain visible.
+
+<p>Note that <a href="../../glossary.html#Annotation">annotations</a>
+associated with the <strong>ContourPlot</strong>, including the
+informational and constant field labels, are always drawn during the
+<em>postdraw</em> phase.<p>
+
+<h3>Controlling annotations</h3><p>
+
+The <strong>ContourPlot</strong> object supports three kinds of
+annotations: those that it creates on its own, the informational and
+constant field <a href="../../glossary.html#EmbeddedAnnotation">embedded annotations</a>; those that
+are created by its composite <a href="PlotManager.html"><strong>PlotManager</strong></a> object,
+including <a href="Title.html"><strong>Title</strong></a>, <a href="TickMark.html"><strong>Tickmark</strong></a>,
+<a href="LabelBar.html"><strong>LabelBar</strong></a>, and <a href="Legend.html"><strong>Legend</strong></a> <a href="../../glossary.html#IntrinsicAnnotation">intrinsic
+annotations</a>; and finally arbitrary user-defined <a href="../../glossary.html#ExternalAnnotation">external
+annotations</a>. The <a href="Transform.html"><strong>Transform</strong></a> class resource
+<a href="../../Graphics/Resources/tf.html#tfPlotManagerOn"><em>tfPlotManagerOn</em></a> must be set True
+(its default value) when the <strong>ContourPlot</strong> object is
+created in order for the intrinsic or external annotations to be
+available. The informational label (and the constant field label under
+the appropriate conditions) appear by default. Assuming <a href="../../Graphics/Resources/tf.html#tfPlotManagerOn"><em>tfPlotManagerOn</em></a> is set True, tick marks
+also appear by default. Titles appear if you set the appropriate title
+string resource to any non-NULL string value. In order for a labelbar
+or legend to appear, you must set the <a href="PlotManager.html"><strong>PlotManager</strong></a>
+resources <a href="../../Graphics/Resources/pm.html#pmLabelBarDisplayMode"><em>pmLabelBarDisplayMode</em></a>
+or <a href="../../Graphics/Resources/pm.html#pmLegendDisplayMode"><em>pmLegendDisplayMode</em></a> to the
+values <code>Conditional</code> or <code>Always</code>.
+
+<p>Except for the tick marks and the titles, all these annotations are
+positioned using resources that follow the <a
+href="PlotManager.html#PlotManager-Location-Control-Model">PlotManager
+Location Control Model</a>. The <strong>ContourPlot</strong> object
+provides resources for controlling attributes of the informational and
+the constant field labels. You can control the resources of the
+objects that render the intrinsic annotations directly, subject to
+some access and behavioral modifications imposed by the
+<a href="PlotManager.html"><strong>PlotManager</strong></a> object and by the
+<strong>ContourPlot</strong> object itself. These objects are the
+<a href="TickMark.html"><strong>TickMark</strong></a> object, the <a href="Title.html"><strong>Title</strong></a> object,
+the <a href="LabelBar.html"><strong>LabelBar</strong></a> object, and the<a href="Legend.html"><strong>Legend</strong></a>
+object.<p>
+
+<h3>Selecting levels</h3><p>
+
+By appropriately setting the <a href="../../Graphics/Resources/cn.html#cnLevelSelectionMode"><em>cnLevelSelectionMode</em></a>
+resource, you can choose from four level-selection modes to set up the
+levels used in the contour plot. The default mode,
+<code>AutomaticLevels</code>, is easy to use. It selects a "nice"
+spacing starting from the smallest relatively round number greater
+than the minimum data value, such that the number of contour levels is
+as close as possible to, but less than, the value of the resource <a href="../../Graphics/Resources/cn.html#cnMaxLevelCount"><em>cnMaxLevelCount</em></a>.
+<code>EqualSpacedLevels</code> mode defines exactly <a href="../../Graphics/Resources/cn.html#cnMaxLevelCount"><em>cnMaxLevelCount</em></a>
+levels spaced evenly from the data minimum value to the data maximum
+value. In <code>ManualLevels</code> mode, you set the maximum and
+minimum contour levels using the resources <a href="../../Graphics/Resources/cn.html#cnMinLevelValF"><em>cnMinLevelValF</em></a> and
+<a href="../../Graphics/Resources/cn.html#cnMaxLevelValF"><em>cnMaxLevelValF</em></a>
+with a spacing defined by the resource <a href="../../Graphics/Resources/cn.html#cnLevelSpacingF"><em>cnLevelSpacingF</em></a>. Finally,
+<code>Explicit</code> mode allows you to define the level values
+yourself by setting the array resource <a href="../../Graphics/Resources/cn.html#cnLevels"><em>cnLevels</em></a>. The
+<code>ManualLevels</code> and <code>ExplicitLevels</code> modes have
+the advantage that they are independent of the maximum and minimum
+values of the particular dataset you are contouring, and therefore
+can be used to enforce consistency in the contouring of a series of
+related datasets. <code>ExplicitLevels</code> is the only mode that
+allows you to establish variably spaced contour levels.
+
+<p>Once you have established the contour levels, you can retrieve the
+number of levels actually used by getting the value of the read-only
+resource <a href="../../Graphics/Resources/cn.html#cnLevelCount"><em>cnLevelCount</em></a>. Based on
+this value, you can set the <a href="../../Graphics/Resources/cn.html#cnLevelFlags"><em>cnLevelFlags</em></a> enumerated
+array resource to specify whether you want lines only, labels only,
+lines and labels, or nothing at each individual contour level. This
+resource also has a scalar equivalent, <a href="../../Graphics/Resources/cn.html#cnLevelFlag"><em>cnLevelFlag</em></a>, which you can
+set instead if you want all levels to appear the same way. If you set
+neither of these resources, then line labels automatically appear at
+contour levels spaced apart by the value of the resource <a href="../../Graphics/Resources/cn.html#cnLineLabelInterval"><em>cnLineLabelInterval</em></a>,
+set by default to the value 2.<p>
+
+<h3>Contour lines</h3><p>
+
+You can control whether contour lines appear at all by setting the
+boolean resource <a href="../../Graphics/Resources/cn.html#cnLinesOn"><em>cnLinesOn</em></a>. By default it
+is set True, meaning that contour lines will appear. If set False,
+no contour lines will appear regardless of the setting of <a href="../../Graphics/Resources/cn.html#cnLevelFlags"><em>cnLevelFlags</em></a> or <a href="../../Graphics/Resources/cn.html#cnLevelFlag"><em>cnLevelFlag</em></a>. You can
+control the color, the dash pattern and the thickness of contour lines
+individually or uniformly as a group.  Individual control is through
+the array resources <a href="../../Graphics/Resources/cn.html#cnLineColors"><em>cnLineColors</em></a>, <a href="../../Graphics/Resources/cn.html#cnLineDashPatterns"><em>cnLineDashPatterns</em></a>,
+and <a href="../../Graphics/Resources/cn.html#cnLineThicknesses"><em>cnLineThicknesses</em></a>
+while control as a group is through the scalar resources <a href="../../Graphics/Resources/cn.html#cnLineColor"><em>cnLineColor</em></a>, <a href="../../Graphics/Resources/cn.html#cnLineDashPattern"><em>cnLineDashPattern</em></a>,
+and <a href="../../Graphics/Resources/cn.html#cnLineThicknessF"><em>cnLineThicknessF</em></a>. You
+choose the scalar resources by setting the boolean resources <a href="../../Graphics/Resources/cn.html#cnMonoLineColor"><em>cnMonoLineColor</em></a>,
+<a href="../../Graphics/Resources/cn.html#cnMonoLineDashPattern"><em>cnMonoLineDashPattern</em></a>,
+and <a href="../../Graphics/Resources/cn.html#cnMonoLineThickness"><em>cnMonoLineThickness</em></a>
+True; you choose the array resources by setting them False.  There is also a
+scalar resource, <a href="../../Graphics/Resources/cn.html#cnLineDashSegLenF"><em>cnLineDashSegLenF</em></a>
+that sets the segment length for all dash patterns used.<p>
+
+<h3>Contour fill</h3><p>
+
+<strong>ContourPlot</strong> supports three
+methods for filling contour regions: area, raster and cell fill.
+Turn on fill for contour regions by setting the boolean resource
+<a href="../../Graphics/Resources/cn.html#cnFillOn"><em>cnFillOn</em></a> True. 
+Select the fill method by setting the enumerated resource 
+<a href="../../Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a>
+to one of the three choices: <code>AreaFill</code>, <code>RasterFill</code>,
+or <code>CellFill</code>.
+
+<h4>Area fill</h4> <p>For area fill, you can control the color,
+the fill pattern, and the scale of the fill pattern for all filled
+contour regions either individually or uniformly as a group.
+Individual control is through the array resources, <a href="../../Graphics/Resources/cn.html#cnFillColors"><em>cnFillColors</em></a>, <a href="../../Graphics/Resources/cn.html#cnFillPatterns"><em>cnFillPatterns</em></a>,
+and <a href="../../Graphics/Resources/cn.html#cnFillScales"><em>cnFillScales</em></a>
+while control as a group is through the scalar resources <a href="../../Graphics/Resources/cn.html#cnFillColor"><em>cnFillColor</em></a>, <a href="../../Graphics/Resources/cn.html#cnFillPattern"><em>cnFillPattern</em></a>,
+<a href="../../Graphics/Resources/cn.html#cnFillDotSizeF"><em>cnFillDotSizeF</em></a>,
+and <a href="../../Graphics/Resources/cn.html#cnFillScaleF"><em>cnFillScaleF</em></a>.
+You choose the scalar resources by setting the boolean resources <a href="../../Graphics/Resources/cn.html#cnMonoFillColor"><em>cnMonoFillColor</em></a>,
+<a href="../../Graphics/Resources/cn.html#cnMonoFillPattern"><em>cnMonoFillPattern</em></a>,
+and <a href="../../Graphics/Resources/cn.html#cnMonoFillScale"><em>cnMonoFillScale</em></a>
+True; you choose the array resources by setting them False.
+
+<A NAME="RasterFill"></A>
+<h4>Raster fill</h4>
+
+<p><strong>ContourPlot</strong> performs raster fill by assigning
+appropriate colors to each cell of a two-dimensional array of
+equally sized rectangular cells superimposed on the area occupied by
+the data grid. If <a href="../../Graphics/Resources/cn.html#cnRasterSmoothingOn"><em>cnRasterSmoothingOn</em></a>
+is set True, the level (and hence the color) assigned to
+each cell is determined by interpolating the values of neighboring
+points in the data grid. If <em>cnRasterSmoothingOn</em> is False (the
+default), <strong>ContourPlot</strong> creates a discrete raster plot:
+any raster cell whose center lies within the rectangular area bounded
+by lines halfway between each grid point (in data space) is given the
+color assigned to the level representing the grid point datum.
+
+<p>By default, <strong>ContourPlot</strong> dynamically tries to
+achieve an optimal size for the cell array based on the resolution of
+the workstation, the density of the data grid, the data transformation
+in effect, and whether smoothing is turned on. However, resources are
+provided for controlling the density of the raster cell grid. You can
+either set the cell size explicitly, using the resource <a href="../../Graphics/Resources/cn.html#cnRasterCellSizeF"><em>cnRasterCellSizeF</em></a>,
+or you can adjust the dynamically determined density, using the
+resource <a href="../../Graphics/Resources/cn.html#cnRasterSampleFactorF"><em>cnRasterSampleFactorF</em></a>.
+The <a href="../../Graphics/Resources/cn.html#cnRasterMinCellSizeF"><em>cnRasterMinCellSizeF</em></a>
+resource sets a lower bound for the size of dynamically sized raster
+cells and consequently an upper limit on the raster cell density.  Its
+purpose is to prevent the cell array from becoming unreasonably large
+for high-resolution workstations.
+
+<p> As with area fill, raster fill colors are specified using the <a href="../../Graphics/Resources/cn.html#cnFillColors"><em>cnFillColors</em></a>
+resource. The fill pattern and fill scale resources are ignored when
+in raster fill mode.
+
+<p>Beginning with version <a href="../../../prev_releases.html#6.2.0">6.2.0</a>, the raster fill mode fully supports
+transparency and the <code>Transparent</code> color index (-1). Previous versions substituted the <code>Background</code>
+color whenever <code>Transparent</code> was specified for a color index used in a raster fill context.
+
+<A NAME="CellFill"></A>
+<h4>Cell fill</h4>
+<p><strong>ContourPlot</strong> performs cell fill by drawing filled
+polygons whose edges are defined by the borders between adjacent grid
+cells. If the data grid is defined using cell edges, these boundaries
+are obtained explicitly from the coordinate arrays. Otherwise, 
+the edges are calculated from the halfway points between the cell centers.
+Optionally, you may draw lines around the edges by setting the 
+resource <a href="../../Graphics/Resources/cn.html#cnCellFillEdgeColor"><em>cnCellFillEdgeColor</em></a> to a color other than the default: <code>Transparent</code>. The 
+color of the edges of cells containing missing data values is controlled
+using a separate resource   <a href="../../Graphics/Resources/cn.html#cnCellFillMissingValEdgeColor"><em>cnCellFillMissingValEdgeColor</em></a>.
+
+<p> As with area fill, cell fill colors are specified using the <a href="../../Graphics/Resources/cn.html#cnFillColors"><em>cnFillColors</em></a>
+resource. The fill pattern and fill scale resources are ignored when
+in cell fill mode.<p>
+
+<p>Beginning with version <a href="../../../prev_releases.html#6.2.0">6.2.0</a>, the cell fill mode can render cells
+with 3, 4, 5, 6, or more vertices as supplied by various non-structured grids. The vertices of the cells must be
+explicitly specified using the resources <a href="../../Graphics/Resources/sf.html#sfXCellBounds"><em>sfXCellBounds</em></a> and
+<a href="../../Graphics/Resources/sf.html#sfYCellBounds"><em>sfYCellBounds</em></a>.
+
+
+<h3>Labels</h3><p>
+
+Almost two thirds of the <strong>ContourPlot</strong> object's resources
+involve attributes of various kinds of labels. This section describes
+the label types and classifies the label attributes.
+
+<p><strong>ContourPlot</strong> supports five label types: line
+labels, high labels, low labels, an informational label, and a
+constant field label. The constant field label also has the ability to
+act as a label indicating that no data have been supplied. Each type
+has its own set of resources allowing individual control of the
+particular label type. The resources controlling label attributes have
+a generally uniform behavior for all label types.  The resource names
+follow a consistent naming scheme for distinguishing the label types
+and their attributes. There are broadly three categories of label
+attributes that apply to all labels: those that control the content
+and format of the text string; those that control the appearance of the
+text, called <em>font attributes</em>; and those that control the
+appearance of the label background and perimeter. The informational
+and constant field labels support a fourth category of label
+attributes: those that control the location of the label. In addition
+to these general categories, there are several resources that apply
+globally to all label types, as well as a few that only apply to a single
+label type.
+
+<p>To simplify the management of label resources, there are
+several resources that allow you tie many of the resources of
+different label types together. <a href="../../Graphics/Resources/cn.html#cnLowUseHighLabelRes"><em>cnLowUseHighLabelRes</em></a>,
+when set True, causes all low label resources except <a href="../../Graphics/Resources/cn.html#cnLowLabelString"><em>cnLowLabelString</em></a>
+to take on the value of the corresponding high label
+resource. Similarly, <a href="../../Graphics/Resources/cn.html#cnHighUseLineLabelRes"><em>cnHighUseLineLabelRes</em></a>,
+when set True, causes all high label resources except <a href="../../Graphics/Resources/cn.html#cnHighLabelString"><em>cnHighLabelString</em></a>
+and <a href="../../Graphics/Resources/cn.html#cnHighLabelAngleF"><em>cnHighLabelAngleF</em></a>
+to take on the value of the corresponding line label resource. And
+finally, <a href="../../Graphics/Resources/cn.html#cnConstFUseInfoLabelRes"><em>cnConstFUseInfoLabelRes</em></a>,
+when set True, causes all constant field label resources except <a href="../../Graphics/Resources/cn.html#cnConstFLabelString"><em>cnConstFLabelString</em></a>
+to take on the value of the corresponding informational label
+resource.
+
+<p>Note that because of constraints imposed by the low level
+utilities, some attributes of high and low labels are tied together
+regardless of the setting of <a href="../../Graphics/Resources/cn.html#cnLowUseHighLabelRes"><em>cnLowUseHighLabelRes</em></a>. Also,
+the line label resources differ because several of them are array
+resources, allowing individual control of the labels that appear with
+each contour line.
+
+<p>The following sections discuss each label attribute category as it
+applies to all label types. The ellipsis marks (...) in the resource
+names below stand for the names of the label types: 
+
+<ul>
+<li><em>Line</em> for line labels
+<li><em>High</em> for high labels
+<li><em>Low</em> for low labels
+<li><em>Info</em> for the informational label
+<li><em>ConstF</em> for the constant field label
+</ul>
+
+<h4>String content and formatting attributes</h4>
+
+These resources control the content and format of all the label types:
+
+<dl>
+<dt><em>cn...Label(s)On</em>
+<dd>Turns the label on and off. Line, high, and low labels use the plural
+form. The informational and constant field labels use the singular form.
+<dt><em>cn...LabelString(s)</em>
+
+<dd>Specifies the text of the label. Line labels use the plural form
+to indicate an array of strings.
+
+<dt><em>cn...LabelFuncCode</em>
+<dd>Sets the function code character used for the label text.
+
+<dt><em>cn...LabelFormat</em>
+<dd>Specifies the format string used for numeric substitutions within the
+label text.
+</dl>  		
+
+Since the information in the labels provided by the
+<strong>ContourPlot</strong> object is closely tied to the values in
+the dataset being contoured, there are several resources that apply
+for all label types to numbers generated from the dataset. Using the
+resources <a href="../../Graphics/Resources/cn.html#cnLabelScalingMode"><em>cnLabelScalingMode</em></a>
+and <a href="../../Graphics/Resources/cn.html#cnLabelScaleValueF"><em>cnLabelScaleValueF</em></a>,
+you can choose from a number of methods of scaling the values of the
+dataset. The point may be to make the label numbers fit within some
+standard range or simply to make them easier to read. Once you have
+set these resources, you can get the value of the read-only resource
+<a href="../../Graphics/Resources/cn.html#cnLabelScaleFactorF"><em>cnLabelScaleFactorF</em></a>
+to determine the scale factor used to achieve the desired
+results. Multiplying the numbers in the labels by the value of
+<em>cnLabelScaleFactorF</em> gives the actual data values the numbers
+represent.
+
+<p>You specify the format string for numerical substitutions according
+to the HLU <A href="../../Graphics/format_spec.html">Floating
+Point Format Specification</a> scheme. This scheme allows certain
+aspects of a number's format to be determined dynamically. The
+<strong>ContourPlot</strong> object uses this facility to allow you to
+base the formatting of all labels--in particular the assumed rightmost
+significant digit--on the dataset element with the maximum absolute
+value. The resource <a href="../../Graphics/Resources/cn.html#cnMaxDataValueFormat"><em>cnMaxDataValueFormat</em></a> specifies a
+format for the dataset element with the maximum absolute value. The
+value and the format used together determine the specification of each
+dynamically specified format option for all label types.
+
+<p>The <strong>ContourPlot</strong> object recognizes a number of
+special substitution strings that are replaced on output with certain 
+key values related to the dataset and the contour levels. How or whether
+a particular substitution string is recognized depends on the label type
+as follows:
+
+<dl>
+<dt>$CIU$
+
+<dd>The contour interval used (value of <a href="../../Graphics/Resources/cn.html#cnLevelSpacingF"><em>cnLevelSpacingF</em></a>);
+informational label only.
+
+<dt>$CMN$ 
+
+<dd>The minimum contour level (first element of <a href="../../Graphics/Resources/cn.html#cnLevels"><em>cnLevels</em></a>); informational
+label only.
+
+<dt>$CMX$
+
+<dd>The maximum contour level (last element of <a href="../../Graphics/Resources/cn.html#cnLevels"><em>cnLevels</em></a>); informational
+label only.
+
+<dt>$SFU$
+
+<dd>The scale factor used (value of <a href="../../Graphics/Resources/cn.html#cnLabelScaleFactorF"><em>cnLabelScaleFactorF</em></a>);
+informational label only.
+
+<dt>$ZMN$
+
+<dd>The minimum data value (value of <a href="ScalarField.html"><strong>ScalarField</strong></a>
+resource <a href="../../Graphics/Resources/sf.html#sfDataMinV"><em>sfDataMinV</em></a>);
+informational label only.
+
+<dt>$ZMX$
+
+<dd>The maximum data value (value of <a href="ScalarField.html"><strong>ScalarField</strong></a>
+resource <a href="../../Graphics/Resources/sf.html#sfDataMaxV"><em>sfDataMaxV</em></a>);
+informational label only.
+
+<dt>$ZDV$
+<dd>The current low, high, and constant field value for low, high
+and constant field labels, respectively.
+
+</dl>
+
+Note that line labels do not accept any substitution strings; by
+default the <a href="../../Graphics/Resources/cn.html#cnLineLabelStrings"><em>cnLineLabelStrings</em></a>
+array is filled with strings representing the value of each contour
+level.
+
+<h4>Font attributes</h4>
+
+These resources set font attributes for all the label types:
+
+<dl>
+<dt><em>cn...LabelFontHeightF</em>
+<dd>Sets the height of the label text.
+<dt><em>cn...LabelFont</em>
+<dd>Sets the font used for the label text.
+<dt><em>cn...LabelFontColor(s)</em>
+<dd>Sets the color of the label text. Line labels use both the plural
+and singular form for array and scalar versions of the resource.
+
+
+<dt><em>cn...LabelFontAspectF</em>
+<dd>Sets the height-to-width ratio of the characters used for the label text.
+<dt><em>cn...LabelFontThicknessF</em>
+<dd>Sets the thickness of the lines used to draw fonts that are stroked
+rather than filled for the label text.
+<dt><em>cn...LabelFontQuality </em>
+<dd>Sets one of three qualities of fonts to use for the label text.
+<dt><em>cn...LabelConstantSpacingF</em>
+<dd>Determines whether the characters used for label text should have
+constant spacing, and if so, determines the spacing to use.
+<dt><em>cn...LabelAngleF</em>
+<dd>Sets the angle at which the label text is drawn.
+</dl>
+
+Note that text height and angle for low labels cannot be set
+differently from high label text height and angle. Currently the
+resources <a href="../../Graphics/Resources/cn.html#cnLowLabelFontHeightF"><em>cnLowLabelFontHeightF</em></a>
+and <a href="../../Graphics/Resources/cn.html#cnLowLabelAngleF"><em>cnLowLabelAngleF</em></a> are
+ignored.
+
+<p>If the resource <a href="../../Graphics/Resources/cn.html#cnMonoLineLabelFontColor"><em>cnMonoLineLabelFontColor</em></a>
+is set True, <strong>ContourPlot</strong> uses the scalar resource <a href="../../Graphics/Resources/cn.html#cnLineLabelFontColor"><em>cnLineLabelFontColor</em></a>
+for all line labels; otherwise it uses the array resource, <a href="../../Graphics/Resources/cn.html#cnLineLabelFontColors"><em>cnLineLabelFontColors</em></a>.
+Also the resource <a href="../../Graphics/Resources/cn.html#cnLineLabelAngleF"><em>cnLineLabelAngleF</em></a> is
+ignored if <a href="../../Graphics/Resources/cn.html#cnLineLabelPlacementMode"><em>cnLineLabelPlacementMode</em></a>
+is set to <code>Constant</code>.
+
+<h4>Backgrounds and perimeter outline attributes</h4>
+
+These resources set background and perimeter outline attributes for
+all the label types:
+
+<dl>
+<dt><em>cn...LabelBackgroundColor</em>
+<dd>Sets the background color for the area inside the label perimeter.
+<dt><em>cn...LabelPerim</em>
+<dd>Turns the label perimeter outline on and off.
+<dt><em>cn...LabelPerimSpaceF</em>
+<dd>Determines the amount of space between the edges of the label text
+and the label perimeter.
+<dt><em>cn...LabelPerimColor</em>
+<dd>Sets the color used for the label perimeter line.
+<dt><em>cn...LabelPerimThicknessF</em>
+<dd>Sets the thickness of the label perimeter line.
+</dl>
+
+Note that low label perimeter space and background color cannot be
+set differently from high label perimeter space and background color.
+Currently the resources <a href="../../Graphics/Resources/cn.html#cnLowLabelPerimSpaceF"><em>cnLowLabelPerimSpaceF</em></a>
+and <a href="../../Graphics/Resources/cn.html#cnLowLabelBackgroundColor"><em>cnLowLabelBackgroundColor</em></a>
+are ignored.
+
+Also note that all background and perimeter resources for line labels
+are ignored when <a href="../../Graphics/Resources/cn.html#cnLineLabelPlacementMode"><em>cnLineLabelPlacementMode</em></a>
+is set to <code>Constant</code>.
+
+<h4>Location and density attributes</h4>
+
+You can position the informational and constant field labels using
+resources that follow the <a
+href="PlotManager.html#PlotManager-Location-Control-Model">PlotManager Location
+Control Model</a>. These are:
+
+<dl>
+<dt><em>cn...LabelZone </em>
+<dd>Sets the overlay zone of the label.
+<dt><em>cn...LabelSide</em>
+<dd>Sets the side on which the label will be located in the plot viewport. 
+<dt><em>cn...LabelJust</em>
+<dd>Sets the justification mode used to position the label.
+<dt><em>cn...LabelParallelPosF</em>
+<dd>Sets the offset from the zone origin parallel to the viewport side. 
+<dt><em>cn...LabelOrthogonalPosF</em>
+<dd>Sets the offset from the zone origin orthogonal to the viewport side.
+</dl>
+
+<p>There are three ways to position line labels using the resource <a href="../../Graphics/Resources/cn.html#cnLineLabelPlacementMode"><em>cnLineLabelPlacementMode</em></a>. The <code>Constant</code> mode is the most basic: the line
+label is rendered as a part of the dash pattern. This implies that the
+label density can be controlled by setting the 
+<a href="../../Graphics/Resources/cn.html#cnLineDashSegLenF"><em>cnLineDashSegLenF</em></a>
+resource, which controls the length of the dash pattern.
+
+<p>For the other two methods, <code>Randomized</code> and
+<code>Computed</code>, the labels are drawn separately from the
+lines. You can increase or decrease the density of labels for these
+modes using <a href="../../Graphics/Resources/cn.html#cnLineLabelDensityF"><em>cnLineLabelDensityF</em></a>.
+For more precise control, you can set a number low level line label
+positioning parameters using the <a href="../../Graphics/Resources/cn.html#cnConpackParams"><em>cnConpackParams</em></a>
+resource.
+
+<p>Also you can control in a limited way the location of high and low
+labels with the resource <a href="../../Graphics/Resources/cn.html#cnHighLowLabelOverlapMode"><em>cnHighLowLabelOverlapMode</em></a>.
+There are no native resources for adjusting the high/low label density, but
+low level control is possible using <a href="../../Graphics/Resources/cn.html#cnConpackParams"><em>cnConpackParams</em></a>.<p>
+
+<h3>Special areas and boundaries</h3><p>
+
+There are several boundaries within the viewport of a
+<strong>ContourPlot</strong> that separate regions where contours
+appear from regions where they do not: the boundaries of missing value
+areas, the data grid boundaries, and the boundaries of regions where
+the data coordinates map to an out-of-range value. Missing value areas
+lie in those portions of the data grid whose elements are set to the
+special signal missing value as set by the
+<a href="ScalarField.html"><strong>ScalarField</strong></a> object's <a href="../../Graphics/Resources/sf.html#sfMissingValueV"><em>sfMissingValueV</em></a>
+resource. You can outline the boundaries of missing value areas and
+also fill the interior of these areas. On the other hand, you can only
+draw boundary lines of the data grid and the out-of-range regions.
+
+<p>You control the line attributes of the boundaries with the
+following resources. The ellipsis marks (...) in the resource names
+below stand for the names of the boundary types:
+<em>MissingValue</em></a>, <em>Grid</em>, or <em>OutOfRange</em>.
+
+<dl>
+<dt><em>cn...BoundPerim</em>
+<dd>Turns the perimeter line on and off.
+<dt><em>cn...BoundPerimThicknessF</em>
+<dd>Sets the thickness of the line used to draw the perimeter.
+<dt><em>cn...BoundPerimDashPattern</em>
+<dd>Sets the dash pattern of the line used to draw the perimeter.
+<dt><em>cn...BoundPerimColor</em>
+<dd>Sets the color of the line used to draw the perimeter.
+</dl>
+
+The <strong>ContourPlot</strong> object sets the dash pattern segment
+length for these special lines with the same resource used for the
+regular contour lines: <a href="../../Graphics/Resources/cn.html#cnLineDashSegLenF"><em>cnLineDashSegLenF</em></a>.
+
+<p>Missing values areas have in addition the resources <a href="../../Graphics/Resources/cn.html#cnMissingValFillColor"><em>cnMissingValFillColor</em></a>,
+<a href="../../Graphics/Resources/cn.html#cnMissingValFillPattern"><em>cnMissingValFillPattern</em></a>,
+and <a href="../../Graphics/Resources/cn.html#cnMissingValFillScaleF"><em>cnMissingValFillScaleF</em></a>
+for controlling the fill attributes of the missing value areas. If the
+raster mode of contour filling is enabled, only the resource
+<em>cnMissingValFillColor</em> has any effect.<p>
+
+<h3>Contour line rendering control</h3><p>
+
+There are several resources you can use to control the way
+<strong>ContourPlot</strong> draws the contour lines. The resource <a href="../../Graphics/Resources/cn.html#cnSmoothingOn"><em>cnSmoothingOn</em></a> controls
+whether the contour lines are smoothed (using cubic splines under
+tension). <a href="../../Graphics/Resources/cn.html#cnSmoothingTensionF"><em>cnSmoothingTensionF</em></a>
+and <a href="../../Graphics/Resources/cn.html#cnSmoothingDistanceF"><em>cnSmoothingDistanceF</em></a>
+control parameters of the smoothing algorithm.  The resource <a href="../../Graphics/Resources/cn.html#cnMaxPointDistanceF"><em>cnMaxPointDistanceF</em></a>
+controls the accuracy with which contour lines near discontinuous
+points in the mapping are rendered.
+
+<hr>
+<h2>Support functions</h2>
+
+The <strong>ContourPlot</strong> object does not define any support
+functions, but inherits all the support functions available to its
+superclass.
+
+<hr>
+<h2>Status notes for Release 4.1</h2>
+
+<p><A name="Status.1">1.</a> The support for irregular transformations
+is at a transitional stage. Eventually, <strong>ContourPlot</strong> will
+be able to perform transformations from irregular coordinates to linear
+and logarithmic coordinates without using the overlay mechanism. This will
+eliminate the need for a switch to the index coordinate system.
+
+<p><A name="Status.3">3.</a> Under certain conditions when part of the
+data space is outside the viewport, the Computed line label placement
+mode seems to fail, and the plot appears without any line labels at
+all.  This problem requires further investigation.
+
+<p><A name="Status.4">4.</a> Large values of
+<em>cnSmoothingTensionF</em> above 10.0 or so often cause the
+<strong>ContourPlot</strong> object to improperly project lines out
+of the plotter frame. This needs to be examined more closely. Also
+note that when lines cross, contour fill often 'bleeds' out of its
+boundaries.
+
+<p><A name="Status.5">5.</a> Since the
+<strong>ContourPlot</strong> object creates the informational
+label using an Annotation object managed by the PlotManager object,
+Conpack has no way of knowing the position of the Informational
+label. Therefore, there is no way to support the option of omitting
+high and low labels that overlap the informational label.  For the
+time being at least, the type <em>NhlTcnHighLowLabelOverlapMode</em>
+maps directly to the Conpack internal parameter, 'HLO'. Therefore,
+numerically speaking, this type effectively has two values for each
+functionally unique enumerated value.
+
+<hr>
+<h2>See also</h2>
+<ul>
+<li><a href="../API/NhlCreate.html"><strong>NhlCreate</strong></a> function
+<li><a href="../API/NhlDestroy.html"><strong>NhlDestroy</strong></a> function
+<li><a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> function
+<li><a href="../API/NhlGetValues.html"><strong>NhlGetValues</strong></a> function
+<li><a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a> function
+<li><a href="ScalarField.html"><strong>ScalarField</strong></a> object
+<li><a href="MeshScalarField.html"><strong>MeshScalarField</strong></a> object
+<li><a href="PlotManager.html"><strong>PlotManager</strong></a> object
+<li><a href="Title.html"><strong>Title</strong></a> object
+<li><a href="TickMark.html"><strong>TickMark</strong></a> object
+<li><a href="LabelBar.html"><strong>LabelBar</strong></a> object
+<li><a href="Legend.html"><strong>Legend</strong></a> object
+<li><a href="AnnoManager.html"><strong>AnnoManager</strong></a> object
+<li><a href="DataComm.html"><strong>DataComm</strong></a> object
+<li><a href="Transform.html"><strong>Transform</strong></a> object
+<li><a href="View.html"><strong>View</strong></a> object
+<li><a href="Base.html"><strong>Base</strong></a> object
+</ul>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/ContourPlot.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:30 GMT -->
+</html>
+

@@ -1,0 +1,567 @@
+<HTML>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/table.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:14:36 GMT -->
+<Head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to create simple tables.">
+<meta name="keywords" content="NCL, graphics, visualization, table">
+</head>
+<TITLE>NCL Graphics: Tables and Gridded Cells</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: Tables and gridded cells</h1>
+
+<div class=mainimage>
+<img src="Images/table_2_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+You can draw basic tables in NCL using the
+<a href="../Document/Graphics/Interfaces/gsn_table.html"><strong>gsn_table</strong></a> procedure.
+<p>
+
+To draw plots of gridded cells, you can use
+<a href="../Document/Graphics/Interfaces/gsn_csm_blank_plot.html"><strong>gsn_csm_blank_plot</strong></a>
+to create a blank plot, and then call
+<a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> and 
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>
+to add filled polygons and lines.
+<p>
+
+To annotate a plot with labelbars or text, use
+use <a href="../Document/Graphics/Interfaces/gsn_create_labelbar.html"><strong>gsn_create_labelbar</strong></a>
+<a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a>,
+and/or <a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--Table_1--> <a name=ex1></a>
+<a href="Images/table_1_1_lg.png">
+<img src="Images/table_1_1_sm.png" align=left border=2></a>
+<a href="Images/table_1_2_lg.png">
+<img src="Images/table_1_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/table_1.html">table_1.ncl</a>:
+
+Example of a simple table
+using <a href="../Document/Graphics/Interfaces/gsn_table.html"><strong>gsn_table</strong></a>.  This table has 4
+rows and 3 columns. No resources are set in the first frame, and then
+the second frame sets <a href="../Document/Graphics/Resources/tx.html#txJust"><em>txJust</em></a> to
+control the justification of the text (the default is "CenterCenter").
+
+<p>
+
+</div>
+
+<div class=ex>
+<!--Table_2-->
+<a name=ex2></a>
+<a href="Images/table_2_lg.png">
+<img src="Images/table_2_sm.png" align=left border=2></a>
+<a href="Scripts/table_2.html">table_2.ncl</a>: 
+
+This table is actually made up of three separate tables.  It is a
+duplicate of the one found on the <a href="taylor.html">taylor</a>
+applications page.
+<p>
+
+The <a href="../Document/Graphics/Resources/gs.html#gsFillColor"><em>gsFillColor</em></a> resource is
+used to fill the grid cells. In order to get a different fill color
+for various cells, this resource is set to an array of the same size
+as the text strings, and given a fill color for every cell.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Tables/NCL_table_2.html#sphx-glr-gallery-tables-ncl-table-2-py">here</a>.
+<p>
+</div>
+
+<div class=ex>
+<!--Table_3-->
+<a name=ex3></a>
+<a href="Images/table_3_lg.png">
+<img src="Images/table_3_sm.png" align=left border=2></a>
+<a href="Scripts/table_3.html">table_3.ncl</a>: 
+
+Demonstrates using a variety of resources to customize tables, like
+<a href="../Document/Graphics/Resources/gs.html#gsLineThicknessF"><em>gsLineThicknessF</em></a>, <a href="../Document/Graphics/Resources/gs.html#gsFillIndex"><em>gsFillIndex</em></a>, <a href="../Document/Graphics/Resources/tx.html#txFontColor"><em>txFontColor</em></a>, <a href="../Document/Graphics/Resources/tx.html#txFontHeightF"><em>txFontHeightF</em></a>, and <a href="../Document/Graphics/Resources/tx.html#txAngleF"><em>txAngleF</em></a>.
+<p>
+
+</div>
+
+<div class=ex>
+<!--Table_4-->
+<a name=ex4></a>
+<a href="Images/table_4_lg.png">
+<img src="Images/table_4_sm.png" align=left border=2></a>
+<a href="Scripts/table_4.html">table_4.ncl</a>: 
+
+This example shows how to associate tickmarks with a table.
+The <a href="../Document/Graphics/Interfaces/gsn_csm_blank_plot.html"><strong>gsn_csm_blank_plot</strong></a> function
+is used to create a blank plot, and then we draw the
+table in the same location.  We also attach a separate
+labelbar using <a href="../Document/Graphics/Interfaces/gsn_create_labelbar.html"><strong>gsn_create_labelbar</strong></a>
+and
+<a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a>.  We had to set
+the vpXXXX resources for the blank plot to make sure we left room to
+add the labelbar on the outside.
+<p>
+
+This example reads dummy data from
+the <a href="Data/asc/table4.txt">table4.txt</a> file.
+</div>
+
+<div class=ex>
+<!--Table_5-->
+<a name=ex5></a>
+<a href="Images/table_5_lg.png">
+<img src="Images/table_5_sm.png" align=left border=2></a>
+<a href="Scripts/table_5.html">table_5.ncl</a>: 
+
+This example shows how to use <a href="../Document/Graphics/Interfaces/gsn_table.html"><strong>gsn_table</strong></a>
+to create a monthly calendar. Each calendar contains
+three tables: the main title, the day of the week heading, and the 
+days of the month. The position of each table is determined by using
+position information from the previous table.
+<p>
+
+Command line options can be used to indicate how the calendar(s) are
+to be generated:
+<p>
+
+<ul>
+<li>Calendar for current month and year:
+<p>
+
+<pre>
+   ncl table_5.ncl
+</pre>
+
+<li>Calendar for a particular month:
+<p>
+
+<pre>
+   ncl month=10 table_5.ncl
+</pre>
+
+<li>Calendar for a particular month and year:
+<p>
+
+<pre>
+   ncl month=9 year=2010 table_5.ncl
+</pre>
+
+<li>All calendars for the current year:
+<p>
+
+<pre>
+   ncl ALL_MONTHS=True table_5.ncl
+</pre>
+
+<li>All calendars for a given year:
+<p>
+
+<pre>
+   ncl ALL_MONTHS=True year=2011 table_5.ncl
+</pre>
+</ul>
+
+</div>
+
+<div class=ex>
+<!--Indices_2-->
+<a name=ex2></a>
+<a href="Images/indices_oni_1_lg.png">
+<img src="Images/indices_oni_1_sm.png" align=left border=2></a>
+<a href="Images/indices_oni_table_1_lg.png">
+<img src="Images/indices_oni_table_1_sm.png" align=left border=2></a>
+<a href="Scripts/indices_oni_1.html">indices_oni_1.ncl</a>:
+NOAA's operational definitions of El Ni&ntilde;o and La Ni&ntilde;a conditions are based
+upon the <i>Oceanic Ni&ntilde;o Index</i> [<b>ONI</b>]. The ONI is defined as
+the <b>3</b>-month running means of SST anomalies in the Ni&ntilde;o 3.4
+region [5N-5S, 120-170W]. The anomalies
+are derived from the 1971-2000 SST climatology.
+<p>
+The Ni&ntilde;o 3.4 anomalies may be thought of as representing the average equatorial
+SSTs across the Pacific from about the dateline to the South American coast.
+To be classified as a full-fledged El Ni&ntilde;o and La Ni&ntilde;a episode the ONI must exceed
++0.5 [El Ni&ntilde;o] or -0.5 [La Ni&ntilde;a] for at least five consecutive months.
+<p>
+</div>
+
+<div class=ex>
+<!--Table_6-->
+<a name=ex6></a>
+<a href="Images/table_6_lg.png">
+<img src="Images/table_6_sm.png" align=left border=2></a>
+<a href="Scripts/table_6.html">table_6.ncl</a>: 
+
+This example is similar to example 4, except it draws filled triangles
+to represent ranges of values.<p>
+
+The <a href="../Document/Graphics/Interfaces/gsn_csm_blank_plot.html"><strong>gsn_csm_blank_plot</strong></a> function was
+used to create a blank plot, and the filled triangles were added using
+<a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> 
+and
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--Table_7--> <a name=ex7></a>
+<a href="Images/table_7_1_lg.png">
+<img src="Images/table_7_1_sm.png" align=left border=2></a>
+<a href="Images/table_7_2_lg.png">
+<img src="Images/table_7_2_sm.png" align=left border=2></a>
+<a href="Scripts/table_7.html">table_7.ncl</a>: This script
+shows how to draw filled gridded cells using 
+<a href="../Document/Graphics/Interfaces/gsn_csm_blank_plot.html"><strong>gsn_csm_blank_plot</strong></a> 
+and <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>.
+<p>
+
+The <a href="../Document/Functions/Contributed/closest_val.html"><strong>closest_val</strong></a>
+function is used to find the closest integer value to
+each data value, and that cell is then filled in the
+appropriate color.
+<p>
+
+The second frame shows how to annotate the plot using
+<a href="../Document/Graphics/Interfaces/gsn_create_labelbar.html"><strong>gsn_create_labelbar</strong></a>
+for a labelbar and <a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a>
+for text strings.
+<p>
+
+This script is based on one written by Yang Zhao 
+of the Chinese Academy of Meteorological Sciences.
+
+</div>
+
+<div class=ex>
+<!--Table_8-->
+<a name=ex8></a>
+<a href="Images/table_8_lg.png">
+<img src="Images/table_8_sm.png" align=left border=2></a>
+<a href="Images/table_text_8_lg.png">
+<img src="Images/table_text_8_sm.png" align=left border=2></a>
+<a href="Scripts/table_8.html">table_8.ncl</a>: 
+
+This example is similar to table_6.ncl, except it draws four triangles
+per each quadrant. The bottom triangles represent the minimum of the
+values, the top triangles represent the maximum of the values, the
+left triangles represent the average, and the right triangles the
+standard deviation. Each set of triangles has their own color map,
+illustrated by the four labelbars.
+<p>
+
+The second image is from running the script with nvars=5, nmodels=5, and ADD_TEXT=True.
+This is just for debugging purposes, so you can see what each triangle value is equal
+to.
+<p>
+
+Dummy data is used, which is generated by the script.
+<p>
+
+
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/table.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:14:40 GMT -->
+</html>
+
+

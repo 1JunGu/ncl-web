@@ -1,0 +1,574 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/str_split_by_length.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:14 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (string manipulators)">
+<meta name="keywords" content="str_split_by_length">
+<title>str_split_by_length</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../string.html">String manipulation</a>
+<br>
+<h1>str_split_by_length</h1>
+
+<p>
+Splits a string or strings into an array of strings given a length, or an array of lengths.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.0.0">version 6.0.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function str_split_by_length (
+		string_val [*] : string,   
+		length_val [*] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [*] :  string
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>string_val</em>
+<p class=indent>The input string(s) to split.
+</p>
+<em>length_val</em>
+<p class=indent>The length(s) of which to split the string(s) into.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+An array of strings.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function splits string(s) based on a length or a length array.
+If the sum of the length array is larger than the length of the input string,
+then missing values are is assigned to the sub-strings beyond the input string length.
+<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="str_split.html"><strong>str_split</strong></a>,
+<a href="str_split_csv.html"><strong>str_split_csv</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<b>Example 1</b><p>
+
+Split string(s) by length, or by array of length
+<p>
+
+<pre>
+ digit_strings = (/"012345678901234567890123456789", "01234567898765432100123456789876543210"/)
+ alpha_strings = (/"abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"/)
+ dtime_strings = (/"20010203040506", "200203040506", "20030405", "200405060708", "20050607080910"/)
+
+ tst_digit = <strong>str_split_by_length</strong>(digit_strings, 1)
+ tst_alpha = <strong>str_split_by_length</strong>(alpha_strings, 2)
+
+ dtime_map = (/4,2,2,2,2,2/)
+ tst_dtime = <strong>str_split_by_length</strong>(dtime_strings, dtime_map)
+
+ <a href="print.html"><strong>print</strong></a>(tst_digit)
+ <a href="print.html"><strong>print</strong></a>(tst_alpha)
+ <a href="print.html"><strong>print</strong></a>(tst_dtime)
+
+ <a href="print.html"><strong>print</strong></a>("dtime_year  : " + tst_dtime(:,0))
+ <a href="print.html"><strong>print</strong></a>("dtime_month : " + tst_dtime(:,1))
+ <a href="print.html"><strong>print</strong></a>("dtime_day   : " + tst_dtime(:,2))
+ <a href="print.html"><strong>print</strong></a>("dtime_hour  : " + tst_dtime(:,3))
+ <a href="print.html"><strong>print</strong></a>("dtime_minute: " + tst_dtime(:,4))
+ <a href="print.html"><strong>print</strong></a>("dtime_second: " + tst_dtime(:,5))
+</pre>
+<p>
+
+Output will be:
+<p>
+
+<pre>
+Variable: tst_digit
+Type: string
+Total Size: 304 bytes
+            76 values
+Number of Dimensions: 2
+Dimensions and sizes:	[2] x [38]
+Coordinates: 
+(0,0)	0
+(0,1)	1
+(0,2)	2
+(0,3)	3
+(0,4)	4
+(0,5)	5
+(0,6)	6
+(0,7)	7
+(0,8)	8
+(0,9)	9
+(0,10)	0
+(0,11)	1
+(0,12)	2
+(0,13)	3
+(0,14)	4
+(0,15)	5
+(0,16)	6
+(0,17)	7
+(0,18)	8
+(0,19)	9
+(0,20)	0
+(0,21)	1
+(0,22)	2
+(0,23)	3
+(0,24)	4
+(0,25)	5
+(0,26)	6
+(0,27)	7
+(0,28)	8
+(0,29)	9
+(0,30)	missing
+(0,31)	missing
+(0,32)	missing
+(0,33)	missing
+(0,34)	missing
+(0,35)	missing
+(0,36)	missing
+(0,37)	missing
+(1,0)	0
+(1,1)	1
+(1,2)	2
+(1,3)	3
+(1,4)	4
+(1,5)	5
+(1,6)	6
+(1,7)	7
+(1,8)	8
+(1,9)	9
+(1,10)	8
+(1,11)	7
+(1,12)	6
+(1,13)	5
+(1,14)	4
+(1,15)	3
+(1,16)	2
+(1,17)	1
+(1,18)	0
+(1,19)	0
+(1,20)	1
+(1,21)	2
+(1,22)	3
+(1,23)	4
+(1,24)	5
+(1,25)	6
+(1,26)	7
+(1,27)	8
+(1,28)	9
+(1,29)	8
+(1,30)	7
+(1,31)	6
+(1,32)	5
+(1,33)	4
+(1,34)	3
+(1,35)	2
+(1,36)	1
+(1,37)	0
+
+
+Variable: tst_alpha
+Type: string
+Total Size: 104 bytes
+            26 values
+Number of Dimensions: 2
+Dimensions and sizes:	[2] x [13]
+Coordinates: 
+(0,0)	ab
+(0,1)	cd
+(0,2)	ef
+(0,3)	gh
+(0,4)	ij
+(0,5)	kl
+(0,6)	mn
+(0,7)	op
+(0,8)	qr
+(0,9)	st
+(0,10)	uv
+(0,11)	wx
+(0,12)	yz
+(1,0)	AB
+(1,1)	CD
+(1,2)	EF
+(1,3)	GH
+(1,4)	IJ
+(1,5)	KL
+(1,6)	MN
+(1,7)	OP
+(1,8)	QR
+(1,9)	ST
+(1,10)	UV
+(1,11)	WX
+(1,12)	YZ
+
+
+Variable: tst_dtime
+Type: string
+Total Size: 120 bytes
+            30 values
+Number of Dimensions: 2
+Dimensions and sizes:	[5] x [6]
+Coordinates: 
+(0,0)	2001
+(0,1)	02
+(0,2)	03
+(0,3)	04
+(0,4)	05
+(0,5)	06
+(1,0)	2002
+(1,1)	03
+(1,2)	04
+(1,3)	05
+(1,4)	06
+(1,5)	missing
+(2,0)	2003
+(2,1)	04
+(2,2)	05
+(2,3)	missing
+(2,4)	missing
+(2,5)	missing
+(3,0)	2004
+(3,1)	05
+(3,2)	06
+(3,3)	07
+(3,4)	08
+(3,5)	missing
+(4,0)	2005
+(4,1)	06
+(4,2)	07
+(4,3)	08
+(4,4)	09
+(4,5)	10
+(0)	dtime_year  : 2001
+(1)	dtime_year  : 2002
+(2)	dtime_year  : 2003
+(3)	dtime_year  : 2004
+(4)	dtime_year  : 2005
+(0)	dtime_month : 02
+(1)	dtime_month : 03
+(2)	dtime_month : 04
+(3)	dtime_month : 05
+(4)	dtime_month : 06
+(0)	dtime_day   : 03
+(1)	dtime_day   : 04
+(2)	dtime_day   : 05
+(3)	dtime_day   : 06
+(4)	dtime_day   : 07
+(0)	dtime_hour  : 04
+(1)	dtime_hour  : 05
+(2)	dtime_hour  : missing
+(3)	dtime_hour  : 07
+(4)	dtime_hour  : 08
+(0)	dtime_minute: 05
+(1)	dtime_minute: 06
+(2)	dtime_minute: missing
+(3)	dtime_minute: 08
+(4)	dtime_minute: 09
+(0)	dtime_second: 06
+(1)	dtime_second: missing
+(2)	dtime_second: missing
+(3)	dtime_second: missing
+(4)	dtime_second: 10
+</pre>
+<p>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/str_split_by_length.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:14 GMT -->
+</html>

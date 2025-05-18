@@ -1,0 +1,550 @@
+<html>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Diagnostics/wkSpaceTime.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:23 GMT -->
+<head>
+<meta name="description" content="NCL diagnostics_cam.ncl functions (cesm)">
+<meta name="keywords" content="wkSpaceTime">
+<title>wkSpaceTime</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../cesm.html">CESM</a>
+<br>
+<h1>wkSpaceTime</h1>
+
+<p>
+Calculates Wheeler-Kiladis space-time spectra.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#5.1.0">version 5.1.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"        ; These three libraries are <b>automatically</b>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"         ; <b>loaded</b> from NCL V6.2.0 onward.
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"     ; No need for user to explicitly load.
+
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/diagnostics_cam.ncl" ; Still need to load this library.
+
+	procedure wkSpaceTime (
+		x  [*][*][*] : numeric,  ; float or double
+		diro     [1] : string,   
+		caseName [1] : string,   
+		varName  [1] : string,   
+		latBound [*] : numeric,  
+		spd      [1] : numeric,  
+		nDayWin  [1] : integer,  
+		nDaySkip [1] : integer,  
+		opt      [1] : logical   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  graphical output
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>The variable array to be used. Must be type <i>float</i> or <i>double</i>.
+</p>
+<em>diro</em>
+<p class=indent>Directory where output graphics will be placed.
+</p>
+<em>caseName</em>
+<p class=indent>Unique identifier which will be placed on plot.
+Typically, the is the CAM case identifier. Spaces are <b>not</b> allowed
+because it is used as part of the output file name.
+</p>
+<em>varName</em>
+<p class=indent>Name of the variable to be processed. See "Description" section below.
+</p>
+<em>latBound</em>
+<p class=indent>Latitude boundary. If this is a scalar,
+the southern latitude boundary will
+automatically be set to <em>-latBound</em>. If it is a one-dimensional
+array of length 2, then <em>latBound(0)</em> will be the southern
+boundary and <em>latBound(1)</em> will be the northern boundary,
+</p>
+<em>spd</em>
+<p class=indent>Sampling rate ("samples per day") on the input file(s). 
+Typically, <em>spd</em> is one of the following [1,2,4,8,12,24]. 
+These correspond to [24,12,6,3,2,1] hour sampling rates.
+</p>
+<em>nDayWin</em>
+<p class=indent>Length of the temporal window in days. Typically, for Wheeler-Kiladis
+space-time spectra, <em>nDayWin</em>=96.
+</p>
+<em>nDaySkip</em>
+<p class=indent>Number of days to skip between temporal windows. 
+A negative value means that overlapping windows will be used.
+For example, if <em>nDayWin</em>=96 and <em>nDaySkip</em>=-65, then the
+last 65 days of the previous temporal window will be included
+in the current temporal window.
+</p>
+<em>opt</em>
+<p class=indent>If <em>opt</em>=False, the function will operate under default mode
+regardless of any attributes associated with the variable.
+</p>
+<p class=indent>
+If <em>opt</em>=True, then attributes associated with  <em>opt</em>
+may be used to alter the default behavior.
+</p>
+<p class=indent>
+<DL>
+
+<DD><em>opt</em>@<em>debug</em>=True: 
+    Multiple <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a> will be activated.  
+    Default: <em>opt</em>@<em>debug</em>=False.
+</p>
+<p class=indent>
+<DD><em>opt</em>@<em>pltType</em>  - 
+        If <em>opt</em>=True and this attribute
+	is present, then this attribute will specify the output format
+	of the plots. Allowed formats are "ps", "eps",
+        "x11", "ncgm".	Default: "ps"
+</p>
+<p class=indent>
+<DD><em>opt</em>@<em>pltTitle</em>  - 
+        If <em>opt</em>=True and this attribute
+	is present, then this attribute will specify the main title 
+        to be placed at the top of <b>each</b> figure. 
+        If <em>opt</em>@<em>pltTitle</em>="" or " ",
+        <i>no</i> title will be placed on the plot. Default is:
+<pre>
+        pltTitle = caseName+" "+varName+" LOG[Power: "+latBound+"S-"+latBound+"N]"
+</pre>
+</p>
+<p class=indent>
+<DD><em>opt</em>@<em>pltColorMap</em>  - 
+        If <em>opt</em>=True and this attribute
+	is present, then this attribute will specify color map to be used.  
+        Currently, the color map 
+<a href="../../Graphics/ColorTables/amwg_blueyellowred.html">amwg_blueyellowred</a>
+        is the default.
+</p>
+<p class=indent>
+<DD><em>opt</em>@<em>cnLinesOn</em>  - 
+        If <em>opt</em>=True and this attribute
+	is present, then this attribute will specify if contour lines   
+        are to be plotted. If, <em>opt</em>@<em>cnLinesOn</em>=False,
+        then no contour lines will be drawn. 
+        Default: <em>opt</em>@<em>cnLinesOn</em>=True 
+</p>
+<p class=indent>
+<DD><em>opt</em>@<em>Fig_1</em>  - 
+        If <em>opt</em>=True and this attribute
+	is present, then this attribute will explicitly specify the contour 
+	levels to be used for "Figure 1" of the Wheeler-Kiladis paper. It is
+        recommended that 15 contour levels be specified. EG:
+<pre>
+        opt@Fig_1 = <a href="../Built-in/fspan.html"><strong>fspan</strong></a>(-3.3, 0.9, 15)                          ; equal spacing 
+        or
+        opt@Fig_1 = (/-18.2,-18.0,-17.8,-17.6,-17.5,-17.4,-17.3 \ ; unequal
+                     ,-17.2,-17.1,-17.0,-16.9,-16.8,-16.7,-16.6 \
+                     ,-16.5/)
+</pre>
+</p>
+<p class=indent>
+<DD><em>opt</em>@<em>Fig_2</em>  - If <em>opt</em>=True and this attribute
+	is present, then this attribute will explicitly specify the contour 
+	levels to be used for "Figure 2" of the Wheeler-Kiladis paper.
+	This is the "background" spectrum.
+</p>
+<p class=indent>
+<DD><em>opt</em>@<em>Fig_3a</em>  - If <em>opt</em>=True and this attribute
+	is present, then this attribute will explicitly specify the contour 
+	levels to be used for "Figure 3a" of the Wheeler-Kiladis paper.
+	This is the ratio of the (asymmetric/background).
+</p>
+<p class=indent>
+<DD><em>opt</em>@<em>Fig_3b</em>  - If <em>opt</em>=True and this attribute
+	is present, then this attribute will explicitly specify the contour 
+	levels to be used for "Figure 3b" of the Wheeler-Kiladis paper.
+	This is the ratio of the (symmetric/background).
+</p>
+<p class=indent>
+<DD><em>opt</em>@<em>spdSkip</em>  - If <em>opt</em>=True and this attribute
+	is present, then this attribute specifies the number of temporal samples to
+        to be skipped on input. The default is <em>opt</em>@<em>spdSkip</em>=1 which
+        means all the data are read from the files. If, say, <em>opt</em>@<em>spdSkip</em>=2,
+        then every other temporal sample will be read. Hence, this attribute <i>decimates</i> the
+        sampling rate. EG: <em>spd</em>=4 (6 hour sampling rate) and <em>opt</em>@<em>spdSkip</em>=2,
+        then the effective sampling rate will be reduced to 2 samples per day. This could 
+        be useful if memory is limited. 
+</p>
+<p class=indent>
+</DL>
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+This procedure will create plots similar to Wheeler and Kiladis figures 1-3.
+<p>
+For historical reasons, this procedure has contour levels 
+'hard-wired' for specific variable names [<em>varName</em>]: 
+"FLUT", "OLR", "olr", "U200", 
+"U850", "OMEGA500" and "PRECT". The contour resource, 
+<a href="../../Graphics/Resources/cn.html#cnLevels"><em>cnLevels</em></a>, 
+is used. If the user wishes to override these contour intervals or, 
+if the <em>varName</em> is not one of the
+hard-wired variables, the user may specify the contour levels to 
+be used via the appropriate <em>opt</em> attributes. Otherwise,
+NCL will automatically choose contour levels.
+
+<pre>
+********************   REFERENCES  *******************************
+ Wheeler, M., G.N. Kiladis 
+    Convectively Coupled Equatorial Waves: 
+    Analysis of Clouds and Temperature in the 
+    Wavenumber-Frequency Domain
+    J. Atmos. Sci., 1999,  56: 374-399.
+---
+ Hayashi, Y.
+    A Generalized Method of Resolving Disturbances into
+    Progressive and Retrogressive Waves by Space and
+    Fourier and TimeCross Spectral Analysis
+    J. Meteor. Soc. Japan, 1971, 49: 125-128.
+</pre>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="wkSpaceTime_cam.html"><strong>wkSpaceTime_cam</strong></a>, 
+<a href="../Contributed/omega_ccm_driver.html"><strong>omega_ccm_driver</strong></a>, 
+<a href="../Built-in/omega_ccm.html"><strong>omega_ccm</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+
+<B>Example 1</B><P>
+
+<PRE>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/diagnostics_cam.ncl"
+
+  case     = "Example_1"
+  diro     = "./"        ; output dir: location of plots
+
+  latN     = 15          ; <em>latBound</em>
+  latS     = -latN       ; symmetric about the equator
+
+  nDayWin  = 96          ; Wheeler-Kiladis [WK] temporal window length (days)
+  nDaySkip = 30          ; time (days) between temporal windows [segments]
+
+  opt      = True
+  opt@debug= True
+  opt@pltType     = "eps"
+  opt@cnLinesOn   = False   ; turn off contour lines
+
+                     ; specify the plot intervals
+  opt@Fig_3a      = <a href="../Built-in/fspan.html"><strong>fspan</strong></a>( 1,2,15)
+  opt@Fig_3b      = (/1.0,1.5,2,3,4,5,6,7,8,9,10,11,13,15,17/)  ; unequal
+
+  spd      = 4       ; samples per day (6 hour sampling rate)
+  var      = "PSFC"  ; user specified
+
+  diri     = "/project/cas/shea/WHEELER/"
+  fili     = "PRES.SFC.nc"
+
+  f        = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>(diri+fili, "r")
+  psfc     = f->pres(:,{latS:latN},:)   
+
+                     ; calculation and create plots
+  <strong>wkSpaceTime</strong> (psfc, diro, case, var             \
+              ,latN, spd, nDayWin, nDaySkip, opt  )
+</PRE>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Diagnostics/wkSpaceTime.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:23 GMT -->
+</html>

@@ -1,0 +1,770 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/mask.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:13:57 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+masking">
+<meta name="keywords" content="NCL, graphics, visualization, mask, masking">
+<TITLE>NCL Graphics: Masking</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: Masking</h1>
+
+<div class=mainimage>
+<img src="Images/mask_1_1_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+Masking refers to the technique of not drawing certain portions of
+your data over areas you are not interested in.
+<p>
+
+Various ways to do masking include:
+
+<ul>
+
+<li>using the <strong>mask</strong> function to change certain
+values in your data to missing,
+
+<li>using <a href="../Document/Functions/Built-in/gc_inout.html"><strong>gc_inout</strong></a> to change certain 
+values in your data to missing,
+
+<li>using graphical resources to control masking,
+
+<li>changing the drawing order of certain plot elements to control
+what gets drawn when.
+
+</ul>
+<p>
+
+You may also want to see the <a href="draworder.html">draw order
+applications page</a> to see examples of controlling graphical masking
+by changing the draw order of certain plot elements.
+
+</div>
+
+<div class=ex>
+<!--mask_1-->
+<a name=ex1></a>
+<a href="Images/mask_1_1_lg.png">
+<img src="Images/mask_1_1_sm.png" align=left border=3></a>
+<a href="Images/mask_1_2_lg.png">
+<img src="Images/mask_1_2_sm.png" align=left border=3></a>
+<a href="Scripts/mask_1.html">mask_1.ncl</a>: Demonstrates the use of
+the <a href="../Document/Functions/Built-in/mask.html">mask</a>
+function and a masking array to mask out land or ocean.
+<p>
+
+The NCL <a href="../Document/Functions/Built-in/mask.html">mask</a>
+function can be a bit confusing. It sets all values to missing that DO
+NOT equal the mask array. To mask out the ocean, you put in the land
+value and vice versa. 
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Masking/NCL_mask_1.html#sphx-glr-gallery-masking-ncl-mask-1-py">here</a>.
+
+</div>
+
+<div class=ex>
+<!--mask_2-->
+<a name=ex2></a>
+<a href="Images/mask_2_lg.png">
+<img src="Images/mask_2_sm.png" align=left border=2></a>
+<a href="Scripts/mask_2.html">mask_2.ncl</a>: Uses resources to draw
+land on top of the contours.
+<p>
+
+<a href="../Document/Graphics/Resources/cn.html#cnFillDrawOrder"><em>cnFillDrawOrder</em></a> = "Predraw"
+draws the contours first. If necessary, you can also specify that the
+contour lines be drawn first as well by setting <a href="../Document/Graphics/Resources/cn.html#cnLineDrawOrder"><em>cnLineDrawOrder</em></a> = "Predraw".
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Masking/NCL_mask_2.html#sphx-glr-gallery-masking-ncl-mask-2-py">here</a>.
+</div>
+
+<div class=ex>
+<!--mask_3-->
+<a name=ex3></a>
+<a href="Images/mask_3_lg.png">
+<img src="Images/mask_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/mask_3.html">mask_3.ncl</a>: Uses the <a
+href="../Document/Functions/Built-in/mask.html">mask</a> function to
+leave only a range of the data.
+
+</div>
+
+<div class=ex>
+<!--mask_4-->
+<a name=ex4></a>
+<a href="Images/mask_4_lg.png">
+<img src="Images/mask_4_sm.png" align=left border=2></a>
+<a href="Scripts/mask_4.html">mask_4.ncl</a>: Uses the <a href="../Document/Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a> and <a href="../Document/Graphics/Resources/mp.html#mpMaskAreaSpecifiers"><em>mpMaskAreaSpecifiers</em></a> resources to indicate
+which map areas to fill and mask.
+
+</div>
+
+<div class=ex>
+<!--mask_5-->
+<a name=ex5></a>
+<a href="Images/mask_5_lg.png">
+<img src="Images/mask_5_sm.png" align=left border=2></a>
+<a href="Scripts/mask_5.html">mask_5.ncl</a>: The shea_util function <a href="../Document/Functions/Shea_util/landsea_mask.html"><strong>landsea_mask</strong></a> 
+can be used to create a landsea mask when one is not available for your particular dataset. This example demonstrates 
+how to use <a href="../Document/Functions/Shea_util/landsea_mask.html"><strong>landsea_mask</strong></a> to calculate a mask based on a particular resolution (in 
+this case t85), and how to apply that mask to mask out all the ocean points from the data array.
+<p>
+The top plot shows the calculated T85 land sea mask. Note that at this resolution some islands (notably Hawaii) are not labeled as 
+land or as small islands. This can be due to a variety of reasons, including the resolution of the data, the resolution of 
+the 1x1 basemap, or whether the centers of the grid boxes are over the islands themselves. Note that the file that is 
+returned by <a href="../Document/Functions/Shea_util/landsea_mask.html"><strong>landsea_mask</strong></a> can be easily modified, as can the basemap that is downloadable 
+off of the <a href="../Document/Functions/Shea_util/landsea_mask.html"><strong>landsea_mask</strong></a> documentation page.
+<p>
+The bottom plot shows a surface temperature field at T85 resolution that has had the ocean points masked out by using the land sea
+mask shown in the top plot. 
+
+</div>
+
+<div class=ex>
+<!--mask_6-->
+<a name=ex6></a>
+<a href="Images/mask_6_lg.png">
+<img src="Images/mask_6_sm.png" align=left border=2></a>
+<a href="Scripts/mask_6.html">mask_6.ncl</a>: This example shows how to
+mask out areas of your data based on a mask shape (a circle in this case).
+<p>
+
+This example also shows how to annotate the map with lines, markers,
+and text, using <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>,
+<a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a>, and
+<a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--mask_7-->
+<a name=ex7></a>
+<a href="Images/mask_7_lg.png">
+<img src="Images/mask_7_sm.png" align=left border=2></a>
+<a href="Scripts/mask_7.html">mask_7.ncl</a>: This example shows how to
+mask out areas of a contour plot that are below a certain threshold, in this case topography. 
+<p>
+The first frame shows the unmasked data array. 
+<p>
+The second frame shows the data array masked by the topography, with the missing areas
+filled via <a href="../Document/Graphics/Resources/cn.html#cnMissingValFillColor"><em>cnMissingValFillColor</em></a>. Note that to use <a href="../Document/Graphics/Resources/cn.html#cnMissingValFillColor"><em>cnMissingValFillColor</em></a>, one also has to set <a href="../Document/Graphics/Resources/cn.html#cnFillOn"><em>cnFillOn</em></a> to True. As we
+do not wish to color fill the contour field in this case, we simply set <a href="../Document/Graphics/Resources/cn.html#cnFillColor"><em>cnFillColor</em></a> to the background
+color (white in this case).
+<p>
+The third frame shows the data array masked by the topography, with the missing areas outlined. <a href="../Document/Graphics/Resources/cn.html#cnMissingValPerimOn"><em>cnMissingValPerimOn</em></a> needs to be set to True to outline the missing areas.
+</div>
+
+<div class=ex>
+<!--mask_8-->
+<a name=ex8></a>
+<a href="Images/mask_8_lg.png">
+<img src="Images/mask_8_sm.png" align=left border=2></a>
+<a href="Images/mask_dummy_8_lg.png">
+<img src="Images/mask_dummy_8_sm.png" align=left border=2></a>
+<a href="Scripts/mask_8.html">mask_8.ncl</a> /
+
+<a href="Scripts/mask_dummy_8.html">mask_dummy_8.ncl</a>: This example
+shows how to using masking resources to draw only the counties of
+Wisconsin, United States and to mask other areas.
+It uses the <a href="../Document/Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a> and
+<a href="../Document/Graphics/Resources/mp.html#mpMaskAreaSpecifiers"><em>mpMaskAreaSpecifiers</em></a> resources to
+indicate which map areas to fill and mask.
+<p>
+
+The "mask_8.ncl" script is the original script that reads the data
+from a NetCDF file. The "mask_dummy_8.ncl" script uses dummy data.
+The "landsea.nc" file can be downloaded
+from <a href="Data/index.html#cdf">http://www.ncl.ucar.edu/Applications/Data/#cdf</a>
+<p>
+
+To get the counties of Wisconsin, <a href="../Document/Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a> must be set to "Earth..2" and
+<a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> to "MediumRes".  The
+counties are drawn and filled by setting <a href="../Document/Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a> and <a href="../Document/Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a> to "Wisconsin:counties".
+<p>
+
+This script was contributed by Dr. Michael Notaro, a scientist at the
+Center for Climatic Research, University of Wisconsin-Madison.
+
+</div>
+
+<div class=ex>
+<!--mask_9-->
+<a name=ex9></a>
+<a href="Images/mask_9_1_lg.png">
+<img src="Images/mask_9_1_sm.png" align=left border=3></a>
+<a href="Images/mask_9_2_lg.png">
+<img src="Images/mask_9_2_sm.png" align=left border=3></a>
+<a href="Images/mask_9_3_lg.png">
+<img src="Images/mask_9_3_sm.png" align=left border=3></a>
+<a href="Scripts/mask_9.html">mask_9.ncl</a>: Demonstrates
+using <a href="../Document/Functions/Built-in/gc_inout.html"><strong>gc_inout</strong></a> to mask an area in your
+data array using a geographical outline.
+<p>
+
+This particular example reads
+a <a href="shapefiles.html">shapefile</a> to get an outline of the
+Mississippi River Basin. You then have the option of masking out all
+areas inside or outside this outline.
+
+</div>
+
+<div class=ex>
+<!--mask_10-->
+<a name=ex10></a>
+<a href="Images/mask_10_1_lg.png">
+<img src="Images/mask_10_1_sm.png" align=left border=3></a>
+<a href="Images/mask_10_2_lg.png">
+<img src="Images/mask_10_2_sm.png" align=left border=3></a>
+<a href="Images/mask_10_3_lg.png">
+<img src="Images/mask_10_3_sm.png" align=left border=3></a>
+<a href="Scripts/mask_10.html">mask_10.ncl</a>: Demonstrates how to
+overlay a cell fill plot on a raster plot, filling the missing value
+areas of the cell fill plot with transparency so you can see the first
+contour plot underneath.
+<p>
+
+The <a href="../Document/Graphics/Resources/cn.html#cnMissingValFillColor"><em>cnMissingValFillColor</em></a> resource 
+is set to -1 to get the transparency. You have to use a
+<a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a> of "CellFill" for the
+second plot, because transparency isn't available for
+"RasterFill". ("AreaFill", the default, would also work.)
+
+</div>
+
+<div class=ex>
+<!--mask_11-->
+<a name=ex11></a>
+<a href="Images/mask_11_lg.png">
+<img src="Images/mask_11_sm.png" align=left border=3></a>
+<a href="Scripts/mask_11.html">mask_11.ncl</a>: Similar to <a href="#ex8">example 8</a>, 
+this script shows how to show a color filled contour field only over those areas 
+specified in <a href="../Document/Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>. 
+<p>
+In this example the <a href="../Document/HLUs/Classes/MapPlotData4_1_earth_4.html">Earth..4</a> 
+database is used by setting the <a href="../Document/Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a> resource. This database
+has many areas, and all can be specified in <a href="../Document/Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>. Note that under the
+Area Name column in the table on the <a href="../Document/HLUs/Classes/MapPlotData4_1_earth_4.html">Earth..4</a> page there
+are a number of words bolded. The bolded part of the area name is unique, and can be used to specify a specific area. 
+<p>
+The following areas were specified: (/"Arizona","New Mexico","Conterminous US: Utah",
+"Conterminous US: Colorado", "Great Salt Lake"/). The reason "Conterminous US" was needed
+before Colorado and Utah is because there are other areas in the <a href="../Document/HLUs/Classes/MapPlotData4_1_earth_4.html">Earth..4</a>
+database named Utah and Colorado, namely Utah county in Utah and Colorado county in Texas. As these areas are being specified in 
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a> and <a href="../Document/Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>, these areas would 
+also be outlined and filled if "Conterminous US" was not present. The reason Great Salt Lake was specified is because 
+all inland water areas were being map color filled white, and by specifying Great Salt Lake in 
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a> and <a href="../Document/Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a> NCL will not
+color fill the lake white. 
+</div>
+
+<div class=ex>
+<!--mask_12-->
+<a name=ex12></a>
+<a href="Images/mask_12_lg.png">
+<img src="Images/mask_12_sm.png" align=left border=3></a>
+<a href="Scripts/mask_12.html">mask_12.ncl</a>: This example shows how
+to use a shapefile that contains polygon outlines to create a data
+mask for a variable with 1D coordinate arrays. The mask array is then
+written to a copy of the input file.
+<p>
+
+In this case, the shapefile contains coastal outlines, which a land
+mask is created from. See the function "create_mask_from_shapefile"
+in the "mask_12.ncl" script. This function only works for data that
+contains coordinate arrays. You will need to modify it to work with
+curvilinear or unstructured data.
+<p>
+
+You should be able to use any shapefile that contains polygon data
+(point and polyline data won't work) to create the desired mask.
+<p>
+
+The shapefile used in this example was part of a compressed file,
+"GSHHS_shp_2.2.0.zip", downloaded from:<br>
+<blockquote>
+<a href="http://www.ngdc.noaa.gov/mgg/shorelines/data/gshhs/oldversions/version2.2.0/">
+http://www.ngdc.noaa.gov/mgg/shorelines/data/gshhs/oldversions/version2.2.0/</a>
+</blockquote>
+<p>
+
+You need to uncompress it with the "unzip" command.  You can use any
+of the other shapefiles that are included with this file, but they are
+potentially a higher resolution, and hence creating the mask will take
+longer.
+
+</div>
+
+<div class=ex>
+<!--mask_13-->
+<a name=ex13></a>
+<a href="Images/mask_13_lg.png">
+<img src="Images/mask_13_sm.png" align=left border=3></a>
+<a href="Scripts/mask_13.html">mask_13.ncl</a>: This example
+uses the same "create_mask_from_shapefile" function as the
+previous example, to compare the mask with the "ORO" mask
+already on the file (same data used in example mask_1.ncl).
+
+</div>
+
+<div class=ex>
+<!--overlay_11-->
+<a href="Images/overlay_11_lg.png">
+<img src="Images/overlay_11_sm.png" align=left border=2></a>
+<a href="Scripts/overlay_11.html">overlay_11.ncl</a>: 
+
+This example shows how to overlay vectors on top of a filled contour plot,
+where the contours are masked by a geographical area and the vectors
+are not.  The masking is accomplished by setting:
+<p>
+
+<pre>
+  mpres@<a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a>   = "MediumRes"
+  mpres@<a href="../Document/Graphics/Resources/mp.html#mpMaskAreaSpecifiers"><em>mpMaskAreaSpecifiers</em></a> = (/"China:states","Taiwan"/)
+</pre>
+<p>
+
+The mask area specifier names are part of the
+<a href="../Document/HLUs/Classes/MapPlot.html#Pre-Defined-String-Constants-Ncarg4_1">predefined group
+names</a> available in the "MediumRes" map database.
+<p>
+
+This script was written by Yang Zhao (CAMS) (Chinese Academy of
+Meteorological Sciences).
+
+</div>
+
+<div class=ex>
+<!--mask_14-->
+<a name=ex14></a>
+<a href="Images/mask_14_lg.png">
+<img src="Images/mask_14_sm.png" align=left border=3></a>
+<a href="Scripts/mask_14.html">mask_14.ncl</a>: This example
+shows how to mask data based on terrain data read from a separate
+file.  The terrain data is regridded to the data to be masked
+using <a href="../Document/Functions/Contributed/area_hi2lores_Wrap.html"><strong>area_hi2lores_Wrap</strong></a>.
+<p>
+
+This script was written by Yang Zhao (CAMS) (Chinese Academy of
+Meteorological Sciences).
+
+</div>
+
+<div class=ex>
+<!--mask_15-->
+<a name=ex15></a>
+<a href="Images/mask_15_lg.png">
+<img src="Images/mask_15_sm.png" align=left border=3></a>
+<a href="Scripts/mask_15.html">mask_15.ncl</a>: This example
+shows how to draw two filled contour plots on top of one
+another. The top plot has a rectangular "hole" of missing
+data, allowing you to see part of the base plot underneath.
+<p>
+
+The original version of this script was written by Yang Zhao and
+Yuhong Wang (CAMS) (Chinese Academy of Meteorological Sciences).
+</div>
+
+<div class=ex>
+<a name=Katrina_circle></a>
+<a href="Images/Katrina_circle_lg.png">
+<img src="Images/Katrina_circle_sm.png" align=left border=2></a>
+<a href="Scripts/Katrina_circle.html">Katrina_circle.ncl</a>:
+This script plots the 5-day running average of precipitation for an
+entire year (2005). It shows a unique way of displaying filled
+contours in a circle, by using <a href="../Document/Functions/Built-in/nggcog.html"><strong>nggcog</strong></a> in conjunction
+with <a href="../Document/Functions/Built-in/gc_inout.html"><strong>gc_inout</strong></a> to mask data inside a great circle.
+<p>
+
+See the <a href="unique.html#Katrina_circle">Unique examples page</a>
+for another version of this script that generates a histogram of the values,
+and for an animation of both scripts.
+<p>
+
+This code was contributed by Jake Huff, a Masters student in the
+Climate Extremes Modeling Group at Stony Brook University.
+
+</div>
+
+<div class=ex>
+<!--mask_16-->
+<a name=ex16></a>
+<a href="Images/mask_16_lg.png">
+<img src="Images/mask_16_sm.png" align=left border=3></a>
+<a href="Scripts/mask_16.html">mask_16.ncl</a> / 
+<a href="Scripts/mask_annotate_16.html">mask_annotate_16.ncl</a>:
+
+This example, which uses dummy data, shows how to draw filled contours over gray land,
+with the ocean filled in white to mask out the filled contours over ocean.
+The dummy data was generated using <a href="../Document/Functions/Built-in/generate_2d_array.html"><strong>generate_2d_array</strong></a>, with
+random missing values added for illustrative purposes. For an example using real data
+see examples mask_17.ncl / mask_annotate_17.ncl below.<p>
+
+In order to draw filled land, followed by filled contours, followed
+by filled ocean, you have to create two plots.<p>
+
+The mask_16.ncl script creates and draws the contour/map plot twice:
+the first time with filled contours drawn over gray land and
+transparent ocean (the ocean color is arbitrary), and second time with
+the ocean filled in white, the land transparent, and the filled
+contours also transparent so you don't end up with filled contours
+over ocean again.<p>
+
+The mask_annotate_16.ncl script creates a contour/map plot with filled contours
+over gray land and transparent ocean and a map only plot of the exact same size
+with white ocean and transparent land. You then have two choices for drawing the two plots:
+you can simply draw both of them, or you can add one as an annotation of the other using 
+<a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a>. Both methods are shown in this script, 
+and they both produce the same image. The annotation method is generally the preferred method,
+because this will allow you to panel a series of these plots later with 
+<a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--mask_17-->
+<a name=ex17></a>
+<a href="Images/mask_17_lg.png">
+<img src="Images/mask_17_sm.png" align=left border=3></a>
+<a href="Scripts/mask_17.html">mask_17.ncl</a> / <a href="Scripts/mask_annotate_17.html">mask_annotate_17.ncl</a>:
+<p>
+This example is similar to mask_16.ncl, except it uses precipitation data
+read off a NetCDF file. See the <a href="#ex16">description above</a>
+for a description of how the map is being masked.<p>
+<p>
+For more information about this particular dataset, see example
+gpm_1.ncl on the <a href="HiResPrc.html">high-resolution
+precipitation page</a>.
+<p>
+</div>
+
+<div class=ex>
+<!--mask_18-->
+<a name=ex18></a>
+<a href="Images/mask_18_1_lg.png">
+<img src="Images/mask_18_1_sm.png" align=left border=3></a>
+<a href="Images/mask_18_2_lg.png">
+<img src="Images/mask_18_2_sm.png" align=left border=3></a>
+<a href="Scripts/mask_18.html">mask_18.ncl</a>: This example
+shows how to create a lat/lon polygon from the boundary of a lambert
+conformal plot, and then use this polygon to mask data with
+<a href="../Document/Functions/Built-in/gc_inout.html"><strong>gc_inout</strong></a>. See the "get_latlon_bounding_polygon"
+and "create_mask_array" functions.
+<p>
+
+The data being masked is a simple 2D array which has coordinate
+arrays. If you need to mask data that is not rectilinear, then you'll
+need to modify the "create_mask_array" function and change lat1d/lon1d
+to represent your lat/lon grid or mesh.
+<p>
+
+Both images contain the original data in the top plot, and the masked
+data in the bottom plot. The first image has primitives added (markers
+and lines) to show the location of the lambert conformal boundary, and
+the location of the missing and non-missing data.
+
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/mask.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:14:09 GMT -->
+</html>
+

@@ -1,0 +1,506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/precip_rain_snow.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:04 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (meteorology)">
+<meta name="keywords" content="precip_rain_snow">
+<title>precip_rain_snow</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../crop.html">Crop</a>,
+<a class=crumb href="../meteo.html">Meteorology</a>
+<br>
+<h1>precip_rain_snow</h1>
+
+<p>
+Partition monthly precipitation totals into rain and snow amount using an empirical relationship.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.6.0">version 6.6.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function precip_rain_snow (
+		prc    : numeric,  
+		tmp    : numeric,  
+		train  : numeric,  
+		tsnow  : numeric   
+	)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>prc</em>
+<p class=indent>Monthly precipitation total amount.
+</p>
+<em>tmp</em>
+<p class=indent>Monthly mean temperature. It must have the same size and shape as <em>prc</em>.
+</p>
+<em>train</em>
+<p class=indent>Rain temperature threshold with the same units as <em>tmp</em>  
+This can be a scalar or array. If an array, it must have 
+the same size and shape as <em>tmp</em>.  A value equivalent to <em>train</em>=3.3C 
+(38F, 276K) is commonly used.
+</p>
+<em>tsnow</em>
+<p class=indent>Snow temperature threshold.   This can be a scalar or array. If an array, it must have 
+the same size and shape as <em>tmp</em>.
+<em>tsnow</em> varies by elevation.  At elevations below 1000m, 
+<em>tsnow</em>=-10.0C (14F, 263K) is suggested while for elevations 
+above 1000m <em>tsnow</em>=-1.0C (30.2F, 272K) may be more appropriate.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A variable of type '<b>list</b>' containing two arrays rain and snow. Each returned array will 
+have the same size and shape as <em>prc</em>.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<p>
+In many archives, precipitation amount is available as one quantity consisting of rain and (melted)
+snow amount. For certain applications separate estimates are needed.
+Using temperature thresholds for both snow and rain, <strong>precip_rain_snow</strong> 
+will partition the total precipitation (<em>prc</em>) into snow ('prc_snow') and rain ('prc_rain') amounts.
+<p>
+This is based on an empirical relationship.
+Where <em>tmp</em> is greater than <em>train</em> the <em>prc</em> is considered to be all rain. 
+Where <em>tmp</em> is less than <em>tsnow</em>  the <em>prc</em> is considered to be all snow. 
+Between <em>tsnow</em>  and <em>train</em>, the amount of precipitation that is snow decreases 
+linearly from 100 percent to 0 percent of total precipitation. For <em>tmp</em> within the 
+<em>tsnow</em>  and <em>train</em> temperature range:  
+<pre>
+     prc_snow = <em>prc</em>*[(<em>train</em>-<em>tmp</em>)/(<em>train</em>-<em>tsnow</em>)]
+     prc_rain = <em>prc</em>-prc_snow
+</pre>
+All appropriate metadata are returned.
+<p>
+Rather than use fixed constants for <em>train</em> and/or <em>tsnow</em>,
+the user may wish to create an array for <em>train</em> and/or <em>tsnow</em> that is a 
+function of elevation, latitude and longitude. However,  
+the array size and shape must conform to <em>tmp</em>. 
+<pre>
+
+<b>References:</b>
+   McCabe, G.J., and S.L. Markstrom, 2007
+  <a href="https://pubs.usgs.gov/of/2007/1088/pdf/of07-1088_508.pdf"><b> A Monthly Water-Balance Model Driven By A Graphical User Interface</b></a>
+   U.S. Geological Survey Open-File report 2007-1088, 6 pp.
+
+   Wolock, D.M., and McCabe, G.J., 1999 
+   Effects of potential climatic change on annual runoff in the conterminous United States 
+   Journal of the American Water Resources Association, v. 35, p. 1,341-1,350.
+</pre>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../contributed.html"><b>Crop and Evapotranspiration functions</b></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+<b>Example 1:</b> For illustration, set a constant <em>prc</em> and linearly vary <em>tmp</em> such
+that the values span -20C to 10C.  
+<p>
+<pre>
+  train = 3.3              ; suggested values for degC                   
+  tsnow = -10.0
+
+  N     = 31
+  prc   = <a href="../Built-in/new.html"><strong>new</strong></a>( N, float)
+  prc   = 100              ; set constant for illustration
+  prc@units = "mm"
+
+; MIX: set all tmp => all-snow, mix (snow and rain), all-rain
+
+  tmp   = <a href="../Built-in/fspan.html"><strong>fspan</strong></a>(-20,10,N)
+  tmp@units = "degC"
+  RS    = <strong>precip_rain_snow</strong>(prc, tmp, train, tsnow)   
+  prain = RS[0]            ; explicitly extract for clarity and convenience
+  psnow = RS[1]
+  <a href="../Built-in/delete.html"><strong>delete</strong></a>( RS )             
+  <a href="../Built-in/print.html"><strong>print</strong></a>(<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%5.2f", tmp)  +"  "+<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%5.2f", prc)+"   " \
+       +<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%5.2f", prain)+"  "+<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%5.2f", psnow))
+
+</pre>
+<p>
+The edited output is:
+<pre>
+       <b>tmp</b>     <b>prc</b>    <b>prain</b>   <b>psnow</b> 
+     -20.00  100.00    0.00  100.00      <b>all snow</b>
+     -19.00  100.00    0.00  100.00
+     -18.00  100.00    0.00  100.00
+     -17.00  100.00    0.00  100.00
+     -16.00  100.00    0.00  100.00
+     -15.00  100.00    0.00  100.00
+     -14.00  100.00    0.00  100.00
+     -13.00  100.00    0.00  100.00
+     -12.00  100.00    0.00  100.00
+     -11.00  100.00    0.00  100.00
+     <b>-10.00  100.00    0.00  100.00</b>
+      -9.00  100.00    7.52   92.48      <b>linear change</b> 
+      -8.00  100.00   15.04   84.96
+      -7.00  100.00   22.56   77.44
+      -6.00  100.00   30.08   69.92
+      -5.00  100.00   37.59   62.41
+      -4.00  100.00   45.11   54.89
+      -3.00  100.00   52.63   47.37
+      -2.00  100.00   60.15   39.85
+      -1.00  100.00   67.67   32.33
+       0.00  100.00   75.19   24.81
+       1.00  100.00   82.71   17.29
+       2.00  100.00   90.23    9.77
+       3.00  100.00   97.74    2.26
+       <b>3.30  100.00  100.00    0.00</b>      <b>all rain</b>
+       4.00  100.00  100.00    0.00
+       5.00  100.00  100.00    0.00
+       6.00  100.00  100.00    0.00
+       7.00  100.00  100.00    0.00
+       8.00  100.00  100.00    0.00
+       9.00  100.00  100.00    0.00
+      10.00  100.00  100.00    0.00
+</pre>
+<p>
+<b>Example 2:</b> Consider <em>prc</em>(time,lat,lon) and <em>tmp</em>(time,lat,lon) with scalar <em>train</em> 
+and <em>tsnow</em>
+<p>
+<pre>
+  train = 3.3                ; suggested values for degC                   
+  tsnow = -10.0
+  RS    = <strong>precip_rain_snow</strong>(prc, tmp, train, tsnow)  
+  prain = RS[0]              ; explicitly extract for clarity and convenience
+  psnow = RS[1]
+  <a href="../Built-in/delete.html"><strong>delete</strong></a>( RS )             
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(prain)   ; prain(time,lat,lon)
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(psnow)   ; psnow(time,lat,lon)
+</pre>
+<p>
+<b>Example 3:</b> A user may have created arrays where the threshold settings are functions
+of latitude, longitude and elevation: <em>train</em>(lat,lon) and <em>tsnow</em>(lat,lon). The 
+<strong>precip_rain_snow</strong> function requires that if <em>train</em> 
+and <em>tsnow</em> are not scalars, these arguments must conform to <em>tmp</em>.
+Here, the user must explicity perform that task using <a href="../Built-in/conform.html"><strong>conform</strong></a>:  
+<p>
+<pre>
+  TRAIN = <a href="../Built-in/conform.html"><strong>conform</strong></a>(tmp, train, <b>(/1,2/)</b>)
+  TSNOW = <a href="../Built-in/conform.html"><strong>conform</strong></a>(tmp, tsnow, <b>(/1,2/)</b>)
+  RS    = <strong>precip_rain_snow</strong>(prc, tmp, TRAIN, TSNOW)   
+  prain = RS[0]                 ; explicitly extract for clarity and convenience
+  psnow = RS[1]
+  <a href="../Built-in/delete.html"><strong>delete</strong></a>( [/RS, TRAIN, TSNOW/] )             
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(prain)       ; prain(time,lat,lon)
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(psnow)       ; psnow(time,lat,lon)
+</pre>
+<p>
+<b>Example 4:</b> Similar to Example 3: Consider <em>prc</em>(time,nsta) and 
+<em>tmp</em>(time,nsta) with user created arrays where the threshold settings are functions
+of individual station locations and elevations: <em>train</em>(nsta) and <em>tsnow</em>(nsta).  
+<p>
+<pre>
+  TRAIN = <a href="../Built-in/conform.html"><strong>conform</strong></a>(tmp, train, <b>1</b>)      ; TRAIN(time,nsta)
+  TSNOW = <a href="../Built-in/conform.html"><strong>conform</strong></a>(tmp, tsnow, <b>1</b>)      ; TSNOW(time,nsta)
+  RS    = <strong>precip_rain_snow</strong>(prc, tmp, TRAIN, TSNOW)   
+  prain = RS[0]                        ; explicitly extract for clarity and convenience
+  psnow = RS[1]
+  <a href="../Built-in/delete.html"><strong>delete</strong></a>( [/RS, TRAIN, TSNOW/] )             
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(prain)             ; prain(time,nsta)
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(psnow)             ; psnow(time,nsta)
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/precip_rain_snow.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:05 GMT -->
+</html>

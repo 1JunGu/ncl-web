@@ -1,0 +1,531 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/conOncon.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:13:07 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to place multiple contours on one plot.">
+<meta name="keywords" content="NCL, graphics, visualization, resources,
+multiple contours">
+<TITLE>NCL Graphics: Contours overlaid on contours</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: Contours overlaid on contours</h1>
+
+<div class=mainimage>
+<img src="Images/conOncon_2_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+To overlay contours on top of other contours (and possibly those on
+top of maps), you can either use the <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a>
+procedure (which can also be used to overlay other things like vectors
+and streamlines), or the special plotting function <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map_overlay.html"><strong>gsn_csm_contour_map_overlay</strong></a>.
+<p>
+
+This page also shows how you can create different types of contours
+for more meaningful plots, like dashed line contours, shaded contours,
+and stippled contours.
+<p>
+
+If you plan to overlay multiple types of plots on a map
+plot, the prefered method is to use the <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a>
+procedure.
+
+</div>
+
+<div class=ex>
+<!--ConOncon_1-->
+<a name=ex1></a>
+<a href="Images/conOncon_1_lg.png">
+<img src="Images/conOncon_1_sm.png" align=left border=2></a>
+
+<a href="Scripts/conOncon_1.html">conOncon_1.ncl</a>: A typical contour
+on contour plot.<br> Note that this data is already on pressure
+levels. If this were model data, it would be necessary to interpolate
+from hybrid coordinates to pressure levels.
+<p>
+
+Use <a href="../Document/Graphics/Interfaces/gsn_csm_pres_hgt.html"><strong>gsn_csm_pres_hgt</strong></a> and <a href="../Document/Graphics/Interfaces/gsn_csm_contour.html"><strong>gsn_csm_contour</strong></a>.  Then
+<a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a>(plotu,plotv) will overlay the two plots.
+At this point NCL only sees one plot, plotu since it was listed first,
+so now if we draw plotu, we will get both plots.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnContourZeroLineThicknessF"><em>gsnContourZeroLineThicknessF</em></a> doubles the
+thickness of the zero contour, and <a href="../Document/Graphics/Resources/gsn.html#gsnContourNegLineDashPattern"><em>gsnContourNegLineDashPattern</em></a> dashes the negative
+contours.
+<p>
+
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Contours/NCL_conOncon_1.html#sphx-glr-gallery-contours-ncl-cononcon-1-py">here</a>.
+</div>
+
+<div class=ex>
+<!--ConOncon_2-->
+<a name=ex2></a>
+<a href="Images/conOncon_2_lg.png">
+<img src="Images/conOncon_2_sm.png" align=left border=3></a>
+
+<a href="Scripts/conOncon_2.html">conOncon_2.ncl</a>: This example
+shows how to overlay several contour objects over a map background.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour_map_overlay.html"><strong>gsn_csm_contour_map_overlay</strong></a> is the
+plot interface that overlays contour objects onto a map
+background. Note that this function sets the zero line thickness to
+2.0 and sets all other contours line thickness to 1.0.  This will
+override whatever thicknesses you have set.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnContourZeroLineThicknessF"><em>gsnContourZeroLineThicknessF</em></a> doubles the
+thickness of the zero contour, and <a href="../Document/Graphics/Resources/gsn.html#gsnContourNegLineDashPattern"><em>gsnContourNegLineDashPattern</em></a> dashes the negative
+contours.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Contours/NCL_conOncon_2.html#sphx-glr-gallery-contours-ncl-cononcon-2-py">here</a>.
+</div>
+
+<div class=ex>
+<!--ConOncon_3-->
+<a name=ex3></a>
+<a href="Images/conOncon_3_lg.png">
+<img src="Images/conOncon_3_sm.png" align=left border=2></a> 
+<a href="Scripts/conOncon_3.html">conOncon_3.ncl</a>: Contours over 
+contours in a polar projection.
+<p>
+
+<a href="../Document/Graphics/Resources/cn.html#cnLineThicknessF"><em>cnLineThicknessF</em></a> = 1.5, Changes
+the thickness of the contours.
+
+</div>
+
+<div class=ex>
+<!--ConOncon_4-->
+<a name=ex4></a>
+<a href="Images/conOncon_4_lg.png">
+<img src="Images/conOncon_4_sm.png" align=left border=3></a> 
+<a href="Scripts/conOncon_4.html">conOncon_4.ncl</a>: Adds stippling to
+a plot. Can be slow.
+<p>
+</div>
+
+<div class=ex>
+<!--ConOncon_5-->
+<a name=ex5></a>
+<a href="Images/conOncon_5_lg.png">
+<img src="Images/conOncon_5_sm.png" align=left border=2></a> 
+<a href="Scripts/conOncon_5.html">conOncon_5.ncl</a>: Spaghetti plot 
+(data with 1D coordinates):
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Contours/NCL_conOncon_5.html#sphx-glr-gallery-contours-ncl-cononcon-5-py">here</a>.
+</div>
+
+<div class=ex>
+<!--ConOncon_6-->
+<a name=ex6></a>
+<a href="Images/conOncon_6_lg.png">
+<img src="Images/conOncon_6_sm.png" align=left border=2></a>
+<a href="Scripts/conOncon_6.html">conOncon_6.ncl</a>: Demonstrates the
+addition of a legend for a contour-On-contour plot.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_legend_ndc.html"><strong>gsn_legend_ndc</strong></a> is the function that
+will add a legend to a contour plot.
+
+</div>
+
+<div class=ex>
+<!--ConOncon_7-->
+<a name=ex7></a>
+<a href="Images/conOncon_7_lg.png">
+<img src="Images/conOncon_7_sm.png" align=left border=2></a>
+
+<a href="Scripts/conOncon_7.html">conOncon_7.ncl</a>: Spaghetti plot
+(data with 2D coordinates). Data with 2D coordinates require extra
+steps to create an overlay spaghetti plot.
+<p>
+
+You must use <a href="../Document/Graphics/Interfaces/gsn_contour.html"><strong>gsn_contour</strong></a> for the
+contour portion of this plot. See the sample script for all the
+details.
+<p>
+
+This data just happens to be on a <a href="native.html"> native
+grid projection</a>. This is just one type of data that usually has 2D
+coordinates. The techniques in the loop will not change for data that
+is not on a native grid.
+
+</div>
+
+<div class=ex>
+<!--ConOncon_8-->
+<a name=ex8></a>
+<a href="Images/conOncon_8_lg.png">
+<img src="Images/conOncon_8_sm.png" align=left border=2></a>
+
+<a href="Scripts/conOncon_8.html">conOncon_8.ncl</a>: A color
+significance plot. The difference between this example and example 2
+is the order. The color fill must be drawn first and then the contour
+lines added. This goes whether the significance is colored magenta or
+gray.  The issue is a solid fill versus a pattern fill (stippling).
+<p>
+
+For a "B&W" plot, replace magenta with gray and turn off the continent
+fill by setting <a href="../Document/Graphics/Resources/mp.html#mpFillOn"><em>mpFillOn</em></a> = False.
+
+</div>
+
+<div class=ex>
+<!--ConOncon_9-->
+<a name=ex9></a>
+<a href="Images/conOncon_9_lg.png">
+<img src="Images/conOncon_9_sm.png" align=left border=2></a>
+
+<a href="Scripts/conOncon_9.html">conOncon_9.ncl</a>: This image
+describes land use in different resolutions for each domain. This
+script was originally written in <a
+href="http://www.pyngl.ucar.edu/">PyNGL</a> by Ufuk Utku Turuncoglu of
+the Istanbul Technical University in relation to a Turkey Climate
+Change Scenarios project.
+<p>
+
+The <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> function is used to do the multiple
+contour overlays, and the special lat2d/lon2d attributes are used to
+indicate there are 2-dimensional latitude/longitude coordinate arrays.
+<p>
+
+Polylines are drawn on top of the map to show the three domains.
+
+</div>
+
+<div class=ex>
+<!--ConOncon_10-->
+<a name=ex10></a>
+<a href="Images/conOncon_10_lg.png">
+<img src="Images/conOncon_10_sm.png" align=left border=2></a>
+
+<a href="Scripts/conOncon_10.html">conOncon_10.ncl</a>: This example shows
+how to overlay precipitation contours on a terrain map, each with its
+own color map. For the two lowest precipitation contours, the colors
+are set to transparent. Since two color maps are used here, one of
+the labelbars is drawn horizontally, and the other vertically.
+<p>
+
+This example is similar to the <a href="wrfpcp.html#ex1">WRF_pcp_1.ncl</a> 
+example, except it uses "gsn" functions to create the plots, rather than
+"wrf" functions.  The special <a href="../Document/Functions/WRF_arw/wrf_map_resources.html"><strong>wrf_map_resources</strong></a>
+function is used to set the correct map projection.
+<p>
+ 
+The <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> function is used to do the overlay of
+precipitation. The special lat2d/lon2d attributes are used to indicate
+the latitude, longitude positions of the data.
+<p>
+
+Thanks to Dr. Craig Mattocks at the Center for Environmental Modeling
+for Policy Development, UNC-Chapel Hill, for providing the inspiration
+for this example and helping fine-tune it.
+
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/conOncon.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:13:11 GMT -->
+</html>
+
+

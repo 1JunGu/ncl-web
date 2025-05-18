@@ -1,0 +1,89 @@
+;----------------------------------------------------------------------
+; wrf_interp_1.ncl
+;----------------------------------------------------------------------
+; Concepts illustrated:
+;   - Interpolating a 2D WRF-ARW field along a horizontal line.
+;   - Drawing a legend inside an XY plot
+;   - Reversing the order of legend items
+;----------------------------------------------------------------------
+; Interpolate t2 along a horizontal line from five WRF output files and
+; plot against longitude on an xy-plot. This script uses 
+; wrf_user_interp_line to do the interpolation.
+; 
+; wrf_user_interp_line replaces the deprecated wrf_user_intrp2d 
+; function. 
+;
+; NCL V6.6.0 or higher is required to run this example.
+;----------------------------------------------------------------------
+
+begin
+  dir      = "wrf_files/"
+  filenames = systemfunc("ls " + dir + "/wrfout_d01_2008-09*")
+
+;---Open first 5 files.
+  a = addfiles(filenames(0:4),"r")
+
+  wks = gsn_open_wks("png","wrf_interp")
+
+;---Get time information and strip out the day and hour
+  times_in_file  = wrf_user_list_times(a)
+  times          = str_get_cols(times_in_file,8,15)
+
+;---Get t2 for all times
+  t2   = wrf_user_getvar(a, "T2",-1)           ; [Time | 5] x [south_north | 197] x [west_east | 206]
+  t2   = 1.8*(t2-273.16)+32.
+  t2@description = t2@description + " (degF)"
+
+;---Get xlon for graphics labeling later.
+  xlon = wrf_user_getvar(a, "XLONG",0)
+
+  printVarSummary(t2)     ; [Time | 5] x [south_north | 197] x [west_east | 206]
+  printVarSummary(xlon)   ;              [south_north | 197] x [west_east | 206]
+
+;---Set a pivot point on the lat/lon plane
+  dims = dimsizes(t2)
+  plane = (/ dims(2)/2, dims(1)/2 /)       ; pivot point (x,y) through center of domain
+
+;---Set the angle to 90 for a horizontal line
+  opt           = True
+  opt@use_pivot = True
+  opt@angle     = 90.
+
+  lon_plane = wrf_user_interp_line(xlon,plane,opt)    ;              [line_idx | 206]
+  t_plane   = wrf_user_interp_line(t2,plane,opt)      ; [Time | 5] x [line_idx | 206]
+
+  res = True
+  res@gsnMaximize            = True
+  res@vpWidthF               = 0.8
+  res@vpHeightF              = 0.5
+
+  res@xyMonoDashPattern      = True
+  res@xyLineThicknessF       = 3.0
+  res@xyLineColors           = (/ 2, 60, 145, 170, 200 /)   ; index values into ncl_default colormap
+
+  res@tmXBMode               = "Explicit"
+  res@tmXBValues             = ispan(110,180,10)
+  res@tmXBLabels             = res@tmXBValues + "~S~o~N~E"
+  res@tmXBLabelFontHeightF   = 0.01
+  res@tmYLLabelFontHeightF   = 0.01
+  res@tmXBMinorOn            = False
+
+;---Titles
+  res@tiMainString           = "Surface temperature along a line"
+  res@tiMainFontHeightF      = 0.02
+  res@tiYAxisFontHeightF     = 0.02
+
+;---Legend
+  res@xyExplicitLegendLabels = times
+  res@pmLegendDisplayMode    = "Always"
+  res@lgItemOrder            = (/ 4, 3, 2, 1, 0 /)    ; reverses order of legend items
+  res@lgPerimOn              = False   
+  res@pmLegendSide           = "Bottom"
+  res@pmLegendParallelPosF   = 0.85      
+  res@pmLegendOrthogonalPosF = -0.5
+  res@pmLegendWidthF         = 0.15  
+  res@pmLegendHeightF        = 0.15 
+
+  plot = gsn_csm_xy(wks,lon_plane,t_plane,res)
+
+end

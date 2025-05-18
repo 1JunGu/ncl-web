@@ -1,0 +1,82 @@
+;*********************************************
+; leg_22.ncl
+;
+; Concepts illustrated:
+;   - Generating time series which illustrate 'chaos'
+;   - Manually creating a legend using simple_legendc
+;*********************************************
+; Equation source:
+; http://www.staff.science.uu.nl/~delde102/Lecture2AtmDyn2016.pdf
+;*********************************************
+
+  nRun = 2
+  T    = 51
+
+  time = ispan(0,T-1,1)
+  time@long_name = "time"
+
+  x    = new ( (/2,T/),"double","No_FillValue")
+
+  k    = 3.75d 
+
+  do nrun=0,1                                    ; two iterations
+     if (nrun.eq.0) then                         ; initial values
+         x(0,0) = 0.50d           
+     else
+         x(1,0) = 0.51d 
+     end if
+
+     do t=0,T-2
+        x(nrun,t+1) = k*x(nrun,t)*(1d-x(nrun,t))
+     end do
+  end do 
+
+; PLOT 
+
+  wks   = gsn_open_wks ("png","leg")           ; send graphics to PNG/X11 file
+  res                   = True                   ; plot mods desired
+
+  res@gsnDraw           = False                  ; add legend later
+  res@gsnFrame          = False
+
+  res@tiMainString      = "CHAOS: k="+sprintf("%3.2f",k)+": x(t+1)=k*x(t)*[1-x(t)]"
+  res@xyLineThicknesses = (/  5.0,   2.5/) 
+  res@xyMonoDashPattern = True                   ; default is False
+
+  res@xyLineColors      = (/"blue","red"/)       ; change line color
+  res@trYMinF           =  0.2                   ; min value on y-axis
+  res@trYMaxF           =  1.2                   ; max value on y-axis
+
+  res@vpHeightF         = 0.5                    ; change aspect ratio of plot
+  res@vpWidthF          = 0.8                  
+  res@vpXF              = 0.1                    ; start plot at x ndc coord
+ 
+  res@tiMainFontHeightF    = 0.022
+  res@tmXBLabelFontHeightF = 0.017
+  res@tmYLLabelFontHeightF = res@tmXBLabelFontHeightF
+
+  plot  = gsn_csm_xy (wks,time,x,res)          
+  
+; Add legend
+; --- YPosPercent       ; expressed as %, 0->100, sets position of TOP  legend border
+; --- XPosPercent       ; expressed as %, 0->100, sets position of LEFT legend border
+; --- LineLengthPercent ; expressed as %, 0->100, length of line
+
+  gres = True
+  gres@YPosPercent = 95.0  
+  gres@XPosPercent =  5.0  
+                                                          ; match previous line resources
+  lineres = True                                          
+  lineres@lgLineColors      = res@xyLineColors            ; line colors
+  lineres@lgLineThicknesses = res@xyLineThicknesses       ; line thicknesses
+  lineres@LineLengthPercent = 9.                          ; expressed as %, 0->100, length of line
+
+  textres = True
+  textres@lgLabels = (/"x(0)="+sprintf("%3.2f",x(0,0)) \
+                      ,"x(0)="+sprintf("%3.2f",x(1,0)) /) ; legend labels (required)
+
+  plot = simple_legend(wks,plot,gres,lineres,textres)     ; add legend to plot
+  draw(plot)
+  frame(wks)
+
+

@@ -1,0 +1,586 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/calculate_daily_values.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:14 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (general applied math)">
+<meta name="keywords" content="calculate_daily_values">
+<title>calculate_daily_values</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>calculate_daily_values</h1>
+
+<p>
+Calculate daily values [avg, sum, min, max] from high frequency temporal values.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.4.0">version 6.4.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function calculate_daily_values (
+		x         : numeric,  
+		arith [1] : string,   
+		nDim  [1] : integer,  
+		opt   [1] : logical   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double array with with the same rank as <em>x</em>.
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>Array containing the high frequency data.  The <em>x</em> must have an associated 
+<i>time</i> coordinate variable in units recognized by the 
+<a href="../Built-in/cd_calendar.html"><strong>cd_calendar</strong></a> function.  
+</p>
+<p class=indent>
+The following array structures are supported.   The dimension name 'time' is a place-holder. 
+Any name can be used.  The <em>nDim</em> argument specifies the dimension number 
+to be used.
+<pre>
+       (time)                     ; <em>nDim</em>=0        
+       (time,npts)
+       (time,ny,nx) 
+       (time,nz,ny,nx)
+       (time,ne,nz,ny,nx)         ; <em>nDim</em>=0; added for NCL version 6.5.0 
+       (ne,time,nz,ny,nx)         ; <em>nDim</em>=1
+</pre>
+</p>
+<em>arith</em>
+<p class=indent>A scalar string value which specifies the operation to be performed.
+Valid values are: <b>"avg"</b> [also, <b>"ave"</b>], <b>"sum"</b>, <b>"min"</b>, <b>"max"</b>.
+It is required that <em>x</em> have associated with it a coordinate variable
+named <b>time</b> (<i>ie</i>, x&time) 
+where "time" is recognized by <a href="../Built-in/cd_calendar.html"><strong>cd_calendar</strong></a>.
+</p>
+<em>nDim</em>
+<p class=indent>The dimension of <em>x</em> on which to calculate the statistic. Currently, only <em>nDim</em>=0 or 1 is allowed.
+</p>
+<em>opt</em>
+<p class=indent>A logical variable to which various optional arguments may be assigned as attributes. These optional arguments alter the default behavior of the function. Must be set to True prior to setting the attributes which are assigned using the @ operator. Currently, there is one attribute.
+<ul>
+<li> If <em>opt</em>=True; the attribute 'nval_crit' (integer) will specify the minimum number of values need
+to calculate the desired statistic. If fewer values than 'nval_crit' are available, the result
+will be set to _fillValue. The default is 1 (one).
+</ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+An array of the same rank as <em>x</em>.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<p>
+The function uses <a href="../Built-in/cd_calendar.html"><strong>cd_calendar</strong></a> to extract the year, month, day and hour.
+All values for a particular day are used. <b>NOTE:</b>
+Use of <a href="../Built-in/cd_calendar.html"><strong>cd_calendar</strong></a>  means the units of time are something like: "days/hours/minutes/seconds since ...".
+If these units are not present as an attribute of 'time', the function will not work.
+<p>
+As an alternative to this function, consider using the 
+<a href="https://code.zmaw.de/projects/cdo"><b>Climate Data Operators (CDO)</b></a>. 
+These operators will process all variables on the file. For example:
+<pre>
+       <b>cdo daymean</b> foo_hourly.nc  foo_daily_mean.nc
+       <b>cdo daymin </b> foo_hourly.nc  foo_daily_min.nc
+       <b>cdo daymax </b> foo_hourly.nc  foo_daily_max.nc
+       <b>cdo daysum </b> foo_hourly.nc  foo_daily_sum.nc
+</pre>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Built-in/dim_avg_n.html"><strong>dim_avg_n</strong></a>, <a href="../Built-in/dim_sum_n.html"><strong>dim_sum_n</strong></a>,
+  <a href="../Built-in/dim_min_n.html"><strong>dim_min_n</strong></a>, <a href="../Built-in/dim_max_n.html"><strong>dim_max_n</strong></a>,
+  <a href="calculate_monthly_values.html"><strong>calculate_monthly_values</strong></a>,
+  <a href="calculate_segment_values.html"><strong>calculate_segment_values</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+<b>Example 1 </b>
+<p>
+ Let x(time,lat,lon) where <b>x&time</b> 
+is recognized by <a href="../Built-in/cd_calendar.html"><strong>cd_calendar</strong></a>. The values of <em>x</em>
+may contain values separated by any time step. 
+<pre>
+              nDim    = 0          
+              xDayAvg = <strong>calculate_daily_values</strong>(x, "avg", nDim, False)
+              xDaySum = <strong>calculate_daily_values</strong>(x, "sum", nDim, False)
+              xDayMin = <strong>calculate_daily_values</strong>(x, "min", nDim, False)
+              xDayMax = <strong>calculate_daily_values</strong>(x, "max", nDim, False)
+</pre>
+<p>
+<b>Example 2: </b>
+<p>
+Read 4x daily values for one year (2008; a leap year) and calculate the daily means. The value are type 'short' with the attributes 'scale_factor' and 'add-offset'. The 'time' dimension is: <em>nDim</em>=0.
+<p>
+<pre>
+              f = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>("foo.2008.nc","r")
+              x = <a href="short2flt.html"><strong>short2flt</strong></a>(f->air)
+              <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(x)   ; <b>[time | 1464]</b> x [level | 17] x [lat | 73] x [lon | 144]
+
+              opt = True
+              opt@nval_crit = 4    ; require at least 4 values per day for a daily mean to be calculated. 
+
+              xDay = <strong>calculate_daily_values</strong> (x, "avg", 0, opt)
+              <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(xDay)
+
+</pre>
+The output looks like:
+<pre>
+              Variable: xDay
+              Type: float
+              Total Size: 8577792 bytes
+                          2144448 values
+              Number of Dimensions: 4
+              Dimensions and sizes:   <b>[time | 366]</b> x [level | 17] x [lat | 73] x [lon | 144]
+              Coordinates:
+                          time: [17593032..17601072]
+                          level: [1000..10]
+                          lat: [90..-90]
+                          lon: [ 0..357.5]
+              Number Of Attributes: 18
+                _FillValue :  32766
+                missing_value :       32766
+                long_name :   mean Daily Air temperature
+                valid_range : ( 150, 350 )
+                actual_range :        ( 178.73, 318.5 )
+                units :       degK
+                precision :   2
+                least_significant_digit :     1
+                GRIB_id :     11
+                GRIB_name :   TMP
+                var_desc :    Air temperature
+                dataset :     NCEP Reanalysis Daily Averages
+                level_desc :  Multiple levels
+                statistic :   Mean
+                parent_stat : Individual Obs
+                _FillValue_original : 32766
+                missing_value_original :      32766
+                NCL_tag = calculate_daily_values: arith=avg
+</pre>
+<p>
+<b>Example 3: </b>
+<p>
+Read hourly values for spanning multiple files and calculate the daily and monthly means. The 'time' dimension is: <em>nDim</em>=0.
+<pre>
+
+   diri    = "../"
+   fili    = <a href="../Built-in/systemfunc.html"><strong>systemfunc</strong></a>("cd "+diri+" ; ls ACCESS_SRF.*.nc")  ; all files beginning with 'ACCESS_SRF'
+   nfili   = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(fili)
+   <a href="../Built-in/print.html"><strong>print</strong></a>(fili)
+
+   varName = (/"snv" , "ts"/)
+   nName   = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(varName)
+
+   opt     = True
+   opt@nval_crit = 10              ; require at least 10 values
+
+   ndim    = 0
+
+   f = <a href="../Built-in/addfiles.html"><strong>addfiles</strong></a>(diri+fili, "r")   ; read variables from all files
+
+   do nv=0,nName-1
+      print("")
+      print("-----------------------------------------------")
+      print("-----------  "+varName(nv)+"  -----------------")
+      print("-----------------------------------------------")
+      print("")
+
+      xhr := f[:]->$varName(nv)$                      ; (time,lat,lon) 
+      <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(xhr)
+      <a href="../Built-in/print.html"><strong>print</strong></a>("---")
+
+      xdd := <strong>calculate_daily_values</strong> (xhr, "avg", ndim, opt)
+      <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(xdd)
+      <a href="../Built-in/print.html"><strong>print</strong></a>("---")
+
+      xmm := <a href="calculate_monthly_values.html"><strong>calculate_monthly_values</strong></a> (xhr, "avg", ndim, opt)
+      <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(xmm)
+      <a href="../Built-in/print.html"><strong>print</strong></a>("---")
+   end do
+
+
+</pre>
+The output for the 'snv' variables is:
+<pre> 
+
+    Variable: fili
+    Type: string
+    Total Size: 16 bytes
+                2 values
+    Number of Dimensions: 1
+    Dimensions and sizes:   [2]
+    Coordinates: 
+    (0)     ACCESS_SRF.1980010100.nc
+    (1)     ACCESS_SRF.1980020100.nc                                           ; leap year (29 days in Feb.
+    (0)     
+    (0)     -----------------------------------------------
+    (0)     -----------> snv <-----------------
+    (0)     -----------------------------------------------
+    (0)     
+    
+    Variable: xhr
+    Type: float
+    Total Size: 176238720 bytes
+                44059680 values
+    Number of Dimensions: 3
+    Dimensions and sizes:   [time | 1440] x [iy | 141] x [jx | 217]           ; <b>1440 = (24*31)+(24*29)</b>
+    Coordinates: 
+                time: [263713..265152]
+                iy: [-1750000..1750000]
+                jx: [-2700000..2700000]
+    Number Of Attributes: 7
+      long_name :   Liquid water equivalent of snow thickness
+      standard_name :       lwe_thickness_of_surface_snow_amount
+      units :       kg m-2
+      coordinates : xlat xlon
+      grid_mapping :        rcm_map
+      cell_methods :        time: mean
+      _FillValue :  1e+20
+    
+    Variable: xdd
+    Type: float
+    Total Size: 7343280 bytes
+                1835820 values
+    Number of Dimensions: 3
+    Dimensions and sizes:   [time | 60] x [iy | 141] x [jx | 217]             ; <b>  60 = (31+29)</b>
+    Coordinates: 
+                time: [263713..265128]
+                iy: [-1750000..1750000]
+                jx: [-2700000..2700000]
+    Number Of Attributes: 9
+      _FillValue :  1e+20
+      long_name :   Liquid water equivalent of snow thickness
+      standard_name :       lwe_thickness_of_surface_snow_amount
+      units :       kg m-2
+      coordinates : xlat xlon
+      grid_mapping :        rcm_map
+      cell_methods :        time: mean
+      time :        263713
+      NCL_tag :     calculate_daily_values: arith=avg
+    
+    Variable: xmm
+    Type: float
+    Total Size: 244776 bytes
+                61194 values
+    Number of Dimensions: 3
+    Dimensions and sizes:   [time | 2] x [iy | 141] x [jx | 217]              ; <b> 2 months [Jan , Feb] </b>
+    Coordinates: 
+                time: [263713..264456]
+                iy: [-1750000..1750000]
+                jx: [-2700000..2700000]
+    Number Of Attributes: 9
+      _FillValue :  1e+20
+      long_name :   Liquid water equivalent of snow thickness
+      standard_name :       lwe_thickness_of_surface_snow_amount
+      units :       kg m-2
+      coordinates : xlat xlon
+      grid_mapping :        rcm_map
+      cell_methods :        time: mean
+      time :        263713
+      NCL_tag :     calculate_monthly_values: arith=avg
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/calculate_daily_values.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:14 GMT -->
+</html>

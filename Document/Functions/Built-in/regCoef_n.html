@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/regCoef_n.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:08 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (statistics)">
+<meta name="keywords" content="regCoef_n">
+<title>regCoef_n</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+<a class=crumb href="../statistics.html">Statistics</a>
+<br>
+<h1>regCoef_n</h1>
+
+<p>
+Calculates the linear regression coefficient between two variables
+on the given dimensions.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function regCoef_n (
+		x          : numeric,  
+		y          : numeric,  
+		dims_x [*] : integer,  
+		dims_y [*] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>An array of any dimensionality. Missing values should be indicated by
+<em>x</em>@<a href="../../Language/fillval.html">_FillValue</a>. 
+If <em>x</em>@_FillValue is not set, then the NCL
+default (appropriate to the type of <em>x</em>) will be assumed.
+</p>
+<em>y</em>
+<p class=indent>An array of any dimensionality. The last dimension of <em>y</em> must
+be the same as the last dimension of <em>x</em>.  Missing values
+should be indicated by <em>y</em>@_FillValue. If <em>y</em>@_FillValue
+is not set, then the NCL default (appropriate to the type of
+<em>y</em>) will be assumed.
+</p>
+<em>dims_x</em>
+<p class=indent>A scalar integer indicating which dimension of <em>x</em> to do the
+calculation on. Dimension numbering starts at 0.
+</p>
+<em>dims_y</em>
+<p class=indent>A scalar integer indicating which dimension of <em>y</em> to do the
+calculation on. Dimension numbering starts at 0.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+If either <em>x</em> or <em>y</em> are of type double, then the return
+array is returned as double. Otherwise, the returned variable is returned as
+type float. The dimensionality is a bit more complicated; see the
+description and examples below.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<strong>regCoef_n</strong> computes the linear regression coefficient
+via least-squares across the given dimensions.
+It is designed to work with multi-dimensional
+x and y arrays. If the regression information for a single best fit
+line for 1-dimensional x and y data is desired, then <a href="regline.html"><strong>regline</strong></a> 
+is the appropriate choice. Missing data are allowed.<p>
+
+The <strong>regCoef_n</strong> function returns the following attributes: 
+<em>yintercept</em> (y-intercept),
+<em>tval</em> (t-statistic), <em>rstd</em> (standard error of the estimated
+regression coefficient) and <em>nptxy</em> (number of elements used). 
+These will be returned
+as scalars for one-dimensional <em>x</em>/<em>y</em>; otherwise, as 
+one-dimensional attributes of the return variable (call it <em>rc</em>). The
+type of <em>tval</em> and <em>rstd</em> will be the same as <em>rc</em>
+while <em>nptxy</em> will be of type integer. 
+These attributes may be used for statistical testing
+(see examples).<P>
+
+The dimensions of <em>rc</em> are illustrated as follows:<P>
+
+<PRE>
+    x(N), y(N)          rc, tval, mptxy are scalars
+    x(N), y(K,M,N)      rc, tval, mptxy are arrays of size (K,M)
+  x(I,N), y(K,M,N)      rc, tval, mptxy are arrays of size (I,K,M)
+x(J,I,N), y(L,K,M,N)    rc, tval, mptxy are arrays of size (J,I,L,K,M)
+</PRE>
+
+There's a special case when <I>all</I> dimensions of <em>x</em> and
+<em>y</em> are identical:<P>
+
+<PRE>
+   x(J,I,N), y(J,I,N)      rc, tval, mptxy are arrays of size (J,I)
+</PRE>
+
+Note on the units of the returned regression coefficient(s): if
+<em>x</em> has units of, say, degrees Kelvin (K), and <em>y</em> has
+units of, say, meters (M), then the units of the regression
+coefficient are M/K. The function does not standardize <em>x</em> (or
+<em>y</em>) prior to calculating the regression coefficient. If this
+is desired, then it is the user's responsibility do so.  The NCL
+function <a href="dim_standardize.html"><strong>dim_standardize</strong></a> can be used.<P>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="regCoef-1.html"><strong>regCoef</strong></a>, <a href="regcoef.html"><strong>regcoef</strong></a>, <a href="regline.html"><strong>regline</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B>: Here use simple one-dimensional arrays. 
+<p>
+<PRE>
+begin
+ 
+   x = (/ 1190.,1455.,1550.,1730.,1745.,1770. \
+       ,  1900.,1920.,1960.,2295.,2335.,2490. \
+       ,  2720.,2710.,2530.,2900.,2760.,3010. /)
+ 
+   y = (/ 1115.,1425.,1515.,1795.,1715.,1710. \
+       ,  1830.,1920.,1970.,2300.,2280.,2520. \
+       ,  2630.,2740.,2390.,2800.,2630.,2970. /)
+ 
+   rc    = <strong>regCoef_n</strong>(x,y, <b>0</b>, <b>0</b>)
+   <a href="print.html"><strong>print</strong></a>(rc)
+
+</PRE>
+The (edited) output is:
+<pre>
+
+   Variable: rc
+   Type: float
+   Total Size: 4 bytes
+               1 values
+   Number of Dimensions: 1
+   Dimensions and sizes:   [1]
+   Coordinates:
+   Number Of Attributes: 5
+     _FillValue :  9.96921e+36
+     nptxy :       18
+     <b>rstd</b> :        0.02515461
+     <b>yintercept</b> :  15.35228
+     <b>tval</b> :        38.74286
+   (0)     0.9745615
+</pre>
+<p>
+<B>Example 2:</B>
+Assume <em>x</em> is a one dimensional array (1D) array of size
+<em>ntim</em> and type float. Assume <em>y</em> is a three-dimensional
+array (3D) array with <a href="../../Manuals/Ref_Manual/NclVariables.html#Dimensions">named dimensions</a>, "time", "lat" and "lon"
+with the following ordering <em>y</em>(time,lat,lon).
+<PRE>
+        ;     0       0    1    2  (dimension number)        
+        ; x[ntim], y(ntim,nlat,mlon) )
+   rc   = <strong>regCoef_n</strong>(x, y, 0, 0) ; <b>rc(nlat,mlon)</b>
+
+</PRE>
+If <em>y</em> has <a href="../../Language/cv.html">coordinate variables</a>
+these may readily be assigned via NCL syntax: 
+<PRE>
+
+   rc!0   = "lat"    ; name dimensions
+   rc!1   = "lon"
+   rc&lat = y&lat    ; assign coordinate values to named dimensions
+   rc&lon = y&lon
+</PRE>
+<p>
+Alternatively, more compactly 
+<PRE>
+   <a href="../Contributed/copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(y(0,:,:), rc)   ; trick to copy coord information
+</PRE>
+<p>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/regCoef_n.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:08 GMT -->
+</html>

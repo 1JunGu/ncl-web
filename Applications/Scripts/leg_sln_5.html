@@ -1,0 +1,119 @@
+;*************************************************
+; leg_sln_5.ncl
+;
+; Concepts illustrated:
+;   - Manually creating a legend using simple_legend_ndc
+;
+;************************************************
+; This example requires the simple_legend_ndc procedure,
+; which was added in NCL V6.5.0
+;************************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl" 
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"
+;************************************************
+begin
+;************************************************
+; read in netCDF file
+;************************************************
+  a = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/uv300.nc","r")
+
+;************************************************
+; read in zonal winds
+;************************************************
+  lat=a->lat
+  nlat=dimsizes(lat)
+
+  u   = a->U(0,:,:)
+  uz1 = dim_avg(u)
+  u   = a->U(1,:,:)
+  uz2 = dim_avg(u)
+  uz1!0   = "lat"
+  uz1&lat =  lat
+  uz2!0   = "lat"
+  uz2&lat =  lat
+
+  v   = a->V(0,:,:)
+  vz1 = dim_avg(v)
+  v   = a->V(1,:,:)
+  vz2 = dim_avg(v)
+  vz1!0   = "lat"
+  vz1&lat =  lat
+  vz2!0   = "lat"
+
+  vz2&lat =  lat
+;************************************************
+; Combine uz2 and vz2 into one array
+;************************************************
+  data_1 = new( (/2,nlat/),float)
+  data_1(0,:)=uz1
+  data_1(1,:)=vz1
+
+  data_2 = new( (/2,nlat/),float)
+  data_2(0,:)=uz2
+  data_2(1,:)=vz2
+
+;************************************************
+; create plot
+;************************************************
+  wks = gsn_open_wks("png","leg_sln")              ; send graphics to PNG file
+  plot = new(2,graphic) 
+
+  colors                     = (/"foreground","green","blue","red"/)         ; set colors for XY plots
+
+; set resources for XY plots and draw them
+
+  res                        = True
+  res@gsnDraw                = False
+  res@gsnFrame               = False
+
+  res@xyMarkLineModes        = (/"Lines"/)         ; line style
+  res@xyLineThicknesses      = (/2.,2.,2.,2./)     ; line thickness
+
+  res@xyLineColors           = colors(0:1)
+  plot(0) = gsn_csm_xy(wks,lat,data_1,res)
+
+  res@xyLineColors           = colors(2:3)
+  plot(1) = gsn_csm_xy(wks,lat,data_2,res)
+
+;************************************************
+; set legend resources for simple_legend_ndc
+;************************************************
+    genres                           = True
+    genres@XPosPercent               = 76                      ; orientation on page
+    genres@YPosPercent               = 15
+    genres@ItemSpacePercent          = 3
+    textres                          = True
+    textres@lgLabels                 = (/"u1", "v1", "u2", "v2"/)
+    textres@lgPerimOn                = False                   ; no perimeter
+    textres@lgItemCount              = 4                       ; how many
+    lineres                          = True
+    lineres@lgLineLabelFontHeightF   = 0.015                   ; font height
+    lineres@lgDashIndexes            = (/0,1,0,1/)             ; line patterns
+    lineres@lgLineColors             = colors
+    lineres@lgLineThicknesses        = 2.5                     ; line thicknesses
+
+;************************************************
+; set panel resources
+;************************************************
+  pnlres                    = True
+  pnlres@gsnFrame           = False
+  pnlres@gsnPanelMainString = "Using simple_legend_ndc"
+
+;************************************************
+; Draw the panel plot, legend, and NDC grid
+;************************************************
+  gsn_panel(wks,plot,(/2,1/),pnlres)
+  simple_legend_ndc(wks, genres, lineres, textres)
+  drawNDCGrid(wks)                                    ; This is for debugging purposes to help position the legend
+  frame(wks)
+
+;************************************************
+; Draw the panel plot and legend without the NDC grid
+;************************************************
+  gsn_panel(wks,plot,(/2,1/),pnlres)
+  simple_legend_ndc(wks, genres, lineres, textres)
+  frame(wks)
+end

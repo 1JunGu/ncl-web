@@ -1,0 +1,211 @@
+;----------------------------------------------------------------------
+; bar_22.ncl
+;
+; Concepts illustrated:
+;   - Drawing a 4-panel bar plot
+;   - Filling the plot area in light gray
+;   - Drawing grid lines on an XY bar plot
+;   - Turning off the top and right tickmarks
+;   - Adjusting the X positions of plots in a panel
+;   - Adding a rotated title at the left side of a panel
+;   - Using "getvalues" to retrieve the min/max of axes
+;   - Using "setvalues" to set resource values
+;----------------------------------------------------------------------
+
+;----------------------------------------------------------------------
+; This procedure takes an existing blank plot, retrieves the viewport 
+; coordinates, and fills that area in the desired color. This
+; procedure can be used on *any* plot object.
+;----------------------------------------------------------------------
+undef("fill_plot_area")
+procedure fill_plot_area(wks,plot)
+begin
+  getvalues plot
+    "trXMinF"   : xmin
+    "trYMinF"   : ymin
+    "trXMaxF"   : xmax
+    "trYMaxF"   : ymax
+  end getvalues
+
+  xbox = (/xmin,xmax,xmax,xmin,xmin/)
+  ybox = (/ymin,ymin,ymax,ymax,ymin/)
+
+  gnres = True
+  gnres@gsFillColor     = "LightGray"
+  gnres@tfPolyDrawOrder = "PreDraw"
+  plot@$unique_string("box")$ = gsn_add_polygon(wks,plot,xbox,ybox,gnres)
+end
+
+;----------------------------------------------------------------------
+; Main driver code
+;----------------------------------------------------------------------
+begin
+;---Create some dummy data for four bars per plot
+  times = (/3, 4, 5, 6/)     ; hours
+  sflow = (/(/0.0, 0.16, 0.20, 0.19/), \
+            (/0.0, 0.15, 0.71, 0.61/), \
+            (/0.0, 0.0,  0.25, 0.14/), \
+            (/0.0, 0.0,  0.14, 0.19/)/)
+  ntime = dimsizes(times)
+  titles = "Station " + ispan(1,ntime,1)
+
+;---These will be used to determine the min/max of the X/Y axes.
+  time_delta  = times(1)-times(0)
+  sflow_range = max(sflow)-min(sflow)
+
+;---Create the arrays for labeling the X axis.
+  xvalues          = new(ntime+2,typeof(times))
+  xvalues(0)       = times(0)-time_delta
+  xvalues(1:ntime) = times
+  xvalues(ntime+1) = times(ntime-1)+time_delta
+
+  xlabels = sprinti("%0.2i",xvalues) + ":00"
+  xlabels(0)       = ""    ; don't want labels on first or 
+  xlabels(ntime+1) = ""    ; last tickmark
+
+  wks  = gsn_open_wks("png","bar")
+
+;
+; The blank plots will be used to draw a grey-filled blank plot with XY grid
+; lines, and the XY bar plots will be overlaid on top of those. This is
+; so we can better control the draw order of various elements.
+;
+  blank_plots = new(ntime,graphic)
+  bar_plots   = new(ntime,graphic)
+
+;---Set common plot options for both blank and XY bar plots
+  res = True
+
+;---Turn these off because we plan to panel later.
+  res@gsnDraw        = False
+  res@gsnFrame       = False
+
+;---Change aspect ratio of plot
+  res@vpWidthF       = 0.7 
+  res@vpHeightF      = 0.5
+
+;---Set the X and Y axis limits
+  res@trYMinF        = min(sflow) - (sflow_range*0.1)
+  res@trYMaxF        = max(sflow) + (sflow_range*0.1)
+  res@trXMinF        = min(xvalues)
+  res@trXMaxF        = max(xvalues)
+
+;
+; Make a copies of the current set of resources which will then
+; be further customized for the blank plots (blres) and the
+; XY plot (xyres).
+;
+  xyres = res
+  blres = res
+
+;
+; Customize resources for the XY bar plots. No tickmarks will be drawn
+; because this is all done with the blank plots.
+;
+  xyres@gsnXYBarChart                  = True
+  xyres@gsnXYBarChartColors            = (/"navyblue","brown","darkgoldenrod1","forestgreen"/)
+  xyres@gsnXYBarChartOutlineThicknessF = 5.0
+  xyres@tmXTOn                         = False       ; Turn off all tickmarks
+  xyres@tmYROn                         = False
+  xyres@tmXBOn                         = False
+  xyres@tmYLOn                         = False
+
+;---Customize tickmark resources for the blank plots
+
+  blres@tmXTOn                  = False           ; Turn off top tickmarks
+  blres@tmXBMode                = "Explicit"      ; Change labels on X axis.
+  blres@tmXBValues              = xvalues
+  blres@tmXBMinorValues         = ispan(min(xvalues)*10,max(xvalues)*10,5)*0.1
+  blres@tmXBLabels              = xlabels
+  blres@tmXBMinorPerMajor       = 1
+  blres@tmXBMajorLengthF        = 0.0    ; Turn off the bottom X tickmarks
+  blres@tmXBMajorOutwardLengthF = 0.0    ; You have to do it this way
+  blres@tmXBMinorOutwardLengthF = 0.0    ; in order to keep the labels.
+  blres@tmXBMinorLengthF        = 0.0
+
+  blres@tmYLMinorOutwardLengthF = 0.0    ; Turn off the left Y tickmarks
+  blres@tmYLMinorLengthF        = 0.0
+  blres@tmYLTickSpacingF        = 0.2
+  blres@tmYLMinorPerMajor       = 1
+  blres@tmYLFormat              = "0@;*.1f"   ; Only one value after decimal point
+  blres@tmYROn                  = False       ; Turn off right tickmarks
+
+  blres@tmXMajorGrid            = True         ; Add vertical grid lines
+  blres@tmXMinorGrid            = True
+  blres@tmXMajorGridLineColor   = "White"
+  blres@tmXMinorGridLineColor   = "White"
+
+  blres@tmYMajorGrid            = True        ; Add horizontal grid lines
+  blres@tmYMinorGrid            = True
+  blres@tmYMajorGridLineColor   = "White"
+  blres@tmYMinorGridLineColor   = "White"
+  blres@tmGridDrawOrder         = "predraw"    ; new resource added in NCL V6.5.0
+
+  blres@tiYAxisString           = ""
+  blres@tiMainFontHeightF       = 0.025
+
+;----------------------------------------------------------------------
+; Loop across each station and create a plot for paneling later.
+;----------------------------------------------------------------------
+  do nt=0,ntime-1
+;----------------------------------------------------------------------
+; Set additional resources to turn off various tickmarks and labels
+; depending on which plots we're drawing
+;----------------------------------------------------------------------
+    if(nt.eq.1.or.nt.eq.3) then      ; The rightmost plots; turn off left labels
+      blres@tmYLLabelsOn            = False
+      blres@tmYLMajorOutwardLengthF = 0.0
+      blres@tmYLMajorLengthF        = 0.0
+      blres@tmYLMinorOutwardLengthF = 0.0
+      blres@tmYLMinorLengthF        = 0.0
+    else
+      blres@tmYLLabelsOn = True
+      delete_attr(blres,"tmYLMinorOutwardLengthF")
+      delete_attr(blres,"tmYLMinorLengthF")
+      delete_attr(blres,"tmYLMajorOutwardLengthF")
+      delete_attr(blres,"tmYLMajorLengthF")
+    end if
+    if(nt.eq.0.or.nt.eq.1) then      ; The topmost plots; turn off bottom labels
+      blres@tmXBLabelsOn = False
+    else
+      blres@tmXBLabelsOn = True
+    end if
+
+;----------------------------------------------------------------------
+; Create the XY bar plot for this time step
+;----------------------------------------------------------------------
+    blres@tiMainString = titles(nt)
+    blank_plots(nt) = gsn_csm_blank_plot(wks,blres)
+    fill_plot_area(wks,blank_plots(nt))
+    bar_plots(nt) = gsn_csm_xy(wks,times,sflow(nt,:),xyres)
+
+;---setvalues fix necessary to filled bars to appear on top of the grid lines
+    setvalues bar_plots(nt)
+      "tfPolyDrawOrder" : "draw"
+    end setvalues
+
+    overlay(blank_plots(nt),bar_plots(nt))
+  end do
+
+;----------------------------------------------------------------------
+; Panel the four plots.
+;----------------------------------------------------------------------
+  pnlres             = True
+  pnlres@gsnMaximize = True
+  pnlres@gsnPanelXF  = (/0.08,0.54,0.08,0.54/)  ; slightly adjust X location of each plot
+  pnlres@gsnFrame    = False
+  gsn_panel(wks,blank_plots,(/2,2/),pnlres)
+
+;----------------------------------------------------------------------
+; Add a sideways text string on left side.
+;----------------------------------------------------------------------
+  txres               = True
+  txres@txFontHeightF = 0.02
+  txres@txAngleF      = 90    ; rotate 90 degrees
+  gsn_text_ndc(wks,"streamflow",0.015,0.5,txres)
+
+;----------------------------------------------------------------------
+; Advance frame once we are done drawing to this page.
+;----------------------------------------------------------------------
+  frame(wks)
+end

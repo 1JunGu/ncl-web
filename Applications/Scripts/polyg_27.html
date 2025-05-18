@@ -1,0 +1,220 @@
+;----------------------------------------------------------------------
+; polyg_27.ncl
+;----------------------------------------------------------------------
+; Concepts illustrated:
+;   - Drawing polylines using nggcog to define great circle arcs
+;   - Using gc_onarc to identify points on an array of great circle arcs
+;   - Moving the X axis strings to a different side
+;   - Changing the angle of the Y axis string
+;   - Removing tickmarks and labels from paneled plots so they can be drawn closer together
+;   - Customizing axis labels in panel plot to label columns and rows
+;----------------------------------------------------------------------
+;   The purpose of this script is to demonstrate that using floating
+;   point and double precision values with nggcog and gc_onarc, while
+;   also varying the number of great circle arcs to approximate a
+;   circle can yield differing results.
+;
+;   For illustrative purposes, a quadruply nested do loop is used in
+;   this example. Generally, it is recommended to minimize the number
+;   of nested do loops in order to maximize performance.
+;
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+  ; define grid points
+  grid_lat = fspan(5.d, 85.d, 17)
+  grid_lon = fspan(5.d, 85.d, 17)
+  n_lats = dimsizes(grid_lat)
+  n_lons = dimsizes(grid_lon)
+
+  ; create array containing lat-lon pairs
+  grid = new((/n_lats, n_lons, 2/), typeof(grid_lat))
+  grid(:,:,0) = conform_dims((/n_lats, n_lons/), grid_lat, 0)
+  grid(:,:,1) = conform_dims((/n_lats, n_lons/), grid_lon, 1)
+  grid := reshape(grid, (/n_lats * n_lons, 2/))
+
+  ; define circles
+  circ_center_lat = (/15.d, 25.d, 45.d, 75.028310082d, 55.d/)
+  circ_center_lon = (/75.d, 25.d, 70.d, 45.d,          22.480059887141225d/)
+  circ_radius = 10.d
+
+  ; nggcog arc approximation permutations
+  n_arcs_array = (/100000, 100001, 1000000/)
+
+  ; data type permutations
+  gtypes = (/ "float", "double",  "float", "double" /)
+  ctypes = (/ "float",  "float", "double", "double" /)
+
+  ; useful variables
+  n_cols = dimsizes(n_arcs_array)
+  n_rows = dimsizes(gtypes)
+  nplots = n_cols * n_rows
+  n_circ = dimsizes(circ_center_lat)
+
+  ; format individual plots
+  res          = True
+  res@gsnDraw  = False
+  res@gsnFrame = False
+  ; set plot area
+  res@mpMinLatF = 0.
+  res@mpMaxLatF = 90.
+  res@mpMinLonF = 0.
+  res@mpMaxLonF = 90.
+  ; configure plot labels
+  res@tiXAxisSide     = "top"       ; Move X-Axis label to top 
+  res@tiYAxisAngleF   = 0.          ; Rotate Y-Axis label to be horizontal
+  res@tiYAxisOffsetXF = -0.02
+  res@tiYAxisJust     = "CenterLeft"
+  ; disable tickmarks
+  res@tmXTOn = False
+  res@tmXBOn = False
+  res@tmYLOn = False
+  res@tmYROn = False
+
+  ; create workstation
+  wks_type = "png"
+  wks      = gsn_open_wks(wks_type, "polyg")
+
+  ; create array for panel plot
+  plot     = new(nplots, graphic)
+
+  ; format top-level panel plot labels and spacing
+  panel_res = True
+  panel_res@gsnPanelTop            = 0.95
+  panel_res@gsnPanelMainString     = "nggcog and gc_onarc with varying data types and number of arcs"
+  panel_res@gsnPanelScalePlotIndex = nplots - 1
+
+  ; marker options
+  mkres                         = True
+  mkres@gsMarkerIndex           = 5
+  mkres@gsMarkerColor           = "red"
+  mkres_oncirc                  = True
+  mkres_oncirc@gsMarkerIndex    = 16
+  mkres_oncirc@gsMarkerColor    = "green"
+
+  ; work array used in loops
+  on_any_circle = new((/n_lats * n_lons/), logical)
+
+  ; dummy arrays used by gsn_add_* functions
+  dum0 = new((/nplots, n_circ/),graphic)
+  dum1 = new(nplots,graphic)
+  dum2 = new(nplots,graphic)
+
+  ; loop over each plot in panel
+  do n=0,nplots-1
+    ; define loop variables
+    row    = n / n_cols
+    col    = mod(n, n_cols)
+    col    = n % n_cols
+    gtype  = gtypes(row)
+    ctype  = ctypes(row)
+    n_arcs = n_arcs_array(col)
+
+    ; initialize work array
+    on_any_circle = False ; assume false until proven true
+
+    ; modify plot text
+    if(row.eq.0) then
+      res@tiXAxisString = "number of arcs: " + n_arcs
+    else
+      res@tiXAxisString = ""
+    end if
+
+    if(col.eq.0) then
+      res@tiYAxisString = "grid type:   " + gtype + "~C~circle type: " + ctype
+    else
+      res@tiYAxisString = ""
+    end if
+    ; modify plot text end
+
+    ; create sub plot
+    plot(n)         = gsn_csm_map(wks, res)
+
+    ; loop over circles
+    do c=0,n_circ - 1
+      ; logical array used for each grid point's "on arc" status, initialized to False
+      grid_onarc := new((/n_lats, n_lons/), logical)
+      grid_onarc = False
+
+      ; convert to appropriate type for loop iteration
+      clat := totype(circ_center_lat(c), ctype)
+      clon := totype(circ_center_lon(c), ctype)
+      crad := totype(circ_radius, ctype)
+
+      ; used for approximating circle with nggcog() and then drawing circle with gsn_polyline()
+      arc_lat := new(n_arcs, ctype)
+      arc_lon := new(n_arcs, ctype)
+
+      ; draw circle
+      nggcog(clat, clon, crad, arc_lat, arc_lon) ; only used for graphics, not calculations
+      dum0(n,c) = gsn_add_polyline(wks, plot(n), arc_lon, arc_lat, True)
+
+      ; take series of N lats and N lons that define a circle approximation and create
+      ; N x 2 arrays for lat and lon defining end points of each constituent arc
+      arc_lat_pairs := new((/n_arcs, 2/), typeof(arc_lat))
+      arc_lon_pairs := new((/n_arcs, 2/), typeof(arc_lon))
+
+      arc_lat_pairs(:,0) = arc_lat
+      arc_lat_pairs(0:n_arcs-2,1) = arc_lat(1:)
+      arc_lat_pairs(n_arcs-1,1) = arc_lat(0)
+      arc_lon_pairs(:,0) = arc_lon
+      arc_lon_pairs(0:n_arcs-2,1) = arc_lon(1:)
+      arc_lon_pairs(n_arcs-1,1) = arc_lon(0)
+
+      ; in the interest of saving time when running this script, we have hardcoded values defining circles and grid points.
+      ; we only run gc_onarc on grid points that we expect to be on a circle -- this saves a lot of time
+      ; commenting the next three lines should show the same output, but performs unnecessary calculations for this demonstration
+      expected_grid_points = (/14, 38, 82, 106, 115, 183, 279, 281/)
+      do j=0, n_lats - 1
+        do k=0, n_lons - 1
+          ; commenting the next three lines should show the same output,
+          ; but performs unnecessary calculations for this demonstration
+          if(.not.any((n_lons * j + k).eq.expected_grid_points)) then
+              continue
+          end if
+
+          ; gc_onarc requires arguments of length (N, N, N x 2, N x 2)
+          ; arguments 1 and 2 are arrays of lat and lon points
+          ; arguments 3 and 4 are great circle arc segments defined by a pair of lats and a pair of lons
+          ; for each index in N, gc_onarc() checks if the point defined by arguments 1 and 2 is on the arc defined by the pair of points in args 3 and 4
+          ; in this case, we are looping over all grid points and want to see if the point (j, k) is on ANY of the arcs defined by the arg 3 and 4 arrays 
+          ; this means args 1 and 2 must be arrays of length N filled entirely with grid_lat(j) and grid_lon(k), which is done with conform_dims()
+          conform_lat := conform_dims(n_arcs, totype(grid_lat(j), gtype), -1)
+          conform_lon := conform_dims(n_arcs, totype(grid_lon(k), gtype), -1)
+          on_arc := gc_onarc(conform_lat, conform_lon, arc_lat_pairs, arc_lon_pairs)
+
+          if(any(on_arc))
+              ; True if the grid point (j, k) was on any of the arcs defined by arc_lat_pairs and arc_lon_pairs
+              grid_onarc(j,k) = True
+          end if
+          ; would the following work?
+          ; grid_onarc(j,k) = any(onarc)
+        end do
+      end do
+
+      ; set on_any_circle to True for any indices of grid_onarc that are True
+      ; have to check any(grid_onarc) first because ind() can return missing if grid_onarc is all False
+      if(any(grid_onarc)) then
+          on_any_circle(ind(ndtooned(grid_onarc))) = ind(ndtooned(grid_onarc))
+      end if
+    end do
+
+  ; create green circle marker for grid points on any circle
+  if(any(on_any_circle)) then
+    klat := ndtooned(grid(ind(ndtooned(on_any_circle)), 0))
+    klon := ndtooned(grid(ind(ndtooned(on_any_circle)), 1))
+    dum1(n) = gsn_add_polymarker(wks, plot(n), klon, klat, mkres_oncirc)
+  end if
+  ; create red x marker for grid points that are not on any circle
+    klat := ndtooned(grid(ind(ndtooned(.not.on_any_circle)), 0))
+    klon := ndtooned(grid(ind(ndtooned(.not.on_any_circle)), 1))
+    dum2(n) = gsn_add_polymarker(wks, plot(n), klon, klat, mkres)
+
+  end do
+
+  ; create panel plot
+  gsn_panel(wks,plot,(/n_rows,n_cols/),panel_res)
+end

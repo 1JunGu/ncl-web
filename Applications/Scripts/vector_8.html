@@ -1,0 +1,70 @@
+;----------------------------------------------------------------------
+; vector_8.ncl
+;
+; Concepts illustrated:
+;   - Create a panel plot
+;   - Adjusting vector thickness to enhance plot readability
+;   - Drawing line and curly vectors
+;   - Using vcGlyphStyle to change the vector type
+;   - Coloring vectors by magnitude
+;----------------------------------------------------------------------
+;
+; These files are loaded by default in NCL V6.2.0 and newer 
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;---Generate dummy vector data.
+  M  = 30
+  N  = 25
+
+  PI = 3.14159
+
+  U  = transpose(10.0 * cos(onedtond((2.0 * PI / N) * ispan(0,N-1,1),(/M,N/))))
+  V  = 10.0 * cos(onedtond((2.0 * PI / M) * ispan(0,M-1,1),(/N,M/)))
+
+;---Open workstation
+  wks  = gsn_open_wks ("png", "vector" )        ; send graphics to PNG file
+
+;---Set GSN resources
+  res                           = True
+  res@gsnDraw                   = False
+  res@gsnFrame                  = False
+  res@gsnMaximize               = True
+
+;---Set vector resources
+  res@vcMinMagnitudeF           = 1.
+  res@vcRefLengthF              = 0.05          ; define length of vec ref
+  res@vcRefAnnoOn               = False
+  res@vcLineArrowThicknessF     = 1.5           ; change vector thickness
+  res@vcWindBarbLineThicknessF  = 1.5
+  res@vcMinDistanceF            = 0.017
+
+;---Create line vector plot
+  res@tiMainString = "Line vectors"
+  plot1 = gsn_csm_vector(wks, U, V, res)
+
+;---Create curly vector plot
+  res@tiMainString = "Curly vectors"
+  res@vcGlyphStyle = "CurlyVector"
+  plot2 = gsn_csm_vector(wks, U, V, res)
+
+;---Create wind barb vector plot
+  res@tiMainString = "Wind barbs"
+  res@vcGlyphStyle = "WindBarb"
+  plot3 = gsn_csm_vector(wks, U, V, res)
+
+;---Create vector plot colored by magnitude
+  res@tiMainString         = "Colored by magnitude"
+  res@vcGlyphStyle         = "LineArrow"
+  res@vcMonoLineArrowColor = False
+  res@lbLabelBarOn         = False
+  plot4 = gsn_csm_vector(wks, U, V, res)
+
+;---Draw and panel all four plots
+  pres             = True
+  pres@gsnMaximize = True
+  gsn_panel(wks,(/plot1,plot2,plot3,plot4/),(/2,2/),pres)
+
+end
+

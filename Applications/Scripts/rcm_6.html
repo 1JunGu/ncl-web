@@ -1,0 +1,149 @@
+;********************************************************************
+; rcm_6.ncl
+;
+; Concepts illustrated:
+;   - Read a specified variable
+;   - Extract date information via 'cd_calendar'
+;   - Explore the variable's  statistical distribution  
+;   - Determine the index corresponding to a user specified 'time'
+;   - Plotting RCM 'dust' data
+;   - Extract required map parameters from the input file's attributes
+;   - Drawing color-filled contours over a lambert conformal map
+;********************************************************************
+;     float emflx(time, iy, jx) ;
+;           emflx:long_name = "Surface emission flux" ;
+;           emflx:standard_name = "surface_emission_flux" ;
+;           emflx:units = "mg m-2 day-1" ;
+;  =====>   emflx:coordinates = "xlat xlon" ;
+;  =====>   emflx:grid_mapping = "crs" ;
+;           emflx:cell_methods = "time: mean" ;
+;                 
+;     The emflx:coordinates attribute indicates the appropriate lat/lon arrays
+;********************************************************************
+; global attributes:
+;           :title = "ICTP Regional Climatic model V4" ;
+;           :institution = "ICTP" ;
+;           :source = "RegCM Model output file" ;
+;           :Conventions = "CF-1.4" ;
+;           :references = "http://gforge.ictp.it/gf/project/regcm" ;
+;           :model_revision = "tag-4.6.0" ;
+;           :history = "2019-08-12 13:49:21 : Created by RegCM RegCM Model program" ;
+;           :experiment = "Zabol-All-2018" ;
+;  =====>   :projection = "LAMCON" ;
+;           :grid_size_in_meters = 20000. ;
+;  =====>   :latitude_of_projection_origin = 31.025 ;
+;  =====>   :longitude_of_projection_origin = 61.501 ;
+;  =====>   :standard_parallel = 20., 44. ;
+;  [SNIP]
+;********************************************************************
+  diri = "./"
+  fili = "dust2018.nc"
+  pthi = diri+fili
+  f    = addfile(pthi,"r")
+;;
+  vName= "emflx"
+
+  x    = f->$vName$
+  printVarSummary(x)   ; (time, iy, jx)
+  printMinMax(x,0)
+  print("-----")
+
+  xlat = f->xlat       ; (iy, jx)   ==> Cartesian
+  xlon = f->xlon
+
+  dimx = dimsizes(x)
+  ntim = dimx(0)
+  nlat = dimx(1)
+  mlon = dimx(2)
+
+;---Extract dates: yyyymmddhh
+
+  ymdh = cd_calendar(x&time, -3)
+  print(ymdh)
+
+; Explore data: look at distribution
+
+  opt_sd = True         
+  opt_sd@PrintStat = True
+  stat_x = stat_dispersion(x, opt_sd )
+  print("-----")
+
+;---PLOT: Use "Cartesian" coordinates 'iy', 'ix'
+;         Use contour levels based upon data distribution. 
+;         This may require iteration to find what is best.
+
+  YMDH = 2018052912                    ; desired date
+  nt   = ind(YMDH.eq.ymdh)             ; time index corresponding to the requested data
+
+  pltTyp = "png"                       ; png, x11, pdf, ...
+  pltDir = "./"
+  pltFil = "rcm_"+YMDH
+  pltFil = "rcm"
+  pltPth = pltDir+pltFil
+
+; Delete cartesian coordinates associated with the variable
+; For this application, NCL does not use this information
+
+  delete( [/ x&jx, x&iy /] )
+
+;;wks  = gsn_open_wks(pltTyp,"rcm_"+YMDH)
+  wks  = gsn_open_wks(pltTyp,"rcm")
+  
+  res                      = True      ; plot mods desired
+  res@gsnMaximize          = True      ; maximize plot size
+  res@gsnAddCyclic         = False     ; data are regional   
+  res@cnFillOn             = False     ; turn on color
+  res@cnFillOn             = True      ; turn on color fill
+  res@cnLinesOn            = False     ; turn off contour lines
+  res@cnLineLabelsOn       = False     ; turn off contour line labels
+ ;res@cnFillPalette        = "BlAqGrYeOrRe"
+  res@cnFillPalette        = "WhiteBlueGreenYellowRed"
+  res@cnFillMode           = "RasterFill"       ; Raster Mode
+ ;res@lbOrientation        = "Vertical"
+  res@lbBoxLinesOn         = False     ; Turn off labelbar box lines 
+
+  res@mpFillOn             = False
+  res@mpLimitMode          = "Corners"          ; choose region of map
+  res@mpLeftCornerLatF     = xlat(0,0)
+  res@mpLeftCornerLonF     = xlon(0,0)
+  res@mpRightCornerLatF    = xlat(nlat-1,mlon-1)
+  res@mpRightCornerLonF    = xlon(nlat-1,mlon-1)
+  res@mpDataBaseVersion    = "MediumRes"        ; better map outlines
+  res@pmTickMarkDisplayMode= "Always"           ; turn on tickmarks
+  
+; Map information parameters are file attributes [also associated with 'crs' variable
+
+  res@mpProjection          = "LambertConformal"
+  res@mpLambertParallel1F   = f@standard_parallel(0)
+  res@mpLambertParallel2F   = f@standard_parallel(1)
+  res@mpLambertMeridianF    = f@longitude_of_projection_origin
+
+  res@cnLevelSelectionMode = "ExplicitLevels"
+  res@cnLevels             = (/   100,  250,  500,  750, 1000, 2000\
+                              ,  3000, 4000, 5000, 6000, 7000, 8000\
+                              ,  9000,10000,11000,12000,13000,14000\
+                              , 15000,17250,20000,25000,30000,40000\
+                              , 50000,60000,75000,100000 /)               
+
+  res@sfXArray = xlon                              ; equivalently x@lon2d = xlon
+  res@sfYArray = xlat                              ; equivalently x@lat2d = xlat
+
+  res@tiMainString         = "ITCP: RCM: "+YMDH
+
+  plot    = gsn_csm_contour_map(wks,x(nt,:,:),res) ; contour the variable
+
+;
+; Draw the lat/lon locations as grid lines. Since the
+; lat/lon arrays are not associated with "x", we
+; have to pass them explicitly via the gsnCoordsLat/Lon
+; attributes.
+;
+  res@gsnDraw = False
+  res@gsnFrame= False
+
+  plot    = gsn_csm_contour_map(wks,x(nt,:,:),res) ; contour the variable
+  lnres = True
+  lnres@gsnCoordsLat = xlat
+  lnres@gsnCoordsLon = xlon
+  lnres@gsnCoordsAsLines = True
+  gsn_coordinates(wks,plot,x(nt,:,:),lnres)

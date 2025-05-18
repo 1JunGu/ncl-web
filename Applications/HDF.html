@@ -1,0 +1,1149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/HDF.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:01:30 GMT -->
+<head>
+<meta name="description" content="Use of NCL to visualize datasets in HDF format.">
+<meta name="keywords" content="NCL, graphics, visualization, HDF-4, HDF-EOS, he2, he5">
+<TITLE>NCL: HDF, HDF-EOS</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_data.html">Data sets</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL: HDF:  Hierarchical Data Format <br>
+HDF-SDS: Scientific Data Set<br>
+HDF-EOS: Earth Observing System
+</h1>
+
+<div class=mainimage>
+<img src="Images/hdf4eos_5_lg.png">
+</div>
+<div class=text>
+
+<h3>HDF and HDF-EOS</h3>
+<p>
+In 1993, NASA chose the Hierarchical Data Format Version 4 (HDF4) 
+to be the official format for all data products derived by the
+Earth Observing System (EOS). It is commonly used  for
+satellite based data sets.  There are several 'models' of 
+HDF4 which can be a bit confusing. Each model addresses 
+different needs.  One model is the Scientific Data Set (SDS) which is 
+similar to netCDF-3 (Classic netCDF).  It supports multi-dimensional 
+gridded data with meta-data including support for an unlimited dimension. 
+<p>
+To better serve a broader spectrum within the user community
+with needs for geolocated data, a new format or convention, 
+HDF-EOS2 was developed. 
+HDF-EOS supports three geospatial data types: <i>grid</i>, 
+<i>point</i>, and <i>swath</i>. 
+<p>
+Limitations of the HDF4 format, needs for improved data compression and
+changing computer paradigms led to the introduction of a
+new HDF format (HDF5) in 2008. The HDF4 and HDF5 appellations
+might imply some level of compatibility.
+Unfortunately, no! These are completely independent formats. 
+The calling interfaces and underlying storage formats are different. 
+<p>
+Unlike the netCDF community which has a well established
+<a href="http://www.unidata.ucar.edu/software/netcdf/conventions.html"><b>history of conventions</b></a> 
+(<i>eg.</i>, <a href="http://cf-pcmdi.llnl.gov/"><b>Climate and Forecast</b></a> convention), 
+there seems to be a lack of commonly accepted conventions by the 
+HDF satellite community. For example the "units" for geographical coordinates under the
+CF convention must be recognized by the <a href="http://www.unidata.ucar.edu/software/udunits/">
+<b>udunits</b></a> package. Often on HDF files the latitude and longitude
+variables will have the units "degrees" while netCDF's CF convention
+would require "degrees_north" and "degrees_east" or some other recognized units.
+<p>
+Some experiments (<i>eg</i>, 
+<a href="http://www.esdswg.org/spg/rfc/esds-rfc-009/ESDS-RFC-009.pdf"><b>AURA</b></a>)
+have developed "guidelines" for data. However, perhaps because the spectrum
+of experiments is large, the HDF community does not have a "culture" where broadly accepted  
+<a href="http://www.unidata.ucar.edu/software/netcdf/conventions.html">conventions </a> are commonly used.       
+
+
+</div>
+
+<div class=text>
+<h3>NASA Data Processing Levels</h3>
+NASA data products are processed at various <a href="https://ghrc.nsstc.nasa.gov/uso/proc_level.html">
+<b>Data Processing Levels</b></a> ranging from Level 0 to Level 4. 
+Level 0 products are raw data at full instrument resolution. At higher levels, the data 
+are converted into more useful parameters and formats. Often the levels are included in
+the file name: <i>eg.</i> L0, L1, L1A, L1B, ..., L3, L4. 
+</div>
+
+<div class=text>
+<h3>NCL General Comments</h3>
+NCL 
+<a href="../Document/Manuals/Ref_Manual/NclFormatSupport.html">
+recognizes and supports multiple data formats</a> including
+HDF4, HDF5, HDF-EOS2 and HDF-EOS5. The following HDF
+related file extensions are recognized: "hdf", "hdfeos", 
+"he2", "he4", and "he5".
+<p>
+The first rule of 'data processing' is to look at the data. 
+The command line utility
+<a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a>
+can be used to examine a file's contents. Information such as a variable's type,
+size, shape can allow users to develop optimal code for processing.
+<p>
+The <a href="../Document/Functions/Contributed/stat_dispersion.html"><strong>stat_dispersion</strong></a>  and
+<a href="../Document/Functions/Contributed/pdfx.html"><strong>pdfx</strong></a> functions 
+can be used to examine a variable's distribution. It is not
+uncommon for outliers to be present. If so, it is best to manually specify
+the contour limits and spacing to maximize information content
+on the plots.
+<p>
+A possible source of confusion is that variables that are "short" or "byte"
+can be unpacked to float via two different formulations. If <b>x</b>
+represents a variable of type "short" or "byte", the unpacked
+ or scaled value can be derived via:
+<p>
+<pre>
+          value =  <b>x</b>*scale_factor + add_offset
+or
+          value = (<b>x</b> - add_offset)*scale_factor
+
+</pre>
+Examples of files that use the latter formula are at <a href="http://hdfeos.org/zoo/Data_Collection/LAADS_MYD.pdf"><b>MYDATML_2, MYD04_L2</b></a>.
+<p>
+The NCL functions
+<a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a>/ 
+<a href="../Document/Functions/Contributed/byte2flt.html"><strong>byte2flt</strong></a> can
+be used to unpack the former, while,
+<a href="../Document/Functions/Contributed/short2flt_hdf.html"><strong>short2flt_hdf</strong></a>/ 
+<a href="../Document/Functions/Contributed/byte2flt_hdf.html"><strong>byte2flt_hdf</strong></a> can
+be used to unpack the latter.
+</div>
+
+<div class=text>
+<h3>FYI: An Inconsistency between Reading HDF4 and HDF-EOS2</h3>
+
+<b>The following does not apply for NCL versions 6.2.0 and newer.
+NCL v6.2.0 perform a 'double read' HDF and HDF-EOS and merges the
+appropriate meta data.</b>
+<p>
+An issue which may confuse users reading HDF-EOS2 files is that a variable 
+imported after a file has been opened with a <b>.hdf</b> extension may 
+have different meta data associated with it then if it had been imported 
+after being opened with a <b>.hdfeos</b> or <b>.he2</b> extension. The reason 
+is that although HDF-EOS2 library has an interface for getting variable attributes,
+many of the attributes that would be visible when reading using the 
+straight HDF library are <b><i>not</i></b> accessible using the HDFEOS library.  
+Conversely, the coordinates are often only visible using the HDF-EOS2 library. So,
+currently, the only solution is for the user to examine the variable by
+opening the file via each extension (ie: a 'double read').  
+</div>
+
+<div class=text>
+<h3>Data used in the Examples</h3>
+Regardless of the dataset used, the same principle can be used to process the data.
+<p>
+<pre>
+<b>HDF-SDS [hdf]</b>
+   TRMM   - Tropical Rainfall Measuring Mission
+   MODIS  - Moderate Resolution Imaging Spectroradiometer
+   SeaWiFS- Sea-viewing Wide Field-of-view Sensor [ <a href="seawifs.html">SeaWiFS examples</a> ]
+
+<b>HDF4EOS [he2, he4, hdfeos]</b>
+   AIRS   - Atmospheric Infrared Sounder
+   MODIS  - Moderate Resolution Imaging Spectroradiometer
+
+<b>HDF5EOS [he5]</b>
+   HIRDLS - High Resolution Dynamics Limb Sounder
+   MLS    - Microwave Limb Sounder
+   OMI    - Ozone Monitoring Instrument
+   TES    - Tropospheric Emission Spectrometer
+
+<b>HDF5 [h5]</b>
+   GPM    - Global Precipitation Mission
+   SMAP   - Soil Moisture Active Passive 
+
+</pre>
+
+</div>
+<p>
+<p>
+<div class=text>
+<h3>HDF Group Comprehensive Examples</h3>
+The HDF-Group has created a suite of examples called the  
+<a href="http://hdfeos.org/zoo/"><b>hdfeos.org/zoo</b></a>. 
+It contains <B>NCL, Matlab, IDL and Python</b> example scripts and the associated images.
+A 'side-benefit' is that looking at these examples provides some insight on how the 
+different tools accomplish the same task. Caveat: Possibly, an expert in any one of these 
+languages could create a more elegent script and better image. 
+<p>
+They also provide <a href="http://hdfeos.net/software/ncl.php">NCL specific comments</a>.
+</div>
+<p>
+<div class=text>
+Some HDF examples may need a library named <a href="Scripts/HDFEOS_LIB.html">HDFEOS_LIB.ncl</a> .
+</div>
+<p>
+
+<div class=ex>
+<!--hdf4sds-->
+<a name=hdf4sds_ex1></a>
+<a href="Images/hdf4sds_1_lg.png">
+<img src="Images/hdf4sds_1_sm.png" align=left border=2></a>
+<a href="Scripts/hdf4sds_1.html">hdf4sds_1.ncl</a>:
+
+Read a TRMM 
+file containing 3-hourly
+precipitation at 0.25 degree resolution. The geographical 
+extent is 40S to 40N. This data is from the
+Tropical Rainfall Measuring Mission (TRMM). 
+<p>
+Create a <b>packed</b> netCDF
+using the <a href="../Document/Functions/Contributed/pack_values.html"><strong>pack_values</strong></a> function. 
+This creates a file half the size of those created 
+using float values. Some precision is lost but is not important here.
+<p>
+This HDF file is classifed as a "<b>S</b>cientific 
+<b>D</b>ata <b>S</b>et" (<b>HDF4-SDS</b>). 
+Unfortunately, the file is not 'self-contained'.
+because the file contnts do not contain the geographical coordinates
+or temporal information The former must be obtained via
+a web site while the time is embedded within the file name.
+</div>
+
+<div class=ex>
+<!--hdf4sds-->
+<a name=hdf4sds_ex2></a>
+<a href="Images/hdf4sds_2_lg.png">
+<img src="Images/hdf4sds_2_sm.png" align=left border=2></a>
+<a href="Scripts/hdf4sds_2.html">hdf4sds_2.ncl</a>:
+
+Read an <b>HDF4-SDS</b> file that contains high resolution (1km)
+data over India and Sri Lanka. The file does not explicitly contain
+any coordinate arrays. However, the variable on the file
+"Mapped_Composited_mapped" does have the following attributes:
+<pre>
+         Slope :         1
+         Intercept :     0
+         Scaling :      linear
+         Limit :        (    4,   62,   27,   95 )
+         Projection_ID :        8
+         Latitude_Center :         0
+         Longitude_Center :     78.5
+         Rotation :        0
+</pre>
+The <b>Slope/Intercept</b> attributes would indicate that no scaling has been
+applied to the data. The <b>Limit</b> attribute indicates the geographical
+limits and the <b>Latitude_Center/Longitude_Center/Rotation</b>
+specify map attributes. The variable does not specify any 
+missing value [_FillValue] attribute but, after looking at the
+data, it was noted that the value -1 is appropriate.
+<p>
+The <a href="../Document/Functions/Contributed/stat_dispersion.html"><strong>stat_dispersion</strong></a> function was
+used to determine the standard and robust estimates of the 
+variable's dispersion. Outliers are present and the contour
+information was manually specified.
+</div>
+
+
+<div class=ex>
+<!--hdf4sds_3-->
+<a name=hdf4sds_ex3></a>
+<a href="Images/hdf4sds_3_lg.png">
+<img src="Images/hdf4sds_3_sm.png" align=left border=2></a>
+<a href="Scripts/hdf4sds_3.html">hdf4sds_3.ncl</a>: Read multiple files
+(here, 131 files) for one particular day; for each file
+bin and sum the satellite data using <a href="../Document/Functions/Built-in/bin_sum.html"><strong>bin_sum</strong></a>;
+after all files have been read, use <a href="../Document/Functions/Built-in/bin_avg.html"><strong>bin_avg</strong></a>
+to average all the summed values; plot; create a netCDF
+of the binned (gridded data).
+<p>
+Note: 
+Here the data are netCDF files. However, the original files were 
+HDF-SDS (eg: MYD06_L2.A2005364.1405.005.2006127140531.hdf). The
+originating scientist converted these to netCDF for some reason.
+NCL can handle either. Only the file extension need be changed 
+(.nc to .hdf).
+</div>
+
+<div class=ex>
+<!--hdf4sds_4-->
+<a name=hdf4sds_ex4></a>
+<a href="Images/hdf4sds_4_lg.png">
+<img src="Images/hdf4sds_4_sm.png" align=left border=2></a>
+<a href="Scripts/hdf4sds_4.html">hdf4sds_4.ncl</a>: 
+Read a HDF-SDS dataset containing 
+<a href="http://oceancolor.gsfc.nasa.gov/PRODUCTS/L3_sst.html">
+MODIS Aqua Level-3 SSTs</a>. The file attributes contain the
+geographical information and this is used to generate
+coordinate variables.  One issue is that the data "l3m_data"
+are of type "unsigned short". These are not explicitly supported
+through v5.1.1 (but will be in 5.2.0). Hence, a simple 'work-around'
+is used. 
+<p>
+In addition to plotting the original 9KM data, the
+<a href="../Document/Functions/Built-in/area_hi2lores.html"><strong>area_hi2lores</strong></a> is used to interpolate
+the data to a 0.5x0.5 grid. A netCDF file is created.    
+<p>
+Other 'L3' datasets could be directly used in the sample script.
+For example: Example 3 on the 
+<a href="seawifs.html">SeaWiFS</a> Application page.
+</div>
+
+<div class=ex>
+<!--hdf4sds_5-->
+<a name=hdf4sds_ex5></a>
+<a href="Images/hdf4sds_5_lg.png">
+<img src="Images/hdf4sds_5_sm.png" align=left border=2></a>
+<a href="Scripts/hdf4sds_5.html">hdf4sds_5.ncl</a>: 
+Read four MODIS HDF datasets and create a series
+of swath contours over an Orthographic map. The 2D lat/lon data 
+is read off of each file and used to determine where on the map
+to overlay the contours.
+<p>
+
+This example uses <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a> to create the map plot
+with the first set of contours, and then creates the remaining contour
+plots with <a href="../Document/Graphics/Interfaces/gsn_csm_contour.html"><strong>gsn_csm_contour</strong></a>.  The
+<a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> procedure is then used to overlay these
+remaining contour plots over the existing contour/map plot.
+
+</div>
+
+<div class=ex>
+<!--hdf4sds_6-->
+<a name=hdf4sds_ex6></a>
+   <a href="Images/hdf4sds_6_1_lg.png">
+   <img src="Images/hdf4sds_6_1_sm.png" align=left border=2></a>
+   <a href="Images/hdf4sds_6_2_lg.png">
+   <img src="Images/hdf4sds_6_2_sm.png" align=left border=2></a>
+   <a href="Images/hdf4sds_6_3_lg.png">
+   <img src="Images/hdf4sds_6_3_sm.png" align=left border=2></a>
+<a href="Scripts/hdf4sds_6.html">hdf4sds_6.ncl</a>: 
+TRMM 2A12: 
+TMI Hydrometeor (cloud liquid water, prec. water, cloud ice, prec. ice) contains profiles in 14 layers at 5 km horizontal resolution, along with latent heat and surface rain, over a 760 km swath.
+Specify a variable (here, "latentHeat") and plot (a) the entire swath; (b) region near India; (c) a vertical profile at locations where the latent heat
+exceeds 1500. The file contains no units information for the variables.
+<p>
+</div>
+
+<div class=ex>
+<!--hdf4sds_7-->
+<a name=hdf4sds_ex7></a>
+   <a href="Images/hdf4sds_7_lg.png">
+   <img src="Images/hdf4sds_7_sm.png" align=left border=2></a>
+<a href="Scripts/hdf4sds_7.html">hdf4sds_7.ncl</a>: 
+A SEVIRI Level-3 water vapor data set. The variable is packed in a rather unusual 
+fashion. The flags should be viewed to determine the source of the data. 
+<p>
+</div>
+
+<div class=ex>
+<!--hdf4sds_8-->
+   <a href="Images/hdf4sds_8_1_lg.png">
+   <img src="Images/hdf4sds_8_1_sm.png" align=left border=2></a>
+   <a href="Images/hdf4sds_8_2_lg.png">
+   <img src="Images/hdf4sds_8_2_sm.png" align=left border=2></a>
+   <a href="Images/hdf4sds_8_3_lg.png">
+   <img src="Images/hdf4sds_8_3_sm.png" align=left border=2></a>
+   <a href="Images/hdf4sds_8_4_lg.png">
+   <img src="Images/hdf4sds_8_4_sm.png" align=left border=2></a>
+<a name=hdf4sds_ex7></a>
+<a href="Scripts/hdf4sds_8.html">hdf4sds_8.ncl</a>: 
+A TRMM A25 file is read. At each pixel, the maximum 'correctZFactor' from all levels is extracted using <a href="../Document/Functions/Built-in/dim_max_n.html"><strong>dim_max_n</strong></a>.  Several ways of presenting the data for a swath are illustrated.
+<p>
+</div>
+
+<div class=ex>
+<!--hdf4sds_9-->
+<a name=hdf4sds_ex9></a>
+   <a href="Images/hdf4sds_9_lg.png">
+   <img src="Images/hdf4sds_9_sm.png" align=left border=2></a>
+<a href="Scripts/hdf4sds_9.html">hdf4sds_9.ncl</a>: 
+A TRMM A25 file is read. The 'nearSurfZ' is imported.  Several ways of presenting the data for a swath are illustrated.
+<p>
+</div>
+
+
+
+
+
+   <div class=ex>
+   <!--hdf4eos_1-->
+   <a name=hdf4eos_ex1></a>
+   <a href="Images/hdf4eos_1_lg.png">
+   <img src="Images/hdf4eos_1_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf4eos_1.html">hdf4eos_1.ncl</a>: 
+Read a <b>HDF-EOS2</b> file containing <i>swath</i> data.
+NCL identifies the swath as <b>MODIS_SWATH_Type_L1B</b>. 
+   Create a simple plot of reflectance with coordinates of scanline
+and pixel.
+<p>
+   The <b>eos.hdf</b> that appears as the file name is an alias for
+   <b>MOOD021KM.A2000303.1920.002.2000317044659.hdf</b>. It is not
+uncommon for a HDF-EOS2 file to have the ".hdf" file extension. 
+In this case, NCL will open and read the file sucessfully but
+it is best to manually append the ".hdfeos" extension when opening
+the file in the <a href="../Document/Functions/Built-in/addfile.html"><strong>addfile</strong></a> function.
+
+<p>
+<pre>
+     <a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a> eos.hdf
+</pre>
+yields
+<pre>
+     filename:       eos
+path:   eos.hdf
+   file global attributes:
+      HDFEOSVersion : <b>HDFEOS</b>_V2.6
+      StructMetadata_0 : GROUP=<b>SwathStructure</b>
+        GROUP=SWATH_1
+                SwathName="MODIS_SWATH_Type_L1B"
+                [...SNIP...]
+        END_GROUP=SWATH_1
+END_GROUP=SwathStructure
+[...SNIP...]
+</pre>
+
+   </div>
+
+   <div class=ex>
+   <!--hdf4eos_2-->
+   <a name=hdf4eos_ex2></a>
+   <a href="Images/hdf4eos_2_lg.png">
+   <img src="Images/hdf4eos_2_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf4eos_2.html">hdf4eos_2.ncl</a>: 
+   Example of a radiance plot. Note that the color table is reversed
+   from example 1. 
+   </div>
+
+   <div class=ex>
+   <!--hdf4eos_3-->
+   <a name=hdf4eos_ex3></a>
+   <a href="Images/hdf4eos_3_lg.png">
+   <img src="Images/hdf4eos_3_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf4eos_3.html">hdf4eos_3.ncl</a>: 
+   A multiple contour plot of other quantities on the MODIS file.
+   </div>
+
+   <div class=ex>
+   <!--hdf4eos_4-->
+   <a name=hdf4eos_ex4></a>
+   <a href="Images/hdf4eos_4_lg.png">
+   <img src="Images/hdf4eos_4_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf4eos_4.html">hdf4eos_4.ncl</a>: 
+   MODIS data placed on a geographical projection.
+   A rather awkward aspect of this file is that the Latitude and Longitude
+variables differ in size from the variable being plotted. 
+<br>
+   <br>
+   The 5 added to the map limits is arbitrary (not required). Here it is 
+used to specify 
+   extra space around the plot. 
+   </div>
+
+   <div class=ex>
+   <!--hdf4eos_5-->
+   <a name=hdf4eos_ex5></a>
+   <a href="Images/hdf4eos_5_lg.png">
+   <img src="Images/hdf4eos_5_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf4eos_5.html">hdf4eos_5.ncl</a>: 
+Illustrates the use of <a href="../Document/Functions/Built-in/dim_gbits.html"><strong>dim_gbits</strong></a> to extract specic bits within a bit-stream. 
+A data (variable) issue is that the cloud mask variable is on a 1-km grid while the latitude/longitude 
+variables are on a 5-km grid. NCL array syntax (::5) is used to decimate (sub-sample) the 1-km array to the 5-km array) 
+   It also demonstrates explicitly labeling different label bar colors with a specific integers. 
+   <p>
+   The use of res@<a href="../Document/Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> =
+   "TriangularMesh" makes the plotting faster.
+   <p>
+
+   NCL 6.5.0 introduces a new function, <a href="../Document/Functions/Built-in/get_bitfield.html"><strong>get_bitfield</strong></a>, 
+   that will simplify the use of
+   <a href="../Document/Functions/Built-in/dim_gbits.html"><strong>dim_gbits</strong></a>. <a href="Scripts/hdf4eos_5a.html">hdf4eos_5a.ncl</a>
+   illustrates the use of this new function to obtain the same result.
+
+   </div>
+
+   <div class=ex>
+   <!--hdf4eos_6-->
+   <a name=hdf4eos_ex6></a>
+   <a href="Images/hdf4eos_6_1_lg.png">
+   <img src="Images/hdf4eos_6_1_sm.png" align=left border=2></a>
+   <a href="Images/hdf4eos_6_2_lg.png">
+   <img src="Images/hdf4eos_6_2_sm.png" align=left border=2></a>
+   <a href="Images/hdf4eos_6_3_lg.png">
+   <img src="Images/hdf4eos_6_3_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf4eos_6.html">hdf4eos_6.ncl</a>: 
+Read an AIRS Level-3 file (here, product type AIRX3STD). This uses the
+AIR IR and MSU instruments. Although on a 1x1 degree grid, the 
+grid point values represent satellite swaths that have been
+binned over a period of time (24 hours). The data to the left and right
+of the Date Line represent  
+values that were sampled at different times. Hence, <b> the gridded
+values are not cyclic in longitude</b>. 
+   </div>
+
+   <div class=text>
+<font color=red>Support for HDF5 and HDF-EOS5 is present in
+v5.2.0 which was released April 14, 2010. </font> Some samples follow.
+   </div>
+
+   <div class=ex>
+   <!--hdf5eos_1-->
+   <a name=hdf5eos_ex1></a>
+   <a href="Images/hdf5eos_1_1_lg.png">
+   <img src="Images/hdf5eos_1_1_sm.png" align=left border=2></a>
+   <a href="Images/hdf5eos_1_2_lg.png">
+   <img src="Images/hdf5eos_1_2_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf5eos_1.html">hdf5eos_1.ncl</a>: 
+Read a <b>HDF-EOS5</b> <font color=red>(available v5.2.0)</font> file from the Aura
+OMI (Ozone Monitoring Instrument) and plot all the variables 
+on the file. Here only two of the variables are shown.
+   </div>
+
+   <div class=ex>
+   <!--hdf5eos_2-->
+   <a name=hdf5eos_ex2></a>
+   <a href="Images/hdf5eos_2_lg.png">
+   <img src="Images/hdf5eos_2_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf5eos_2.html">hdf5eos_2.ncl</a>: 
+Read an <b>HDF-EOS5</b> <font color=red>(available v5.2.0)</font>
+file (OMI) and plot selected variables 
+on the file. (The 
+<a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a>
+utility was used to preview the file's contents,) 
+This example also demonstrates how to retrieve a
+variable's type prior to reading it into memory. (See
+<a href="../Document/Functions/Built-in/getfilevartypes.html"><strong>getfilevartypes</strong></a>.)
+It is best to use 
+<a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a> or 
+<a href="../Document/Functions/Contributed/byte2flt.html"><strong>byte2flt</strong></a> if
+the variable type is "short" or "byte". 
+These functions will automatically apply the proper scaling.  
+<p>
+Note that the units for the "EffectiveTemperature"
+variable appear to be incorrect. They indicate "degrees Celsius" 
+but the range would indicate "degrees Kelvin". This could be addressed
+by adding the following to the script after the variable has
+been imported:
+<pre>
+     if (vNam(nv).eq."EffectiveTemperature_ColumnAmountO3") then
+         x@units = "degrees Kelvin"       ; fix bad units
+     end if
+</pre>
+   </div>
+
+   <div class=ex>
+   <!--hdf5eos_3-->
+   <a name=hdf5eos_ex3></a>
+   <a href="Images/hdf5eos_3_1_lg.png">
+   <img src="Images/hdf5eos_3_1_sm.png" align=left border=2></a>
+   <a href="Images/hdf5eos_3_2_lg.png">
+   <img src="Images/hdf5eos_3_2_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf5eos_3.html">hdf5eos_3.ncl</a>: 
+Read an <b>HDF-EOS5</b> <font color=red>(available v5.2.0)</font> file from the MLS (Aura Microwave Limb Sounder) and 
+plot a two-dimensional cross-section (pressure/time) of temperature. Then plot the trajectory of the satellite over this time. 
+<p>
+Sean Davis (NOAA) has put together a gridded satellite WV/ozone product called 
+<a href="http://www.esrl.noaa.gov/csd/groups/csd8/swoosh/"><b>SWOOSH</b><a> that includes MLS data. 
+   </div>
+<p>
+   <div class=ex>
+   <!--hdf5eos_3a-->
+   <a name=hdf5eos_ex3a></a>
+   <a href="Images/hdf5eos_3a_1_lg.png">
+   <img src="Images/hdf5eos_3a_1_sm.png" align=left border=2></a>
+   <a href="Images/hdf5eos_3a_2_lg.png">
+   <img src="Images/hdf5eos_3a_2_sm.png" align=left border=2></a>
+   <a href="Images/hdf5eos_3a_3_lg.png">
+   <img src="Images/hdf5eos_3a_3_sm.png" align=left border=2></a>
+   <a href="Images/hdf5eos_3a_4_lg.png">
+   <img src="Images/hdf5eos_3a_4_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf5eos_3a.html">hdf5eos_3a.ncl</a>: 
+Very similar to the previous example: (a) Different data set (MLS-Aura_L2GP-O3); (b) trajectory values are colored by value. The 3 left figures show the vertical profile of O3 along the trajectory for (i) <b>all</b> levels; (b) a smaller subset; and (c) a very small subset. A user requested an example of gridding the sparsely sampled trajectory data. Obviously it was not a 'nice' picture.
+<p>
+Sean Davis (NOAA) has put together a gridded satellite WV/ozone product called 
+<a href="http://www.esrl.noaa.gov/csd/groups/csd8/swoosh/"><b>SWOOSH</b><a> that includes MLS data. 
+   </div>
+
+   <div class=ex>
+   <!--hdf5eos_4-->
+   <a name=hdf5eos_ex4></a>
+   <a href="Images/hdf5eos_4_1_lg.png">
+   <img src="Images/hdf5eos_4_1_sm.png" align=left border=2></a>
+   <a href="Images/hdf5eos_4_2_lg.png">
+   <img src="Images/hdf5eos_4_2_sm.png" align=left border=2></a>
+   <a href="Images/hdf5eos_4_3_lg.png">
+   <img src="Images/hdf5eos_4_3_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf5eos_4.html">hdf5eos_4.ncl</a>: 
+Read an <b>HDF-EOS5</b> <font color=red>(available v5.2.0)</font> file from 
+the HIRDLS: (a) Use <a href="../Document/Functions/Contributed/stat_dispersion.html"><strong>stat_dispersion</strong></a> to
+print the statistical information for each variable; (b) compute PDFs
+via <a href="../Document/Functions/Contributed/pdfx.html"><strong>pdfx</strong></a>; 
+(c) plot cross-sections; and, (d) plot time series of three different variables. 
+   </div>
+
+   <div class=ex>
+   <!--hdf5eos_5-->
+   <a name=hdf5eos_ex5></a>
+   <a href="Images/hdf5eos_5_lg.png">
+   <img src="Images/hdf5eos_5_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf5eos_5.html">hdf5eos_5.ncl</a>: 
+Read two similar OMI files (L3-OMDOAO3e and L3-OMTO3e). 
+This illustrates that users <b>must</b>
+look at a file's contents before using. (Use 
+<a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a>)
+ Here, there are two
+files with similar variables but NCL assigns slightly different names. 
+<p>
+The OMI L3 files used in this example have a bug in the way the OMI
+data were written to the
+files. NCL <a href="../prev_releases.html#6.1.0">version 6.1.0</a> and
+later will be able to identify OMI data files and will automatically
+correct for the latitude reversal.
+   </div>
+
+<div class=ex>
+   <!--amsr_1-->
+   <a name=amsr_ex1></a>
+   <a href="Images/AMSR2_L3.SoilMoisture_1_1_lg.png">
+   <img src="Images/AMSR2_L3.SoilMoisture_1_1_sm.png" align=left border=2></a>
+   <a href="Images/AMSR2_L3.SoilMoisture_1_2_lg.png">
+   <img src="Images/AMSR2_L3.SoilMoisture_1_2_sm.png" align=left border=2></a>
+   <a href="Images/AMSR2_L3.SoilMoisture_1_3_lg.png">
+   <img src="Images/AMSR2_L3.SoilMoisture_1_3_sm.png" align=left border=2></a>
+   <a href="Scripts/amsr_1.html">amsr_1.ncl</a>: 
+Swaths containing soil moisture from the Advanced Microwave Scanning Radiometer (AMSR) 
+are read from multiple <b>h5</b> files. Documentation was not available but there were file 'issues':
+(1) The variable name has a space ("Geophysical Data"); (2) The variable has an attribute 
+<b>FillValue</b> and not <b>_FillValue</b>;
+(3) There are two 'missing value categories' (-32767<b>s</b>, -32768<b>s</b>)
+(4) The unrecognized unpacking attribute ["SCALE FACTOR"] to must be 
+converted to "scale_factor" for use by NCL's <a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a> function.
+   </div>
+
+   <div class=ex>
+   <!--MOPITT_MOP03M_1-->
+   <a name=MOPITT_ex1></a>
+   <a href="Images/MOPITT_MOP03M_1_lg.png">
+   <img src="Images/MOPITT_MOP03M_1_sm.png" align=left border=2></a>
+   <a href="Scripts/MOPITT_MOP03M_1.html">MOPITT_MOP03M_1.ncl</a>: 
+Read a variable and plot a user specified level. The grid is (180x360). 
+Missing values are present. A common issue with
+HDF files is that they do not contain all the desired information
+or units.  Hence, they must be manually provided. 
+   </div>
+
+   <div class=ex>
+   <!--MOPITT_MOP03M_2-->
+   <a name=MOPITT_ex2></a>
+   <a href="Images/MOPITT_MOP03M_2_lg.png">
+   <img src="Images/MOPITT_MOP03M_2_sm.png" align=left border=2></a>
+   <a href="Scripts/MOPITT_MOP03M_2.html">MOPITT_MOP03M_2.ncl</a>: 
+Read a variable and plot all levels. 
+   </div>
+
+   <div class=ex>
+   <!--MOPITT_MOP03M_3-->
+   <a name=MOPITT_ex3></a>
+   <a href="Images/MOPITT_MOP03M_3_1_lg.png">
+   <img src="Images/MOPITT_MOP03M_3_1_sm.png" align=left border=2></a>
+   <a href="Images/MOPITT_MOP03M_3_2_lg.png">
+   <img src="Images/MOPITT_MOP03M_3_2_sm.png" align=left border=2></a>
+   <a href="Scripts/MOPITT_MOP03M_3.html">MOPITT_MOP03M_3.ncl</a>: 
+Read a variable and interpolate to a much coarser 46x72 grid using
+<a href="../Document/Functions/Contributed/linint2_Wrap.html"><strong>linint2_Wrap</strong></a> and
+<a href="../Document/Functions/Contributed/area_hi2lores_Wrap.html"><strong>area_hi2lores_Wrap</strong></a>.
+Missing areas are present. Then use <a href="../Document/Functions/Built-in/poisson_grid_fill.html"><strong>poisson_grid_fill</strong></a>
+to fill in the missing values and repeat the interpolations. 
+   </div>
+
+   <div class=ex>
+   <!--MOPITT_MOP02T_1-->
+   <a name=MOPITT_ex4></a>
+   <a href="Images/MOPITT_MOP02T_1_lg.png">
+   <img src="Images/MOPITT_MOP02T_1_sm.png" align=left border=2></a>
+   <a href="Scripts/MOPITT_MOP02T_1.html">MOPITT_MOP02T_1.ncl</a>: 
+Reads "CO Total Column" across a time interval and a selected spatial
+region, and plots it on a map using a range of colored markers.
+<p>
+This script was contributed by Rebecca Buchholz, a researcher in the
+Atmospheric Chemistry Division at NCAR.
+   </div>
+
+   <div class=ex>
+   <!--EUMETSAT-->
+   <a name=hdf5_1></a>
+   <a href="Images/hdf5_1_lg.png">
+   <img src="Images/hdf5_1_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf5_1.html">hdf5_1.ncl</a>: 
+Read a variable and plot it according to a palette specified on the file. 
+The MSG (Meteosat Second Generation) file is HDF5.
+The desired variables contain a dash and a space
+which are not allowed in NCL variable names. Hence,
+the variables are enclosed in quotes to make them
+type string. For the <b>-&gt</b> file syntax operator
+to successfully access the string variables, they must be enclosed
+within dollar sign (<b>$</b>).
+
+   </div>
+
+
+   <div class=ex>
+   <!--H5-->
+   <a name=hdf5_2></a>
+   <a href="Images/hdf5_2_lg.png">
+   <img src="Images/hdf5_2_sm.png" align=left border=2></a>
+   <a href="Scripts/hdf5_2.html">hdf5_2.ncl</a>: 
+HDF5 (h5) files can be complicated. Users should become acquainted
+with the file's contents prior to creating a script. 
+An <a href="../Document/Functions/Built-in/ncl_filedump.html"><strong>ncl_filedump</strong></a> of the file would yield:
+<pre>
+
+   %> <a href="../Document/Functions/Built-in/ncl_filedump.html"><strong>ncl_filedump</strong></a> K1VHR_15NOV2013_1200_L02_OLR.h5 | less
+
+      Variable: f
+      Type: file
+      filename:       K1VHR_15NOV2013_1200_L02_OLR
+      path:   K1VHR_15NOV2013_1200_L02_OLR.h5
+         file global attributes:
+         dimensions:
+            DIM_000 = 250601
+
+         variables:
+            <b>group</b> &lt/OLR&gt
+      
+            <b>compound</b> &ltOLR_Dataset&gt    (Latitude, Longitude, OLR) (DIM_000)
+      
+            <b>group</b> &lt/OLR/GP_PARAM_INFO&gt
+      
+               GP_PARAM_DESCRIPTION : Every_Acquisition
+               GP_PARAM_NAME :        Outgoing Longwave Radiation (OLR)
+               Input_Channels :       TIR             
+               LatInterval :  0.25
+               Latitude_Unit :        Degrees         
+               LonInterval :  0.25
+               Longitude_Unit :       Degrees         
+               MissingValueInProduct :         999
+               OLR_Unit :     Watts/sq. met.  
+               ValidBottomLat :        -60
+               ValidLeftLon :   10
+               ValidRightLon :         140
+               ValidTopLat :    60
+      
+            <b>group</b> &lt/PRODUCT_INFORMATION&gt
+      
+               GROUND_STATION :       BES,SAC/ISRO,Ahmedabad,INDIA. 
+               HDF_PRODUCT_FILE_NAME :        K1VHR_15NOV2013_1200_L02_OLR.h5
+               OUTPUT_FORMAT :        hdf5-1.6.6
+               PRODUCT_CREATION_TIME :        2013-11-15T18:01:49 _L02_OLR.h5
+               STATION_ID :   BES3-11-15T18:01:49 _L02_OLR.h5
+               UNIQUE_ID :    K1VHR_15NOV2013_1200_L02_OLR.h5
+      
+            <b>group</b> &lt/PRODUCT_METADATA&gt
+      
+            <b>group</b> &lt/PRODUCT_METADATA/PRODUCT_DETAILS&gt
+      
+               ACQUISITION_DATE :     15NOV2013
+               ACQUISITION_TIME_IN_GMT :      1200V2013
+               PROCESSING_LEVEL :     L020V2013
+               PROCESSING_SOFTWARE :  InPGS_XXXXXXXXXXXXXX
+               PRODUCT_NAME : GP_OLR         XXXXX
+               PRODUCT_TYPE : GEOPHY
+               SENSOR_ID :    VHRPHY
+               SPACECRAFT_ID :        KALPANA-1
+
+</pre>
+Read a h5 (HDF5) file with 'group' fields. Note the syntax used by NCL.
+The Latitude, Longitude and OLR are one-dimensional arrays of size 250601.
+There are no general file conventions for HDF5 files. Users must
+examine the file's contents and explicitly extract desired information. 
+The region of the globe is defined as attributes of the 
+group /OLR/GP_PARAM_INFO. These are used to create rectilinear 
+grid coordinates which are associated with the variable to
+be plotted (olr) and written to a netCDF file. 
+<p>
+FYI: It is not necessay to make a two-dimensional grid.
+NCL can plot one-dimensional latitude/longitudinal/values
+with appropriate graphical resource settings. However,
+since a script option is to create a netCDF file. It
+was designed to create the variable as a conventional
+two-dimensional array.
+
+   </div>
+
+   <div class=ex>
+   <!--Seawif_4-->
+   <a name=seawif_ex1></a>
+   <a href="Images/seawif_4_lg.png">
+   <img src="Images/seawif_4_sm.png" align=left border=2></a>
+   <a href="Scripts/seawif_4.html">seawif_4.ncl</a>: 
+Read a SeaWIFS variable and use meta data contained within the file attributes
+to construct a complete (ie, self contained) variable. The initial look at the
+file was via the <a href="../Document/Functions/Built-in/ncl_filedump.html"><strong>ncl_filedump</strong></a> command line operator. 
+<p>
+Data files were obtained 
+<a href="http://oceancolor.gsfc.nasa.gov/cgi/l3?per=MO&amp;prd=CHL_chlor_a&amp;sen=S&amp;res=9km&amp;num=24&amp;ctg=Standard&amp;date=1Jan1998">here</a>.
+
+<p>
+Additional SeaWIFS examples are available <a href="seawifs.html">here</a>. 
+   </div>
+
+   <div class=ex>
+   <!--smap_l3_1-->
+   <a name=smapf_ex1></a>
+   <a href="Images/smap_l3_1_lg.png">
+   <img src="Images/smap_l3_1_sm.png" align=left border=2></a>
+   <a href="Scripts/smap_l3_1.html">smap_l3_1.ncl</a>:
+<br> <b>NOTE:</b>
+It is recommended that users use <b><a href="../Document/Functions/Built-in/ncl_filedump.html"><strong>ncl_filedump</strong></a></b> to carefully examine
+the SMAP level-3 (l3) file prior to use. Note the 'complexity' of the file. Assorted variables are
+within 'groups.' NCL offers two ways to access data within groups. This and other examples 
+use the 'full path' method. (see script) 
+<p> 
+Read soil moisture from an individual H5 SMAP level-3 (l3) file. The data are on a regular grid BUT 
+the data is from a swath. The desired variable is named 'soil_moisture'. 
+It is located within the group named <i>Soil_Moisture_Retrieval_Data</i>. 
+The latitude and longitude variables are within this group also. A peculiarity is that the 'latitude'
+and 'longitude' variables do not have an _FillValue attribute associated with them. However, a 
+<a href="../Document/Functions/Built-in/printMinMax.html"><strong>printMinMax</strong></a> indicates a minimum value of -9999.0 for each. The script 
+assigns these manually.
+   </div>
+
+   <div class=ex>
+   <!--smap_l3_2-->
+   <a name=smapf_ex1></a>
+   <a href="Images/smap_l3_2_1_lg.png">
+   <img src="Images/smap_l3_2_1_sm.png" align=left border=2></a>
+   <a href="Images/smap_l3_2_2_lg.png">
+   <img src="Images/smap_l3_2_2_sm.png" align=left border=2></a>
+   <a href="Images/smap_l3_2_3_lg.png">
+   <img src="Images/smap_l3_2_3_sm.png" align=left border=2></a>
+   <a href="Scripts/smap_l3_2.html">smap_l3_2.ncl</a>: Similar to <b>smap_l3_1</b>. The difference
+is that this read mutiple files. The files are processed one-by-one. Only the first three of 
+of nine SMAP files are shown.
+   </div>
+
+   <div class=ex>
+   <!--smap_l3_3-->
+   <a name=smapf_ex1></a>
+   <a href="Images/smap_l3_3_lg.png">
+   <img src="Images/smap_l3_3_sm.png" align=left border=2></a>
+   <a href="Scripts/smap_l3_3.html">smap_l3_3.ncl</a>: This loops over the nine files for a particular period and
+creates a composite plot by overlaying individual graphical swath grids. 
+Setting, <i>res@cnMissingValFillColor= "Transparent"</i>, keeps plotting from previous grids
+from being overwritten. 
+   </div>
+
+   <div class=ex>
+   <!--smap_l3_4-->
+   <a name=smapf_ex1></a>
+   <a href="Images/smap_l3_4_lg.png">
+   <img src="Images/smap_l3_4_sm.png" align=left border=2></a>
+   <a href="Scripts/smap_l3_4.html">smap_l3_4.ncl</a>: Similar result to <b>smap_l3_3.ncl</b>. 
+However, it is obtained via a different method. A 'super variable' is create and the grid points are filled by use of a
+<a href="../Document/Functions/Built-in/where.html"><strong>where</strong></a> function. After reading the EASE latitude and longitude variables from
+a separate file (SMAP_EASE.406x964.nc), the resulting super variable is plotted.
+   </div>
+
+
+
+
+
+
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/HDF.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:01:59 GMT -->
+</html>
+

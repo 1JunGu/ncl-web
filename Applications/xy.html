@@ -1,0 +1,1291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/xy.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:19:06 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+xy template and its modification.">
+<meta name="keywords" content="NCL, graphics, visualization, xy, lines,
+xy plots">
+<TITLE>NCL Graphics: xy</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_gsn_csm.html">gsn_csm graphical interfaces</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>XY Plots</h1>
+
+<div class=mainimage>
+<img src="Images/xy_2_1_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+<h3>XY Plotting Functions</h3>
+<a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_xy.html"><strong>gsn_xy</strong></a> (generic routine)
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_xy2.html"><strong>gsn_csm_xy2</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_xy3.html"><strong>gsn_csm_xy3</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_x2y2.html"><strong>gsn_csm_x2y2</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_x2y.html"><strong>gsn_csm_x2y</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_polyline.html"><strong>gsn_polyline</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>
+<p>
+
+<h3>Related Pages</h3><p>
+<ul>
+<li><a href="bar.html">Bar chart</a> - how to turn XY plots into
+bar plots
+
+<li><a href="legend.html">Legends</a> - how to add legends to
+an xy plot
+
+<li><a href="polyg.html">Drawing primitives</a> - how to add
+additional lines, text, markers, and polygons to a plot
+
+</div>
+
+<div class=ex>
+<!--Xy_1-->
+<a name=ex1></a>
+<a href="Images/xy_1_lg.png">
+<img src="Images/xy_1_sm.png" align=left border=2></a>
+<a href="Scripts/xy_1.html">xy_1.ncl</a>: 
+Default XY plot.
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a> 
+is the plot template that draws xy plots.
+</div>
+
+<div class=ex>
+<!--Xy_2-->
+<a name=ex2></a>
+<a href="Images/xy_2_1_lg.png">
+<img src="Images/xy_2_1_sm.png" align=left border=2></a>
+<a href="Images/xy_2_2_lg.png">
+<img src="Images/xy_2_2_sm.png" align=left border=2></a>
+<a href="Scripts/xy_2.html">xy_2.ncl</a>: 
+Multiple line plot with varying colors, thicknesses, and markers.
+<p>
+
+<a href="../Document/Graphics/Resources/xy.html#xyLineThicknesses"><em>xyLineThicknesses</em></a> allows the user to
+change the thickness of individual lines in the array, while <a href="../Document/Graphics/Resources/xy.html#xyLineThicknessF"><em>xyLineThicknessF</em></a> allows the user to set one
+value that changes the thickness of all the lines in the array.
+<p>
+
+You can set the color of your lines with <a href="../Document/Graphics/Resources/xy.html#xyLineColors"><em>xyLineColors</em></a>.
+<p>
+
+<a href="../Document/Graphics/Resources/xy.html#xyMarkLineMode"><em>xyMarkLineMode</em></a> allows the user to
+set the "mode" ("Lines", "MarkLines", "Markers") for all lines.
+You can change colors and marker styles with <a href="../Document/Graphics/Resources/xy.html#xyMarkerColors"><em>xyMarkerColors</em></a> and <a href="../Document/Graphics/Resources/xy.html#xyMarkers"><em>xyMarkers</em></a>.
+<p>
+
+There are numerous <a
+href="../Document/Graphics/marker_styles.html">marker styles</a> to
+choose from. See <a href="#ex4">example 4</a> for an example
+of creating your own markers.
+<p>
+A Python version of the two curve XY plot projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/XY/NCL_xy_2_1.html#sphx-glr-gallery-xy-ncl-xy-2_1-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Xy_3-->
+<a name=ex3></a>
+<a href="Images/xy_3_1_lg.png">
+<img src="Images/xy_3_1_sm.png" align=left border=2></a>
+<a href="Images/xy_3_2_lg.png">
+<img src="Images/xy_3_2_sm.png" align=left border=2></a>
+<a href="Scripts/xy_3.html">xy_3.ncl</a>: 
+Profile plot with y-axis reversed. Demonstrates how to change the
+line dash pattern.
+<p>
+First Plot: Use predefined dash pattern: <a href="../Document/Graphics/Resources/xy.html#xyDashPatterns"><em>xyDashPatterns</em></a> allows you to select from one
+of the following <a
+href="../Document/Graphics/dash_patterns.html">dashed
+patterns</a>. Note that in a multi-line plot, the default is to make
+the first line the first pattern, the second line the second pattern
+etc.
+<p>
+<a href="../Document/Graphics/Resources/tr.html#trYReverse"><em>trYReverse</em></a>, reverses the
+y-axis.
+<p>
+
+Second Plot: Create your own dash pattern: As of NCL version
+4.2.0.a030, you can make your own marker using
+<a href="../Document/Functions/Built-in/NhlNewDashPattern.html"><strong>NhlNewDashPattern</strong></a>. You give the function a string
+representing the pattern you want. See script and function
+documentation for examples.  The function returns a dash pattern index
+that can be used with <a href="../Document/Graphics/Resources/xy.html#xyDashPatterns"><em>xyDashPatterns</em></a>
+<p>
+A Python version of the profile plot projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/XY/NCL_xy_3.html#sphx-glr-gallery-xy-ncl-xy-3-py">here</a>.
+</div>
+
+
+<div class=ex>
+<!--Xy_4-->
+<a name=ex4></a>
+<a href="Images/xy_4_1_lg.png">
+<img src="Images/xy_4_1_sm.png" align=left border=2></a>
+<a href="Images/xy_4_2_lg.png">
+<img src="Images/xy_4_2_sm.png" align=left border=2></a> 
+<a href="Scripts/xy_4.html">xy_4.ncl</a>: Scatter plot
+<p>
+First Plot: Use predefined markers<br> <a href="../Document/Graphics/Resources/xy.html#xyMarkLineModes"><em>xyMarkLineModes</em></a>, <a href="../Document/Graphics/Resources/xy.html#xyMarkers"><em>xyMarkers</em></a>, <a href="../Document/Graphics/Resources/xy.html#xyMarkerColor"><em>xyMarkerColor</em></a>, and <a href="../Document/Graphics/Resources/xy.html#xyMarkerSizeF"><em>xyMarkerSizeF</em></a> are used to control the markers
+in an XY plot.
+<p>
+Second Plot: Make your own marker <br> As of NCL version 4.2.0.a030,
+you can make your own marker using
+<a href="../Document/Functions/Built-in/NhlNewMarker.html"><strong>NhlNewMarker</strong></a>. You give the function the character
+and font table you want the marker taken from, and provide sizing and
+placement values. The function returns a marker index that can be used
+with <a href="../Document/Graphics/Resources/xy.html#xyMarkerColor"><em>xyMarkerColor</em></a>.
+<p>
+A Python version of the scatter plot projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/XY/NCL_xy_4.html#sphx-glr-gallery-xy-ncl-xy-4-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Xy_5-->
+<a name=ex5></a>
+<a href="Images/xy_5_1_lg.png">
+<img src="Images/xy_5_1_sm.png" align=left border=3></a>
+<a href="Images/xy_5_2_lg.png">
+<img src="Images/xy_5_2_sm.png" align=left border=3></a>
+<a href="Scripts/xy_5.html">xy_5.ncl</a>: 
+Adding a polyline and shading above and below it: both color and b&w. 
+Limit axis.
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_polyline.html"><strong>gsn_polyline</strong></a> is the function that
+will add the polyline. Note that you can not panel plots made with
+this function. If you need to panel, use <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>. See polyline <a
+href="polyg.html#ex4"> example 4</a> on how to use this
+function. It is slightly different than
+<a href="../Document/Graphics/Interfaces/gsn_polyline.html"><strong>gsn_polyline</strong></a>.
+<p>
+<a href="../Document/Graphics/Resources/gsn.html#gsnYRefLine"><em>gsnYRefLine</em></a>, <a href="../Document/Graphics/Resources/gsn.html#gsnAboveYRefLineColor"><em>gsnAboveYRefLineColor</em></a>, <a href="../Document/Graphics/Resources/gsn.html#gsnBelowYRefLineColor"><em>gsnBelowYRefLineColor</em></a> will draws a reference line
+and determines the color for the shaded regions.
+<p>
+<a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> and <a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a> will changes the aspect ratio of the
+plot.  Since we stretch the plot, we also moved it slightly to the
+left using <a href="../Document/Graphics/Resources/vp.html#vpXF"><em>vpXF</em></a>.<p> <a href="../Document/Graphics/Resources/tr.html#trYMinF"><em>trYMinF</em></a>, <a href="../Document/Graphics/Resources/tr.html#trYMaxF"><em>trYMaxF</em></a> can be used to limit the
+extent of the y-axis. There are corresponding resources for the
+x-axis.
+<p>
+A Python version of this projection in color is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/XY/NCL_xy_5.html#sphx-glr-gallery-xy-ncl-xy-5-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Xy_6-->
+<a name=ex6></a>
+<a href="Images/xy_6_lg.png">
+<img src="Images/xy_6_sm.png" align=left border=2></a>
+<a href="Scripts/xy_6.html">xy_6.ncl</a>: Explicit axis labeling
+<p>
+<a href="../Document/Graphics/Resources/tm.html#tmXBMode"><em>tmXBMode</em></a> = "Explicit", <a href="../Document/Graphics/Resources/tm.html#tmXBValues"><em>tmXBValues</em></a>, adn <a href="../Document/Graphics/Resources/tm.html#tmXBLabels"><em>tmXBLabels</em></a> will allow the user to explicitly
+set the tick mark labels for the bottom x (XB) axis. Similar resources
+exist for the left y (YL) axis etc.
+<p>
+<a href="../Document/Functions/Built-in/ind.html"><strong>ind</strong></a> returns the indexes of the input where it is
+True.
+<p>
+<a href="../Document/Functions/Built-in/ispan.html"><strong>ispan</strong></a> allows the user to create an integer
+array. This is frequently used when creating the x-array in an XY
+plot.
+</div>
+
+<div class=ex>
+<!--Xy_7-->
+<a name=ex7></a>
+<a href="Images/xy_7_1_lg.png">
+<img src="Images/xy_7_1_sm.png" align=left border=2></a>
+<a href="Images/xy_7_2_lg.png">
+<img src="Images/xy_7_2_sm.png" align=left border=2></a>
+<a href="Scripts/xy_7.html">xy_7.ncl</a>:
+An example of a double y plot: two separate line with their own
+unique axis. 
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_xy2.html"><strong>gsn_csm_xy2</strong></a> allows the user to 
+draw two lines each with their own separate Y-axis.
+<p>
+A Python version of the xy_7_2 projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/XY/NCL_xy_7_2.html#sphx-glr-gallery-xy-ncl-xy-7-2-py">here</a>.
+</div>
+<div class=ex>
+<!--Xy_8-->
+<a name=ex8></a>
+<a href="Images/xy_8_lg.png">
+<img src="Images/xy_8_sm.png" align=left border=2></a>
+<a href="Scripts/xy_8.html">xy_8.ncl</a>: 
+Additional axis explicitly set by the user.
+<p>
+<a href="../Document/Graphics/Resources/tm.html#tmXUseBottom"><em>tmXUseBottom</em></a>= False, <a href="../Document/Graphics/Resources/tm.html#tmXTOn"><em>tmXTOn</em></a>, and <a href="../Document/Graphics/Resources/tm.html#tmXTLabelsOn"><em>tmXTLabelsOn</em></a> allows the user to set a top
+X-axis in addition to the bottom X-axis. We could have done the same
+for the right Y-axis using the corresponding YR resources.
+<p>
+As in <a href="xy.html#ex6">example 6</a> above, we can now use
+the explicitly labeling resources 
+<a href="../Document/Graphics/Resources/tm.html#tmXTMode"><em>tmXTMode</em></a> = "Explicit",
+<a href="../Document/Graphics/Resources/tm.html#tmXTValues"><em>tmXTValues</em></a>, and
+<a href="../Document/Graphics/Resources/tm.html#tmXTLabels"><em>tmXTLabels</em></a> to label the axis.
+</div>
+
+<div class=ex>
+<!--Xy_9-->
+<a name=ex9></a>
+<a href="Images/xy_9_lg.png">
+<img src="Images/xy_9_sm.png" align=left border=2></a>
+<a href="Scripts/xy_9.html">xy_9.ncl</a>: Turns on grid.
+<p>
+<a href="../Document/Graphics/Resources/tm.html#tmXMajorGrid"><em>tmXMajorGrid</em></a>= True, Turns on the
+grid in the x-direction.<br> <a href="../Document/Graphics/Resources/tm.html#tmXMajorGridThicknessF"><em>tmXMajorGridThicknessF</em></a>, controls the line
+thickness.<br> <a href="../Document/Graphics/Resources/tm.html#tmXMajorGridLineDashPattern"><em>tmXMajorGridLineDashPattern</em></a>, controls the
+type of line. Similar resources exist for the y-axis grid.
+</div>
+
+<div class=ex>
+<!--Xy_10-->
+<a name=ex10></a>
+<a href="Images/xy_10_lg.png">
+<img src="Images/xy_10_sm.png" align=left border=2></a> <a
+href="Scripts/xy_10.html">xy_10.ncl</a>: Demonstrates Greek characters
+into a text string and drawing a polygon around a xy line.  <br> <br>
+There are numerous <a
+href="../Document/Graphics/font_tables.html">fonts/character</a> sets
+in NCL. As this example demonstrates, you change between sets by using
+a <a href="../Document/Graphics/function_code.html">function code</a>.
+The default code is a ":", but since this is a character that people
+often put into their strings, we recommend changing that to a non-used
+character like a "~". You can change this on the fly as demonstrated
+in this example, or in your <a
+href="../Document/Graphics/hlures.html">.hluresfile</a>.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/XY/NCL_xy_10.html#sphx-glr-gallery-xy-ncl-xy-10-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Xy_11-->
+<a name=ex11></a>
+<a href="Images/xy_11_lg.png">
+<img src="Images/xy_11_sm.png" align=left border=3></a> <a
+href="Scripts/xy_11.html">xy_11.ncl</a>: Demonstrates the use of the
+function <a href="../Document/Graphics/Interfaces/gsn_csm_y.html"><strong>gsn_csm_y</strong></a> (available since
+NCL version 4.2.0.a023) which creates a line plot with no defined
+x-axis except for array index values.
+<p>
+This example also demonstrates how to set the precision of an
+additional axis.<br> <a href="../Document/Graphics/Resources/tm.html#tmYRLabelsOn"><em>tmYRLabelsOn</em></a>
+turns on the labels, <a href="../Document/Graphics/Resources/tm.html#tmYUseLeft"><em>tmYUseLeft</em></a> =
+False, will sure than any settings, such as precision used by the left
+axis are not used for the right axis.  <a href="../Document/Graphics/Resources/tm.html#tmYRAutoPrecision"><em>tmYRAutoPrecision</em></a> = False, turns off the
+auto precision for the right axis and finally, <a href="../Document/Graphics/Resources/tm.html#tmYRPrecision"><em>tmYRPrecision</em></a> sets the desired precision.
+</div>
+
+<div class=ex>
+<!--Xy_12-->
+<a name=ex12></a>
+<a href="Images/xy_12_1_lg.png">
+<img src="Images/xy_12_1_sm.png" align=left border=2></a>
+<a href="Images/xy_12_2_lg.png">
+<img src="Images/xy_12_2_sm.png" align=left border=2></a>
+<a href="Scripts/xy_12.html">xy_12.ncl</a>: Emphasize part of a line.
+<p>
+Method 1: Break the line up into different parts and draw as it it were
+multiple lines. This way you can specify the color and style of each
+segment.
+<p>
+Method 2: Similar to example 14, but demonstrates how to create a 
+polygon around a portion of a xy line in order to highlight it. 
+<p>
+A Python version of both projections is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/XY/NCL_xy_12.html#sphx-glr-gallery-xy-ncl-xy-12-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Xy_13-->
+<a name=ex13></a>
+<a href="Images/xy_13_lg.png">
+<img src="Images/xy_13_sm.png" align=left border=2></a>
+<a href="Scripts/xy_13.html">xy_13.ncl</a>: Add error bars
+using <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>
+and <a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a>.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/XY/NCL_xy_13.html#sphx-glr-gallery-xy-ncl-xy-13-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Xy_14-->
+<a name=ex14></a>
+<a href="Images/xy_14_lg.png">
+<img src="Images/xy_14_sm.png" align=left border=3></a>
+<a href="Scripts/xy_14.html">xy_14.ncl</a>: Label a line.
+<p>
+<a href="../Document/Graphics/Resources/xy.html#xyLabelMode"><em>xyLabelMode</em></a> = "Custom", allows the
+user to label a line.
+<p>
+<a href="../Document/Graphics/Resources/xy.html#xyExplicitLabels"><em>xyExplicitLabels</em></a> will set the string
+to label the line, <a href="../Document/Graphics/Resources/xy.html#xyLineLabelFontHeightF"><em>xyLineLabelFontHeightF</em></a> sets the label size,
+and <a href="../Document/Graphics/Resources/xy.html#xyLineLabelFontColor"><em>xyLineLabelFontColor</em></a> sets the
+color.
+</div>
+
+<div class=ex>
+<!--Xy_15-->
+<a name=ex15></a>
+<a href="Images/xy_15_lg.png">
+<img src="Images/xy_15_sm.png" align=left border=3></a>
+<a href="Scripts/xy_15.html">xy_15.ncl</a>:
+Turn off borders and tickmarks on selected sides and demonstrates
+how to draw tickmarks inward.
+<p>
+<a href="../Document/Graphics/Resources/tm.html#tmYRBorderOn"><em>tmYRBorderOn</em></a> = False, will turn off
+a border while <a href="../Document/Graphics/Resources/tm.html#tmYROn"><em>tmYROn</em></a> = False, will
+turn off the tickmarks for that side.  Corresponding resources exist
+for the other sides.
+<p>
+<a href="../Document/Graphics/Resources/tm.html#tmXBMajorOutwardLengthF"><em>tmXBMajorOutwardLengthF</em></a> set to 0.0
+will draw the tickmarks inward.  You must do this for the minor
+tickmarks as well. Separate resources exist for each axis.
+</div>
+
+<div class=ex>
+<!--Xy_16-->
+<a name=ex16></a>
+<a href="Images/xy_16_1_lg.png">
+<img src="Images/xy_16_1_sm.png" align=left border=2></a>
+<a href="Images/xy_16_2_lg.png">
+<img src="Images/xy_16_2_sm.png" align=left border=2></a>
+<a href="Scripts/xy_16.html">xy_16.ncl</a>: 
+Profile plot with polyline, legend and log scaling with explicit labeling.
+<p>
+See the <a href="legend.html">legend</a> example page for a 
+description of the legend resources used in this example as well as
+other legend resources. 
+<p>
+A Python version of the first example profile plot projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/XY/NCL_xy_16.html#sphx-glr-gallery-xy-ncl-xy-16-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Xy_17-->
+<a name=ex17></a>
+<a href="Images/xy_17_lg.png">
+<img src="Images/xy_17_sm.png" align=left border=2></a>
+<a href="Scripts/xy_17.html">xy_17.ncl</a>:
+
+Demonstrates how to fill the areas between two Y curves uising the
+special "gsn"
+resources <a href="../Document/Graphics/Resources/gsn.html#gsnXYAboveFillColors"><em>gsnXYAboveFillColors</em></a> and
+<a href="../Document/Graphics/Resources/gsn.html#gsnXYBelowFillColors"><em>gsnXYBelowFillColors</em></a>.
+
+
+</div>
+
+<div class=ex>
+<!--Xy_vert_17-->
+<a name=exvert_17></a>
+<a href="Images/xy_vert_17_lg.png">
+<img src="Images/xy_vert_17_sm.png" align=left border=2></a>
+<a href="Scripts/xy_vert_17.html">xy_vert_17.ncl</a>:
+
+This example is similar to xy_17.ncl, except it demonstrates how to
+fill the areas between two X curves using the special "gsn"
+resources <a href="../Document/Graphics/Resources/gsn.html#gsnXYLeftFillColors"><em>gsnXYLeftFillColors</em></a> and
+<a href="../Document/Graphics/Resources/gsn.html#gsnXYRightFillColors"><em>gsnXYRightFillColors</em></a>.
+<p>
+
+These resources were added in NCL V6.4.0.
+
+</div>
+
+<div class=ex>
+<!--Xy_18-->
+<a name=ex18></a>
+<a href="Images/xy_18_lg.png">
+<img src="Images/xy_18_sm.png" align=left border=2></a>
+<a href="Scripts/xy_18.html">xy_18.ncl</a>:
+
+Demonstrates how to use the special "gsn" resource <a href="../Document/Graphics/Resources/gsn.html#gsnXYFillColors"><em>gsnXYFillColors</em></a> to fill the area between two
+curves. Also shows how to manually attach a legend and extra text and
+the top of the plot.
+<p>
+
+After all the plot elements are created and attached, this script
+calls <a href="../Document/Graphics/Interfaces/maximize_output.html"><strong>maximize_output</strong></a> to maximize
+the size of the plot in the frame.  This only applies for PS/PDF
+output.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/XY/NCL_xy_18.html#sphx-glr-gallery-xy-ncl-xy-18-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Xy_19-->
+<a name=ex19></a>
+<a href="Images/xy_19_1_lg.png">
+<img src="Images/xy_19_1_sm.png" align=left border=2></a>
+<a href="Images/xy_19_2_lg.png">
+<img src="Images/xy_19_2_sm.png" align=left border=2></a>
+<a href="Images/xy_19_3_lg.png">
+<img src="Images/xy_19_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_19.html">xy_19.ncl</a>: Draw three curves, each with a
+separate Y axis, using <a href="../Document/Graphics/Interfaces/gsn_csm_xy3.html"><strong>gsn_csm_xy3</strong></a>. The second frame shows how to
+customize the individual curves, and move the rightmost Y axis to the
+right, using <a href="../Document/Graphics/Resources/am.html#amOrthogonalPosF"><em>amOrthogonalPosF</em></a>.
+The third frame shows how to add your own legend using
+<a href="../Document/Graphics/Interfaces/gsn_create_legend.html"><strong>gsn_create_legend</strong></a> and
+<a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a>.
+
+</div>
+
+
+<div class=ex>
+<!--Xy_20-->
+<a name=ex20></a>
+<a href="Images/xy_20_lg.png">
+<img src="Images/xy_20_sm.png" align=left border=2></a>
+<a href="Scripts/xy_20.html">xy_20.ncl</a>: Draw two curves, each with
+a separate X <em>and</em> Y axis, using <a href="../Document/Graphics/Interfaces/gsn_csm_x2y2.html"><strong>gsn_csm_x2y2</strong></a>. This example also shows a way
+of creating a custom legend using calls to <a href="../Document/Graphics/Interfaces/gsn_text.html"><strong>gsn_text</strong></a> and <a href="../Document/Graphics/Interfaces/gsn_polyline.html"><strong>gsn_polyline</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--Xy_21--> <a name=ex21></a> <a href="Images/xy_21_lg.png"> <img
+src="Images/xy_21_sm.png" align=left border=2></a> <a
+href="Scripts/xy_21.html">xy_21.ncl</a>: Draw a single curve with three
+Y reference lines, with a fill above the topmost and below the
+bottommost lines. The resources used are
+<a href="../Document/Graphics/Resources/gsn.html#gsnYRefLine"><em>gsnYRefLine</em></a>,
+<a href="../Document/Graphics/Resources/gsn.html#gsnBelowYRefLineColor"><em>gsnBelowYRefLineColor</em></a>, and
+<a href="../Document/Graphics/Resources/gsn.html#gsnAboveYRefLineColor"><em>gsnAboveYRefLineColor</em></a>.
+
+</div>
+
+<div class=ex>
+<!--xy_vert_21-->
+<a name=exvert_21></a>
+<a href="Images/xy_vert_21_lg.png">
+<img src="Images/xy_vert_21_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_vert_21.html">xy_vert_21.ncl</a>: This example is
+similar to xy_21.ncl, except it shows how to fill curves based on an X
+reference line.
+<p>
+
+The resources used are <a href="../Document/Graphics/Resources/gsn.html#gsnXRefLine"><em>gsnXRefLine</em></a>,
+<a href="../Document/Graphics/Resources/gsn.html#gsnLeftXRefLineColor"><em>gsnLeftXRefLineColor</em></a>, and
+<a href="../Document/Graphics/Resources/gsn.html#gsnRightXRefLineColor"><em>gsnRightXRefLineColor</em></a>.
+<p>
+
+These resources were added in NCL V6.4.0.
+</div>
+
+<div class=ex>
+<!--Xy_22-->
+<a name=ex22></a>
+<a href="Images/xy_22_lg.png"> <img src="Images/xy_22_sm.png"
+align=left border=2></a> <a href="Scripts/xy_22.html">xy_22.ncl</a>:
+Draw a single curve with the left Y axis shifted to the left. This
+kind of plot can be done multiple ways. In this case, it is done by
+basically drawing the same plot twice, the second time with the plot
+shifted to the left and everything turned off but the left Y axis.
+
+</div>
+
+
+<div class=ex>
+<!--axes_3-->
+<a href="Images/axes_3_lg.png"> <img
+src="Images/axes_3_sm.png" align=left border=2></a>
+<a href="Scripts/axes_3.html">axes_3.ncl</a>: Shows various ways that
+you can control all four axes of a plot. Although this is an XY plot,
+these techniques apply for contour and vector plots as well.
+
+</div>
+
+
+<div class=ex>
+<!--xy_23-->
+<a name=ex23></a>
+<a href="Images/xy_23_1_lg.png">
+<img src="Images/xy_23_1_sm.png" align=left border=2></a>
+<a href="Images/xy_23_2_lg.png">
+<img src="Images/xy_23_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_23.html">xy_23.ncl</a>: Shows how to
+use <a href="../Document/Graphics/Interfaces/gsn_attach_plots.html"><strong>gsn_attach_plots</strong></a> and the
+resource <a href="../Document/Graphics/Resources/gsn.html#gsnAttachPlotsXAxis"><em>gsnAttachPlotsXAxis</em></a> to attach
+multiple XY plots along the bottom X axes, and how resizing the base
+plot will automatically cause all plots to be resized.
+<p>
+
+Several <a href="../Document/Graphics/Resources/tm.html">"tmYR"
+tickmark resources</a> are set to control the ticks and the labels on
+the right Y axis. The default is to put tickmarks and labels only on
+the left axis. To put them on the right only, you need to set (for
+one) <a href="../Document/Graphics/Resources/tm.html#tmYUseLeft"><em>tmYUseLeft</em></a> to False.  The
+resource <a href="../Document/Graphics/Resources/tm.html#tmYRLabelDeltaF"><em>tmYRLabelDeltaF</em></a> is set to
+2.0 to move the labels further away from the right tickmarks,
+and <a href="../Document/Graphics/Resources/tm.html#tmYRLabelJust"><em>tmYRLabelJust</em></a> is set to
+"CenterRight" to right-justify the labels.
+
+</div>
+
+<div class=ex>
+<!--xy_24-->
+<a name=ex24></a>
+<a href="Images/xy_24_1_lg.png">
+<img src="Images/xy_24_1_sm.png" align=left border=2></a>
+<a href="Images/xy_24_2_lg.png">
+<img src="Images/xy_24_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_24.html">xy_24.ncl</a>: Shows how to use special
+"gsn" resources to fill areas between curves.
+<p>
+
+The first frame shows how to fill areas between adjacent curves that
+don't intersect, using <a href="../Document/Graphics/Resources/gsn.html#gsnXYFillColors"><em>gsnXYFillColors</em></a>.
+This resource can be an array of color indexes or color names, and
+should have one fewer colors than you have curves.
+<p>
+
+The second frame shows how to fill areas between adjacent curves that
+intersect, using <a href="../Document/Graphics/Resources/gsn.html#gsnXYAboveFillColors"><em>gsnXYAboveFillColors</em></a> and
+<a href="../Document/Graphics/Resources/gsn.html#gsnXYBelowFillColors"><em>gsnXYBelowFillColors</em></a> to indicate the colors
+where one curve is above or below the other curve. For any areas you
+don't want filled, you can use "transparent" or -1.
+<p>
+
+<font color="red"><i>Available in <a href="../prev_releases.html#5.1.0">version 5.1.0</a> and later.</i></font>
+
+</div>
+
+<div class=ex>
+<!--xy_vert_24-->
+<a name=exvert_24></a>
+<a href="Images/xy_vert_24_1_lg.png">
+<img src="Images/xy_vert_24_1_sm.png" align=left border=2></a>
+<a href="Images/xy_vert_24_2_lg.png">
+<img src="Images/xy_vert_24_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_vert_24.html">xy_vert_24.ncl</a>: This example
+is similar to xy_24.ncl, except it shows how to fill between curves
+that are vertically oriented. This feature was added in NCL V6.4.0.
+<p>
+
+In the first frame, the <a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a>
+function detects that your X values are the multi-dimensional array, so
+the <a href="../Document/Graphics/Resources/gsn.html#gsnXYFillColors"><em>gsnXYFillColors</em></a> are applied between the
+X curves.
+<p>
+
+The second frame shows how to fill areas between adjacent curves that
+intersect, using <a href="../Document/Graphics/Resources/gsn.html#gsnXYRightFillColors"><em>gsnXYRightFillColors</em></a> and
+<a href="../Document/Graphics/Resources/gsn.html#gsnXYLeftFillColors"><em>gsnXYLeftFillColors</em></a> to indicate the colors
+where one curve is to the right or left of the next curve.
+These resources were added in NCL V6.4.0.
+
+</div>
+
+<div class=ex>
+<!--xy_25-->
+<a name=ex25></a>
+<a href="Images/xy_25_1_lg.png">
+<img src="Images/xy_25_1_sm.png" align=left border=2></a>
+<a href="Images/xy_25_2_lg.png">
+<img src="Images/xy_25_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_25.html">xy_25.ncl</a>: Shows how to add data (curves)
+to an existing XY plot.
+<p>
+
+The first frame shows an XY plot created using
+<a href="../Document/Graphics/Interfaces/gsn_csm_xy2.html"><strong>gsn_csm_xy2</strong></a>, and the second frame
+shows a new curve that was added to the plot represented by the
+right Y axis.
+<p>
+
+The point of this example is to show how to use the relatively unknown
+<a href="../Document/Functions/Built-in/NhlAddData.html"><strong>NhlAddData</strong></a> function to add data to an XY plot.
+This example uses some of the normally-hidden object-oriented features
+of NCL to create a new data object, and to set additional resources.
+<p>
+
+You need to use the special "xy2" attribute that is returned from the
+<a href="../Document/Graphics/Interfaces/gsn_csm_xy2.html"><strong>gsn_csm_xy2</strong></a> call.
+<p>
+
+</div>
+
+<div class=ex>
+<!--xy_overlay_25-->
+<a name=exoverlay25></a>
+<a href="Images/xy_overlay_25_1_lg.png">
+<img src="Images/xy_overlay_25_1_sm.png" align=left border=2></a>
+<a href="Images/xy_overlay_25_2_lg.png">
+<img src="Images/xy_overlay_25_2_sm.png" align=left border=2></a>
+<a href="Images/xy_overlay_25_3_lg.png">
+<img src="Images/xy_overlay_25_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_overlay_25.html">xy_overlay_25.ncl</a>: This
+example is similar to xy_25.ncl, except it shows how to add the third
+curve by creating another XY plot and overlaying it on the existing
+two-curve plot.
+<p>
+
+<ul>
+<li>first frame - the original two-curve plot
+<li>second frame - the third curve in its own plot
+<li>third frame - the third curve plot overlaid on the two-curve plot
+</ul>
+<p>
+
+Note that additional code had to be added to turn off the titles
+before drawing the three-curve plot.
+<p>
+
+The third curve is in the same data space as the blue curve of the
+two-curve plot, which is represented by the "xy2" attribute.  When you
+call <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a>, you need to use this attribute
+as the base plot to overlay on.
+
+</div>
+
+<div class=ex>
+<!--xy_26-->
+<a name=ex26></a>
+<a href="Images/xy_26_1_lg.png">
+<img src="Images/xy_26_1_sm.png" align=left border=2></a>
+<a href="Images/xy_26_2_lg.png">
+<img src="Images/xy_26_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_26.html">xy_26.ncl</a>: This plot
+is similar to example 25. It shows another method for adding curves
+to an existing XY plot that has two different Y axes.
+<p>
+
+The first frame shows an XY plot created using
+<a href="../Document/Graphics/Interfaces/gsn_csm_xy2.html"><strong>gsn_csm_xy2</strong></a>, and the second frame
+shows how to add a curve to the data space represented by both
+Y axes using <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>.
+<p>
+
+To add curves to the data space of the right Y axis, you need to use
+the special "xy2" attribute that is returned from the <a href="../Document/Graphics/Interfaces/gsn_csm_xy2.html"><strong>gsn_csm_xy2</strong></a> call.
+
+</div>
+
+<div class=ex>
+<!--unique_10-->
+<a name=ex10></a>
+<a href="Images/unique_10_lg.png">
+<img src="Images/unique_10_sm.png" align=left border=2></a>
+<a href="Images/unique_thicker_10_lg.png">
+<img src="Images/unique_thicker_10_sm.png" align=left border=2></a>
+<a href="Scripts/unique_10.html">unique_10.ncl</a> /
+<a href="Scripts/unique_10_thicker.html">unique_10_thicker.ncl</a>: 
+
+This script shows how to create a series of XY plots attached
+along the X axes, with gray-filled bars added for emphasis.
+<p>
+
+The second image is identical, except with thicker plot elements for a
+nicer looking image.  It was created by "unique_10_thicker.ncl".
+<p>
+
+This is a typical plot that people see in papers of paleoclimate
+studies.
+<p>
+
+This example was contributed by Yi Wang of PNNL.
+
+</div>
+
+<div class=ex>
+<!--xy_27-->
+<a name=ex27></a>
+<a href="Images/xy_27_lg.png">
+<img src="Images/xy_27_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_27.html">xy_27.ncl</a>: This plot
+shows how to create an XY plot that contains four curves,
+each with a separate Y axis. Two of the axes are
+drawn outside of the plot as single vertical lines.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_xy3.html"><strong>gsn_csm_xy3</strong></a> is used to
+draw the first three curves. The fourth curve is created separately,
+and added as an annotation using <a href="../Document/Functions/Built-in/NhlAddAnnotation.html"><strong>NhlAddAnnotation</strong></a>
+The Y axis for the fourth curve is also added as an
+annotation. This allows to you resize the original "plot", and
+all four curves will be resized accordingly.
+<p>
+
+Michel Mesquita of the Bjerknes Centre for Climate Research gave us
+permission to include his script.
+
+</div>
+<div class=ex>
+<!--xy_28-->
+<a name=ex28></a>
+<a href="Images/xy_28_lg.png">
+<img src="Images/xy_28_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_28.html">xy_28.ncl</a>: This script
+shows how to draw a hodograph plot, which is a suitable approach in
+describing diurnal variations in the wind vector
+at a given point.
+<p>
+
+This script was contributed by Haoming Chen from LASG/IAP in Beijing,
+China.
+
+</div>
+
+<div class=ex>
+<!--xy_29-->
+<a name=ex29></a>
+<a href="Images/xy_29_lg.png">
+<img src="Images/xy_29_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_29.html">xy_29.ncl</a>: This script
+demonstrates a use of polymarkers. Each file had  approximately
+30 years of observations. Observations were available for only
+few days each year. This displays the range of values each year
+for one selected ascii file (South Pole).
+
+<p>
+This script was contributed by Birgit Hassler (NOAA).
+
+</div>
+
+<div class=ex>
+<!--axes_4-->
+<a name=ex4></a>
+<a href="Images/axes_4_1_lg.png">
+<img src="Images/axes_4_1_sm.png" align=left border=2></a>
+<a href="Images/axes_4_2_lg.png">
+<img src="Images/axes_4_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/axes_4.html">axes_4.ncl</a>: This script shows how to
+replace the default axes in an XY plot with a cartesian coordinate
+system. This method should also work for contour and vector plots.
+
+</div>
+
+<div class=ex>
+<!--xy_30-->
+<a name=ex30></a>
+<a href="Images/xy_30_1_lg.png">
+<img src="Images/xy_30_1_sm.png" align=left border=2></a>
+<a href="Images/xy_30_2_lg.png">
+<img src="Images/xy_30_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_30.html">xy_30.ncl</a>: This script demonstrates
+how to make the Y axis irregular by overlaying it on a "blank" plot
+created with
+<a href="../Document/Graphics/Interfaces/gsn_csm_blank_plot.html"><strong>gsn_csm_blank_plot</strong></a>. You
+need to set <a href="../Document/Graphics/Resources/tr.html#trYCoordPoints"><em>trYCoordPoints</em></a>
+to the array of irregularly-spaced Y values you want on the Y axis.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_blank_plot.html"><strong>gsn_csm_blank_plot</strong></a> won't be
+available until <a href="../prev_releases.html#6.0.0">version
+6.0.0</a>, so it's included in this example.
+<p>
+
+The first frame of this example shows the default plot with a
+linearly-spaced Y axis, and the second frame shows how to make this
+axis irregularly spaced.
+<p>
+
+The "ypts" variable is the array that defines the new spacing on the Y
+axis.
+<p>
+
+</div>
+
+<div class=ex>
+<!--xy_31-->
+<a name=ex31></a>
+<a href="Images/xy_31_1_lg.png">
+<img src="Images/xy_31_1_sm.png" align=left border=2></a>
+<a href="Images/xy_31_2_lg.png">
+<img src="Images/xy_31_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_31.html">xy_31.ncl</a>: This example
+shows how to create several of your own dash patterns.
+<p>
+
+The first frame
+uses <a href="../Document/Graphics/Images/dashpatterns.png">predefined
+dashed patterns</a>, which can be hard to distinguish if you make the
+lines really thick.
+<p>
+
+The second frame uses dash patterns created with the
+<a href="../Document/Functions/Built-in/NhlNewDashPattern.html"><strong>NhlNewDashPattern</strong></a> function.
+<p>
+
+Here's what the strings look like for the predefined dash patterns:
+<p>
+<pre>
+  0   "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+  1   "$$$$__$$$$__$$$$__$$$$__$$$$__$$$$__$$$$__$$$$__"
+  2   "$__$__$__$__$__$__$__$__$__$__$__$__$__$__$__$__"
+  3   "$$$$__$__$$$$__$__$$$$__$__$$$$__$__$$$$__$__"
+  4   "$$$$__$_$__$$$$__$_$__$$$$__$_$__$$$$__$_$__"
+  5   "$$_$$_$$_$$_$$_$$_$$_$$_$$_$$_$$_$$_$$_$$_$$_$$_"
+  6   "$$$_$$$_$$$_$$$_$$$_$$$_$$$_$$$_$$$_$$$_$$$_$$$_"
+  7   "$_$$_$_$$_$_$$_$_$$_$_$$_$_$$_$_$$_$_$$_$_$$_$_$$_"
+  8   "$_$$$_$_$$$_$_$$$_$_$$$_$_$$$_$_$$$_$_$$$_$_$$$_"
+  9   "$$_$$$$_$$_$$$$_$$_$$$$_$$_$$$$_$$_$$$$_$$_$$$$_"
+  10  "$$$$_$$_$_$$_$$$$_$$_$_$$_$$$$_$$_$_$$_$$$$_$$_$_$$_"
+  11  "$$__$$__$$__$$__$$__$$__$$__$$__$$__$$__$$__$$__"
+  12  "$$$$$$__$$$$$$__$$$$$$__$$$$$$__$$$$$$__$$$$$$__"
+  13  "$$$_$$$__$$$_$$$__$$$_$$$__$$$_$$$__$$$_$$$__"
+  14  "$$___$$___$$___$$___$$___$$___$$___$$___$$___$$___"
+  15  "$_$___$_$___$_$___$_$___$_$___$_$___$_$___$_$___"
+  16  "$$$$$_____$$$$$_____$$$$$_____$$$$$_____$$$$$_____"
+</pre>
+</div>
+
+<div class=ex>
+<!--xy_32-->
+<a name=ex32></a>
+<a href="Images/xy_32_lg.png">
+<img src="Images/xy_32_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_32.html">xy_32.ncl</a>: This example shows how to
+draw a 8-curve XY plot with 4 legends stacked side-by-side.<p>
+
+In order to do this, it is necessary to create 4 XY plots, each with
+two curves and two items in its legend. The legend for each plot is
+moved to the right or left slightly so they don't overlap.  The plots
+are then all "connected" into one plot using
+the <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> procedure.
+
+</div>
+
+<div class=ex>
+<!--xy_33-->
+<a name=ex33></a>
+<a href="Images/xy_33_lg.png">
+<img src="Images/xy_33_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_33.html">xy_33.ncl</a>: 
+An ncl-talk question wanted to reproduce a plot created by Excel.
+This required fairly basic steps: (a) read values from 
+an ASCII (text) file via <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>; (b) apply a
+13-point running average <a href="../Document/Functions/Built-in/runave.html"><strong>runave</strong></a>; (c) fit
+a 3rd degree least squares polynomial using <a href="../Document/Functions/Built-in/lspoly.html"><strong>lspoly</strong></a> 
+(or <a href="../Document/Functions/Built-in/lspoly_n.html"><strong>lspoly_n</strong></a>) to the output from
+the running average function; and, (d) plot all three series
+using a common ordinate array.
+
+</div>
+
+<div class=ex>
+<!--compare_wind_fields-->
+<a name=compare_wind_fields></a>
+<a href="Images/Zmean.LW.ALL.png">
+<img src="Images/Zmean.LW.ALL.sm.png" align=left border=2></a>
+<a href="Scripts/mkZmean.html">mkZmean.ncl</a>:
+
+This script creates a panel of four XY plots, with filled curves and a
+custom legend added to the bottom right plot. It was contributed by
+Dustin Swales, an associate scientist at NOAA/PSD.
+
+</div>
+<div class=ex>
+<!--xy_34-->
+<a name=ex34></a>
+<a href="Images/xy_34_lg.png">
+<img src="Images/xy_34_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_34.html">xy_34.ncl</a>: This
+plot is similar to the one generated by 
+<a href="#ex23">xy_23.ncl</a>. It shows how to draw
+a series of stacked plots, with the Y axes labeled
+alternatively on the left and right, and with areas
+of the first and fourth plots highlighted with filled
+boxes and text.
+<p>
+
+The Y location of each plot is changed by setting
+the <a href="../Document/Graphics/Resources/vp.html#vpYF"><em>vpYF</em></a> value.
+The highlighting is done with calls to 
+<a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>,
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>,
+and <a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a>.
+
+
+
+</div>
+
+<div class=ex>
+<!-- xy_35-->
+<a name=ex35></a>
+<a href="Images/xy_35_lg.png">
+<img src="Images/xy_35_sm.png" align=left border=2></a>
+<a href="Scripts/xy_35.html">xy_35.ncl</a>
+: Illustrates the use of new XYPlot opacity resources (new with 
+NCL 6.4.0):
+<p>
+<a href="../Document/Graphics/Resources/xy.html#xyLineOpacityF"><em>xyLineOpacityF</em></a><br>
+<a href="../Document/Graphics/Resources/xy.html#xyLineOpacities"><em>xyLineOpacities</em></a><br>
+<a href="../Document/Graphics/Resources/xy.html#xyMarkerOpacityF"><em>xyMarkerOpacityF</em></a><br>
+<a href="../Document/Graphics/Resources/xy.html#xyMarkerOpacities"><em>xyMarkerOpacities</em></a>
+</div>
+
+<div class=ex>
+<!-- xy_36-->
+<a name=ex36></a>
+<a href="Images/xy_36_1_lg.png">
+<img src="Images/xy_36_1_sm.png" align=left border=2></a>
+<a href="Images/xy_36_2_lg.png">
+<img src="Images/xy_36_2_sm.png" align=left border=2></a>
+<a href="Images/xy_36_3_lg.png">
+<img src="Images/xy_36_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_36.html">xy_36.ncl</a>: Illustrates the use of the
+new X reference line resources added in NCL 6.4.0:
+
+<p>
+<a href="../Document/Graphics/Resources/gsn.html#gsnXRefLineThicknesses"><em>gsnXRefLineThicknesses</em></a><br>
+<a href="../Document/Graphics/Resources/gsn.html#gsnXRefLineColors"><em>gsnXRefLineColors</em></a><br>
+<a href="../Document/Graphics/Resources/gsn.html#gsnXRefLineDashPatterns"><em>gsnXRefLineDashPatterns</em></a><br>
+</div>
+
+<div class=ex>
+<!-- xy_yref_36-->
+<a name=exyref_36></a>
+<a href="Images/xy_yref_36_1_lg.png">
+<img src="Images/xy_yref_36_1_sm.png" align=left border=2></a>
+<a href="Images/xy_yref_36_2_lg.png">
+<img src="Images/xy_yref_36_2_sm.png" align=left border=2></a>
+<a href="Images/xy_yref_36_3_lg.png">
+<img src="Images/xy_yref_36_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_yref_36.html">xy_yref_36.ncl</a>: This
+script is identical to the previous one, except the 
+X and Y arrays are swapped, and this time horizontal reference
+lines are drawn.
+
+<p>
+<a href="../Document/Graphics/Resources/gsn.html#gsnYRefLineThicknesses"><em>gsnYRefLineThicknesses</em></a><br>
+<a href="../Document/Graphics/Resources/gsn.html#gsnYRefLineColors"><em>gsnYRefLineColors</em></a><br>
+<a href="../Document/Graphics/Resources/gsn.html#gsnYRefLineDashPatterns"><em>gsnYRefLineDashPatterns</em></a><br>
+</div>
+
+<div class=ex>
+<!-- xy_37-->
+<a name=ex37></a>
+<a href="Images/xy_37_lg.png">
+<img src="Images/xy_37_sm.png" align=left border=2></a>
+<a href="Scripts/xy_37.html">xy_37.ncl</a>: Illustrates how to
+fill the background area of a plot using
+<a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>.
+
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/xy.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:20:03 GMT -->
+</html>
+

@@ -1,0 +1,1685 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/panel.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:57:56 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+the use of panel plots.">
+<meta name="keywords" content="NCL, graphics, visualization, panel, multiple
+plots">
+<TITLE>NCL Graphics: Panel Plots</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: Panel Plots</h1>
+
+<div class=mainimage>
+<img src="Images/GWL_rain_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+<a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> is a powerful procedure
+that allows you to "panel" multiple plots on the same page. There are
+many
+special <a href="../Document/Graphics/Resources/gsn.html">gsnPanel</a>
+resources that are specific to this procedure.
+<br><br>
+
+Note: <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> calls
+<a href="../Document/Functions/Built-in/draw.html"><strong>draw</strong></a> and <a href="../Document/Functions/Built-in/frame.html"><strong>frame</strong></a> automatically for
+the user. You do not need to call these after you call <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>.
+<p>
+
+A debug tip: setting the panel resource <a href="../Document/Graphics/Resources/gsn.html#gsnPanelDebug"><em>gsnPanelDebug</em></a> to True causes a bunch of output to
+be echoed to the screen, telling you what values are used for the plot
+positions and sizes in <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>. You can then use this information
+to adjust resources as necessary.
+<p>
+
+When using <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> it is generally recommended
+that you not set <a href="../Document/Graphics/Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> to True in the resource lists
+that control the look of the <i>individual</i> plots. When paneling, 
+<a href="../Document/Graphics/Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> should only be set in the panel resource list, as in 
+<a href="#ex13">Example 13</a> or <a href="#ex25">Example 25</a>. 
+<p>
+
+</div>
+
+<div class=ex>
+<!--panel_1-->
+<a name=ex1></a>
+<a href="Images/panel_1_lg.png">
+<img src="Images/panel_1_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_1.html">panel_1.ncl</a>: This is the simplest
+panel plot. Three plots are draw and then placed on the page. In most
+instances, the user will also want to add a common title or label
+bar. Subsequent examples demonstrate these features.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> is the plot interface that
+creates panel plots.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a> and <a href="../Document/Graphics/Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a> should be set to false when drawing the
+individual plots so that they can be saved for the panel plot.<br>
+You do not, however, need to call these afterwards. <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> calls them for you.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Panels/NCL_panel_1.html#sphx-glr-gallery-panels-ncl-panel-1-py">here</a>.
+</div>
+
+<div class=ex>
+<!--panel_2-->
+<a name=ex2></a>
+<a href="Images/panel_2_lg.png">
+<img src="Images/panel_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_2.html">panel_2.ncl</a>: Adds a common title to
+the plot.
+<p>
+
+To add a title, it is necessary to create a set of resources that are
+passed to only the panel template. It is best to give them a different
+name than the resources used for the individual plots. (e.g. <em>
+resP = True</em>)
+<p>
+
+In NCL versions 6.4.0 and
+later, <a href="../Document/Graphics/Resources/gsn.html#gsnPanelMainString"><em>gsnPanelMainString</em></a> is the resource
+that sets a main title for the paneled plots. In NCL versions 6.3.0
+and earlier, <a href="../Document/Graphics/Resources/tx.html#txString"><em>txString</em></a> is the
+resource for setting a main string.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Panels/NCL_panel_2.html#sphx-glr-gallery-panels-ncl-panel-2-py">here</a>.
+</div>
+
+<div class=ex>
+<!--panel_3-->
+<a name=ex3></a>
+<a href="Images/panel_3_lg.png">
+<img src="Images/panel_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_3.html">panel_3.ncl</a>: Adds a common label bar
+to the plot.
+<p>
+
+<a href="../Document/Graphics/Resources/lb.html#lbLabelBarOn"><em>lbLabelBarOn</em></a> = False, Turns off the
+individual label bars, while <a href="../Document/Graphics/Resources/gsn.html#gsnPanelLabelBar"><em>gsnPanelLabelBar</em></a> = True, adds a common label bar
+at the bottom of the plot. <a href="../Document/Graphics/Resources/lb.html#lbLabelFontHeightF"><em>lbLabelFontHeightF</em></a> is used to decrease the
+labels sizes of the common labelbar.
+<p>
+
+Remember to manually set the contour levels so that each plot has the
+same interval. The common label bar is draw from the first plot, and
+assumes all are the same.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Panels/NCL_panel_3.html#sphx-glr-gallery-panels-ncl-panel-3-py">here</a>.
+</div>
+
+<div class=ex>
+<!--panel_4-->
+<a name=ex4></a>
+<a href="Images/panel_4_lg.png">
+<img src="Images/panel_4_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_4.html">panel_4.ncl</a>: Adds some space at the
+bottom of the plot for more text.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelBottom"><em>gsnPanelBottom</em></a> = 0.05, Is the panel plot
+resource that adds space at the bottom of the plot.
+
+</div>
+
+<div class=ex>
+<!--panel_5-->
+<a name=ex5></a>
+<a href="Images/panel_5_lg.png">
+<img src="Images/panel_5_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_5.html">panel_5.ncl</a>: Automatically adds text
+strings to the panel plot. These strings can be anything you want, but
+the text used here is most common.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelFigureStrings"><em>gsnPanelFigureStrings</em></a> = (/"a)","b)"/), is
+the resource that will add a string to a corner in a panel plot.
+<p>
+
+The default position is the bottom right-hand corner. In this
+example, we use <a href="../Document/Graphics/Resources/am.html#amJust"><em>amJust</em></a> "TopLeft",
+to move them to the upper left-hand corner.
+<p>
+
+Additionally, <a href="../Document/Graphics/Resources/am.html#amOrthogonalPosF"><em>amOrthogonalPosF</em></a>
+and <a href="../Document/Graphics/Resources/am.html#amParallelPosF"><em>amParallelPosF</em></a> will how close
+the boxes are to the axis. Zero is the center of the line, and 0.5 is
+flush with the right and -0.5 is flush with the left.
+<p>
+
+You can
+use <a href="../Document/Graphics/Resources/gsn.html#gsnPanelFigureStringsFontHeightF"><em>gsnPanelFigureStringsFontHeightF</em></a> to
+adjust the font heights of the figure strings. Values range between 0
+and 1, with the default being 0.01
+<p>
+
+You can use <a href="../Document/Graphics/Resources/gsn.html#gsnPanelFigureStringsPerimOn"><em>gsnPanelFigureStringsPerimOn</em></a>
+to turn off the box around the FigureString, and <a href="../Document/Graphics/Resources/gsn.html#
+gsnPanelFigureStringsBackgroundFillColor"><em>
+gsnPanelFigureStringsBackgroundFillColor</em></a> to change the
+background color.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Panels/NCL_panel_5.html#sphx-glr-gallery-panels-ncl-panel-5-py">here</a>.
+</div>
+ 
+<div class=ex>
+<!--panel_6-->
+<a name=ex6></a>
+<a href="Images/panel_6_1_lg.png">
+<img src="Images/panel_6_1_sm.png" align=left border=2></a>
+<a href="Images/panel_6_2_lg.png">
+<img src="Images/panel_6_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_6.html">panel_6.ncl</a>: Demonstrates the
+addition of white space to a panel plot. The first figure contains no
+white space. You can see it is somewhat cramped. The second figure as
+5% white space added in both x and y. It looks much nicer.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelYWhiteSpacePercent"><em>gsnPanelYWhiteSpacePercent</em></a> = 5<br>
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelXWhiteSpacePercent"><em>gsnPanelXWhiteSpacePercent</em></a> = 5, Adds the
+white space to the panel plot.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Panels/NCL_panel_6.html#sphx-glr-gallery-panels-ncl-panel-6-py">here</a>.
+</div>
+
+<div class=ex>
+<!--panel_7-->
+<a name=ex7></a>
+<a href="Images/panel_7_lg.png">
+<img src="Images/panel_7_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_7.html">panel_7.ncl</a>: An example of a
+compressed panel plot. In this case we remove the longitude labels and
+tickmarks from the first two plots and keep only the one on the
+bottom. Since the plot template judges the spacing of the panel plot
+from the first plot, we need to add just a bit of space at the bottom
+like we did in example 4 in order to see the long labels on the bottom
+plot.
+
+</div>
+
+<div class=ex>
+<!--panel_8-->
+<a name=ex8></a>
+<a href="Images/panel_8_lg.png">
+<img src="Images/panel_8_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_8.html">panel_8.ncl</a>: Similar to example 7,
+except that we really start turning the tickmarks and their associated
+labels on and off.
+
+</div>
+
+<div class=ex>
+<!--panel_9-->
+<a name=ex9></a>
+<a href="Images/panel_9_lg.png">
+<img src="Images/panel_9_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_9.html">panel_9.ncl</a>: Create a panel plot
+using viewport specifications. This is required if the plots are of
+different shapes. 
+</div>
+
+<div class=ex>
+<!--panel_10-->
+<a name=ex10></a>
+<a href="Images/panel_10_lg.png">
+<img src="Images/panel_10_sm.png" align=left border=2></a>
+<a href="Images/panel_attach_10_lg.png">
+<img src="Images/panel_attach_10_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_10.html">panel_10.ncl</a> /
+<a href="Scripts/panel_attach_10.html">panel_attach_10.ncl</a>: There may be time
+when it is necessary to panel plots next to each other that have
+different sizes. If these plots can be attached, then the resulting
+new plot can be paneled.
+<p>
+
+In this example, we attach a zonal average plot to a Hovmueller
+diagram. The result is one plot that could then be paneled (see
+<a href="Scripts/panel_attach_10.html">panel_attach_10.ncl</a>). This
+second script uses the nice
+"<a href="../Document/Functions/User_contributed/time_axis_labels.html"><strong>time_axis_labels</strong></a>" procedure to
+generate nice time labels on the Y axis.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_attach_plots.html"><strong>gsn_attach_plots</strong></a> is the plot
+interface that will attach the a group plots along the y-axis
+(default). <br>
+
+ <pre>
+     _________________________________
+     |       |       |       |       |
+     | plot1 | plot2 | plot3 | plot4 |
+     |       |       |       |       |
+     _________________________________
+ </pre>
+
+If you set <a href="../Document/Graphics/Resources/gsn.html#gsnAttachBorderOn"><em>gsnAttachBorderOn</em></a> to False,
+then it will remove the interior borders and look like this:<br>
+
+<pre>
+     _________________________________
+     |                               |
+     | plot1   plot2   plot3   plot4 |
+     |                               |
+     _________________________________
+ </pre>
+
+If you set <a href="../Document/Graphics/Resources/gsn.html#gsnAttachPlotsXAxis"><em>gsnAttachPlotsXAxis</em></a> to True,
+then the plot will be attached along the x-axis.
+<p>
+
+<pre>
+
+ <a href="../Document/Graphics/Resources/gsn.html#gsnAttachBorderOn"><em>gsnAttachBorderOn</em></a>      <a href="../Document/Graphics/Resources/gsn.html#gsnAttachBorderOn"><em>gsnAttachBorderOn</em></a>
+  = True (default)           = False
+     _________              _________
+     |       |              |       |
+     | plot1 |              | plot1 |
+     |       |              |       |
+     |-------|              |       |
+     |       |              |       |
+     | plot2 |              | plot2 |
+     |       |              |       |
+     |-------|              |       |
+     |       |              |       |
+     | plot3 |              | plot3 |
+     |       |              |       |
+     |-------|              |       |
+     |       |              |       |
+     | plot4 |              | plot4 |
+     |       |              |       |
+     ---------              ---------
+ </pre>     
+
+Draw each plot separately, but then fine tune once you see them
+attached, and "scrunched". In our example, we removed the minor
+tickmarks and only plotted every other x-axis label.
+<p>
+
+<em>HOW TO PANEL ATTACHED PLOTS:</em><br>
+<ol>
+<li>Ensure that each plot is given a unique variable name that is 
+ never overwritten:<br>
+
+<pre>
+  plot1  = <a href="../Document/Graphics/Interfaces/gsn_csm_hov.html"><strong>gsn_csm_hov</strong></a> (wks, chi(:,{0:100}), hres)
+  xyplt1 = <a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a>(wks, x,y,xyres)
+  plot2  = <a href="../Document/Graphics/Interfaces/gsn_csm_hov.html"><strong>gsn_csm_hov</strong></a>(wks, chi(:,{220:320}), hres)
+  xyplt2 = <a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a>(wks, x,y,xyres)
+</pre>
+
+<LI>The function <a href="../Document/Graphics/Interfaces/gsn_attach_plots.html"><strong>gsn_attach_plots</strong></a>
+returns a special id number (an integer), and not a plot (a graphical
+object). <br>
+
+<pre>
+  attachres1 = True<br>
+  attachres1@gsnAttachPlotsXAxis = True ; attaches along x-axis <br>
+  attachres2 = True<br>
+  attachid1  = 
+  <a href="../Document/Graphics/Interfaces/gsn_attach_plots.html"><strong>gsn_attach_plots</strong></a>(plot1,xyplt1,attachres1,attachres2)<br>
+  attachid2  = 
+  <a href="../Document/Graphics/Interfaces/gsn_attach_plots.html"><strong>gsn_attach_plots</strong></a>(plot2,xyplt2,attachres1,attachres2)
+</pre>
+<p>
+
+<li>The attached plot is now the first plot in the function call. 
+herefore, feed this into the panel procedure: <br>
+
+<pre>
+ <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>(wks,(/plot1,plot2/),(/2,1/),False)
+</pre>
+
+<li>If you were so inclined the special id number could be used to
+"unattach" an already attached plot by:
+
+<pre>
+ <a href="../Document/Functions/Built-in/NhlRemoveAnnotation.html"><strong>NhlRemoveAnnotation</strong></a>(plot1,attachid1)
+</pre>
+
+plot1 would now only contain the original Hovmueller diagram. 
+<p>
+A Python version of panel_10 is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Panels/NCL_panel_10.html#sphx-glr-gallery-panels-ncl-panel-10-py">here</a>.
+</ol>
+
+</div>
+
+<div class=ex>
+<!--panel_11-->
+<a name=ex11></a>
+<a href="Images/panel_11_1_lg.png">
+<img src="Images/panel_11_1_sm.png" align=left border=2></a>
+<a href="Images/panel_11_2_lg.png">
+<img src="Images/panel_11_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_11.html">panel_11.ncl</a>: As of NCL version
+4.2.0.a012, <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> has the option
+of specifying how many plots should be placed on each row. To do this,
+set <a href="../Document/Graphics/Resources/gsn.html#gsnPanelRowSpec"><em>gsnPanelRowSpec</em></a> = True.
+<p>
+
+The default layout is for the plots to be centered. You can change
+this by setting <a href="../Document/Graphics/Resources/gsn.html#gsnPanelCenter"><em>gsnPanelCenter</em></a> = False.
+
+</div>
+
+<div class=ex>
+<!--panel_12-->
+<a name=ex12></a>
+<a href="Images/panel_12_lg.png">
+<img src="Images/panel_12_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_12.html">panel_12.ncl</a>: Demonstrates putting two separate panel plots on one page, so that each can have its own unique label bar.
+<p>
+
+The important thing to remember here, is to create two separate plot
+arrays to hold the individual plots for both panels. This is required
+b/c the label bar is taken from the last plot drawn.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelRight"><em>gsnPanelRight</em></a> = 0.5, tells the plot to
+only draw on the left 50% of the page, while <a href="../Document/Graphics/Resources/gsn.html#gsnPanelLeft"><em>gsnPanelLeft</em></a> = 0.5, tells the plot to only draw
+on the right 50% of the page.
+
+</div>
+
+<div class=ex>
+<!--panel_13-->
+<a name=ex13></a>
+<a href="Images/panel_13_lg.png">
+<img src="Images/panel_13_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_13.html">panel_13.ncl</a>: Demonstrates paneling
+plots created with <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a>.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Panels/NCL_panel_13.html#sphx-glr-gallery-panels-ncl-panel-13-py">here</a>.
+</div>
+
+<div class=ex>
+<!--panel_14-->
+<a name=ex14></a>
+<a href="Images/panel_14_lg.png">
+<img src="Images/panel_14_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_14.html">panel_14.ncl</a>: Demonstrates
+combining a two-panel panel plot with two manually placed line
+plots. This is required b/c <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> assumes all the plots are the same
+size, and these plots are different enough to prevent their lining up
+axis to axis. Thanks to Keith Lindsay for this example.
+<p>
+
+The trick here is to divide the page into two sections. The lower
+section will just be for the contoured panel plot and its common label
+bar. We can tell <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> to only
+draw its result in the lower half of the page by setting <a href="../Document/Graphics/Resources/gsn.html#gsnPanelTop"><em>gsnPanelTop</em></a> to 0.5.
+<p>
+
+Next, we make sure the width of the xy plots is the same as the
+contour plots by setting <a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a> to its
+appropriate value. Finally, we exactly position each of the two xy
+plots in ndc space so that their axis line up with the contour
+plots. This is done by setting <a href="../Document/Graphics/Resources/vp.html#vpXF"><em>vpXF</em></a> to
+its appropriate value.
+<p>
+
+<a href="../Document/Graphics/Resources/pm.html#pmLabelBarWidthF"><em>pmLabelBarWidthF</em></a> is used to increase
+the width of the labelbar.
+
+</div>
+
+<div class=ex>
+<!--panel_15-->
+<a name=ex15></a>
+<a href="Images/panel_15_lg.png">
+<img src="Images/panel_15_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_15.html">panel_15.ncl</a>: Demonstrates paneling
+two sets of contour plots on the same page, each with its own labelbar. 
+You must download <a href="Scripts/panel_two_sets.html">panel_two_sets.ncl</a>
+for this script to run.
+<p>
+
+The panel_two_sets procedure is similar to gsn_panel, except you
+give it two sets of plots to panel, each with their own dimensions for
+paneling and their own panel resources.  There's a third resource list
+that is solely for setting the <a href="../Document/Graphics/Resources/gsn.html#gsnPanelTop"><em>gsnPanelTop</em></a>  / 
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelBottom"><em>gsnPanelBottom</em></a> /
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelLeft"><em>gsnPanelLeft</em></a> /
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelRight"><em>gsnPanelRight</em></a> resources if needed.
+<p>
+
+The two sets of plots can be paneled side-by-side in a "horizontal"
+configuration, with the labelbars appearing at the bottom, or in a
+top-and-bottom "vertical" configuration, with the labelbars appearing
+at the right. This function will figure out the orientation to use
+based on two dimension arguments. 
+<p>
+
+For example, if you have 6 plots that you want to panel in a 3 x 4
+configuration and 3 plots that you want to panel in a 2 x 4
+configuration, then all the plots will be drawn in a single 5 x 4
+configuration with the 3 x 4 plots appearing on top, the the 2 x 4
+plots on the bottom. They will each have a horizontal labelbar
+appearing at the bottom.
+<p>
+
+If you have a set of 2 x 3 plots and a set of 2 x 2 plots, then the plots
+will be drawn in a 2 x 5 configuration, with the 2 x 3 plots on the left,
+and the 2 x 2 plots on the right, and vertical labelbars appearing at the right.
+<p>
+
+For a horizontal configuration, the two sets of plots must each be
+paneled using the same number of rows.
+<p>
+
+For a vertical configuration, the two plots must have must be
+paneled using the same number of columns.
+<p>
+
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Panels/NCL_panel_15.html#sphx-glr-gallery-panels-ncl-panel-15-py">here</a>.
+
+</div>
+
+<div class=ex>
+<!--panel_old_15-->
+<a name=exold15></a>
+<a href="Images/panel_old_15_lg.png">
+<img src="Images/panel_old_15_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_15_old.html">panel_15_old.ncl</a>: Demonstrates using
+<a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> twice in order to get
+groups of plots with different label bars.
+<p>
+
+Note: see panel_15.ncl above for a function that makes it easier to
+panel two sets of contour plots, each with their own labelbar. This
+example is an older version that is being kept for historical
+purposes.
+<p>
+
+The trick here is the setting of <a href="../Document/Graphics/Resources/gsn.html#gsnPanelBottom"><em>gsnPanelBottom</em></a> and <a href="../Document/Graphics/Resources/gsn.html#gsnPanelTop"><em>gsnPanelTop</em></a> for the two respective panel
+plots. For the first panel, we move the bottom up to 0.4, which leaves
+0.6 for the two panel plot. This means that each plot will be 0.3 in
+size. For the third, single panel plot, we draw only up to where the
+upper plot ended at 0.4. One more step is required, and that is to
+move the bottom of the bottom panel up to 0.1 so that the total draw
+area for this plot equals 0.3, just like we have for the upper
+plots. If you do not set <a href="../Document/Graphics/Resources/gsn.html#gsnPanelBottom"><em>gsnPanelBottom</em></a>
+in this case, then the bottom plot has 0.4 space and will not be the
+same size as the upper two plots.
+
+</div>
+
+<div class=ex>
+<!--panel_16-->
+<a name=ex16></a>
+<a href="Images/panel_16_lg.png">
+<img src="Images/panel_16_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_16.html">panel_16.ncl</a>: Demonstrates using
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelBottom"><em>gsnPanelBottom</em></a> and <a href="../Document/Graphics/Resources/gsn.html#gsnPanelTop"><em>gsnPanelTop</em></a> to "squeeze" the panel plots to
+approximately a column width for use in a publication. By setting
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelTop"><em>gsnPanelTop</em></a> = .9 and <a href="../Document/Graphics/Resources/gsn.html#gsnPanelBottom"><em>gsnPanelBottom</em></a> = .2, the panel plots are drawn
+on .7 of the page instead of the entire page. This is a very easy way
+to shrink panel plots to a desired size.
+
+</div>
+
+<div class=ex>
+<!--panel_17-->
+<a name=ex17></a>
+<a href="Images/panel_17_lg.png">
+<img src="Images/panel_17_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_17.html">panel_17.ncl</a>: Demonstrates how to
+panel four plots that have two separate labelbars and a main title.
+The <a href="../Document/Graphics/Resources/gsn.html#gsnPanelTop"><em>gsnPanelTop</em></a> and <a href="../Document/Graphics/Resources/gsn.html#gsnPanelBottom"><em>gsnPanelBottom</em></a> resources are used to make sure
+the two sets of plots are drawn in an area of the same size so that
+the plots are the same size, and then a small area is reserved for
+drawing the main title using <a href="../Document/Graphics/Interfaces/gsn_text_ndc.html"><strong>gsn_text_ndc</strong></a>. The
+<a href="../Document/Functions/Built-in/generate_2d_array.html"><strong>generate_2d_array</strong></a> function is used to generate
+dummy data for this example.
+</div>
+
+<div class=ex>
+<!--panel_trilbar_17-->
+<a name=extrilbar17></a>
+<a href="Images/panel_trilbar_17_lg.png">
+<img src="Images/panel_trilbar_17_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_trilbar_17.html">panel_trilbar_17.ncl</a>: 
+
+This example is similar
+to <a href="Scripts/panel_17.html">panel_17.ncl</a>, except it shows
+how to get triangle ends on the labelbar by setting
+the <a href="../Document/Graphics/Resources/lb.html#lbBoxEndCapStyle"><em>lbBoxEndCapStyle</em></a> resource to one
+of three values: "TriangleLowEnd", "TriangleHighEnd",
+"TriangleBothEnds". The default for this resource is "RectangleEnds".
+<p>
+
+</div>
+
+
+<div class=ex>
+<!--panel_18-->
+<a name=ex18></a>
+<a href="Images/panel_18_lg.png">
+<img src="Images/panel_18_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_18.html">panel_18.ncl</a>: Similar to 
+<a href="panel.html#ex15">example 15</a>, this 
+example demonstrates that the label bar need not explicitly have color in the middle.
+This is shown in the bottom panel, as <a href="../Document/Graphics/Resources/cn.html#cnFillColors"><em>cnFillColors</em></a>
+is manually being set,  and the background color (0, = white for BlAqGrYeOrRe colormap) 
+is used to fill in all areas between -1 and 1. 
+<p>
+You must download <a href="Scripts/panel_two_sets.html">panel_two_sets.ncl</a>
+for this script to run.
+<p>
+
+See example <a href="Scripts/panel_33.html">panel_33.ncl</a> for
+another version of this plot, but with more plots, and using newer NCL
+features to define the color map for each set of contours.
+
+</div>
+
+<div class=ex>
+<!--panel_trilbar_18-->
+<a name=extrilbar18></a>
+<a href="Images/panel_trilbar_18_lg.png">
+<img src="Images/panel_trilbar_18_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_trilbar_18.html">panel_trilbar_18.ncl</a>:
+
+This example is similar
+to <a href="Scripts/panel_18.html">panel_18.ncl</a>, except it shows
+how to get triangle ends on the labelbar by
+setting <a href="../Document/Graphics/Resources/lb.html#lbBoxEndCapStyle"><em>lbBoxEndCapStyle</em></a> to
+"TriangleBothEnds".
+<p>
+
+You must download <a href="Scripts/panel_two_sets.html">panel_two_sets.ncl</a>
+for this script to run.
+
+</div>
+
+
+<div class=ex>
+<!--panel_19-->
+<a name=ex19></a>
+<a href="Images/panel_19_1_lg.png">
+<img src="Images/panel_19_1_sm.png" align=left border=2></a>
+<a href="Images/panel_19_2_lg.png">
+<img src="Images/panel_19_2_sm.png" align=left border=2></a>
+<a href="Images/panel_19_3_lg.png">
+<img src="Images/panel_19_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_19.html">panel_19.ncl</a>: This example shows
+how to use the <a href="../Document/Graphics/Resources/gsn.html#gsnPanelXF"><em>gsnPanelXF</em></a> and <a href="../Document/Graphics/Resources/gsn.html#gsnPanelYF"><em>gsnPanelYF</em></a> resources to adjust the X and/or Y
+<a href="../Document/glossary.html#">NDC</a> positions of the upper left
+corners of plots in a panel. The first frame shows the paneled plots
+without adjustments, and the remaining two have both X and Y
+adjustments.
+<p>
+
+These resources must be arrays of the same size as the number of plots
+you have. Any individual plots that you don't want to adjust,
+you can set a negative value and the default value will be used.
+<p>
+
+You can optionally set <a href="../Document/Graphics/Resources/gsn.html#gsnPanelDebug"><em>gsnPanelDebug</em></a>
+to True to have some debug information about the default X and Y 
+positions being used, so you know approximately how much to tweak
+the values.
+<p>
+
+These resources will be added in <a
+href="../prev_releases.html#4.3.0">version 4.3.0</a>.
+
+</div>
+
+<div class=ex>
+<!--panel_20-->
+<a name=ex20></a>
+<a href="Images/panel_20_lg.png">
+<img src="Images/panel_20_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_20.html">panel_20.ncl</a>: This example shows
+how to use viewport resources <a href="../Document/Graphics/Resources/vp.html#vpXF"><em>vpXF</em></a>,
+<a href="../Document/Graphics/Resources/vp.html#vpYF"><em>vpYF</em></a>, <a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a>, and <a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a>, to panel different-sized plots.
+If you try to use <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>, you
+will get unexpected results.
+<p>
+
+In order to maximize these four plots in the frame, the procedure
+<a href="../Document/Graphics/Interfaces/maximize_output.html"><strong>maximize_output</strong></a> is used.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Panels/NCL_panel_20.html#sphx-glr-gallery-panels-ncl-panel-20-py">here</a>.
+</div>
+
+<div class=ex>
+<!--panel_21-->
+<a name=ex21></a>
+<a href="Images/panel_21_lg.png">
+<img src="Images/panel_21_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_21.html">panel_21.ncl</a>: This example shows
+how to add a common title, and common x-axis and y-axis labels to a
+panel plot using <a href="../Document/Graphics/Interfaces/gsn_text_ndc.html"><strong>gsn_text_ndc</strong></a> and
+the <a href="../Document/Graphics/Resources/gsn.html#gsnPanelLeft"><em>gsnPanelLeft</em></a>, <a href="../Document/Graphics/Resources/gsn.html#gsnPanelRight"><em>gsnPanelRight</em></a> resources.
+<p>
+
+It also shows how to move the labelbar closer to the panelled plots
+using the special <a href="../Document/Graphics/Resources/pm.html#pmLabelBarOrthogonalPosF"><em>pmLabelBarOrthogonalPosF</em></a> resource.
+(Similarly, <a href="../Document/Graphics/Resources/pm.html#pmLabelBarParallelPosF"><em>pmLabelBarParallelPosF</em></a> can be used to
+move the labelbar parallel to the panelled plots.)
+<p>
+
+This script was written by Jonathan Vigh, a PhD candidate student in
+the Atmospheric Sciences department at Colorado State University.
+
+</div>
+
+<div class=ex>
+<!--panel_22-->
+<a name=ex22></a>
+<a href="Images/panel_22_lg.png">
+<img src="Images/panel_22_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_22.html">panel_22.ncl</a>: This example shows
+how to add individual common titles to a panel plot that actually
+contains two panelled plots (each 2 rows x 1 column).
+<p>
+
+
+In NCL versions 6.4.0 and
+later, use <a href="../Document/Graphics/Resources/gsn.html#gsnPanelMainString"><em>gsnPanelMainString</em></a> to
+set a main title for the paneled plots, and 
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelMainPosXF"><em>gsnPanelMainPosXF</em></a> to position it. You
+need to use a value between 0 and 1, because otherwise both titles
+will be exactly centered on the page (=0.5). In NCL versions 6.3.0,
+use <a href="../Document/Graphics/Resources/tx.html#txString"><em>txString</em></a>
+and <a href="../Document/Graphics/Resources/tx.html#txPosXF"><em>txPosXF</em></a> resource control the
+main string.
+
+</div>
+
+<div class=ex>
+<!--panel_23-->
+<a name=ex23></a>
+<a href="Images/panel_23_1_lg.png">
+<img src="Images/panel_23_1_sm.png" align=left border=2></a>
+<a href="Images/panel_23_2_lg.png">
+<img src="Images/panel_23_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_23.html">panel_23.ncl</a>: This example shows
+how to draw a panel of 4 plots with the plots attached along
+the X and Y axes. A common title and labelbar is added. 
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> is NOT being used here.
+Instead, the resources <a href="../Document/Graphics/Resources/vp.html#vpXF"><em>vpXF</em></a>, <a href="../Document/Graphics/Resources/vp.html#vpYF"><em>vpYF</em></a>, <a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a>,
+and <a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> are set to control the
+size and location of each plot, and tickmark resources are set to turn
+off labels and tickmarks on the various axes.
+<p>
+
+The second frame is generated by calling <a href="../Document/Graphics/Interfaces/maximize_output.html"><strong>maximize_output</strong></a>, which maximizes all objects
+in a frame.
+
+</div>
+
+<div class=ex>
+<!--panel_24-->
+<a name=ex24></a>
+<a href="Images/panel_24_1_lg.png">
+<img src="Images/panel_24_1_sm.png" align=left border=2></a>
+<a href="Images/panel_24_2_lg.png">
+<img src="Images/panel_24_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_24.html">panel_24.ncl</a>: This example shows
+how to draw a panel of 3 x 2 plots where each plot is a slightly
+different size due to Y axis labels that are different lengths.
+<p>
+
+The first frame shows what the paneled plots looks like, without any
+special options set. Note the plot with the blue Y axis labels, and
+how they run off the screen.
+<p>
+
+By setting <a href="../Document/Graphics/Resources/gsn.html#gsnPanelScalePlotIndex"><em>gsnPanelScalePlotIndex</em></a> to 2
+(the third plot with the labels, counting starts at 0), you can tell
+<a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> which plot to base the
+scale factor on when resizing all the plots (the default is the first
+valid plot).
+
+</div>
+
+<div class=ex>
+<!--panel_25-->
+<a name=ex25></a>
+<a href="Images/panel_25_lg.png">
+<img src="Images/panel_25_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_25.html">panel_25.ncl</a>: This example, which
+was contributed by Gary Bates of NOAA, shows how to draw a three plots
+in a row, where each plot is the same height, but a different width. A
+common labelbar and title is added. If you draw the default panel
+plot, the plots run into each other.
+<p>
+
+To fix this, Gary set the resources <a href="../Document/Graphics/Resources/gsn.html#gsnPanelXWhiteSpacePercent"><em>gsnPanelXWhiteSpacePercent</em></a>
+and <a href="../Document/Graphics/Resources/gsn.html#gsnPanelYWhiteSpacePercent"><em>gsnPanelYWhiteSpacePercent</em></a> to 2.0 to add some
+white space between each plot.
+<p>
+
+With plots like this, you may find it easier to position the plots
+yourself using the <a href="../Document/Graphics/Resources/vp.html#vpXF"><em>vpXF</em></a>, <a href="../Document/Graphics/Resources/vp.html#vpYF"><em>vpYF</em></a>, <a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a>,
+and <a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> resources. However,
+you will then need to create the title and common labelbar yourself.
+
+</div>
+
+<div class=ex>
+<!--bar_11-->
+<a name=exbar11></a>
+<a href="Images/bar_11_lg.png">
+<img src="Images/bar_11_sm.png" align=left border=2></a>
+
+<a href="Scripts/bar_11.html">bar_11.ncl</a>: This script shows how to
+panel multiple bar charts and add a custom legend (using labelbars).
+<p>
+
+This example uses the <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> procedure to overlay
+the individual bar plots. Finally, it uses <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> to panel the four sets of plots.
+<p>
+
+See the <a href="bar.html">bar chart page</a> for more examples of
+bar plots.
+
+</div>
+
+<div class=ex>
+<!--panel_26-->
+<a name=ex26></a>
+<a href="Images/panel_26_lg.png">
+<img src="Images/panel_26_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_26.html">panel_26.ncl</a>: This example shows
+how to draw multiple sets of paneled plots on one page, each with
+their own colormap.
+<p>
+
+An unadvertised function is used, "gsn_panel_return", which returns
+the objects created
+by <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>. This allows us to get
+the size of the paneled plots so we can draw the remaining ones right
+next to the previous ones.
+
+</div>
+
+<div class=ex>
+<!--panel_27-->
+<a name=ex27></a>
+<a href="Images/panel_27_lg.png">
+<img src="Images/panel_27_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_27.html">panel_27.ncl</a>: This example shows
+how to draw a vertical shaded labelbar and a horizontal color
+labelbar on a 3 x 3 panel plot. The plots were created using
+dummy data, and have shaded contours overlaid on filled contours
+overlaid on a map.
+<p>
+
+The horizontal labelbar is added via the usual
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelLabelBar"><em>gsnPanelLabelBar</em></a> resource,
+and the vertical labelbar is added using 
+<a href="../Document/Graphics/Interfaces/gsn_create_labelbar.html"><strong>gsn_create_labelbar</strong></a>.
+<p>
+
+This is not the cleanest solution, because creating a labelbar
+yourself can require setting quite a few resources. See the "labelbar"
+function in this script.
+
+</div>
+
+<div class=ex>
+<!--panel_28-->
+<a name=ex28></a>
+<a href="Images/panel_28_lg.png">
+<img src="Images/panel_28_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_28.html">panel_28.ncl</a>: This example shows
+how to panel lots of plots (10x6) with slightly different sizes.
+<p>
+
+The special panel resource 
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelScalePlotIndex"><em>gsnPanelScalePlotIndex</em></a>
+was set to plot #7, to base the scaling on one of the
+smaller plots in the middle.
+<p>
+
+This caused the plots to be too close together, so 
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelXWhiteSpacePercent"><em>gsnPanelXWhiteSpacePercent</em></a>
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelYWhiteSpacePercent"><em>gsnPanelYWhiteSpacePercent</em></a>
+were set to values slightly higher than 1.0 (1%).
+<p>
+
+Finally, in order to keep the left and right labels from running
+off the page, <a href="../Document/Graphics/Resources/gsn.html#gsnPanelLeft"><em>gsnPanelLeft</em></a> and 
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelRight"><em>gsnPanelRight</em></a> were set
+to 0.1 and 0.9 to give a little bit of a margin.
+</div>
+
+<div class=ex>
+<!--panel_29-->
+<a name=ex29></a>
+<a href="Images/panel_29_lg.png">
+<img src="Images/panel_29_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_29.html">panel_29.ncl</a>: 
+This shows how to draw two separate labelbars for variables
+with different spans.
+The leftmost two columns are future scenarios. The right column contains 
+different model reference periods. NCL's masking is used to plot only 
+the land area.
+<p>
+
+</div>
+
+<div class=ex>
+<!--panel_30-->
+<a name=ex30></a>
+<a href="Images/panel_30_lg.png">
+<img src="Images/panel_30_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_30.html">panel_30.ncl</a>: 
+This example shows how to divide a global map into a 4 x 8 
+array of individual maps with overlaid bar charts.
+<p>
+
+Panel and tickmark resources are set so that the paneled plots have
+no white space between them.
+<p>
+
+The bar charts are overlaid on the maps by setting the
+<a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> resource to False
+and calling <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> to do the overlays.
+
+
+</div>
+
+<div class=ex>
+<!--panel_31-->
+<a name=ex31></a>
+<a href="Images/panel_31_lg.png">
+<img src="Images/panel_31_sm.png" align=left border=2></a>
+<a href="Images/panel_31a_lg.png">
+<img src="Images/panel_31a_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_31.html">panel_31.ncl</a>: This example shows
+how to panel vector plots with only one vector reference annotation box. 
+<p>
+
+If TOPO_MAP is set to True in the script, then it will
+overlay the vectors on a topographic map read from a JPEG image.
+<p>
+
+The vector reference annotation box is turned off for all plots except
+the lower rightmost one by setting
+res@<a href="../Document/Graphics/Resources/vc.html#vcRefAnnoOn"><em>vcRefAnnoOn</em></a> = False for all but
+that one plot. The box is moved to the outside right of that plot by
+setting res@<a href="../Document/Graphics/Resources/vc.html#vcRefAnnoParallelPosF"><em>vcRefAnnoParallelPosF</em></a>.
+<p>
+
+The topographic map is created by reading in a JPEG image. See example
+newcolor_11.ncl on the <a href="rgbacolor.html#ex11">RGBA page</a>.
+This image can be slow to create, so set TOPO_MAP to False in the
+script if you just want to generate a generic NCL map object (this
+is the second thumbnail image above).
+<p>
+
+The open source tool <a href="http://gdal.org/">gdal_translate</a> was
+used to convert the jpeg file to a NetCDF file:
+
+<pre>
+  gdal_translate -ot Int16 -of netCDF <a href="Scripts/EarthMap_2500x1250.jpg">EarthMap_2500x1250.jpg</a> EarthMap_2500x1250.nc
+</pre>
+
+
+</div>
+
+<div class=ex>
+<!--panel_32-->
+<a name=ex32></a>
+<a href="Images/panel_32_lg.png">
+<img src="Images/panel_32_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_32.html">panel_32.ncl</a>: This example shows
+how to panel three spaghetti contour plots that are overlaid
+on the northern hemisphere.
+<p>
+
+The plots are left-justfied and the extra space is used for a custom
+legend, which is drawn with a call
+to <a href="../Document/Graphics/Interfaces/gsn_legend_ndc.html"><strong>gsn_legend_ndc</strong></a>.
+<p>
+
+This example was contributed by Mira Berdahl of the Dept. of
+Environmental Studies, Rutgers University.
+
+</div>
+
+<div class=ex>
+<!--panel_33-->
+<a name=ex33></a>
+<a href="Images/panel_33_lg.png">
+<img src="Images/panel_33_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_33.html">panel_33.ncl</a>: This example is similar to 
+<a href="panel.html#ex18">example 18</a>,
+except it creates two sets of difference plots. It also demonstrates
+how you can use <a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a> to
+assign a color palette to a group of contour plots.
+<p>
+
+You must download <a href="Scripts/panel_two_sets.html">panel_two_sets.ncl</a>
+for this script to run.
+
+</div>
+
+<div class=ex>
+<!--panel_33-->
+<a name=ex33></a>
+<a href="Images/panel_5x2_33_lg.png">
+<img src="Images/panel_5x2_33_sm.png" align=left border=2></a>
+<a href="Scripts/panel_5x2_33.html">panel_5x2_33.ncl</a>: This example
+is similar to panel_33.ncl above, except there are three rows of
+regular plots and two rows of difference plots. This script uses the
+"panel_two_sets" function
+in <a href="Scripts/panel_two_sets.html">panel_two_sets.ncl</a> to make it
+easier to panel two sets of plots in various configurations.
+
+</div>
+
+<div class=ex>
+<!--xy_23-->
+<a name=xy23></a>
+<a href="Images/xy_23_1_lg.png">
+<img src="Images/xy_23_1_sm.png" align=left border=2></a>
+<a href="Images/xy_23_2_lg.png">
+<img src="Images/xy_23_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_23.html">xy_23.ncl</a>: Shows how to
+use <a href="../Document/Graphics/Interfaces/gsn_attach_plots.html"><strong>gsn_attach_plots</strong></a> and the
+resource <a href="../Document/Graphics/Resources/gsn.html#gsnAttachPlotsXAxis"><em>gsnAttachPlotsXAxis</em></a> to attach
+multiple XY plots along the bottom X axes, and how resizing the base
+plot will automatically cause all plots to be resized.
+<p>
+
+Several <a href="../Document/Graphics/Resources/tm.html">"tmYR"
+tickmark resources</a> are set to control the ticks and the labels on
+the right Y axis. The default is to put tickmarks and labels only on
+the left axis. To put them on the right only, you need to set (for
+one) <a href="../Document/Graphics/Resources/tm.html#tmYUseLeft"><em>tmYUseLeft</em></a> to False. The
+resource <a href="../Document/Graphics/Resources/tm.html#tmYRLabelDeltaF"><em>tmYRLabelDeltaF</em></a> is set to
+2.0 to move the labels further away from the right tickmarks,
+and <a href="../Document/Graphics/Resources/tm.html#tmYRLabelJust"><em>tmYRLabelJust</em></a> is set to
+"CenterRight" to right-justify the labels.
+
+</div>
+
+<div class=ex>
+<!--panel_34-->
+<a name=ex34></a>
+<a href="Images/panel_34_1_lg.png">
+<img src="Images/panel_34_1_sm.png" align=left border=2></a>
+<a href="Images/panel_34_2_lg.png">
+<img src="Images/panel_34_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_34.html">panel_34.ncl</a>: This example shows
+how to draw two sets of paneled contour plots, using two
+different configurations: one with the paneled plots side-by-side
+with vertical labelbars, and one with the paneled plots top-to-bottom
+with horizontal labelbars.
+<p>
+
+You must download <a href="Scripts/panel_two_sets.html">panel_two_sets.ncl</a>
+for this script to run.
+
+</div>
+
+<div class=ex>
+<!--panel_old_34-->
+<a name=exold34></a>
+<a href="Images/panel_old_34_lg.png">
+<img src="Images/panel_old_34_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_old_34.html">panel_old_34.ncl</a>: This example shows
+how to draw two vertical labelbars on the right size of a set of
+paneled plots.
+<p>
+
+This is an older version of this script.  See panel_34.ncl above for a
+function that makes it easier to panel two sets of contour plots, each
+with their own labelbar.
+<p>
+
+For this example, a
+<a href="../Document/Manuals/Ref_Manual/NclStatements.html#getvalues">getvalues</a>
+block is used to retrieve plot information, like position, size, and
+colors, so the labelbar can be constructed from scratch.
+<p>
+
+The plots were created using dummy data, and have shaded contours
+overlaid on filled contours overlaid on a map.
+
+</div>
+
+<div class=ex>
+<!--Text_18-->
+<a href="Images/text_18_lg.png">
+<img src="Images/text_18_sm.png" align=left border=2></a>
+<a href="Scripts/text_18.html">text_18.ncl</a>: This example shows how
+to add two text strings to the top left and right of four plots and
+then panel them.
+<p>
+
+You can't do this kind of thing using
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelFigureStrings"><em>gsnPanelFigureStrings</em></a>, because this only
+allows for one label per plot be added.
+<p>
+
+The text strings are created with
+<a href="../Document/Graphics/Interfaces/gsn_create_text.html"><strong>gsn_create_text</strong></a>, and then attached
+to each plot using 
+<a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a>. You need to set
+the special
+resources <a href="../Document/Graphics/Resources/am.html#amParallelPosF"><em>amParallelPosF</em></a>
+and <a href="../Document/Graphics/Resources/am.html#amOrthogonalPosF"><em>amOrthogonalPosF</em></a> to correctly
+align the text strings as desired.
+
+</div>
+
+<div class=ex>
+<!--panel_35-->
+<a name=ex35></a>
+<a href="Images/panel_35_lg.png">
+<img src="Images/panel_35_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_35.html">panel_35.ncl</a>: This example shows
+how to draw three filled contour plots, attached along their Y axes,
+with a common labelbar and title
+<p>
+
+The <a href="../Document/Graphics/Interfaces/gsn_attach_plots.html"><strong>gsn_attach_plots</strong></a> function is
+used to attach the plots, and
+then <a href="../Document/Graphics/Interfaces/gsn_create_text.html"><strong>gsn_create_text</strong></a> and
+<a href="../Document/Graphics/Interfaces/gsn_create_labelbar.html"><strong>gsn_create_labelbar</strong></a> are
+used to create a main title and labelbar. The
+<a href="../Document/Functions/Built-in/NhlGetBB.html"><strong>NhlGetBB</strong></a> function gets the bounding box of the
+given plot, which allows us to determine the locations for
+the title and labelbar.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Panels/NCL_panel_35.html#sphx-glr-gallery-panels-ncl-panel-35-py">here</a>.
+</div>
+
+<div class=ex>
+<!--panel_36-->
+<a name=ex36></a>
+<a href="Images/panel_36_lg.png">
+<img src="Images/panel_36_sm.png" align=left border=2></a>
+<a href="Images/panel_vp_36_lg.png">
+<img src="Images/panel_vp_36_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_36.html">panel_36.ncl</a> /
+<a href="Scripts/panel_vp_36.html">panel_vp_36.ncl</a>: This example shows
+two ways drawing four filled contour plots, with two plots having
+their own labelbar and the other two sharing a labelbar.
+<p>
+
+The "panel_36.ncl" script
+uses <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> to panel the four
+plots with the labelbars drawn for all of them, but it draws the last
+two labelbars in white and transparent, effectively hiding them. We
+then create a custom labelbar using
+to <a href="../Document/Graphics/Interfaces/gsn_labelbar_ndc.html"><strong>gsn_labelbar_ndc</strong></a>, and place it
+where the hidden labelbars are. This example is a bit kludgy, but you
+don't have to worry about sizing or positioning the individual plots.
+<p>
+
+The "panel_vp_36.ncl" script uses viewport resources to position and
+resize each individual plot, and then creates a title and labelbar
+from scratch, using <a href="../Document/Graphics/Interfaces/gsn_labelbar_ndc.html"><strong>gsn_labelbar_ndc</strong></a>
+and <a href="../Document/Graphics/Interfaces/gsn_text_ndc.html"><strong>gsn_text_ndc</strong></a>. This example
+requires a bit more work, but it is also more customizable, as you can
+use to place the plots, title, and labelbar wherever you want them.
+
+</div>
+
+<div class=ex>
+<!--panel_37-->
+<a name=ex37></a>
+<a href="Images/panel_37_lg.png">
+<img src="Images/panel_37_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_37.html">panel_37.ncl</a>: This example shows
+how to draw a 4 x 3 set of paneled plots, each row being represented
+by a single labelbar.
+<p>
+
+Basically, the leftmost two columns of plots have the labelbars turned
+off, and the rightmost column has the labelbars turned on.
+
+</div>
+
+<div class=ex>
+<!--panel_38-->
+<a name=ex38></a>
+<a href="Images/panel_38_lg.png">
+<img src="Images/panel_38_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_38.html">panel_38.ncl</a>: This example shows
+how to draw three sets of paneled plots with various labelbars
+and titles, while keeping the plots the same size.
+<p>
+
+In order to keep all the plots the same size, it's important that each
+row of plots is drawn to the exact same size of canvas. This is
+controlled with the <a href="../Document/Graphics/Resources/gsn.html#gsnPanelTop"><em>gsnPanelTop</em></a> and
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelBottom"><em>gsnPanelBottom</em></a> resources.
+<p>
+
+The <a href="../Document/Graphics/Resources/gsn.html#gsnPanelYF"><em>gsnPanelYF</em></a> resource is used to
+slightly adjust the Y position of the top of each row of plots, order
+to make room for various titles and labelbars.
+The <a href="../Document/Graphics/Resources/tx.html#txPosYF"><em>txPosYF</em></a> resource is used to
+position the title relative to the top of each row of plots.
+
+</div>
+
+<div class=ex>
+<!--panel_39-->
+<a name=ex39></a>
+<a href="Images/panel_39_1_lg.png">
+<img src="Images/panel_39_1_sm.png" align=left border=2></a>
+<a href="Images/panel_39_2_lg.png">
+<img src="Images/panel_39_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_39.html">panel_39.ncl</a>: This example shows
+how you can panel plots yourself using 
+viewport resources <a href="../Document/Graphics/Resources/vp.html#vpXF"><em>vpXF</em></a>,
+<a href="../Document/Graphics/Resources/vp.html#vpYF"><em>vpYF</em></a>, <a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a>, and <a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a>.
+<p>
+
+The left image was created
+using <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>, and the right image
+was created using vp resources. They should be identical.
+<p>
+
+One way to help determine good values to use for the vp resources is
+to first panel the plots
+using <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>
+with <a href="../Document/Graphics/Resources/gsn.html#gsnPanelDebug"><em>gsnPanelDebug</em></a> set to True. This
+echoes a bunch of output to the screen, including the "new" values
+being used for the X and Y position and the width and
+height of each plot.
+<p>
+
+With this information, you can then recreate the paneled plots by
+setting the appropriate vp resources for each plot. In this example
+all the plots are the same size, so you only need to set
+<a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a> and
+<a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> once, then adjust the
+<a href="../Document/Graphics/Resources/vp.html#vpXF"><em>vpXF</em></a> and <a href="../Document/Graphics/Resources/vp.html#vpYF"><em>vpYF</em></a>
+resources as needed for each plot.
+
+</div>
+
+<div class=ex>
+<!--panel_40-->
+<a name=ex40></a>
+<a href="Images/panel_40_1_lg.png">
+<img src="Images/panel_40_1_sm.png" align=left border=2></a>
+<a href="Images/panel_40_2_lg.png">
+<img src="Images/panel_40_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_40.html">panel_40.ncl</a>: This example shows
+how to attach four plots along a Y axis, with a labelbar on
+the right side.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_attach_plots.html"><strong>gsn_attach_plots</strong></a> is used to
+attach the four plots, with the
+resource <a href="../Document/Graphics/Resources/gsn.html#gsnAttachPlotsYAxis"><em>gsnAttachPlotsYAxis</em></a> set to True.
+Each plot is customized to turn various tickmark labels and the
+labelbar on or off.
+
+<p>
+
+The second image simply shows a "trick" for using 
+<a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> to add a main title 
+to a set of plots that have already been attached.
+
+</div>
+
+<div class=ex>
+<!--Scatter_13-->
+<a name=ex13></a> 
+<a href="Images/scatter_13_lg.png">
+<img src="Images/scatter_13_sm.png" align=left border=2> </a> 
+<a href="Scripts/scatter_13.html">scatter_13.ncl</a>: This example
+shows how to draw a panel plot with the plot area filled in gray,
+and with a title draw on the left of the panel
+using <a href="../Document/Graphics/Interfaces/gsn_text_ndc.html"><strong>gsn_text_ndc</strong></a> and 
+<a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>.
+
+<p>
+
+There's quite a bit of customization going on with the tickmark
+labels, in order to turn them on and off for various plots.
+</div>
+
+<div class=ex>
+<!--panel_41-->
+<a name=ex41></a>
+<a href="Images/panel_41_lg.png">
+<img src="Images/panel_41_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_41.html">panel_41.ncl</a>: This example shows
+how to add left, right, and center subtitles to a series of paneled
+plots, in the same style that is done for individual plots that
+use <a href="../Document/Graphics/Resources/gsn.html#gsnLeftString"><em>gsnLeftString</em></a>,
+<a href="../Document/Graphics/Resources/gsn.html#gsnCenterString"><em>gsnCenterString</em></a>,
+and <a href="../Document/Graphics/Resources/gsn.html#gsnRightString"><em>gsnRightString</em></a>. See the
+"draw_panel_titles" procedure in this script.
+<p>
+
+The unadvertised <b>gsnPanelSave</b> resource is set to True, which
+tells <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> to keep the plots in
+their resized state. This allows us to query for the NDC locations of
+the topmost paneled plots, and then use this information to draw the
+titles just above the plots
+using <a href="../Document/Graphics/Interfaces/gsn_text_ndc.html"><strong>gsn_text_ndc</strong></a>.
+<p>
+</div>
+
+<div class=ex>
+<!--panel_42-->
+<a name=ex42></a>
+<a href="Images/panel_42_lg.png">
+<img src="Images/panel_42_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_42.html">panel_42.ncl</a>: 
+This example shows how <a href="../Document/Graphics/Resources/gsn.html#<b>gsnPanelXWhiteSpacePercent</b>"><em><b>gsnPanelXWhiteSpacePercent</b></em></a>
+can be used to create space between panel columns. A common label bar is used for the panel figures. 
+Between the panel columns, a different contour plot which uses a different color palette and
+adds grid lines is placed. Finally, creation of angled and colored text is added  
+using <a href="../Document/Graphics/Interfaces/_b_gsn_text_ndc_/b_%20.html"><strong><b>gsn_text_ndc</b> </strong></a>.
+</div>
+
+<div class=ex>
+<!--panel_43-->
+<a name=ex43></a>
+<a href="Images/panel_43_lg.png">
+<img src="Images/panel_43_sm.png" align=left border=2></a>
+
+<a href="Scripts/panel_43.html">panel_43.ncl</a>: 
+Almost identical to <b>panel_42</b>, except that for demonstration purposes,
+the data used for the panel plots are scaled, via a local function 
+('scale_values'), to the same range as that used for the center 
+regular contour plot. Hence, a single color bar. 
+</div>
+
+
+<div class=ex>
+<!--GWLs_Rain-->
+<a name=GWLs_Rain></a>
+<a href="Images/GWL_rain_lg.png">
+<img src="Images/GWL_rain_sm.png" align=left border=2></a>
+<a href="Scripts/panel_GWLs_Rain.html">panel_GWLs_Rain.ncl</a>: This
+example shows how to create a 4 x 4 panel of plots, where different
+columns of plots have their own labelbars. This is accomplished by
+turning off the individual labelbars for all but the bottom row plots.
+<p>
+
+To further give the paneled plots a clean look, the tickmarks and
+their labels are turned off.<p>
+
+The unadvertised <b>gsnPanelSave</b> resource is set to True, which
+tells <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> to keep the plots in
+their resized state. This allows us to query for the NDC locations of
+the leftmost paneled plots, and then use this information to draw
+rotated titles on the left side
+using <a href="../Document/Graphics/Interfaces/gsn_text_ndc.html"><strong>gsn_text_ndc</strong></a>.
+<p>
+
+This script was written by Appolinaire Derbetini of the Laboratory
+for Environmental Modelling and Atmospheric Physics, University of
+Yaounde 1, Yaounde, Cameroon.
+<p>
+
+The idea was inspired by the paper of Pokam et al.,
+2018, <a href="http://iopscience.iop.org/article/10.1088/1748-9326/aab048/meta">Consequences
+of 1.5 C and 2 C global warming levels for temperature and
+precipitation changes over Central Africa</a>, Environ. Res. Lett. 13
+(2018)
+055011, <a href="https://doi.org/10.1088/1748-9326/aab048">https://doi.org/10.1088/1748-9326/aab048</a>.
+
+
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>    
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/panel.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:58:31 GMT -->
+</html>
+
+

@@ -1,0 +1,2089 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/VectorPlot.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:32 GMT -->
+<head>
+<title>VectorPlot class</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index.html">HLUs ></a>
+<a class=crumb href="index-2.html">Classes </a>
+
+<br>
+
+<h1>VectorPlot class</h1>
+
+
+The <strong>VectorPlot</strong> class represents a vector field by
+drawing arrows at points of a grid.
+
+<hr>
+<h2>Synopsis</h2>
+
+<pre>
+Header file:		ncarg/hlu/VectorPlot.h
+Class name:		vectorPlotClass
+Class pointer:		NhlvectorPlotClass
+Fortran class function:	NHLFVECTORPLOTCLASS
+Superclass:		<a href="DataComm.html">DataComm</a>
+Composite classes:	<a href="LogLinTransformation.html">LogLinTransformation</a>,
+			<a href="IrregularTransformation.html">IrregularTransformation</a>,
+			<a href="CurvilinearTransformation.html">CurvilinearTransformation</a>,
+			<a href="SphericalTransformation.html">SphericalTransformation</a>,
+			<a href="PlotManager.html">PlotManager</a>
+
+Data specific class
+Class name:		vectorPlotDataDepClass
+Class pointer:		NhlvectorPlotDataDepClass
+Fortran class function:	NHLFVECTORPLOTDATADEPCLASS
+Superclass:		<a href="DataComm.html">DataSpec</a>
+</pre>
+<p>
+<h3>Class-defined types</h3><p>
+<pre>
+
+Type name:		<a name="NhlTVectorPositionMode">NhlTVectorPositionMode</a>
+Definition:
+typedef enum _NhlVectorPositionMode {
+        NhlARROWHEAD		= 0,		/* ArrowHead	*/
+        NhlARROWTAIL		= 1,		/* ArrowTail	*/
+        NhlARROWCENTER		= 2		/* ArrowCenter	*/
+} NhlVectorPositionMode;
+
+Type name:		<a name="NhlTVectorGlyphStyle">NhlTVectorGlyphStyle</a>
+Definition:
+typedef enum _NhlVectorGlyphStyle {
+        NhlLINEARROW		= 0,		/* LineArrow	*/
+        NhlFILLARROW		= 1,		/* FillArrow	*/
+        NhlWINDBARB		= 2,		/* WindBarb	*/
+        NhlCURLYVECTOR          = 3             /* CurlyVector  */
+} NhlVectorGlyphStyle;
+
+</pre>
+
+<hr>
+<h2>Resources</h2>
+<p>
+<h3>Local resources</h3><p>
+
+<pre>
++---------------------------------------------------------------+
+|		<A name="VectorPlot.res">VectorPlot Resource Set</a>				|
+|---------------------------------------------------------------|
+| NAME				TYPE			ACCESS	|
+|	CLASS				DEFAULT			|
+|===============================================================|
+| <a href="../../Graphics/Resources/vc.html#vcVectorFieldData"><em>vcVectorFieldData</em></a>             <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       VcVectorFieldData               &lt;none&gt;                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcScalarFieldData"><em>vcScalarFieldData</em></a>             <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       VcScalarFieldData               &lt;none&gt;                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMapDirection"><em>vcMapDirection</em></a>                <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcMapDirection                  True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcPositionMode"><em>vcPositionMode</em></a>                <a href="VectorPlot.html#NhlTVectorPositionMode">NhlTVectorPositionMode</a>  RCSG    |
+|       VcPositionMode                  "ArrowCenter"           |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcVectorDrawOrder"><em>vcVectorDrawOrder</em></a>             <a href="View.html#NhlTDrawOrder">NhlTDrawOrder</a>           RCSG    |
+|       VcVectorDrawOrder               "Draw"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcGlyphStyle"><em>vcGlyphStyle</em></a>                  <a href="VectorPlot.html#NhlTVectorGlyphStyle">NhlTVectorGlyphStyle</a>    RCSG    |
+|       VcGlyphStyle                    "LineArrow"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinDistanceF"><em>vcMinDistanceF</em></a>                <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMinDistanceF                  0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinMagnitudeF"><em>vcMinMagnitudeF</em></a>               <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMinMagnitudeF                 0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMaxMagnitudeF"><em>vcMaxMagnitudeF</em></a>               <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMaxMagnitudeF                 0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefMagnitudeF"><em>vcRefMagnitudeF</em></a>               <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcRefMagnitudeF                 0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefLengthF"><em>vcRefLengthF</em></a>                  <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcRefLengthF                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinFracLengthF"><em>vcMinFracLengthF</em></a>              <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMinFracLengthF                0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLevels"><em>vcLevels</em></a>                      <a href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>       RCSG    |
+|       Levels                          &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLevelCount"><em>vcLevelCount</em></a>                  <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       VcLevelCount                    16                      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLevelSelectionMode"><em>vcLevelSelectionMode</em></a>          <a href="DataComm.html#NhlTLevelSelectionMode">NhlTLevelSelectionMode</a>  RCSG    |
+|       LevelSelectionMode              "AutomaticLevels"       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMaxLevelCount"><em>vcMaxLevelCount</em></a>               <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       MaxLevelCount                   16                      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLevelSpacingF"><em>vcLevelSpacingF</em></a>               <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LevelSpacingF                   &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinLevelValF"><em>vcMinLevelValF</em></a>                <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MinLevelValF                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMaxLevelValF"><em>vcMaxLevelValF</em></a>                <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MaxLevelValF                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcSpanLevelPalette"><em>vcSpanLevelPalette</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcSpanLevelPalette                 True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLevelPalette"><em>vcLevelPalette</em></a>                  <A href="Workstation.html#NhlTColorDefinitionGenArray">NhlTColorDefinitionGenArray</a>  RCSG    |
+|       VcLevelPalette                    &lt;None&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLevelColors"><em>vcLevelColors</em></a>                 <a href="Workstation.html#NhlTColorIndexGenArray">NhlTColorIndexGenArray</a>  RCSG    |
+|       VcLevelColors                   &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcUseScalarArray"><em>vcUseScalarArray</em></a>              <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcUseScalarArray                False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcScalarMissingValColor"><em>vcScalarMissingValColor</em></a>       <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       VcScalarMissingValColor         "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMonoLineArrowColor"><em>vcMonoLineArrowColor</em></a>          <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcMonoLineArrowColor            True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLineArrowColor"><em>vcLineArrowColor</em></a>              <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       LineColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLineArrowThicknessF"><em>vcLineArrowThicknessF</em></a>         <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLineArrowHeadMinSizeF"><em>vcLineArrowHeadMinSizeF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcLineArrowHeadMinSizeF         0.005                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLineArrowHeadMaxSizeF"><em>vcLineArrowHeadMaxSizeF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcLineArrowHeadMaxSizeF         &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillArrowsOn"><em>vcFillArrowsOn</em></a>                <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcFillArrowsOn                  False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMonoFillArrowFillColor"><em>vcMonoFillArrowFillColor</em></a>      <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcMonoFillArrowFillColor        True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillArrowFillColor"><em>vcFillArrowFillColor</em></a>          <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillOverEdge"><em>vcFillOverEdge</em></a>                <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcFillOverEdge                  True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMonoFillArrowEdgeColor"><em>vcMonoFillArrowEdgeColor</em></a>      <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcMonoFillArrowEdgeColor        True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillArrowEdgeColor"><em>vcFillArrowEdgeColor</em></a>          <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillArrowEdgeThicknessF"><em>vcFillArrowEdgeThicknessF</em></a>     <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  2.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillArrowWidthF"><em>vcFillArrowWidthF</em></a>             <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcFillArrowWidthF               0.1                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillArrowMinFracWidthF"><em>vcFillArrowMinFracWidthF</em></a>      <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcFillArrowMinFracWidthF        0.25                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillArrowHeadXF"><em>vcFillArrowHeadXF</em></a>             <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcFillArrowHeadXF               0.36                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillArrowHeadMinFracXF"><em>vcFillArrowHeadMinFracXF</em></a>      <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcFillArrowHeadMinFracXF        0.25                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillArrowHeadInteriorXF"><em>vcFillArrowHeadInteriorXF</em></a>     <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcFillArrowHeadInteriorXF       0.33                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillArrowHeadYF"><em>vcFillArrowHeadYF</em></a>             <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcFillArrowHeadYF               0.12                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcFillArrowHeadMinFracYF"><em>vcFillArrowHeadMinFracYF</em></a>      <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcFillArrowHeadMinFracYF        0.25                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMonoWindBarbColor"><em>vcMonoWindBarbColor</em></a>           <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcMonoWindBarbColor             True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcWindBarbColor"><em>vcWindBarbColor</em></a>               <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       LineColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcWindBarbLineThicknessF"><em>vcWindBarbLineThicknessF</em></a>      <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcWindBarbTickAngleF"><em>vcWindBarbTickAngleF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcWindBarbTickAngleF            62.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcWindBarbTickLengthF"><em>vcWindBarbTickLengthF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>              RCSG    |
+|       VcWindBarbTickLengthF           0.3                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcWindBarbTickSpacingF"><em>vcWindBarbTickSpacingF</em></a>        <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcWindBarbTickSpacingF          0.125                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcWindBarbCalmCircleSizeF"><em>vcWindBarbCalmCircleSizeF</em></a>     <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcWindBarbCalmCircleSizeF       0.25                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcWindBarbScaleFactorF"><em>vcWindBarbScaleFactorF</em></a>        <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcWindBarbScaleFactorF          1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcUseRefAnnoRes"><em>vcUseRefAnnoRes</em></a>               <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcUseRefAnnoRes                 False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoOn"><em>vcRefAnnoOn</em></a>                   <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcRefAnnoOn                     True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoOrientation"><em>vcRefAnnoOrientation</em></a>          <a href="View.html#NhlTOrientation">NhlTOrientation</a>         RCSG    |
+|       VcRefAnnoOrientation            "Vertical"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoExplicitMagnitudeF"><em>vcRefAnnoExplicitMagnitudeF</em></a>   <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcRefAnnoExplicitMagnitudeF     0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowLineColor"><em>vcRefAnnoArrowLineColor</em></a>       <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       LineColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowFillColor"><em>vcRefAnnoArrowFillColor</em></a>       <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowEdgeColor"><em>vcRefAnnoArrowEdgeColor</em></a>       <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowUseVecColor"><em>vcRefAnnoArrowUseVecColor</em></a>     <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcRefAnnoArrowUseVecColor       True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowAngleF"><em>vcRefAnnoArrowAngleF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcRefAnnoArrowAngleF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowSpaceF"><em>vcRefAnnoArrowSpaceF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcRefAnnoArrowSpaceF            2.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowMinOffsetF"><em>vcRefAnnoArrowMinOffsetF</em></a>      <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcRefAnnoArrowMinOffsetF        0.25                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoString1On"><em>vcRefAnnoString1On</em></a>            <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcRefAnnoString1On              True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoString1"><em>vcRefAnnoString1</em></a>              <a href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       VcRefAnnoString1                &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoString2On"><em>vcRefAnnoString2On</em></a>            <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcRefAnnoString2On              True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoString2"><em>vcRefAnnoString2</em></a>              <a href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       VcRefAnnoString2                &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoFontHeightF"><em>vcRefAnnoFontHeightF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontHeightF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoTextDirection"><em>vcRefAnnoTextDirection</em></a>        <a href="TextItem.html#NhlTTextDirection">NhlTTextDirection</a>       RCSG    |
+|       TextDirection                   "Across"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoFont"><em>vcRefAnnoFont</em></a>                 <a href="Base.html#NhlTFont">NhlTFont</a>                RCSG    |
+|       Font                            "pwritx"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoFontColor"><em>vcRefAnnoFontColor</em></a>            <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FontColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoFontAspectF"><em>vcRefAnnoFontAspectF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontAspectF                     1.3125                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoFontThicknessF"><em>vcRefAnnoFontThicknessF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoFontQuality"><em>vcRefAnnoFontQuality</em></a>          <a href="TextItem.html#NhlTFontQuality">NhlTFontQuality</a>         RCSG    |
+|       FontQuality                     "High"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoConstantSpacingF"><em>vcRefAnnoConstantSpacingF</em></a>     <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextConstantSpacingF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoAngleF"><em>vcRefAnnoAngleF</em></a>               <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextAngleF                      0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoFuncCode"><em>vcRefAnnoFuncCode</em></a>             <a href="Base.html#NhlTCharacter">NhlTCharacter</a>           RCSG    |
+|       TextFuncCode                    :                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoBackgroundColor"><em>vcRefAnnoBackgroundColor</em></a>      <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillBackgroundColor             "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoPerimOn"><em>vcRefAnnoPerimOn</em></a>              <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       EdgesOn                         True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoPerimSpaceF"><em>vcRefAnnoPerimSpaceF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeBorderWidthF                0.33                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoPerimColor"><em>vcRefAnnoPerimColor</em></a>           <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoPerimThicknessF"><em>vcRefAnnoPerimThicknessF</em></a>      <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoZone"><em>vcRefAnnoZone</em></a>                 <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       VcRefAnnoZone                   4                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoSide"><em>vcRefAnnoSide</em></a>                 <a href="View.html#NhlTPosition">NhlTPosition</a>            RCSG    |
+|       VcRefAnnoSide                   "Bottom"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoJust"><em>vcRefAnnoJust</em></a>                 <a href="View.html#NhlTJustification">NhlTJustification</a>       RCSG    |
+|       VcRefAnnoJust                   "TopRight"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoParallelPosF"><em>vcRefAnnoParallelPosF</em></a>         <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcRefAnnoParallelPosF           1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcRefAnnoOrthogonalPosF"><em>vcRefAnnoOrthogonalPosF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcRefAnnoOrthogonalPosF         0.02                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoOn"><em>vcMinAnnoOn</em></a>                   <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcMinAnnoOn                     False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoOrientation"><em>vcMinAnnoOrientation</em></a>          <a href="View.html#NhlTOrientation">NhlTOrientation</a>         RCSG    |
+|       VcMinAnnoOrientation            "Vertical"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoExplicitMagnitudeF"><em>vcMinAnnoExplicitMagnitudeF</em></a>   <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMinAnnoExplicitMagnitudeF     0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoArrowLineColor"><em>vcMinAnnoArrowLineColor</em></a>       <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       LineColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoArrowFillColor"><em>vcMinAnnoArrowFillColor</em></a>       <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoArrowEdgeColor"><em>vcMinAnnoArrowEdgeColor</em></a>       <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoArrowUseVecColor"><em>vcMinAnnoArrowUseVecColor</em></a>     <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcMinAnnoArrowUseVecColor       True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoArrowAngleF"><em>vcMinAnnoArrowAngleF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMinAnnoArrowAngleF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoArrowSpaceF"><em>vcMinAnnoArrowSpaceF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMinAnnoArrowSpaceF            2.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoArrowMinOffsetF"><em>vcMinAnnoArrowMinOffsetF</em></a>      <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMinAnnoArrowMinOffsetF        0.25                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoString1On"><em>vcMinAnnoString1On</em></a>            <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcMinAnnoString1On              True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoString1"><em>vcMinAnnoString1</em></a>              <a href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       VcMinAnnoString1                &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoString2On"><em>vcMinAnnoString2On</em></a>            <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcMinAnnoString2On              True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoString2"><em>vcMinAnnoString2</em></a>              <a href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       VcMinAnnoString2                &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoFontHeightF"><em>vcMinAnnoFontHeightF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontHeightF               &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoTextDirection"><em>vcMinAnnoTextDirection</em></a>        <a href="TextItem.html#NhlTTextDirection">NhlTTextDirection</a>       RCSG    |
+|       TextDirection                   "Across"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoFont"><em>vcMinAnnoFont</em></a>                 <a href="Base.html#NhlTFont">NhlTFont</a>                RCSG    |
+|       Font                            "pwritx"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoFontColor"><em>vcMinAnnoFontColor</em></a>            <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FontColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoFontAspectF"><em>vcMinAnnoFontAspectF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontAspectF                     1.3125                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoFontThicknessF"><em>vcMinAnnoFontThicknessF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoFontQuality"><em>vcMinAnnoFontQuality</em></a>          <a href="TextItem.html#NhlTFontQuality">NhlTFontQuality</a>         RCSG    |
+|       FontQuality                     "High"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoConstantSpacingF"><em>vcMinAnnoConstantSpacingF</em></a>     <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextConstantSpacingF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoAngleF"><em>vcMinAnnoAngleF</em></a>               <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextAngleF                      0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoFuncCode"><em>vcMinAnnoFuncCode</em></a>             <a href="Base.html#NhlTCharacter">NhlTCharacter</a>           RCSG    |
+|       TextFuncCode                    :                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoBackgroundColor"><em>vcMinAnnoBackgroundColor</em></a>      <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillBackgroundColor             "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoPerimOn"><em>vcMinAnnoPerimOn</em></a>              <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       EdgesOn                         True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoPerimSpaceF"><em>vcMinAnnoPerimSpaceF</em></a>          <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeBorderWidthF                0.33                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoPerimColor"><em>vcMinAnnoPerimColor</em></a>           <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoPerimThicknessF"><em>vcMinAnnoPerimThicknessF</em></a>      <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoZone"><em>vcMinAnnoZone</em></a>                 <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       VcMinAnnoZone                   5                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoSide"><em>vcMinAnnoSide</em></a>                 <a href="View.html#NhlTPosition">NhlTPosition</a>            RCSG    |
+|       VcMinAnnoSide                   "Bottom"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoJust"><em>vcMinAnnoJust</em></a>                 <a href="View.html#NhlTJustification">NhlTJustification</a>       RCSG    |
+|       VcMinAnnoJust                   "TopRight"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoParallelPosF"><em>vcMinAnnoParallelPosF</em></a>         <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMinAnnoParallelPosF           1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMinAnnoOrthogonalPosF"><em>vcMinAnnoOrthogonalPosF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMinAnnoOrthogonalPosF         0.02                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcNoDataLabelOn"><em>vcNoDataLabelOn</em></a>               <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       AnnotationLabelsOn              True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcNoDataLabelString"><em>vcNoDataLabelString</em></a>           <a href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       VcNoDataLabelString             &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelOn"><em>vcZeroFLabelOn</em></a>                <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       AnnotationLabelsOn              True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelString"><em>vcZeroFLabelString</em></a>            <a href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       VcZeroFLabelString              &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelFontHeightF"><em>vcZeroFLabelFontHeightF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontHeightF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelTextDirection"><em>vcZeroFLabelTextDirection</em></a>     <a href="TextItem.html#NhlTTextDirection">NhlTTextDirection</a>       RCSG    |
+|       TextDirection                   "Across"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelFont"><em>vcZeroFLabelFont</em></a>              <a href="Base.html#NhlTFont">NhlTFont</a>                RCSG    |
+|       Font                            "pwritx"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelFontColor"><em>vcZeroFLabelFontColor</em></a>         <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FontColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelFontAspectF"><em>vcZeroFLabelFontAspectF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontAspectF                     1.3125                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelFontThicknessF"><em>vcZeroFLabelFontThicknessF</em></a>    <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelFontQuality"><em>vcZeroFLabelFontQuality</em></a>       <a href="TextItem.html#NhlTFontQuality">NhlTFontQuality</a>         RCSG    |
+|       FontQuality                     "High"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelConstantSpacingF"><em>vcZeroFLabelConstantSpacingF</em></a>  <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextConstantSpacingF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelAngleF"><em>vcZeroFLabelAngleF</em></a>            <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextAngleF                      0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelFuncCode"><em>vcZeroFLabelFuncCode</em></a>          <a href="Base.html#NhlTCharacter">NhlTCharacter</a>           RCSG    |
+|       TextFuncCode                    :                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelBackgroundColor"><em>vcZeroFLabelBackgroundColor</em></a>   <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillBackgroundColor             "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelPerimOn"><em>vcZeroFLabelPerimOn</em></a>           <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       EdgesOn                         True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelPerimSpaceF"><em>vcZeroFLabelPerimSpaceF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeBorderWidthF                0.33                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelPerimColor"><em>vcZeroFLabelPerimColor</em></a>        <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelPerimThicknessF"><em>vcZeroFLabelPerimThicknessF</em></a>   <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelZone"><em>vcZeroFLabelZone</em></a>              <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       VcZeroFLabelZone                0                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelSide"><em>vcZeroFLabelSide</em></a>              <a href="View.html#NhlTPosition">NhlTPosition</a>            RCSG    |
+|       VcZeroFLabelSide                "Bottom"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelJust"><em>vcZeroFLabelJust</em></a>              <a href="View.html#NhlTJustification">NhlTJustification</a>       RCSG    |
+|       VcZeroFLabelJust                "CenterCenter"          |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelParallelPosF"><em>vcZeroFLabelParallelPosF</em></a>      <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcZeroFLabelParallelPosF        0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcZeroFLabelOrthogonalPosF"><em>vcZeroFLabelOrthogonalPosF</em></a>    <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcZeroFLabelOrthogonalPosF      0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMagnitudeScalingMode"><em>vcMagnitudeScalingMode</em></a>        <a href="DataComm.html#NhlTScalingMode">NhlTScalingMode</a>         RCSG    |
+|       VcMagnitudeScalingMode          "ScaleFactor"           |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMagnitudeScaleValueF"><em>vcMagnitudeScaleValueF</em></a>        <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMagnitudeScaleValueF          1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMagnitudeScaleFactorF"><em>vcMagnitudeScaleFactorF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcMagnitudeScaleFactorF         1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcMagnitudeFormat"><em>vcMagnitudeFormat</em></a>             <a href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       NumberFormat                    "*+^sg"                 |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcScalarValueScalingMode"><em>vcScalarValueScalingMode</em></a>      <a href="DataComm.html#NhlTScalingMode">NhlTScalingMode</a>         RCSG    |
+|       VcScalarValueScalingMode        "ScaleFactor"           |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcScalarValueScaleValueF"><em>vcScalarValueScaleValueF</em></a>      <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcScalarValueScaleValueF        1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcScalarValueScaleFactorF"><em>vcScalarValueScaleFactorF</em></a>     <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       VcScalarValueScaleFactorF       1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcScalarValueFormat"><em>vcScalarValueFormat</em></a>           <a href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       NumberFormat                    "*+^sg"                 |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcExplicitLabelBarLabelsOn"><em>vcExplicitLabelBarLabelsOn</em></a>    <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcExplicitLabelBarLabelsOn      False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLabelBarEndLabelsOn"><em>vcLabelBarEndLabelsOn</em></a>         <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcLabelBarEndLabelsOn           False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLabelsOn"><em>vcLabelsOn</em></a>                    <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcLabelsOn                      False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLabelsUseVectorColor"><em>vcLabelsUseVectorColor</em></a>        <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       VcLabelsUseVectorColor          False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLabelFontColor"><em>vcLabelFontColor</em></a>              <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FontColor                       NhlFOREGROUND           |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/vc.html#vcLabelFontHeightF"><em>vcLabelFontHeightF</em></a>            <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontHeightF               &lt;dynamic&gt;               |
++---------------------------------------------------------------+
+</pre>
+<p>
+
+<h3>Data specific resources</h3><p>
+
+
+The <B>VectorPlot</B> class does not currently use any 
+data specific resources.
+<p>
+ 
+<h3>Composite resources</h3><p>
+
+<A name="Transformation.res"></a>
+<h4><A href="Transformation.html#Transformation.res">Transformation
+resources</a></h4>
+
+<a href="Transformation.html"><strong>Transformation</strong></a> class resources specify the extent,
+direction and grid type of the data coordinate system. The
+<a href="Transformation.html"><strong>Transformation</strong></a> class is the superclass of all classes
+used to perform data transformations, and you can access all its
+resources. However, note that <strong>VectorPlot</strong> intercepts
+its resources, as follows:
+
+<ul>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXMinF"><em>trXMinF</em></a>
+
+<dd>By default <I>trXMinF</I> is set to the minimum data coordinate
+value along the X Axis, as determined from the contents of the
+<B>VectorField</B> object.
+
+</dl>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXMaxF"><em>trXMaxF</em></a>
+
+<dd>By default <I>trXMaxF</I> is set to the maximum data coordinate
+value along the X Axis, as determined from the contents of the
+<B>VectorField</B> object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXReverse"><em>trXReverse</em></a>
+
+<dd>By default <I>trXReverse</I> is set based on the direction of
+the X Axis implied by the contents of the <B>VectorField</B>
+object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYMinF"><em>trYMinF</em></a>
+
+<dd>By default <I>trYMinF</I> is set to the minimum data coordinate
+value along the Y Axis, as determined from the contents of the
+<B>VectorField</B> object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYMaxF"><em>trYMaxF</em></a>
+
+<dd>By default <I>trYMaxF</I> is set to the maximum data coordinate
+value along the Y Axis, as determined from the contents of the
+<B>VectorField</B> object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYReverse"><em>trYReverse</em></a>
+
+<dd>By default <I>trYReverse</I> is set based on the direction of
+the Y Axis implied by the contents of the <B>VectorField</B>
+object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a>
+
+<dd><em>trGridType</em> is forced to <code>LogLin</code> if <em>vfXArray</em>
+and <em>vfYArray</em> have <code>NULL</code> values in the 
+<a href="VectorField.html"><strong>VectorField</strong></a> object. It is forced to <code>Irregular</code> if
+<em>vfXArray</em> and/or <em>vfYArray</em> contain 1D coordinate arrays.
+If <em>vfXArray</em> and <em>vfYArray</em> contain 2D coordinate arrays,
+<em>trGridType</em> defaults to <code>Spherical</code> but the user can
+choose to set it to <code>Curvilinear</code>.
+
+</dl>
+</ul>
+
+<A name="LogLinTransformation.res"></a>
+<h4><A href="LogLinTransformation.html#LogLinTransformation.res">LogLinTransformation
+resources</a></h4>
+
+The <B>VectorPlot</B> class uses the
+<B>LogLinTransformation</B> to handle its transformations as
+long as neither of the <B>VectorField</B> array resources,
+<I>vfXArray</I> or <I>vfYArray</I>, is
+set. <B>LogLinTransformation</B> has resources for selecting
+between linear and logarithmic coordinates for each axis.
+
+<p>You can access all <B>LogLinTransformation</B> resources. 
+However, note that <B>VectorPlot</B> intercepts
+<B>LogLinTransformation</B> resources, as follows:
+
+<ul>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXLog"><em>trXLog</em></a>
+
+<dd><B>VectorPlot</B> issues a warning if <I>trXLog</I>
+is set True when the set value of <I>trXMinF</I> is less than or
+equal to 0.0. In this case it resets <I>trXLog</I> to False.  If the
+<B>IrregularTransformation</B> resource <I>trXAxisType</I>
+is set, <B>VectorPlot</B> sets <I>trXLog</I> True if
+<I>trXAxisType</I> is set to <code>LogAxis</code>. If
+<I>trXAxisType</I> is set to any other value, it sets
+<I>trXLog</I> False.
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYLog"><em>trYLog</em></a>
+
+
+<dd><B>VectorPlot</B> issues a warning if <I>trYLog</I>
+is set True when the set value of <I>trYMinF</I> is less than or
+equal to 0.0. In this case it resets <I>trYLog</I> to False.  If the
+<B>IrregularTransformation</B> resource <I>trYAxisType</I>
+is set, <B>VectorPlot</B> sets <I>trYLog</I> True if
+<I>trYAxisType</I> is set to <code>LogAxis</code>. If
+<I>trYAxisType</I> is set to any other value, it sets
+<I>trYLog</I> False.
+
+</dl>
+</ul>
+
+
+<A name="IrregularTransformation.res"></a>
+<h4><A href="IrregularTransformation.html#IrregularTransformation.res">IrregularTransformation
+resources</a></h4>
+
+<B>VectorPlot</B> automatically uses the
+<B>IrregularTransformation</B> to handle its transformations if the
+<B>VectorField</B> array resources <I>vfXArray</I> and/or
+<I>vfYArray</I> are set with one-dimensional arrays, implying that one
+or both of the coordinate axes is irregularly spaced.
+
+<p>All <B>Transformation</B> superclass
+resources are accessible. However, <B>VectorPlot</B> blocks
+access to all resources specific to the
+<B>IrregularTransformation</B> except for:
+
+<ul>
+<li><a href="../../Graphics/Resources/tr.html#trXTensionF"><em>trXTensionF</em></a>
+<li><a href="../../Graphics/Resources/tr.html#trYTensionF"><em>trYTensionF</em></a>
+</ul>
+
+and for the following intercepted resources:
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXAxisType"><em>trXAxisType</em></a>
+
+<dd>If the <B>VectorField</B> resource <I>vfXArray</I> is
+non-<code>NULL</code> and <I>trXAxisType</I> is set to any other
+value than <code>IrregularAxis</code>, <B>VectorPlot</B>
+switches to a coordinate extent bounded by 0 and the length of the
+X-Axis dimension minus one.  If <I>trXAxisType</I> is not set, but
+the <B>LogLinTransformation</B> resource <I>trXLog</I> is
+set, <B>VectorPlot</B> sets <I>trXAxisType</I> to
+<code>LogAxis</code> if <I>trXLog</I> is True; if <I>trXLog</I> is
+False, it changes <I>trXAxisType</I> to <code>LinearAxis</code> if
+it had been set to <code>LogAxis</code> and leaves it unchanged
+otherwise. <I>trXAxisType</I> can be set to <code>LogAxis</code>
+without error only when the X-Axis coordinate extent as passed from
+the <B>VectorField</B> is entirely positive. If this is not
+the case, <I>trXAxisType</I> will default to <code>LinearAxis</code>.
+
+<p><A href="VectorPlot.html#Status.1">V4.1 Status Note 1</a>
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYAxisType"><em>trYAxisType</em></a>
+
+<dd>If the <B>VectorField</B> resource <I>vfYArray</I> is
+non-<code>NULL</code> and <I>trYAxisType</I> is set to any other
+value than <code>IrregularAxis</code>, <B>VectorPlot</B>
+switches to a coordinate extent bounded by 0 and the length of the
+Y-Axis dimension minus one. If <I>trYAxisType</I> is not set, but
+the <B>LogLinTransformation</B> resource <I>trYLog</I> is
+set, <B>VectorPlot</B> sets <I>trYAxisType</I> to
+<code>LogAxis</code> if <I>trYLog</I> is True; if <I>trYLog</I> is
+False, it changes <I>trYAxisType</I> to <code>LinearAxis</code> if
+it had been set to <code>LogAxis</code> and leaves it unchanged
+otherwise. <I>trYAxisType</I> can be set to <code>LogAxis</code>
+without error only when the Y-Axis coordinate extent as passed from
+the <B>VectorField</B> is entirely positive.  If this is not
+the case, <I>trYAxisType</I> will default to <code>LinearAxis</code>.
+
+<p><A href="VectorPlot.html#Status.1">V4.1 Status Note 1</a>
+</dl>
+
+</ul>
+<A name="CurvilinearTransformation.res"></a>
+<h4><A href="CurvilinearTransformation.html#CurvilinearTransformation.res">CurvilinearTransformation
+resources</a></h4>
+
+<strong>VectorPlot</strong> uses the
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> to handle its
+transformations if the <a href="VectorField.html"><strong>VectorField</strong></a> array resources
+<em>vfXArray</em> and <em>vfYArray</em> are set with two-dimensional
+arrays and the <a href="Transformation.html"><strong>Transformation</strong></a> class resource <a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is set to
+<code>Curvilinear</code>.  The
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> class has no
+user-accessible resources.
+
+
+<A name="SphericalTransformation.res"></a>
+<h4><A href="SphericalTransformation.html#SphericalTransformation.res">SphericalTransformation
+resources</a></h4>
+
+<strong>VectorPlot</strong> uses the
+<a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a> to handle its transformations
+if the <a href="VectorField.html"><strong>VectorField</strong></a> array resources <em>vfXArray</em>
+and <em>vfYArray</em> are set with two-dimensional arrays and the
+<a href="Transformation.html"><strong>Transformation</strong></a> class resource <a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is set to
+<code>Spherical</code>.  The <a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a>
+class has no user-accessible resources.
+
+
+<A name="PlotManager.res"></a>
+<A href="PlotManager.html#PlotManager.res"><h4>PlotManager resources</h4></a>
+
+If <I>tfPlotManagerOn</I> is True when a <B>VectorPlot</B> object
+is created, you can access all <B>PlotManager</B> resources.
+However, note that <B>VectorPlot</B> intercepts certain
+<B>PlotManager</B> resources, as follows:
+
+<ul>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/pm.html#pmLabelBarDisplayMode"><em>pmLabelBarDisplayMode</em></a>
+
+<dd>The default value of <I>pmLabelBarDisplayMode</I> is set to
+<code>Never</code>.
+
+</dl>
+
+<li>
+<dl>
+
+<dt><a href="../../Graphics/Resources/pm.html#pmLegendDisplayMode"><em>pmLegendDisplayMode</em></a>
+
+<dd>
+The <I>pmLegendDisplayMode</I> resource is hard-coded to its default
+value of NhlNOCREATE in <B>VectorPlot</B>.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/pm.html#pmTickMarkDisplayMode"><em>pmTickMarkDisplayMode</em></a>
+
+<dd>The default value of <I>pmTickMarkDisplayMode</I> is set to
+<code>Conditional</code>.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/pm.html#pmTitleDisplayMode"><em>pmTitleDisplayMode</em></a>
+
+<dd>The default value of <I>pmTitleDisplayMode</I> is set to
+<code>Conditional</code>.
+
+
+</dl>
+</ul>
+
+Except for <B>Legend</B>, you can access resources for any of the composite classes of the <B>PlotManager</B> class. However, the
+<B>PlotManager</B> class modifies the access and behavior of
+some of the resources belonging to these classes, as follows:
+
+<ul>
+
+<li><A href="PlotManager.html#TickMark.res">TickMark resources as modified by
+PlotManager</a>
+
+<li><A href="PlotManager.html#Title.res">Title resources as modified by
+PlotManager</a>
+
+<li><A href="PlotManager.html#LabelBar.res">LabelBar resources as modified by
+PlotManager</a>
+
+</ul>
+
+The <B>VectorPlot</B> class itself modifies the access and
+behavior of a number of <B>LabelBar</B> resources.
+
+<A name="LabelBar.res"></a>
+<h5>Additional modifications to <B>LabelBar</B> resources</h5>
+
+The <B>VectorPlot</B> class disables a number of
+<B>LabelBar</B> resources, since it sets them automatically
+based on the current values of certain relevant <B>VectorPlot</B>
+resources. The disabled resources include:
+
+<ul>
+<li><a href="../../Graphics/Resources/lb.html#lbBoxCount"><em>lbBoxCount</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbMonoFillColor"><em>lbMonoFillColor</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillColor"><em>lbFillColor</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillColors"><em>lbFillColors</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbMonoFillPattern"><em>lbMonoFillPattern</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillPattern"><em>lbFillPattern</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillPatterns"><em>lbFillPatterns</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbMonoFillScale"><em>lbMonoFillScale</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillScaleF"><em>lbFillScaleF</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillScales"><em>lbFillScales</em></a>
+</ul>
+
+In addition, the <B>VectorPlot</B> class intercepts certain
+<B>LabelBar</B> resources, as follows:
+
+
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lb.html#lbLabelStrings"><em>lbLabelStrings</em></a>
+
+<dd>Any set value of this resource is ignored unless the
+<B>VectorPlot</B> resource <a href="../../Graphics/Resources/vc.html#vcExplicitLabelBarLabelsOn"><em>vcExplicitLabelBarLabelsOn</em></a> is set True.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lb.html#lbLabelFuncCode"><em>lbLabelFuncCode</em></a>
+
+<dd>Any set value of this resource is ignored unless the
+<B>VectorPlot</B> resource <a href="../../Graphics/Resources/vc.html#vcExplicitLabelBarLabelsOn"><em>vcExplicitLabelBarLabelsOn</em></a> is set True.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lb.html#lbLabelAlignment"><em>lbLabelAlignment</em></a>
+
+<dd>Any set value of this resource is ignored unless the
+<B>VectorPlot</B> resource <a href="../../Graphics/Resources/vc.html#vcExplicitLabelBarLabelsOn"><em>vcExplicitLabelBarLabelsOn</em></a> is set True.
+
+</dl>
+
+</ul>
+
+<p>
+<h3>Superclass resources</h3><p>
+
+You can set all resources defined by the superclasses of the
+<B>VectorPlot</B> object class, including:
+
+<ul>
+<li><A href="DataComm.html#DataComm.res"><B>DataComm</B>
+resources</a>
+<li><A href="Transform.html#Transform.res"><B>Transform</B>
+resources</a>
+<li><A href="View.html#View.res"><B>View</B>
+resources</a>
+</ul>
+
+<hr> 
+<h2>Description</h2>
+
+A <B>VectorPlot</B> object, or <B>vectorplot</B>, represents a vector
+field by drawing glyphs that represent magnitude and direction at grid
+points based on two-dimensional data provided by an instance of the <a
+href="VectorField.html"><B>VectorField</B></a> class. Four glyph
+styles are available: a basic line-drawn arrow, a filled arrow with an
+optional edge line, a standard wind barb, and a "curly" vector style
+rendered using curved lines tangent to the instantaneous flow in the
+neighborhood of each grid point. Glyphs of each style may be
+colored based on magnitude or another associated
+scalar field. The edge of the filled arrow may have a separate color
+from the interior. In the rest of this document the word "arrow" may
+refer generically to any of the three glyph styles. <B>VectorPlot</B>
+intrinsically supports several annotational items, including tick
+marks, titles, one or two reference vector glyphs with explanatory
+text, and a labelbar that provides a key to the color scheme used with
+colored vector arrows. These annotations automatically
+adjust themselves to the current state of the <B>vectorplot</B>.
+
+<p>The <B>VectorPlot</B> class provides many resources that
+you can use to tailor the plot output to your taste. However, only one
+resource must be set explicitly in order to generate a meaningful
+vector plot. You need focus only on resources that modify the
+<B>VectorPlot</B> features important to you. All the others
+will default to a generally usable value. Resources that provide
+control over related attributes of the various
+<B>VectorPlot</B> elements have related names.  As an
+example, all resources associated with the reference vector annotation
+begin with the prefix <I>vcRefAnno</I>.
+<p>
+
+<h3>Data input</h3><p>
+
+The only resource you must set in order to generate an actual vector
+plot is <a href="../../Graphics/Resources/vc.html#vcVectorFieldData"><em>vcVectorFieldData</em></a>.  
+
+This resource specifies the id of an existing <a
+href="VectorField.html"><B>VectorField</B></a> object.  The
+<B>vectorfield</B> accepts data in a variety of types
+and configurations, and allows you to specify how it is to be
+interpreted. As received by the <B>vectorplot</B>,
+the data are accompanied by information specifying the extents of the
+data in the data coordinate system, the minimum and maximum data
+magnitudes, as well as the minimum and maximum values of each
+component of the vector. Also, if either or both of the data
+coordinate axes are irregularly spaced, the <B>vectorfield</B>
+communicates information defining this spacing.
+
+<p>If you want to color the vector arrows individually based on data
+other than the vector magnitudes, you must set the boolean resource
+<a href="../../Graphics/Resources/vc.html#vcUseScalarArray"><em>vcUseScalarArray</em></a> True and also
+supply the <B>vectorplot</B> with a <B>ScalarField</B> object.  You do
+this by setting the resource <a href="../../Graphics/Resources/vc.html#vcScalarFieldData"><em>vcScalarFieldData</em></a> using the id of an
+existing <B>scalarfield</B>. Currently, <B>VectorPlot</B> requires
+that the <B>scalarfield</B> have the same number of elements along
+each dimension (after subsetting and striding is performed) as does
+each component of the <B>vectorfield</B>. It also assumes that the
+data coordinate extents of the <B>scalarfield</B> match those of the
+<B>vectorfield</B> and ignores any explicitly set <B>scalarfield</B>
+coordinate extent values.
+
+<p>
+
+<h3>Coordinate transformations</h3><p>
+
+
+<B>VectorPlot</B> intrinsically supports linear,
+logarithmic, and irregular rectangular gridded data coordinate spaces.
+It does <I>not yet</I>, on its own, support the transformation of an
+irregular data space into either a linear or a logarithmic
+space. However, such transformations are easily accomplished using the
+overlay mechanism.
+
+<p><strong>VectorPlot</strong> also supports topologically
+rectangular grids defined using 2D coordinate arrays.
+
+<p><B>VectorPlot</B> instantiates child objects to manage
+transformations between the data coordinate system and NDC space. The
+<a href="LogLinTransformation.html"><B>LogLinTransformation</B></a>
+manages linear and logarithmic transformations, and the <a
+href="IrregularTransformation.html"><B>IrregularTransformation</B></a>
+manages the transformation if one or both axes are irregularly spaced.
+If the grid is defined using 2D coordinate arrays,
+<strong>VectorPlot</strong> instantiates either the
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> or the
+<a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a> to handle the
+transformations.
+
+<p>By default the data coordinate extents are based on the extents of the
+supplied <B>VectorField</B> object data, but you may adjust
+them using resources belonging to the transformation objects.
+
+<h4>Use of the <B>LogLinTransformation</B> object</h4>
+
+<B>VectorPlot</B> uses a <B>LogLinTransformation</B> object as long as
+the <B>VectorField</B> resources <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> are both <code>NULL</code>. The
+coordinate extents of a linear axis may arbitrarily intersect or
+encompass the data extent. If you set a logarithmic axis, then the
+coordinate extent of that axis must be entirely positive, but
+otherwise may intersect or extend beyond the data extent.
+
+<h4>Use of the <B>IrregularTransformation</B> object</h4>
+
+If either of the <B>VectorField</B> coordinate array resources <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> are non-<code>NULL</code> and
+they are not set with 2D arrays,, then <B>VectorPlot</B> uses an
+<B>IrregularTransformation</B> object. Note that <B>VectorPlot</B>
+treats an axis with an associated coordinate array as irregular even
+if the coordinate array actually has evenly spaced
+values. <B>VectorPlot</B> represents an irregular axis not by
+stretching and compressing various regions of the plot, but by
+displaying it with irregularly spaced tick marks.
+
+<p>In addition to a small performance penalty, there are some
+restrictions associated with use of
+<B>IrregularTransformation</B> object. Although you may
+limit the coordinate extent to a subspace of the data coordinate
+extent of the <B>VectorField</B> object data, you are not
+allowed to define a coordinate range that extends outside the range of
+the data coordinates of an irregular axis. Using the
+<B>IrregularTransformation</B> resources <a href="../../Graphics/Resources/tr.html#trXAxisType"><em>trXAxisType</em></a> or
+<a href="../../Graphics/Resources/tr.html#trYAxisType"><em>trYAxisType</em></a>,
+it is possible to set an irregular axis to <code>LinearAxis</code> or
+even, under certain conditions, to <code>LogAxis</code>, but the
+results are probably not what you want. Since
+<B>VectorPlot</B> does not intrinsically support a
+linearization transformation for irregularly spaced data, it can only
+switch to a linear system by replacing the data coordinates with array
+index coordinates, which are, in fact, linearly spaced. To properly
+transform irregularly spaced data into a linear or logarithmic
+coordinate system, you must use the overlay mechanism (<A
+href="VectorPlot.html#Status.1">V4.1 Status Note 1</a>).
+
+<h4>Use of the <a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> object</h4>
+
+If both the <a href="VectorField.html"><strong>VectorField</strong></a> coordinate array resources
+<a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> are set using 2D coordinate
+arrays and the <a href="Transformation.html"><strong>Transformation</strong></a> class resource <a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is set to
+<code>Curvilinear</code> <strong>VectorPlot</strong> uses a
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> object. As with the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> you cannot set the coordinate
+range outside, the range of the data. Also, since X and Y coordinate
+locations both vary along the grid edges, tickmarks are disabled. In
+order to place the the data in context, you need to overlay the
+<strong>VectorPlot</strong> on another plot such as a
+<strong>mapplot</strong>.
+
+
+<h4>Use of the <a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a> object</h4>
+
+If both the <a href="VectorField.html"><strong>VectorField</strong></a> coordinate array resources
+<a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> are set using 2D coordinate
+arrays and the <a href="Transformation.html"><strong>Transformation</strong></a> class resource <a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is set to
+<code>Spherical</code> <strong>VectorPlot</strong> uses a
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> object. As with the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> you cannot set the coordinate
+range outside the range of the data.  Also, since X and Y coordinate
+locations both vary along the grid edges, tickmarks are disabled. In
+order to place the the data in context, you need to overlay the
+<strong>VectorPlot</strong> on another plot such as a
+<strong>mapplot</strong>.
+ 
+<h4>Overlays</h4>
+
+<p>In addition to the built-in transformation support, you can map a
+<B>vectorplot</B> into a variety of other coordinate spaces by adding
+it as an <a href="../../glossary.html#Overlay">overlay</a> to a <a href="../../glossary.html#BasePlot">base plot</a>.
+You can overlay a <B>vectorplot</B> on a <a
+href="MapPlot.html"><B>mapplot</B></a> to transform the data into any
+of 10 different map projections. You can transform irregularly gridded
+vector data into a linear or logarithmic space by overlaying the
+<B>vectorplot</B> on a <B><a
+href="LogLinPlot.html">loglinplot</a></B>.  You can also make a
+<B>vectorplot</B> into an overlay of any other plot object, including
+a <B><a href="ContourPlot.html">contourplot</a></B>, an <B><a
+href="IrregularPlot.html">irregularplot</a></B>, a <B><a
+href="StreamlinePlot.html">streamlineplot</a></B>, or an <B><a
+href="XyPlot.html">xyplot</a></B>.  Use the <a href="../API/NhlAddOverlay.html"><strong>NhlAddOverlay</strong></a> function to perform an
+overlay.
+
+<h4>Mapping vector direction</h4> In certain situations, such as when
+the coordinate system is irregular or when the units along each
+coordinate axis are different, you may want to locate the vectors
+within the coordinate space, but it may not make sense to transform
+their direction relative to the space. For instance, suppose you
+create a wind profile plot with degrees of longitude along the X Axis
+and geopotential height along the Y Axis. Assume the vector data
+represent the eastward and northward horizontal components of the flow
+in meters per second. It is clear in this case that the direction of
+the vectors is unrelated to the coordinate system in which they are
+located.
+
+<p><B>VectorPlot</B> has a boolean resource called <I><a href="../../Graphics/Resources/vc.html#vcMapDirection"><em>vcMapDirection</em></a></I> that
+allows you to specify whether the direction as well as the location is
+to be mapped into the coordinate space defined by the transformation
+currently in effect. When you set this resource False, the
+direction is rendered in an independent uniform coordinate system. The
+U component of the vector data will be parallel to the X Axis, and the
+V component will be parallel to the Y Axis with units of equal size in
+each direction.
+<p>
+
+<h3>Draw order</h3><p>
+
+
+The <B>VectorPlot</B> class allows you specify when the
+vector arrows are drawn in relation to other plot elements of an
+overlay. You control the drawing order using the <I><a href="../../Graphics/Resources/vc.html#vcVectorDrawOrder"><em>vcVectorDrawOrder</em></a></I>
+resource.  There are three drawing phases: the <I>predraw</I> phase,
+the <I>draw</I> phase, and the <I>postdraw</I> phase. By default,
+the <B>VectorPlot</B> object draws its arrows during the
+draw phase. When a <B>VectorPlot</B> is drawn by itself, the
+drawing order is not important. However, when a
+<B>vectorplot</B> is an overlay, you often need to
+adjust the drawing order to ensure that the features you most want to see
+remain visible.
+
+<p>Note that <B>VectorPlot</B> annotations are
+always drawn during the <I>postdraw</I> phase.
+<p>
+
+<h3>Annotations</h3><p>
+
+Like all plot objects, a <B>vectorplot</B> is by default instantiated
+with a <B><a href="PlotManager.html">plotmanager</a></B> to manage
+overlays and <a href="../../glossary.html#Annotation">annotations</a> on its behalf.
+<B>VectorPlot</B> supplies several annotations of its own in addition
+to enabling three <B>PlotManager</B> <a href="../../glossary.html#IntrinsicAnnotation">intrinsic
+annotations</a>. The annotations supplied by <B>VectorPlot</B>
+include two vector reference annotations and a zero field message
+label. These are described in more detail later on.  The enabled
+<B>PlotManager</B> annotations include <B><a
+href="TickMark.html">TickMark</a></B>, <B><a
+href="Title.html">Title</a></B>, and <B><a
+href="LabelBar.html">LabelBar</a></B>. <B>VectorPlot</B> displays
+tick marks by default. Titles will appear if you set the appropriate
+title string resource to a non-NULL string value. The <B>labelbar</B>,
+which provides a key to the color scheme used with individually
+colored arrows, only appears if you set <a href="../../Graphics/Resources/pm.html#pmLabelBarDisplayMode"><em>pmLabelBarDisplayMode</em></a> appropriately. As
+with any plot object, you can also add arbitrary user-defined <a href="../../glossary.html#ExternalAnnotation">external
+annotations</a> to a <B>vectorplot</B>.
+
+<p>All these annotations (<B>TickMark</B> and
+<B>Title</B> partially excepted) subscribe to the locational
+conventions defined by the <a
+href="PlotManager.html#PlotManager-Location-Control-Model">PlotManager
+Location Control Model</a>.
+<p>
+
+<A NAME="GlyphStyles"></A>
+<h3>Glyph styles</h3><p>
+
+
+<B>VectorPlot</B> supports four glyph styles: a basic line-drawn
+arrow, a filled arrow with an optional edge line, a standard wind barb
+representation, and a "curly" vector style drawn in step-wise increments
+tangent to the instantaneous flow. Some attribute-setting resources
+apply only to specific glyph styles. Resources containing the string
+"LineArrow" apply when the glyph style is <code>LineArrow</code> or
+<code>CurlyVector</code>. "FillArrow" resources apply when the glyph style
+is <code>FillArrow</code> and "WindBarb" resources apply when the glyph style
+is <code>WindBarb</code>. By default, <B>VectorPlot</B>
+uses line-drawn arrows. Set the <I><a href="../../Graphics/Resources/vc.html#vcGlyphStyle"><em>vcGlyphStyle</em></a></I> resource
+to select the desired glyph style.
+
+<h4>Line-drawn arrows</h4>
+
+The resource <I><a href="../../Graphics/Resources/vc.html#vcMonoLineArrowColor"><em>vcMonoLineArrowColor</em></a></I>
+controls whether line-drawn arrows are to use a single color
+for every vector. If set to its default value,
+True, you specify the single arrow color using the resource <I><a href="../../Graphics/Resources/vc.html#vcLineArrowColor"><em>vcLineArrowColor</em></a></I>. Otherwise,
+the arrows are individually colored based on the array resources <I><a href="../../Graphics/Resources/vc.html#vcLevels"><em>vcLevels</em></a></I> and <I><a href="../../Graphics/Resources/vc.html#vcLevelColors"><em>vcLevelColors</em></a></I> and the
+scalar value associated with the vector.
+
+<p>Line-drawn vector arrows have a fixed shape that the user cannot
+modify.  However, you can set a minimum and maximum size for the
+vector arrowhead using the resources <I><a href="../../Graphics/Resources/vc.html#vcLineArrowHeadMinSizeF"><em>vcLineArrowHeadMinSizeF</em></a></I>
+and <I><a href="../../Graphics/Resources/vc.html#vcLineArrowHeadMaxSizeF"><em>vcLineArrowHeadMaxSizeF</em></a></I>.  This
+allows you to ensure that the arrowheads remain recognizable for
+small-magnitude vectors while not becoming excessively large for
+high-magnitude vectors.
+
+<p>You can set the thickness of the polylines used to render
+line-drawn arrows using the resource <I><a href="../../Graphics/Resources/vc.html#vcLineArrowThicknessF"><em>vcLineArrowThicknessF</em></a></I>.  You may notice that as the lines are made thicker, the arrows begin to
+take on a rather fuzzy look. This is an unavoidable consequence of using
+thick lines, (at least where there is no control of the line join
+method), and one of the motivations for the development of filled vector
+arrows.
+
+<h4>Filled arrows</h4>
+
+<B>VectorPlot</B> draws filled vector arrows using a
+solid-filled area with an edge outline. 
+Filled arrows have several advantages over line-drawn arrows:
+
+<ul>
+<li>The edges can be sharply defined no matter how wide you make the
+arrow body or head.
+<li>There is more area available to apply colors to the arrow and therefore
+the colors are more visible.
+<li>You have much greater control over the shape of the vector arrows.
+<li>Since the edge can be drawn in a separate color from the fill, you
+can distinguish the individual vector arrows more easily in areas where the
+vectors overlap, or where the fill has a similar color to the 
+background color.
+</ul>
+Naturally, filled arrows have a few drawbacks as well: 
+<ul>
+<li>They take a bit longer to draw.
+<li>If you are overlaying the <B>vectorplot</B> on
+another plot, such as a <B>contourplot</B>, the filled
+arrows may obscure too much of the information underneath unless
+you set the fill color to <code>Transparent</code>.
+
+<li>Since there are more resources to play with, you may find yourself
+spending more time figuring out how they work and what looks best for your
+data.
+
+</ul>
+
+Either the filled area or the edge or both may be colored
+individually based on the values in the <I><a href="../../Graphics/Resources/vc.html#vcLevelColors"><em>vcLevelColors</em></a></I> array
+resource. The resource <I><a href="../../Graphics/Resources/vc.html#vcMonoFillArrowFillColor"><em>vcMonoFillArrowFillColor</em></a></I>
+controls whether to draw the fill using a single color. If set
+True, the resource <I><a href="../../Graphics/Resources/vc.html#vcFillArrowFillColor"><em>vcFillArrowFillColor</em></a></I>
+specifies the fill color; otherwise the <I>vcLevelColors</I> array
+applies. Likewise <I><a href="../../Graphics/Resources/vc.html#vcMonoFillArrowEdgeColor"><em>vcMonoFillArrowEdgeColor</em></a></I>
+controls whether the edge should be a single color. If set True,
+<I><a href="../../Graphics/Resources/vc.html#vcFillArrowEdgeColor"><em>vcFillArrowEdgeColor</em></a></I>
+specifies the fill color; if False, the <I>vcLevelColors</I> array
+once again applies. You can eliminate either the edge or the
+filled portion of a filled arrow by setting the appropriate color
+resource to <code>Transparent</code> (-1).
+
+<p>The resource <I><a href="../../Graphics/Resources/vc.html#vcFillOverEdge"><em>vcFillOverEdge</em></a></I>
+specifies whether the edge should be drawn first with the fill on top
+or vice versa. Drawing the fill on top ensures that the full extent of
+the fill area appears, even when the vector arrow is very
+small. However, for this to work properly, the resource <I><a href="../../Graphics/Resources/vc.html#vcFillArrowEdgeThicknessF"><em>vcFillArrowEdgeThicknessF</em></a></I>
+should be set to a value greater than 1.0. Otherwise the edges will
+appear broken and poorly formed. Since the default value of
+<I>vcFillOverEdge</I> is True, <I>vcFillArrowEdgeThicknessF</I> is
+set by default to 2.0.
+
+<p>There are seven resources for controlling the shape of filled
+vector arrows. These allow for many variations not only in the appearance of
+the arrows at the reference length but also in the way the appearance
+changes as the length of the arrow changes with vector magnitude. The
+figure below indicates which part of the arrow each of the following
+resources specifies:
+<ul>
+<li><I><a href="../../Graphics/Resources/vc.html#vcFillArrowWidthF"><em>vcFillArrowWidthF</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcFillArrowHeadXF"><em>vcFillArrowHeadXF</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcFillArrowHeadInteriorXF"><em>vcFillArrowHeadInteriorXF</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcFillArrowHeadYF"><em>vcFillArrowHeadYF</em></a></I>
+</ul>
+
+Each of these resources is specified as a fraction of the value of
+<I><a href="../../Graphics/Resources/vc.html#vcRefLengthF"><em>vcRefLengthF</em></a></I>.
+
+<a name="VectorFillArrow"></a> 
+<p><img src="../Images/VectorFillArrow.png">
+
+<p>The resources <I><a href="../../Graphics/Resources/vc.html#vcFillArrowMinFracWidthF"><em>vcFillArrowMinFracWidthF</em></a></I>,
+<I><a href="../../Graphics/Resources/vc.html#vcFillArrowHeadMinFracXF"><em>vcFillArrowHeadMinFracXF</em></a></I>,
+and <I><a href="../../Graphics/Resources/vc.html#vcFillArrowHeadMinFracYF"><em>vcFillArrowHeadMinFracYF</em></a></I>
+set minimum sizes for <I>vcFillArrowWidthF</I>,
+<I>vcFillArrowHeadXF</I>, and <I>vcFillArrowHeadYF</I>
+respectively. They are specified as fractions of the resource with
+which they are associated.  So, for example, if you set
+<I>vcFillArrowMinFracWidthF</I> to 0.25, the width used for the
+minimum length arrow will be equal to 0.25 *
+<I>vcFillArrowWidthF</I> * <I>vcRefLengthF</I> NDC units. The
+widths used for intermediate-length arrows will be sized
+proportionally between the minimum width and the reference width.
+This implies that if you set <I>vcFillArrowMinFracWidthF</I> to 1.0,
+the arrow width will remain constant for all filled arrows, no matter
+what their length. Setting any of these <I>...MinFrac...</I>
+resources to 0.0 causes their associated arrow dimension to vary in
+strict proportion to the arrow length.
+
+<p>See the example <a href="../../../Applications/BasicExamples/Vector/vc03.html">vc03n</a> for an illustration of
+some of the stylistic variations that are possible using the fill
+arrow resources.
+
+<h4>Wind barbs</h4>
+
+Wind barb glyphs consist of a shaft parallel to the vector
+direction, and zero or more pennants and/or ticks spaced 
+along the shaft starting at the end nearest the direction
+from which the flow is coming. However, if the magnitude of the
+velocity is less than 2.5, a circle replaces the shaft. Half
+ticks represent 5 units of magnitude, full ticks represent 10 units,
+and pennants represent 50 units. By convention, the units are
+knots. The pennants are drawn using a filled polygon, while the ticks,
+the shaft, and the calm circle are all rendered with polylines. Unlike
+the other glyph styles, wind barbs maintain a basically uniform length
+for all magnitudes. You can control this length with the resource 
+<I><a href="../../Graphics/Resources/vc.html#vcRefLengthF"><em>vcRefLengthF</em></a></I>.
+
+<p>You can use the resource <I><a href="../../Graphics/Resources/vc.html#vcWindBarbScaleFactorF"><em>vcWindBarbScaleFactorF</em></a></I>
+to convert vector fields represented with other units into knots in
+order to render wind speeds according to the usual convention. Note
+that this resource operates independently of the resources <I><a href="../../Graphics/Resources/vc.html#vcMagnitudeScaleFactorF"><em>vcMagnitudeScaleFactorF</em></a></I>
+and <I><a href="../../Graphics/Resources/vc.html#vcMagnitudeScaleValueF"><em>vcMagnitudeScaleValueF</em></a></I>,
+both of which only apply to <B>VectorPlot</B> annotations.
+
+<p>The resource <I><a href="../../Graphics/Resources/vc.html#vcMonoWindBarbColor"><em>vcMonoWindBarbColor</em></a></I>
+controls whether all wind barb glyphs appear in a single color.  If
+set to its default value, True, you specify this color using the
+resource <I><a href="../../Graphics/Resources/vc.html#vcWindBarbColor"><em>vcWindBarbColor</em></a></I>. Otherwise,
+the wind barb glyphs are individually colored based on the array
+resources <I><a href="../../Graphics/Resources/vc.html#vcLevels"><em>vcLevels</em></a></I>
+and <I><a href="../../Graphics/Resources/vc.html#vcLevelColors"><em>vcLevelColors</em></a></I> and
+the scalar value associated with the vector.
+
+<p><I><a href="../../Graphics/Resources/vc.html#vcWindBarbTickAngleF"><em>vcWindBarbTickAngleF</em></a></I>
+controls the angle of the ticks and the hypotenuse of the pennant
+triangles. It is measured in degrees clockwise from the vector
+direction. Use a negative value to represent southern hemisphere wind
+barbs, which, by convention, have their ticks on the opposite side of
+shaft from northern hemisphere wind barbs.  <I><a href="../../Graphics/Resources/vc.html#vcWindBarbTickLengthF"><em>vcWindBarbTickLengthF</em></a></I> controls the
+length of the wind barb ticks and the hypotenuse of the triangles
+forming the pennants. <I><a href="../../Graphics/Resources/vc.html#vcWindBarbTickSpacingF"><em>vcWindBarbTickSpacingF</em></a></I> controls the
+spacing between ticks along the shaft. Pennants are spaced by half
+this amount. The resource <I><a href="../../Graphics/Resources/vc.html#vcWindBarbCalmCircleSizeF"><em>vcWindBarbCalmCircleSizeF</em></a></I> sets the
+size of the circle used to render magnitudes less than 2.5.
+
+Set the thickness of the polyline elements of the wind barb
+glyphs using the resource <I><a href="../../Graphics/Resources/vc.html#vcWindBarbLineThicknessF"><em>vcWindBarbLineThicknessF</em></a></I>. 
+
+<h4>Curly Vectors</h4>
+
+Curly vectors are rendered using curved lines that are tangent to the
+instantaneous flow direction in the neighborhood of the grid point. A
+variably-sized arrow head at one end indicates the direction of
+flow. Their appearance is controlled using the same resources as for
+line-drawn vector arrows. However, optimal settings for these
+resources may be different in the <code>CurlyVector</code> case. In
+one case, that of <I><a href="../../Graphics/Resources/vc.html#vcLineArrowHeadMaxSizeF"><em>vcLineArrowHeadMaxSizeF</em></a></I>,
+the default value is different. When <I><a href="../../Graphics/Resources/vc.html#vcMonoLineArrowColor"><em>vcMonoLineArrowColor</em></a></I>
+is set to <code>False</code>, individual <code>CurlyVector</code>
+arrows appear multicolored. Each incremental step along the path
+length is colored individually based upon the interpolated value of
+the magnitude or other scalar field at that point.  (<A
+href="VectorPlot.html#Status.2">V4.1 Status Note 2</a>)
+<p>
+
+<h3>Arrow length, spacing, and position</h3> <p>
+
+
+One of the difficulties of representing a vector field using arrows at
+the grid points is that when the transformation is non-linear or a
+dense dataset is used, the arrows become bunched together in areas or
+are too crowded everywhere. The vectors must either become so small that
+it is difficult to distinguish between them, or they overlap and
+degenerate into an amorphous mass. Although there is no absolute cure
+for this problem, <B>VectorPlot</B> provides a number of
+features to help you present the data as coherently as possible.
+ 
+<h4>Reference length and magnitude</h4>
+
+If <I><a href="../../Graphics/Resources/vc.html#vcGlyphStyle"><em>vcGlyphStyle</em></a></I> is set to <code>LineArrow</code> or
+<code>FillArrow</code>, the length of each vector arrow is determined
+in relation to a vector reference magnitude specified by the resource
+<I><a href="../../Graphics/Resources/vc.html#vcRefMagnitudeF"><em>vcRefMagnitudeF</em></a></I>
+and a vector reference length specified in <a href="../../glossary.html#NDC">NDC</a> units by the
+resource <I><a href="../../Graphics/Resources/vc.html#vcRefLengthF"><em>vcRefLengthF</em></a></I>. Vectors
+whose magnitude is equal to the reference magnitude are drawn at the
+reference length. By default, the reference magnitude is the maximum
+magnitude in the <B>vectorfield</B>, but it may be set to
+any arbitrary value. The default reference length is determined
+dynamically based on the viewport and the number of elements along
+each data dimension. Note that the length of each vector arrow
+increases as you increase the reference length but decreases as you
+increase the reference magnitude.<p>
+
+If <I><a href="../../Graphics/Resources/vc.html#vcGlyphStyle"><em>vcGlyphStyle</em></a></I> is set to <code>WindBarb</code>, things work
+a bit differently: vector magnitude is now represented
+by varying the number of ticks and/or pennants on the wind barb,
+rather than by varying the size of the glyph as a whole. 
+<B>VectorPlot</B> draws most wind barbs using a
+uniform length, determined solely by the value of the <I><a href="../../Graphics/Resources/vc.html#vcRefLengthF"><em>vcRefLengthF</em></a></I>
+resource. This length actually consists of the length of the wind barb
+shaft plus the projection of a full wind barb tick onto the axis of
+the shaft. Therefore, wind barbs with only a half tick or with no
+tick are a bit shorter than the length specified by
+<I>vcRefLengthF</I>. The <I><a href="../../Graphics/Resources/vc.html#vcRefMagnitudeF"><em>vcRefMagnitudeF</em></a></I>
+resource has no effect on the length of wind barb glyphs. However, it
+does still have a role to play in setting up the reference vector
+annotation.
+
+<h4>Minimum length and magnitude</h4>
+
+By default, except when <I><a href="../../Graphics/Resources/vc.html#vcGlyphStyle"><em>vcGlyphStyle</em></a></I> is set to
+<code>WindBarb</code>, the size of each vector arrow differs from the
+reference length by the ratio of its magnitude to the reference
+magnitude. In practice, a common result of this strictly proportional
+representation is that low-magnitude vectors become too small to be
+rendered with full detail, particularly on low-resolution devices. As
+a result, their direction, especially, becomes difficult to
+decipher. Therefore, <B>VectorPlot</B> provides a resource,
+<I><a href="../../Graphics/Resources/vc.html#vcMinFracLengthF"><em>vcMinFracLengthF</em></a></I>,
+that allows you to specify, as a fraction of the reference length, a
+minimum vector arrow length. When this resource is set to a value
+greater than 0.0, the smallest magnitude vector is rendered at the
+specified fraction of the reference length, and intermediate magnitude
+vectors are rendered at proportionally intermediate lengths. Setting
+<I>vcMinFracLengthF</I> to 1.0 causes all vector arrows to be drawn
+at the reference length. If <I>vcGlyphStyle</I> is set to 
+<code>WindBarb</code>, setting <I>vcMinFracLengthF</I> has no effect:
+effectively it is forced to the value 1.0.
+
+<p>The resource <I><a href="../../Graphics/Resources/vc.html#vcMinMagnitudeF"><em>vcMinMagnitudeF</em></a></I>
+specifies the minimum magnitude a vector must have in order to
+qualify for drawing. You can use it to eliminate low-velocity vectors
+in order to concentrate attention on the dominant features of a vector
+field. However, note that <I>vcMinMagnitudeF</I> also has another
+role. When it has a non-zero value and <I><a href="../../Graphics/Resources/vc.html#vcMinFracLengthF"><em>vcMinFracLengthF</em></a></I>
+is also non-zero, <I>vcMinMagnitudeF</I> specifies the vector
+magnitude that is rendered at the minimum length specified by
+<I>vcMinFracLengthF</I>. 
+
+<h4>Ensuring uniform arrow sizing over a series of plots</h4>
+
+In order to ensure that within a series of plots of related data a
+particular length always represents the same vector magnitude, you
+must always first set the reference magnitude, <I><a href="../../Graphics/Resources/vc.html#vcRefMagnitudeF"><em>vcRefMagnitudeF</em></a></I>,
+explicitly. Otherwise, whatever magnitude happens to be the maximum in
+each plot will be rendered at the reference length. In addition, if
+you set <I><a href="../../Graphics/Resources/vc.html#vcMinFracLengthF"><em>vcMinFracLengthF</em></a></I>
+to a non-zero value, you should be careful to set <I><a href="../../Graphics/Resources/vc.html#vcMinMagnitudeF"><em>vcMinMagnitudeF</em></a></I>
+non-zero as well. Otherwise the length specified by
+<I>vcMinFracLengthF</I> will be used to represent whatever magnitude
+happens to be the minimum in each plot. If you do not want any
+low-magnitude vectors actually eliminated, simply set
+<I>vcMinMagnitudeF</I> to a small positive number that is less than
+the smallest magnitude in any of your datasets (<A
+href="VectorPlot.html#Status.2">V4.1 Status Note 2</a>).
+
+<h4>Controlling the spacing between vector arrows</h4>
+
+There are two ways to reduce the crowding of a too-densely populated
+<B>vectorplot</B>. One is to specify a stride greater than
+unity  along one or both dimensions of the
+<B>vectorfield</B>, using the <B>VectorField</B>
+resources <I><a href="../../Graphics/Resources/vf.html#vfXCStride"><em>vfXCStride</em></a></I> and/or
+<I><a href="../../Graphics/Resources/vf.html#vfYCStride"><em>vfYCStride</em></a></I>.
+This method has the effect of reducing the density uniformly
+throughout the data space, and may be the most appropriate if your
+plot is overly dense throughout. The second way is to set the
+resource <I><a href="../../Graphics/Resources/vc.html#vcMinDistanceF"><em>vcMinDistanceF</em></a></I> to
+an <a href="../../glossary.html#NDC">NDC</a> value
+representing the minimum distance you want to allow between the
+locations of neighboring vector arrows. This method requires a bit more
+computing time, but it ensures that the minimum distance between
+vectors is maintained even after arbitrary non-linear transformations,
+like many map projections, from data space to NDC space.
+
+<h4>Arrow position</h4>
+
+Using the resource <I><a href="../../Graphics/Resources/vc.html#vcPositionMode"><em>vcPositionMode</em></a></I>, you can
+control whether the tail, the head, or the center of a vector arrow is
+positioned at the location of the grid point in data space.
+<p>
+
+<h3>Selecting levels</h3><p>
+
+
+In order to support vector arrows individually colored according to a
+scalar value, <B>VectorPlot</B> uses an array of level
+values to subdivide the range of scalars. By default, the levels apply
+to the range of vector magnitudes. However, if <I><a href="../../Graphics/Resources/vc.html#vcUseScalarArray"><em>vcUseScalarArray</em></a></I>
+is set True and a <B>scalarfield</B> has been provided, the
+levels will apply to the range of the <B>scalarfield</B>
+data.  The level array resource <I><a href="../../Graphics/Resources/vc.html#vcLevels"><em>vcLevels</em></a></I> is specified in the
+same way as the
+<B><a href="ContourPlot.html">ContourPlot</a></B>
+resource <I><a href="../../Graphics/Resources/cn.html#cnLevels"><em>cnLevels</em></a></I>.
+
+<p>By appropriately setting the <a href="../../Graphics/Resources/vc.html#vcLevelSelectionMode"><em>vcLevelSelectionMode</em></a> resource, you can
+choose from four level selection modes to set up the <a href="../../Graphics/Resources/vc.html#vcLevels"><em>vcLevels</em></a> array. The default mode,
+<code>AutomaticLevels</code>, is easy to use. It selects a "nice"
+spacing starting from the smallest relatively round number greater
+than the minimum data value, such that the number of levels is as
+close as possible to, but less than, the value of the resource <a href="../../Graphics/Resources/vc.html#vcMaxLevelCount"><em>vcMaxLevelCount</em></a>.
+<code>EqualSpacedLevels</code> mode defines exactly <a href="../../Graphics/Resources/vc.html#vcMaxLevelCount"><em>vcMaxLevelCount</em></a> levels spaced evenly from
+the data minimum value to the data maximum value. In
+<code>ManualLevels</code> mode, you set the maximum and minimum levels
+using the resources <a href="../../Graphics/Resources/vc.html#vcMinLevelValF"><em>vcMinLevelValF</em></a>
+and <a href="../../Graphics/Resources/vc.html#vcMaxLevelValF"><em>vcMaxLevelValF</em></a> with a spacing
+defined by the resource <a href="../../Graphics/Resources/vc.html#vcLevelSpacingF"><em>vcLevelSpacingF</em></a>. Finally,
+<code>Explicit</code> mode allows you to define the level values
+yourself by setting the array resource <a href="../../Graphics/Resources/vc.html#vcLevels"><em>vcLevels</em></a>. The <code>ManualLevels</code>
+and <code>ExplicitLevels</code> modes have the advantage that they are
+independent of the maximum and minimum values of the particular
+dataset you are plotting, and therefore can be used to enforce
+consistency in the plots of a series of related
+datasets. <code>ExplicitLevels</code> is the only mode that allows you
+to establish variably spaced levels.
+
+<p>Once you have established the levels, you can retrieve the
+number of levels actually used by getting the value of the read-only
+resource <a href="../../Graphics/Resources/vc.html#vcLevelCount"><em>vcLevelCount</em></a>.
+<p>
+
+<h3>The reference vector and minimum vector annotations</h3><p>
+
+<B>VectorPlot</B> supports two annotations that each display
+a single vector arrow sandwiched between optional text.  One of these,
+the reference vector annotation, appears by default. You control it
+using resources with the prefix <I>vcRefAnno</I>. By default, it
+displays a vector arrow drawn at the reference length along with a
+text string representing the reference magnitude above and the
+string "Reference Vector" below. The second, the minimum vector 
+annotation, must be turned on explicitly in order to appear. Its
+resources have the prefix <I>vcMinAnno...</I>, and by default it
+displays an arrow drawn at the minimum length along with text
+representing the minimum magnitude above and the words "Minimum
+Vector" below. When the arrow-sizing resources are set such that the
+relation between arrow length and vector magnitude is not strictly
+proportional, the minimum vector annotation can be useful for
+helping to convey the relationship between the various arrow sizes in
+the plot.
+
+<p>The names given to these annotations are based on the way
+<B>VectorPlot</B> configures them by default. However, they are both
+capable of displaying arrows representing any arbitrary magnitude
+(using resources <a href="../../Graphics/Resources/vc.html#vcRefAnnoExplicitMagnitudeF"><em>vcRefAnnoExplicitMagnitudeF</em></a> or <I><a href="../../Graphics/Resources/vc.html#vcMinAnnoExplicitMagnitudeF"><em>vcMinAnnoExplicitMagnitudeF</em></a></I>), as well
+as arbitrary text. In addition, <B>VectorPlot</B> recognizes a set of
+substitution substrings that allows you to place within this text a
+number of key values drawn dynamically from the data, including
+maximum and minimum values of the magnitude, of each of the vector
+components, and of the associated <B>ScalarField</B> data, if present.
+
+<p>There is a boolean resource called <I><a href="../../Graphics/Resources/vc.html#vcUseRefAnnoRes"><em>vcUseRefAnnoRes</em></a></I>,
+that when set True causes the minimum vector annotation (as well as
+the zero field annotation) to use the same values for many of the
+appearance-related resources that the reference vector annotation uses.
+This resource acts as a shortcut for achieving a consistent 
+appearance. 
+
+<p>In other respects, the reference and the minimum
+vector annotations function identically. The rest of this section
+discusses only the reference vector annotation but applies equally
+to the minimum vector annotation if you simply substitute the 
+equivalent minimum vector annotation resource.
+
+<h4>Reference vector annotation size and position</h4>
+
+<p>You control the size of the reference vector annotation indirectly,
+based on the text string length, the font height and aspect ratio, and
+the amount of space occupied by the arrow. Besides the size of the
+arrow itself, there are three resources that affect how much space the
+arrow will occupy. These are:
+<ul>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowAngleF"><em>vcRefAnnoArrowAngleF</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowSpaceF"><em>vcRefAnnoArrowSpaceF</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowMinOffsetF"><em>vcRefAnnoArrowMinOffsetF</em></a></I>
+</ul>
+The resources that control the position of the reference vector annotation
+follow the locational conventions
+of the <a
+href="PlotManager.html#PlotManager-Location-Control-Model">PlotManager
+Location Control Model</a>. They include:
+<ul>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoZone"><em>vcRefAnnoZone</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoSide"><em>vcRefAnnoSide</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoJust"><em>vcRefAnnoJust</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoParallelPosF"><em>vcRefAnnoParallelPosF</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoOrthogonalPosF"><em>vcRefAnnoOrthogonalPosF</em></a></I>
+</ul>
+
+<h4>Reference vector annotation arrow color</h4>
+
+<p>By default, the reference vector annotation arrow takes its colors
+from the colors specified for the arrows in the plot. If the arrows in
+the plot are individually colored based on vector magnitude, the
+reference vector arrow will be colored according to the magnitude it
+represents.  Otherwise, the colors used for the annotation arrow will
+be as specified by <I><a href="../../Graphics/Resources/vc.html#vcLineArrowColor"><em>vcLineArrowColor</em></a></I>
+for line-drawn arrows and wind barbs or <I><a href="../../Graphics/Resources/vc.html#vcFillArrowFillColor"><em>vcFillArrowFillColor</em></a></I>
+and <I><a href="../../Graphics/Resources/vc.html#vcFillArrowEdgeColor"><em>vcFillArrowEdgeColor</em></a></I>
+for filled arrows. On the other hand, if you set the resource <I><a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowUseVecColor"><em>vcRefAnnoArrowUseVecColor</em></a></I>
+False, you can set the annotation arrow colors explicitly, using
+<I><a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowLineColor"><em>vcRefAnnoArrowLineColor</em></a></I>
+for line-drawn arrows and wind barbs or <I><a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowFillColor"><em>vcRefAnnoArrowFillColor</em></a></I>
+and <I><a href="../../Graphics/Resources/vc.html#vcRefAnnoArrowEdgeColor"><em>vcRefAnnoArrowEdgeColor</em></a></I>
+for filled arrows.
+
+
+<h4>Text strings </h4>
+
+<p>The reference vector annotation has a complete set of text
+attribute resources for controlling font height, aspect ratio, color
+and so forth.  These resources apply to both of the
+annotation's strings.
+
+<p>You control the content of each of the two text strings in the reference
+vector annotation and whether they should appear at all using the
+following resources: 
+<ul>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoString1On"><em>vcRefAnnoString1On</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoString1"><em>vcRefAnnoString1</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoString2On"><em>vcRefAnnoString2On</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcRefAnnoString2"><em>vcRefAnnoString2</em></a></I>
+</ul>
+String 1 appears above or to the left of the arrow, and String 2 appears
+below or to the right of the arrow.
+
+
+<a name="VectorPlotSubstitutionSubstrings"></a> 
+<p>There are a number of special substitution substrings that you can
+insert anywhere in either of the text strings. They will be replaced with
+substrings representing numerical values, as follows:
+
+<ul>
+<dl>
+<dt>$VMG$
+<dd>The magnitude represented by the annotation's arrow.
+<dt>$RFM$
+<dd>The value of the reference magnitude used in representing the
+vector field.
+
+<dt>$MNM$
+<dd>The minimum vector magnitude (the value of the
+<B>VectorField</B> resource
+<I><a href="../../Graphics/Resources/vf.html#vfMagMinV"><em>vfMagMinV</em></a></I>).
+<dt>$MXM$
+<dd>The maximum vector magnitude (the value of the
+<B>VectorField</B> resource
+<I><a href="../../Graphics/Resources/vf.html#vfMagMaxV"><em>vfMagMaxV</em></a></I>).
+
+<dt>$MNU$
+<dd>The minimum value of the U component of the vector field
+(the value of the <B>VectorField</B> resource
+<I><a href="../../Graphics/Resources/vf.html#vfUMinV"><em>vfUMinV</em></a></I>).
+<dt>$MXU$
+<dd>The maximum value of the U component of the vector
+field (the value of the <B>VectorField</B> resource
+<I><a href="../../Graphics/Resources/vf.html#vfUMaxV"><em>vfUMaxV</em></a></I>).
+
+<dt>$MNV$
+<dd>The minimum value of the V component of the vector field
+(the value of the <B>VectorField</B> resource
+<I><a href="../../Graphics/Resources/vf.html#vfVMinV"><em>vfVMinV</em></a></I>).
+<dt>$MXU$
+<dd>The maximum value of the V component of the vector
+field (the value of the <B>VectorField</B> resource
+<I><a href="../../Graphics/Resources/vf.html#vfVMaxV"><em>vfVMaxV</em></a></I>).
+<dt>$MSF$
+<dd>The scale factor used for vector magnitudes (value of
+<I><a href="../../Graphics/Resources/vc.html#vcMagnitudeScaleFactorF"><em>vcMagnitudeScaleFactorF</em></a></I>).
+
+<dt>$MNS$
+<dd>The minimum value in the scalar dataset used to color the
+vectors (the value of the <B>ScalarField</B>
+resource <I><a href="../../Graphics/Resources/sf.html#sfDataMinV"><em>sfDataMinV</em></a></I>).
+<dt>$MXS$
+<dd>The maximum value in the scalar dataset used to color the
+vectors (the value of the <B>ScalarField</B>
+resource <I><a href="../../Graphics/Resources/sf.html#sfDataMaxV"><em>sfDataMaxV</em></a></I>).
+<dt>$SSF$
+<dd>The scale factor used for values in the scalar dataset (value of
+<I><a href="../../Graphics/Resources/vc.html#vcScalarValueScaleValueF"><em>vcScalarValueScaleValueF</em></a></I>).
+
+</dl>
+</ul>
+ 
+<p>
+
+<h3>Zero field annotation</h3><p>
+
+<B>VectorPlot</B> provides a zero field annotation that
+outputs a diagnostic message if you attempt to draw an instance using a
+<B>vectorfield</B> that contains only zero-magnitude vectors
+or missing values. This annotation also outputs a message if you draw
+without setting the <I><a href="../../Graphics/Resources/vc.html#vcVectorFieldData"><em>vcVectorFieldData</em></a></I>
+resource to the id of an existing <B>vectorfield</B>.
+You can individually control the contents of each of these messages as
+well as whether they should appear at all. The applicable resources are:
+<ul>
+<li><I><a href="../../Graphics/Resources/vc.html#vcZeroFLabelOn"><em>vcZeroFLabelOn</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcZeroFLabelString"><em>vcZeroFLabelString</em></a></I>
+</ul>
+for controlling the zero field message, and 
+<ul>
+<li><I><a href="../../Graphics/Resources/vc.html#vcNoDataLabelOn"><em>vcNoDataLabelOn</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcNoDataLabelString"><em>vcNoDataLabelString</em></a></I>
+</ul>
+for the no data message.
+
+<p>All the remaining resources for the zero field annotation have the
+prefix <I>vcZeroFLabel</I>. These include a complete set of text 
+attribute resources, as well as resources for controlling position
+according to the locational conventions of the <a
+href="PlotManager.html#PlotManager-Location-Control-Model">PlotManager
+Location Control Model</a>.
+<p>
+
+<h3>Numerical formatting and scaling</h3><p>
+
+You can control the format of numerical values that are related to the
+data when they appear in VectorPlot annotations, including the
+<B>labelbar</B> and the two vector annotations. You can also scale
+these numbers in a uniform manner, as, for instance, in order to
+represent the field using units different from the data itself.
+Formatting is controlled using a format string constructed according
+to the HLU <a href="../../Graphics/format_spec.html">Floating Point Format
+Specification</a> scheme.  A separate set of resources controls
+these features for magnitude-related values and <B>ScalarField</B>
+data values.  For magnitude-related values, the following resources
+apply:
+<ul>
+<li><I><a href="../../Graphics/Resources/vc.html#vcMagnitudeScalingMode"><em>vcMagnitudeScalingMode</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcMagnitudeScaleValueF"><em>vcMagnitudeScaleValueF</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcMagnitudeScaleFactorF"><em>vcMagnitudeScaleFactorF</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcMagnitudeFormat"><em>vcMagnitudeFormat</em></a></I>
+</ul>
+whereas <B>ScalarField</B> data are affected by the following resources:
+<ul>
+<li><I><a href="../../Graphics/Resources/vc.html#vcScalarValueScalingMode"><em>vcScalarValueScalingMode</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcScalarValueScaleValueF"><em>vcScalarValueScaleValueF</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcScalarValueScaleFactorF"><em>vcScalarValueScaleFactorF</em></a></I>
+<li><I><a href="../../Graphics/Resources/vc.html#vcScalarValueFormat"><em>vcScalarValueFormat</em></a></I>
+</ul>
+
+<hr> 
+<h2>Status</h2>
+
+<p><A name="Status.1">1.</a> The support for irregular transformations
+is at a transitional stage. Eventually, <B>VectorPlot</B> will
+be able to perform transformations from irregular coordinates to linear
+and logarithmic coordinates without using the overlay mechanism. This will
+eliminate the need for a switch to the index coordinate system.
+
+<p><A name="Status.2">2.</a> The <code>CurlyVector</code> glyph style
+does not yet support the <I><a href="../../Graphics/Resources/vc.html#vcMinMagnitudeF"><em>vcMinMagnitudeF</em></a></I>
+resource. Therefore, in order to assure uniform length for a series of
+vector plots rendered using this glyph style, you must not set <I><a href="../../Graphics/Resources/vc.html#vcMinFracLengthF"><em>vcMinFracLengthF</em></a></I>
+to a non-zero value.
+
+
+<hr>
+<h2>See also</h2>
+<ul>
+<li><a href="../API/NhlCreate.html"><strong>NhlCreate</strong></a> function
+<li><a href="../API/NhlDestroy.html"><strong>NhlDestroy</strong></a> function
+<li><a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> function
+<li><a href="../API/NhlGetValues.html"><strong>NhlGetValues</strong></a> function
+<li><a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a> function
+<li><a href="VectorField.html"><strong>VectorField</strong></a> object
+<li><a href="ScalarField.html"><strong>ScalarField</strong></a> object
+<li><a href="PlotManager.html"><strong>PlotManager</strong></a> object
+<li><a href="Title.html"><strong>Title</strong></a> object
+<li><a href="TickMark.html"><strong>TickMark</strong></a> object
+<li><a href="LabelBar.html"><strong>LabelBar</strong></a> object
+<li><a href="AnnoManager.html"><strong>AnnoManager</strong></a> object
+<li><a href="DataComm.html"><strong>DataComm</strong></a> object
+<li><a href="Transform.html"><strong>Transform</strong></a> object
+<li><a href="View.html"><strong>View</strong></a> object
+<li><a href="Base.html"><strong>Base</strong></a> object
+</ul>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/VectorPlot.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:32 GMT -->
+</html>
+

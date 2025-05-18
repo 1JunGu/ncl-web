@@ -1,0 +1,555 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/spec.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:10:25 GMT -->
+<head>
+<meta name="description" content="NCL data analysis example page. 
+Demonstrates spectral analysis and complex demodulation">
+<TITLE>NCL: Spectral Analysis and Complex Demodulation</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+    <h1>NCL: Spectral Analysis and Complex Demodulation</h1>
+
+<div class=text>
+<b>Spectral Analysis</b>
+<p>
+Spectral analysis of time series is the process of partitioning the temporal variance information
+into frequency variance information. The latter is called the <em>spectrum</em>. 
+The spectrum breaks the sample variance of time series into discret components, 
+each of which is associated with a particular frequency.
+<p>
+A nice simple example of the concept and process is provided at
+<a href="https://faculty.washington.edu/dbp/PDFFILES/GHS-AP-Stat-talk.pdf">
+<b>Introduction to Spectral Analysis</b></a> (D. Percival, U. Washington).
+<p>
+The NCL functions <a href="../Document/Functions/Built-in/specx_anal.html"><strong>specx_anal</strong></a> and <a href="../Document/Functions/Built-in/specxy_anal.html"><strong>specxy_anal</strong></a> 
+perform the temporal-to-frequency transformation via the 
+<a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform"><b>Fast Fourier Transform (FFT)</b></a>.
+The <b>FFT</b> implicitly assume the time series are 'cyclic'. Generally, this is not true.
+Hence, the source time series must be pre-treated (<i>aka</i>, "pre-whitening"). 
+In most applications, this means  the data must be tapered in the time or frequency domains. 
+NCL's functions perform the tapering in the time domain. Further, removing any linear 
+trend in the source data is recommended. The trend removal is performed first, then the 
+trend-removed data are tapered.  This combination minimizes "ringing" and "leakage".
+<p>
+The FFT performed on the pre-whitened series create periodogram estimates. Nominally,
+each periodogram estimate has 2 degrees of freedom for each frequency band. 
+("Nominally" because the source data has been pre-whitened which slightly reduces
+the degrees of freedom..) To provide some level 
+of statistical reliability, the periodogram estimates must be smoothed.  
+For example, a 5-point smoother would nominally result in 10 degrees of freedom (5*2).
+The side effect of the smoothing process is that the effective band-width is wider
+(think, 5*periodogram-band-width). A nice description is at:
+<a href="http://www.ltrr.arizona.edu/~dmeko/notes_6.pdf">
+<b>Spectral Analysis: Smoothed Periodogram Method</b></a> (DMeko, U. Arizona).
+
+</div>
+
+    <div class=ex>
+    <!--Spec_1-->
+    <a name=ex1></a>
+    <a href="Images/spec_1_lg.png">
+    <img src="Images/spec_1_sm.png" align=left border=2></a>
+    <a href="Scripts/spec_1.html">spec_1.ncl</a>: Reads in a time series from
+    a netCDF file, calculates the spectrum and plots the results.
+    <p>
+    <a href="../Document/Functions/Built-in/specx_anal.html"><strong>specx_anal</strong></a>: Calculates the spectra of a time series with options on 
+    smoothing, demeaning, detrending, and tapering.
+    <br><br>
+    <a href="../Document/Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a>: calculates the dimension sizes of any array.
+    </div>
+
+    <div class=ex>
+    <!--Spec_2-->
+    <a name=ex2></a>
+    <a href="Images/spec_2_lg.png">
+    <img src="Images/spec_2_sm.png" align=left border=2></a>
+    <a href="Scripts/spec_2.html">spec_2.ncl</a>: Reads in two time series 
+    and calculates their spectra, cospectra, coherence, quadrature spectra, 
+    and phase and creates a panel plot of all values.
+    <p>
+    <a href="../Document/Functions/Built-in/specxy_anal.html"><strong>specxy_anal</strong></a>: Calculates the cospectra, coherence-squared, quadrature 
+    spectra, and phase as well as the spectra of two time series with 
+    options on smoothing, demeaning, detrending, and tapering.
+    <p>
+    The coherence-squared is a statistic that can be used to examine the relation between 
+two signals or data sets. It allows identification of significant frequency-domain 
+correlation between the two time series.  <b>Phase estimates in the cross spectrum are 
+only useful where significant frequency-domain coherence-squared exists.</b> The 
+6.4.0 release contains two functions that can be used to test for significance:
+<a href="../Document/Functions/Contributed/cohsq_c2p.html"><strong>cohsq_c2p</strong></a> and <a href="../Document/Functions/Contributed/cohsq_p2c.html"><strong>cohsq_p2c</strong></a>.
+    <br><br>
+    <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> is the plot interface that panels plots together.  
+    <a href="panel.html">More examples</a> of panel plots.
+    </div>
+
+    <div class=ex>
+    <!--Spec_3-->
+    <a name=ex3></a>
+    <a href="Images/spec_3_lg.png">
+    <img src="Images/spec_3_sm.png" align=left border=2></a>
+    <a href="Scripts/spec_3.html">spec_3.ncl</a>: Calculates red noise
+    confidence intervals and creates several plot variations.
+    <br><br>
+    <a href="../Document/Functions/Shea_util/specx_ci.html"><strong>specx_ci</strong></a>
+    calculates a red noise confidence interval. This function 
+    returns four curves: the calculated spectrum, the "red noise" curve 
+    and the curves indicating the upper and lower confidence bounds.
+    </div>
+
+    <div class=ex>
+    <!--Spec_4-->
+    <a name=ex4></a>
+    <a href="Images/spec_4_lg.png">
+    <img src="Images/spec_4_sm.png" align=left border=3></a>
+    <a href="Scripts/spec_4.html">spec_4.ncl</a>: Plots spectra and 
+    "red noise" confidence intervals on a log scale and draws the bandwidth.
+    <br><br>
+    <a href="../Document/Graphics/Resources/tr.html#trYLog"><em>trYLog</em></a> = True
+    <br>
+    <a href="../Document/Graphics/Resources/tr.html#trYMinF"><em>trYMinF</em></a> = 
+    0.10 <br>
+    <a href="../Document/Graphics/Resources/tr.html#trYMaxF"><em>trYMaxF</em></a> = 
+    30.0, Changes the Y-axis to log and manually
+    sets the lower adn uppe limits.
+    <br><br>
+    <a href="../Document/Graphics/Interfaces/gsn_polyline.html"><strong>gsn_polyline</strong></a> and
+    <a href="../Document/Graphics/Interfaces/gsn_text.html"><strong>gsn_text</strong></a> 
+    are used to add the bandwidth line and label to the figure.
+    </div>
+
+    <div class=ex>
+    <!--Spec_5-->
+    <a name=ex5></a>
+    <a href="Images/spec_5_1_lg.png">
+    <img src="Images/spec_5_1_sm.png" align=left border=3></a>
+    <a href="Images/spec_5_2_lg.png">
+    <img src="Images/spec_5_2_sm.png" align=left border=3></a>
+    <a href="Images/spec_5_3_lg.png">
+    <img src="Images/spec_5_3_sm.png" align=left border=3></a>
+    <a href="Scripts/spec_5.html">spec_5.ncl</a>: A variation of Example 4. 
+The leftmost plot uses frequency as the abscissa. The two rightmost plots
+use period (1/fequency) as the abscissa. Since the period is not linear, 
+plotting a subset of all the periods may be more useful. The <a href="../Document/Functions/Built-in/ind.html"><strong>ind</strong></a>
+function is used to select the desired indices.  The rightmost plot illustrates
+how to reverse the abscissa order.
+    </div>
+
+    <div class=ex>
+    <!--CrosSpc_TimeLon-->
+    <a name=ex1></a>
+    <a href="Images/CrosSpc_TimeLon_1_lg.png">
+    <img src="Images/CrosSpc_TimeLon_1_sm.png" align=left border=3></a>
+    <a href="Scripts/CrosSpc_TimeLon_1.html">CrosSpc_TimeLon_1.ncl</a>: 
+Calculate and plot the cross-spectral components: cospectrum, quadrature spectrum,
+coherence-squared and phase. Specifically, a fixed latitude [LAT] is specifed and 
+<a href="../Document/Functions/Built-in/specxy_anal.html"><strong>specxy_anal</strong></a> is applied at each longidude to anomalies.      
+The cross-spectral components are stored and ploted as a contour plot.
+The frequency unit is cycles/day. 
+    </div>
+
+<div class=text>
+<b>Complex Demodulation:</b>
+<p>
+As noted by Bloomfield (1976, 2000) "not all 'periodic' phenomena have simple representations in
+terms of cosine functions. Complex demodulation is a more flexible approach to the analysis
+of such data. By trading off some <i>frequency resolution</i> for <i>time resolution</i>, complex
+demodulation can describe features of data that would be missed by harmonic analysis. 
+The price of this flexibility is loss of precision in describing pure frequencies, 
+for which harmonic analysis is most exact." 
+<p>
+Complex demodulation may be viewed as a <i>local</i> version of harmonic analysis.  It enables the 
+amplitude and phase of a particular frequency component of a time series to be described 
+as functions of time. It is <i>local</i> in that these components are allowed to change slowly over time.
+<p>
+The complex demodulation process, implemented by <a href="../Document/Functions/Contributed/demod_cmplx.html"><strong>demod_cmplx</strong></a>, consists of several steps:  
+<pre>
+   (1) A demodulation frequency (<em>frqdem</em>) is specified.
+   (2) Compute the real (cosine) and imaginary (sine) components at each time step.
+   (3) Low pass filter each component using a specified low pass 
+       cutoff frequency (<em>frqcut</em>).  
+   (4) Compute the amplitudes [ <b>A</b>(t) ] and phases [ <b>P</b>(t) ] 
+       using the low pass filtered components (3). 
+</pre>
+<p>
+The phases returned in step (4) are calculated via <a href="../Document/Functions/Built-in/atan2.html"><strong>atan2</strong></a> and range from -pi to +pi. 
+These are called 'wrapped phases.' Unfortunately, the resulting phase plots may appear quite noisy and 
+are difficult to interpret. For graphical and interpretation purposes, the wrapped phases are often 
+unwrapped. NCL's <a href="../Document/Functions/Contributed/unwrap_phase.html"><strong>unwrap_phase</strong></a> can be used to perform this task.
+<p>
+Further, as suggested by the 
+<a href="http://www.uni-muenster.de/ZIV.BennoSueselbeck/s-html/helpfiles/demod.html"><b>S-Plus demod</b></a> documentation:
+<pre>
+    <b>To better understand the results of complex demodulation 
+    several lowpass filters should be tried:</b> the smaller the pass band, 
+    the less instantaneous in time but more specific in frequency is the result.
+</pre>
+In fact, complex demodulation (like spectral analysis), could be viewed to be as much 'art' as 'science'. 
+Different <em>frqcut</em> and <em>nwt</em> and, in some cases (Example demod_cmplx_2), different
+
+
+<p>
+References:
+<pre>
+    <a href="https://iujfk.files.wordpress.com/2013/04/bloomfield-2000-fourier-analysis-of-time-series-an-introduction-2ed.pdf"><b>Fourier Analysis of Time Series</b></a>
+    Peter Bloomfield
+    Wiley, 2000
+
+    WWW:
+    http://faculty.washington.edu/kessler/generals/complex-demodulation.pdf
+    http://www.pmel.noaa.gov/maillists/tmap/ferret_users/fu_2007/pdfHMANlJLqCE.pdf
+</pre>
+</div>
+
+    <div class=ex>
+    <!--demod_1-->
+    <a name=ex1></a>
+    <a href="Images/demod_cmplx_1_lg.png">
+    <img src="Images/demod_cmplx_1_sm.png" align=left border=3></a>
+    <a href="Images/demod_cmplx_1b_lg.png">
+    <img src="Images/demod_cmplx_1b_sm.png" align=left border=3></a>
+    <a href="Scripts/demod_cmplx_1.html">demod_cmplx_1.ncl</a>: 
+Demodulate Wolf's annual sun spot series using NCL's <a href="../Document/Functions/Contributed/demod_cmplx.html"><strong>demod_cmplx</strong></a> function.  
+The modulation period used is 11 years [<em>frqdem</em>=(1.0/11)]. 
+<p>
+As noted above, several different low pass (<em>frqcut</em>, <em>nwt</em>) 
+filters should be tried. The left figure uses <em>frqcut</em>=0.045 (=0.5*<em>frqdem</em>); 
+the right figure uses <em>frqcut</em>=0.025.  In both figures, the <em>nwt</em>=41 is kept constant. 
+That was what Bloomfield (1976) used for his least squares filter.
+However, that too could be changed to get different filter effects.    
+<p>
+The unwrapped phases created by <a href="../Document/Functions/Contributed/unwrap_phase.html"><strong>unwrap_phase</strong></a> 
+are at the bottom of the figure.
+<p>
+<b>Note: <em>frqcut</em> and <em>frqdem</em> are not related.</b> The use of <em>frqcut</em>=0.5*<em>frqdem</em>
+in the example (left figure) was an experiment.
+    </div>
+
+    <div class=ex>
+    <!--demod_2-->
+    <a name=ex2></a>
+    <a href="Images/demod_cmplx_2_1_lg.png">
+    <img src="Images/demod_cmplx_2_1_sm.png" align=left border=3></a>
+    <a href="Images/demod_cmplx_2_2_lg.png">
+    <img src="Images/demod_cmplx_2_2_sm.png" align=left border=3></a>
+    <a href="Images/demod_cmplx_2_3_lg.png">
+    <img src="Images/demod_cmplx_2_3_sm.png" align=left border=3></a>
+    <a href="Scripts/demod_cmplx_2.html">demod_cmplx_2.ncl</a>: 
+Read and unpack daily sea-level-pressures (slp) from grid points surrounding 
+Kanton Island (2.8N,  188.325E). Perform a simple areal average at each time step.  
+Calculate daily anomalies from a daily climatology. Perform a complex 
+demodulation on the anomaly time series about a period of 40 days (<em>frqdem</em>=(1/40). 
+Commonly, the Madden-Julian Oscillation (MJO) is described as having a 30-60 day period.
+<p>
+Since the MJO spans 30-60 days several different demodulation (<em>frqdem</em>) frequencies
+should be examined. Again,  different <em>frqcut</em> and <em>nwt</em> should be
+examined.
+<p>
+The unwrapped phases created by <a href="../Document/Functions/Contributed/unwrap_phase.html"><strong>unwrap_phase</strong></a> 
+are at the bottom of the middle figure.
+    </div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/spec.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:10:33 GMT -->
+</html>
+
+

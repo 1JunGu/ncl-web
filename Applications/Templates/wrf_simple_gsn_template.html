@@ -1,0 +1,47 @@
+;----------------------------------------------------------------------
+; This is a very basic NCL template for creating contours over maps of
+; a variable read off a WRF output file. This template plots one 
+; timestep of HGT from a WRF file.  You can modify this script to 
+; plot other variables on the same file.
+;
+; This script does NOT use the wrf_xxxx scripts to do the plotting.
+; It shows how to use gsn_csm_xxxx scripts to do the plotting.
+;
+; This script sets the bare number of resources necessary to get a
+; somewhat interesting plot
+;----------------------------------------------------------------------
+; Note: as of NCL V6.2.0, you don't need these four load commands
+;----------------------------------------------------------------------
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/wrf/WRFUserARW.ncl"
+
+begin
+  filename = "wrfout_d01_2002-07.nc"
+  a        = addfile(filename,"r")
+
+;---Read variables directly or use wrf_user_getvar
+  nt        = 0 
+  hgt       = a->HGT(nt,:,:)        ; nt=0 is the first time step
+  hgt@lat2d = a->XLAT(nt,:,:)       ; Lat/lon coordinates required if
+  hgt@lon2d = a->XLONG(nt,:,:)      ; not using WRF's map projection.
+
+;---Open workstation
+  wks = gsn_open_wks("x11","wrf_simple_gsn")   ; "ps", "pdf", "png"
+
+;---Set some resources
+  res                   = True
+
+  res@gsnMaximize       = True            ; maximize plot in frame
+
+  res@cnFillOn          = True            ; Turn on color fill
+
+  res@mpMinLatF         = min(hgt@lat2d) 
+  res@mpMaxLatF         = max(hgt@lat2d) 
+  res@mpMinLonF         = min(hgt@lon2d) 
+  res@mpMaxLonF         = max(hgt@lon2d) 
+  res@mpCenterLonF      = (res@mpMinLonF + res@mpMaxLonF) / 2.
+
+  plot = gsn_csm_contour_map(wks,hgt,res)
+end

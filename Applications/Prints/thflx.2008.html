@@ -1,0 +1,78 @@
+ Copyright (C) 1995-2009 - All Rights Reserved
+ University Corporation for Atmospheric Research
+ NCAR Command Language Version 5.1.1
+ The use of this software is governed by a License Agreement.
+ See http://www.ncl.ucar.edu/ for more details.
+Variable: f (file variable)
+
+filename:	thflx.2008
+path:	thflx.2008.nc
+   file global attributes:
+      creation_date : Fri Mar 2 15:05:00 MDT 2007
+      sfcHeatFlux : 
+Note that the net surface heat flux are the total surface heat flux 
+from the NCEP reanalysis 2 plus the relaxation terms.
+      time_comment : The internal time stamp indicates the FIRST day of the averaging period.
+      conventions : COARDS
+      grib_file : godas.M.2007*
+      html_REFERENCES : http://www.cpc.ncep.noaa.gov/products/GODAS/background.shtml
+      html_BACKGROUND : http://www.cpc.ncep.noaa.gov/products/GODAS/background.shtml
+      html_GODAS : www.cpc.ncep.noaa.gov/products/GODAS
+      comment : NOTE:  THESE ARE THE BIAS CORRECTED GODAS FILES.
+      title : GODAS: Global Ocean Data Assimilation System
+      history : Created 2007/03 by Hoop
+      references : http://www.cdc.noaa.gov/cdc/data.godas.html
+   dimensions:
+      time = 12  // unlimited
+      lat = 418
+      lon = 360
+   variables:
+      float lon ( lon )
+         units :	degrees_east
+         GridType :	Cylindrical Equidistant Projection Grid
+         long_name :	longitude
+         actual_range :	( 0.5, 359.5 )
+
+      float lat ( lat )
+         units :	degrees_north
+         GridType :	Cylindrical Equidistant Projection Grid
+         long_name :	latitude
+         actual_range :	( -74.5, 64.499 )
+
+      double time ( time )
+         units :	days since 1901-01-01 00:00:0.0
+         info :	This is the FIRST day of the averaging period.
+         long_name :	time
+         actual_range :	( 39081, 39416 )
+         delta_t :	0000-01-00 00:00:00
+         avg_period :	0000-01-00 00:00:00
+
+      integer date ( time )
+         units :	YYYYMM
+
+      float timePlot ( time )
+         info :	good for plotting time series
+         units :	YYYY.(fractional part of year)
+
+      short thflx ( time, lat, lon )
+         missing_value :	32767 
+         dataset :	NCEP GODAS
+         var_desc :	total downward heat flux at surface
+         level_desc :	surface
+         statistic :	Monthly Mean
+         parent_stat :	Individual Obs
+         _FillValue :	32766 
+         sub_center :	Environmental Modeling Center
+         center :	US National Weather Service - NCEP (WMC)
+         long_name :	Total downward heat flux at surface (downward is positive)
+         units :	W/m2
+         level_indicator :	1
+         gds_grid_type :	0
+         parameter_table_version :	129
+         parameter_number :	202
+         add_offset :	 0
+         scale_factor :	0.08545183
+         valid_range :	( -1400, 1400 )
+         actual_range :	( -1093.504, 1049.981 )
+
+ 

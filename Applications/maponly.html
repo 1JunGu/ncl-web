@@ -1,0 +1,1022 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/maponly.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:57 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+the creation of map only plots">
+<meta name="keywords" content="NCL, graphics, visualization, resources,
+maps">
+<TITLE>NCL Graphics: Map only plots</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_maps.html">Maps and map projections</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+
+<h1>NCL Graphics: Map only plots</h1>
+
+<div class=mainimage>
+<img src="Images/maponly_3_lg.png" align=left border=0></a>
+<p>
+</div>
+
+<div class=text>
+<h3>Map Only Templates</h3>
+
+<a href="../Document/Graphics/map_projections.html">Sample of all the
+NCL map projections with contours overlaid</a>
+<p>
+
+There are two main NCL functions for creating just maps:<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_map.html"><strong>gsn_csm_map</strong></a><br>
+<a href="../Document/Graphics/Interfaces/gsn_csm_map_polar.html"><strong>gsn_csm_map_polar</strong></a><p>
+
+There's a third function
+called <a href="../Document/Graphics/Interfaces/gsn_csm_map_ce.html"><strong>gsn_csm_map_ce</strong></a>, but it simply
+calls <a href="../Document/Graphics/Interfaces/gsn_csm_map.html"><strong>gsn_csm_map</strong></a> under the hood,
+which defaults to a cylindrical equidistant map projection unless
+<a href="../Document/Graphics/Resources/mp.html#mpProjection"><em>mpProjection</em></a> is set to something else.
+<p>
+
+This page shows the various map projections you can create in NCL.
+Any of these maps can be used to overlay contours, vectors, streamlines, markers,
+lines, and polygons. If you need more map outlines than what NCL provides,
+then see the <a href="shapefiles.html">Shapefiles example page</a>.
+<p>
+
+See the description at the top of the <a href="mapoutlines.html">Map
+outlines examples page</a> for information about a change to the
+behavior of the <a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a>
+resource in NCL V6.4.0.
+
+</div>
+
+<div class=ex>
+<!--Maponly_1-->
+<a name=ex1></a>
+<a href="Images/maponly_1_lg.png">
+<img src="Images/maponly_1_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_1.html">maponly_1.ncl</a>: 
+A cylindrical equidistant global map.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_map.html"><strong>gsn_csm_map</strong></a> is the plot templates
+that draws a cylindrical equidistant map.
+<p>
+
+Note that the default behavior is gray filled continents.
+</div>
+
+<div class=ex>
+<!--Maponly_2-->
+<a name=ex2></a>
+<a href="Images/maponly_2_1_lg.png">
+<img src="Images/maponly_2_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_2_2_lg.png">
+<img src="Images/maponly_2_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_2_3_lg.png">
+<img src="Images/maponly_2_3_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_2.html">maponly_2.ncl</a>: 
+
+A subregion map with a few modifications. Note that the first two
+images will now look different in NCL V6.4.0 and later.  See the next
+section to compare the images.
+<p>
+
+First frame: shows Australia and parts of south-east Asia.<br>
+Second frame:  centered on Western Eurasia.<br>
+Third frame: demonstrates how to get more up-to-date country
+boundaries for this region along with higher resolution.<p>
+
+The following resources were used for this example:<br>
+
+<ul>
+
+<li><a href="../Document/Graphics/Resources/mp.html#mpFillOn"><em>mpFillOn</em></a> = False - 
+Turns off gray continental fill.<p>
+
+<li><a href="../Document/Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a> = "National" -
+Turns on country boundaries.<p> 
+
+<li><a href="../Document/Graphics/Resources/mp.html#mpGeophysicalLineColor"><em>mpGeophysicalLineColor</em></a> = "Navy" -
+Changes the outline line color.<p>  
+
+<li><a href="../Document/Graphics/Resources/mp.html#mpGeophysicalLineThicknessF"><em>mpGeophysicalLineThicknessF</em></a> = 1.5 - 
+Changes the thickness of continental outlines.<p>  
+
+<li><a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> = "MediumRes" -
+Chooses the medium resolution database, which is required to get the
+most recent country borders.  "MediumRes" is now the default in NCL
+V6.4.0 if <a href="../Document/Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a> is
+set to something other than "Geophysical".<p>
+
+<li><a href="../Document/Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a> = "Earth..4" - 
+Selects the most up-to-date national boundaries.
+
+</div>
+
+<div class=ex>
+<!--Maponly_2-->
+<a name=ex2></a>
+<a href="Images/maponly_2_640_1_lg.png">
+<img src="Images/maponly_2_640_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_2_640_2_lg.png">
+<img src="Images/maponly_2_640_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_2_640_3_lg.png">
+<img src="Images/maponly_2_640_3_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_2.html">maponly_2.ncl</a>: This is the
+same script as the previous example. The images have 
+been updated to show what you get with NCL Version 6.4.0. Note that
+the first two images are now showing MediumRes outlines by default.
+
+</div>
+
+<div class=ex>
+<!--Maponly_3-->
+<a name=ex3></a>
+<a href="Images/maponly_3_lg.png">
+<img src="Images/maponly_3_sm.png" align=left border=3></a>
+<a href="Scripts/maponly_3.html">maponly_3.ncl</a>: 
+
+Demonstrates changing the colors of the various regions.
+<p>
+
+<a href="../Document/Graphics/Resources/mp.html#mpOceanFillColor"><em>mpOceanFillColor</em></a> = 8, selects the
+light blue color from the colormap.<br> <a href="../Document/Graphics/Resources/mp.html#mpLandFillColor"><em>mpLandFillColor</em></a> = 164, selects the dark
+orange color from the colormap.<br> <a href="../Document/Graphics/Resources/mp.html#mpInlandWaterFillColor"><em>mpInlandWaterFillColor</em></a> = 54, selects the dark
+blue color from the colormap.
+<p>
+
+Note that the longitude range of the plot was changed via
+<a href="../Document/Graphics/Resources/mp.html#mpMinLonF"><em>mpMinLonF</em></a>=0 and
+<a href="../Document/Graphics/Resources/mp.html#mpMaxLonF"><em>mpMaxLonF</em></a>=360, and
+hence <a href="../Document/Graphics/Resources/mp.html#mpCenterLonF"><em>mpCenterLonF</em></a> had to be set to
+180 reflect the true center of the plot.
+
+There are numerous <a
+href="../Document/Graphics/color_tables.html">color tables</a> to
+choose from.
+
+</div>
+
+<div class=ex>
+<!--Maponly_4-->
+<a name=ex4></a>
+<a href="Images/maponly_4_lg.png">
+<img src="Images/maponly_4_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_4.html">maponly_4.ncl</a>: A polar map.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_map_polar.html"><strong>gsn_csm_map_polar</strong></a> is the plot
+templates that draws a polar map.
+
+</div>
+
+<div class=ex>
+<!--Maponly_5-->
+<a name=ex5></a>
+<a href="Images/maponly_5_lg.png">
+<img src="Images/maponly_5_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_5.html">maponly_5.ncl</a>: 
+
+An example of a <a href="satel.html">satellite</a> projection map.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_map.html"><strong>gsn_csm_map</strong></a> is the plot templates
+that draws map, where you specify the projection.<br> <a href="../Document/Graphics/Resources/mp.html#mpProjection"><em>mpProjection</em></a> = satellite, selects projection.
+
+</div>
+
+<div class=ex>
+<!--Maponly_6-->
+<a name=ex6></a>
+<a href="Images/maponly_6_lg.png">
+<img src="Images/maponly_6_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_6.html">maponly_6.ncl</a>: 
+
+An example of drawing the U.S. and filling each state with a data value.
+<p>
+
+<a href="../Document/Functions/Contributed/GetFillColorIndex.html"><strong>GetFillColorIndex</strong></a> will assign a
+color to a polygon based on an array of color indices.
+
+</div>
+
+<div class=ex>
+<!--Maponly_7-->
+<a name=ex7></a>
+<a href="Images/maponly_7_1_lg.png">
+<img src="Images/maponly_7_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_7_2_lg.png">
+<img src="Images/maponly_7_2_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_7.html">maponly_7.ncl</a>: 
+
+Demonstrates how to remove portions of a map. The first plot shows the
+default mapfill, and the second plot has had all "SmallIslands"
+removed.  These include the Lesser Antilles, Hawaii, the Phillipine
+Islands etc.
+<p>
+
+<a href="../Document/Graphics/Resources/mp.html#mpAreaMaskingOn"><em>mpAreaMaskingOn</em></a> turns on the area
+masking so that the <a href="../Document/HLUs/Classes/MapPlot.shtml.html#Pre-Defined-String-Constants">regions</a> specified in <a href="../Document/Graphics/Resources/mp.html#mpMaskAreaSpecifiers"><em>mpMaskAreaSpecifiers</em></a> will not be filled. Note
+that if we did not turn off the map outline with <a href="../Document/Graphics/Resources/mp.html#mpOutlineOn"><em>mpOutlineOn</em></a>, we would still see the outline,
+but it would not be filled.
+
+</div>
+
+<div class=ex>
+<!--Maponly_8-->
+<a name=ex8></a>
+<a href="Images/maponly_8_1_lg.png">
+<img src="Images/maponly_8_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_8_2_lg.png">
+<img src="Images/maponly_8_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_8_3_lg.png">
+<img src="Images/maponly_8_3_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_8.html">maponly_8.ncl</a>: 
+
+Demonstrates how to draw only certain portions of map when there is no
+map fill.
+<p>
+
+This technique differs lightly from that demonstrated in example 7. In
+that example we exclude only the desired features. In this method we
+only draw the desired features.
+<p>
+
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a>
+="NoBoundaries", indicates not to draw any boundary other than what is
+set by <a href="../Document/Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a>
+<p>
+This method can thus be used to draw only those countries or boundaries that are specified in 
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a>. In the third frame, China, Chinese provinces, India, 
+and various other southeastern countries are drawn. To draw the Chinese provinces, 
+<a href="../Document/Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a> must be set to "Earth..4"
+and <a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> must be set to "MediumRes".
+</div>
+
+<div class=ex>
+<!--Maponly_9-->
+<a name=ex9></a>
+<a href="Images/maponly_9_lg.png">
+<img src="Images/maponly_9_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_9.html">maponly_9.ncl</a>:
+
+Demonstrates how to draw both US States and Mexican States. This
+method requires that the plot be drawn first an then the values for
+the Mexican States retrieved and added to the plot.
+
+</div>
+
+<div class=ex>
+<!--Maponly_10-->
+<a name=ex10></a>
+<a href="Images/maponly_10_1_lg.png">
+<img src="Images/maponly_10_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_10_2_lg.png">
+<img src="Images/maponly_10_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_10_3_lg.png">
+<img src="Images/maponly_10_3_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_10.html">maponly_10.ncl</a>: 
+
+Demonstrates how to draw all of the counties in the US, how to draw
+just the counties with the name "Adams", and then how to draw only the
+counties in Florida by listing them by name.
+<p>
+
+The resource <a href="../Document/Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a> needs to
+be set to "Earth..2" in order to have access to the US counties.
+
+</div>
+
+<div class=ex>
+<!--Maponly_11-->
+<a name=ex11></a>
+<a href="Images/maponly_11_lg.png">
+<img src="Images/maponly_11_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_11.html">maponly_11.ncl</a>:
+
+Demonstrates the difference in resolution between the three available
+map databases in NCL.  <a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> is used to set the database
+that NCL uses to draw the basemap. By default, <a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> is set to "LowRes". The
+upper left panel shows the country of Greece with this setting. The
+upper right panel shows the same area with a database setting of
+"MediumRes". The bottom panel is drawn with a database setting of
+"HighRes".
+<p>
+
+If you want to use the "HighRes" map database, you will have to <a
+href="../Document/Graphics/rangs.html">download the RANGS database</a>.
+
+</div>
+
+<div class=ex>
+<!--Maponly_12-->
+<a name=ex12></a>
+<a href="Images/maponly_12_1_lg.png">
+<img src="Images/maponly_12_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_12_2_lg.png">
+<img src="Images/maponly_12_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_12_3_lg.png">
+<img src="Images/maponly_12_3_sm.png" align=left border=2></a>
+<a href="Images/maponly_12_4_lg.png">
+<img src="Images/maponly_12_4_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_12.html">maponly_12.ncl</a>: 
+
+This script demonstrates the use of the resource <a href="../Document/Graphics/Resources/mp.html#mpProjection"><em>mpProjection</em></a>, which sets the map
+projection. There are 13 map projections available; each is shown
+here. Resources are not set to limit the map area, and thus the
+default area (whole globe) is shown.
+<p>
+
+The resources <a href="../Document/Graphics/Resources/mp.html#mpGridAndLimbOn"><em>mpGridAndLimbOn</em></a> and
+<a href="../Document/Graphics/Resources/mp.html#mpPerimOn"><em>mpPerimOn</em></a> are turned on and off
+throughout the program depending on whether the projection looks best
+with the perimeter drawn or with the earth's outline drawn.
+<p>
+
+By default, NCL does not draw a line outlining the earth for the
+Orthographic, Satellite, Mollweide, and Robinson projections. To trick
+NCL into drawing the outline for these projections, the following
+resources should be set:<p> <a href="../Document/Graphics/Resources/mp.html#mpGridAndLimbOn"><em>mpGridAndLimbOn</em></a> = True ; turn on lat/lon
+lines. <br>
+
+<a href="../Document/Graphics/Resources/mp.html#mpGridLatSpacingF"><em>mpGridLatSpacingF</em></a> =  90; change latitude  line spacing <br>
+
+<a href="../Document/Graphics/Resources/mp.html#mpGridLonSpacingF"><em>mpGridLonSpacingF</em></a> = 180.   ; change longitude line spacing <br>
+
+<a href="../Document/Graphics/Resources/mp.html#mpGridLineColor"><em>mpGridLineColor</em></a>   = "transparent"
+ ; trick ncl into drawing earth's outline
+
+</div>
+
+<div class=ex>
+<!--Maponly_13-->
+<a name=ex13></a>
+<a href="Images/maponly_13_1_lg.png">
+<img src="Images/maponly_13_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_13_2_lg.png">
+<img src="Images/maponly_13_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_13_3_lg.png">
+<img src="Images/maponly_13_3_sm.png" align=left border=2></a>
+<a href="Images/maponly_13_4_lg.png">
+<img src="Images/maponly_13_4_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_13.html">maponly_13.ncl</a>: 
+
+Similar to Example 12 above, except this script uses 
+<a href="../Document/Graphics/Resources/mp.html#mpLimitMode"><em>mpLimitMode</em></a> and 
+<a href="../Document/Graphics/Resources/mp.html#mpMinLatF"><em>mpMinLatF</em></a> / 
+<a href="../Document/Graphics/Resources/mp.html#mpMaxLatF"><em>mpMaxLatF</em></a> /
+<a href="../Document/Graphics/Resources/mp.html#mpMinLonF"><em>mpMinLonF</em></a> /
+<a href="../Document/Graphics/Resources/mp.html#mpMaxLonF"><em>mpMaxLonF</em></a> to zoom in on Europe. 
+<p>
+
+As in Example 12, this example doesn't always highlight the best use
+of each projection.
+
+</div>
+
+<div class=ex>
+<!--Maponly_14-->
+<a name=ex14></a>
+<a href="Images/maponly_14_1_lg.png">
+<img src="Images/maponly_14_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_14_2_lg.png">
+<img src="Images/maponly_14_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_14_3_lg.png">
+<img src="Images/maponly_14_3_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_14.html">maponly_14.ncl</a>:
+
+Demonstrates how to draw continental outlines without any inland
+water, lakes, or islands drawn, using a relatively new
+map resource <a href="../Document/Graphics/Resources/mp.html#mpMaskOutlineSpecifiers"><em>mpMaskOutlineSpecifiers</em></a>.
+You use <a href="../Document/Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a> and/or
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a>  to indicate
+what outlines you want, and then you use this new resource to indicate
+which outlines you want to mask.
+<p>
+
+
+</div>
+
+<div class=ex>
+<!--Maponly_15-->
+<a name=ex15></a>
+<a href="Images/maponly_15_1_lg.png">
+<img src="Images/maponly_15_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_15_2_lg.png">
+<img src="Images/maponly_15_2_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_15.html">maponly_15.ncl</a>:
+
+The first frame demonstrates how to draw climate divisions, by
+setting the resources <a href="../Document/Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a>
+to "Earth..3", <a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a>
+to "MediumRes", and <a href="../Document/Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a>
+to "AllBoundaries".<p>
+
+The second frame shows how to color the climate divisions by a third
+field. The climate divisions already have their own default color
+indexes (called "group ids") that you can use to color the climate
+areas such that adjacent areas will not have the same color. These
+default values are retrieved (via the <a href="../Document/Graphics/Resources/mp.html#mpDynamicAreaGroups"><em>mpDynamicAreaGroups</em></a> resource) so that you can
+replace them with new color indexes based on this third field.
+
+</div>
+
+<div class=ex>
+<!--Maponly_16-->
+<a name=ex16></a>
+<a href="Images/maponly_16_1_lg.png">
+<img src="Images/maponly_16_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_16_2_lg.png">
+<img src="Images/maponly_16_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_16_3_lg.png">
+<img src="Images/maponly_16_3_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_16.html">maponly_16.ncl</a>:
+
+This example demonstrates how to use the map database, "Earth..4",
+to generate divisions for other countries.
+<p>
+
+This example in particular shows how to draw the states of Brazil, the
+provinces of China, and the states of India. You must set the
+resources <a href="../Document/Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a> to "Earth..4"
+and <a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> to
+"MediumRes". In addition, by using special quantifiers like
+"China:states", you can get these new divisions either as outlines
+(via
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a>) or as filled
+areas (via <a href="../Document/Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>).
+<p>
+
+</div>
+
+<div class=ex>
+<!--Maponly_17-->
+<a name=ex17></a>
+<a href="Images/maponly_17_1_lg.png">
+<img src="Images/maponly_17_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_17_2_lg.png">
+<img src="Images/maponly_17_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_17_3_lg.png">
+<img src="Images/maponly_17_3_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_17.html">maponly_17.ncl</a>:
+
+This example shows three map projections that were added
+in <a href="../prev_releases.html#5.1.0">V5.1.0</a>: Hammer, Aitoff,
+and Winkel Tripel. There's also a new-and-improved Mollweide (see the
+next box for an example of this) that replaces the old one.
+
+</div>
+
+<div class=ex>
+<!--Maponly_18-->
+<a name=ex18></a>
+<a href="Images/maponly_18_lg.png">
+<img src="Images/maponly_18_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_18.html">maponly_18.ncl</a>:
+
+This example compares the new-and-improved Mollweide projection that
+was added in <a href="../prev_releases.html#5.1.0">V5.1.0</a> to
+replace the old Mollweide projection.  The old Mollweide, like a true
+Mollweide, has an elliptical perimeter twice as wide as it is high
+(though with different dimensions) and its parallels are straight and
+horizontal, as in a true Mollweide, but the shapes of the land masses
+are noticeably different.
+<p>
+
+To get the old Mollweide projection, set <a href="../Document/Graphics/Resources/mp.html#mpProjection"><em>mpProjection</em></a> to "PseudoMollweide".
+
+</div>
+
+<div class=ex>
+<!--Maponly_19-->
+<a name=ex19></a>
+<a href="Images/maponly_19_lg.png">
+<img src="Images/maponly_19_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_19.html">maponly_19.ncl</a>:
+
+This example shows how to draw Antarctica with the new ice shelves
+that were added in <a href="../prev_releases.html#5.1.0">V5.1.0</a>.
+
+</div>
+
+
+<div class=ex>
+<!--Maponly_20-->
+<a name=ex20></a>
+<a href="Images/maponly_20_1_lg.png">
+<img src="Images/maponly_20_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_20_2_lg.png">
+<img src="Images/maponly_20_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_20_3_lg.png">
+<img src="Images/maponly_20_3_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_20.html">maponly_20.ncl</a>:
+
+This example shows how to draw different resolutions of the coastal
+outlines when you use the "HighRes" map database.  The resource is
+<a href="../Document/Graphics/Resources/mp.html#mpDataResolution"><em>mpDataResolution</em></a>, and the possible
+values are "Coarsest", "Coarse", "Medium", "Fine" and "Finest".
+<p>
+
+If you don't set this resource, then the default behavior is to
+determine which resolution to use based on the size of your plot and
+the range of your map. (This is the "Unspecified" setting.)
+<p>
+
+You should only use "Fine" or "Finest" if you are zoomed in pretty far
+on the map. They can take a long time to draw.
+<p>
+
+If you want to use the "HighRes" map database, you will have to <a
+href="../Document/Graphics/rangs.html">download the RANGS database</a>.
+
+</div>
+
+<div class=ex>
+<!--Maponly_21-->
+<a name=ex21></a>
+<a href="Images/maponly_21_1_lg.png">
+<img src="Images/maponly_21_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_21_2_lg.png">
+<img src="Images/maponly_21_2_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_21.html">maponly_21.ncl</a>:
+
+Demonstrates how to remove the lines that separate North America from Central
+America, and Central America from South America. All 7 continents are outlined when 
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a> = "Geophysical" (the default), as are
+all boundaries separating land from ocean. 
+<p>
+To remove those lines you need to set the following resources:<br>
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a> = "NoBoundaries"<br>
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a> = "Land"
+</div>
+
+<div class=ex>
+<!--Maponly_22-->
+<a name=ex22></a>
+<a href="Images/maponly_22_lg.png">
+<img src="Images/maponly_22_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_22.html">maponly_22.ncl</a>: Demonstrates how
+to outline and fill specific countries by name, using the <a href="../Document/Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a> and <a href="../Document/Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a> resources.
+
+</div>
+
+<div class=ex>
+<!--Maponly_23-->
+<a name=ex23></a>
+<a href="Images/maponly_23_1_lg.png">
+<img src="Images/maponly_23_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_23_2_lg.png">
+<img src="Images/maponly_23_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_23_3_lg.png">
+<img src="Images/maponly_23_3_sm.png" align=left border=2></a>
+<a href="Images/maponly_23_4_lg.png">
+<img src="Images/maponly_23_4_sm.png" align=left border=2></a>
+
+<a href="Scripts/maponly_23.html">maponly_23.ncl</a>: Draws
+all of the available map projections as of V5.1.1.
+
+
+</div>
+
+<div class=ex>
+<!--Maponly_24-->
+<a name=ex24></a>
+<a href="Images/maponly_24_1_lg.png">
+<img src="Images/maponly_24_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_24_2_lg.png">
+<img src="Images/maponly_24_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/maponly_24.html">maponly_24.ncl</a>: Shows how to
+add minor tickmarks to a map that only has major tickmarks. This 
+method only works if you have a rectangular projection and are
+setting  <a href="../Document/Graphics/Resources/pm.html#pmTickMarkDisplayMode"><em>pmTickMarkDisplayMode</em></a>
+to "Always".
+<p>
+
+The <a href="../Document/Graphics/Interfaces/gsn_blank_plot.html"><strong>gsn_blank_plot</strong></a> function is used
+to create a tickmark object with minor tickmarks, and this is then
+overlaid on the map using <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--Maponly_25-->
+<a name=ex25></a>
+<a href="Images/maponly_25_lg.png">
+<img src="Images/maponly_25_sm.png" align=left border=2></a>
+
+<a href="Scripts/maponly_25.html">maponly_25.ncl</a>: Shows how to
+fill the climate divisions in the state Idaho, and annotate the map
+with a labelbar and text strings.
+<p>
+
+</div>
+
+<div class=ex>
+<!--Maponly_26-->
+<a name=ex26></a>
+<a href="Images/maponly_26_1_lg.png">
+<img src="Images/maponly_26_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_26_2_lg.png">
+<img src="Images/maponly_26_2_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_26.html">maponly_26.ncl</a>: Shows how to turn
+on the medium resolution map database and get better outlines for the
+Caribbean Islands.
+<p>
+
+</div>
+
+<div class=ex>
+<!--Maponly_27-->
+<a name=ex27></a>
+<a href="Images/maponly_27_lg.png">
+<img src="Images/maponly_27_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_27.html">maponly_27.ncl</a>: Shows how draw
+a map in four quadrants, using a lat/lon slice. The land fill
+is set to a different color for each quadrant, and certain
+borders are turned off depending on which quadrant you're in.
+
+</div>
+
+
+<div class=ex>
+<!--Maponly_28-->
+<a name=ex28></a>
+<a href="Images/maponly_28_1_lg.png">
+<img src="Images/maponly_28_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_28_2_lg.png">
+<img src="Images/maponly_28_2_sm.png" align=left border=2></a>
+<a href="Images/maponly_28_630_1_lg.png">
+<img src="Images/maponly_28_630_1_sm.png" align=left border=2></a> 
+<a href="Images/maponly_28_630_2_lg.png">
+<img src="Images/maponly_28_630_2_sm.png" align=left border=2></a>           
+<a href="Scripts/maponly_28.html">maponly_28.ncl</a>: This example shows the 
+updates to counties in Colorado that were added in NCL V6.4.0.  
+The first two images show the updated counties, and the second two images show
+the outdated counties, if you use NCL V6.3.0 or earlier.
+
+For an example that compares these new county outlines to shapefile
+outlines, see example <a href="shapefiles.html#ex15">
+shapefiles_15.ncl</a> on the <a href="shapefiles.html">Shapefiles
+</a> example page.
+
+</div>
+
+<div class=ex>
+<!--Maponly_29-->
+<a name=ex29></a>
+<a href="Images/maponly_29_1_lg.png">
+<img src="Images/maponly_29_1_sm.png" align=left border=2></a>
+<a href="Images/maponly_29_2_lg.png">
+<img src="Images/maponly_29_2_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_29.html">maponly_29.ncl</a>: This script
+demonstrates the use of all three settings of the
+<a href="../Document/Graphics/Resources/mp.html#mpShapeMode"><em>mpShapeMode</em></a> resource, which
+affects aspect ratios and bounding boxes of the plots:
+<p>
+- FixedAspectFitBB: Maintains aspect ratio of the map.
+This is the default.</li>
+<p>
+- FreeAspect: Skews the map to fit the user-specified
+<a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a> and 
+<a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> viewport 
+resources, and hence does not maintain aspect ratio.</li>
+<p>
+- FixedAspectNoFitBB: Maintains aspect ratio,
+and places map in a box with width and height specified by
+the <a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a> and
+<a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> viewport resources.
+</ul>
+<p>
+Next, it illustrates how to panel plots manually 
+using viewport resources, which is easier than calling
+<a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> when the plots are
+different sizes, as in this script.
+<p>
+Finally, it demonstrates the use of the function
+<a href="../Document/Functions/Shea_util/drawNDCGrid.html"><strong>drawNDCGrid</strong></a> to draw a grid
+of NDC coordinates on the plot, which is used for debugging
+purposes, and to help choose values for the vpXXX (viewport) resources.
+<p>
+
+For a similar example of using these resources when contouring data,
+see example
+<a href="plot_data_on_map.html#ex14">dataonmap_14.ncl</a>
+on
+the <a href="plot_data_on_map.html">Plotting
+data on a map</a> examples page.
+
+</div>
+
+<div class=ex>
+<!--Maponly_30-->
+<a name=ex30></a>
+<a href="Images/maponly_30_lg.png">
+<img src="Images/maponly_30_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_30.html">maponly_30.ncl</a>: This script
+shows how to use the <a href="../Document/Graphics/Resources/mp.html#mpMaskOutlineSpecifiers"><em>mpMaskOutlineSpecifiers</em></a>
+to remove the outlines of India, while keeping outlines from surrounding
+countries. In the third plot, meteorological subdivisions of India
+were added using a shapefile downloaded off the web.
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/maponly.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:56:33 GMT -->
+</html>
+
+

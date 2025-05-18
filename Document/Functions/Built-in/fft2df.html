@@ -1,0 +1,550 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/fft2df.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:30 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (general applied math)">
+<meta name="keywords" content="fft2df">
+<title>fft2df</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>fft2df</h1>
+
+<p>
+Performs a two-dimensional forward real discrete Fourier transform (i.e., Fourier analysis) of a real periodic array.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function fft2df (
+		x [*][*] : numeric   
+	)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>A real or double array of two dimensions. The dimensions may be any size.
+However, for efficiency reasons, it is recommended that the sizes be even.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+Since this is a real forward transform, only half of the Fourier spectrum 
+of <em>x</em>(M,N) is computed and stored.  
+A three-dimensional array, say <i>coef</i>, containing the real and 
+imaginary parts is returned. Since NCL does not currently support 
+complex numbers, the coefficients are returned as:  
+<pre>
+         returned: <i>coef</i>(2,M,N/2+1)
+        real part: <i>coef</i>(0,:,:)
+   imaginary part: <i>coef</i>(1,:,:)
+</pre>
+The original sizes of the two dimensional array, (M,N),
+are returned as attributes of <i>coef</i>.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<P>
+This function computes the two-dimensional discrete
+ Fourier transform of a real periodic array.  This transform is
+ known as the forward transform or Fourier analysis, transforming
+ from physical to spectral space.
+<P> 
+ The results of <strong>fft2df</strong> are normalized: 
+ a call to <strong>fft2df</strong> followed by a
+ call to <a href="fft2db.html"><strong>fft2db</strong></a> (or vice-versa) reproduces 
+ the original array within roundoff error. 
+<P>
+Missing values (denoted by _FillValue) are <b>not</b> allowed. 
+For efficiency reasons, no checking for missing values 
+is performed.  Hence, if missing values are present, 
+the results will be erroneous.
+<P>
+Depending upon the problem, the user may wish to 
+preprocess the original data.
+Commonly, the mean, the linear trend  [ <a href="dtrend.html"><strong>dtrend</strong></a> ]
+and known periodic components are removed:
+eg, a climatological  mean and/or the first several harmonics of the annual cycle.
+Further, since the <strong>fft2df</strong> assumes the data are
+periodic, the user may wish to <a href="taper.html"><strong>taper</strong></a> prior to
+performing the analysis.  Consult a book on Fourier Analysis for details.
+<p>
+An old but very readable reference is:
+<pre>
+        Peter Bloomfield
+        Fourier analysis of time series : An introduction
+        New York : John Wiley and Sons  , 1976
+</pre>
+A <b>very</b> readable text on real and complex fourier transforms is:
+<pre>
+        Steve Smith
+        The Scientist and Engineer's Guide to Digital Signal Processing
+</pre>
+It is availble at:
+<pre>
+        http://www.dspguide.com/pdfbook.htm
+</pre>
+
+NCL uses 
+
+<a href="https://www2.cisl.ucar.edu/resources/legacy/fft5"> FFTPACK5</a>
+
+developed by Paul Swarztrauber and Richard Valent. The specific Fortran subroutines used are:
+<pre>
+       fft2df:
+       http://www2.cisl.ucar.edu/resources/legacy/fft5/documentation#rfft2f.html
+
+       fft2db:
+       http://www2.cisl.ucar.edu/resources/legacy/fft5/documentation#rfft2b.html
+</pre>
+Please note that Fortran is column major while NCL (like C/C++) is row-major.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="fft2db.html"><strong>fft2db</strong></a>,
+<a href="ezfftf.html"><strong>ezfftf</strong></a>,
+<a href="ezfftb.html"><strong>ezfftb</strong></a>, 
+<a href="cfftf.html"><strong>cfftf</strong></a>, 
+<a href="cfftb.html"><strong>cfftb</strong></a>, 
+<a href="taper.html"><strong>taper</strong></a>, <a href="dtrend.html"><strong>dtrend</strong></a>,
+<a href="specx_anal.html"><strong>specx_anal</strong></a>, <a href="specxy_anal.html"><strong>specxy_anal</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><P>
+Demonstrate two-dimensional fourier analysis and synthesis.
+<pre>
+  N   = 8  
+  M   = 3 
+  x   = <a href="random_normal.html"><strong>random_normal</strong></a>( 10, 5, (/M,N/) )
+
+                              ; ANALYSIS
+  coef = <strong>fft2df</strong> (x)           ; coef:  [2] x [3] x [5]
+
+  <a href="printVarSummary.html"><strong>printVarSummary</strong></a>( coef )
+
+  <a href="print.html"><strong>print</strong></a>(<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", coef(0,:,:))+"    "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", coef(1,:,:)) )
+                              ; SYNTHESIS
+  xNew = <a href="fft2db.html"><strong>fft2db</strong></a> (coef)        ; (M,N)
+
+  xDiff = xNew-x
+  xDiff@long_name = "Difference: (xNew-xOrig)"
+  <a href="print.html"><strong>print</strong></a>(" ")
+  <a href="print.html"><strong>print</strong></a>("max(abs(Diff))="+<a href="max.html"><strong>max</strong></a>(<a href="abs.html"><strong>abs</strong></a>(Diff)))
+  <a href="print.html"><strong>print</strong></a>(" ")
+</pre>
+The (slightly edited)  output is:
+<pre>
+Variable: coef
+Type: float
+Total Size: 120 bytes
+            30 values
+Number of Dimensions: 3
+Dimensions and sizes:  <b> [2] x [3] x [5] </b>
+Coordinates:
+Number Of Attributes: 2
+  <b>M</b> :   3
+  <b>N</b> :   8
+(0)
+
+           <b>real</b>          <b>imag</b>
+           <b>coef(0,:,:)</b>   <b>coef(1,:,:)</b>  <b>freq</b>
+
+(0,0)      11.305        0.000        f=0.0   <===  mean of the input
+(0,1)       1.950        1.432        f=0.125 = 1/N
+(0,2)      -0.860       -2.598        f=0.25  = 2/N
+(0,3)       0.784       -2.750        f=0.375 = 3/N
+(0,4)       0.120        0.000        f=0.50  = 4/N
+
+(1,0)       0.884        0.454
+(1,1)      -0.191        0.682
+(1,2)       0.456        1.876
+(1,3)      -0.050       -2.473
+(1,4)      -0.152        0.611
+
+(2,0)       0.884       -0.454
+(2,1)      -0.323        2.370
+(2,2)       0.575       -0.670
+(2,3)      -0.880        2.693
+(2,4)      -0.152       -0.611
+</pre>
+The transform back yields no difference.
+<pre>
+(0)     max(abs(xDiff))=9.53674e-07
+</pre>
+
+<B>Example 2</B><P>
+
+Same as Example 1 but set the overall mean to 0.0 and then synthesize.
+This would be the 'anomaly' field (ie, the difference from the overall mean).
+<pre>
+  coef = <strong>fft2df</strong> (x)            ; coef:  [2] x [3] x [5]
+  coef(0,0,0) = 0.0            ; set mean coef to 0.0
+  xNoMean = <a href="fft2db.html"><strong>fft2db</strong></a>(coef)       ; SYNTHESIS
+</pre>
+
+
+<B>Example 3</B><P>
+Consider a daily climatology P(time,lat,lon): Extract data at 45N and demonstrate how
+the coefficients returned by <strong>fft2df</strong>  may be altered 
+and then synthesized via <a href="fft2db.html"><strong>fft2db</strong></a>. Since all the longitude
+values at 45N are extracted and the temporal data are from a climatology, the
+input data values are periodic in both space and time. Hence, the data need 
+not be pretreated.
+<pre>
+  LAT    = 45
+                                         ; P(365,72,144)
+  p      = P(:,<b>{</b>LAT<b>}</b>,:)                  ; extract 45N 
+  <a href="printVarSummary.html"><strong>printVarSummary</strong></a>( p )                   ; p(time,lon)  =>  p(365,144)
+
+  coef = <strong>fft2df</strong> (p)                      ; coef(2,365,73)  [ ANALYSIS ] 
+  <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(coef)                                       
+
+  coef(:,:,0:3) = 0.0                    ; coef(:,:,0:3) mean and 1st three waves set to 0.0 [removed]
+  coef(:,:, 4 ) = coef(:,:, 4)*0.25      ; coef(:,:, 4 ) is set to quarter amplitude
+  coef(:,:, 5 ) = coef(:,:, 5)*0.5       ; coef(:,:, 5 ) is set to half amplitude
+  coef(:,:, 6 ) = coef(:,:, 6)*0.75      ; coef(:,:, 6 ) is set to three-quarter amplitude
+                                         ; coef(:,:,7:8) are <b>not</b> modified
+  coef(:,:, 9 ) = coef(:,:, 9)*0.5       ; coef(:,:, 9 ) is set to half amplitude
+  coef(:,:,10:) = 0.0                    ; coef(:,:,10:) are set to 0.0 [removed] 
+
+  pNew = <a href="fft2db.html"><strong>fft2db</strong></a> (coef)                   ; pNew(365,144)   [SYNTHESIS]
+</pre>
+
+
+<B>Example 4</B><P>
+This is a variation of Example 3. A subset of the data is extracted
+in both time and space. Specifically, 100 time steps and longitudes spanning
+100E to 260E at latitude 10N are extracted. The array contains data that not 
+periodic in space or time.  Hence, both dimensions of the array should be 
+tapered to minimize "spectral leakage". The <a href="taper.html"><strong>taper</strong></a> function
+works on the rightmost dimension. Hence, it may be necessary to reorder
+an array. This is best accomplished via NCL's
+<a href="../../Language/reorder.html"> named dimension reordering</a>.
+<pre>
+  LAT    = 10
+  LONL   = 100
+  LONR   = 260
+
+  z      = Z(0:99,{LAT},{LONL:LONR})             
+  <a href="printVarSummary.html"><strong>printVarSummary</strong></a>( z )                         ; z(time,lon)  =>  z(100,65)
+
+  zTaperLon = z                                ; copy to include meta data
+  zTaperLon = <a href="taper.html"><strong>taper</strong></a>(zTaperLon, 0.1, 0)         ; taper the rightmost dim [lon]
+
+  zTaperLonTime = zTaperLon(lon|:, time|:)     ; reorder:  zTaperLon(lon,time) 
+  zTaperLonTime = <a href="taper.html"><strong>taper</strong></a>(zTaperLonTime, 0.1, 0) ; taper in time [rightmost dimension]
+
+                                               ; reorder so time is leftmost
+  coef = <strong>fft2df</strong> (zTaperLonTime(time|:,lon|:))  ; coef(2,100,33)   [ ANALYSIS ]
+  <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(coef)
+
+  coef(:,:,0:3) = 0.0                    ; coef(:,:,0:3) mean and 1st three waves set to 0.0 [removed]
+  coef(:,:, 4 ) = coef(:,:, 4)*0.25      ; coef(:,:, 4 ) is set to quarter amplitude
+  coef(:,:, 5 ) = coef(:,:, 5)*0.5       ; coef(:,:, 5 ) is set to half amplitude
+  coef(:,:, 6 ) = coef(:,:, 6)*0.75      ; coef(:,:, 6 ) is set to three-quarter amplitude
+                                         ; coef(:,:,7:8) are <b>not</b> modified
+  coef(:,:, 9 ) = coef(:,:, 9)*0.5       ; coef(:,:, 9 ) is set to half amplitude
+  coef(:,:,10:) = 0.0                    ; coef(:,:,10:) are set to 0.0 [removed]
+
+  zNew = <a href="fft2db.html"><strong>fft2db</strong></a> (coef)                   ; zNew(100,65)    [SYNTHESIS]
+
+
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/fft2df.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:30 GMT -->
+</html>

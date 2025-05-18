@@ -1,0 +1,50 @@
+;************************************
+; ocean_4.ncl
+;************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+;
+; This file still has to be loaded manually 
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl" 
+
+begin
+;---Read data
+ in = addfile("h_avg_Y0191_D000.00.nc","r")
+
+ lat = 25    ; latitude to slice data at
+ T  = in->T(0,:,{lat},{270:350})   
+
+;---Convert depth coordinate array to meters
+ T&z_t       = T&z_t / 100.
+ T&z_t@units = "m"
+
+ wks = gsn_open_wks("png","ocean")   ; send graphics to PNG file
+
+;---Set plotting options
+ res                      = True
+
+ res@cnFillOn             = True     ; turn on color fill
+ res@cnFillPalette        = "BlAqGrYeOrRe"
+ res@cnLineLabelsOn       = False    ; turns off contour line labels
+ res@cnInfoLabelOn        = False    ; turns off contour info label
+
+ res@cnLevelSelectionMode = "ManualLevels"
+ res@cnMaxLevelValF       = 26
+ res@cnMinLevelValF       = 2
+
+ res@gsnYAxisIrregular2Linear = True ; converts irreg depth to linear 
+ res@trYReverse           = True     ; reverses y-axis
+
+ res@tmXBTickSpacingF     = 15   ; increase number of major ticks
+ res@lbOrientation        = "Vertical"
+ res@tiXAxisString        = ""
+ res@tiYAxisString        = "depth (m)"                    ; y-axis title
+ res@tiMainString         = "Slice at " + lat + "N" ; main title
+
+;---Create plot
+ plot = gsn_csm_contour(wks,T,res)            
+ 
+end

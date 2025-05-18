@@ -1,0 +1,226 @@
+;================================================
+;  ndvi_2.ncl
+;================================================
+; Concepts illustrated:
+;   - Unpacking (Unraveling) a GIMMS NDVI  netCDF file
+;   - For "Fun", create several 'time' variables
+;   - Using the "where" function to create a land-sea mask
+;=================================================
+; NDVI: Normalized Difference Vegetation Index-3rd generation
+; Resolution:  0.05° by 0.05° grid
+;
+; The NDVI3g are a consistent, long-term record of remotely sensed 
+; vegetation observations allows characterization the health of 
+; vegetation in different regions.
+; 
+; Cite dataset when used as a source. 
+; See the dataset's DOI landing page for citation details at 
+;     doi:10.7289/V5PZ56R6.
+;=================================================
+; This is NOT a well written netCDF file.
+;
+;  (0) It does not adhere to any netCDF convention.
+;  (1) No units for lat/lon.
+;  (2) _FillValues are type 'double' while 'ndvi' values are type short
+;  .   netCDF requires the type of the _FillValue attribute match the 
+;  .   type of the variable with which it is associated
+;  (3) Constructing a time series of files spanning several months or years 
+;  .   would necessitate creating a better 'time' variable.
+;
+;  The global (file) attributes have no line breaks so it is a
+;  long 'run-on' stream of words. Difficult to read!
+;
+;  Further: As noted in the documentation: *values include embedded flags*
+;           A nuisance!
+;=================================================
+; https://nex.nasa.gov/nex/projects/1349/wiki/general_data_description_and_access/
+;=================================================
+;   flagW = ndvi3g-floor(ndvi3g/10)*10 + 1;
+;   ndvi = floor(ndvi3g/10)/1000
+;
+;   The meaning of the FLAG:
+;   FLAG = 7 (missing data)
+;   FLAG = 6 (NDVI retrieved from average seasonal profile, possibly snow)
+;   FLAG = 5 (NDVI retrieved from average seasonal profile)
+;   FLAG = 4 (NDVI retrieved from spline interpolation, possibly snow)
+;   FLAG = 3 (NDVI retrieved from spline interpolation)
+;   FLAG = 2 (Good value)
+;   FLAG = 1 (Good value)
+;
+;   datatype: 16-bit signed integer
+;   byte-order: big endian
+;
+;   scale-factor: 10000
+;   min-valid: -10000
+;   max-valid: 10000
+;   mask-water: -10000
+;   mask-nodata: -5000
+;
+;=================================================
+  diri = "./"
+  fili = "ndvi3g_geo_v1_1981_0712.nc4"
+  pthi = diri+fili
+  f    = addfile(pthi, "r")
+
+;---Adjust for a 'better' time: include year
+
+  year = f@Year                        ; Year is type "double"
+  monf = f->time                       ; 7.0, 7.5, 8., ....
+
+;---Make different 'time' variables
+
+  yyyy   = conform(monf,toint(year),-1)
+  mm     = toint(monf)
+  dom    = days_in_month(yyyy, mm)
+  dd     = toint(mod(monf,toint(monf))*dom)+1
+  hh     = conform(monf,0,-1)
+  mn     = conform(monf,0,-1)
+  sc     = conform(monf,0,-1)
+  tunits = "hours since 1980-01-01 00:00:00"
+  time   = cd_inv_calendar(yyyy,mm,dd,hh,mn,sc,tunits, 0)
+  time!0 = "time"
+  time&time =  time 
+
+  yyyymmdd = yyyy*10000 + mm*100 + dd
+  yyyymmdd!0    = "time"
+  yyyymmdd&time = time
+
+  yyyyFrac = yyyymmdd2yyyyFrac(yyyymmdd, 0.0) 
+  yyyyFrac@units = "year and fraction-of-year"
+  yyyyFrac!0     = "time"
+  yyyyFrac&time  =  time 
+
+;---Import packed data: 
+;--- (a) add units to lat/lon coordinate variables
+;--- (b) Use correctly typed _FillValue   
+;--- (b) overwrite the 'time' with better time
+
+  NDVI  = f->ndvi                      ; original unpacked values
+  NDVI@_FillValue = toshort(NDVI@missing_value)     ; match typeof 'ndvi' (netCDF rule)
+  NDVI&time = time                     ; over write original time
+  
+  NDVI&lat@units = "degrees_north"     ; no units on the file
+  NDVI&lon@units = "degrees_east"      ; attach
+
+  printVarSummary(NDVI)
+  printMinMax(NDVI,0)
+
+;---Create a land-water mask ; What is (short) -32768? documentation has -10000  ?
+
+  water      = toshort(-32768)         ; documentation -10000
+  land_water = where(NDVI.eq.water, toshort(1), toshort(0))
+  copy_VarCoords(NDVI, land_water)
+  land_water@long_name = "Land/Water mask"
+  land_water@units     = "0-land; 1-water"
+  printVarSummary(land_water)
+  printMinMax(land_water,0)
+
+;---Make ocean _FillValue
+
+  NDVI = where(NDVI.eq.water, NDVI@_FillValue , NDVI)
+
+;---Unpack (Unravel !) Variables
+
+  flagW = toshort(NDVI - (NDVI-floor(NDVI/10)*10 + 1) )
+  copy_VarCoords(NDVI, flagW)
+  flagW@long_name = "flagW"
+  flagW@units     = ""
+                  ; the 'new line' character make it readable
+  flagW@info      = (/"=1,2 [good values]" + str_get_nl()\
+                     ,"=3 [retrieved from spline interpolation]"+ str_get_nl()        \
+                     ,"=4 [retrieved from spline interpolation, ?snow]"+ str_get_nl() \
+                     ,"=5 [retrieved from average seasonal profile"+ str_get_nl()     \
+                     ,"=6 [retrieved from average seasonal profile, ?snow"+ str_get_nl() \
+                     ,"=7 [missing; also _FillValue " /)
+  printVarSummary(flagW)
+  printMinMax(flagW,0)
+
+;---Flags as positive
+  flagX = where(flagW.lt.toshort(0), abs(flagW/1000), toshort(0))  
+  copy_VarCoords(NDVI, flagX)
+  flagX@long_name = "flags only"
+  flagX@units     = ""
+  printVarSummary(flagX)
+  printMinMax(flagX,0)
+
+  ndvi = floor(NDVI/10)/1000
+  copy_VarCoords(NDVI, ndvi)
+  ndvi@long_name = "ndvi3g: GIMMS"
+  ndvi@units     = ""
+  printVarSummary(ndvi)
+  printMinMax(ndvi,0)
+
+;;opt = True
+;;opt@PrintStat = True
+;;stat_ndvi = stat_dispersion(ndvi, opt )
+
+;=========================================
+;            PLOT
+;=========================================
+  nt  = 0                                    ; 1st time step
+  wks = gsn_open_wks("png","ndvi")            ; send graphics to PNG file
+
+  res                  = True                 ; plot mods desired
+  res@gsnMaximize      = True 
+
+  res@cnFillOn         = True                 ; color Fill 
+  res@cnFillMode       = "RasterFill"         ; Raster Mode
+  res@cnLinesOn        =  False               ; Turn off contour lines
+
+  res@cnLevelSelectionMode = "ExplicitLevels" ; set explict contour levels
+  res@cnLevels             = (/0.5/)          ; Values are either 0 or 1, so use something in the middle
+  res@cnFillColors         = (/"red","green"/)
+
+  res@lbLabelPosition   = "Center"            ; label position
+  res@lbLabelAlignment  = "BoxCenters"        ; label orientation
+  res@lbLabelStrings    = (/ "0", "1"/)
+  res@pmLabelBarHeightF = 0.07                ; default is a bit too thick
+
+  res@mpCenterLonF     = 0                    ; set map center at 180
+  res@mpFillOn         = False
+
+  res@gsnLeftString    = "NDVI3g: Land-Sea Mask"
+  res@gsnCenterString  = "NASA/GSFC GIMMS"      
+  res@tiMainString     =  fili
+  res@gsnRightString   = yyyymmdd(nt)
+  
+  plot = gsn_csm_contour_map_ce(wks, land_water(nt,:,:), res) ; create plot
+
+                                              ; delete 
+  delete([/ res@cnLevelSelectionMode, res@cnLevels , res@cnFillColors /])
+  delete([/ res@lbLabelPosition, res@lbLabelAlignment, res@lbLabelStrings, res@pmLabelBarHeightF /])
+
+;---FLAGS
+
+  res@cnLevelSelectionMode = "ManualLevels"   ; set manual contour levels
+  res@cnMinLevelValF       =   1              ; set min contour level
+  res@cnMaxLevelValF       =   4              ; one less than max
+  res@cnLevelSpacingF      =   1              ; set contour spacing
+ ;res@cnFillPalette        = "default"
+  res@cnFillColors        := (/"red","green","blue","yellow"/)
+  res@lbLabelStrings       = ispan(0,4,1)    
+  res@lbLabelPosition      = "Center"         ; label position
+  res@lbLabelAlignment     = "BoxCenters"
+
+  res@lbTitleString        = "0=good, 1=good, 2=spline,3=spline[?snow]"
+  res@lbTitlePosition      = "Bottom"
+  res@lbTitleFontHeightF   = 0.0125           ; default 0.025
+  res@gsnLeftString        = "NDVI3g: Flags"
+
+  plot = gsn_csm_contour_map_ce(wks,flagX(nt,:,:), res) ; create plot
+
+                                              ; delete
+  delete([/ res@lbLabelPosition, res@lbLabelAlignment, res@lbLabelStrings,  res@gsnRightString  \
+         ,  res@lbTitleFontHeightF, res@lbTitleString , res@lbTitlePosition, res@lbTitleFontHeightF \
+         ,  res@cnFillColors   /])
+
+;---NDVI values
+  
+  res@cnMinLevelValF      :=  -0.25             ; set min contour level
+  res@cnMaxLevelValF      :=   0.95             ; one less than max
+  res@cnLevelSpacingF     :=   0.05             ; set contour spacing
+
+  res@gsnLeftString        = "NDVI3g Index"
+  res@gsnRightString       = yyyymmdd(nt)
+  res@cnFillPalette        = "WhiteBlueGreenYellowRed" 
+  plot = gsn_csm_contour_map_ce(wks, ndvi(nt,:,:), res) ; create plot

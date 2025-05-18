@@ -1,0 +1,62 @@
+netcdf monthly_1979_1151 {
+dimensions:
+	time = UNLIMITED ; // (12 currently)
+	lat = 73 ;
+	lon = 144 ;
+	lev = 17 ;
+variables:
+	int time(time) ;
+		time:units = "yyyymmddhh" ;
+	int lev(lev) ;
+		lev:long_name = "isobaric level" ;
+		lev:units = "hPa" ;
+	float lat(lat) ;
+		lat:long_name = "latitude" ;
+		lat:GridType = "Cylindrical Equidistant Projection Grid" ;
+		lat:units = "degrees_north" ;
+		lat:Dj = 2.5f ;
+		lat:Di = 2.5f ;
+		lat:Lo2 = 357.5f ;
+		lat:La2 = -90.f ;
+		lat:Lo1 = 0.f ;
+		lat:La1 = 90.f ;
+	float lon(lon) ;
+		lon:long_name = "longitude" ;
+		lon:GridType = "Cylindrical Equidistant Projection Grid" ;
+		lon:units = "degrees_east" ;
+		lon:Dj = 2.5f ;
+		lon:Di = 2.5f ;
+		lon:Lo2 = 357.5f ;
+		lon:La2 = -90.f ;
+		lon:Lo1 = 0.f ;
+		lon:La1 = 90.f ;
+	double TIME(time) ;
+		TIME:long_name = "initial time" ;
+		TIME:units = "hours since 1800-01-01 00:00" ;
+	float T(time, lev, lat, lon) ;
+		T:forecast_time = 0 ;
+		T:parameter_number = 130 ;
+		T:parameter_table_version = 128 ;
+		T:gds_grid_type = 0 ;
+		T:level_indicator = 100 ;
+		T:_FillValue = -999.f ;
+		T:units = "K" ;
+		T:long_name = "Temperature" ;
+		T:center = "European Center for Medium-Range Weather Forecasts - Reading" ;
+	float Z(time, lev, lat, lon) ;
+		Z:forecast_time = 0 ;
+		Z:parameter_number = 129 ;
+		Z:parameter_table_version = 128 ;
+		Z:gds_grid_type = 0 ;
+		Z:level_indicator = 100 ;
+		Z:_FillValue = -999.f ;
+		Z:units = "m**2 s**-2" ;
+		Z:long_name = "Geopotential" ;
+		Z:center = "European Center for Medium-Range Weather Forecasts - Reading" ;
+
+// global attributes:
+		:creation_date = "Mon Sep 11 09:48:44 MDT 2006" ;
+		:Conventions = "None" ;
+		:source_file = "monthly_1979_1151.tar.grb" ;
+		:title = "GRIB-to-netCDF: Efficient Approach" ;
+}

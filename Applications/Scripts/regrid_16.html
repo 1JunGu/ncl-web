@@ -1,0 +1,237 @@
+-------------------------------------------------
+; regrid_16.ncl
+;
+; Concepts illustrated:
+;   - Read user specified region usin NCL'd coordinate subscripting suntax   {...}
+;   - Specify one or more central lat and lon
+;   - Specifying the radial distance [km] 
+;   - Use 'css2c' to convert lat/lon to Cartesian coordinates
+;   - Perform ann error check to make sure interpolated vaues are reasonable
+;   - Plotting the results     
+;   - Spatial plot with the central location(s) marked
+;-------------------------------------------------
+
+   vName = "precip"   ; name of desired variable
+
+   latS  =   0.0      
+   latN  =  30.0
+   lonW  =  75.0      ; longitudes on the file are 0->360
+   lonE  = 100.0
+
+   dirTrmm = "./" 
+   filTrmm = "3B42.20121022_20121031.daily_V7.nc"
+   pthTrmm = dirTrmm+filTrmm
+   f       = addfile(pthTrmm, "r")
+   PRC     = f->$vName$(:,{latS:latN},{lonW:lonE})   ; [time | 10] x [lat | 120] x [lon | 100]
+
+   printVarSummary(PRC)            
+   printMinMax(PRC,0)
+   print("---")
+   
+   dimPRC  = dimsizes(PRC)         ; entire grid
+   rankPRC = dimsizes(dimPRC) 
+   ntim    = dimPRC(0)
+   NLAT    = dimPRC(1)
+   MLON    = dimPRC(2)
+
+   ymdh    = cd_calendar(PRC&time,-3)  ; used in plot totle 
+   print(ymdh)
+   print("-----")
+   
+;---Specify center locations 
+ 
+   clat   = (/ 7.5,  10.0 /)
+   clon   = (/85.0,  90.0 /)
+   clat!0 = "center_lat"
+   clon!0 = "center_lon"
+   nctr   = dimsizes(clat)
+
+;---Specify desired distance from lat/lon centers
+
+   kmdist       = 400                  ; user specified maximum distance
+   kmdist@units = "km"
+
+   km2d         = 111.1            
+   km2d@long_name = "conversion factor: km=>degree"
+   km2d@units   = "km"
+
+   dmx          = kmdist/km2d          ; 400km/111.1 ==> approx 3.6 great circle degrees
+   dmx@long_name= "maximum distance"
+   dmx@units    = "km"
+
+   rearth       = 6371.22              ; average radius of earth 
+   rearth@units = "km"
+
+;---Convert all center latitudes and longitudes to Cartesian
+
+   xyzCtrCart   = css2c(clat, clon)*rearth; [3] x [2]
+   copy_VarCoords(clat,xyzCtrCart(0,:))
+   xyzCtrCart!0 =  "cartesian"            ; left dimension refers to Cartesian x,y,z
+   xyzCtrCart@long_name = "Cartesian Center Locations"
+   xyzCtrCart@units     =  rearth@units 
+
+   printVarSummary(xyzCtrCart)            ; [cartesian | 3] x [center | 2]
+   printMinMax(xyzCtrCart,0)
+   print("-----")
+   print(xyzCtrCart)                      ; print cartesian values of for center
+   print("-----")
+
+;================================================================================================
+; Set general graphice resources
+;================================================================================================
+
+   pltDir  = "./"
+   pltType = "png"
+   pltName = "regrid"
+   pltPath = pltDir+pltName
+
+   wks  = gsn_open_wks(pltType,pltPath)
+
+   cnres               = True
+   cnres@gsnDraw       = False
+   cnres@gsnFrame      = False
+   cnres@cnFillOn      = True
+   cnres@cnLinesOn     = False
+   cnres@cnLineLabelsOn= False
+   cnres@trGridType    = "TriangularMesh"
+   cnres@tiYAxisString = "KM from Center"
+   cnres@tiXAxisString = "KM from Center"
+
+   cnres@cnLevelSelectionMode = "ExplicitLevels"
+   colors              = (/"Snow","PaleTurquoise","PaleGreen","SeaGreen3" ,"Yellow"  \
+                          ,"Orange","HotPink","Red","Violet", "Purple", "Brown","Black"/)
+   cnres@cnLevels      = (/0.1,1,2.5,5,10,15,20,25,50,75,100/)
+   cnres@cnFillPalette = colors       ; set color map
+   cnres@cnFillMode    = "RasterFill"
+
+   plres  = True
+   plres@gsMarkerIndex = 16           ; Filled Circle
+   plres@gsMarkerSizeF = 0.015     
+   plres@gsMarkerThicknessF = 0.10      
+   plres@gsMarkerColor = "foreground"
+
+   res                = True          ; plot mods desired
+   res@gsnMaximize    = True          ; maximize plot size
+   res@gsnDraw        = False
+   res@gsnFrame       = False
+   res@gsnAddCyclic   = False
+ 
+   res@cnFillOn       = True          ; turn on color
+   res@cnLinesOn      = False         ; turn off contour lines
+   res@cnLineLabelsOn = False         ; turn off contour line labels
+
+   res@cnLevelSelectionMode = "ExplicitLevels"              
+   colors             = (/"Snow","PaleTurquoise","PaleGreen","SeaGreen3" ,"Yellow"  \
+                         ,"Orange","HotPink","Red","Violet", "Purple", "Brown","Black"/)
+   res@cnLevels       = (/0.1,1,2.5,5,10,15,20,25,50,75,100/) ; mm/day (same units as 'prc')
+   res@cnFillPalette  = colors       ; set color map
+   res@cnFillMode     = "RasterFill"
+ 
+   extra = 0.25                     ; If you want to have a small areal buffer
+   res@mpMinLatF      = min(PRC&lat)-extra
+   res@mpMaxLatF      = max(PRC&lat)+extra
+   res@mpMinLonF      = min(PRC&lon)-extra
+   res@mpMaxLonF      = max(PRC&lon)+extra
+   
+   res@mpGridAndLimbOn        = True       ; turn grid lines on
+   res@mpGridLineDashPattern  = 5          ; lat/lon lines dashed
+   res@mpGridLatSpacingF      = 2.0
+   res@mpGridLonSpacingF      = 2.0
+   res@mpGridAndLimbDrawOrder = "PostDraw" 
+   res@gsnMajorLonSpacing     =  4.0           
+   res@gsnMinorLonSpacing     =  1.0           ; must be >= 1.0
+   res@gsnMajorLatSpacing     =  2.0 
+   res@gsnMinorLatSpacing     =  1.0           ; must be >= 1.0
+
+;================================================================================================
+;---GRAPHICS
+;---Loop over each time and center. Extract the region around current center. 
+;---Dimension sizes may change. Use reassignment operator [ := ] where appropriate. 
+;================================================================================================
+
+do nt_plot=0,0       ; ntim-1
+                       ; georeferened map with center location(s) marked
+     res@tiMainString = "TRMM: "+ymdh(nt_plot) 
+     plot = gsn_csm_contour_map(wks,PRC(nt_plot,:,:), res) ; entire grid
+     plot@$unique_string("polymark")$ = gsn_add_polymarker(wks,plot,clon, clat, plres)
+     draw(plot)
+     frame(wks)
+
+  do nc_plot=0,nctr-1  ; loop over each center
+     latMin = clat(nc_plot)-dmx
+     latMax = clat(nc_plot)+dmx
+     lonMin = clon(nc_plot)-dmx
+     lonMax = clon(nc_plot)+dmx
+                                                             ; local region around enter
+     prc   := PRC(nt_plot,{latMin:latMax},{lonMin:lonMax})   ; (lat,lon)  
+     printVarSummary(prc)
+     printMinMax(prc,0)
+     print("-----")
+  
+;================================================================================================
+;---CONVERT lat/lon region associated with current center to Cartesian
+;================================================================================================
+     lat   := prc&lat                                  ; local region
+     lon   := prc&lon
+     nlat   = dimsizes(lat)
+     mlon   = dimsizes(lon)
+                                                       ; css2c requires the following
+     lat2d := conform_dims( (/nlat,mlon/), lat, 0)     ; (nlat,mlon)
+     lon2d := conform_dims( (/nlat,mlon/), lon, 1)     ; (nlat,mlon)
+  
+     printVarSummary(lat2d)
+     printMinMax(lat2d,0)
+     print("---------")
+     printVarSummary(lon2d)
+     printMinMax(lon2d,0)
+     print("---------")
+                                             ; cartesian conversion
+     xyzCart  := css2c(lat2d, lon2d)*rearth  ; current (nc_plot) region
+     xyzCart@units = "km"
+     xyzCart!0 =  "cartesian"                ; [cartesian | 3] ===> x,y,z 
+  
+     printVarSummary(xyzCart)                ; [cartesian | 3] x [nlat] x [mlon ]
+     printMinMax(xyzCart,0)
+     print("---------")
+  
+;================================================================================================
+;---ERROR CHECK: xyzCart: ALL distances should be 'rearth. 
+;---Allow for some rounding use an epsilon. 
+;---Not necessary. Just for illustration.
+;================================================================================================
+  
+     RE    = sqrt(xyzCart(0,:,:)^2 + xyzCart(1,:,:)^2 + xyzCart(2,:,:)^2)
+     REPS  = 0.01  ; small number relative to 'rearth' to allow for rounding [km]
+  
+     if (all(RE.gt.(rearth-REPS)) .and. all(RE.lt.(rearth+REPS))) then
+         print("CHECK: GOOD:  all(RE) = rearth="+rearth)
+     else
+         print("CHECK: ERROR: all(RE) .ne. rearth="+rearth)
+         exit
+     end if
+     print("-----")
+  
+;================================================================================================
+;---Center the cartesin locations about current [nc] clat/clon ==> xyzCtrCart
+;================================================================================================
+  
+     xyzCart(0,:,:) = xyzCart(0,:,:)-xyzCtrCart(0,nc_plot)
+     xyzCart(1,:,:) = xyzCart(1,:,:)-xyzCtrCart(1,nc_plot)
+     xyzCart(2,:,:) = xyzCart(2,:,:)-xyzCtrCart(2,nc_plot)
+  
+;================================================================================================
+;  PLOT
+;================================================================================================
+     cnres@tiMainString = "TRMM: Cartesian: "+ymdh(nt_plot)    \
+                        +": ["+sprintf("%5.1f",clat(nc_plot)) \
+                        +","  +sprintf("%5.1f",clon(nc_plot))+"]"
+  
+     cnres@sfXArray   := -xyzCart(0,:,:)    ; centered: not sure why - had to be used
+     cnres@sfYArray   :=  xyzCart(2,:,:)    ; centered
+     contour = gsn_csm_contour(wks,(/prc/),cnres)
+     contour@$unique_string("polymark")$ = gsn_add_polymarker(wks,contour, 0, 0, plres) 
+     draw(contour)
+     frame(wks)
+    end do            ; nc
+  end do              ; nt
+    

@@ -1,0 +1,563 @@
+<html>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/WRF_arw/wrf_user_interp_line.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:59:15 GMT -->
+<head>
+<meta name="description" content="NCL WRFUserARW.ncl functions (interpolation)">
+<meta name="keywords" content="wrf_user_interp_line">
+<title>wrf_user_interp_line</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../wrf.html">WRF</a>,
+<a class=crumb href="../interp.html">Interpolation</a>
+<br>
+<h1>wrf_user_interp_line</h1>
+
+<p>
+Interpolates a two-dimensional WRF-ARW field along a line.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.6.0">version 6.6.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"      ; These two libraries are <b>automatically</b>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/wrf/WRFUserARW.ncl"    ; <b>loaded</b> from NCL V6.4.0 onward.
+                                                              ; No need for user to explicitly load.
+
+	function wrf_user_interp_line (
+		var2d      : numeric,  
+		loc_param  : numeric,  
+		opt    [1] : logical   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  numeric
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>var2d</em>
+<p class=indent>A WRF-ARW field to be interpolated; it must have at least two
+dimensions, with the rightmost dimensions being latitude x
+longitude.
+</p>
+<em>loc_param</em>
+<p class=indent>Four values representing the start point and end point for the line 
+(start_x, start_y, end_x, end_y), OR two values representing a
+single point when <em>opt</em>@use_pivot is set to True, representing
+the pivot point.
+</p>
+<p class=indent>
+
+The values can be in grid coordinates or lat/lon coordinates (start_x
+= start_lon, start_y = start_lat, end_x = end_lon, end_y =
+end_lat). See the description below for more information.
+</p>
+<em>opt</em>
+<p class=indent>A logical scalar that can optionally contain attributes. See description below.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+Data interpolated to a specified line on the model domain.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function interpolates two-dimensional WRF-ARW model data onto a
+specified line.
+<p>
+
+This function replaces <a href="wrf_user_intrp2d.html"><strong>wrf_user_intrp2d</strong></a>,
+which will be deprecated in NCL V6.6.0.
+<p>
+
+The interpolation can be further customized by attaching attributes to
+the <em>opt</em> argument:
+<p>
+
+<ul>
+
+<li><i>use_pivot</i> - set to True to indicate that <em>loc_param</em>
+and <em>opt</em>@<i>angle</i> are used. Otherwise, <em>loc_param</em>
+must be set to four values to indicate a start and end point.
+<p>
+
+Default: False
+<p>
+
+<li><i>angle</i> - an angle for vertical plots - 90 represents a WE
+interpolation line; ignored if <em>opt</em>@<i>use_pivot</i> is either not
+set or is set to False.
+<p>
+
+Default: 0.0
+<p>
+
+<li><i>latlon</i> - set to True if the values in <em>loc_param</em>
+are latitude and longitude values rather than grid values
+<p>
+
+Default: False
+<p>
+
+<li><i>file_handle</i> - must be set to an NCL file handle (returned
+from
+<a href="../Built-in/addfile.html"><strong>addfile</strong></a> or <a href="../Built-in/addfiles.html"><strong>addfiles</strong></a>)
+when <em>opt</em>@<i>latlon</i> is True
+or <em>opt</em>@<i>linecoords</i> is True; otherwise, this is ignored.
+<p>
+
+<li><i>timeidx</i> - the time index to use for moving nests
+when <i>latlon</i> is True. Set to 0 if the nest is not moving.
+<p>
+
+Default: 0
+<p>
+
+
+<li><i>linecoords</i> - set to True to attach the latitude and
+longitude coordinates for the interpolation line as attributes "lats"
+and "lons" on the return variable.
+<p>
+
+Default: False
+<p>
+
+</ul>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="wrf_user_interp_level.html"><strong>wrf_user_interp_level</strong></a>,
+<a href="wrf_user_vert_cross.html"><strong>wrf_user_vert_cross</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<b>Example 1</b>: Interpolate a 2D field to two lines: one using a
+west-east line and one using a north-south line.
+<p>
+
+<pre>
+  a = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>("wrfout_d01_2008-09-28_06:30:00","r")
+
+;---Calculate T2 at first time step
+  t2 = <a href="wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"T2",0)
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(t2)    ; [south_north | 197] x [west_east | 206]
+
+;---Interpolate the field to a line using a pivot point in the middle of the domain and an angle.
+  dims          = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(t2)
+  loc_param     = (/ dims(1)/2, dims(0)/2 /)
+  opt           = True
+  opt@use_pivot = True
+
+  opt@angle     = 90.                      ; line from west to east
+  t2_line_we   = <strong>wrf_user_interp_line</strong>(t2,loc_param,opt)
+
+  opt@angle     = 0.                       ; line from south to north
+  t2_line_sn   = <strong>wrf_user_interp_line</strong>(t2,loc_param,opt)
+
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(t2_line_we)     ; [line_idx | 206]
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(t2_line_sn)     ; [line_idx | 197]
+</pre>
+<p>
+
+<b>Output:</b>
+
+<pre>
+  Variable: t2
+  Type: float
+  Total Size: 162328 bytes
+              40582 values
+  Number of Dimensions: 2
+  Dimensions and sizes : [south_north | 197] x [west_east | 206]
+  Coordinates: 
+  Number Of Attributes: 6
+  FieldType : 104
+  MemoryOrder : XY 
+  description : TEMP at 2 M
+  units : K
+  stagger :
+  coordinates : XLONG XLAT
+  
+  Variable: t2_line_we
+  Type: float
+  Total Size: 824 bytes
+              206 values
+  Number of Dimensions: 1
+  Dimensions and sizes : [line_idx | 206]
+  Coordinates: 
+  Number Of Attributes : 3
+  units : K
+  description : TEMP at 2 M
+  _FillValue : 9.96921e+36
+  
+  
+  Variable: t2_line_sn
+  Type: float
+  Total Size: 788 bytes
+              197 values
+  Number of Dimensions: 1
+  Dimensions and sizes : [line_idx | 197]
+  Coordinates: 
+  Number Of Attributes: 3
+  units : K
+  description : TEMP at 2 M
+  _FillValue : 9.96921e+36
+</pre>
+<p>
+  
+<b>Example 2</b>: Interpolate a 2D filed to a line (read from 105
+WRF output files) using start and end lat/lon values.
+<p>
+
+<pre>
+;---Open multiple WRF output files 
+  dir       = "./"
+  filenames = <a href="../Built-in/systemfunc.html"><strong>systemfunc</strong></a>("ls " + dir + "wrfout_d01_2008-09*")  ; 105 files
+  a = <a href="../Built-in/addfiles.html"><strong>addfiles</strong></a>(filenames,"r")
+
+;---Get T2 for all time steps
+  t2 = <a href="wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a, "T2",-1)   ; [Time | 105] x [south_north | 197] x [west_east | 206]
+
+;---Start/end lat/lon line for interpolation
+  start_lon = 115
+  end_lon   = 130
+  start_lat =  52
+  end_lat   =  42
+
+;---Options for lat/lon line
+  opt             = True
+  opt@latlon      = True
+  opt@file_handle = a[0]   ; use first file; only valid if not a moving nest
+  opt@linecoords  = True   ; returns lat/lon values on line as attributes of return value
+
+;---Interpolate the 2D field to the lat/lon line
+  t2_line  = <strong>wrf_user_interp_line</strong>(t2,(/start_lon,start_lat,end_lon,end_lat/),opt)
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(t2_line)   ; [Time | 105] x [south_north | 197] x [west_east | 206]
+</pre>
+<p>
+
+<b>Output:</b>
+
+<pre>
+  Variable: t2
+  Total Size: 17044440 bytes
+              4261110 values
+  Type: float
+  Number of Dimensions: 3
+  Dimensions and sizes : [Time | 105] x [south_north | 197] x [west_east | 206]
+  Coordinates: 
+  Number Of Attributes: 6
+  FieldType : 104
+  MemoryOrder : XY 
+  description : TEMP at 2 M
+  units : K
+  stagger :
+  coordinates : XLONG XLAT
+  
+  Variable: t2_line
+  Type: float
+  Total Size: 27720 bytes
+              6930 values
+  Number of Dimensions: 2
+  Dimensions and sizes : [Time | 105] x [line_idx | 66]
+  Coordinates: 
+  Number Of Attributes : 5
+  units : K
+  description : TEMP at 2 M
+  _FillValue : 9.96921e+36
+  lats : &lt;ARRAY of 66 elements&gt;
+  lons : &lt;ARRAY of 66 elements&gt;
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/WRF_arw/wrf_user_interp_line.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:59:15 GMT -->
+</html>

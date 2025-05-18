@@ -1,0 +1,62 @@
+;*****************************************************
+; trimesh_4.ncl
+;
+; Concepts illustrated:
+;   - Drawing the edges of a triangular mesh using gsn_coordinates
+;*****************************************************
+; This script requires NCL V6.6.0 or later.
+;*****************************************************
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;
+;  This data is from the Chesapeake Community Model Program Quoddy
+;  model:
+;
+;    http://ccmp.chesapeake.org
+;
+;  using the NOAA/NOS standardized hydrodynamic model NetCDF format:
+;
+;    https://sourceforge.net/projects/oceanmodelfiles
+;
+  f = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/ctcbay.nc","r")
+
+  depth       = f->depth
+
+  wks = gsn_open_wks("png","trimesh")
+
+  res                     = True
+  res@gsnMaximize         = True
+  res@gsnDraw             = False
+  res@gsnFrame            = False
+
+  res@mpLimitMode         = "LatLon"
+  res@mpMinLonF           = -77.5
+  res@mpMaxLonF           = -75.5
+  res@mpMinLatF           =  36.6
+  res@mpMaxLatF           =  39.7
+
+  res@mpDataBaseVersion     = "MediumRes"
+  res@mpDataBaseVersion     = "HighRes"
+  res@pmTickMarkDisplayMode = "Always"        ; nicer map tickmarks
+
+;---Titles
+  res@tiMainString                 = "Triangular mesh drawn by gsn_coordinates"
+  res@tiMainOffsetYF               = -0.02           ; Move the title down.
+
+  map = gsn_csm_map(wks,res)
+
+;---Draw the triangular mesh
+  lnres = True
+  lnres@gsnCoordsMeshVerticesOnCell     = f->ele
+  lnres@gsnCoordsMeshLatVertices        = f->lat 
+  lnres@gsnCoordsMeshLonVertices        = f->lon
+  lnres@gsnCoordsMeshVerticesStartIndex = 1
+
+  lnres@gsLineColor                     = "Blue"
+
+;---depth is just a dummy place holder. It is not used.
+  gsn_coordinates(wks,map,depth,lnres)
+end

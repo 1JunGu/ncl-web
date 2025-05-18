@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/generate_sample_indices.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:32 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (array creators)">
+<meta name="keywords" content="generate_sample_indices">
+<title>generate_sample_indices</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../random.html">Random number generators</a>,
+<a class=crumb href="../array_create.html">Array creators</a>
+<br>
+<h1>generate_sample_indices</h1>
+
+<p>
+Generate indices (subscripts) for resampling: with and without replacement.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.3.0">version 6.3.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function generate_sample_indices (
+		N       : integer or long,  
+		method  : integer           
+	)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>N</em>
+<p class=indent>The number of indices (subscripts) to be generated.
+</p>
+<em>method</em>
+<p class=indent>Integer which specifies which type of indices should be generated.
+<ul>
+<li> method=0: Sample <b>without replacement</b>. These can be used to 
+reshuffle the order. Use when the order of sampling may be important.
+Statistics like the mean and standard deviation will not be changed.
+<li> method=1: Sample <b>with replacement</b>. These can be used
+for (say) bootstrap resampling. Statistics like the mean and standard 
+deviation will be changed.
+</ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A one-dimensional array of size <em>N</em> containing the random integer indices (subscripts).
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+Uses a random algorithm to generate subscripts.
+<p>
+If <em>method</em>=1, the indicies are set using <a href="../Built-in/random_uniform.html"><strong>random_uniform</strong></a>. 
+Please read the documentation for  <a href="../Built-in/random_setallseed.html"><strong>random_setallseed</strong></a>.
+The 'seeds' can be manually set via <a href="../Built-in/random_setallseed.html"><strong>random_setallseed</strong></a>.
+Example 1 of <a href="../Built-in/random_setallseed.html"><strong>random_setallseed</strong></a> illustrates  a method of using the
+current date as a seed generator. 
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Built-in/generate_2d_array.html"><strong>generate_2d_array</strong></a>,
+<a href="../Built-in/random_uniform.html"><strong>random_uniform</strong></a>,
+<a href="../Built-in/random_setallseed.html"><strong>random_setallseed</strong></a>,
+<a href="generate_unique_indices.html"><strong>generate_unique_indices</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+The <strong>generate_sample_indices</strong> function uses the uniform random number generator.
+All NCL's  random number functions use random 'seeds'. The seeds can be any integer between 1 and 2147483562 (default is 1234567890). The seeds may be set: (i) by default; (ii) manually specified; or, (iii) 'dynamically set. Some examples:
+<pre>
+
+Manually set the random number seed(s)
+         rand1 = 1234567890
+         rand2 =  236484749
+         <a href="../Built-in/random_setallseed.html"><strong>random_setallseed</strong></a>(rand1, rand2) ; also: <a href="../Built-in/random_setallseed.html"><strong>random_setallseed</strong></a>(1234567890, 236484749)
+
+or, have  the system generate some numbers. One approach:
+
+         rand1 = <a href="../Built-in/toint.html"><strong>toint</strong></a>(<a href="../Built-in/systemfunc.html"><strong>systemfunc</strong></a>(" date +%s"))
+         rand2 = <a href="../Built-in/toint.html"><strong>toint</strong></a>(<a href="../Built-in/systemfunc.html"><strong>systemfunc</strong></a>(" date +%s"))
+
+</pre>
+<p>
+<b>Example 1: </b> Generate N random indices with (method=1) and without (method=0) replacement.
+<pre>
+         n   = 10
+         iwo = <strong>generate_sample_indices</strong>( n, 0 )
+         iw  = <strong>generate_sample_indices</strong>( n, 1 )
+
+         <a href="../Built-in/print.html"><strong>print</strong></a>("iwo+"   "+iw)
+
+The indices would be
+                 <b>iwo iw </b>
+          (0)     5   8
+          (1)     3   3
+          (2)     0   2
+          (3)     1   5
+          (4)     8   7
+          (5)     9   0
+          (6)     4   0
+          (7)     2   2
+          (8)     6   0
+          (9)     7   7
+</pre>
+Note that the <b>iwo</b> are unique while the <b>iw</b> have indices repeated (0, 7) while
+other indices (1, 4, 6, 9) are not present.
+
+<p>
+<b>Example 2: </b> Resample an array x[*] with and without replacement.
+<pre>
+         N   = 10
+         x   = <a href="../Built-in/fspan.html"><strong>fspan</strong></a>(17.89, 52.30,N)
+         iwo = <strong>generate_sample_indices</strong>( N, 0 )
+         iw  = <strong>generate_sample_indices</strong>( N, 1 )
+
+         xAvg     = <a href="../Built-in/avg.html"><strong>avg</strong></a>(x)
+         xAvg_iwo = <a href="../Built-in/avg.html"><strong>avg</strong></a>(x(iwo))
+         xAvg_iw  = <a href="../Built-in/avg.html"><strong>avg</strong></a>(x(iw) )
+
+         xStd     = <a href="../Built-in/stddev.html"><strong>stddev</strong></a>(x)
+         xStd_iwo = <a href="../Built-in/stddev.html"><strong>stddev</strong></a>(x(iwo))
+         xStd_iw  = <a href="../Built-in/stddev.html"><strong>stddev</strong></a>(x(iw) )
+
+         <a href="../Built-in/print.html"><strong>print</strong></a>(x+"   "+iwo+"   "+ x(iwo)+"   "+ iw+"   "+x(iw)  )
+
+         <a href="../Built-in/print.html"><strong>print</strong></a>("avg:  "+xAvg+"      "+xAvg_iwo+"      "+xAvg_iw )
+         <a href="../Built-in/print.html"><strong>print</strong></a>("std:  "+xStd+"      "+xStd_iwo+"      "+xStd_iw )
+
+
+                    <b>x         iwo   x(iwo)     iw    x(iw)</b>
+          (0)     17.89        2   25.5367      4   33.1833
+          (1)     21.7133      3   29.36        0   17.89
+          (2)     25.5367      1   21.7133      9   52.3
+          (3)     29.36        0   17.89        7   44.6533
+          (4)     33.1833      5   37.0067      3   29.36
+          (5)     37.0067      8   48.4767      4   33.1833
+          (6)     40.83        7   44.6533      8   48.4767
+          (7)     44.6533      4   33.1833      0   17.89
+          (8)     48.4767      6   40.83        1   21.7133
+          (9)     52.3         9   52.3         0   17.89
+
+          avg:    35.095           35.095           31.654     
+          std:    11.5757          11.5757          13.1459
+
+
+</pre>
+<b>Example 3: </b> Resample an array x(N,J,K) with and without replacement.
+<pre>
+         
+         iwo = <strong>generate_sample_indices</strong>( N, 0 )
+         iw  = <strong>generate_sample_indices</strong>( N, 1 )
+
+         xw   = new (dimsizes(x), <a href="../Built-in/typeof.html"><strong>typeof</strong></a>(x))
+         xwo  = new (dimsizes(x), <a href="../Built-in/typeof.html"><strong>typeof</strong></a>(x))
+
+         do nl=0,nlat-1              
+           do ml=0,mlon-1
+              xw(:,nl,ml)  = x(iw ,nl,ml)
+              xwo(:,nl,ml) = x(iwo,nl,ml)
+
+             ; .... do something ...
+
+           end do
+         end do
+</pre>
+<p>
+<b>==================================</b><br>
+Examples 4 and 5 illustrate the 'mechanics' of bootstrapping. They bootstrap the mean (average) statistic of a univariate variable. Bootstrapping (say) regression coefficients would require 'x' and 'y' variables. In this case, the 'y' would be resampled. Bootstrapping correlations would require that 'x' and 'y' pairs be resampled. 
+<p>
+There are other approaches. For example, in correlation  bootstrapping, 
+rather then pair resampling, individual 'x' and 'y' pairs, random block sequences could be used. Say, N=1200, then randomly calculate the correlations of many sub-sample blocks of length (say) 50. <br>  
+<b>==================================</b>
+<p>
+<b>Example 4: </b> 
+<p>
+Resample an array x(N) 'nBoot' times with replacement.
+	Since 'x' is one-dimensional, <a href="../Built-in/avg.html"><strong>avg</strong></a> and <a href="../Built-in/stddev.html"><strong>stddev</strong></a> are used.
+(<a href="../Built-in/dim_avg_n.html"><strong>dim_avg_n</strong></a> and <a href="../Built-in/dim_stddev_n.html"><strong>dim_stddev_n</strong></a> could have been used.)
+	Sort the boot-strapped array in ascending order. 
+	Get robust  (a) two sided 2.5 and 97.5% confidence limits and (b) one-sided 95% confidence limit.
+	<p>
+	This example is provided to illustrate the 'mechanics' of the bootstrap methodology.   
+	This does not account for any trend or other complications.
+	<p>
+	Bootstrapping can be computationally intense and, hence, time comsuming. A good test strategy
+	to test the script with a small 'nBoot' to make sure the mechanics are working correctly.
+	<p>
+	<pre>
+
+
+	N       = 100000 
+        xMean   = 0.0             ; population mean
+        xStdDev = 10.0            ; populaton standard deviation
+
+        <a href="../Built-in/random_setallseed.html"><strong>random_setallseed</strong></a>(36484749,119494848)   ; optional: see above comments
+        x       = <a href="../Built-in/random_normal.html"><strong>random_normal</strong></a>(xMean, xStdDev,N)
+
+	xAvg    = <a href="../Built-in/avg.html"><strong>avg</strong></a>(x)          ; Mean
+	xStd    = <a href="../Built-in/stddev.html"><strong>stddev</strong></a>(x)       ; Sample Standard Deviation
+	xStdErr = xStd/sqrt(N)                       ; std error of mean
+	<a href="../Built-in/print.html"><strong>print</strong></a>("N="+N+"  xAvg="+xAvg+"  xStd="+xStd+"  xStdErr="+xStdErr)
+
+	<b>nBoot =   10000</b>                           ; user specified
+        xBoot   = new (nBoot, <a href="../Built-in/typeof.html"><strong>typeof</strong></a>(x))
+
+        <a href="../Built-in/random_setallseed.html"><strong>random_setallseed</strong></a>(119494848, 36484749)   ; optional: see above comments
+ 
+	                                   ;For 'fun', generate the sampling indices directly in the 'x' array.
+	do ns=1,nBoot
+           xBoot(ns-1) = <a href="../Built-in/avg.html"><strong>avg</strong></a>( x(<strong>generate_sample_indices</strong>(N,1)) )
+	end do
+
+	xAvgBoot= <a href="../Built-in/avg.html"><strong>avg</strong></a>(xBoot)      ; Averages of bootstrapped samples
+        xStdBoot= <a href="../Built-in/stddev.html"><strong>stddev</strong></a>(xBoot)   ; Std Dev  "        "        "
+	<a href="../Built-in/print.html"><strong>print</strong></a>("nBoot="+nBoot+"  xAvgBoot="+xAvgBoot+"  xStdBoot="+xStdBoot)
+
+	<a href="../Built-in/qsort.html"><strong>qsort</strong></a>(xBoot)                ; sort bootstrap means into ascending order
+
+	n025 = <a href="../Built-in/toint.html"><strong>toint</strong></a>(0.025*nBoot)   ; indices for sorted array
+	n950 = <a href="../Built-in/toint.html"><strong>toint</strong></a>(0.950*nBoot)
+        n975 = <a href="../Built-in/toint.html"><strong>toint</strong></a>(0.975*nBoot)
+	<a href="../Built-in/print.html"><strong>print</strong></a>("n025="+n025+"  n950="+n950+"  n975="+n975)
+
+	xBoot_025 = xBoot(n025)     ;  2.5% level
+	xBoot_950 = xBoot(n950)     ; 95.0% level
+	xBoot_975 = xBoot(n975)     ; 97.5% level
+	<a href="../Built-in/print.html"><strong>print</strong></a>("xBoot_025="+xBoot_025)
+	<a href="../Built-in/print.html"><strong>print</strong></a>("xBoot_950="+xBoot_950)
+	<a href="../Built-in/print.html"><strong>print</strong></a>("xBoot_975="+xBoot_975)
+	</pre>
+	The output for this examples is:
+	<pre>
+
+	N=100000  xAvg=-0.00324151  xStd=10.0478               <== near 0, 10
+	nBoot=10000  xAvgBoot=-0.00394782  xStdBoot=0.0316319  <== near xStdErr
+
+	n025=250  n950=9500  n975=9750
+	xBoot_025=-0.0662322
+	xBoot_950=0.0472644
+	xBoot_975=0.0571641
+
+	xStdErr=0.0316228
+	</pre>
+	<p>
+	<b>Example 5: </b> 
+	<p>
+	Similar to Example 4 but resample an array containing 100 years of monthly mean values: x(ntim,nlat,mlon) where ntim=1200. 
+	Certainly, all 1200 time steps could be used BUT there is an annual cycle. To bootstrap the (say) January and July values, the monthly
+	sub-samples to be boot strapped would be x(0::12,:,:) and x(6::12,:,:), respectively. Another approach would be: (i) calculate a monthly climatology
+	(ii) calculate the anomalies from each monthly climatology; then, (iii) assuming the anomalies are independent of month, bootstrap 
+	the derived anomaly array. 
+	<p>
+	This example is provided to illustrate the 'mechanics' of the bootstrap methodology on a multi-dimensional array.
+	This does not account for trend or other complications.
+	<p>
+	Bootstrapping can be computationally intense and, hence, time comsuming. 
+	This is particulary true if the array sizes [(ntim,nlat,mlon)] are large. A prudent test strategy
+	would be to test script with a small 'nBoot' to make sure the mechanics are working correctly.
+	<p>
+	<pre>
+	fmdl    = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>("MODEL.nc", "r")
+	x       = fmdl->TREFHT                      ; [time | 1200] x [lat | 192] x [lon | 288]
+
+	xAvg    = <a href="../Built-in/avg.html"><strong>avg</strong></a>(xAnom)                        ; mean anomalies over all grid pts and times
+	xStd    = <a href="../Built-in/stddev.html"><strong>stddev</strong></a>(xAnom)                     ; stddev of all anomalies and times
+	<a href="../Built-in/print.html"><strong>print</strong></a>(xAvg)                                  ; scalar [hopefully 0.0  :-) ]
+	<a href="../Built-in/print.html"><strong>print</strong></a>(xStd)                                  ; scalar
+
+	dimx    = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(x)
+	ntim    = dimx(0)
+	nlat    = dimx(1)
+        mlon    = dimx(2)
+
+	units   = x@units                            ; convenience only
+	                                             ; calculate monthly climatologies
+	xClm   = <a href="clmMonTLL.html"><strong>clmMonTLL</strong></a>(x)                       ; [time | 12] x [lat | 192] x [lon | 288]
+        printVarSummary(xClm)
+	; calculate monthly anomalies
+	xAnom  = <a href="calcMonAnomTLL.html"><strong>calcMonAnomTLL</strong></a>(x, xClm)           ; [time | 1200] x [lat | 192] x [lon | 288]
+	xAnom@units = units
+
+	<a href="../Built-in/delete.html"><strong>delete</strong></a>([/x, xClm/])                          ; no longer needed
+
+	nBoot   = 1000                               ; <b>This could be time consuming</b>
+	                                             ; <b>Test with small nBoot (eg: nBoot=10)</b>
+	dimx(0) = nBoot                              ; 'trick'                                      
+	xBoot   = <a href="../Built-in/new.html"><strong>new</strong></a> (dimx, typeof(xAnom))         ; array to hold nBoot results 
+
+	do ns=0,nBoot-1                              ; generate bootstrap results
+           iw = <strong>generate_sample_indices</strong>(ntim,1)
+           xBoot(ns,:,:) = <a href="../Built-in/dim_avg_n.html"><strong>dim_avg_n</strong></a>( xAnom(iw,:,:), 0)
+	end do
+	<a href="../Built-in/delete.html"><strong>delete</strong></a>(xAnom)                                ; no longer needed
+
+	                                             ; mean of all bootstrap samples at each grid point
+	xAvgBoot = <a href="../Built-in/dim_avg_n.html"><strong>dim_avg_n</strong></a>(xBoot, 0)              ; [192] x [288]                   
+        <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(xBoot)
+
+	idx  = <a href="../Built-in/dim_pqsort_n.html"><strong>dim_pqsort_n</strong></a>(xBoot, 2, 0) ; sort bootstrap means into ascending order at each grid point
+	i025 = <a href="../Built-in/toint.html"><strong>toint</strong></a>(0.025*nBoot)
+        i975 = <a href="../Built-in/toint.html"><strong>toint</strong></a>(0.975*nBoot)
+                                          ; NCL's 'dimension reduction' will result in a 2D array
+	xBoot_025   = xBoot(i025,:,:)           ;  2.5% level; (nlat,mlon)
+	xBoot_975   = xBoot(i975,:,:)           ; 97.5% level; (nlat,mlon)
+	xBoot_Range = xBoot_975 - xBoot_025
+
+	xBoot_025@long_bame = "Bootstrap  2.5% Mean"
+	xBoot_025@units     = units
+	xBoot_975@long_bame = "Bootstrap 97.5% Mean"
+	xBoot_975@units     = units
+	xBoot_Range@long_name = "95% anomaly range"
+	xBoot_Range@units     = units
+
+	<a href="copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(xAnom(0,:,:), xBoot_025)  
+	<a href="copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(xAnom(0,:,:), xBoot_975)
+
+	<a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(xBoot_025)    ; [lat | 192] x [lon | 288]
+	<a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(xBoot_975)    ; [lat | 192] x [lon | 288]
+	<a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(xBoot_Range)  ; [lat | 192] x [lon | 288]
+        <a href="../Built-in/printMinMax.html"><strong>printMinMax</strong></a>(xBoot_Range, 1)) 
+	</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/generate_sample_indices.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:32 GMT -->
+</html>

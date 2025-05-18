@@ -1,0 +1,81 @@
+;*******************************************************
+; leg_sln_12.ncl
+;
+; Concepts illustrated:
+;   - Manually creating a legend using simple_legend
+;   - Manually creating a legend using simple_legend_ndc
+;
+;*******************************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"
+
+begin
+;---Create dummy data for four XY plots.
+  NPTS   = 500
+  y      = new((/4,NPTS/),float)
+  theta  = 0.031415926535898*ispan(0,NPTS-1,1)
+  y(0,:) = sin(theta)
+  y(1,:) = 2+sin(2*sqrt(fabs(theta)))   ; Make sure they
+  y(2,:) = 4+sin(3*sqrt(fabs(theta)))   ; don't intersect.
+  y(3,:) = 6+sin(10*sqrt(fabs(theta)))
+
+  wks = gsn_open_wks("png","leg_sln")   ; send graphics to PNG file
+
+; Set common XY plot resources
+
+  res                        = True
+  res@gsnDraw                = False
+  res@gsnFrame               = False
+  res@tiMainString           = "Using simple_legend_ndc"
+  res@xyExplicitLabels       = "y" + ispan(1,4,1)                    ; XY plot labels
+  res@xyLineThicknessF       = 3.5
+  res@xyLineColors           = (/"brown","purple","orange","green"/) ; colors for XY plot
+  res@xyDashPatterns         = (/1,8,11,15/)                         ; dash patterns for XY plot
+  res@vpYF                   = 0.9                                   ; Move plot up a little to make room for legend
+
+; Set common resources for legends
+
+  genres                     = True
+  textres                    = True
+  lineres                    = True
+  genres@XPosPercent         = 26
+  genres@YPosPercent         = 20
+  textres@lgLabels           = res@xyExplicitLabels(::-1) ; reverse label order for legend
+  textres@lgItemCount        = 4
+  lineres@lgLineThicknesses  = 3.5
+  lineres@lgLineColors       = res@xyLineColors(::-1)     ; reverse color order for legend
+  lineres@lgDashIndexes      = res@xyDashPatterns(::-1)   ; reverse pattern order for legend
+  lineres@LineLengthPercent  = 40
+
+; Draw first legend, first XY plot, and NDC grid if needed
+
+  simple_legend_ndc(wks, genres, lineres, textres)
+
+;  drawNDCGrid(wks)  ; Uncomment this line to display a coordinate grid for debugging purposes
+
+  plot = gsn_csm_y(wks,y,res)
+
+  draw(plot)
+  frame(wks)
+
+;---Set resources for second XY plot and create it
+  res@trYMinF                = -4.5      ; Leave space at bottom for legend
+  res@tiMainString           = "Using simple_legend"
+
+  plot2 = gsn_csm_y(wks,y,res)
+
+;---Set resources for second legend and draw it
+
+  genres@XPosPercent = 36  ; change legend X-axis position
+  textres@lgLabels = "These are long legend labels, y" + ispan(4,1,1) ; set legend labels...
+  lineres@LineLengthPercent = 8
+
+  dum = simple_legend(wks, plot2, genres, lineres, textres)
+
+  draw(plot2)
+  frame(wks)
+
+end

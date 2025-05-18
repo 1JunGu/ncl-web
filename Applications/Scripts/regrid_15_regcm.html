@@ -1,0 +1,304 @@
+;-------------------------------------------------
+; regrid_15_RegCM_ERA.ncl
+;
+; Concepts illustrated:
+;   - Read ERA netCDF file
+;   - Reorder variable from N->S to S->N as required 
+;   - Specifying the central lat and lon
+;   - Specifying the radial distances of points to be interpolated
+;   - Use local function 'rgrid2geocircle' located in 'grid2geolocation'
+;     to get the radial locations via 'nggcog'; use bilinear
+;     interpolation (linint2_points) to get the values at various radii.
+;   - Write a netCDF file [optional]
+;   - Plotting the results     
+;     Spatial plot with the central location marked
+;     Contour radial values         
+;     Contour of averages at each radius
+;-------------------------------------------------
+load "./grid2geocircle.ncl"        ; radial interpolation library
+;================================================================================================
+;                               MAIN
+;================================================================================================
+;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;---User settings
+
+   vName   = "WIND"                        ; will be derived from ua and va
+ ;;vName   = "ta"                          ; in the file
+   diri    = "/Users/shea/Data/netCDF/"
+   filroot = "ERA_25km_UW_TC1"
+   fili    = filroot+".nc" 
+
+   nrad    = 25                            ; # of radii
+   radmax  = 4                             ; max degrees from center
+
+   PLOT    = True
+   if (PLOT) then
+       pltDir  = "./"
+       pltName = "radial.ERA_25km_UW_TC1_"+vName
+   end if
+
+   netCDF  = True       ; True means create a netCDF file
+   if (netCDF) then
+       dirNC = "./"
+       filNC = "radial_"+vName+".ERA_25km_UW_TC1.nc"
+       titleNC = "Radial Average of "+vName
+   end if
+;++++++++++++++++ END USER SETTINGS +++++++++++++++++++++++
+
+;---Open & Read a series of GRIB@ files
+
+   pthi  =  diri+fili
+;; setfileoption("grb","SingleElementDimensions","Forecast_time")  ; only GRIB
+
+   f     = addfiles(pthi,"r")
+   if (vName.eq."WIND") then       ; derived variable
+       u     = f[:]->ua
+       v     = f[:]->va
+       printVarSummary(u)
+       print("-----")
+       printVarSummary(v)
+       print("-----")
+
+       x = sqrt(u^2 + v^2)             ; create wind speed variable
+       copy_VarCoords(u,x)
+       x@long_name = "wind speed"
+       x@units     =  u@units
+   else
+       x     = f[:]->$vName$
+   end if
+
+   printVarSummary(x)
+   printMinMax(x,0)
+   print("-----")
+
+   dimx  = dimsizes(x)             
+   rankx = dimsizes(dimx)          ; rankx=3 or 4
+   ntim  = dimx(0)                 ; ntim=1
+   if (rankx.ne.4) then
+       print("regrid_15: FATAL: currently written for 4D: (time,level,lat,lon): rank="+rankx)
+       exit
+   end if
+
+;---Grid must be in ascending latitude order
+
+   if (x&lat(0).gt.x&lat(1)) then
+       x = x(:,:,::-1,:)           ; reorder South-to-North
+       printVarSummary(x)
+       printMinMax(x,0)
+       print("-----")
+   end if
+
+;---Specify the central lat/lon point(s). 
+
+   clat  = 7.97
+   clon  = 114.61
+   clat!0= "center_lat"
+   clon!0= "center_lon"
+   nctr  = dimsizes(clat)
+
+;---Specify radii: can be unequally spaced but must be monotonically increasing
+
+   radius       = fspan(0,radmax,nrad)  ; radii (degrees)
+   radius!0     = "radius"
+   radius@units = "degrees"
+   radius@long_name = "Radii"
+   nrad         = dimsizes(radius) 
+
+;---Calculate the interpolated value and lat/lon locations of each circle at each radius
+    
+   N = 180
+   x_geocircle = rgrid2geocircle(x, clat, clon, radius, N, False)
+   printVarSummary(x_geocircle)
+   print("-----")
+
+;---Clarity: Explicitly extract the returned variables from the returned list variable
+
+   xrad = x_geocircle[0]
+   plat = x_geocircle[1]          ; radial [azimuthal] latitudes 
+   plon = x_geocircle[2]          ;   "        :       longutudes
+   printVarSummary(xrad)          ; [time | 1] x [center | 1] x [plev | 4] x [radius | 25] x [circle | 180]     
+   printVarSummary(plat)          ; [center | 1] x [radius | 25] x [circle | 180]          
+
+;---Average all 'geo-circles' for each time, each center, each pressure level and each radius
+
+   xrad_avg = dim_avg_n_Wrap(xrad, rankx)  
+   printVarSummary(xrad_avg)      ; [time | 1] x [center | 1] x [plev | 4] x [radius | 25]
+
+;---Create a netCDF file
+
+   if (isvar("netCDF") .and. netCDF) then
+        delete( [/plat@radii_input_values, plon@radii_input_values/] )  ; redundant
+
+        pthNC = dirNC+filNC
+        system("/bin/rm -f "+pthNC)          ; explicitly remove any pre-existing file
+
+        clat@long_name = "geocircle center latitudes"
+        clat@units     = "degrees_north"
+        clon@long_name = "geocircle center latitudes"
+        clon@units     = "degrees_east"
+
+        ncdf = addfile(pthNC ,"c")           ; open output netCDF file
+
+;---Create global attributes of the file (optional)
+
+        fAtt               = True            ; assign file attributes
+        fAtt@title         = titleNC
+        fAtt@source_file   = fili
+        fAtt@Conventions   = "CF-1.0"
+        fAtt@creation_date = systemfunc ("date")
+        fileattdef( ncdf, fAtt )            ; copy file attributes
+
+;---Make time UNLIMITED ; recommended  for most applications
+
+        filedimdef(ncdf,"time",-1,True)
+
+;---Write variables to nc file
+
+        ncdf->CLAT           = clat
+        ncdf->CLON           = clon
+        ncdf->PLAT           = plat
+        ncdf->PLON           = plon
+        ncOutName            = vName+"_RADIAL_AVERAGE"
+        ncdf->$ncOutName$    = xrad_avg   
+        ncRadiusName         = vName+"_RADIUS"
+        ncdf->$ncRadiusName$ = xrad   
+end if                                 ; netCDF
+
+;================================================================================================
+;  PLOT
+;================================================================================================
+
+if (PLOT) then
+   ymdh = cd_calendar(x&time,-3)  ; used in plot totle 
+   print(ymdh)
+   print("-----")
+
+   pltType = "png"
+   pltPath = pltDir+pltName
+
+   wks  = gsn_open_wks(pltType,pltPath)
+
+; Original data at selected level over a mao 
+
+   res              = True          ; plot mods desired
+   res@gsnMaximize  = True          ; maximize plot size
+   res@gsnFrame     = False
+   res@gsnAddCyclic = False
+ 
+   res@cnFillOn     = True          ; turn on color
+   res@cnLinesOn    = False         ; turn off contour lines
+   res@cnLineLabelsOn  = False      ; turn off contour line labels
+  ;res@cnFillPalette= "BlAqGrYeOrReVi200"
+ 
+   extra = 0.25                     ; If you want to have a small areal buffer
+   res@mpMinLatF    = min(x&lat)-extra
+   res@mpMaxLatF    = max(x&lat)+extra
+   res@mpMinLonF    = min(x&lon)-extra
+   res@mpMaxLonF    = max(x&lon)+extra
+ 
+ ;---Draw map of the original variable  at specified level (plev)
+ 
+   nt_plot = ntim-1    ; arbitrary time index; (ntim-1) is the last time
+   plev    = 500       ; hPa
+   res@tiMainString = ymdh(nt_plot)+": plev="+plev 
+
+ ;;optsd = True                                      ; explore the data ?
+ ;;optsd@PrintStat = True
+ ;;statsd = stat_dispersion(x(nt_plot,{plev},:,:), optsd )   ; explore data being plotted
+ 
+   plot = gsn_csm_contour_map(wks,x(nt_plot,{plev},:,:), res)
+ 
+; add marker for central location
+
+   plres  = True
+  ;plres@gsMarkerIndex = 2           ; Plus sign ( + )
+  ;plres@gsMarkerIndex = 15          ; Circle with x
+   plres@gsMarkerIndex = 16          ; Filled Circle
+   plres@gsMarkerSizeF = 0.015     
+   plres@gsMarkerThicknessF = 0.10      
+   plres@gsMarkerColor = "foreground"; "white"  
+   gsn_polymarker(wks, plot, clon, clat, plres) 
+   frame(wks)
+
+ ;;delete( res@cnFillMode ) 
+
+; Azimuthal style plot
+
+do nc_plot=0,nctr-1                        ; currently only 1 center [index 0]
+   radData = xrad(nt_plot,nc_plot,{plev},:,:)
+   printVarSummary(radData)                ; [radius | 17] x [circle | 180]
+
+   res@sfXArray  = plon(nc_plot,:,:)       ;---Set coordinates          
+   res@sfYArray  = plat(nc_plot,:,:)      
+   printVarSummary(plon(nc_plot,:,:))      ; radius | 17] x [circle | 180]      
+   printMinMax(res@sfXArray,0)
+   printMinMax(res@sfYArray,0)
+
+   extra = 0.10                            ; If you want to have a small areal buffer
+   res@mpMinLatF = min(plat)-extra 
+   res@mpMaxLatF = max(plat)+extra
+   res@mpMinLonF = min(plon)-extra
+   res@mpMaxLonF = max(plon)+extra
+    
+   res@gsnMajorLonSpacing =  2.0           ; ?BUG? ... these don't work in this application
+   res@gsnMinorLonSpacing =  1.0
+   res@gsnMajorLatSpacing =  2.0 
+   res@gsnMinorLatSpacing =  1.0 
+
+   res@mpGridAndLimbOn        = True       ; turn grid lines on
+   res@mpGridLineDashPattern  = 5          ; lat/lon lines dashed
+   res@mpGridLatSpacingF      = 2.0
+   res@mpGridLonSpacingF      = 2.0
+   res@mpGridAndLimbDrawOrder = "PostDraw" ; Draw grid first
+
+   plot = gsn_csm_contour_map(wks,radData, res)
+   gsn_polymarker(wks, plot, clon, clat, plres) 
+   frame(wks)
+                                                                               ; X-section is not a map
+   delete( [/ res@mpMinLatF, res@mpMaxLatF, res@mpMinLonF, res@mpMaxLonF /] )  ; not appropriate for X-section
+   delete( [/ res@sfXArray, res@sfYArray /] )                                  ; not appropriate for X-section
+   delete( [/ res@gsnMajorLatSpacing, res@gsnMajorLonSpacing /] )              ; not appropriate for X-section
+   delete( [/ res@gsnMinorLatSpacing, res@gsnMinorLonSpacing /] )              ; not appropriate for X-section
+   delete( [/ res@mpGridAndLimbOn, res@mpGridLineDashPattern \
+            , res@mpGridLatSpacingF, res@mpGridLonSpacingF   \
+            , res@mpGridAndLimbDrawOrder /] )
+end do                                     ; nctr
+
+  ;if (isatt(res,"cnFillOn")) then
+  ;    delete( res@cnFillMode )              
+  ;end if
+
+;---Draw cross-section
+ 
+   res@gsnFrame            = True
+   res@tiMainFontHeightF   = 0.020     ; default 0.025
+   res@lbOrientation       = "vertical"
+ 
+   res@trYReverse          = True
+  ;res@gsnYAxisIrregular2Log = True    ; Convert Y axis to logarithmic
+   res@tiYAxisString       = "Pressure (Pa)"                   
+   res@tiXAxisString       = "Radius (degrees)"  
+ 
+   if (vName.eq."VVEL_P0_L100_GLL0") then       ; want symmetric 
+       res@cnFillPalette   = "ViBlGrWhYeOrRe"
+
+     ;;optsd = True
+     ;;optsd@PrintStat = True
+     ;;stat_xrad_avg   = stat_dispersion(xrad_avg(nt_plot,:,:,:), optsd )
+ 
+       symMinMaxPlt (xrad_avg(nt_plot,:,:,:),20,False,res)    
+       res@cnMinLevelValF   = -5.00              ; set min contour level
+       res@cnMaxLevelValF   =  5.00              ; set max contour level
+       res@cnLevelSpacingF  =  0.25              ; set contour spacing
+   end if
+ 
+;---For each time, center ... draw a contour
+ 
+   do nt=nt_plot,nt_plot  ; nt=0,ntim-1  ==> all
+     do nc=0,nctr-1       ; nc=0,nctr-1  ==> all
+        res@tiMainString = "rgrid2geocircle: "+ymdh(nt)+": ["+sprintf("%5.1f",clat(nc)) \
+                                                       +","+sprintf("%5.1f",clon(nc))+"]"
+        plot = gsn_csm_contour(wks,xrad_avg(nt,nc,:,:),res)       ; contour the variable
+     end do
+   end do
+ end if    ; PLOY 

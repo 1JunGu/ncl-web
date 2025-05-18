@@ -1,0 +1,784 @@
+<HTML>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/overlay.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:10:54 GMT -->
+<Head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to create overlay plots.">
+<meta name="keywords" content="NCL, graphics, visualization, boxplot box plot">
+</head>
+<TITLE>NCL Graphics: Overlay Plots</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+    <h1>NCL Graphics: Overlay Plots</h1>
+
+    <div class=mainimage>
+    <img src="Images/overlay_6_lg.png" align=left border=0></a><br>
+    </div>
+
+    <div class=text>
+    <p>
+    Overlay plots are different plots (like vectors and contours) that are drawn
+    on top of each other, and possibly on top of a map.<p>
+    There are many different ways that one can create overlay plots:
+    <ul> 
+    <li>Use the <a href="../Document/Functions/Built-in/overlay.html">overlay</a> procedure (this is the best method)</li>
+    <li>Use the <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map_overlay.html"><strong>gsn_csm_contour_map_overlay</strong></a> plotting function (this method is not usually recommended)</li>
+    <li>Manually overlay plots by drawing each plot and not advancing the frame</li>
+    <li>Use <a href="../Document/Functions/Built-in/NhlAddData.html"><strong>NhlAddData</strong></a> to add a line, a legend, or other graphical object to an existing plot. 
+    <li>If plotting WRF data, you can alternatively use the <a href="../Document/Functions/WRF_arw/wrf_overlays.html"><strong>wrf_overlays</strong></a> or <a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a> plotting functions</li>
+    </ul>  
+    <p>
+    There are numerous examples of overlay plots available across many different NCL web pages. A number of them can be 
+    found on the <a href="conOncon.html">Contours overlaid on contours</a> Application page. 
+    </p>
+   </div>
+
+    <div class=ex>
+    <!--overlay_1-->
+    <a name=ex1></a>
+    <a href="Images/overlay_1_lg.png">
+    <img src="Images/overlay_1_sm.png" align=left border=2></a>
+    <a href="Scripts/overlay_1.html">overlay_1.ncl</a>: 
+    Create individual plots with <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a> and <a href="../Document/Graphics/Interfaces/gsn_csm_contour.html"><strong>gsn_csm_contour</strong></a>, and use
+    <a href="../Document/Functions/Built-in/overlay.html">overlay</a> to combine them. 
+    <p>
+    As we only wish that the overlaid plot be drawn, <a href="../Document/Graphics/Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a> and <a href="../Document/Graphics/Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a> are both set
+    to False in the two resource lists. After <a href="../Document/Functions/Built-in/overlay.html">overlay</a> is called, <a href="../Document/Functions/Built-in/draw.html"><strong>draw</strong></a> is called
+    to draw plot, which has had plot_ov overlaid on it. Finally, the <a href="../Document/Functions/Built-in/frame.html"><strong>frame</strong></a> is advanced, in essence completing the page. 
+    
+    <p>
+    Note that you are not allowed to use any gsn_csm_*_map plotting functions to create the <b>2nd</b> input in 
+    <a href="../Document/Functions/Built-in/overlay.html">overlay</a>, as an error message will result.</p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Overlays/NCL_overlay_1.html#sphx-glr-gallery-overlays-ncl-overlay-1-py">here</a>.
+    </div>
+    
+    <div class=ex>
+    <!--overlay_2-->
+    <a name=ex2></a>
+    <a href="Images/overlay_2_lg.png">
+    <img src="Images/overlay_2_sm.png" align=left border=2></a>
+    <a href="Scripts/overlay_2.html">overlay_2.ncl</a>: 
+    Similar to example 1, except  <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map_overlay.html"><strong>gsn_csm_contour_map_overlay</strong></a> is used in lieu of 
+    <a href="../Document/Functions/Built-in/overlay.html">overlay</a>.
+    </div>
+
+    <div class=ex>
+    <!--overlay_3-->
+     <a name=ex3></a>
+     <a href="Images/overlay_3_lg.png">
+     <img src="Images/overlay_3_sm.png" align=left border=2></a>
+     <a href="Scripts/overlay_3.html">overlay_3.ncl</a>: 
+     Similar to examples 1 and 2, except here plot2 is manually drawn on plot by not advancing the frame upon the creation of plot.
+     <p>
+     Note that when manually overlaying, one strives to create each plot the exact same size in the exact same location on the page. 
+     In this example, that was trivial. In some cases, the <a href="../Document/Graphics/Resources/vp.html#vpXF"><em>vpXF</em></a>, <a href="../Document/Graphics/Resources/vp.html#vpYF"><em>vpYF</em></a>, <a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a>, and 
+     <a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> resources, various titles and font heights all need to be set the same for both plots. 
+     </p>
+     </div>
+
+     <div class=ex>
+     <!--overlay_4-->
+     <a name=ex4></a>
+     <a href="Images/overlay_4_lg.png">
+     <img src="Images/overlay_4_sm.png" align=left border=2></a>
+     <a href="Scripts/overlay_4.html">overlay_4.ncl</a>: 
+     Manually overlay 2 histograms.
+     <p>
+     To get both histograms to be drawn the exact same size and the same, <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramClassIntervals"><em>gsnHistogramClassIntervals</em></a> and
+     <a href="../Document/Graphics/Resources/tr.html#trYMaxF"><em>trYMaxF</em></a> needed to be set the same for both plots.</p>
+     </div>
+     
+     <div class=ex>
+     <!--overlay_5-->
+     <a name=ex5></a>
+     <a href="Images/overlay_5_lg.png">
+     <img src="Images/overlay_5_sm.png" align=left border=2></a>
+     <a href="Scripts/overlay_5.html">overlay_5.ncl</a>: 
+     Documents how to use <a href="../Document/Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a> to create an overlay plot that is then overlaid on the base plot 
+     by using <a href="../Document/Functions/Built-in/overlay.html">overlay</a>.
+     <p>
+     This is one way to overlay a pattern filled contour field on top
+     of a different color filled contour field. Another way can be found on 
+     <a href="coneff.html#ex14">example 14</a> on the <a href="coneff.html">Contour Effects</a> applications page.
+     </div>
+     
+     <div class=ex>
+     <!--overlay_6-->
+     <a name=ex6></a>
+     <a href="Images/overlay_6_lg.png">
+     <img src="Images/overlay_6_sm.png" align=left border=2></a>
+     <a href="Scripts/overlay_6.html">overlay_6.ncl</a>:
+
+     Demonstrates how to overlay a color filled contour field,
+     streamlines, and color filled vectors all on one plot.
+     <p>
+
+     Two label bars are created, one for the color filled contour
+     field, and one for the color filled vector field. Individually 4
+     plots are created: A plot showing just a map, a color filled
+     contour field plot, a streamline plot, and a color filled vector
+     plot.  <strong>overlay</strong> is then used to overlay the
+     contour, streamline and vector plot on the map plot.
+     <p>
+
+     The resources <a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a>
+     and <a href="../Document/Graphics/Resources/vc.html#vcLevelPalette"><em>vcLevelPalette</em></a> are used
+     to indivudally assign color maps for the color contours and vectors.
+     <p>
+     A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Overlays/NCL_overlay_6.html#sphx-glr-gallery-overlays-ncl-overlay-6-py">here</a>.
+     </div>
+     
+     <div class=ex>
+     <!--overlay_7-->
+     <a name=ex7></a>
+     <a href="Images/overlay_7_lg.png">
+     <img src="Images/overlay_7_sm.png" align=left border=2></a>
+     <a href="Scripts/overlay_7.html">overlay_7.ncl</a>: 
+     Documents how to overlay xy plots whose timeseries are of different sizes. As <a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a> expects each input
+     timeseries to be the same size, this is one method that can be used to add timeseries of different lengths to a single plot.  
+     <p>
+     <a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a> is used to add a legend to the overlaid plot, which allows the legend to be resized
+     if the plot itself is resized.</p> 
+     
+     </div>
+     
+<div class=ex>
+<!--ConOncon_5-->
+<a name=ex5></a>
+<a href="Images/conOncon_5_lg.png">
+<img src="Images/conOncon_5_sm.png" align=left border=2></a> 
+<a href="Scripts/conOncon_5.html">conOncon_5.ncl</a>: "Spaghetti" contours
+overlaid on a map. The first spaghetti contour is created using
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>, and subsequent
+contours are created using 
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour.html"><strong>gsn_csm_contour</strong></a>.  
+</div>
+
+<div class=ex>
+<!--ConOncon_9-->
+<a name=ex9></a>
+<a href="Images/conOncon_9_lg.png">
+<img src="Images/conOncon_9_sm.png" align=left border=2></a>
+
+<a href="Scripts/conOncon_9.html">conOncon_9.ncl</a>: This image
+describes land use in different resolutions for each domain. This
+script was originally written in <a
+href="http://www.pyngl.ucar.edu/">PyNGL</a> by Ufuk Utku Turuncoglu of
+the Istanbul Technical University in relation to a Turkey Climate
+Change Scenarios project.
+<p>
+
+The <a href="../Document/Functions/Built-in/overlay.html">overlay</a>
+procedure is used to do the multiple contour overlays. These contours
+are over a map, so the first contour (coarse) plot is created with
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>, and the
+other two contour plots are created using 
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour.html"><strong>gsn_csm_contour</strong></a>.  
+
+<p>
+
+Polylines are drawn on top of the map to show the three domains.
+
+</div>
+
+     <div class=ex>
+     <!--overlay_8-->
+     <a name=ex8></a>
+     <a href="Images/overlay_8_lg.png">
+     <img src="Images/overlay_8_sm.png" align=left border=2></a>
+     <a href="Scripts/overlay_8.html">overlay_8.ncl</a>: 
+
+     Shows how to overlay a scatter plot on a contour plot. The key is
+     that the axes of both plots must be in the same data space.
+     <p>
+     The next example shows how to overlay two plots that are not
+     in the same data space.
+     
+     </div>
+
+<div class=ex>
+<!--overlay_9-->
+<a name=ex9></a>
+<a href="Images/overlay_9_1_lg.png">
+<img src="Images/overlay_9_1_sm.png" align=left border=2></a>
+<a href="Images/overlay_9_2_lg.png">
+<img src="Images/overlay_9_2_sm.png" align=left border=2></a>
+<a href="Images/overlay_9_3_lg.png">
+<img src="Images/overlay_9_3_sm.png" align=left border=2></a>
+<a href="Images/overlay_9a_lg.png">
+<img src="Images/overlay_9a_sm.png" align=left border=2></a>
+<a href="Scripts/overlay_9.html">overlay_9.ncl</a> / 
+<a href="Scripts/overlay_9a.html">overlay_9a.ncl</a>: 
+
+Shows two different ways to overlay a line contour plot on a filled
+contour plot when they have two different axes. The "overlay_9.ncl"
+script uses <a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a> to
+add the line contour plot as an annotation of the filled contour plot.
+The "overlay_9a.ncl" script uses <strong>overlay</strong> procedure,
+along with setting the
+special <a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> resource to
+True.
+<p>
+Note that the left axis corresponds with the filled contour plot,
+and the right Y axes with the line contour plot.
+<p>
+
+Since the axes are not in the same data space, this example only works
+if the Y ranges of the two plots line up exactly.
+<p>
+
+When you use <strong>overlay</strong>, the tickmarks and labels
+get removed from the overlay plot. The "overlay_9a.ncl" example
+adds them to the base plot on the Y right axis.
+</div>
+
+<div class=ex>
+<!--overlay_10-->
+<a name=ex10></a>
+<a href="Images/overlay_10_lg.png">
+<img src="Images/overlay_10_sm.png" align=left border=2></a>
+<a href="Scripts/overlay_10.html">overlay_10.ncl</a>: 
+
+Shows how to overlay a shaded contour plot on a filled contour plot
+and get labelbars for both plots by drawing one vertically and
+one horizontally.
+
+</div>
+
+<div class=ex>
+<!--xy_32-->
+<a name=ex32></a>
+<a href="Images/xy_32_lg.png">
+<img src="Images/xy_32_sm.png" align=left border=2></a>
+
+<a href="Scripts/xy_32.html">xy_32.ncl</a>: This example shows how to
+draw a 8-curve XY plot with 4 legends stacked side-by-side.<p>
+
+In order to do this, it is necessary to create 4 XY plots, each with
+two curves and two items in its legend. The legend for each plot is
+moved to the right or left slightly so they don't overlap.  The plots
+are then all "connected" into one plot using
+the <strong>overlay</strong> procedure.
+
+</div>
+
+
+<div class=ex>
+<!--wrf_gsn_5-->
+<a name=wrfgsn5></a>
+<a href="Images/wrf_gsn_5_lg.png">
+<img src="Images/wrf_gsn_5_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_5.html">wrf_gsn_5.ncl</a>
+
+This example shows how to overlay line contours, vectors, and filled
+contours on a map. The data and map projection are all read off a WRF
+output file.
+
+</div>
+
+<div class=ex>
+<!--wrf_nogsn_5-->
+<a name=wrfnogsn5></a>
+<a href="Images/wrf_nogsn_5_lg.png">
+<img src="Images/wrf_nogsn_5_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_nogsn_5.html">wrf_nogsn_5.ncl</a>
+
+This example is similar to the previous one, except it shows
+how to use WRF plotting functions instead of gsn_csm plotting 
+functions.
+
+</div>
+
+<div class=ex>
+<!--overlay_11-->
+<a name=ex11></a>
+<a href="Images/overlay_11_lg.png">
+<img src="Images/overlay_11_sm.png" align=left border=2></a>
+<a href="Scripts/overlay_11.html">overlay_11.ncl</a>: 
+
+This example shows how to overlay vectors on top of a filled contour plot,
+where the contours are masked by a geographical area and the vectors
+are not.  The masking is accomplished by setting:
+<p>
+
+<pre>
+  mpres@<a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a>   = "MediumRes"
+  mpres@<a href="../Document/Graphics/Resources/mp.html#mpMaskAreaSpecifiers"><em>mpMaskAreaSpecifiers</em></a> = (/"China:states","Taiwan"/)
+</pre>
+<p>
+
+The mask area specifier names are part of the
+<a href="../Document/HLUs/Classes/MapPlot.html#Pre-Defined-String-Constants-Ncarg4_1">predefined group
+names</a> available in the "MediumRes" map database.
+
+
+<p>
+
+This script was written by Yang Zhao (CAMS) (Chinese Academy of
+Meteorological Sciences).
+<p>
+There are two versions of this projection available in Python. Version (a) is found <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Overlays/NCL_overlay_11a.html#sphx-glr-gallery-overlays-ncl-overlay-11a-py">here</a> and version (b) is found <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Overlays/NCL_overlay_11b.html#sphx-glr-gallery-overlays-ncl-overlay-11b-py">here</a>.
+</div>
+
+<div class=ex>
+<!--overlay_12-->
+<a name=ex12></a>
+<a href="Images/overlay_12_1_lg.png">
+<img src="Images/overlay_12_1_sm.png" align=left border=2></a>
+<a href="Images/overlay_12_2_lg.png">
+<img src="Images/overlay_12_2_sm.png" align=left border=2></a>
+<a href="Scripts/overlay_12.html">overlay_12.ncl</a>: 
+
+This example shows how you can create two color contour plots, each
+with their own color map, and then use the <strong>overlay</strong>
+procedure to overlay them into a single image.
+<p>
+
+The  <a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a> 
+resource is used to set the color map for both plots. The 
+color map for the reflectivity contours is first
+read in using <a href="../Document/Functions/Built-in/read_colormap_file.html"><strong>read_colormap_file</strong></a>, so
+that the first color can be set to transparent.
+<p>
+
+Transparency is used in both plots to subdue the colors in the terrain
+map, and to make one of the colors in the reflectivity plot completely
+transparent.
+<p>
+
+Important note: In NCL V6.3.0 and earlier the labelbar does not
+reflect the same opacities as the filled contours; this bug was fixed
+in NCL V6.4.0. A new resource
+called <a href="../Document/Graphics/Resources/lb.html#lbOverrideFillOpacity"><em>lbOverrideFillOpacity</em></a> was
+introduced in NCL V6.4.0 which allows you to keep the labelbar colors
+fully opaque independent of the opacity of the filled contours.
+<p>
+
+The first frame shows the partially opaque labelbar, and the
+second frame shows a fully opaque labelbar created
+by setting <a href="../Document/Graphics/Resources/lb.html#lbOverrideFillOpacity"><em>lbOverrideFillOpacity</em></a> 
+to True.
+<p>
+
+For a version of this script that does animation, see 
+<a href="rgbacolor.html#ex10">newcolor_10.ncl</a> on the
+<a href="rgbacolor.html">RGB/A</a> example page.
+
+</div>
+
+<div class=ex>
+
+<!--overlay_13-->
+<a name=ex13></a>
+<a href="Images/overlay_13_1_lg.png">
+<img src="Images/overlay_13_1_sm.png" align=left border=2></a>
+<a href="Images/overlay_13_2_lg.png">
+<img src="Images/overlay_13_2_sm.png" align=left border=2></a>
+<a href="Images/overlay_13_3_lg.png">
+<img src="Images/overlay_13_3_sm.png" align=left border=2></a>
+<a href="Scripts/overlay_13.html">overlay_13.ncl</a>:
+
+This example shows what happens when you try to overlay two plots that
+don't have the same X and Y axis ranges. The X/Y axis from the "base" plot
+is the one that gets used for both plots, which may cause your "overlay" 
+plot to be cut off if its X and/or Y axis outside the range of the 
+X/Y axis of the "base" plot.
+<p>
+
+In this example, the <b>X axis of the second plot is longer than the first</b>, and
+the <b>Y axis of the first plot is longer than the second</b>. The first image
+shows what happen when you overlay plot #2 on plot #1.  The second image
+shows what happen when you overlay plot #1 on plot #2. 
+<p>
+
+For the third image, the X/Y range was increased to be large enough to accommodate
+both plots.
+
+</div>
+
+<div class=ex>
+<!--overlay_14-->
+<a name=ex14></a>
+<a href="Images/overlay_14_lg.png">
+<img src="Images/overlay_14_sm.png" align=left border=2></a>
+<a href="Scripts/overlay_14.html">overlay_14.ncl</a>:
+
+This example illustrates overlaying an 'xy-object' onto a 'contour-object.' 
+The original source code was from:
+<pre>
+
+  - Ehimen Williams: Institute of Meteorology and Geophysics
+  - University of Cologne, Germany
+</pre>
+
+</div>
+
+<div class=ex>
+<!--overlay_15-->
+<a name=ex15></a>
+<a href="Images/overlay_15_1_lg.png">
+<img src="Images/overlay_15_1_sm.png" align=left border=2></a>
+<a href="Images/overlay_15_2_lg.png">
+<img src="Images/overlay_15_2_sm.png" align=left border=2></a>
+<a href="Images/overlay_15_3_lg.png">
+<img src="Images/overlay_15_3_sm.png" align=left border=2></a>
+<a href="Images/overlay_15_4_lg.png">
+<img src="Images/overlay_15_4_sm.png" align=left border=2></a>
+<a href="Scripts/overlay_15.html">overlay_15.ncl</a>:
+
+This example overlays two XY plots on a third XY plot (the base
+plot). For illustrative purposes, the three individual plots are
+drawn, and then the fourth image shows the overlaid plots.
+<p>
+
+This script shows how the <strong>overlay</strong> procedure
+adopts the X/Y axis from the base plot.  This means that the overlaid
+plots may be cut off if their axis ranges are outside the axis ranges
+of the base plot.  The overlaid curves will be plotted correctly, but
+you will note in the fourth image that the red and green curves are
+truncated because they don't fit in the same range as the blue curve.
+<p>
+
+If you want the axes of the base plot to be large enough to encompass
+all overlaid curves, then you will need to set the resources 
+<a href="../Document/Graphics/Resources/tr.html#trXMinF"><em>trXMinF</em></a> /
+<a href="../Document/Graphics/Resources/tr.html#trXMaxF"><em>trXMaxF</em></a> /
+<a href="../Document/Graphics/Resources/tr.html#trYMinF"><em>trYMinF</em></a> /
+<a href="../Document/Graphics/Resources/tr.html#trYMaxF"><em>trYMaxF</em></a>.
+Also note that the main title and the X and Y axis titles from the
+base plot will be inherited from the base plot. This example uses
+<a href="../Document/Manuals/Ref_Manual/NclStatements.html#Setvalues">setvalues</a> to change the titles after the
+plot is created, but before <strong>overlay</strong> is called.
+<p>
+
+For an example that shows how to set the axis ranges and do more
+customization of titles, see example overlay_16.ncl below.
+
+</div>
+
+<div class=ex>
+<!--overlay_16-->
+<a name=ex16></a>
+<a href="Images/overlay_16_1_lg.png">
+<img src="Images/overlay_16_1_sm.png" align=left border=2></a>
+<a href="Images/overlay_16_2_lg.png">
+<img src="Images/overlay_16_2_sm.png" align=left border=2></a>
+<a href="Images/overlay_16_3_lg.png">
+<img src="Images/overlay_16_3_sm.png" align=left border=2></a>
+<a href="Images/overlay_16_4_lg.png">
+<img src="Images/overlay_16_4_sm.png" align=left border=2></a>
+<a href="Scripts/overlay_16.html">overlay_16.ncl</a>:
+
+This example is similar to overlay_15, but it sets more resources to
+customize the plot. For example, vertical grid lines were added and
+the XY curves are drawn with both lines and markers.
+<p>
+
+When overlaying plots, note that the titles created by 
+<a href="../Document/Graphics/Resources/gsn.html#gsnLeftString"><em>gsnLeftString</em></a>,
+<a href="../Document/Graphics/Resources/gsn.html#gsnCenterString"><em>gsnCenterString</em></a>,
+and <a href="../Document/Graphics/Resources/gsn.html#gsnRightString"><em>gsnRightString</em></a>
+are retained from the overlaid plots and the base plot, but the 
+<a href="../Document/Graphics/Resources/ti.html#tiMainString"><em>tiMainString</em></a>
+title is only retained from the base plot.
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+<div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/overlay.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:11:09 GMT -->
+</html>
+
+

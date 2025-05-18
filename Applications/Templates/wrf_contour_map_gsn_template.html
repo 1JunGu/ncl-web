@@ -1,0 +1,78 @@
+;----------------------------------------------------------------------
+; This is a basic NCL template for creating contours over maps using
+; WRF data. This template plots one timestep of HGT from a WRF file.
+; You should be able to modify it to plot other variables.
+;
+; This script does NOT use the wrf_xxxx scripts to do the plotting.
+; It shows how to use gsn_csm_xxxx scripts to do the plotting.
+;
+; You can use the map projection settings on the WRF file, or you
+; can use your own map projection. See USE_WRF_MAP_PROJECTION below.
+;----------------------------------------------------------------------
+; Note: as of NCL V6.2.0, you don't need these four load commands
+;----------------------------------------------------------------------
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/wrf/WRFUserARW.ncl"
+
+begin
+;
+; This indicates whether to use the native WRF projection on the WRF
+; output file, or your own. Cylindricial equidistant is used in this
+; example. If you want to change this, you will need to set any
+; required map resources, especially those for zooming in on the map.
+;
+  USE_WRF_MAP_PROJECTION = True
+
+;---Open file. You may need to include ".nc" at the end.
+  filename = "wrfout_d01_2002-07.nc"
+  a        = addfile(filename,"r")
+
+;---Read variables directly or use wrf_user_getvar
+  nt        = 0 
+  hgt       = a->HGT(nt,:,:)       ; nt=0 is the first time step
+
+;---Open workstation
+  wks = gsn_open_wks("x11","wrf_contour_map")   ; "ps", "pdf", "png"
+
+;---Set some resources
+  res                      = True
+
+  res@gsnMaximize          = True     ; maximize plot in frame
+
+  res@cnFillOn             = True     ; turn on contour fill
+  res@cnLinesOn            = False    ; turn off contour lines
+  res@cnLineLabelsOn       = False    ; turn off line labels
+  res@gsnAddCyclic         = False    ; set to False if plotting regional data
+  res@tiMainString         = filename
+  res@cnFillPalette        = "OceanLakeLandSnow"
+
+;---THESE VALUES WILL LIKELY NEED TO BE CHANGED OR COMMENTED
+  res@cnLevelSelectionMode = "ManualLevels"
+  res@cnMinLevelValF       = 1
+  res@cnMaxLevelValF       = 2000
+  res@cnLevelSpacingF      = 40
+
+  if(USE_WRF_MAP_PROJECTION) then
+;
+; This function looks at the global attributes on the WRF output 
+; file and sets some map resources based on their values.
+; 
+    res = wrf_map_resources(a,res)
+    res@tfDoNDCOverlay = True                      ; No lat/lon coordinates required
+  else 
+     hgt@lat2d             = a->XLAT(nt,:,:)       ; Lat/lon coordinates required
+     hgt@lon2d             = a->XLONG(nt,:,:)
+
+     res@mpProjection      = "CylindricalEquidistant"   ; default for gsn_csm_contour_map
+     res@mpMinLatF         = min(hgt@lat2d) 
+     res@mpMaxLatF         = max(hgt@lat2d) 
+     res@mpMinLonF         = min(hgt@lon2d) 
+     res@mpMaxLonF         = max(hgt@lon2d) 
+     res@mpCenterLonF      = (res@mpMinLonF + res@mpMaxLonF) / 2.
+     res@mpDataBaseVersion = "MediumRes"                ; better map outlines
+  end if
+
+  plot = gsn_csm_contour_map(wks,hgt,res)
+end

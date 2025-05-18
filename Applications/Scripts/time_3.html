@@ -1,0 +1,56 @@
+;----------------------------------------------------------------------
+; time_3.ncl
+;
+; Concepts illustrated:
+;   - Converting YYYYMM time to fractional year values
+;   - Labeling the X axis with nicely-formatted time labels
+;----------------------------------------------------------------------
+; This example shows what happens if you try to create a plot with
+; a "time" axis represented by values like 201011, 201012, 201101,
+; 201102, etc.
+;
+; You will get an irregularly-spaced curve on the X axis, because
+; NCL doesn't know this is a time axis where months 13 through 
+; 99 don't exist.
+;
+; To fix this, use the yyyymm_to_yyyyfrac function to convert
+; to yearly fractional values.
+;----------------------------------------------------------------------
+
+begin
+;---Create dummy array dimensioned 20 x time, with time = YYYYMM.
+  npts = 20
+  yyyymm = (/201001,201002,201003,201004,201005,201006,201007,201008,\
+           201009,201010,201011,201012,201101,201102,201103,201104,\
+           201105,201106,201107,201108,201109,201110,201111,201112,\
+           201201,201202,201203,201204,201205,201206,201207,201208,\
+           201209,201210,201211,201212/)
+  ntim   = dimsizes(yyyymm)
+  x      = generate_2d_array(10, 10, -19.69, 15.82, 0, (/npts,ntim/))
+
+  wks = gsn_open_wks("png","time")
+
+  res                   = True
+  res@gsnMaximize       = True
+
+  res@vpWidthF          = 0.8     ; Make plot wider than it 
+  res@vpHeightF         = 0.3     ; is high.
+
+  res@xyMonoDashPattern = True    ; All lines solid
+
+;---Draw the default plot without fixing the X axis values
+  res@tiMainString      = "Irreguarly spaced curves"
+  plot = gsn_csm_xy(wks,yyyymm,x,res)    
+
+;---Draw a second plot with fractional year values
+  yfrac = yyyymm_to_yyyyfrac(yyyymm,0)
+  res@tiMainString = "yyyymm_to_yyyyfrac used for X axis"
+  plot = gsn_csm_xy(wks,yfrac,x,res)    
+
+;---Draw a third plot with a differently labeled X axis
+  res@tmXBMode     = "Explicit"
+  res@tmXBValues   = (/2010,2011,2012,2013/)
+  res@tmXBLabels   = " Jan~C~" + res@tmXBValues
+  res@tiMainString = "Explicit labels for X axis"
+  plot = gsn_csm_xy(wks,yfrac,x,res)    
+end

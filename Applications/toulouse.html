@@ -1,0 +1,737 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/toulouse.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:05:22 GMT -->
+<head>
+<meta name="description" content="Use of NCL to visualize TIGGE project data.">
+<meta name="keywords" content="NCL, graphics, visualization, TIGGE">
+<TITLE>NCL Graphics: Toulouse Models</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_models.html">Models</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL Graphics: Toulouse Models</h1>
+<p>
+
+<div class=mainimage>
+<img src="Images/SAFRAN_temperature_lg.png">
+</div>
+
+<div class=text>
+
+This page provides several scripts for visualizing climate models used
+in the NCL Workshops held
+at <a href="http://www.cerfacs.fr/">CERFACS</a> in October
+2012. Models included on this page are:
+<p>
+
+<ul>
+
+<li><a href="http://www.cnrm.meteo.fr/aladin/">ALADIN</a>
+
+<li><a href="http://www.cnrm.meteo.fr/gmgec/spip.php?article83&amp;lang=fr">ARPEGE</a>
+
+<li><a href="http://igcmg.ipsl.jussieu.fr/Doc/IPSLCM4/">IPSL</a>
+
+<li><a href="http://gems.ecmwf.int/documents/workdescription/The_MOCAGE_Model.html">MOCAGE</a>
+
+<li><a href="http://www.nemo-ocean.eu/">NEMO</a>
+
+<li><a href="http://www.mercator-ocean.fr/eng/science/composantes-systemes/modelisation/orca025_lim">ORCA025</a> / 
+<a href="http://www.mercator-ocean.fr/eng/science/composantes-systemes/modelisation/orca12">ORCA12</a>
+
+<li><a href="http://www.myroms.org/">ROMS</a>
+
+<li><a href="http://www.cnrm.meteo.fr/spip.php?article424&amp;lang=fr">SAFRAN</a>
+
+</ul>
+<p>
+
+For more information about the workshops themselves, including sample
+scripts using during the class, visit: 
+<a href="../Training/Workshops/CERFACS/index.html">http://www.ncl.ucar.edu/Training/Workshops/CERFACS/</a>.
+
+</div>
+
+<div class=ex>
+<a href="Images/ALADIN_tsur_5_lg.png">
+<img src="Images/ALADIN_tsur_5_sm.png" align=left border=2></a>
+<a href="Scripts/ALADIN_tsur_5.html">ALADIN_tsur_5.ncl</a>:
+
+This script plots the surface soil temperature ("tsur") from the 
+<a href="http://www.cnrm.meteo.fr/aladin/">ALADIN</a>
+model on a lambert conformal map. The data were provided by
+Pierre Nabat of M&eacute;t&eacute;o-France.
+<p>
+
+The lambert conformal projection information was written to the 
+file via the "Lambert_Conformal" variable, so we were able to 
+use this to set the special lambert parallel and merdian resources.
+
+</div>
+
+<div class=ex>
+<a href="Images/ALADIN_tas_5_lg.png">
+<img src="Images/ALADIN_tas_5_sm.png" align=left border=2></a>
+<a href="Scripts/ALADIN_tas_5.html">ALADIN_tas_5.ncl</a>:
+
+This script is similar to the previous "ALADIN_tsur_5.ncl" script. The
+data file was provided by Samuel Somot of M&eacute;t&eacute;o-France.
+<p>
+
+It plots the near-surface air temperature ("tas") from 
+an ALADIN file, putting it on a lambert conformal projection.
+<p>
+
+To create an animated GIF of this variable which has 384 time steps,
+run <a href="../Training/Workshops/CERFACS/Scripts/ALADIN/ALADIN_tas_anim.html">ALADIN_tas_anim.ncl</a>.  The <a href="../Document/Functions/Built-in/cd_calendar.html"><strong>cd_calendar</strong></a> function
+is used to create a time stamp as the main title.
+<p>
+
+To create the GIF file, you must have the
+free <a href="http://www.imagemagick.org/script/convert.php">convert</a>
+tool
+from <a href="http://www.imagemagick.org/script/index.php">ImageMagick</a>
+installed. A file called
+<a href="../Training/Workshops/CERFACS/Scripts/ALADIN/ALADIN_tas_anim.gif">ALADIN_tas_anim.gif</a>
+will be created, which you can open with your web browser to see the
+animation.  In the script, every 10th timestep is plotted. This was to
+keep the GIF file small. To plot every time step, simply remove the
+",10" from the do loop.
+
+</div>
+
+<div class=ex>
+<a href="Images/ALADIN_tsur_mslp_lg.png">
+<img src="Images/ALADIN_tsur_mslp_sm.png" align=left border=2></a>
+<a href="Scripts/ALADIN_tsur_mslp.html">ALADIN_tsur_mslp.ncl</a>:
+
+This script creates a time series plot of averaged temperature and
+pressure on the same page, using different labels on the right and
+left Y axis. It shows how to create text labels that contain French
+accented characters, like &egrave;.
+<p>
+
+It was created by Pierre Nabat during the NCL Workshop at CERFACS,
+October 4-5, 2012.
+<p>
+
+</div>
+
+<div class=ex>
+<a href="Images/Sat_to_ALADIN_regrid_lg.png">
+<img src="Images/Sat_to_ALADIN_regrid_sm.png" align=left border=2></a>
+<a href="Scripts/Sat_to_ALADIN_regrid.html">Sat_to_ALADIN_regrid.ncl</a>:
+
+This script shows how to regrid data on a satellite grid to an ALADIN
+grid using three different <a href="ESMF.html">ESMF</a> regridding
+methods (bilinear, conserve, patch).
+<p>
+
+The datasets were provided bymodel on a lambert conformal map. The
+data were provided by Pierre Nabat of M&eacute;t&eacute;o-France.
+
+</div>
+
+<div class=ex>
+<a href="Images/ARPEGE_BB_1_lg.png">
+<img src="Images/ARPEGE_BB_1_sm.png" align=left border=2></a>
+<a href="Images/ARPEGE_BB_2_lg.png">
+<img src="Images/ARPEGE_BB_2_sm.png" align=left border=2></a>
+<a href="Scripts/ARPEGE_BB.html">ARPEGE_BB.ncl</a>:
+
+This script shows how to plot data from
+an <a href="http://www.cnrm.meteo.fr/gmgec/spip.php?article83&amp;lang=fr">ARPEGE
+model</a>. The NetCDF file used for these plots is "BBf130PLr2035.nc",
+provided by Silvana Buarque of M&eacute;t&eacute;o-France.
+<p>
+
+You can modify this script to change which variables you want to plot
+by changing the "varc" line.
+
+</div>
+
+<div class=ex>
+<a href="Images/ARPEGE_BB_mask_lg.png">
+<img src="Images/ARPEGE_BB_mask_sm.png" align=left border=2></a>
+<a href="Scripts/ARPEGE_BB_mask.html">ARPEGE_BB_mask.ncl</a>:
+
+This script reads "psl" from the same dataset as the previous example,
+and applies an inverted sea-land mask (from a separate NetCDF file) to
+it using the <a href="../Document/Functions/Built-in/where.html"><strong>where</strong></a> function.
+<p>
+
+Contours of the original data and the masked data are "paneled" on the
+same page using
+<a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>.
+
+</div>
+
+<div class=ex>
+<a href="Images/ARPEGE_BB_Greenland_mask_lg.png">
+<img src="Images/ARPEGE_BB_Greenland_mask_sm.png" align=left border=2></a>
+<a href="Scripts/ARPEGE_BB_Greenland_mask.html">ARPEGE_BB_Greenland_mask.ncl</a>:
+
+This script was created during the workshop (and improved after the
+workshop) based on questions from Silvana. She wanted to mask her data
+roughly over the area of Greenland. A Greenland shapefile was
+downloaded
+from <a href="http://www.gadm.org/country/">www.gadm.org/country</a>
+and used to create a new mask.<p>
+
+</div>
+
+<div class=ex>
+<a href="Images/ARPEGE_psl_with_GRL_mask_and_grid_lg.png">
+<img src="Images/ARPEGE_psl_with_GRL_mask_and_grid_sm.png" align=left border=2</a>
+<a href="Scripts/ARPEGE_psl_with_GRL_mask_and_grid.html">ARPEGE_psl_with_GRL_mask_and_grid.ncl</a>:
+
+This example uses the "greenland_mask.nc" mask file created in the
+previous "ARPEGE_BB_Greenland_mask.ncl" script, and draws a plot of
+"psl" and "masked psl" with the lat/lon grid locations drawn as filled
+dots.
+<p>
+
+If you are using NCL V6.0.0 or earlier, then you need to
+download this <a href="Scripts/gsn_coordinates.html">gsn_coordinates.ncl</a>
+script.
+
+</div>
+
+<div class=ex>
+<a href="Images/IPSL_thetao_lg.png">
+<img src="Images/IPSL_thetao_sm.png" align=left border=2></a>
+<a href="Scripts/IPSL_thetao.html">IPSL_thetao.ncl</a>:
+
+This script plots "thetao" from
+an <a href="http://igcmg.ipsl.jussieu.fr/Doc/IPSLCM4/">IPSL climate
+model</a> dataset, provided by Sophie Valcke of CERFACS.
+<p>
+
+</div>
+
+<div class=ex>
+<a href="Images/IPSL_thetao_panel_lg.png">
+<img src="Images/IPSL_thetao_panel_sm.png" align=left border=2></a>
+<a href="Scripts/IPSL_thetao_panel.html">IPSL_thetao_panel.ncl</a>:
+
+This script is similar to the previous one, except it creates
+four plots of thetao using a different timestep, and then
+panels them with <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>.
+<p>
+
+To create an
+<a href="../Training/Workshops/CERFACS/Scripts/IPSL/IPSL_thetao_5.gif">animated
+GIF</a> of this variable across all 120 timesteps,
+run <a href="Scripts/IPSL_thetao_anim.html">IPSL_thetao_anim.ncl</a>. You
+must have the
+free <a href="http://www.imagemagick.org/script/convert.php">convert</a>
+tool
+from <a href="http://www.imagemagick.org/script/index.php">ImageMagick</a>
+installed to create the GIF file. The <a href="../Document/Functions/Built-in/cd_calendar.html"><strong>cd_calendar</strong></a>
+function is used to create a time stamp as the main title.
+</div>
+
+<div class=ex>
+<a href="Images/MOCAGE_DX_apas_lg.png">
+<img src="Images/MOCAGE_DX_apas_sm.png" align=left border=2></a>
+<a href="Scripts/MOCAGE_DX_apas.html">MOCAGE_DX_apas.ncl</a>:
+
+This script plots "apas" (pressure) from
+a <a href="http://gems.ecmwf.int/documents/workdescription/The_MOCAGE_Model.html">MOCAGE
+model</a> dataset, provided by Andrea Piacentini of CERFACS.
+
+</div>
+
+<div class=ex>
+<a href="Images/NEMO_CNTASN_temper_lg.png">
+<img src="Images/NEMO_CNTASN_temper_sm.png" align=left border=2></a>
+<a href="Scripts/NEMO_CNTASN_temper.html">NEMO_CNTASN_temper.ncl</a>:
+
+This script shows how to plot "votemper" (temperature) from a NEMO
+file provided by Clotilde Dubois of M&eacute;t&eacute;o-France.
+<p>
+
+Optionally, you can set USE_SHAPEFILE to True to draw country outlines
+from a shapefile instead of using NCL map outlines.  To use the
+shapefile outlines, you must download the "country bounaries"
+shapefile data
+from <a href="http://www.diva-gis.org/Data/">http://www.diva-gis.org/Data/</a>.
+<p>
+
+</div>
+
+<div class=ex>
+<a href="Images/NEMO_sst_lg.png">
+<img src="Images/NEMO_sst_sm.png" align=left border=2></a>
+<a href="Scripts/NEMO_sst.html">NEMO_sst.ncl</a>:
+
+This script shows how to plot "sosstsst" (sea surface temperature)
+from a NEMO file provided by Florence Sevault of
+M&eacute;t&eacute;o-France.
+<p>
+
+The missing values for this variable had to be "fixed" because they
+were not exactly equal to the sst@_FillValue value. This was done by
+using the <a href="../Document/Functions/Built-in/where.html"><strong>where</strong></a> function to set all values
+greater-than-or-equal to sst@_FillValue to sst@_FillValue.
+
+</div>
+
+<div class=ex>
+<a href="../Training/Workshops/CERFACS/Scripts/NEMO/NEMO_plot_sobowlin.png">
+<img src="../Training/Workshops/CERFACS/Scripts/NEMO/NEMO_plot_sobowlin.sm.png" align=left border=2></a>
+<a href="../Training/Workshops/CERFACS/Scripts/NEMO/NEMO_plot_sohdyn.png">
+<img src="../Training/Workshops/CERFACS/Scripts/NEMO/NEMO_plot_sohdyn.sm.png" align=left border=2></a>
+
+<a href="Scripts/NEMO_plot_all.html">NEMO_plot_all.ncl</a>: This script
+shows how to plot the first timestep of every three-dimensional
+numeric variable on a NEMO data file. The purpose of this is to
+get a quick visual look at the data on the file.
+<p>
+
+The <a href="../Document/Functions/Built-in/getfilevarnames.html"><strong>getfilevarnames</strong></a> function is used to read all
+the variable names off the file. The <a href="../Document/Functions/Built-in/isnumeric.html"><strong>isnumeric</strong></a>
+and <a href="../Document/Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a> functions are then used to check if
+this variable is numeric and how many dimensions it has.
+<p>
+
+Each variable is plotted to its own PNG file.
+
+</div>
+
+<div class=ex>
+<a href="Images/ORCA025_icemod_1_lg.png">
+<img src="Images/ORCA025_icemod_1_sm.png" align=left border=2></a>
+<a href="Images/ORCA025_icemod_2_lg.png">
+<img src="Images/ORCA025_icemod_2_sm.png" align=left border=2></a>
+<a href="Scripts/ORCA025_icemod.html">ORCA025_icemod.ncl</a>:
+
+This script shows how to plot ice thickness from an ORCA 0.25 degree
+grid file provided by Romain Bourdalle-Badie of Mercator Ocean.
+The variable is dimensioned 1021 x 1442.
+<p>
+
+The "iicethic" variable is of type "short" on the file, with a
+"scale_factor" that needs to be applied,
+so <a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a> is used to do the
+conversion.
+
+</div>
+
+<div class=ex>
+<a href="Images/ORCA12_zgr_mbathy_lg.png">
+<img src="Images/ORCA12_zgr_mbathy_sm.png" align=left border=2></a>
+<a href="Scripts/ORCA12_zgr_mbathy.html">ORCA12_zgr_mbathy.ncl</a>:
+
+This script shows how to plot bathymetry from an ORCA12 grid file
+provided by Romain Bourdalle-Badie of Mercator Ocean.  The variable is
+dimensioned 3059 x 4322, so it takes awhile longer to plot.
+<p>
+
+For faster plotting, it's important to set:
+<p>
+
+<pre>
+res@<a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a> = "RasterFill"
+res@<a href="../Document/Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> = "TriangularMesh"
+</pre>
+<p>
+
+When NCL V6.1.0 is released, you can try an experimental fill mode of
+"MeshFill" for even faster plotting.
+
+</div>
+
+<div class=ex>
+<a href="Images/ORCA12_gridUV_vel_lg.png">
+<img src="Images/ORCA12_gridUV_vel_sm.png" align=left border=2></a>
+<a href="Scripts/ORCA12_gridUV_vel.html">ORCA12_gridUV_vel.ncl</a>:
+
+This example shows how to created a curly vector plot 
+that is colored based on magnitude.  This is a large 
+grid (3059 x 4322), so only every 10th data value is plotted.
+<p>
+
+For an example of plotting the full grid, see the
+"ORCA12_gridUV_vel_3.ncl" script
+at <a href="../Training/Workshops/CERFACS/Scripts/ORCA/index.html">http://www.ncl.ucar.edu/Training/Workshops/CERFACS/Scripts/ORCA/</a>.
+
+</div>
+
+<div class=ex>
+<a href="Images/ROMS_avgtemp_lg.png">
+<img src="Images/ROMS_avgtemp_sm.png" align=left border=2></a>
+<a href="Scripts/ROMS_avgtemp.html">ROMS_avgtemp.ncl</a>:
+
+This script shows how to plot average potential temperature from a
+ROMS file provided by S&eacute;r&eacute;na Thevenin-Illig of LEGOS.
+The lat/lon coordinates are read off a separate file.
+<p>
+
+All temperature values equal to 0.0 are set to a missing value so they
+don't get plotted. This effectively masks out the land values.
+
+</div>
+
+<div class=ex>
+<a href="Images/SAFRAN_temperature_lg.png">
+<img src="Images/SAFRAN_temperature_sm.png" align=left border=2></a>
+<a href="Scripts/SAFRAN_temperature.html">SAFRAN_temperature.ncl</a>:
+
+This script shows how to plot temperature from a
+SAFRAN file provided by Clotilde Dubois of M&eacute;t&eacute;o-France.
+<p>
+
+If USE_SHAPEFILE is set to True, then you must download the France
+shapefile data from
+<a href="http://www.gadm.org/country/">www.gadm.org/country</a>.
+<p>
+
+This script uses the
+"<a href="../Document/Graphics/ColorTables/WhiteBlueGreenYellowRed.html">WhiteBlueGreenYellowRed</a>"
+color table, which has several very light shades of white and blue at
+the beginning that we may not want. To remove these, you can read in
+the color table
+with <a href="../Document/Graphics/Interfaces/read_colormap_file.html"><strong>read_colormap_file</strong></a>, and then
+subset as necessary when setting the
+<a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a> resource.
+
+</div>
+
+<div class=ex>
+<a href="Images/SAFRAN_temperature_anim.gif">
+<img src="Images/SAFRAN_temperature_sm.png" align=left border=2></a>
+<a href="Scripts/SAFRAN_temperature_anim.html">SAFRAN_temperature_anim.ncl</a>:
+
+This script is similar to the previous one, except it creates an
+animated GIF image from every 24 timesteps (they are hourly).
+The <a href="../Document/Functions/User_contributed/cd_string.html"><strong>cd_string</strong></a> function is used
+to create a time stamp as the main title.
+<p>
+
+After about time index 2991, the time values suddenly go to 0, so we
+have cull these values out by using <a href="../Document/Functions/Built-in/ind.html"><strong>ind</strong></a> to get only
+the time values that are &gt; 0.
+<p>
+
+You must have the
+free <a href="http://www.imagemagick.org/script/convert.php">convert</a>
+tool
+from <a href="http://www.imagemagick.org/script/index.php">ImageMagick</a>
+installed to create the GIF file.
+<p>
+
+Click on the thumbnail to see the animation.
+
+</div>
+<div class=ex>
+<a href="Images/density_comparison_lg.png">
+<img src="Images/density_comparison_sm.png" align=left border=2></a>
+<a href="Scripts/snow_density_map.html">snow_density_map.ncl</a>:
+
+This script was written by Eric Brun and St&eacute;phane Senesi of
+M&eacute;t&eacute;o-France during the NCL workshop. It compares
+snowpack density from observations read off an ASCII file with Crocus
+snow model output read off a NetCDF file.
+
+</div>
+					</div>
+
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/toulouse.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:05:38 GMT -->
+</html>
+

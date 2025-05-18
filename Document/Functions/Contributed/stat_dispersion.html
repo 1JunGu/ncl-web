@@ -1,0 +1,526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/stat_dispersion.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:13 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (statistics)">
+<meta name="keywords" content="stat_dispersion">
+<title>stat_dispersion</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+<a class=crumb href="../statistics.html">Statistics</a>
+<br>
+<h1>stat_dispersion</h1>
+
+<p>
+Computes a number of robust statistics.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function stat_dispersion (
+		x    : numeric,  
+		opt  : logical   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  [30]
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>An array of any numeric type.
+</p>
+<em>opt</em>
+<p class=indent>Setting <em>opt</em>=True and <em>opt</em>@PrintStat=True means that
+the function will print the calculated statistics.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The results are returned in a one dimensional array of size [30].
+Double if <em>x</em> is type "double"; otherwise, "float".
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function is intended for <b>large</b> dataset sizes.
+It sorts the non-missing data values and uses the index values to extract
+the dectile, octile, sextile, quartile, tritile values.
+<b>It does not do anything special with replicated values.</b>
+It does not perform linear interpolation like "Minitab".
+<p>
+Currently the returned statistics (here, STATX) include:
+<pre>
+               Mean="+STATX(0)      ; average of all values
+             StdDev="+STATX(1)      ; standard deviation
+                Min="+STATX(2)      ; minimum
+             LowDec="+STATX(3)      ; lower dectile  
+             LowOct="+STATX(4)      ; lower octile
+             LowSex="+STATX(5)      ; lower sextile
+        LowQuartile="+STATX(6)      ; lower quartile
+             LowTri="+STATX(7)      ; lower tritile
+             Median="+STATX(8)      ; median
+            HighTri="+STATX(9)      ; upper tritile
+       HighQuartile="+STATX(10)     ; upper quartile
+            HighSex="+STATX(11)     ; upper sextile
+            HighOct="+STATX(12)     ; upper octile
+            HighDec="+STATX(13)     ; upper dectile
+                Max="+STATX(14)     ; maximum
+              Range="+STATX(15)     ; Max(x) - Min(x)
+         Dispersion="+STATX(16)     ; Range/STATX(1)
+        RMS Anomaly="+STATX(17)     ; sqrt( (x-xAvg)^2/N ) where N=# non-missing values
+          #   Total="+STATX(18)     ; Total number of input values
+          #    Used="+STATX(19)     ; Number of input values used for statistics
+          # Missing="+STATX(20)     ; Number of missing values
+          % Missing="+STATX(21)     ; percent of missing values
+
+                                    ; <b>STATX(22 to 29) added for v6.1.0</b>
+                                    ; STATX(22 to 27) require more than 1000 observations
+                                    ; Otherwise, they are set to _FillValue
+
+         Lower 0.1%="+STATX(22)     ; lower 0.1%   => 0.1th percentile
+         Lower 1.0%="+STATX(23)     ; lower 1.0%   => 1th
+         Lower 5.0%="+STATX(24)     ; lower 5.0%   => 5th
+         Upper 5.0%="+STATX(25)     ; upper 5.0%   => 95th percentile
+         Upper 1.0%="+STATX(26)     ; upper 1.0%   => 99th 
+         Upper 0.1%="+STATX(27)     ; Upper 0.1%   => 99.9th 
+
+           Skewness="+STATX(28)     ; Skewness    
+           Kurtosis="+STATX(29)     ; Kurtosis    
+
+</pre>
+<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Built-in/avg.html"><strong>avg</strong></a>,
+<a href="../Built-in/stddev.html"><strong>stddev</strong></a>,
+<a href="../Built-in/dim_stat4.html"><strong>dim_stat4</strong></a>, <a href="../Built-in/dim_stat4_n.html"><strong>dim_stat4_n</strong></a>,
+<a href="../Built-in/dim_avg.html"><strong>dim_avg</strong></a>, <a href="../Built-in/dim_avg_n.html"><strong>dim_avg_n</strong></a>,
+<a href="../Built-in/dim_stddev.html"><strong>dim_stddev</strong></a>, <a href="../Built-in/dim_stddev_n.html"><strong>dim_stddev_n</strong></a>,
+<a href="../Built-in/dim_median.html"><strong>dim_median</strong></a>, <a href="../Built-in/dim_median_n.html"><strong>dim_median_n</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+The following require that contributed.ncl be loaded prior
+to invoking the function.
+<pre> load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+</pre>
+<p>
+<b>Example 1 </b>
+<p>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+
+  b   = <a href="../Built-in/random_chi.html"><strong>random_chi</strong></a>    (2   , (/1000/))
+
+  opt = True
+  opt@PrintStat = True
+  statb = <strong>stat_dispersion</strong>(b, opt )
+</pre>
+will yield
+<pre>
+See http://www.ncl.ucar.edu/ for more details.
+(0)      
+(0)        ===> Robust Dispersion Statistics <===
+(0)      [0]            Mean=1.96763
+(0)      [1]          StdDev=1.94921
+(0)      [2]             Min=0.00386701
+(0)      [3]          LowDec=0.217212
+(0)      [4]          LowOct=0.284452
+(0)      [5]          LowSex=0.383918
+(0)      [6]     LowQuartile=0.592704
+(0)      [7]          LowTri=0.783372
+(0)      [8]          Median=1.34768
+(0)      [9]         HighTri=2.21197
+(0)      [10]   HighQuartile=2.75091
+(0)      [11]        HighSex=3.55215
+(0)      [12]        HighOct=4.0649
+(0)      [13]        HighDec=4.39585
+(0)      [14]            Max=12.4941
+(0)      [15]          Range=12.4903
+(0)      [16]     Dispersion=6.40786
+(0)      [17]    RMS Anomaly=1.94824
+(0)      [18]      #   Total=1000
+(0)      [19]      #    Used=1000
+(0)      [20]      # Missing=0
+(0)      [21]      % Missing=0
+(0)	 [22]     Lower 0.1%=0.00386701
+(0)	 [23]     Lower 1.0%=0.0306022
+(0)	 [24]     Lower 5.0%=0.112683
+(0)	 [25]     Upper 5.0%=5.76009
+(0)	 [26]     Upper 1.0%=9.32739
+(0)	 [27]     Upper 0.1%=12.0497
+(0)      [28]       Skewness=1.85963
+(0)      [29]       Kurtosis=4.42162
+
+
+</pre>
+<p>
+Example 2: Very similar but the user prints the values.
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+
+
+  a   = <a href="../Built-in/random_normal.html"><strong>random_normal</strong></a> (0,50, (/64,128/))
+  b   = <a href="../Built-in/random_chi.html"><strong>random_chi</strong></a>    (2   , (/1000/))
+  c   = <a href="../Built-in/random_gamma.html"><strong>random_gamma</strong></a>  (75,2, (/50,100/))
+
+  opt   = False
+  stata = <strong>stat_dispersion</strong>(a, opt )
+  statb = <strong>stat_dispersion</strong>(b, opt )
+  statc = <strong>stat_dispersion</strong>(c, opt )
+
+  nStat = <a href="../Built-in/num.html"><strong>num</strong></a>(.not.<a href="../Built-in/ismissing.html"><strong>ismissing</strong></a>(stata))
+  statLabel = <a href="../Built-in/new.html"><strong>new</strong></a> ( nStat, "string")
+
+  statLabel = (/ "    mean", "  stddev", "     min" \
+               , "  lowDec", "  LowOct", "  LowSex" \
+               , "LowQuart", "  LowTri" \
+               , "  Median" \
+               , "   HiTri", " HiQuart","   HiSex","   HiOct", "   HiDec" \
+               , "     Max", "   Range","  Disper","     RMS" \
+               , "    nTot", "    nUse","    nMsg","    %Msg" /)
+
+  <a href="../Built-in/print.html"><strong>print</strong></a>(statLabel+"   " \
+       +<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%9.5f", stata(0:nStat-1))+"   " \
+       +<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%9.5f", statb(0:nStat-1))+"   " \
+       +<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%9.5f", statc(0:nStat-1)) )
+</pre>
+The print yields (titles added):
+<pre>
+                      <b>Normal</b>         <b>Chi</b>      <b>Gamma</b>
+(0)	    mean    -0.50953     2.06056     0.02719
+(1)	  stddev    49.86744     2.01248     0.01904
+(2)	     min  -202.86754     0.00221     0.00012
+(3)	  lowDec   -64.91030     0.24242     0.00730
+(4)	  LowOct   -58.03373     0.29952     0.00834
+(5)	  LowSex   -48.72330     0.39296     0.01013
+(6)	LowQuart   -33.34077     0.61729     0.01310
+(7)	  LowTri   -21.46025     0.87286     0.01633
+(8)	  Median    -0.80563     1.39053     0.02284
+(9)	   HiTri    21.11183     2.31731     0.03127
+(10)	 HiQuart    33.43311     2.90952     0.03675
+(11)	   HiSex    47.70136     3.63185     0.04362
+(12)	   HiOct    56.36256     4.26664     0.04851
+(13)	   HiDec    62.17917     4.70950     0.05222
+(14)	     Max   182.83937    15.80180     0.16530
+(15)	   Range   385.70691    15.79958     0.16518
+(16)	  Disper     7.73464     7.85079     8.67700
+(17)	     RMS    49.86436     2.01148     0.01903
+(18)	    nTot  8192.00000  1000.00000  5000.00000
+(19)	    nUse  8192.00000  1000.00000  5000.00000
+(20)	    nMsg     0.00000     0.00000     0.00000
+(21)	    %Msg     0.00000     0.00000     0.00000
+(22)        0.1%   -153.01517    0.00189     0.00061
+(23)        1.0%   -117.51499    0.01804     0.00195
+(24)        5.0%   -84.37138     0.08294     0.00486
+(25)       95.0%    82.00737     5.87699     0.06296
+(26)       99.0%   116.81857     7.92976     0.08951
+(27)       99.9%   155.62813    13.01617     0.12813
+(28)    Skewness    -0.00585     1.64650     1.46050
+(29)    Kurtosis     0.02865     3.99830     3.46480
+
+
+
+
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/stat_dispersion.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:13 GMT -->
+</html>

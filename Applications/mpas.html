@@ -1,0 +1,691 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/mpas.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:04:46 GMT -->
+<head>
+<meta name="description" content="Use of NCL to visualize MPAS data">
+<meta name="keywords" content="NCL, graphics, visualization, MPAS">
+<TITLE>NCL Graphics: MPAS</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_models.html">Models</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: MPAS</h1>
+
+<div class=mainimage>
+<img src="Images/mpas_7_lg.png">
+</div>
+
+<div class=text>
+
+The Model for Prediction Across Scales (MPAS) is a collaborative
+project for developing atmosphere, ocean and other earth-system
+simulation components for use in climate, regional climate and weather
+studies. The primary development partners are the climate modeling
+group at Los Alamos National Laboratory
+(<a href="http://climate.lanl.gov/">COSIM</a>) and
+the <a href="http://ncar.ucar.edu/">NCAR</a>.  Both primary partners
+are responsible for the MPAS framework, operators and tools common to
+the applications; LANL has primary responsibility for the ocean model,
+and NCAR has primary responsibility for the atmospheric model.
+[Taken from the <a href="http://mpas-dev.github.io/">MPAS Home Page</a> page.]
+<p>
+
+For an introduction to MPAS modeling, see the slides presented at the
+Joint WRF-MPAS Users' Conference,
+"<a href="http://www2.mmm.ucar.edu/projects/mpas/tutorial/mpas_for_wrf_users.pdf">MPAS
+for WRF Users - A Gentle Introduction to Atmospheric Modeling with
+MPAS</a>".
+
+<p>
+
+</div>
+
+<div class=ex>
+<!--mpas_1-->
+<a name=ex1></a>
+<a href="Images/mpas_1_lg.png">
+<img src="Images/mpas_1_sm.png" align=left border=2></a>
+<a href="Scripts/mpas_1.html">mpas_1.ncl</a>: This
+example shows how to create a color-filled contour plot
+of surface pressure on an MPAS grid.<p>
+
+The lat/lon values on the file are in radians, so they need to be
+converted to degrees. Since they contain missing values, it is
+necessary to set <a href="../Document/Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> to
+"TriangularMesh" to plot correctly.
+<p>
+
+<a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a> is set to "RasterFill"
+to make the plotting go faster.
+
+</div>
+
+
+<div class=ex>
+<!--mpas_2-->
+<a name=ex2></a>
+<a href="Images/mpas_2_lg.png">
+<img src="Images/mpas_2_sm.png" align=left border=2></a>
+<a href="Images/mpas_polar_2_lg.png">
+<img src="Images/mpas_polar_2_sm.png" align=left border=2></a>
+<a href="Scripts/mpas_2.html">mpas_2.ncl</a> /
+<a href="Scripts/mpas_faster_2.html">mpas_faster_2.ncl</a>: This
+example shows how to draw the MPAS-O (ocean) grid edges on a
+cylindrical equidistant or polar stereographic map.
+<p>
+
+This map would be too busy if you drew the whole globe (there are
+349,339 edges), so this example zooms in on arbitrarily selected
+areas.<p>
+
+With <a href="../prev_releases.html#6.2.0">NCL Version 6.2.0</a>, there's
+a much faster way of drawing the MPAS edges, using the new resource
+<a href="../Document/Graphics/Resources/gs.html#gsSegments"><em>gsSegments</em></a>.
+The "<a href="Scripts/mpas_faster_2.html">mpas_faster_2.ncl</a>"
+script demonstrates the use of this resource.  
+<p>
+
+</pre>
+
+</div>
+
+
+<div class=ex>
+<!--ESMF_10-->
+<a name=ESMF10></a>
+<a href="Images/ESMF_all_10_lg.png">
+<img src="Images/ESMF_all_10_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_10.html">ESMF_regrid_10.ncl</a>
+<p>
+
+This example shows how to regrid unstructured MPAS data (163842 cells)
+to a 0.25 degree grid (719 x 440), using the default "bilinear"
+method with <a href="../Document/Functions/ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a>.
+<p>
+
+</div>
+
+<div class=ex>
+<!--mpas_3-->
+<a name=ex3></a>
+<a href="Images/mpas_3_lg.png">
+<img src="Images/mpas_3_sm.png" align=left border=2></a>
+<a href="Images/mpas_cell_3_lg.png">
+<img src="Images/mpas_cell_3_sm.png" align=left border=2></a>
+<a href="Images/mpas_polygon_3_lg.png">
+<img src="Images/mpas_polygon_3_sm.png" align=left border=2></a>
+<a href="Scripts/mpas_3.html">mpas_3.ncl</a> / 
+<a href="Scripts/mpas_cell_3.html">mpas_cell_3.ncl</a> /
+<a href="Scripts/mpas_polygon_3.html">mpas_polygon_3.ncl</a>: This
+example shows how to draw contours of temperature on a 15 km MPAS grid
+(2,621,442 cells) using three different methods:
+<p>
+
+<ul>
+<li>raster fill (<a href="Scripts/mpas_3.html">mpas_3.ncl</a>)
+<li>cell fill (<a href="Scripts/mpas_cell_3.html">mpas_cell_3.ncl</a>)
+<li>polygon fill (<a href="Scripts/mpas_polygon_3.html">mpas_polygon_3.ncl</a>)
+</ul>
+<p>
+
+The second two methods will only work in NCL V6.2.0 and later. The
+first method (raster fill), works in previous versions, but has been
+significantly sped up in NCL V6.2.0.
+<p>
+
+The cell fill and polygon methods produce slightly nicer looking plots
+(the 2nd and 3rd images above); you won't see the white corners in the
+upper and lower left corners of the plot.
+<p>
+
+Here are some timing results on a Mac for the various scripts:
+
+<pre>
+mpas_3.ncl (V6.1.2):       83.5 CPU seconds
+mpas_3.ncl (V6.2.0):       14.5 CPU seconds
+mpas_cell.ncl (V6.2.0):    95.6 CPU seconds
+mpas_polygon.ncl (V6.2.0): 71.9 CPU seconds
+</pre>
+<p>
+
+The mpas_polygon_3.ncl example is the most complicated one to use,
+because you have to generate the labelbar yourself and call
+<a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> to add the polygons
+after the map plot is created.  It was written mainly to show how to
+use the <a href="../Document/Graphics/Resources/gs.html#gsSegments"><em>gsSegments</em></a>
+and <a href="../Document/Graphics/Resources/gs.html#gsColors"><em>gsColors</em></a> resources.
+This example will give you the most control over the individual
+cells, should you need it.
+</div>
+
+<div class=ex>
+<!--mpas_4-->
+<a name=ex4></a>
+<a href="Images/mpas_4_lg.png">
+<img src="Images/mpas_4_sm.png" align=left border=2></a>
+<a href="Images/mpas_cell_4_lg.png">
+<img src="Images/mpas_cell_4_sm.png" align=left border=2></a>
+<a href="Scripts/mpas_4.html">mpas_4.ncl</a> /
+<a href="Scripts/mpas_cell_4.html">mpas_cell_4.ncl</a>: This example
+shows how to draw raster-filled contours of "ssh" on an MPAS-O (ocean)
+grid, using a cylindrical or polar steregraphic map.
+<p>
+
+The first image uses raster contours
+(res@<a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a></em> =
+"RasterFill") over a global area, and the second image uses
+cell-filled contours
+(res@<a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a></em> =
+"CellFill") over a zoomed area.  Using "CellFill" allows you to turn
+on the cell edges
+with <a href="../Document/Graphics/Resources/cn.html#cnCellFillEdgeColor"><em>cnCellFillEdgeColor</em></a>.
+
+</div>
+
+<div class=ex>
+<!--mpas_5-->
+<a name=ex5></a>
+<a href="Images/mpas_5_lg.png">
+<img src="Images/mpas_5_sm.png" align=left border=2></a>
+<a href="Scripts/mpas_5.html">mpas_5.ncl</a> - This script shows how to
+create a filled raster contour plot of the "ter" variable on an MPAS
+initialization file (init.nc). This particular MPAS file is a
+quasi-uniform 15 km global forecast file that has 2.6 million cells,
+which takes about 7 seconds to plot on a Mac.
+<p>
+
+The contour levels are explicitly chosen and the
+<a href="../Document/Graphics/ColorTables/MPL_terrain.html">MPL_terrain</a>
+color map is subsetted to remove some of the dark blue colors.
+<p>
+
+The next example plots the same data, except on a higher-resolution 
+MPAS mesh.
+
+</div>
+
+<div class=ex>
+<!--mpas_6-->
+<a name=ex6></a>
+<a href="Images/mpas_6_lg.png">
+<img src="Images/mpas_6_sm.png" align=left border=2></a>
+<a href="Scripts/mpas_6.html">mpas_6.ncl</a> - This script is similar
+to mpas_5.ncl, except the MPAS file is a mixed-resolution mesh of 15
+km and 3 km cells, where the 3 km region is over the United
+States. There are 6.4 million cells in this file, which takes about 18
+seconds to plot on a Mac.
+
+</div>
+
+<div class=ex>
+<!--mpas_7-->
+<a name=ex7></a>
+<a href="Images/mpas_7_lg.png">
+<img src="Images/mpas_7_sm.png" align=left border=2></a>
+<a href="Scripts/mpas_7.html">mpas_7.ncl</a> - This script creates a
+filled raster contour plot of any 2D variable (dimensioned Time x
+nCells) on an MPAS file. The MPAS mesh is the same one used in example
+<a href="#ex5">mpas_5.ncl</a>, except the data being plotted are on a separate file
+called "diag.2017-08-24_12.00.00.nc".
+<p>
+You can change the variable being plotted when you run the script:
+
+<pre>
+  ncl 'vname="relhum_700hPa"' mpas_7.ncl
+</pre>
+<p>
+
+The <a href="../Document/Graphics/Resources/cn.html#cnMaxLevelCount"><em>cnMaxLevelCount</em></a> resource is
+set to 256 to force NCL to use more contour levels. The default is 16.
+<p>
+
+The next example plots the same data, except on a higher-resolution 
+MPAS mesh.
+</div>
+
+<div class=ex>
+<!--mpas_8-->
+<a name=ex8></a>
+<a href="Images/mpas_8_lg.png">
+<img src="Images/mpas_8_sm.png" align=left border=2></a>
+<a href="Scripts/mpas_8.html">mpas_8.ncl</a> - This script creates a
+filled raster contour plot of any 2D variable (dimensioned Time x
+nCells) on an MPAS file. The MPAS mesh is the same mixed-resolution
+one used in example <a href="#ex6">mpas_6.ncl</a>.
+<p>
+
+Just for something different, the data are plotted over an
+orthographic projection instead of a cylindrical equidistant map
+projection.
+<p>
+
+The <a href="../Document/Graphics/Resources/cn.html#cnMaxLevelCount"><em>cnMaxLevelCount</em></a> resource is
+set to 256 to force NCL to use more contour levels. See the next
+example which compares the two different resolutions using a panel
+plot.
+<p>
+
+</div>
+
+<div class=ex>
+<!--mpas_9-->
+<a name=ex9></a>
+<a href="Images/mpas_9_lg.png">
+<img src="Images/mpas_9_sm.png" align=left border=2></a>
+
+<a href="Scripts/mpas_9.html">mpas_9.ncl</a> - This script plots the
+same variable on two different resolutions of MPAS meshes. See
+examples <a href="#ex5">mpas_5.ncl</a> and <a href="#ex6">mpas_6.ncl</a>
+for descriptions of the MPAS files.
+<p>
+
+For a similar example that zooms in on a map area of interest and outlines
+the edges of the mesh, see <a href="#ex11">mpas_11.ncl</a>.
+</div>
+
+<div class=ex>
+<!--mpas_10-->
+<a name=ex10></a>
+<a href="Images/mpas_10_lg.png">
+<img src="Images/mpas_10_sm.png" align=left border=2></a>
+<a href="Scripts/mpas_10.html">mpas_10.ncl</a> - This script plots data
+from the same 15-km MPAS file described in example
+<a href="#ex7">mpas_7.ncl</a>, except it uses CellFill instead
+of RasterFill to generate the contours. This script takes longer, but
+creates a slightly nicer looking plot that doesn't have gaps in the
+upper and lower left corner of the rectangle.
+<p>
+
+Using CellFill requires that you provide the cell borders for each lat/lon
+center point. This part of the script takes almost 35 seconds, while the plotting
+takes another 25 seconds. 
+<p>
+
+If you plan to plot other variables on the same MPAS mesh, then you
+can write the cell border information to a file and read it in later
+for faster processing. When you run this script for the first time,
+the lat/lon cell borders will be constructed and written to a
+file. When you run the script again, it will detect this file and use
+it to read in the cell borders, hence running in half the time.
+<p>
+
+The other advantage of using cell fill is that you can draw the mesh outlines
+by setting <a href="../Document/Graphics/Resources/cn.html#cnCellFillEdgeColor"><em>cnCellFillEdgeColor</em></a>. See
+the next script for an example.
+<p>
+
+Note: change the workstation type (in the call to 
+<a href="../Document/Graphics/Interfaces/gsn_open_wks.html"><strong>gsn_open_wks</strong></a>) from "png" to "x11" to
+watch the MPAS mesh get drawn in real-time.  This can be a useful
+debugging tool.
+
+</div>
+
+<div class=ex>
+<!--mpas_11-->
+<a name=ex11></a>
+<a href="Images/mpas_11_1_lg.png">
+<img src="Images/mpas_11_1_sm.png" align=left border=2></a>
+<a href="Images/mpas_11_2_lg.png">
+<img src="Images/mpas_11_2_sm.png" align=left border=2></a>
+<a href="Images/mpas_11_3_lg.png">
+<img src="Images/mpas_11_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/mpas_11.html">mpas_11.ncl</a> - This script uses cell
+fill to plot the same variable on two different resolutions of MPAS
+meshes,  but over a small map region of interest. This can significantly
+speed up the script.
+<p>
+
+The cell edges are outlined by setting
+<a href="../Document/Graphics/Resources/cn.html#cnCellFillEdgeColor"><em>cnCellFillEdgeColor</em></a> to "black".
+<p>
+
+The three frames are the result of setting the "region_of_interest"
+variable in the script three different values: "Colorado", "Tibet",
+and "Florida".  The script currently only recognizes these three
+regions, but you can certainly modify it to add other regions.
+<p>
+
+Note that with the Colorado and Florida regions, you can clearly see
+the different mesh resolutions, with the top mesh being 15 km and the
+bottom mesh being 3 km. However, with the Tibet region, the two
+regions look close to the same resolution. This is because the top mesh
+is mostly uniform over the whole globe (15 km), and the bottom mesh is
+a mixed-resolution, with 3 km over the United States and 15 km
+elsewhere.
+<p>
+
+</div>
+
+<div class=ex>
+<!--Datagrid_9-->
+<a name=ex9></a>
+<a href="Images/datagrid_9_1_lg.png">
+<img src="Images/datagrid_9_1_sm.png" align=left border=3></a>
+<a href="Images/datagrid_9_2_lg.png">
+<img src="Images/datagrid_9_2_sm.png" align=left border=3></a>
+<a href="Scripts/datagrid_9.html">datagrid_9.ncl</a>: This example
+shows how to use <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> to
+draw the edges and centers of an unstructured mesh. These feature were
+added in NCL Version 6.6.0.
+<p>
+
+The first image is the "t2m" variable plotted over the full grid. 
+An area of interest is highlighted on this plot, which is what the
+second image represents. 
+<p>
+
+The MPAS edges and cell centers were only added to the second plot,
+because this particular MPAS mesh has over two million cells which
+would create a very dense plot if you drew all the edges. An area of
+interest was selected using the
+special <a href="../Document/Graphics/Resources/gsn.html#gsnCoordsMinLat"><em>gsnCoordsMinLat</em></a>, <a href="../Document/Graphics/Resources/gsn.html#gsnCoordsMaxLat"><em>gsnCoordsMaxLat</em></a>,
+<a href="../Document/Graphics/Resources/gsn.html#gsnCoordsMinLon"><em>gsnCoordsMinLon</em></a>,
+and <a href="../Document/Graphics/Resources/gsn.html#gsnCoordsMaxLon"><em>gsnCoordsMaxLon</em></a> resources, making the
+drawing of the mesh less dense and significantly faster.
+
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/mpas.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:04:56 GMT -->
+</html>
+
+

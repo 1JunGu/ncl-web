@@ -1,0 +1,77 @@
+;----------------------------------------------------------------------
+; This is an NCL template for creating a cylindrical equidistant
+; map plot. It may be useful as a starting point for adding other 
+; geographic information, say from a shapefile.
+;
+; Several map resources (graphical options) are included in this 
+; template, some of them commented out. For a very basic map plot 
+; template with minimal resources set, see "map_minres_template.ncl"
+;
+; See "map_nores_template.ncl" for a script that sets a bare number
+; of plot options.
+;
+; See "map_shapefile_template.ncl" for an example of adding 
+; shapefile data to a map.
+;
+; Use "contour_map_template.ncl" if want to add contours to a map 
+; plot.
+;----------------------------------------------------------------------
+
+; Note: as of NCL V6.2.0, you don't need these load commands
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;---Open workstation (where to sent graphical output)
+  wks = gsn_open_wks("x11","map")   ; "ps", "pdf", "png"
+
+;---Set some resources
+  res                   = True
+
+  res@gsnMaximize           = True     ; maximize plot in frame
+
+;----------------------------------------------------------------------
+; Zoom in on map if desired. There are other ways to zoom in on
+; map if you have a different projection, like lambert conformal.
+;----------------------------------------------------------------------
+  res@mpMinLatF             = 54
+  res@mpMaxLatF             = 70
+  res@mpMinLonF             =  4
+  res@mpMaxLonF             = 20
+
+;----------------------------------------------------------------------
+; Set the resolution of map outlines. For global maps, "LowRes" may be
+; acceptable. For regional map, "MediumRes" may be more desirable. For
+; higher resolution on the coastlines, "HighRes" may be desired. This
+; resolution requires additional files to be downloaded. For some
+; graphical examples and instructions, see:
+;
+;    http://www.ncl.ucar.edu/Document/Graphics/rangs.shtml
+;----------------------------------------------------------------------
+  res@mpDataBaseVersion     = "MediumRes"   ; "LowRes", "HighRes"
+; res@mpDataSetName         = "Earth..1"    ; "Earth..2" is the default. 
+                                            ; "Earth..3", "Earth..4" 
+                                            ; Use to get counties, some
+                                            ; provinces/territories, etc.
+
+  res@pmTickMarkDisplayMode = "Always"      ; Gives you nicer tickmarks 
+                                            ;     with degree symbol
+
+  res@tiMainString          = "Basic map plot"
+
+;---One or more of these resources may be useful
+;  res@mpOutlineOn           = True     ; turn on map outlines
+;  res@mpFillOn              = True     ; turn on map fill
+;  res@mpLandFillColor       = "tan"    ; default is "LightGray"
+;  res@mpOceanFillColor      = "blue"   ; default is "transparent"
+;  res@mpFillDrawOrder       = "Draw"   ; "Predraw", "Draw", "PostDraw"
+;  res@mpOutlineBoundarySets = "Allboundaries"     ; Default is "Geophysical", 
+                                                   ;   other options: "National"
+;  res@mpFillDrawOrder       = "Draw"              ; "Predraw", "Draw", "PostDraw"
+;  res@mpProjection          = "LambertConformal"  ; Default is "CylindricalEquidistant"
+;  res@mpLimitMode           = .....               ; Zoom in on map; default is "LatLon" 
+                                                   ;    (depends on projection and type 
+                                                   ;     of zoom desired)
+
+  plot = gsn_csm_map(wks,res)
+end

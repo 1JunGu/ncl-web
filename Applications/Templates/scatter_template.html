@@ -1,0 +1,32 @@
+;----------------------------------------------------------------------
+; This is a basic NCL template for creating scatter plots.
+;----------------------------------------------------------------------
+; Note: as of NCL V6.2.0, you don't need these load commands
+;----------------------------------------------------------------------
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;---Read data
+  filename = "file.nc"
+  a = addfile(filename,"r")
+  x = a->x
+  y = a->y
+
+;---Open workstation
+  wks = gsn_open_wks("x11","xy")   ; "ps", "pdf", "png"
+
+;---Set some resources
+  res                   = True
+
+  res@gsnMaximize       = True     ; maximize plot in frame
+
+;---These are sample resources you might want to set.
+  res@xyMarkLineMode    = "Markers"
+  res@xyMarker          = 16         ; default is 0 (asterisk)
+  res@xyMarkerColor     = "blue"
+  res@xyMarkerSizeF     = 0.02       ; change the size
+  res@tiMainString      = "Data file is " + filename
+
+  plot = gsn_csm_xy(wks,x,y,res)   ; use gsn_csm_y if no X values.
+end

@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/godas.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:01:20 GMT -->
+<head>
+<meta name="description" content="Use of NCL to read and visualize GODAS datasets in Griband netCDF format.">
+<meta name="keywords" content="NCL, graphics, visualization">
+<TITLE>NCL Applications: GODAS</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_data.html">Data sets</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>GODAS: Global Ocean Data Analysis System 
+</h1>
+<p>
+<p>
+<div class=mainimage>
+<img src="Images/godas_2_2_lg.png">
+</div>
+
+<div class=text>
+
+<h3><a href="http://www.cpc.ncep.noaa.gov/products/GODAS/">GODAS</a></h3>
+<p>
+The NCEP <a href="http://www.cpc.ncep.noaa.gov/products/GODAS/">
+Global Ocean Data Assimilation System (GODAS) </a> uses 
+<pre>
+       continuous real-time data from the Global Ocean Observing System. 
+       This project is to deliver routine ocean monitoring products, 
+       and is being implemented by the Climate Prediction Center in 
+       cooperation with NOAA's Office of Climate Observation (OCO).
+</pre>
+<h3>Data Availability</h3>
+<p>
+<b>GRIB-1</b>: Monthly and pentad data can be downloaded
+by clicking on the <i>Binary Data</i> link at the 
+<a href="http://www.cpc.ncep.noaa.gov/products/GODAS/">GODAS</a> website. 
+<p>
+<b>netCDF</b>: GODAS data can be downloaded from the NOAA/OAR/ESRL 
+Physical Sciences Division (PSD), 
+Boulder, Colorado, USA, from their Web site at 
+<a href="http://www.cdc.noaa.gov/data/gridded/data.godas.html">
+http://www.cdc.noaa.gov/data/gridded/data.godas.html</a>.
+The data adhere to the 
+<a href="http://ferret.wrc.noaa.gov/noaa_coop/coop_cdf_profile.html">COARDS</a> 
+netCDF convention.
+The data files contain one variable for each year.
+<p>
+One peculiarity with the PSD GODAS files is that they include 
+<b>missing_value</b> and <b>_FillValue</b> attributes that are
+different (Click <a href="Prints/thflx.2008.html">here</a> for an example.). 
+NCL only recognizes <b>_FillValue</b>. Hence, the 
+user must make some changes. See Example 4. 
+</div>
+
+
+<div class=text>
+<h3>NCL Comments</h3>
+The golden rule of 'data processing' is to look at the data prior to processing.
+The command line utility,
+<a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a>,
+can be used to examine a file's contents. It readily accepts files
+in a variety of formats including GRIB and netCDF. Sample results from use
+on a GODAS GRIB file and a NOAA/OAR/ESRL/PSD netCDF file:
+<pre>
+
+        <a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a> -itime godas.M.200901.grb
+
+        <a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a> thflx.2008.nc
+</pre>
+<p>
+The output from
+<a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a> 
+on the GRIB can be seen <a href="Prints/godas.M.200901.dump">here</a>
+and on the netCDF file can be seen <a href="Prints/thflx.2008.html">here</a>.
+The GRIB file has all the variables for a particular year-month while
+the netCDF has one variable for each month of the year. 
+<p>
+NCL can import the data directly. NCL does not care which format is input:
+<ol>
+<li>NCL will unpack the GRIB directly. 
+<li>The netCDF files provided by NOAA/OAR/ESRL/PSD
+contain variables of type "short".  The NCL function
+<a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a> can be used to unpack the values
+and retain all meta data.
+</ol>
+<p>
+NCL's <a href=
+"../Document/Manuals/Ref_Manual/NclVariables.html#CoordinateSubscripts"> <b>coordinate subscripting</b></a> is used in several of the examples.
+This allows the use of 'physical coordinates' to access subsets of the data.
+This is more convenient then using subscript indices.
+</div>
+
+
+<div class=ex>
+<!--godas-->
+<a name=ex1></a>
+   <a href="Images/godas_1_1_lg.png">
+   <img src="Images/godas_1_1_sm.png" align=left border=2></a>
+   <a href="Images/godas_1_2_lg.png">
+   <img src="Images/godas_1_2_sm.png" align=left border=2></a>
+   <a href="Images/godas_1_3_lg.png">
+   <img src="Images/godas_1_3_sm.png" align=left border=2></a>
+   <a href="Scripts/godas_1.html">godas_1.ncl</a>: 
+
+Read a GODAS <b>grib</b> formatted file and create a 
+standard cylindrical equidistant plot. In addition, create 
+two cross-section views: default and raster.
+</div>
+
+<div class=ex>
+   <a name=ex2></a>
+   <a href="Images/godas_2_1_lg.png">
+   <img src="Images/godas_2_1_sm.png" align=left border=2></a>
+   <a href="Images/godas_2_2_lg.png">
+   <img src="Images/godas_2_2_sm.png" align=left border=2></a>
+   <a href="Images/godas_2_3_lg.png">
+   <img src="Images/godas_2_3_sm.png" align=left border=2></a>
+   <a href="Scripts/godas_2.html">godas_2.ncl</a>: 
+
+Read a GODAS <b>grib</b> formatted file and plot vectors over a scalar [here, salinity].
+A standard cylindrical equidistant plot and two regional plots. The last
+plot required the <a href="../Document/Functions/Contributed/lonFlip.html"><strong>lonFlip</strong></a> 
+function be used to shift from 0-to-360 to -180 to 180.
+</div>
+
+<div class=ex>
+   <a name=ex3></a>
+   <a href="Images/godas_3_1_lg.png">
+   <img src="Images/godas_3_1_sm.png" align=left border=2></a>
+   <a href="Images/godas_3_2_lg.png">
+   <img src="Images/godas_3_2_sm.png" align=left border=2></a>
+   <a href="Scripts/godas_3.html">godas_3.ncl</a>: 
+
+Read a variable (here, <i>pottmp</i> at a depth of 5 meters) spanning thirty GODAS 
+<b>netCDF</b> files for the period 1980 to 2009;
+calculate a monthly climatology for 1995-2004; calculate
+anomalies and create a regional time series of anomalies
+over a specific region.
+</div>
+
+<div class=ex>
+   <a name=ex4></a>
+   <a href="Images/godas_4_lg.png">
+   <img src="Images/godas_4_sm.png" align=left border=2></a>
+   <a href="Scripts/godas_4.html">godas_4.ncl</a>: 
+
+Read from PSD netCDF files. Manually force the NCL recognixed _FillValue
+attribute to take on the value of the missing_value attribute. then
+'unpack' the short values to float. Create a panel plot.
+</div>
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/godas.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:01:25 GMT -->
+</html>
+

@@ -1,0 +1,554 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/specxy_anal.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:13 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (general applied math)">
+<meta name="keywords" content="specxy_anal">
+<title>specxy_anal</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>specxy_anal</h1>
+
+<p>
+Calculates cross spectra quantities of a series.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function specxy_anal (
+		x    [*] : numeric,  
+		y    [*] : numeric,  
+		iopt [1] : integer,  
+		jave [1] : integer,  
+		pct  [1] : numeric   
+	)
+
+	<a href="../return_val.html">return_val</a> [1] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<br>
+<em>y</em>
+<p class=indent>One-dimensional arrays containing the data. <em>x</em> and <em>y</em>
+must be the same length, and missing values are not allowed.
+</p>
+<em>iopt</em>
+<p class=indent>A scalar representing the detrending option:
+
+<dl>
+
+<dt><em>iopt</em> = 0
+<dd>Remove series mean.
+
+<dt><em>iopt</em> = 1
+<dd>Remove the series mean and least squares linear trend.
+
+</dl>
+</p>
+<em>jave</em>
+<p class=indent>A scalar representing the smoothing to be performed on the periodogram
+estimates. This should be an odd number (&gt;= 3). If not, the routine
+will force it to the next largest odd number.
+
+<dl>
+<dt><em>jave</em> < 3
+<dd>Do no smoothing. <em>spcx</em> contains raw spectra estimates
+(periodogram).
+
+<dt><em>jave</em> >= 3
+
+<dd>Average <em>jave</em> periodogram estimates together utilizing
+modified Daniell smoothing (good stability but may lead to large
+bias).  All weights are 1/<em>jave</em> except weight(1) and
+weight(<em>jave</em>) which are 1/(2*<em>jave</em>). This is the
+recommended option. It is this number which has the most impact on the
+degrees of freedom.
+
+</dl>
+</p>
+<em>pct</em>
+<p class=indent>A scalar representing the percent of the series to be tapered (0.0
+&lt;= <em>pct</em> &lt;= 1.0).  If <em>pct</em> =0.0, no tapering will
+be done. If <em>pct</em> = 1.0, the whole series is affected. A value
+of 0.10 is common (tapering should always be done).
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The return value is a scalar representing the degrees of freedom.  The
+scalar will be double if <em>x</em>, <em>y</em>, or <em>pct</em> are
+double, and float otherwise.  See the description below for a list of
+attributes that are also returned.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<strong>specxy_anal</strong> returns the degrees of freedom as a
+scalar.  It also returns the following attributes:<P>
+
+<dl>
+
+<dt><em>spcx,spcy</em>
+<dd>One-dimensional arrays of length <em>N</em>/2.<p>
+
+<em>spcx</em>(0) - spectral estimate at frequency = (1/<em>N</em>)<br>
+[<em>N</em>=<a href="dimsizes.html"><strong>dimsizes</strong></a>(x)]<p>
+
+<em>spcx</em>(<em>N</em>/2-1)- spectral estimate at frequency = 0.5<P>
+
+These spectra have been normalized so that the area under the curve:
+
+<blockquote>
+(<em>spcx</em>(0)+<em>spcx</em>(<em>N</em>/2-1))*(df/2) +
+SUM{<em>spcx</em>(n)*df}
+</blockquote>
+
+equals the variance of the detrended series, where
+df=(1/<em>N</em>)=frequency spacing and n=1 to <em>N</em>/2-2.<P>
+
+The units are variance/(unit frequency interval).<P>
+ 
+<dt><em>frq</em>
+<dd>A one-dimensional array of length <em>N</em>/2 representing
+frequency (cycles/time).
+       
+<dt><em>cospc</em>
+<dd>A one-dimensional array of length <em>N</em>/2 representing the
+cospectrum. This is the real part of the cross spectrum. It measures
+the extent to which there are oscillations with the same phase in the
+two series (or with opposite sign, i.e. with a phase shift of half a
+cycle).  In other words, it measures the contribution of different
+frequencies to the total cross-covariance at zero lag.<P>
+
+<dt><em>quspc</em>
+<dd>A one-dimensional array of length <em>N</em>/2 representing the
+quadrature spectrum.  This is the imaginary part of the cross
+spectrum. it measures the extent to which there are oscillations with
+a phase difference of a quarter cycle in either direction. i.e., It
+measures the contribution of different frequencies to the total
+cross-covariance of the series when all harmonics of one series are
+delayed a quarter cycle relative to the other relative to the other
+series.<P>
+
+<dt><em>coher</em>
+
+<dd>A one-dimensional array of length <em>N</em>/2 representing
+coherence squared.  This is analogous to the square of the correlation
+coef except that the coherence squared is a function of frequency.<P>
+
+<dt><em>phase</em>
+<dd>A one-dimensional array of length <em>N</em>/2 representing the
+phase in degrees.  A positive phase indicates that <em>x</em> leads
+<em>y</em>.<P>
+
+<dt><em>bw</em>
+<dd>A scalar (same type as output) representing the spectral bandwidth.<p>
+
+<dt><em>coher_probability</em>
+<dd>An array of length 4 containing the coherence corresponding to the
+90, 95, 99, and 99.9% levels.<P>
+
+<dt><em>xavei</em>
+<dd>A scalar (same type as output) representing the average of the x
+series on input.<p>
+
+<dt><em>xvari</em>
+<dd>A scalar (same type as output) representing the variance of the x
+series on input.<p>
+
+<dt><em>xvaro</em>
+<dd>A scalar (same type as output) representing the variance of the x
+series after detrending.<p>
+
+<dt><em>xlag1</em>
+<dd>A scalar (same type as output) representing the lag-one autocorrelation
+of the x series after detrending.<p>
+
+<dt><em>xslope</em>
+<dd>A scalar (same type as output) representing the least-squares
+slope per time interval of linear trend (if <em>iopt</em> = 1) of the
+x series.<P>
+
+<dt><em>yavei</em>
+<dd>A scalar (same type as output) representing the average of the y
+series on input.<p>
+
+<dt><em>yvari</em>
+<dd>A scalar (same type as output) representing the variance of the y
+series on input.<p>
+
+<dt><em>yvaro</em>
+<dd>A scalar (same type as output) representing the variance of the y
+series after detrending.<p>
+
+<dt><em>ylag1</em>
+<dd>A scalar (same type as output) representing the lag-one autocorrelation
+of the y series after detrending.<p>
+
+<dt><em>yslope</em>
+<dd>A scalar (same type as output) representing the least-squares
+slope per time interval of linear trend (if <em>iopt</em> = 1) of the
+y series.<P>
+
+</dl>
+<pre>
+--------------------------------------------------------------------------------
+Some NCL users have asked about testing for significance. The following may help:
+
+The coherence-squared is a statistic that can be used to examine the relation between 
+two signals or data sets. It allows identification of significant frequency-domain 
+correlation between the two time series.  <b>Phase estimates in the cross spectrum are 
+only useful where significant frequency-domain correlation exists.</b>
+
+<b>References: </b>
+
+  Dennis Hartmann
+  http://www.atmos.washington.edu/~dennis/552_Notes_6c.pdf
+      See Table 6.2 , page 187 and the associated caption on page 186
+ 
+  <a href="http://dx.doi.org/10.1175/1520-0469(1975)032<0836:COTDOS>2.0.CO;2">
+Comments on the Determination of Significance Levels of the Coherence Statistic</a>
+   Paul R. Julian
+   J. of Atm. Sci. (1975), Volume <b>32</b>, pp 836-837. 
+
+  <a href="http://dx.doi.org/10.1175/1520-0469(1979)036<2020:CSL>2.0.CO;2">Coherence Significance Levels</a>
+   Rory O. R. Y. Thompson
+   Journal of the Atmospheric Sciences, 1979
+   Volume <b>36</b>, pp 2020-2021
+</pre>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="specx_anal.html"><strong>specx_anal</strong></a>,
+<a href="../Contributed/cohsq_c2p.html"><strong>cohsq_c2p</strong></a>,
+<a href="../Contributed/cohsq_p2c.html"><strong>cohsq_p2c</strong></a>, 
+<a href="../Shea_util/specx_ci.html"><strong>specx_ci</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<b>Example 1</b><p>
+
+Perform cross-spectral analysis on series <em>x</em> and
+<em>y</em>:<P>
+
+<PRE>
+   iopt = 1    ; remove least squares linear trends from each
+               ; series prior to tapering and computing spectra.
+   jave = 7    ; Average 7 periodogram estimates using modified Daniell
+   pct  = 0.1  ; taper 10% of the data
+   sdof = <strong>specxy_anal</strong> (x,y,iopt,jave,pct)
+</PRE>
+<p>
+<b>Example 2</b>: Calculate the probability level of each coherence-squared returned by <strong>specxy_anal</strong>.
+
+<pre>
+    d    = 0                     ; detrending opt: 0=>remove mean 1=>remove mean and detrend
+    sm   = 7                     ; smoothing periodogram: should be at least 3 and odd
+    pct  = 0.10                  ; percent tapered: 0.10 common. 
+
+                                 ; calculate the cross-spectrum
+    sdof = <strong>specxy_anal</strong>(x,y,d,sm,pct)   ; sdof is a scalar quantity
+
+    c2   = spec@coher            ; c2(N)
+    p    = <a href="../Contributed/cohsq_c2p.html"><strong>cohsq_c2p</strong></a>(c2, sdof)  ; p(N),  0 <= <em>p</em>  <= 1
+
+                                 ; print the values
+    <a href="print.html"><strong>print</strong></a>(sdof@frq+"   "+c2+"   "+p)
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/specxy_anal.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:13 GMT -->
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/NhlAddOverlay.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:51 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (graphics routines)">
+<meta name="keywords" content="NhlAddOverlay">
+<title>NhlAddOverlay</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../object.html">NCL object routines</a>,
+<a class=crumb href="../graphics_routines.html">Graphics routines</a>
+<br>
+<h1>NhlAddOverlay</h1>
+
+<p>
+Overlays one plot object on another.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	procedure NhlAddOverlay (
+		base_id      [1] : graphic,  
+		transform_id [1] : graphic,  
+		after_id     [1] : graphic   
+	)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>base_id</em>
+<p class=indent>The base plot of the overlay chain of plots. The object referenced
+must support overlays.
+</p>
+<em>transform_id</em>
+<p class=indent>The graphical object to be overlaid on the <em>base_id</em> plot.  The
+object must be one of the <a href="../../HLUs/Classes/Transform.html"><strong>Transform</strong></a> objects; that is, an
+object that can go through a transformation to become part of the
+<em>base_id</em> plot. Examples of Transform objects include contour
+plots, XY plots, vector plots, and streamline plots.
+</p>
+<em>after_id</em>
+<p class=indent>If the base plot already contains one or more overlaid plots, then
+<em>after_id</em> identifies the existing overlay that the new overlay
+is to follow in the overlay sequence. A value less than 0 specifies
+that the new overlay is to be added to the end of the sequence. If the
+value is the id of the base plot itself, the new overlay is placed
+just behind the base plot in the sequence.
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+The <strong>NhlAddOverlay</strong> procedure is used to set the
+<em>transform</em> object so it will be drawn over the
+<em>base_id</em> plot.  The <em>base_id</em> plot must have the same
+workstation parent as the <em>transform_id</em> object, and it cannot
+already be an overlaid plot itself.  The <em>transform_id</em> object
+will become a plot member of the <em>base_id</em> plot.<p>
+
+The base plot will provide the coordinate transformation and data
+boundaries that together determine where the data coordinate space
+belonging to the overlay will appear, and how much of it will be
+visible.  In addition, if the transform is a plot object, the base
+plot assumes management responsibilities for the plot object's plot
+members if it has any.<p>
+
+If the base plot already has overlays, you can place the new overlay
+anywhere in the overlay sequence using the <em>after_id</em>
+parameter. The overlay sequence determines the basic drawing order for
+the overlays.<P>
+
+Note that map plots cannot become overlay plots, although they can
+serve as base plots.<p>
+
+Once you overlay <em>transform_id</em> plot, you can no longer draw it
+separately.  You can only draw the <em>base_id</em> plot, which causes
+the base plot to be drawn along with all the plots that have been
+overlaid on it.<p>
+
+This procedure is similar to <a href="overlay.html"><strong>overlay</strong></a>, only it has
+the additional <em>after_id</em> argument.<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="overlay.html"><strong>overlay</strong></a>, <a href="NhlRemoveOverlay.html"><strong>NhlRemoveOverlay</strong></a>,
+<a href="NhlAddPrimitive.html"><strong>NhlAddPrimitive</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+For a GSN example that uses the <a href="overlay.html"><strong>overlay</strong></a> procedure,
+see examples 1 or 3 in the "<a href="../../../Applications/conOncon.html">Contours overlaid on
+contours</a>" section, and example 1 in the "<a href="../../../Applications/meteo.html">Meteogram</a>" section.<p>
+
+<b>Example 1</b></p>
+
+This example creates a map plot and overlays vectors and contours
+using <strong>NhlAddOverlay</strong>.  It then uses
+<a href="NhlRemoveOverlay.html"><strong>NhlRemoveOverlay</strong></a> to remove the vectors and redraw
+the plot (illustration only).
+
+<pre>
+begin
+  MSIZE = 73
+  NSIZE = 73
+  NROWS = 11
+
+; 
+; Define our own colormap.
+;
+  cmap = (/(/1.0,1.0,1.0/), \
+           (/0.0,0.0,0.0/), \
+           (/0.9,0.9,0.9/), \
+           (/0.6,0.6,0.6/), \
+           (/0.3,0.3,0.3/), \
+           (/0.8,0.9,1.0/), \
+           (/0.5,0.0,0.5/), \
+           (/0.0,0.5,0.7/), \
+           (/0.0,0.0,0.0/), \
+           (/0.00000,1.00000,0.00000/), \
+           (/0.14286,1.00000,0.00000/), \
+           (/0.28571,1.00000,0.00000/), \
+           (/0.42857,1.00000,0.00000/), \
+           (/0.57143,1.00000,0.00000/), \
+           (/0.71429,1.00000,0.00000/), \
+           (/0.85714,1.00000,0.00000/), \
+           (/1.00000,1.00000,0.00000/), \
+           (/1.00000,0.85714,0.00000/), \
+           (/1.00000,0.71429,0.00000/), \
+           (/1.00000,0.57143,0.00000/), \
+           (/1.00000,0.42857,0.00000/), \
+           (/1.00000,0.28571,0.00000/), \
+           (/1.00000,0.14286,0.00000/), \
+           (/1.00000,0.00000,0.00000/) /)
+;
+; Create an ncgmWorkstation object.
+;
+  wks = create "vc07Work" xWorkstationClass defaultapp
+    "<a href="../../Graphics/Resources/wk.html#wkColorMap"><em>wkColorMap</em></a>" : cmap
+  end create
+
+;
+; Read the data file.
+;
+;   data(0,:,:) is U
+;   data(1,:,:) is V
+;   data(2,:,:) is P
+;
+  path = <a href="ncargpath.html"><strong>ncargpath</strong></a>("examples")
+  data = <a href="asciiread.html"><strong>asciiread</strong></a>(path + "/fcover.dat",(/3,73,73/),"float")
+  data@_FillValue = -9999.0
+;
+; Massage the data to eliminate surplus of vectors near the pole
+;
+  ithin = (/90,15,5,5,4,4,3,3,2,2,2/)
+  do j=1,NROWS
+    data(0,NSIZE-j,<a href="ind.html"><strong>ind</strong></a>(<a href="ispan.html"><strong>ispan</strong></a>(1,MSIZE,1) % ithin(j-1) .ne. 0)) = -9999.0
+  end do
+
+;
+; Create a MapPlot object.
+; 
+  map = create "mapplot" mapPlotClass wks
+    "<a href="../../Graphics/Resources/vp.html#vpXF"><em>vpXF</em></a>"                    : 0.05
+    "<a href="../../Graphics/Resources/vp.html#vpYF"><em>vpYF</em></a>"                    : 0.95
+    "<a href="../../Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a>"                : 0.9
+    "<a href="../../Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a>"               : 0.9
+
+    "<a href="../../Graphics/Resources/mp.html#mpProjection"><em>mpProjection</em></a>"            : "Stereographic"
+    "<a href="../../Graphics/Resources/mp.html#mpCenterLatF"><em>mpCenterLatF</em></a>"            : 90.0
+    "<a href="../../Graphics/Resources/mp.html#mpCenterLonF"><em>mpCenterLonF</em></a>"            : 180.0
+    "<a href="../../Graphics/Resources/mp.html#mpCenterRotF"><em>mpCenterRotF</em></a>"            : 45.0
+    "<a href="../../Graphics/Resources/mp.html#mpFillOn"><em>mpFillOn</em></a>"                : True
+    "<a href="../../Graphics/Resources/mp.html#mpGridAndLimbDrawOrder"><em>mpGridAndLimbDrawOrder</em></a>"  : "Draw"
+    "<a href="../../Graphics/Resources/mp.html#mpGridLineDashPattern"><em>mpGridLineDashPattern</em></a>"   : 5
+    "<a href="../../Graphics/Resources/mp.html#mpLabelsOn"><em>mpLabelsOn</em></a>"              : False
+    "<a href="../../Graphics/Resources/mp.html#mpLimitMode"><em>mpLimitMode</em></a>"             : "Corners"
+
+    "<a href="../../Graphics/Resources/mp.html#mpLeftCornerLatF"><em>mpLeftCornerLatF</em></a>"        : 10.
+    "<a href="../../Graphics/Resources/mp.html#mpLeftCornerLonF"><em>mpLeftCornerLonF</em></a>"        : -180.
+    "<a href="../../Graphics/Resources/mp.html#mpRightCornerLatF"><em>mpRightCornerLatF</em></a>"       : 10.
+    "<a href="../../Graphics/Resources/mp.html#mpRightCornerLonF"><em>mpRightCornerLonF</em></a>"       : 0.
+
+    "<a href="../../Graphics/Resources/mp.html#mpLandFillColor"><em>mpLandFillColor</em></a>"         : 3
+    "<a href="../../Graphics/Resources/mp.html#mpOceanFillColor"><em>mpOceanFillColor</em></a>"        : 7
+    "<a href="../../Graphics/Resources/mp.html#mpInlandWaterFillColor"><em>mpInlandWaterFillColor</em></a>"  : 7
+  end create
+
+;
+; Create a ScalarField object.
+;
+  sfield = create "ScalarField" scalarFieldClass defaultapp
+    "<a href="../../Graphics/Resources/sf.html#sfDataArray"><em>sfDataArray</em></a>"     : data(2,:,:)
+    "<a href="../../Graphics/Resources/sf.html#sfMissingValueV"><em>sfMissingValueV</em></a>" : data@_FillValue
+    "<a href="../../Graphics/Resources/sf.html#sfXCStartV"><em>sfXCStartV</em></a>"      : -180.
+    "<a href="../../Graphics/Resources/sf.html#sfYCStartV"><em>sfYCStartV</em></a>"      : -90.
+    "<a href="../../Graphics/Resources/sf.html#sfXCEndV"><em>sfXCEndV</em></a>"        : 180.
+    "<a href="../../Graphics/Resources/sf.html#sfYCEndV"><em>sfYCEndV</em></a>"        : 90.
+  end create
+;
+; Create a VectorField object.
+;
+  vfield = create "VectorField" vectorFieldClass defaultapp
+    "<a href="../../Graphics/Resources/vf.html#vfMissingUValueV"><em>vfMissingUValueV</em></a>" : -9999.0
+    "<a href="../../Graphics/Resources/vf.html#vfMissingVValueV"><em>vfMissingVValueV</em></a>" : -9999.0
+
+    "<a href="../../Graphics/Resources/vf.html#vfUDataArray"><em>vfUDataArray</em></a>"     : data(0,:,:)
+    "<a href="../../Graphics/Resources/vf.html#vfVDataArray"><em>vfVDataArray</em></a>"     : data(1,:,:)
+    "<a href="../../Graphics/Resources/vf.html#vfXCStartV"><em>vfXCStartV</em></a>"       : -180.
+    "<a href="../../Graphics/Resources/vf.html#vfYCStartV"><em>vfYCStartV</em></a>"       :  -90.
+    "<a href="../../Graphics/Resources/vf.html#vfXCEndV"><em>vfXCEndV</em></a>"         :  180.
+    "<a href="../../Graphics/Resources/vf.html#vfYCEndV"><em>vfYCEndV</em></a>"         :   90.
+  end create
+
+;
+; Create a VectorPlot object.
+;
+  vector = create "vectorplot" vectorPlotClass wks
+    "<a href="../../Graphics/Resources/vc.html#vcUseScalarArray"><em>vcUseScalarArray</em></a>"         :  True
+    "<a href="../../Graphics/Resources/vc.html#vcVectorFieldData"><em>vcVectorFieldData</em></a>"        :  vfield
+    "<a href="../../Graphics/Resources/vc.html#vcScalarFieldData"><em>vcScalarFieldData</em></a>"        :  sfield
+    "<a href="../../Graphics/Resources/vc.html#vcLevelSelectionMode"><em>vcLevelSelectionMode</em></a>"     : "ManualLevels"
+    "<a href="../../Graphics/Resources/vc.html#vcMinLevelValF"><em>vcMinLevelValF</em></a>"           : 970.
+    "<a href="../../Graphics/Resources/vc.html#vcMaxLevelValF"><em>vcMaxLevelValF</em></a>"           : 1040.
+    "<a href="../../Graphics/Resources/vc.html#vcLevelSpacingF"><em>vcLevelSpacingF</em></a>"          : 5.
+    "<a href="../../Graphics/Resources/vc.html#vcLevelColors"><em>vcLevelColors</em></a>"            : <a href="ispan.html"><strong>ispan</strong></a>(9,23,1)
+    "<a href="../../Graphics/Resources/vc.html#vcLineArrowHeadMinSizeF"><em>vcLineArrowHeadMinSizeF</em></a>"  :  0.007
+    "<a href="../../Graphics/Resources/vc.html#vcLineArrowThicknessF"><em>vcLineArrowThicknessF</em></a>"    : 3.0
+    "<a href="../../Graphics/Resources/vc.html#vcMaxLevelCount"><em>vcMaxLevelCount</em></a>"          : 15
+    "<a href="../../Graphics/Resources/vc.html#vcMinFracLengthF"><em>vcMinFracLengthF</em></a>"         : 0.4
+    "<a href="../../Graphics/Resources/vc.html#vcMonoLineArrowColor"><em>vcMonoLineArrowColor</em></a>"     : False
+    "<a href="../../Graphics/Resources/vc.html#vcRefAnnoOn"><em>vcRefAnnoOn</em></a>"              : False
+    "<a href="../../Graphics/Resources/vc.html#vcRefLengthF"><em>vcRefLengthF</em></a>"             : 0.054794524
+  end create
+
+  getvalues vector
+    "<a href="../../Graphics/Resources/vc.html#vcMinMagnitudeF"><em>vcMinMagnitudeF</em></a>": vmin
+    "<a href="../../Graphics/Resources/vc.html#vcMaxMagnitudeF"><em>vcMaxMagnitudeF</em></a>": vmax
+  end getvalues
+
+  setvalues vector
+    "<a href="../../Graphics/Resources/vc.html#vcMinMagnitudeF"><em>vcMinMagnitudeF</em></a>": vmin + 0.1 * (vmax - vmin)
+  end setvalues
+
+;
+; Create a ContourPlot object.
+;
+  contour = create "contourplot" contourPlotClass wks
+    "<a href="../../Graphics/Resources/cn.html#cnScalarFieldData"><em>cnScalarFieldData</em></a>"          : sfield
+    "<a href="../../Graphics/Resources/cn.html#cnInfoLabelOn"><em>cnInfoLabelOn</em></a>"              : False
+    "<a href="../../Graphics/Resources/cn.html#cnLineColor"><em>cnLineColor</em></a>"                : 6
+    "<a href="../../Graphics/Resources/cn.html#cnLineLabelPerimOn"><em>cnLineLabelPerimOn</em></a>"         : False
+    "<a href="../../Graphics/Resources/cn.html#cnLineLabelsOn"><em>cnLineLabelsOn</em></a>"             : False
+    "<a href="../../Graphics/Resources/cn.html#cnLineThicknessF"><em>cnLineThicknessF</em></a>"           : 3.0
+    "<a href="../../Graphics/Resources/cn.html#cnMaxLevelCount"><em>cnMaxLevelCount</em></a>"            : 20
+  end create
+
+;
+; Overlay the vectors and the contours on the map and draw
+; everything.
+;
+  <strong>NhlAddOverlay</strong>(map,vector,map)
+  <strong>NhlAddOverlay</strong>(map,contour,map)
+
+  <a href="draw.html"><strong>draw</strong></a>(map)
+  <a href="frame.html"><strong>frame</strong></a>(wks)
+
+;
+; Remove the vector overlay and redraw the plot.
+;
+  <a href="NhlRemoveOverlay.html"><strong>NhlRemoveOverlay</strong></a>(map,vector,False)
+  <a href="draw.html"><strong>draw</strong></a>(map)
+  <a href="frame.html"><strong>frame</strong></a>(wks)
+end
+
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/NhlAddOverlay.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:51 GMT -->
+</html>

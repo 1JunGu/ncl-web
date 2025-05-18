@@ -1,0 +1,93 @@
+;======================================================================
+; geo_3.ncl
+;
+; Concepts illustrated:
+;   - Plotting data on a geodesic mesh over a polar stereographic map
+;   - Setting the cell bounds for an unstructured mesh
+;   - Paneling northern and southern hemisphere plots
+;======================================================================
+; This script requires NCL V6.6.0 or later to run, since it uses
+; an updated version of gsn_coordinates.
+;======================================================================
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;
+; This grid came to us via Dave Randall, Todd Ringler, and Ross Heikes
+; of CSU. The data for this mesh were originally downloaded from:
+; http://kiwi.atmos.colostate.edu/BUGS/geodesic/interpolate.html
+;
+
+;---Open file and read in data
+  f = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/hswm_d000000p000.g2.nc","r")
+
+  r2d = get_r2d("float")
+  x  = f->grid_center_lon * r2d    ; 2462 cells
+  y  = f->grid_center_lat * r2d    ;   "
+  cx = f->grid_corner_lon * r2d    ; 2462 cells x 6 vertices
+  cy = f->grid_corner_lat * r2d    ;   "
+  ke = f->kinetic_energy(2,:)      ; 3 x 2452  (time x cells)
+  printVarSummary(ke)      
+
+  wks = gsn_open_wks("png","geo")            ; send graphics to PNG file
+
+  res                      = True            ; plot mods desired
+  res@gsnDraw              = False           ; will draw plot later
+  res@gsnFrame             = False           ; with gsn_coordinates
+
+  res@cnFillOn             = True            ; turn on color
+  res@cnLinesOn            = False           ; turn off contour lines
+  res@cnLineLabelsOn       = False           ; turn off line labels
+  res@cnLevelSpacingF      = 25
+  res@cnFillPalette        = "gui_default"
+
+;---These resources define the cell centers and cell vertices
+  res@sfXArray             = x
+  res@sfYArray             = y
+  res@sfXCellBounds        = cx
+  res@sfYCellBounds        = cy
+  res@gsnRightString       = ""
+  res@gsnLeftString        = ""
+
+  res@gsnPolar             = "NH"    ; Create a northern hemisphere polar map
+; res@mpMinLatF            = 45      ; Limit view if desired
+  res@tiMainString         = "Northern hemisphere"
+
+  plot_nh = gsn_csm_contour_map_polar(wks,ke,res)
+; delete(res@mpMinLatF)
+
+  res@gsnPolar             = "SH"    ; Create a southern hemisphere polar map
+  res@tiMainString         = "Southern hemisphere"
+; res@mpMaxLatF            = -45     ; Limit view if desired
+  plot_sh = gsn_csm_contour_map_polar(wks,ke,res)
+
+;
+; gsn_coordinates was updated in NCL V6.6.0 to 
+; draw mesh vertices. You will need NCL V6.6.0 or
+; later for the code below to work.
+;
+  gsres                            = True
+  gsres@gsnCoordsMeshLatBounds     = cy
+  gsres@gsnCoordsMeshLonBounds     = cx
+  gsres@gsnCoordsMeshLatCenter     = y
+  gsres@gsnCoordsMeshLonCenter     = x
+  gsres@gsnCoordsMeshClosePolygons = True      ; necessary to get fully closed polygons
+  gsres@gsMarkerColor              = "Black"   ; color to use for cell centers
+  gsres@gsLineColor                = "Brown"   ; color to use for cell edges
+  gsres@gsMarkerSizeF              = 3.0
+  gsres@gsLineThicknessF           = 3.0
+  gsres@gsnCoordsAttach            = True      ; lines and markers will be
+                                               ; attached to plot. This is so
+                                               ; we can panel the plots later.
+;---Attachs markers and lines to plot
+  gsn_coordinates(wks,plot_nh,ke,gsres)     
+  gsn_coordinates(wks,plot_sh,ke,gsres)     
+ 
+;---Panel both plots
+  pres = True
+  pres@gsnMaximize = True
+  gsn_panel(wks,(/plot_nh,plot_sh/),(/1,2/),pres)
+
+end

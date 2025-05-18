@@ -1,0 +1,81 @@
+;************************************
+; hirlam_1.ncl
+;************************************
+; %> ncl_filedump hirlam_20200210T120000_20200210T120000_20200212T180000_latlon.grb2
+; will provide a 'ncdump' sty;e look at the file's contents
+;************************************
+;     MAIN
+;************************************
+
+;setfileoption("grb","SingleElementDimensions","Initial_time") ; initial_time0_hours
+
+ dirHLAM = "./"
+ filHLAM = "hirlam_20200210T120000_20200210T120000_20200212T180000_latlon.grb2"
+ pthHLAM =  dirHLAM+filHLAM
+ f       = addfile(pthHLAM,"r")
+                                              ; ( forecast_time0, lat_0, lon_0 )
+ t2m     = f->TMP_P0_L103_GLL0                ; ( 55, 27, 128)
+ u10     = f->UGRD_P0_L103_GLL0
+ v10     = f->VGRD_P0_L103_GLL0
+ ftime   = f->forecast_time0                  ; hours since initial timt
+ idate   = t2m@initial_time                   ; string: mm/dd/yyyy (hh:mn)
+
+ t2m     = t2m-273.15                         ; prefer C
+ t2m@units = "degC"    
+
+ spd     = sqrt(u10^2+v10^2)
+ printMinMax(spd,0)
+;************************************
+; create plot
+;************************************
+ dimt    = dimsizes(t2m)
+ ntimf   = dimt(0)                            ; number of times on file: initial_time + forecast_times
+
+ wks = gsn_open_wks("png","hirlam")      ; send graphics to PNG file
+ res                      = True         ; plot mods desired
+ res@gsnMaximize          = True
+ res@gsnScalarContour     = True     
+ res@gsnMajorLatSpacing   = 1.0
+ res@gsnMajorLonSpacing   = 1.0
+
+ res@cnFillOn             = True     ; turn on color fill
+ res@cnLinesOn            = False    ; turn off contour lines
+ res@cnFillPalette        = "BlAqGrYeOrReVi200"
+
+ res@cnLevelSelectionMode = "ManualLevels"     ; set manual contour levels
+ res@cnMinLevelValF       = -5.0               ; set min contour level
+ res@cnMaxLevelValF       =  10.0              ; set max contour level
+ res@cnLevelSpacingF      =   1.               ; set contour spacing
+
+ res@lbLabelFontHeightF   = 0.0075
+ res@pmLabelBarOrthogonalPosF = -0.15          ; move whole thing up
+
+
+ res@tiMainString         = "HIRLAM: "+idate    ; main title
+ res@gsnLeftString        = "T_2M; SPEED_10M"
+ res@gsnRightString       = "degC; m/s"           
+
+ res@gsnAddCyclic         = False              ; regional data
+
+ res@mpMaxLatF            = max(t2m&lat_0)     ; map subregion
+ res@mpMinLatF            = min(t2m&lat_0)
+ res@mpMaxLonF            = max(t2m&lon_0)   
+ res@mpMinLonF            = min(t2m&lon_0)   
+
+;res@vcGlyphStyle         = "CurlyVector"      ; turn on curly vectors
+ res@vcGlyphStyle         = "WindBarb"    
+ res@vcVectorDrawOrder    = "PostDraw"         ; draw vectors last
+ res@vcMinDistanceF       = 0.015              ; larger means sparser
+ res@vcRefMagnitudeF      = 5.0                ; define vector ref mag
+ res@vcRefLengthF         = 0.025            ; define length of vec ref
+print(res)
+
+ hrPlt = (/12,24,48,ntimf-1/)                      ; arbitrary
+ nhrPlt = dimsizes(hrPlt)
+
+ do nhr=0,0   ; 0,nhrPlt-1
+     hour   = hrPlt(nhr)
+     res@gsnCenterString   = "Forecast: "+hour+" hr"
+     plot = gsn_csm_vector_scalar_map(wks,u10({hour},:,:), v10({hour},:,:),t2m({hour},:,:),res)
+ end do
+

@@ -1,0 +1,102 @@
+;======================================================================
+; contour_methods_2.ncl
+;
+; Concepts illustrated:
+;   - Drawing cell-filled contours of ORCA data
+;   - Turning on edges for cell-fill
+;   - Turning on edges for missing cell-fill areas
+;   - Using opacity to emphasize or subdue overlain features
+;======================================================================
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+  orca = addfile("ctorca.nc","r")
+  sst  = orca->sosstsst(0,:,:)
+  lon  = orca->nav_lon
+  lat  = orca->nav_lat
+
+;
+; Open workstation and set basic resources
+;
+  wks = gsn_open_wks("png","contour_methods")   ; send graphics to PNG file
+
+  res                     = True
+
+  res@trGridType          = "TriangularMesh"    ; Define the mesh type.
+
+;---Set lat/lon arrays and missing value
+  res@sfXArray            = lon
+  res@sfYArray            = lat
+  res@sfMissingValueV     = sst@missing_value
+
+;---Set plotting and map resources
+  res@gsnAddCyclic        = False      ; don't add cyclic point
+  res@gsnLeftString       = ""         ; use empty string to turn off left side string
+  res@gsnRightString      = ""         ; use empty string to turn off right side string
+  res@tiMainString        = "Default smoothed plot (AreaFill)" ; set default plot title
+  res@tiMainFont          = "helvetica"; set title font
+  res@lbLabelBarOn        = False      ; turn off individual label bars
+  res@mpProjection        = "Orthographic"
+  res@mpPerimOn           = False      ; turn map perimeter off
+  res@mpOutlineOn         = False      ; turn map outlines off
+
+;---Turn off drawing and frame advancing so that plots can be paneled later
+  res@gsnDraw             = False
+  res@gsnFrame            = False
+
+;---Define contour resources and create plot variable
+  res@cnFillOn            = True                ; turn color contours on
+  res@cnLinesOn           = False               ; turn contour lines off
+  res@cnLineLabelsOn      = False               ; turn contour line labels off
+  res@cnFillPalette       = "BlAqGrYeOrReVi200" ; set color map
+
+  plot = new(3,graphic)
+
+;---Create default contour map plot
+  plot(0) = gsn_csm_contour_map(wks,sst,res)
+
+;
+; Use the "CellFill" method to fill the contours, and
+; outline the cell edges.
+;
+  res@cnFillMode          = "CellFill"
+
+  res@cnLinesOn           = False         ; Turn lines off
+  res@cnLineLabelsOn      = False         ; Turn labels off
+
+
+  res@mpGridLineColor     =  -1           ; Turn off grid lat/lon lines
+  res@mpGridAndLimbOn     =  True
+
+  res@tiMainString        = "CellFill"
+
+;---Create cell-fill contour map without edges
+  plot(1) = gsn_csm_contour_map(wks,sst,res)
+
+;
+; Turn on the cell edges and the missing value edges so we can see 
+; an outline of the grid and the missing value areas.
+;
+  res@cnCellFillEdgeColor           = 1
+  res@cnCellFillMissingValEdgeColor = "gray30"
+  res@tiMainString                  = "CellFill with cell edges on"
+  res@cnFillOpacityF                = 0.4       ; make contours slightly more transparent
+  res@mpFillOn                      = False     ; turn map fill off
+
+;---Create cell-fill contour map with edges
+  plot(2) = gsn_csm_contour_map(wks,sst,res)
+
+
+;---Draw plots paneled on one page
+  pres                    = True
+  pres@gsnMaximize        = True
+  pres@gsnPanelLabelBar   = True  ; create common label bar
+  pres@lbLabelFontHeightF = 0.01
+  pres@gsnPanelRowSpec    = True
+  pres@gsnPanelMainString = "Comparing AreaFill and CellFill"
+  pres@gsnPanelMainFont   = "helvetica-bold"
+  gsn_panel(wks,plot,(/1,2/),pres)
+end

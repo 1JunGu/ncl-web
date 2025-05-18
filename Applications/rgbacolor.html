@@ -1,0 +1,968 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/rgbacolor.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:54:23 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+the use of the Evans plot.">
+<meta name="keywords" content="NCL, graphics, visualization, Evans,
+color wheel">
+<TITLE>NCL Graphics: Working with RGBA color</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_special.html">Special plots</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: Working with RGBA color</h1>
+
+<div class=mainimage>
+<img src="Images/newcolor_7_3_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+NCL <a href="../prev_releases.html#6.1.0">V6.1.0</a> introduced a new
+color model in which color is specified in a natural and flexible
+manner. Colors may have degrees of transparency, and there is no
+longer a limit of 256 colors in a plot. Backwards compatibility with
+the previous color model is also retained. This new color model
+is limited to PS, PDF, PNG, and X11 output. 
+
+<p>
+In versions of NCL prior to v6.1.0, colors are specified relative to
+a colortable that is associated with the workstation. Most commonly,
+a color-resource is assigned the index into the colortable of the
+desired color. Alternatively, a named-color or an RGB-triplet may be given
+to designate a specific color; the color is added to the lookup table
+if there is room, or the most similar color in the table is used. 
+The workstation colortable has a limit of 256 entries, and those are
+the only colors that may appear in a plot.
+<p>
+In the new model, color may -- and should -- be used independently of a workstation
+colormap. Users choose colors directly by names or RGB-triplets,
+without appeal to a workstation colormap. Colors might even be
+computed dynamically based upon a data source. There is no practical
+limit on the number of colors that may be used in a plot.
+<p>
+Colors may also be partially transparent, by specifying an <i>opacity</i>
+value (sometimes referred to as <i>alpha</i> in computer graphics
+parlance).  Opacity is given as a floating-point in the range [0.,1.],
+ where 0. means completely transparent, and 1. means fully
+opaque. Opacity values may be given for individual colors by
+specifying a 4-tuple, in which the components are red, green, blue, and
+opacity values. Alternatively, newly introduced resources can set the
+opacity for entire classes of graphical primitives (described below).
+<p>
+Finally, to maintain backwards compatibility, the one exception to the
+foregoing discussion is that if color is ever specified as an integer
+index, it is interpreted to be a color relative to the workstation's
+colormap. Workstations still have an associated colormap that may be
+changed and manipulated as before, however this usage is discouraged for
+new scripts. 
+
+<h5>Specifying Opacity</h5>
+
+Again, opacity values range from 0. to 1.
+The opacity of individual colors can be specified by giving a 4-tuple
+of red, green, blue, opacity values. For example:
+<p>
+
+<pre>
+  res@gsLineColor = (/ 1., 0., 0., .5 /)
+</pre>
+specifies a partially transparent red color.
+<p>
+New resources are available to specify the opacity of classes of
+graphical elements:
+<table>
+<tr><td><a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a></td>
+    <td>sets the opacity of all colors in a contour plot </td></tr>
+<tr><td><a href="../Document/Graphics/Resources/vc.html#vcGlyphOpacityF"><em>vcGlyphOpacityF</em></a></td>
+    <td>sets the opacity of all vector glyphs in a vector plot</td></tr>
+<tr><td><a href="../Document/Graphics/Resources/st.html#stLineOpacityF"><em>stLineOpacityF</em></a></td>
+    <td>sets the opacity of all streamlines in a streamline plot</td></tr>
+<tr><td><a href="../Document/Graphics/Resources/gs.html#gsFillOpacityF"><em>gsFillOpacityF</em></a></td>
+    <td>sets opacity for color-filled polygons</td></tr>
+<tr><td><a href="../Document/Graphics/Resources/gs.html#gsLineOpacityF"><em>gsLineOpacityF</em></a></td>
+    <td>sets opacity for boundaries of polygons, polylines, etc.</td></tr>
+<tr><td><a href="../Document/Graphics/Resources/gs.html#gsMarkerOpacityF"><em>gsMarkerOpacityF</em></a></td>
+    <td>sets opacity for marker-based graphics</td></tr>
+<tr><td><a href="../Document/Graphics/Resources/tx.html#txFontOpacityF"><em>txFontOpacityF</em></a></td>
+    <td>sets opacity for textual graphics</td></tr>
+</table>
+<p>
+
+<b><font color="red">Import note:</font></b> in NCL V6.3.0 and
+earlier, there's a bug in which the labelbar does not reflect the same
+opacities as filled contours or vectors that
+have <a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a>
+or <a href="../Document/Graphics/Resources/vc.html#vcGlyphOpacityF"><em>vcGlyphOpacityF</em></a> set. This bug
+was fixed in NCL V6.4.0. If this fixed behavior is not desired, set
+<a href="../Document/Graphics/Resources/lb.html#lbOverrideFillOpacity"><em>lbOverrideFillOpacity</em></a> to True.
+<p>
+
+<h5>A new perspective on colormaps</h5>
+While the use of a workstation colormap is no longer necessary,
+color lookup tables are a useful means to map color onto data, such as in a
+contour plot or vector plot. The following new resources can be
+used to define a colormap for particular plot:
+
+<table>
+<tr><td><a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a></td><td>colormap to used for a filled contour plot</td></tr>
+<tr><td><a href="../Document/Graphics/Resources/vc.html#vcLevelPalette"><em>vcLevelPalette</em></a></td><td>colormap to use in a filled vector plot</td></tr>
+<tr><td><a href="../Document/Graphics/Resources/st.html#stLevelPalette"><em>stLevelPalette</em></a></td><td>colormap to use in a filled streamlines plot</td></tr>
+ </table>
+<p>
+
+You can also use existing color resources to set colors via an
+<a href="../Document/glossary.html#RGB">RGB</a>
+or <a href="../Document/glossary.html#RGBA">RGBA</a> array:
+
+<table>
+<tr><td><a href="../Document/Graphics/Resources/cn.html#cnFillColors"><em>cnFillColors</em></a></td><td>RGB(A) values used in a contour plot</td></tr>
+<tr><td><a href="../Document/Graphics/Resources/vc.html#vcLevelColors"><em>vcLevelColors</em></a></td><td>RGB(A) colors used in a vector plot</td></tr>
+<tr><td><a href="../Document/Graphics/Resources/st.html#stLevelColors"><em>stLevelColors</em></a></td><td>RGB(A) colors used in a streamlines plot</td></tr>
+<tr><td><a href="../Document/Graphics/Resources/mp.html#mpFillColors"><em>mpFillColors</em></a></td><td>RGB(A) colors used for filling map areas</td></tr>
+</table>
+<p>
+Colormaps used in this fashion are still limited to 256 colors, but each
+instance of these plot types may have its own colormap. Thus for example, multiple contour
+plots appearing in a panel plot may employ differing colormaps. Or
+several plots using distinct colormaps incorporating partial
+transparency may be overlain to depict multiple data aspects, 
+as in the <a href="#newcolor_7">example</a>) below. 
+
+<p>
+A new function, <a href="../Document/Functions/Built-in/read_colormap_file.html"><strong>read_colormap_file</strong></a> is
+available to make it easy to load existing 
+<a href="../Document/Graphics/color_table_gallery.html">NCL system colormaps</a>, or
+<a href="../Document/Graphics/create_color_table.html">user-created
+  colormaps</a>. Note that this function always returns 4-component
+  colors, comprised of red, green, blue, opacity values; the opacity
+  defaults to 1 (fully opaque) where ever it is not explicity given. User created
+  colormaps may freely intermix  3-component and 4-component
+  tuples.
+
+</div>
+
+<div class=ex>
+<!--newcolor_1-->
+<a name=ex1></a>
+<a href="Images/newcolor_1_1_lg.png">
+<img src="Images/newcolor_1_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_1_2_lg.png">
+<img src="Images/newcolor_1_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/newcolor_1.html">newcolor_1.ncl</a>: This example
+simply illustrates that with V6.1.0 of NCL, you no longer need to add
+named colors to your color map in order to use them. This example uses
+a 256-color map
+(<a href="../Document/Graphics/ColorTables/BlueYellowRed.html">BlueYellowRed</a>)
+that contains no gray in it.
+<p>
+
+The first frame shows what the graphic would look like if you ran this
+script with NCL version 6.0.0 or earlier. You get a bluish color for the land,
+because this was the closest match to gray that NCL found in the workstation color map.
+<p>
+
+The second frame shows the graphic as generated by NCL versions 6.1.0
+or later, in which you should see gray-filled land.
+<p>
+
+Internally, the land areas are being filled with "LightGray".
+
+</div>
+
+<div class=ex>
+<!--newcolor_2-->
+<a name=ex2></a>
+<a href="Images/newcolor_2_lg.png">
+<img src="Images/newcolor_2_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_2.html">newcolor_2.ncl</a>:  
+A simple example showing possibilities with text opacity resources.
+<p>
+
+<a href="../Document/Graphics/Resources/tx.html#txFontOpacityF"><em>txFontOpacityF</em></a> is set to 0.10 to
+produce a highly-transparent text string.
+
+</div>
+
+ 
+<div class=ex>
+<!--newcolor_3-->
+<a name=ex3></a>
+<a href="Images/newcolor_3_lg.png">
+<img src="Images/newcolor_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/newcolor_3.html">newcolor_3.ncl</a>: Re-creates the original
+<a href="opacity.html">opaque markers</a> example that
+showed how to achieve transparency effects with previous versions of NCL, in combination
+with external tools. Here, its simply a matter of using the new 
+<a href="../Document/Graphics/Resources/gs.html#gsMarkerOpacityF"><em>gsMarkerOpacityF</em></a> 
+   resource to achieve the desired effect.
+</div>
+
+<div class=ex>
+<!--newcolor_4-->
+<a name=ex4></a>
+<a href="Images/newcolor_4_1_lg.png">
+<img src="Images/newcolor_4_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_4_2_lg.png">
+<img src="Images/newcolor_4_2_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_4.html">newcolor_4.ncl</a>: 
+Adapted from an example
+of <a href="scatter.html">scatter plots</a>. 
+The original plot is re-created using the new
+color model idioms, and a second version is drawn using partially
+transparent colors. Notice how markers that are obscured in the first
+version are visible in the second plot. 
+</div>
+ 
+<div class=ex>
+<!--newcolor_5-->
+<a name=ex5></a>
+<a href="Images/newcolor_5_630_1_lg.png">
+<img src="Images/newcolor_5_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_5_2_lg.png">
+<img src="Images/newcolor_5_2_sm.png" align=left border=2></a>
+<a href="Images/newcolor_5_3_lg.png">
+<img src="Images/newcolor_5_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/newcolor_5.html">newcolor_5.ncl</a>: This example
+shows how to use two large color maps in the same contour plot,
+both containing 254 colors 
+(<a href="../Document/Graphics/ColorTables/BlueRed.html">BlueRed</a>
+and <a href="../Document/Graphics/ColorTables/GreenYellow.html">GreenYellow</a>).
+The three frames show how to make the GreenYellow contours
+increasingly more transparent.
+<p>
+
+To do this, you first need to set the new resource
+<a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a> to the desired
+colormap (NCL will automatically span it).
+
+To control then opacity, set the new
+<a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a> resource
+to 1.0 for a fully opaque plot, and 0.4 for a mostly transparent plot.
+A value of 0.0 is fully transparent.
+<p>
+
+Important note: in NCL V6.3.0 and earlier, there's a bug in which the
+colors in the labelbar do not correctly reflect the opacity applied
+to the filled contours.  This bug has been fixed in NCL V6.4.0. See
+the next example for more information.
+
+</div>
+
+<div class=ex>
+<!--newcolor_5-->
+<a name=ex5></a>
+<a href="Images/newcolor_5_1_lg.png">
+<img src="Images/newcolor_5_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_5_2_lg.png">
+<img src="Images/newcolor_5_2_sm.png" align=left border=2></a>
+<a href="Images/newcolor_5_3_lg.png">
+<img src="Images/newcolor_5_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/newcolor_5.html">newcolor_5.ncl</a>: This example
+is identical to the previous one, except it shows what the
+labelbar will look like in NCL V6.4.0, now that the colors
+reflect the same opacity values reflected in the filled contours.
+<p>
+
+If you do not want the labelbar to show the same fill opacities as the
+color contours, set
+<a href="../Document/Graphics/Resources/lb.html#lbOverrideFillOpacity"><em>lbOverrideFillOpacity</em></a> 
+to True.
+
+</div>
+
+<div class=ex>
+<!--newcolor_6-->
+<a name=ex6></a>
+<a href="Images/newcolor_6_1_lg.png">
+<img src="Images/newcolor_6_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_6_2_lg.png">
+<img src="Images/newcolor_6_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/newcolor_6.html">newcolor_6.ncl</a> - Shows how to
+use transparency to de-emphasize a particular area in a plot.
+<p>
+
+In the first frame, <a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a>
+is used to first draw the full plot with a transparency of 0.5,
+and then the second subsetted plot is drawn with no transparency.
+<p>
+
+In the second
+frame, <a href="../Document/Graphics/Resources/gs.html#gsFillOpacityF"><em>gsFillOpacityF</em></a> is used to
+draw a partially transparent filled box over an area to "hide" it.
+<p>
+
+Important note: in NCL V6.3.0 and earlier, there's a bug in which the
+colors in the labelbar do not correctly reflect the opacity applied
+to the filled contours.  This bug has been fixed in NCL V6.4.0. See
+example <a href="#ex5">newcolor_5.ncl</a> for more information.
+
+</div>
+
+
+<div class=ex>
+<!--newcolor_7--> <a name=ex7></a> 
+<a href="Images/newcolor_7_1_lg.png">
+<img src="Images/newcolor_7_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_7_2_lg.png">
+<img src="Images/newcolor_7_2_sm.png" align=left border=2></a>
+<a href="Images/newcolor_7_3_lg.png">
+<img src="Images/newcolor_7_3_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_7.html">newcolor_7.ncl</a>: 
+Adapted from an example on <a href="overlay.html#overlay_6">
+  overlay techniques</a>. 
+Here the original plot is created using
+multiple and independent colormaps for the contours, vectors, and
+streamlines. Then two additional versions of the plot are generated,
+varying the levels of opacity of the contours and streamlines. Notice
+how opacity can be used to (de)emphasize or declutter overlain
+graphics.
+<p>
+Other concepts illustrated are the use of new resources
+<a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a> and 
+<a href="../Document/Graphics/Resources/vc.html#vcLevelPalette"><em>vcLevelPalette</em></a> 
+to load desired colormaps, and the direct specification of color for
+the map backgrounds, rather than by giving colormap indices.
+<p>
+In the script, code using constructs of the previous color model has been
+commented out with special annotations, and is followed immediately by
+equivalent idioms in the new model, to contrast the different usages.
+<p>
+
+Important note: in NCL V6.3.0 and earlier, there's a bug in which the
+colors in the labelbar do not correctly reflect the opacity applied
+to the filled contours.  This bug has been fixed in NCL V6.4.0. See
+example <a href="#ex5">newcolor_5.ncl</a> for more information.
+
+</div>
+
+<div class=ex>
+<!--newcolor_8-->
+<a name=ex8></a>
+<a href="Images/newcolor_8_1_lg.png">
+<img src="Images/newcolor_8_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_8_2_lg.png">
+<img src="Images/newcolor_8_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/newcolor_8.html">newcolor_8.ncl</a>: This example
+shows how to draw partially transparent filled vectors over filled
+contours.  The vectors are drawn fully opaque in the first frame.  In
+the second frame, <a href="../Document/Graphics/Resources/vc.html#vcGlyphOpacityF"><em>vcGlyphOpacityF</em></a>
+is set to 0.3.
+<p>
+
+This example also shows another method for subscripting a color
+palette, if you don't want to use the whole thing. It first
+uses <a href="../Document/Functions/Built-in/read_colormap_file.html"><strong>read_colormap_file</strong></a> 
+to get an RGBA array, and then passes a subset of it
+<a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a>.
+<p>
+
+</div>
+
+<div class=ex>
+<!--newcolor_9-->
+<a name=ex9></a>
+<a href="Images/newcolor_9_lg.png">
+<img src="Images/newcolor_9_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_9.html">newcolor_9.ncl</a>:  
+This example makes use of overlays and opacity to plot full color
+imagery. The red, green, and blue channels of a source image are
+plotted separately as "contour maps". The red channel is plotted with
+full opacity, while the green and blue channels are plotted as
+completely transparent.
+When the green and blue channels are overlain on top of the red
+image, the colors combine to recreate the colors of the image, but
+upper layers do not obscure lower ones due to their transparency.
+<p>
+Notice that the colormaps for the red, green, blue contour maps are computed
+as a ramp-function, from 0. to 1. 
+<p>
+The open source tool <a href="http://gdal.org/">gdal_translate</a> was
+used to convert an original image (in .png, .jpg, .gif, etc.),
+into a NetCDF file with the color-channels pre-separated:
+
+<pre>
+  gdal_translate -ot Int16 -of netCDF fuji_orig.jpg fuji.nc
+</pre>
+<p>
+
+This example only works for "x11" or "png" output, and not with
+"ps" and "pdf" output.
+ 
+</div>
+
+<div class=ex>
+<!--newcolor_10-->
+<a name=ex10></a>
+<a href="Images/newcolor_10_lg.png">
+<img src="Images/newcolor_10_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_10.html">newcolor_10.ncl</a>:  
+
+This example shows how you can use the 256-color
+<a href="../Document/Graphics/ColorTables/OceanLakeLandSnow.html">OceanLakeLandSnow</a>
+color table to draw filled terrain from a WRF output file, and then
+use the
+103-color <a href="../Document/Graphics/ColorTables/WhViBlGrYeOrRe.html">WhViBlGrYeOrRe</a>
+color table to overlay filled contours showing reflectivity.
+<p>
+
+The <a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a> resource
+is used to set the color palette.
+<p>
+
+The first color for reflectivity is set to transparent by setting the
+"A" component of the RGBA color array to 0.0.
+
+</div>
+
+<div class=ex>
+<!--overlay_12-->
+<a name=overlay12></a>
+<a href="Images/overlay_12_1_lg.png">
+<img src="Images/overlay_12_1_sm.png" align=left border=2></a>
+<a href="Images/overlay_12_2_lg.png">
+<img src="Images/overlay_12_2_sm.png" align=left border=2></a>
+<a href="Scripts/overlay_12.html">overlay_12.ncl</a>: 
+
+This example is very similar to the
+previous <a href="#ex10">newcolor_10.ncl</a> example, except the
+labelbar for the terrain plot is also drawn.
+<p>
+
+Important note: In NCL V6.3.0 and earlier the labelbar does not
+reflect the same opacities as the filled contours; this bug was fixed
+in NCL V6.4.0. A new resource
+called <a href="../Document/Graphics/Resources/lb.html#lbOverrideFillOpacity"><em>lbOverrideFillOpacity</em></a> was
+introduced in NCL V6.4.0 which allows you to keep the labelbar colors
+fully opaque independent of the opacity of the filled contours.
+<p>
+
+The first frame shows the partially opaque labelbar, and the
+second frame shows a fully opaque labelbar created
+by setting <a href="../Document/Graphics/Resources/lb.html#lbOverrideFillOpacity"><em>lbOverrideFillOpacity</em></a> 
+to True.
+<p>
+
+</div>
+
+<div class=ex>
+<!--newcolor_11-->
+<a name=ex11></a>
+<a href="Images/newcolor_11_1_lg.png">
+<img src="Images/newcolor_11_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_11_2_lg.png">
+<img src="Images/newcolor_11_2_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_11.html">newcolor_11.ncl</a>: This example is
+similar to example #9. It recreates a JPEG image using overlays and
+opacity.  It then attaches lat/lon information to the jpeg image,
+allowing us to change the projection to "satellite", and overlay map
+outlines and contour lines.
+<p>
+
+As with example #9, the open source
+tool <a href="http://gdal.org/">gdal_translate</a> was used to convert
+the jpeg file  to a NetCDF file:
+
+<pre>
+  gdal_translate -ot Int16 -of netCDF <a href="Scripts/EarthMap_2500x1250.jpg">EarthMap_2500x1250.jpg</a> EarthMap_2500x1250.nc
+</pre>
+<p>
+
+This example only works for "x11" or "png" output, and not with
+"ps" and "pdf" output.
+
+</div>
+
+<div class=ex>
+<!--newcolor_12-->
+<a name=ex12></a>
+<a href="Images/newcolor_12_lg.png">
+<img src="Images/newcolor_12_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_12.html">newcolor_12.ncl</a>:  
+This example shows how to draw partially transparent filled polygons
+using <a href="../Document/Graphics/Resources/gs.html#gsFillOpacityF"><em>gsFillOpacityF</em></a>.
+<p>
+
+The point of this example is to show how various boxes look when they
+overlaid in a different order. The middle column was drawn starting
+with the red box starting first.  The right column was drawn with the
+yellow box starting first.
+
+</div>
+
+<div class=ex>
+<!--newcolor_13-->
+<a name=ex13></a>
+<a href="Images/newcolor_13_lg.png">
+<img src="Images/newcolor_13_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_13.html">newcolor_13.ncl</a>:  
+This example shows how to draw four panelled contour plots,
+each with a different color map. With older versions of NCL,
+you had to draw each plot before you changed the color map,
+or you had to merge all color maps into one single color map
+that was fewer than 256 colors.
+<p>
+
+With NCL V6.1.0 and later, you can use
+the <a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a> resource to
+define a color palette for each filled contour plot.
+
+</div>
+
+<div class=ex>
+<!--newcolor_14-->
+<a name=ex14></a>
+<a href="Images/newcolor_14_lg.png">
+<img src="Images/newcolor_14_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_14.html">newcolor_14.ncl</a>:  
+
+This example is similar to example 13, in that it shows you how to
+draw three sets of panelled contour plots, each with a different color
+map. This example is identical to <a href="panel.html#ex26">panel
+example #26</a> except it shows you the easier way to do this
+using <a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a>.
+
+
+</div>
+
+<div class=ex>
+<!--newcolor_15-->
+<a name=ex15></a>
+<a href="Images/newcolor_15_1_lg.png">
+<img src="Images/newcolor_15_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_15_2_lg.png">
+<img src="Images/newcolor_15_2_sm.png" align=left border=2></a>
+<a href="Images/newcolor_15_3_lg.png">
+<img src="Images/newcolor_15_3_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_15.html">newcolor_15.ncl</a>:  
+
+The first frame of this example uses
+the <a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a> resource to set
+the
+"<a href="u/Document/Graphics/ColorTables/BlueYellowRed.html">BlueYellowRed</a>"
+color map for the contours. In the second frame, it sets
+<a href="../Document/Graphics/Resources/cn.html#cnSpanPalette"><em>cnSpanPalette</em></a> to False to tell it
+not to span the full colormap. In the third frame, it then uses
+<a href="../Document/Functions/Built-in/read_colormap_file.html"><strong>read_colormap_file</strong></a> to subset
+just the red/yellow portion of the color map.
+
+</div>
+
+<div class=ex>
+<!--newcolor_16-->
+<a name=ex16></a>
+<a href="Images/newcolor_16_1_lg.png">
+<img src="Images/newcolor_16_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_16_2_lg.png">
+<img src="Images/newcolor_16_2_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_16.html">newcolor_16.ncl</a>:  
+
+This example overlays three filled XY plots. In the second frame, it
+uses <a href="../Document/Graphics/Resources/gsn.html#gsnXYFillOpacities"><em>gsnXYFillOpacities</em></a> (a new resource
+that was added after V6.1.2 was released) to specify an opacity for
+each of the filled areas.
+<p>
+
+In order to use this new resource with NCL V6.1.0, 6.1.1, or 6.1.2,
+you must download
+the <a href="Scripts/fill_opacities_fix.html">fill_opacities_fix.ncl</a>
+file and load it in your script after "gsn_csm.ncl" is loaded:
+<p>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "./fill_opacities_fix.ncl"
+</pre>
+ 
+</div>
+
+<div class=ex>
+<!--newcolor_17-->
+<a name=ex17></a>
+<a href="Images/newcolor_17_lg.png">
+<img src="Images/newcolor_17_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_17.html">newcolor_17.ncl</a>:  
+This example uses transparency in order to show where positive and negative
+contours in two different plots overlap.
+<p>
+
+<a href="../Document/Graphics/Resources/cn.html#cnLevels"><em>cnLevels</em></a> is set to 0.0 so that we
+only have two contour levels (&lt; 0 and &gt; 0). Then,
+<a href="../Document/Graphics/Resources/cn.html#cnFillColors"><em>cnFillColors</em></a> is set to 
+<a href="../Document/glossary.html#RGBA">RGBA values</a> so we can set the
+opacity for each contour fill color for each plot:
+<p>
+
+base plot:<br>
+res@cnFillColors = (/(/0.60,0.60,0.60,1./),(/1.,1.,1.,1./)/)<p>
+
+overlay plot:<br>
+res@cnFillColors = (/(/0.60,0.60,0.60,1./),(/1.,1.,1.,0./)/)
+<p>
+
+By setting the white contours in the overlay plot to fully transparent, this
+means that you only see white in locations where both datasets are positive.
+<p>
+
+The contour lines are drawn in different colors just so you can see where
+the contours actually are in the overlay.
+
+</div>
+
+<div class=ex>
+<!--newcolor_18-->
+<a name=ex18></a>
+<a href="Images/newcolor_18_1_lg.png">
+<img src="Images/newcolor_18_1_sm.png" align=left border=2></a>
+<a href="Images/newcolor_18_2_lg.png">
+<img src="Images/newcolor_18_2_sm.png" align=left border=2></a>
+<a href="Images/newcolor_18_3_lg.png">
+<img src="Images/newcolor_18_3_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_18.html">newcolor_18.ncl</a>:  
+
+The purpose of this example is to show a work-around for a bug in NCL
+V6.3.0 and earlier, in which the labelbar colors do not reflect the
+same transparency as the filled contours
+when <a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a> is used to
+set the opacity.
+<p>
+
+This bug has been fixed in NCL V6.4.0. If you do not want the labelbar
+to reflect the same opacities, you can set
+the <a href="../Document/Graphics/Resources/lb.html#lbOverrideFillOpacity"><em>lbOverrideFillOpacity</em></a> resource to
+True.
+<p>
+
+The first frame of this example draws a fully opaque contour plot,
+using <a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a> to specify
+the colors to use.
+<p>
+
+The second frame draws a partially opaque contour plot by setting
+<a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a> to 0.5. If you
+have NCL V6.3.0 or earlier, you will note that the labelbar colors
+do not reflect the same opacities.
+<p>
+
+The third frame shows a work-around. It draws the same partially
+opaque contour plot, except by 1)
+calling <a href="../Document/Functions/Built-in/span_color_indexes.html"><strong>span_color_indexes</strong></a> to generate a set of
+integer indexes that fully span the "GMT_hot" color table, 2) using
+these indexes in an RGBA array (254 x 4) generated by
+calling <a href="../Document/Functions/Built-in/read_colormap_file.html"><strong>read_colormap_file</strong></a>, and 3) setting the "A"
+component of this RGBA array to 0.5.  This has the same effect as
+setting <a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a> to 0.5,
+except now the labelbar colors also appear partially opaque.
+
+<p>
+
+
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/rgbacolor.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:54:44 GMT -->
+</html>
+
+
+

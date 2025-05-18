@@ -1,0 +1,82 @@
+/;
+ ; task_parallelism_driver_3.ncl
+ ; 
+ ; Illustrates the use of the subprocess/subprocess_wait function to generate a series 
+ ; of plots as frames for an animation.
+ ;
+ ; The script launches MAX_CONCURRENT number of instances of a "worker" script that generates
+ ; a plot for a single time step. It then waits for instances to finish to launch instance
+ ; for subsequent timesteps. MAX_CONCURRENT is set to some "reasonable" number to keep from 
+ ; overwhelming the machine's resources. In this case, a number equal to the number of processor-cores
+ ; seemed to provide a good balance.
+ ;
+ ;/
+begin
+  MAX_CONCURRENT = 8
+
+  numTimeSteps = -1
+
+  ;
+  ; determine the number of time steps of the variable...
+  ;
+  f = addfile("sst8292.nc", "r")
+  dimNames = getvardims(f)
+  dimSizes = getfiledimsizes(f)
+  do i=0, dimsizes(dimNames)-1
+    if (dimNames(i).eq."time") then
+      numTimeSteps = dimSizes(i)
+      break
+    end if
+  end do
+  print("Number of timesteps: " + numTimeSteps)
+  delete(f)             ; no longer needed
+
+  startPlotTime = systemfunc("date")
+
+  ;
+  ; begin generating plot frames...
+  ;
+  numPlotsCompleted = 0
+  numJobsActive = 0
+  do i=0,numTimeSteps-1
+
+    ; don't allow more than MAX_CONCURRENT processes at a time....
+    do while (numJobsActive.ge.MAX_CONCURRENT)
+      
+      ; check if any tasks have completed; block until something completes...
+      pid = subprocess_wait(0, True)
+      if (pid.gt.0) then
+        numPlotsCompleted = numPlotsCompleted + 1
+        numJobsActive = numJobsActive - 1
+        break
+      end if
+    end do
+
+    print("working on frame: " + i)
+    command = "ncl contourSST.ncl " + str_get_sq() + "timestep=" + i + str_get_sq() + " >/dev/null"
+    pid = subprocess(command)
+    numJobsActive = numJobsActive + 1
+  end do
+
+  ;
+  ; need to wait for all pending jobs to complete...
+  ;
+  do while (numPlotsCompleted.lt.numTimeSteps-1)
+      pid = subprocess_wait(0, True)
+      if (pid.gt.0) then
+        numPlotsCompleted = numPlotsCompleted + 1
+      end if
+  end do
+
+  wallClockElapseTime(startPlotTime, "done generating plot frames", 0)
+
+
+  ;
+  ; use Imagemagick to create the animation from the *png frames...
+  ; 
+  startAnimateTime = systemfunc("date")
+  system("convert -delay 100 -loop 0 sst*.png sst.gif")
+
+  wallClockElapseTime(startAnimateTime, "done generating animation", 0)
+    
+end

@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/wrf.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:05:38 GMT -->
+<head>
+<meta name="description" content="NCL WRF graphics Home Page.">
+<meta name="keywords" content="NCL, graphics, visualization, WRF, ocean model">
+<TITLE>NCL Graphics: Plotting WRF-ARW data using NCL</TITLE>
+</head>
+
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_models.html">Models</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+
+    <h1>NCL Graphics: Plotting WRF-ARW data using NCL</h1>
+    <h2>WEATHER RESEARCH <br>
+    AND FORECASTING <a href="http://wrf-model.org/">(WRF)</a> MODEL</h2>
+    <p class=text>
+
+    [<a href="http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Graphics/NCL/">WRF
+    ARW OnLine Tutorial</a> |
+    <a href="wrfvapor.html">WRF-VAPOR</a>
+    | <a href="http://forum.mmm.ucar.edu/phpBB3/">WRF Support Forum</a>]<p>
+
+<div class=text>
+
+This page describes how to use NCL to read and plot data and
+diagnostics calculated from WRF-ARW files.
+<p>
+
+To read WRF ARW data and/or calculate certain diagnostics, you need
+two functions:
+<p>
+
+<ol>
+
+<li><a href="../Document/Functions/Built-in/addfile.html"><strong>addfile</strong></a> - this function opens a WRF-ARW NetCDF
+file so you can read data or calculate diagnostics. If you have more
+than one WRF-ARW file, use <a href="../Document/Functions/Built-in/addfiles.html"><strong>addfiles</strong></a>.
+<p>
+
+<li><a href="../Document/Functions/WRF_arw/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a> - given the
+file(s) you opened in the first step, this function allows you to
+specify what diagnostic you want to calculate or what variable you
+want to read.
+</ol>
+<p>
+
+Once you have read a variable or calculated a diagnostic, there are
+two different sets of routines you can use for plotting WRF-ARW data:
+<p>
+
+<ol>
+<li><a href="../Document/Functions/WRF_arw/index-2.html">WRF-specific plotting functions</a>
+<p>
+
+The folks who help develop the WRF model have created their own
+tutorial for plotting data using the the WRF-specific plotting
+functions.  See the
+the <a href="http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Graphics/NCL/"><b>WRF
+ARW OnLine Tutorial</b></a> web page.
+<p>
+
+<li><a href="../Document/Functions/list_gsn.html">gsn_csm plotting functions</a>
+<p>
+
+The example pages linked to from this page mainly show how to plot data using
+gsn_csm functions, although in some cases the WRF-specific routines are also used
+for comparison purposes. As an example, see the "wrf_gsn_1.ncl" and "wrf_nogsn_1.ncl"
+scripts on the <a href="wrfgsn.html#ex1">WRF gsn_csm examples page</a>.
+<p>
+
+</ol>
+<p>
+
+There are other packages developed at NCAR for analyzing and
+visualizing WRF-ARW data:
+<p>
+
+<ul>
+<li><a href="http://wrf-python.readthedocs.io/en/latest/">wrf-python</a> - A
+Python package that extends the functionality of <a href="../Document/Functions/WRF_arw/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>.
+<p>
+
+<li><a href="wrfvapor.html">WRF-VAPOR</a> - An interactive tool for
+creating 3D visualizations of WRF data.
+<p>
+
+</ul>
+
+</div>
+<div class=text>
+Mark Seefeldt [U. Colorado: Cooperative Institute for Research in Environmental Sciences (CIRES)] 
+has created an NCL based script, <a href="http://foehn.colorado.edu/wrfout_to_cf/overview.html">
+<b>wrfout_to_cf</b></a> that creates new Climate-and-Forecast (CF) based 
+NetCDF files from native wrfout NetCDF files. The script is well-documented and is easy to configure and run.
+</div>
+
+<div class=text>
+
+<a href="wrfnetcdf.html">WRF-ARW netCDF files</a> are 
+different from netCDF files produced by the component models of
+the <a href="http://www2.cesm.ucar.edu/">Community Earth System Model
+(CESM)</a>.
+<p>
+
+For example, the CESM grids do not change with time, while the WRF
+model(s) allow for this possibility by making the latitude and
+longitude arrays a function of time. NCL can readily read and process
+WRF netCDF files. However, some software processing tools may require
+data files to be
+<a href="http://cf-pcmdi.llnl.gov/">Climate and Forecast (CF)
+convention</a> conformant.
+<p>
+
+WRF-related questions should be addressed on
+the <a href="http://forum.mmm.ucar.edu/phpBB3/">WRF Support Form</a>.
+<p>
+NCL-related questions should be sent
+to <a href="../Support/email_lists.html">ncl-talk</a>.
+<p>
+
+Note about WRF-NMM data: WRF-NMM can be plotted with NCL after you
+used the WPP code to convert to grib format.  The wrf_<i>xxx</i>
+<b>computational</b> functions in theory can be used for any model - although they
+have not been tested. The problem is that all the wrf_<i>xxx</i>
+<b>plotting</b> scripts have been written exclusively for WRF-ARW, and
+that is because the scripts handle the projection change from C to A,
+and also the map information. Since WRF-NMM is on a rotated E grid,
+the map information is very complicated to deal with.
+</div>
+
+<div class=ex>
+<a href="Images/wrf_gsn_4_lg.png">
+<img src="Images/wrf_gsn_4_sm.png" align=left border=2></a>
+<a href="wrfgsn.html">Plotting WRF with gsn_csm</a>: This 
+page shows examples of using gsn_csm scripts to plot WRF-ARW
+data.<p>
+
+Many of the examples also include a WRF-specific plotting
+version of the script so you can compare the two methods.
+</div>
+
+<div class=ex>
+<a href="Images/wrf_zoom_2_2_lg.png">
+<img src="Images/wrf_zoom_2_2_sm.png" align=left border=2></a>
+<a href="wrfzoom.html">Zooming</a>: This page
+shows how to zoom in on WRF data plotted over maps.
+</div>
+
+<div class=ex>
+<a href="Images/ESMF_all_5_1_lg.png">
+<img src="Images/ESMF_all_5_1_sm.png" align=left border=2></a>
+<a href="ESMF.html">Regridding</a>: This page
+shows how to regrid data from one grid or mesh, to another grid or mesh.
+This page is not limited to just WRF data.
+</div>
+
+
+<div class=ex>
+<a href="Images/wrf_interp_5_lg.png">
+<img src="Images/wrf_interp_5_sm.png" align=left border=2></a>
+<a href="wrfinterp.html">Interpolations and cross-sections</a>: This page
+shows how to do interpolations and cross-sections of WRF-ARW 2D and 3D fields
+using lines and planes as slices. 
+
+</div>
+
+
+<div class=ex>
+<a href="Images/wrf_title_6_lg.png">
+<img src="Images/wrf_title_6_sm.png" align=left border=2></a>
+<a href="wrftitles.html">Titles</a>: This page
+shows how to customize the special titles that come with
+the <a href="../Document/Functions/WRF_arw/index-2.html">suite of WRF plotting scripts</a>.
+</div>
+
+<div class=ex>
+<a href="Images/wrf_debug_2_lg.png">
+<img src="Images/wrf_debug_2_sm.png" align=left border=2></a>
+<a href="wrfdebug.html">Debugging:</a>: This page
+provides some graphical scripts to help you understand
+WRF grids and to debug problems you might run into.
+</div>
+
+<div class=ex>
+<a href="Images/WRF_pcp_1_lg.png">
+<img src="Images/WRF_pcp_1_sm.png" align=left border=2></a>
+<a href="wrfpcp.html">Precipitation</a>: This page shows how to create
+precipitation contour plots.
+</div>
+
+<div class=ex>
+<a href="Images/wrf_helicity_1_lg.png">
+<img src="Images/wrf_helicity_1_sm.png" align=left border=2></a>
+<a href="wrfhelicity.html">Helicity</a>:
+This page shows how to create helicity plots.
+</div>
+
+<div class=ex>
+<a href="Images/WRF_cn_2_lg.png">
+<img src="Images/WRF_cn_2_sm.png" align=left border=2></a>
+<a href="wrfcn.html">Contours</a>: This page shows how to
+create basic contour plots of
+using <a href="../Document/Graphics/Interfaces/gsn_csm_contour.html"><strong>gsn_csm_contour</strong></a>.
+</div>
+
+<div class=ex>
+<a href="Images/WRF_xy_1_3_lg.png">
+<img src="Images/WRF_xy_1_3_sm.png" align=left border=2></a>
+<a href="wrfxy.html">XY</a>: This page shows how to create
+basic XY plots using <a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a>.
+</div>
+
+<div class=ex>
+<a href="Images/WRF_lc_2_lg.png">
+<img src="Images/WRF_lc_2_sm.png" align=left border=2></a>
+<a href="wrflc.html">Lambert</a>: This page
+shows how to plot WRF-ARW data that is on a native
+Lambert Conformal projection.
+</div>
+
+<div class=ex>
+<a href="Images/WRF_me_2_lg.png">
+<img src="Images/WRF_me_2_sm.png" align=left border=2></a>
+<a href="wrfmerc.html">Mercator</a>: This page
+shows how to plot WRF-ARW data that is on a native
+Mercator projection.
+</div>
+
+<div class=ex>
+<a href="Images/WRF_track_1_lg.png">
+<img src="Images/WRF_track_1_sm.png" align=left border=2></a>
+<a href="wrftrack.html">Storm tracks</a>: This page
+shows how to plot storm tracks.
+</div>
+
+<div class=ex>
+<a href="Images/precip_vapor_scene.png">
+<img src="Images/small_precip_vapor_scene.png" align=left border=2></a>
+<a href="wrfvapor.html">WRF-VAPOR (3D)</a>: This page shows how to use
+NCL and <a href="http://www.vapor.ucar.edu/">VAPOR</a> to visualize WRF
+output in 3D data.
+<p>
+
+See this <a href="https://www.vapor.ucar.edu/sites/default/files/docs/VAPOR-WRF-NCL.pdf">short
+tutorial</a> for more information.
+
+</div>
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/wrf.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:05:45 GMT -->
+</html>
+
+wrfvapor.xml
+

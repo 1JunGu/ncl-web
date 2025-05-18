@@ -1,0 +1,583 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/stream.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:57:42 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+streamline template and its modification.">
+<meta name="keywords" content="NCL, graphics, visualization, streamline,
+streamlines">
+<TITLE>NCL Graphics: Streamlines</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_gsn_csm.html">gsn_csm graphical interfaces</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL Graphics: Streamlines</h1>
+<div class=mainimage>
+<img src="Images/stream_1_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+<h3>Streamline Plot Templates</h3>
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline.html"><strong>gsn_csm_streamline</strong></a> 
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_map_ce.html"><strong>gsn_csm_streamline_map_ce</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_map_polar.html"><strong>gsn_csm_streamline_map_polar</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_contour_map_ce.html"><strong>gsn_csm_streamline_contour_map_ce</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_contour_map_polar.html"><strong>gsn_csm_streamline_contour_map_polar</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_pres_hgt_streamline.html"><strong>gsn_csm_pres_hgt_streamline</strong></a>
+<p>
+
+Added in <a href="../prev_releases.html#6.3.0">NCL V6.3.0</a>:
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_scalar.html"><strong>gsn_csm_streamline_scalar</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_scalar_map_ce.html"><strong>gsn_csm_streamline_scalar_map_ce</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_scalar_map_polar.html"><strong>gsn_csm_streamline_scalar_map_polar</strong></a>
+</div>
+   
+<div class=ex>
+<!--Streamline_1-->
+<a name=ex1></a>
+<a href="Images/stream_1_lg.png">
+<img src="Images/stream_1_sm.png" align=left border=2></a>
+<a href="Scripts/stream_1.html">stream_1.ncl</a>: 
+Default black and white plot.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_map_ce%20.html"><strong>gsn_csm_streamline_map_ce </strong></a> is the
+plot interface that draws streamlines on a cylindrical equidistant
+projection.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Streamlines/NCL_stream_1.html#sphx-glr-gallery-streamlines-ncl-stream-1-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Streamline_2-->
+<a name=ex2></a>
+<a href="Images/stream_2_lg.png">
+<img src="Images/stream_2_sm.png" align=left border=2></a>
+<a href="Scripts/stream_2.html">stream_2.ncl</a>: 
+Zooms in on a subregion and blows up the streamlines
+<p>
+<a href="../Document/Graphics/Resources/st.html#stArrowLengthF"><em>stArrowLengthF</em></a> = 0.004, 
+Changes the size of the arrows
+<p>
+<a href="../Document/Graphics/Resources/st.html#stMinArrowSpacingF"><em>stMinArrowSpacingF</em></a> = 0.004,
+Changes the arrow spacing
+<p>
+<a href="../Document/Graphics/Resources/st.html#stArrowStride"><em>stArrowStride</em></a> = 3, indicates that arrows are placed 
+every third grid point. The default is 2.
+</div>
+
+<div class=ex>
+<!--Streamline_3-->
+<a name=ex3></a>
+<a href="Images/stream_3_lg.png">
+<img src="Images/stream_3_sm.png" align=left border=2></a>
+<a href="Scripts/stream_3.html">stream_3.ncl</a>: 
+Zooms in on a subregion and blows up the streamlines.
+<p>
+<a href="../Document/Graphics/Resources/st.html#stLineThicknessF"><em>stLineThicknessF</em></a> = 1.5, 
+Changes the line thickness
+<p>
+
+<a href="../Document/Graphics/Resources/st.html#stLineColor"><em>stLineColor</em></a> = "orange",changes
+the streamline color
+
+</div>
+
+<div class=ex>
+<!--Stream_4-->
+<a name=ex4></a>
+<a href="Images/stream_4_lg.png">
+<img src="Images/stream_4_sm.png" align=left border=2></a>
+<a href="Scripts/stream_4.html">stream_4.ncl</a>: Example of a polar
+streamline plot. 
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_map_polar.html"><strong>gsn_csm_streamline_map_polar</strong></a> is the
+plot interface that draws a streamline plot over a polar plot.
+<p>
+
+<a href="../Document/Graphics/Resources/st.html#stArrowLengthF"><em>stArrowLengthF</em></a> = 0.008,
+controls the length of the directional arrows. The default is
+dynamic.<br>
+
+<a href="../Document/Graphics/Resources/st.html#stLengthCheckCount"><em>stLengthCheckCount</em></a> = 15,
+controls how frequently a new streamline is started. The value is in
+terms of an internal NCL loop that calculates new starts. The default
+is 35.<br>
+
+<a href="../Document/Graphics/Resources/st.html#stArrowStride"><em>stArrowStride</em></a> = 1, Controls in
+which grid cells an arrow head is draw. The default is every other
+grid cell.<br>
+
+<a href="../Document/Graphics/Resources/st.html#stLineStartStride"><em>stLineStartStride</em></a> = 1,
+Controls which grid points are allowed to start new streamlines. The
+default is 2, which is every other grid cell.<br>
+
+<a href="../Document/Graphics/Resources/st.html#stMinArrowSpacingF"><em>stMinArrowSpacingF</em></a> = 0.035,
+controls the distance between drawn arrows. The default is 0.0, which
+could draw arrows right on top of each other.<br>
+
+<a href="../Document/Graphics/Resources/st.html#stStepSizeF"><em>stStepSizeF</em></a>= 0.001, Controls the basic step size used 
+to create the streamline. The default is dynamic.
+<p>
+
+ The following two resources on the ones that you will really have to
+ tweak depending upon the field you are plotting.
+ <p>
+
+<a href="../Document/Graphics/Resources/st.html#stMinDistanceF"><em>stMinDistanceF</em></a> = 0.03<br> 
+<a href="../Document/Graphics/Resources/st.html#stMinLineSpacingF"><em>stMinLineSpacingF</em></a> =
+0.007,Controls the minimum distance between drawn streamlines. The
+default is dynamic.
+
+</div>
+
+<div class=ex>
+<!--Stream_5-->
+<a name=ex5></a>
+<a href="Images/stream_5_lg.png">
+<img src="Images/stream_5_sm.png" align=left border=2></a>
+<a href="Scripts/stream_5.html">stream_5.ncl</a>: Example of a 
+streamline plot draw without a map. 
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline.html"><strong>gsn_csm_streamline</strong></a> is the plot
+interface that draws a streamline plot without a map.
+
+</div>
+
+<div class=ex>
+<!--Stream_6-->
+<a name=ex6></a>
+<a href="Images/stream_6_lg.png">
+<img src="Images/stream_6_sm.png" align=left border=2></a>
+<a href="Scripts/stream_6.html">stream_6.ncl</a>: Example of a streamline
+plot drawn over a contour plot with a map
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_contour_map_ce.html"><strong>gsn_csm_streamline_contour_map_ce</strong></a> is
+the plot interface that draws a streamline plot over a contour plot.
+</div>
+
+<div class=ex>
+<!--Stream_7-->
+<a name=ex7></a>
+<a href="Images/stream_7_lg.png">
+<img src="Images/stream_7_sm.png" align=left border=2></a>
+<a href="Scripts/stream_7.html">stream_7.ncl</a>: Example of a streamline
+plot drawn over a contour plot on a polar projection.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_contour_map_polar.html"><strong>gsn_csm_streamline_contour_map_polar</strong></a>
+is the plot interface that draws a streamline plot over a contour plot
+with a polar projection.
+
+</div>
+
+<div class=ex>
+<!--Stream_8-->
+<a name=ex8></a>
+<a href="Images/stream_8_lg.png">
+<img src="Images/stream_8_sm.png" align=left border=3></a>
+<a href="Images/stream_overlay_8_lg.png">
+<img src="Images/stream_overlay_8_sm.png" align=left border=3></a>
+<a href="Scripts/stream_8.html">stream_8.ncl</a> / 
+<a href="Scripts/stream_overlay_8.html">stream_overlay_8.ncl</a>: 
+Shows two different ways to draw a streamline plot over a
+pressure/height plot.
+<p>
+
+The "stream_8.ncl" script uses a single
+interface, <a href="../Document/Graphics/Interfaces/gsn_csm_pres_hgt_streamline.html"><strong>gsn_csm_pres_hgt_streamline</strong></a>,
+to draw a streamline plot over a press/height plot.
+<p>
+
+The "stream_overlay_8.ncl" script uses a 5-step process to create the same plot:
+<ol>
+<li>Create filled contour plot using <a href="../Document/Graphics/Interfaces/gsn_csm_pres_hgt.html"><strong>gsn_csm_pres_hgt</strong></a>.
+<li>Create streamline plot using <a href="../Document/Graphics/Interfaces/gsn_csm_streamline.html"><strong>gsn_csm_streamline</strong></a>.
+<li>Overlay the streamline plot on the contour plot using <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a>.
+<li>Draw both plots using <a href="../Document/Functions/Built-in/draw.html"><strong>draw</strong></a>.
+<li>Advance the frame with <a href="../Document/Functions/Built-in/frame.html"><strong>frame</strong></a>.
+</ol>
+<p>
+
+The 5-step process is more work, but can allow you more flexibility if
+you need to overlay other plots.
+
+</div>
+
+<div class=ex>
+<!--Stream_9-->
+<a name=ex9></a>
+<a href="Images/stream_9_1_lg.png">
+<img src="Images/stream_9_1_sm.png" align=left border=3></a>
+<a href="Images/stream_9_2_lg.png">
+<img src="Images/stream_9_2_sm.png" align=left border=3></a>
+<a href="Scripts/stream_9.html">stream_9.ncl</a>: This
+example shows how to use new resources added in
+NCL <a href="../prev_releases.html#6.1.0">V6.1.0</a>
+to select a color palette for colored streamlines (first frame)
+and to make streamlines partially transparent (second frame).
+<p>
+
+<a href="../Document/Graphics/Resources/st.html#stLevelPalette"><em>stLevelPalette</em></a> is used to set
+the color palette
+to <a href="../Document/Graphics/ColorTables/thelix.html">thelix</a>,
+and <a href="../Document/Graphics/Resources/st.html#stLineOpacityF"><em>stLineOpacityF</em></a> is used to
+make the streamlines partially transparent.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Streamlines/NCL_stream_9.html#sphx-glr-gallery-streamlines-ncl-stream-9-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Stream_10-->
+<a name=ex10></a>
+<a href="Images/stream_10_1_lg.png">
+<img src="Images/stream_10_1_sm.png" align=left border=3></a>
+<a href="Images/stream_10_2_lg.png">
+<img src="Images/stream_10_2_sm.png" align=left border=3></a>
+<a href="Images/stream_10_3_lg.png">
+<img src="Images/stream_10_3_sm.png" align=left border=3></a>
+
+<a href="Scripts/stream_10.html">stream_10.ncl</a>: This example shows
+how to panel colored streamlines plots with a common labelbar.  There
+are three plots: 1) a panel plot with the default horizontal labelbar,
+2) a panel with two plots in one row and a vertical labelbar,
+3) a panel with two plots in a column and a longer vertical labelbar.
+<p>
+
+Alan Brammer of the University at Albany contributed the initial
+version of this example and the code necessary to
+get <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> to recognize
+streamline plots and create a labelbar.
+<p>
+
+Note: you need NCL version 6.3.0 to run this example.
+</div>
+
+<div class=ex>
+<!--Stream_11-->
+<a name=ex11></a>
+<a href="Images/stream_11_lg.png">
+<img src="Images/stream_11_sm.png" align=left border=3></a>
+
+<a href="Scripts/stream_11.html">stream_11.ncl</a>: This example shows
+how to use <a href="../Document/Graphics/Interfaces/gsn_csm_streamline_scalar_map.html"><strong>gsn_csm_streamline_scalar_map</strong></a> to
+color streamlines based on another field.
+<p>
+
+Alan Brammer of the University at Albany contributed the initial
+version of this example and contributed the 
+gsn_csm_streamline_scalar_xxx functions which we added to
+NCL Version 6.3.0.
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/stream.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:57:50 GMT -->
+</html>
+

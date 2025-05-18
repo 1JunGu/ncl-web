@@ -1,0 +1,820 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/HiResPrc.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:01:59 GMT -->
+<head>
+<meta name="description" content="Use of NCL to visualize high resolution precipitation datasets, interpolation and create netCDF.">
+<meta name="keywords" content="NCL, graphics, visualization, CMORPH, PERSIANN, TRMM, GPCP, CPC, GPM, ST4, netCDF">
+<TITLE>NCL: CMORPH, PERSIANN, TRMM, CPC_Famine, CPC_Uni, GPM, GPCP-1DD, ST4</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_data.html">Data sets</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL: High Resolution Precipitation: <br> CMORPH, PERSIANN, TRMM, <br> GPM, GPCP, CPC_Famine, ST4</h1>
+
+<div class=mainimage>
+<img src="Images/cmorph_2_lg.png">
+</div>
+
+<div class=text>
+
+<h3>High Resolution Precipitation</h3>
+<p>
+Several high resolution precipitation datasets have beome available. 
+These datasets should be viewed as experimental.
+The three datasets included in this suite of examples
+are all freely available. Some are in binary format and
+others in HDF.
+
+<p>
+Details descriptions of the datasets are available at:
+<ol>
+<li><a href="http://www.cpc.ncep.noaa.gov/products/janowiak/cmorph_description.html"><b>CMORPH</b></a>: NOAA CPC Morphing Technique. Also, <a href="http://rda.ucar.edu/datasets/ds502.0/">NCAR Research Data Archive.
+     
+<li><a href="http://chrs.web.uci.edu/research/satellite_precipitation/activities00.html"><b>PERSIANN</b></a>: Precipitation Estimation from Remotely Sensed Information using Artificial Neural Networks
+<li><a href="http://trmm.gsfc.nasa.gov/"><b>TRMM</b></a>: Tropical Rainfall Measuring Mission. The TRMM 
+<a href="http://www.eurekalert.org/pub_releases/2015-04/nsfc-ttr040915.php"><b>ended 8 April 2015</b>. It has been replaced by the <b>GPM</b>.
+<li><a href="http://www.gewex.org/gpcp.html"><b>GPCP</b></a>: Global Precipitation Climatology Project 
+<li><a href="ftp://ftp.cpc.ncep.noaa.gov/fews/newalgo_est/RFE_readme.txt"><b>CPC Famine Early Warning System</b></a> daily estimates (New_Algo).
+<li><a href="http://pmm.nasa.gov/node/243"><b>GPM:</b></a> The Global Precipitation Measurement mission is an international network of satellites that provide the next-generation global observations of rain and snow. GPM is the global successor to TRMM.
+</ol>
+<p>
+Commentary from experts on many of these preciitation data sets is available at the <a href="https://climatedataguide.ucar.edu/"><b>Climate Data Guide</b>. For example:
+<ul>
+<li> <a href="https://climatedataguide.ucar.edu/climate-data/phttps://climatedataguide.ucar.edu/climate-data/persiann-cdr-precipitation-estimation-remotely-sensed-information-using-artificial"><b>PERSIANN</b></a> expert commentary.
+</ul>
+
+</div>
+<p>
+
+<div class=text>
+<h3>NCL Comments</h3>
+<p>
+Generally, the examples below process only one file.
+To process multiple files would require only minor additions
+to the sample codes.
+<pre>
+        dir  = "./"               ; input directory 
+        fili = <a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a>("cd "+dir+" ; ls root*") ; 'root' is unique
+        nfil = <a href="../Document/Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a>(fili)
+    
+        do nf=0,nfil-1
+            :
+            ; change all fili to fili(nf)
+            :
+        end do
+</pre>
+<b>------------------------------------------------------------------------</b>
+<p>
+Reading "big endian" and "little endian" binary file types
+is readily accomplished via
+<pre>
+        <a href="../Document/Functions/Built-in/setfileoption.html"><strong>setfileoption</strong></a>("bin","ReadByteOrder","BigEndian")
+    or
+        <a href="../Document/Functions/Built-in/setfileoption.html"><strong>setfileoption</strong></a>("bin","ReadByteOrder","LittleEndian")
+</pre>
+<b>------------------------------------------------------------------------</b>
+<p>
+Interpolating high spatial/temporal resolution precipitation fields,
+is best accomplished via <a href="../Document/Functions/Built-in/area_conserve_remap.html"><strong>area_conserve_remap</strong></a> or the
+<a href="ESMF.html"><b>ESMF</b></a> software.
+<p> 
+Note: The  <a href="../Document/Functions/Built-in/area_hi2lores.html"><strong>area_hi2lores</strong></a> has been deprecated as of NCL Version 5.2.0.
+However, it is used here for backward compatibility.
+<p>
+All of the basic interpolation functions have "_Wrap" versions which
+preserve and create appropriate meta data:
+<a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a>,
+<a href="../Document/Functions/Contributed/linint2_Wrap.html"><strong>linint2_Wrap</strong></a>,
+<a href="../Document/Functions/Contributed/area_hi2lores_Wrap.html"><strong>area_hi2lores_Wrap</strong></a> (deprecated).
+<p>
+If netCDF creation is desired and file space is a concern, 
+it may be best to "pack" the precipitation values.
+Using <a href="../Document/Functions/Contributed/pack_values.html"><strong>pack_values</strong></a>
+will create a file half the size of those created
+using float values. Some precision is lost but is not important here.
+<p>
+<b>------------------------------------------------------------------------</b>
+<p>
+Often, precipitation variables contain <b>N</b>-hourly accumulated
+totals, where <b>N</b>=1 or 3 or 6 or 12. A common question:
+Given hourly precipitation (eg, 0Z, 1Z, 2Z, ..., 23Z, 0Z, ...),
+how can (say) 6-hourly (0Z, 6Z, 12Z, 18Z) totals be calculated?  
+Please see Example 5 of the <a href="../Document/Functions/Built-in/dim_sum_n.html"><strong>dim_sum_n</strong></a> function. 
+
+</div>
+<div class=text>
+The CMORPH examples use the 
+<a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><b>cnFillPalette</b></a> resource introduced in NCL 6.1.0 (Oct 28, 2012).
+This facilitates associating different color schemes and contour levels. 
+<b>NOTE:</b> There is one more color than there are contour levels.
+<pre>
+
+  res@cnLevelSelectionMode = "ExplicitLevels"              
+  res@cnLevels             = (/0.1,1,2.5,5,10,15,20,25,50,75/) ;   ; 10 contour values
+  res@cnFillPalette        = (/"Snow","PaleTurquoise","PaleGreen"\ ; 11 contour colors
+                              ,"SeaGreen3" ,"Yellow","Orange"    \
+                              ,"HotPink","Orange","HotPink","Red"\
+                              ,"Violet", "Purple", "Brown"       /)       
+
+</pre>
+Subsequently, if different contour levels and colors are needed, the 'cnLevels' and 'cnFillPalette'
+resources would have to be deleted because the array sizes are different. 
+NCL's <b>:=</b> syntax, introduced in NCL 6.1.1 (Feb 2013) can be used. 
+<pre>
+
+  res@cnLevelSelectionMode = "ExplicitLevels"              
+  res@cnLevels          <b>:=</b> (/5,10,20,30,40,50/)                     ; 6 contour values  
+  res@cnFillPalette     <b>:=</b> (/"Snow","PaleGreen","Yellow" \          ; 7 contour colors
+                            ,"Orange","Red","Purple", "Brown"/)  
+</div>
+<div class=text>
+The GPM files are HDF5. These use 'groups' a new data structure for HDF. 
+</div>
+<p>
+
+<div class=ex>
+<!--cmorph_1-->
+<a name=1></a>
+<a href="Images/cmorph_1_lg.png">
+<img src="Images/cmorph_1_sm.png" align=left border=2></a>
+<a href="Scripts/cmorph_1.html">cmorph_1.ncl</a>:
+
+Read a big endian binary file containing daily total
+precipitation at 0.25 degree resolution. The plot contains
+the merged satellite precipitation and the 
+Climate Prediction Center's morphed estimates. Create netCDF. 
+</div>
+
+<div class=ex>
+<!--cmorph_2-->
+<a name=2></a>
+<a href="Images/cmorph_2_lg.png">
+<img src="Images/cmorph_2_sm.png" align=left border=2></a>
+<a href="Scripts/cmorph_2.ncl">cmorph_2.ncl</a>:
+
+Interpolate the 0.25 gridded data to (a) 1x1 degree resolution
+and (b) the Community Atmosphere Model (CAM) 1.9x2.5
+degree grid. Create netCDF.
+</div>
+
+<div class=ex>
+<!--cmorph_trilbar_2-->
+<a name=tr2></a>
+<a href="Images/cmorph_trilbar_2_lg.png">
+<img src="Images/cmorph_trilbar_2_sm.png" align=left border=2></a>
+<a href="Scripts/cmorph_trilbar_2.html">cmorph_trilbar_2.ncl</a>:
+
+This example is the same as cmorph_2, except that the labelbar ends are triangular.  This is accomplished by setting
+the resource <a href="../Document/Graphics/Resources/lb.html#lbBoxEndCapStyle"><em>lbBoxEndCapStyle</em></a> to "TriangleBothEnds".
+</div>
+
+<div class=ex>
+<!--cmorph_3-->
+<a name=3></a>
+<a href="Images/cmorph_3_lg.png">
+<img src="Images/cmorph_3_sm.png" align=left border=4></a>
+<a href="Scripts/cmorph_3.html">cmorph_3.ncl</a>:
+Read the 3-hourly CMORPH grids for one day: plot and create netCDF.
+<p>
+</div>
+
+<div class=ex>
+<!--cmorph_4-->
+<a name=3></a>
+<a href="Images/cmorph_4_lg.png">
+<img src="Images/cmorph_4_sm.png" align=left border=4></a>
+<a href="Scripts/cmorph_4.ncl">cmorph_4.ncl</a>:
+Read a 8km CMORPH 1/2 hour grid for one time and plot. See 
+<a href="ftp://ftp.cpc.ncep.noaa.gov/precip/global_CMORPH/README.cmorph.8km_30minute"><b>README.cmorph.8km_30minute</b></a>
+for a description. 
+<p>
+</div>
+
+
+<div class=ex>
+<!--persiann_1-->
+<a name=1></a>
+<a href="Images/persiann_1_lg.png">
+<img src="Images/persiann_1_sm.png" align=left border=2></a>
+<a href="Scripts/persiann_1.html">persiann_1.ncl</a>:
+
+Read a big endian binary file containing 3-hourly
+precipitation at 0.25 degree resolution. The geographical 
+extent is 60N to 60S. Create a <b>packed</b> netCDF
+using the <a href="../Document/Functions/Contributed/pack_values.html"><strong>pack_values</strong></a> function. 
+This creates a file half the size of those created 
+using float values. Some precision is lost but is not important here.
+<p>
+The plot style here mimics that used at the 
+<a href="http://chrs.web.uci.edu/research/satellite_precipitation/activities00.html">PERSIANN</a> WWW site.
+</div>
+
+<div class=ex>
+<!--persiann_2-->
+<a name=2></a>
+<a href="Images/persiann_2_lg.png">
+<img src="Images/persiann_2_sm.png" align=left border=2></a>
+<a href="Scripts/persiann_2.html">persiann_2.ncl</a>:
+
+Analogous to the previous example but it uses
+a big endian binary file containing 6-hourly
+precipitation at 0.25 degree resolution. The geographical 
+extent is 50N to 50S. Create packed netCDF. 
+</div>
+
+<div class=ex>
+<!--persiann_3-->
+<a name=3></a>
+<a href="Images/persiann_3_lg.png">
+<img src="Images/persiann_3_sm.png" align=left border=4></a>
+<a href="Scripts/persiann_3.html">persiann_3.ncl</a>:
+Interpolate the 6-hourly 0.25 gridded data to (a) 1x1 degree resolution
+and (b) the Community Atmosphere Model (CAM) 1.9x2.5
+degree grid. Create packed netCDF.
+</div>
+
+<div class=ex>
+<!--persiann_4-->
+<a name=4></a>
+<a href="Images/persiann_4_lg.png">
+<img src="Images/persiann_4_sm.png" align=left border=4></a>
+<a href="Scripts/persiann_4.html">persiann_4.ncl</a>:
+(a) Read one or more  binary file(s) [3000x9000]; (b) Explore data; (c) Increase workstation workspace; (d) Plot ; (e) Create netCDF-4."
+</div>
+
+<div class=ex>
+<!--cpcFamine_1-->
+<a name=1></a>
+<a href="Images/cpcFamine_1_lg.png">
+<img src="Images/cpcFamine_1_sm.png" align=left border=2></a>
+<a href="Scripts/cpcFamine_1.html">cpcFamine_1.ncl</a>:
+
+Read a big endian binary file containing daily total
+precipitation at 0.1 degree resolution. The 
+daily precipitation estimates are obtained by merging       
+GTS gauge observations and  3 kinds of satellite estimates:
+GPI,SSM/I and AMSU.  Create netCDF.
+<p>
+For this file, the areal average is 1.3 mm/day.
+The maximum value is 265.4 mm/day.  
+</div>
+<br>
+    <div class=ex>
+    <!--GPCP_4-->
+    <a name=ex4></a>
+    <a href="Images/gpcp_4_lg.png">
+    <img src="Images/gpcp_4_sm.png" align=left border=2></a>
+    <a href="Scripts/gpcp_4.html">gpcp_4.ncl</a>:
+Plot GPCP-1DD for a user specified date.
+    <br><br>
+    </div>
+<br>
+    <div class=ex>
+    <!--CPCUNI_1-->
+    <a name=ex1></a>
+    <a href="Images/cpcuni_1_lg.png">
+    <img src="Images/cpcuni_1_sm.png" align=left border=2></a>
+    <a href="Scripts/cpcuni_1.html">cpcuni_1.ncl</a>:
+Read one or more CPC_Unified binary files. Optionally: (a) Create netCDF and/or (b) plot the data.
+If multiple files are being read and corresponding netCDF files are created, there is an
+option to concatenate (combine) all the netCDF into one file use the netCDF Operator (NCO)
+<a href="http://nco.sourceforge.net/nco.html#ncrcat"><b>ncrcat</b></a>. This is invoked 
+by creating a string containing the desired command and, then, 
+executing the command via the <a href="../Document/Functions/Built-in/system.html"><strong>system</strong></a> procedure. 
+The plots have a contour max of 150 mm/day. However, many files contain values much greater
+than this: 250, 300, etc. The script prints the min and max values for each file.
+    <br><br>
+    </div>
+
+<div class=ex>
+<!--trmm_1-->
+<a name=1></a>
+<a href="Images/trmm_1_lg.png">
+<img src="Images/trmm_1_sm.png" align=left border=2></a>
+<a href="Scripts/trmm_1.html">trmm_1.ncl</a>:
+
+Read a HDF file containing 3-hourly
+precipitation at 0.25 degree resolution. The geographical 
+extent is 40S to 40N. Create a <b>packed</b> netCDF
+using the <a href="../Document/Functions/Contributed/pack_values.html"><strong>pack_values</strong></a> function. 
+This creates a file half the size of those created 
+using float values. Some precision is lost but is not important here.
+<p>
+The HDF file is classifed as a "Scientific Data Set" [HDF-SDS].
+Unfortunately, it does not contain the geographical coordinates
+or temporal information. The former must be obtained via
+a web site while the time is in the file name.
+</div>
+
+<div class=ex>
+<!--trmm_3A25_1-->
+<a name=1></a>
+<a href="Images/trmm_3A25_rainMean2_2km_lg.png">
+<img src="Images/trmm_3A25_rainMean2_2km_sm.png" align=left border=2></a>
+<a href="Scripts/trmm_3A25_1.html">trmm_3A25_1.ncl</a>:
+
+Read a HDF-SDS file containing monthly precipitation rates derived
+from the 3A25 precipitation algorithm. The 'rainMean2'   
+variable is at 0.25 degree resolution. 
+<p>
+The HDF file is classifed as a "Scientific Data Set" [HDF-SDS].
+Unfortunately, it does not contain the geographical coordinates
+or temporal information. The former must be obtained via
+a web site while the time is in the file name.
+<p>
+Climate and Forecast meta data is manually added. 
+</div>
+
+<div class=ex>
+<!--trmm_3B42RT_1-->
+<a name=1></a>
+<a href="Images/trmm_3B42RT_1_lg.png">
+<img src="Images/trmm_3B42RT_1_sm.png" align=left border=2></a>
+<a href="Scripts/trmm_3B42RT_1.html">trmm_3B42RT_1.ncl</a>:
+The 3B42<b>RT</b> (<b>R</b>eal <b>T</B>ime) product is a big-endian binary file containing  
+variables of mixed types: type character, type short and type byte.
+NCL can be used to read the data but it is a bit cumbersome because 
+NCL's binary read functions only read one variable type. They lack the 
+necessay 'granularity' to partition the different variable
+types. The approach is to read the <i>entire file as a single type</i>
+and extract the appropriate information.
+The same record must be read for <i>each</i> type specification.
+Hence, the user must keep track of the byte counts.
+<p>
+The <b>trmm_3B42RT_1.ncl</b> script reads one or more 3B42<b>RT</b>
+binary files. It unpacks the data (see description in the script) and 
+creates a netCDF file for each input binary file containing the unpacked values. 
+It also plots a simple image.  Note: for this plot, all negative precipitation
+values were set to _FillValue. 
+</div>
+
+<div class=ex>
+<!--trmm_3B42RT_2-->
+<a name=2></a> <a href="Scripts/trmm_3B42RT_2.html">trmm_3B42RT_2.ncl</a>:
+Read one or more 3B42<b>RT</b> binary files and create a CF-1.0
+convention conforming netCDF file with the original numeric types
+(short and byte).  The character record is included as global
+attributes.  In addition, a reference is added. A
+sample <a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a>
+(same as <b>ncdump -h</b>)
+is <a href="Prints/trmm_3B42RT.2007062518.html"><b>here</b></a>.  It
+is <i>slightly</i> larger than the original binary file because it
+contains additional information (time/date, lat/lon, reference).
+</div>
+
+<div class=ex>
+<!--trmm_3B40RT_1-->
+<a name=1></a>
+<a href="Images/trmm_3B40RT_1_lg.png">
+<img src="Images/trmm_3B40RT_1_sm.png" align=left border=2></a>
+<a href="Scripts/trmm_3B40RT_1.html">trmm_3B40RT_1.ncl</a>:
+The 3B40<b>RT</b> (<b>R</b>eal <b>T</B>ime) product is a big-endian binary file containing  
+variables of mixed types: type character, type short and type byte.
+NCL can be used to read the data but it is a bit cumbersome because 
+NCL's binary read functions only read one variable type. They lack the 
+necessay 'granularity' to partition the different variable
+types. The approach is to read the <i>entire file as a single type</i>
+and extract the appropriate information.
+The same record must be read for <i>each</i> type specification.
+Hence, the user must keep track of the byte counts.
+<p>
+The <b>trmm_3B40RT_1.ncl</b> script reads one or more 3B40<b>RT</b>
+binary files. It unpacks the data (see description in the script) and 
+creates a netCDF file for each input binary file containing the unpacked values. 
+It also plots a simple image.  Note: for this plot, all negative precipitation
+values were set to _FillValue. 
+</div>
+
+<div class=ex>
+<!--trmm_3B40RT_2-->
+<a name=2></a> <a href="Scripts/trmm_3B40RT_2.html">trmm_3B40RT_2.ncl</a>:
+Read one or more 3B40<b>RT</b> binary files and create a CF-1.0
+convention conforming netCDF file with the original numeric types
+(short and byte).  The character record is included as global
+attributes.  In addition, a reference is added. A
+sample <a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a>
+(same as <b>ncdump -h</b>)
+is <a href="Prints/trmm_3B40RT.2001012212.html"><b>here</b></a>.  It
+is <i>slightly</i> larger than the original binary file because it
+contains additional information (time/date, lat/lon, reference).
+</div>
+
+<div class=ex>
+<!--aphro_1-->
+<a name=1></a> 
+<a href="Images/aphro_1_lg.png">
+<img src="Images/aphro_1_sm.png" align=left border=2></a>
+<a href="Scripts/aphro_1.html">aphro_1.ncl</a>:
+Read an APHRODITE netCDF file containing daily mean rain rates and create simple regional plot. 
+</div>
+
+
+<div class=ex>
+<!--gpm_1-->
+<a name=1></a> 
+<a href="Images/gpm_1_1_lg.png">
+<img src="Images/gpm_1_1_sm.png" align=left border=2></a>
+<a href="Images/gpm_1_2_lg.png">
+<img src="Images/gpm_1_2_sm.png" align=left border=2></a>
+<a href="Images/gpm_1_3_lg.png">
+<img src="Images/gpm_1_3_sm.png" align=left border=2></a>
+<a href="Scripts/gpm_1.html">gpm_1.ncl</a>:
+Read a HDF5 file containing monthly mean rain rates. A sample <a href="../Document/Tools/ncl_filedump.html"><b>ncl_filedump</b><a> 
+which shows how NCL 'sees' the file is <a href="Prints/dump.3B-MO.MS.MRG.3IMERG.20140701"><b>here</b></a>. 
+Note that the <i>group</i> variable '/Grid' has a preceding '/'.  
+<p>
+
+In NCL Version 6.4.0, a new labelbar resource
+called <a href="../Document/Graphics/Resources/lb.html#lbBoxEndCapStyle"><em>lbBoxEndCapStyle</em></a> was added
+that allows you to force one or both of the end labelbar boxes to be
+drawn as triangles. The second two plots of this example show two ways
+of using this resource to customize the labelbar.
+<p>
+
+As of NCL version
+6.4.0, <a href="../Document/Tools/ncl_convert2nc.html"><b>ncl_convert2nc</b></a>
+can not (generally) convert HDF5 to netCDF.  An NCL script that makes
+netCDF file(s) from the GPM 'IMERG' HDF5 is here:
+<a href="Scripts/gpm_hdf2nc.html"><b>gpm_hdf2nc.ncl</b></a>
+<p>
+NASA provides a service that can convert these HDF5 to netCDF. The following was posted to ncl-talk by "Fan Fang":
+<pre>
+
+If you're looking to convert IMERG data, you can use the service from our Hyrax site:
+
+  <a href="http://gpm1.gesdisc.eosdis.nasa.gov/opendap/ncml/GPM_L3/contents.html">http://gpm1.gesdisc.eosdis.nasa.gov/opendap/ncml/GPM_L3/contents.html</a>
+
+Each granule page has "Get as NetCDF X" tab on top where you can convert the whole file, 
+or you can select variables to subset and convert.
+
+There is also time-aggregated data service at
+
+  <a href="http://gpm1.gesdisc.eosdis.nasa.gov/opendap/ncml/aggregation/GPM_3GPROFF16SSMIS.03/contents.html">http://gpm1.gesdisc.eosdis.nasa.gov/opendap/ncml/aggregation/GPM_3GPROFF16SSMIS.03/contents.html</a>
+or
+  <a href="http://gpm1.gesdisc.eosdis.nasa.gov/thredds/catalog/aggregation/catalog.html">http://gpm1.gesdisc.eosdis.nasa.gov/thredds/catalog/aggregation/catalog.html</a>
+
+For "thredds" you can use "NetcdfSubset" service to convert data to netcdf.  
+Time-aggregation allows you to convert data in a time range into one file.  
+Watch the time length for performance issues.
+</pre>
+</div>
+
+<div class=ex>
+<!--gpm_2-->
+<a name=1></a> 
+<a href="Images/gpm_2_1_lg.png">
+<img src="Images/gpm_2_1_sm.png" align=left border=2></a>
+<a href="Images/gpm_2_2_lg.png">
+<img src="Images/gpm_2_2_sm.png" align=left border=2></a>
+<a href="Images/gpm_2_3_lg.png">
+<img src="Images/gpm_2_3_sm.png" align=left border=2></a>
+<a href="Images/gpm_2_4_lg.png">
+<img src="Images/gpm_2_4_sm.png" align=left border=2></a>
+<a href="Images/gpm_2_6_lg.png">
+<img src="Images/gpm_2_6_sm.png" align=left border=2></a>
+<a href="Scripts/gpm_2.html">gpm_2.ncl</a>:
+Read a GPM HDF5 file containing swath data from the COR satellite. 
+Read the 'zFactorCorrected' radar values with dimensionality: 
+<pre>
+
+    [nscan | 7935] x [nray | 49] x [nbin | 176]
+</pre>
+Each 'nscan' corresponds to a unique time. 
+The nray represent 49 samples perpendicular to the trajectory. 
+The nbin represent 176 vertical' samples at each scan and ray.. 
+There are <b>many</b> missing values.
+Plot the trajectory data in different ways: (a) trajectory only; 
+(b) polymarkers colored by the maximum value at each scan (time); 
+(c) time series using polymarkers for maximum values at each time (scan); 
+(d) same as (c) but plotting latitude and longitude as the abscissa; and, 
+(e) plotting a contour cross-section. 
+Create a CF-conforming time variable using <a href="../Document/Functions/Built-in/cd_inv_calendar.html"><strong>cd_inv_calendar</strong></a>.
+Use <a href="../Document/Functions/Built-in/nice_mnmxintvl.html"><strong>nice_mnmxintvl</strong></a> and <a href="../Document/Functions/Contributed/stat_dispersion.html"><strong>stat_dispersion</strong></a>
+to explore the data and set plot resources.
+</div>
+
+<div class=ex>
+<!--ST4_1-->
+<a name=1></a> 
+<a href="Images/ST4_1_lg.png">
+<img src="Images/ST4_1_sm.png" align=left border=2></a>
+<a href="Scripts/ST4_1.html">ST4_1.ncl</a>:
+Read an <a href="http://www.emc.ncep.noaa.gov/mmb/ylin/pcpanl/stage4/"><b>NCEP Stage IV</b></a>
+regional hourly/6-hourly multi-sensor (radar+gauges) precipitation analyses on a 4km grid. 
+Plot and explicitly show grid locations with missing values (light gray).
+</div>
+
+
+<div class=ex>
+<!--ST4_2-->
+<a name=2></a> 
+<a href="Images/ST4_2_lg.png">
+<img src="Images/ST4_2_sm.png" align=left border=2></a>
+<a href="Scripts/ST4_2.html">ST4_2.ncl</a>:
+Read an <a href="http://www.emc.ncep.noaa.gov/mmb/ylin/pcpanl/stage4/"><b>NCEP Stage IV</b></a>
+regional hourly/6-hourly multi-sensor (radar+gauges) precipitation analyses. 
+Use <b>ESMF conservative interpolation</b> to regrid from 4km resolution to 12km resolution.
+Plot and explicitly show grid locations with missing values (light gray).
+</div>
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/HiResPrc.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:02:16 GMT -->
+</html>
+
+

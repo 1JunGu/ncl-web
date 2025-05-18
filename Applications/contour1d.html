@@ -1,0 +1,534 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/contour1d.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:15:55 GMT -->
+<head>
+<meta name="description" content="Use of NCL to contour random data.">
+<meta name="keywords" content="NCL, graphics, visualization, contour">
+<meta http-equiv="expires" content="Tues Mar 23 16:33:45 MST 1999">
+<TITLE>NCL Graphics: Contouring one-dimensional X, Y, Z (random) data</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_grids.html">Non-uniform grids</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL Graphics: Contouring one-dimensional X, Y, Z (random) data</h1>
+
+<div class=mainimage>
+<img src="Images/contour1d_1_2_lg.png">
+</div>
+
+<div class=text>
+
+If you have X, Y, Z data represented by one-dimensional (1D) arrays of
+the same length, then NCL will contour this data by first generating a
+triangular mesh of the data under the hood, and then contouring the
+triangular mesh. You can also choose to regrid or interpolate
+your data to a 2D grid before plotting.
+<p>
+
+Here are the options for contouring 1D data:
+
+<ol>
+
+<li>Set the <a href="../Document/Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> and
+<a href="../Document/Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> resources to the X
+and Y arrays respectively, and pass the 1D Z data to the
+appropriate gsn_csm contouring routine.
+<p>
+
+<li>If your X/Y arrays are lon/lat arrays, then in NCL V6.4.0 and
+later you can attach the special "lat1d" / "lon1d" attributes to your
+data variable to be plotted. This effectively causes the
+<a href="../Document/Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> and
+<a href="../Document/Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> resources to
+be set for you under the hood.<p>
+See the "<a href="plot_data_on_map.html">Plotting data on map</a>"
+examples page for more information.
+<p>
+
+<li>If you have arrays representing polygons that surround each data point,
+then you can additionally set <a href="../Document/Graphics/Resources/sf.html#sfXCellBounds"><em>sfXCellBounds</em></a> and
+<a href="../Document/Graphics/Resources/sf.html#sfYCellBounds"><em>sfYCellBounds</em></a> to these arrays for a
+(potentially) better plot.
+<p>
+
+<li>You can first regrid or interpolate the data to
+a <a href="../Document/glossary.html#RectilinearGrid">rectilinear</a>,
+or <a href="../Document/glossary.html#CurvilinearGrid">curvilinear</a> grid using
+<a href="ESMF.html">ESMF regridding</funcref>, or functions like
+like <a href="../Document/Functions/Built-in/cssgrid.html"><strong>cssgrid</strong></a>, <a href="../Document/Functions/Built-in/natgrid.html"><strong>natgrid</strong></a>
+and <a href="../Document/Functions/Built-in/triple2grid.html"><strong>triple2grid</strong></a>.<p>
+See the "<a href="rdm2grid.html">Random to Grid</a>" examples page.
+<p>
+</ol>
+
+<b>In all cases</b>, the quality of the resulting plot will be a
+function of the distribution of the X and Y arrays, the number of
+sampling points, and the 'shape' of the data be contoured.
+
+</div>
+
+<div class=ex>
+<!--contour1d_1-->
+<a name=ex1></a>
+<a href="Images/contour1d_1_1_lg.png">
+<img src="Images/contour1d_1_1_sm.png" align=left border=2></a>
+<a href="Images/contour1d_1_2_lg.png">
+<img src="Images/contour1d_1_2_sm.png" align=left border=2></a>
+<a href="Scripts/contour1d_1.html">contour1d_1.ncl</a> /
+<a href="Scripts/contour1d_old_1.html">contour1d_old_1.ncl</a>:
+
+The data file for this example
+is <a href="Data/asc/pw.html">pw.dat</a>, which contains
+a column of data values, each with a corresponding lat, lon value.
+<p>
+
+To contour this data correctly over a map, this script attaches the 1D
+lat/lon arrays to the data using special "lat1d" and "lon1d"
+attributes. As of NCL V6.4.0, the gsn_csm_<i>xxxxx</i>_map scripts
+will look for these special attributes in order to correctly plot the
+data over a map.
+<p>
+
+If you have an older version of NCL that doesn't recognize the
+lat1d/lon1d attributes, then see
+the <a href="Scripts/contour1d_old_1.html">contour1d_old_1.ncl</a>
+script, which sets the <a href="../Document/Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a>
+and <a href="../Document/Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> resources to these
+lat/lon arrays respectively. NCL will internally use the triangular
+mesh capability to contour this data.
+<p>
+
+By default, NCL will generate smoothed contours (see first frame)
+in an area enclosed by a
+<a href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> of
+the data. If <a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a> is set to
+"RasterFill" (see second frame), then no smoothing will take effect,
+but you may get a blocky look. Raster fill can be significantly
+faster, but looks smoother if you have more points.
+<p>
+
+If you have data with concave boundaries, then you may get a
+"streaking effect" where NCL is trying to fill areas just outside the
+concave boundary area. This is because the contouring algorithm has no
+way of knowing where the boundary actually is, and thus creates the
+appearance of drawing outside the lines.<p>
+
+In order to hide the streaking effect, you can either
+provide "bounds" for each data value via the
+<a href="../Document/Graphics/Resources/sf.html#sfXCellBounds"><em>sfXCellBounds</em></a> and
+<a href="../Document/Graphics/Resources/sf.html#sfYCellBounds"><em>sfYCellBounds</em></a> resources (see
+the <a href="geodesic.html">Geodesic examples page</a>) or you can
+use masking effects to hide streaking areas. See examples mask_8.ncl
+and mask_11.ncl on the
+<a href="mask.html">Masking examples page</a>.
+<p>
+
+See example 1 on the "<a href="station.html">Plotting station
+data</a>" page for a similar example using the same data.
+
+</div>
+
+
+<div class=ex>
+<!--contour1d_2-->
+<a name=ex2></a>
+<a href="Images/contour1d_2_lg.png">
+<img src="Images/contour1d_2_sm.png" align=left border=2></a>
+<a href="Scripts/contour1d_2.html">contour1d_2.ncl</a> /
+<a href="Scripts/contour1d_2_640.html">contour1d_2_640.ncl</a>:
+
+This example shows how to contour an ARPEGE grid, which came
+to us from Christophe Cassou of Meteo-France.
+<p>
+
+The data for this example are spread across two NetCDF files.  The
+resolution is pretty fine, so raster contours
+(<a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a> = "RasterFill") are
+used.
+<p>
+
+In the <a href="Scripts/contour1d_2.html">contour1d_2.ncl</a> script,
+lat/lon information is provided by setting the
+resources <a href="../Document/Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a>
+and <a href="../Document/Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a>. In the
+<a href="Scripts/contour1d_2_640.html">contour1d_2_640.ncl</a>
+script, the special lat1d/lon1d attributes are used.
+
+</div>
+
+<div class=ex>
+<!--contour1d_3-->
+<a name=ex3></a>
+<a href="Images/contour1d_3_lg.png">
+<img src="Images/contour1d_3_sm.png" align=left border=2></a>
+<a href="Scripts/contour1d_3.html">contour1d_3.ncl</a> /
+<a href="Scripts/contour1d_3_640.html">contour1d_3_640.ncl</a>:
+
+Gridded sea level pressures are read; then, for demonstration
+purposes, <i>NOBS</i> are randomly sampled from the grid using 
+<a href="../Document/Functions/Contributed/generate_unique_indices.html"><strong>generate_unique_indices</strong></a>
+or <a href="../Document/Functions/Built-in/random_uniform.html"><strong>random_uniform</strong></a> and small random location
+perturbations are added.
+<p>
+
+The resulting lat[*], lon[*], Z[*] arrays are then contoured using
+the <a href="../Document/Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a>
+and <a href="../Document/Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> resources in the
+<a href="Scripts/contour1d_3.html">contour1d_3.ncl</a> script, and
+lat1d/lon1d attributes in
+<a href="Scripts/contour1d_3_640.html">contour1d_3_640.ncl</a>.
+<p>
+
+In this example,
+the <a href="../Document/Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a>
+resource is explicitly set to "TriangularMesh". However,
+as noted above, this is not necessary.
+<p>
+<b>Note: </b> The input data are on a global grid. Hence, the data are cyclic
+in longitude. The resulting plot clearly shows [left and right edges]
+ that the "TriangularMesh" is not capable of handling this situation. 
+<p>
+</div>
+
+<div class=ex>
+<!--contour1d_4-->
+<a name=ex4></a>
+<a href="Images/contour1d_4_lg.png">
+<img src="Images/contour1d_4_sm.png" align=left border=2></a>
+<a href="Scripts/contour1d_4.html">contour1d_4.ncl</a> / 
+<a href="Scripts/contour1d_4_640.html">contour1d_4_640.ncl</a>:
+
+This example is very similar to the first one on this page, except the
+markers are colored according to the labelbar generated by the color
+contours.
+<p>
+
+The color contours are made more transparent by
+setting <a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a> to 0.5
+(default is 1.0). The main purpose of this example is to show how to
+color the markers based on an existing contour field.
+
+</div>
+
+<div class=ex>
+<!--geodesic_1-->
+<a name=1></a>
+<a href="Images/geo_1_1_lg.png">
+<img src="Images/geo_1_1_sm.png" align=left border=2></a>
+<a href="Images/geo_1_2_lg.png">
+<img src="Images/geo_1_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/geo_1.html">geodesic_1.ncl</a>:
+<a href="../Document/Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> and
+<a href="../Document/Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> are set
+to the model's grid center lat/lon arrays (converted to degrees),and 
+<a href="../Document/Graphics/Resources/sf.html#sfXCellBounds"><em>sfXCellBounds</em></a> 
+and
+<a href="../Document/Graphics/Resources/sf.html#sfYCellBounds"><em>sfYCellBounds</em></a> are set the model's
+grid corner lat/lon arrays (also converted to degrees).
+<p>
+
+The second image shows the structure of a GEODESIC grid, along with its
+cell centers.
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/contour1d.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:15:58 GMT -->
+</html>
+
+

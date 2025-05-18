@@ -1,0 +1,122 @@
+;----------------------------------------------------------------------
+;  mapoutlines_7.ncl
+;----------------------------------------------------------------------
+;
+; Concepts illustrated:
+;   - Compares the different settings for the mpDataSetName resource
+;----------------------------------------------------------------------
+; When mpDataBaseVersion is set to "MediumRes", then you have more
+; outline options through the mpDataSetName resource, which can have
+; four possible values:
+;
+; "Earth..1" - This is an older dataset that contains geophysical and
+;  political boundaries including the states of the United States.
+;
+; "Earth..2" - Similar "Earth..1" except that it contains the country
+;  Eritrea, and several countries resulting from the breakup of the USSR
+;  that were not included in "Earth..1". It also contains the provinces
+;  of Canada, the states of Mexico, and all the counties in the United
+;  States.
+;
+; "Earth..3" - Similar to "Earth..2" except that the US counties are
+;  replaced with climate divisions within each state.
+;
+; "Earth..4" - Similar to "Earth..2", but has about 10 times as much
+;  detail and is much more accurate.
+;
+; For more details, see the documentation for mpDataSetName:
+;
+; https://www.ncl.ucar.edu/Document/Graphics/Resources/mp.shtml#mpDataSetName
+;----------------------------------------------------------------------
+begin 
+
+  dq = str_get_dq()
+
+  wks  = gsn_open_wks("png","mapoutlines") ; send graphics to PNG file
+
+  res                       = True
+  res@gsnMaximize           = True
+  res@gsnDraw               = False
+  res@gsnFrame              = False
+
+  res@mpOutlineOn           = True
+  res@mpOutlineBoundarySets = "AllBoundaries"
+  res@mpDataBaseVersion     = "MediumRes"   ; necessary for mpDataSetName to be effective
+  res@mpLandFillColor       = "bisque2"
+
+;---Set up three resources lists for three sets of plots
+  res1 = res
+  res2 = res
+  res3 = res
+  res4 = res
+
+;---First map (Gulf of Mexico)
+  res1@mpProjection          = "Mercator"
+  res1@mpLimitMode           = "Corners"
+  res1@mpCenterLatF          =  0
+  res1@mpCenterLonF          = -89
+  res1@mpRightCornerLonF     = 283
+  res1@mpRightCornerLatF     = 36
+  res1@mpLeftCornerLonF      = 259
+  res1@mpLeftCornerLatF      = 19
+
+;---Second map (China, India)
+  res2@mpLimitMode           = "LatLon"
+  res2@mpMinLatF             =  5
+  res2@mpMaxLatF             = 55
+  res2@mpMinLonF             = 72
+  res2@mpMaxLonF             = 136
+
+;---Third map (Australia)
+  res3@mpLimitMode           = "LatLon"
+  res3@mpMinLatF             = -45
+  res3@mpMaxLatF             =  -6
+  res3@mpMinLonF             = 110
+  res3@mpMaxLonF             = 155
+
+;---Fourth map (Russia)
+  res4@mpProjection          = "LambertEqualArea"
+  res4@mpLimitMode           = "LatLon"
+  res4@mpMinLatF             = 40
+  res4@mpMaxLatF             = 90
+  res4@mpMinLonF             = 40
+  res4@mpMaxLonF             = 150
+  res4@mpCenterLatF          = 45
+  res4@mpCenterLonF          = 100
+
+;---Array of all possible settings for mpDataSetName
+  data_set_name = (/"Earth.."/) + (/1,2,3,4/)
+  ndata         = dimsizes(data_set_name)
+
+;---Create four graphic arrays to hold four sets of plots
+  plots1 = new(ndata,graphic)
+  plots2 = new(ndata,graphic)
+  plots3 = new(ndata,graphic)
+  plots4 = new(ndata,graphic)
+
+;---Loop through each possible setting of mpDataSetName and create four different plots
+  do nd=0,ndata-1
+    res1@mpDataSetName = data_set_name(nd)
+    res2@mpDataSetName = data_set_name(nd)
+    res3@mpDataSetName = data_set_name(nd)
+    res4@mpDataSetName = data_set_name(nd)
+    res1@tiMainString  = dq + data_set_name(nd) + dq
+    res2@tiMainString  = dq + data_set_name(nd) + dq
+    res3@tiMainString  = dq + data_set_name(nd) + dq
+    res4@tiMainString  = dq + data_set_name(nd) + dq
+    plots1(nd) = gsn_csm_map(wks,res1)
+    plots2(nd) = gsn_csm_map(wks,res2)
+    plots3(nd) = gsn_csm_map(wks,res3)
+    plots4(nd) = gsn_csm_map(wks,res4)
+  end do
+
+;---Panel the four sets of plots
+  pres                       = True
+  pres@gsnMaximize           = True
+  pres@gsnPanelMainString    = "Comparing settings for mpDataSetName"
+  pres@gsnPanelMainFont      = "Helvetica-bold"   ; default is "helvetica"
+  gsn_panel(wks,plots1,(/2,2/),pres)
+  gsn_panel(wks,plots2,(/2,2/),pres)
+  gsn_panel(wks,plots3,(/2,2/),pres)
+  gsn_panel(wks,plots4,(/2,2/),pres)
+end

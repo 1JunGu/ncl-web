@@ -1,0 +1,1406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/shapefiles.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:02:41 GMT -->
+<head>
+<meta name="description" content="Use of NCL to visualize shapefiles data.">
+<meta name="keywords" content="NCL, graphics, visualization, shapefiles">
+<TITLE>NCL: Plotting and working with shapefiles</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_data.html">Data sets</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL: Plotting and working with shapefiles</h1>
+
+<div class=mainimage>
+<img src="Images/shapefiles_1_lg.png">
+</div>
+
+<div class=text>
+
+<b>Webinar</b>: <a href="../Training/Webinars/NCL_and_Shapefiles/index.html">NCL and Shapefiles</a>
+
+</div>
+
+<div class=text>
+
+<h3>Shapefiles</h3>
+<p class=justEX>
+
+Shapefiles are a <glossary term="SupportedDataFormat">supported data
+format</a> in NCL, and hence can be read
+with <a href="../Document/Functions/Built-in/addfile.html"><strong>addfile</strong></a>.  Unlike other supported formats,
+however, a "shapefile" refers to a collection of files, with ".shp",
+".shx", ".prj", ".dbf" and other possible extensions. In order to
+read shapefiles with NCL, you must have the ".shp", ".shx", and ".dbf"
+files in the same directory.
+<p>
+
+From <a href="http://en.wikipedia.org/wiki/Shapefile">Wikipedia</a>:
+<p>
+
+The <b><a href="http://www.esri.com/">Esri*</a> Shapefile</b> or simply
+a <b>shapefile</b> is a popular geospatial vector data format for
+geographic information systems software. It is developed and regulated
+by Esri as a (mostly) open specification for data interoperability
+among ESRI and other software products.[1] A "shapefile" commonly
+refers to a collection of files with ".shp", ".shx", ".prj", ".dbf",
+and other extensions on a common prefix name (e.g., "lakes.*"). The
+actual shapefile relates specifically to files with the ".shp"
+extension, however this file alone is incomplete for distribution, as
+these other supporting files are required.
+<p>
+
+<i><font size=-1>*Esri and the Esri Logo are licensed trademarks of
+Environmental Systems Research Institute, Inc.</font></i><p>
+
+Shapefiles describe a homogeneous set of geometrical <i>features</i> comprised of either points, polylines, or polygons. These, for example, could represent water wells, rivers, and lakes, respectively. Each feature may also have non-spatial attributes that describe it, such as the name or temperature.
+<p>
+
+The <a href="http://www.gadm.org/">Global Administrative Database</a>
+(GADM) offers consistent administrative boundaries at multiple levels.
+The level 0 database (nations) is good to use for global or mesoscale
+results, level 1 is the first level of sub-national administration
+(typically states/provinces and territories) while level 2 offers the
+second level of administration and is potentially useful for
+high-resolution plots. Sometimes there are more levels (for example,
+France has 6) with even higher resolution. The global shapefiles are
+large, but it's possible to download individual countries separately.
+<p>
+
+NOAA provides some useful <a href="http://www.nws.noaa.gov/geodata/">AWIPS
+shapefile data</a>.
+</div>
+
+<div class=text>
+
+<h3>Shapefile plotting and masking routines</h3>
+
+These functions can be used to draw polygons, lines, and markers from
+shapefile data:
+<p>
+
+<ul>
+<li><a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polygons.html"><strong>gsn_add_shapefile_polygons</strong></a>
+<li><a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polylines.html"><strong>gsn_add_shapefile_polylines</strong></a>
+<li><a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polymarkers.html"><strong>gsn_add_shapefile_polymarkers</strong></a>
+</ul>
+<p>
+
+<a name="ShapefileMasking"></a>
+The <b><a href="Scripts/shapefile_utils.html">shapefile_utils.ncl</a></b>
+script provides additional useful routines for working with shapefiles:
+<p>
+
+<ul>
+<li><b>print_shapefile_info</b> - prints information about the shapefile
+<li><b>plot_shapefile</b> - creates a basic map plot with the shapefile outlines added
+<li><b>shapefile_mask_data</b> - masks your own data against outlines in a shapefile
+</ul>
+<p>
+
+<b>Important note:</b> The <b>shapefile_mask_data</b> function is 
+a powerful function used by many scripts on this page. In order for your data
+to be masked correctly using this function, your longitude values must
+be in the same range as the longitude values on the shapefile. Most
+shapefile longitude values are in the range -180 to 180. You can use
+the <b>print_shapefile_info</b> procedure above to print this
+information.
+<p>
+
+For a sample of the first two routines, try this simple 4-line NCL script
+with your own shapefile data, or
+download <a href="Data/index.html#shp">sample
+shapefiles here</a>.
+<p>
+
+<a href="Images/plot_shapefile_lg.png"><img src="Images/plot_shapefile_sm.png" align=left border=2></a>
+<p>
+
+<pre>
+load "./shapefile_utils.ncl"
+sname = "states.shp"
+print_shapefile_info(sname)
+plot_shapefile(sname)
+</pre>
+<p>
+
+</div>
+
+<div class=text>
+
+<h3>Shapefile details</h3>
+
+What follows are details of the contents of a shapefile. Several
+functions (see above) have been added to hide some of this detail.
+<p>
+
+Within NCL, a shapefile appears as a collection of 4 or 5 specifically named variables that encode the geometry of the features, along with some number of non-spatial variables. The number, names and types of the non-spatial variables depend upon the specific shapefile. The geometry of a feature is composed of one or more <i>segments</i>. Segments in turn are composed of an ordered-list of X, Y (and optionally Z) tuples. NCL uses the following variables to encode these relationships:
+
+<code><pre>
+    geometry(num_features, 2)
+    segments(num_segments, 2)
+    x(num_points)
+    y(num_points)
+    z(num_points)    ; 3D datasets only
+</pre></code>
+<p>  
+
+  Each feature in the shapefile is represented by an entry in the <code>geometry</code> variable, along with corresponding entries in the non-spatial variables; i.e., the data for the i-th feature is found at the i-th entry of these variables. Each entry in <code>geometry</code> has two values: <code>geometry(i, 0)</code> specifies the index into variable <code>segments</code> of the 1st segment of the i-th feature, and <code>geometry(i, 1)</code> denotes the number of segments that make up the feature.
+<p>
+Similarly, each entry in <code>segments</code> has two values: <code>segments(j, 0)</code> is the index of the 1st XY(Z) tuple of the j-th segment, and <code>segments(j, 1)</code> is the number of tuples belonging to the segment.
+With this encoding, any subsequent segments belonging to the i-th feature follow its first one in <code>segments</code>, and all the XY(Z) tuples belonging to the j-th segment follow the first in the <code>x,y,(z)</code> variables.
+
+<p>
+NCL defines several global attributes for a shapefile:
+<code><pre>
+    geom_segIndex = 0
+    geom_numSegs  = 1
+    segs_xyzIndex = 0
+    segs_numPnts  = 1
+    geometry_type = "point" | "polyline" | "polygon"
+    layer_name    =    ; value derived from the shapefile
+</pre></code>
+<p>
+
+The first 4 attributes are intended as symbolic indices into the <code>geometry</code> and <code>segments</code> variable; see the examples below for how they should be used.
+<p>
+ 
+</div>
+
+<div class=ex>
+<!--shapefiles_1-->
+<a name=ex1></a>
+<a href="Images/shapefiles_1_lg.png">
+<img src="Images/shapefiles_1_sm.png" align=left border=2></a>
+<a href="Scripts/shapefiles_1.html">shapefiles_1.ncl</a>:
+
+Demonstrates how to read a shapefile and draw filled polygons over a map.
+Non-spatial variables from the associated database (i.e., the states.dbf
+file) are used to compute the polygon colors.
+<p>
+
+To run this example, you must have the files "states.shp",
+"states.dbf", and "states.shx". These can be obtained from the
+ <a href="http://nationalmap.gov/small_scale/mld/1statep.html">National Map</a>.
+ <p>
+ A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Shapefiles/NCL_shapefiles_1.html#sphx-glr-gallery-shapefiles-ncl-shapefiles-1-py">here</a>.
+</div>
+
+<div class=ex>
+<!--shapefiles_2-->
+<a name=ex2></a>
+<a href="Images/shapefiles_2_lg.png">
+<img src="Images/shapefiles_2_sm.png" align=left border=2></a>
+<a href="Scripts/shapefiles_2.html">shapefiles_2.ncl</a>:
+
+Demonstrates how to read a shapefile and draw selected information
+based upon a database query.
+In this case, the historical incidents of F5-class tornadoes in
+the USA are plotted.
+<p>
+
+To run this example, you must have the "states" shapefiles from the
+previous example, along with "tornadx020.shp",
+"tornadx020.dbf", and "tornadx020.shx". These can be obtained from the USGS's holdings on 
+<a href="http://catalog.data.gov/dataset/united-states-tornado-touchdown-points-1950-2004-direct-download">data.gov</a>.
+
+</div>
+
+<div class=ex>
+<!--Mapoutlines_5-->
+<a href="Images/mapoutlines_5_1_lg.png">
+<img src="Images/mapoutlines_5_1_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_5_2_lg.png">
+<img src="Images/mapoutlines_5_2_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_5_3_lg.png">
+<img src="Images/mapoutlines_5_3_sm.png" align=left border=2></a>
+<a href="Scripts/mapoutlines_5.html">mapoutlines_5.ncl</a>: 
+
+This script demonstrates the difference in resolution between the
+low resolution and medium resolution map databases of NCL,
+and a world shapefile downloaded from 
+<a href="http://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/">http://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/</a>.
+<p>
+
+You cannot use the
+"<a href="../Document/Graphics/rangs.html">HighRes</a>" database with a
+global map, so the shapefile outlines are your best bet if you need
+more resolution.
+
+</div>
+
+<div class=ex>
+<!--Mapoutlines_5-->
+<a href="Images/mapoutlines_zoom_5_1_lg.png">
+<img src="Images/mapoutlines_zoom_5_1_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_zoom_5_2_lg.png">
+<img src="Images/mapoutlines_zoom_5_2_sm.png" align=left border=2></a>
+<a href="Scripts/mapoutlines_5_zoom.html">mapoutlines_5_zoom.ncl</a>: 
+
+This script is similar to the mapoutlines_5.ncl one above, except it
+includes the "<a href="../Document/Graphics/rangs.html">HighRes</a>"
+database, if installed. It produces two panel plots, so you can
+compare the various map outlines.
+<p>
+
+</div>
+
+<div class=ex>
+<!--shapefiles_3-->
+<a name=ex3></a>
+<a href="Images/shapefiles_3_lg.png">
+<img src="Images/shapefiles_3_sm.png" align=left border=2></a>
+<a href="Scripts/shapefiles_3.html">shapefiles_3.ncl</a>:
+
+Demonstrates how to add shapefile outlines representing stream data in
+South America to an NCL map using
+<a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polylines.html"><strong>gsn_add_shapefile_polylines</strong></a>.
+<p>
+
+To run this example, you must download the "HYDRO1k Streams data set
+for South America as a tar file in shapefile format" (2.4 MB) from:<br>
+<a
+href="http://eros.usgs.gov/#/Find_Data/Products_and_Data_Available/gtopo30/hydro/samerica">http://eros.usgs.gov/#/Find_Data/Products_and_Data_Available/gtopo30/hydro/samerica</a><p>
+
+Note: this dataset no longer appears to be available as of February 2014.
+
+</div>
+
+<div class=ex>
+<!--shapefiles_4-->
+<a name=ex4></a>
+<a href="Images/shapefiles_4_1_lg.png">
+<img src="Images/shapefiles_4_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_4_2_lg.png">
+<img src="Images/shapefiles_4_2_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_4_3_lg.png">
+<img src="Images/shapefiles_4_3_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_4.html">shapefiles_4.ncl</a>: Demonstrates
+using "shapefile_mask_data" to mask an area in your data array
+using a geographical outline. This script
+requires <b><a href="Scripts/shapefile_utils.html">shapefile_utils.ncl</a></b>.
+<p>
+
+See the <a href="#ShapefileMasking">description</a> of this
+function for important information.
+<p>
+
+This particular example reads
+a <a href="shapefiles.html">shapefile</a> to get an outline of the
+Mississippi River Basin. You then have the option of masking out all
+areas inside or outside this outline.
+<p>
+
+The "mrb.<i>xxx</i>" data files for this example can be found on the
+<a href="Data/index.html#shp">example datasets</a> page.
+<p>
+
+The <a href="Scripts/shapefiles_4_old.html">shapefiles_4_old.ncl</a> is
+an older script that doesn't use a separate function to mask the
+data. Look at this script if you are interested in seeing the "guts"
+of what it takes to mask data against a shapefile outline.
+
+</div>
+
+
+<div class=ex>
+<!--shapefiles_5-->
+<a name=ex5></a>
+<a href="Images/shapefiles_5_lg.png">
+<img src="Images/shapefiles_5_sm.png" align=left border=2></a>
+<a href="Scripts/shapefiles_5.html">shapefiles_5.ncl</a>:
+
+Makes use of several shapefiles of differing resolutions and contents to mask data along county borders (Pakistan), and to draw and label selected boundaries and cities. Demonstrates querying the shapefiles' databases via non-spatial attributes to extract and draw specific geometry.
+<p>
+Also provides an example of using table to create a custom map legend.
+<p>
+The shapefiles for this example were obtained from <a href="http://www.diva-gis.org/gdata">DIVA-GIS</a>. Search for administrative boundaries of Pakistan and download. The resultant zipfile contains four sets of shapefile files. 
+</div>
+
+<div class=ex>
+<!--shapefiles_6-->
+<a name=ex6></a>
+<a href="Images/shapefiles_6_1_lg.png">
+<img src="Images/shapefiles_6_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_6_2_lg.png">
+<img src="Images/shapefiles_6_2_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_6.html">shapefiles_6.ncl</a>:
+
+This example uses a script very similar to example 3 above for South 
+America to draw the canton outlines for Switzerland. The first frame
+shows the default map outline for Switzerland (admittedly not very good),
+and the second frame shows the data from the shapefile.
+<p>
+
+The point is to show that shapefiles tend to have similar formats, and
+hence you can take a script and easily modify it to draw the outlines
+you're interested in.
+<p>
+
+In this example, the outlines are drawn with polylines, and the places
+of interest with text strings and polymarkers.
+<p>
+
+With versions 6.1.2 or earlier of NCL, if you try to plot a lot of
+individual line segments or text strings using gsn_add_polyxxxx
+functions, then you may want to consider using
+<a href="../Document/Graphics/Interfaces/gsn_polyline.html"><strong>gsn_polyline</strong></a> instead of
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>,
+<a href="../Document/Graphics/Interfaces/gsn_polymarker.html"><strong>gsn_polymarker</strong></a> instead of
+<a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a>, and
+<a href="../Document/Graphics/Interfaces/gsn_text.html"><strong>gsn_text</strong></a> instead of
+<a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a>.
+<p>
+
+With version 6.2.0 of NCL, drawing polylines and polygons is much faster.
+Markers and text may still be slow.
+</div>
+
+<div class=ex>
+<!--shapefiles_7-->
+<a name=ex7></a>
+<a href="Images/shapefiles_7_1_lg.png">
+<img src="Images/shapefiles_7_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_7_2_lg.png">
+<img src="Images/shapefiles_7_2_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_7_3_lg.png">
+<img src="Images/shapefiles_7_3_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_7.html">shapefiles_7.ncl</a>:
+
+This script uses several shapefiles to draw river basins, points of
+interest, and indigenous areas in Australia. The shapefiles were
+downloaded from several locations. See the comments in 
+the script for details.
+<p>
+
+The routines 
+<a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polygons.html"><strong>gsn_add_shapefile_polygons</strong></a>,
+<a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polylines.html"><strong>gsn_add_shapefile_polylines</strong></a>, and
+<a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polymarkers.html"><strong>gsn_add_shapefile_polymarkers</strong></a> 
+are used to attach the shapefile information.
+
+</div>
+
+
+<div class=ex>
+<!--shapefiles_8-->
+<a name=ex8></a>
+<a href="Images/shapefiles_8_1_lg.png">
+<img src="Images/shapefiles_8_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_8_2_lg.png">
+<img src="Images/shapefiles_8_2_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_8_3_lg.png">
+<img src="Images/shapefiles_8_3_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_panel_8_lg.png">
+<img src="Images/shapefiles_panel_8_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_8.html">shapefiles_8.ncl</a> / 
+<a href="Scripts/shapefiles_8_panel.html">shapefiles_8_panel.ncl</a>:
+
+This script uses four shapefiles downloaded from
+<a href="http://www.gadm.org/country">http://www.gadm.org/country</a>
+to draw various administrative areas for India.
+<p>
+
+</div>
+
+<div class=ex>
+<!--shapefiles_9-->
+<a name=ex9></a>
+<a href="Images/shapefiles_9_lg.png">
+<img src="Images/shapefiles_9_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_9.html">shapefiles_9.ncl</a>:
+This uses the shapefile Example 4.
+This demonstrates calculating an areally weighted mean time series
+for an irregularly shaped region. As in Example 4, an array containing
+only the desired locations inside the shapefile is created. All other
+grid points are set to _FillValue. Specifially, this computes the
+areal mean time series of monthly precipitation for the Mississippi
+River Basin. The data is the monthly GPCP. 
+
+</div>
+
+<div class=ex>
+<!--mask_12-->
+<a href="Images/mask_12_lg.png">
+<img src="Images/mask_12_sm.png" align=left border=3></a>
+<a href="Scripts/mask_12.html">mask_12.ncl</a>: This example shows how
+to use a shapefile that contains polygon outlines to create a data
+mask for a variable with 1D coordinate arrays. The mask array is then
+written to a copy of the input file.  [This script
+requires <b><a href="Scripts/shapefile_utils.html">shapefile_utils.ncl</a></b>.]
+<p>
+
+In this case, the shapefile contains coastal outlines, which a land
+mask is created from. See the function "create_mask_from_shapefile"
+in the "mask_12.ncl" script. This function only works for data that
+contains coordinate arrays. You will need to modify it to work with
+curvilinear or unstructured data.
+<p>
+
+You should be able to use any shapefile that contains polygon data
+(point and polyline data won't work) to create the desired mask.
+<p>
+
+The shapefile used in this example was part of a compressed file,
+"GSHHS_shp_2.2.0.zip", downloaded from:<br>
+<blockquote>
+<a href="http://www.ngdc.noaa.gov/mgg/shorelines/data/gshhs/oldversions/version2.2.0/">http://www.ngdc.noaa.gov/mgg/shorelines/data/gshhs/oldversions/version2.2.0</a>
+</blockquote>
+<p>
+
+You need to uncompress it with the "unzip" command.  You can use any
+of the other shapefiles that are included with this file, but they are
+potentially a higher resolution, and hence creating the mask will take
+longer.
+
+</div>
+
+<div class=ex>
+<!--shapefiles_10-->
+<a name=ex10></a>
+<a href="Images/shapefiles_10_1_lg.png">
+<img src="Images/shapefiles_10_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_10_NM_1_lg.png">
+<img src="Images/shapefiles_10_NM_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_10_2_lg.png">
+<img src="Images/shapefiles_10_2_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_10.html">shapefiles_10.ncl</a> /
+<a href="Scripts/shapefiles_NM_10.html">shapefiles_NM_10.ncl</a>: These
+examples show how to plot polygon data from a shapefile containing
+geologic units and structural features in Colorado and New Mexico.  The shapefiles were
+downloaded from
+<a href="http://mrdata.usgs.gov/geology/state/">http://mrdata.usgs.gov/geology/state/</a>.
+<p>
+
+The shapefile data came with a suggested lithologic color map:
+<a href="http://mrdata.usgs.gov/catalog/lithclass-color.php">http://mrdata.usgs.gov/catalog/lithclass-color.php</a>, which shows which colors to use 
+for which rock type.  This example draws the lithologic 
+color map on a separate frame, using several labelbars.
+<p>
+
+In order to use the suggested color map, the
+<a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polygons.html"><strong>gsn_add_shapefile_polygons</strong></a>
+procedure was copied from the $NCARG_ROOT/lib/ncarg/nclscripts/csm
+directory, and then modified as needed.
+<p>
+
+The New Mexico image additionally adds fault lines.
+</div>
+
+<div class=ex>
+<!--shapefiles_11-->
+<a name=ex11></a>
+<a href="Images/shapefiles_11_lg.png">
+<img src="Images/shapefiles_11_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_11.html">shapefiles_11.ncl</a>: This
+example shows how to use a shapefile that contains an outline of the
+United States to create a land mask. The land mask is written to a
+NetCDF file so you can use it later for masking other variables on the
+same grid.
+<p>
+
+This script calls <b>shapefile_mask_data</b>, which is in
+the <b><a href="Scripts/shapefile_utils.html">shapefile_utils.ncl</a></b>
+script.  See the <a href="#ShapefileMasking">description</a> of this
+function for important information.
+<p>
+
+Two USA shapefiles were tried with this example. 
+The "gz_2010_us_020_00_5m.shp" shapefile is from
+<a href="http://www.census.gov/geo/www/cob/">http://www.census.gov/geo/www/cob/</a> and the "nationalp010g.shp" shapefile is from
+<a href="http://nationalmap.gov/small_scale/mld/1natlp.html">http://nationalmap.gov/small_scale/mld/1natlp.html</a>. The
+census one is smaller and hence the script runs much faster on this
+one (200+ wall seconds versus 17 wall clock seconds). Which file you
+use depends on how fine your original grid is, and how good of a mask
+you need.
+
+</div>
+
+<div class=ex>
+<!--shapefiles_12-->
+<a name=ex12></a>
+<a href="Images/shapefiles_12_lg.png">
+<img src="Images/shapefiles_12_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_12b_lg.png">
+<img src="Images/shapefiles_12b_sm.png" align=left border=3></a>
+
+<a href="Scripts/shapefiles_12.html">shapefiles_12.ncl</a> / 
+<a href="Scripts/shapefiles_12b.html">shapefiles_12b.ncl</a>: This
+example shows how to
+modify <a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polylines.html"><strong>gsn_add_shapefile_polylines</strong></a>
+to have it draw only a subset of the features in the given shapefile.
+<p>
+
+See references to "feature_names", "vname", and "vlist" in the
+"gsn_add_shapefile_polylines_subset" function at the top of the NCL
+script.
+<p>
+
+The shapefile contains Interstate Highways, and only the primary
+interstate highways (I-5, I-82, and I-90) in Western United States are
+drawn. (Special thanks to Dave Allured for his improvement of this
+script to correctly plot all highway segments with complex entries,
+like "I- 5, US 30".)
+
+<p>
+
+The shapefile was downloaded from
+<a href="http://www.nws.noaa.gov/geodata/catalog/transportation/html/interst.htm">http://www.nws.noaa.gov/geodata/catalog/transportation/html/interst.htm</a>.
+
+</div>
+
+<div class=ex>
+<!--shapefiles_13-->
+<a name=ex13></a>
+<a href="Images/shapefiles_13_lg.png">
+<img src="Images/shapefiles_13_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_13.html">shapefiles_13.ncl</a>: This
+example shows how to use shapefile data to collect lat/lon data points
+in each county of Georgia, and take an average of all the data values
+in that county. Based on each county average, a fill color is assigned
+and the county is filled using
+modify <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>.
+<p>
+
+The <a href="../Document/Functions/Built-in/gc_inout.html"><strong>gc_inout</strong></a> function is used to collect lat/lon
+pairs that fall in each county. Since this function can be slow if
+you are checking a lot of points, a number of "if" statements
+are included to prevent unnecessary calls to this function.
+<p>
+
+The county outlines for Georgia come from the USA_adm2.shp shapefile,
+which was downloaded from
+<a href="http://www.gadm.org/country">http://www.gadm.org/country</a>.
+
+</div>
+
+<div class=ex>
+<!--shapefiles_14-->
+<a name=ex14></a>
+<a href="Images/shapefiles_14_lg.png">
+<img src="Images/shapefiles_14_sm.png" align=left border=3></a>
+
+<a href="Scripts/shapefiles_14.html">shapefiles_14.ncl</a>: This
+example shows how to add shapefile outlines to an existing WRF
+contour/map plot. 
+<p>
+
+In order to attach the shapefile outlines to the plot, you need to set
+"pltres@PanelPlot  = True" so
+that <a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a> doesn't
+remove the contour plot. You can then use
+<a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polylines.html"><strong>gsn_add_shapefile_polylines</strong></a> to add the 
+shapefile outlines.
+<p>
+
+The country outline for USA was downloaded from
+<a href="http://www.gadm.org/country">http://www.gadm.org/country</a>.
+<p>
+
+</div>
+
+<div class=ex>
+<!--shapefiles_mask_14-->
+<a name=ex14></a>
+<a href="Images/shapefiles_mask_14_1_lg.png">
+<img src="Images/shapefiles_mask_14_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_mask_14_2_lg.png">
+<img src="Images/shapefiles_mask_14_2_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_14_mask.html">shapefiles_14_mask.ncl</a>: This
+example is similar to the previous one, except it masks the WRF "hgt"
+variable against a select list of U.S. states outlines from the
+shapefile. 
+<p>
+
+This script calls <b>shapefile_mask_data</b>, which is in
+the <b><a href="Scripts/shapefile_utils.html">shapefile_utils.ncl</a></b>
+script. See the <a href="#ShapefileMasking">description</a> of this
+function for important information.
+<p>
+
+The outlines for the U.S. states comes from the USA_adm2.shp
+shapefile, which was downloaded from
+<a href="http://www.gadm.org/country">http://www.gadm.org/country</a>.
+<p>
+
+The first frame is the unzoomed variable, and the second frame shows
+how to zoom in on the area of interest using the special "ZoomIn" WRF
+resource.
+<p>
+
+</div>
+
+<div class=ex>
+<a name="Germany_coastal_counties"></a>
+<a href="Images/Germany_coastal_counties_DEU_adm_lg.png">
+<img src="Images/Germany_coastal_counties_DEU_adm_sm.png" align=left border=3></a>
+<a href="Scripts/Germany_coastal_counties_DEU_adm.html">Germany_coastal_counties_DEU_adm.ncl</a>:
+
+This script, contributed by Karin Meier-Fleischer
+of <a href="https://www.dkrz.de/">Deutsche Klimarechenzentrum</a>
+(DKRZ), shows how to use the DEU_adm3.shp shapefile downloaded
+from <a href="http://www.gadm.org/country/">http://www.gadm.org/country</a>
+to average data over coastal counties of Germany.
+<p>
+
+You can customize what outlines are drawn by using command line
+options. Examples:
+<p>
+
+<ol>
+<li>Coastal region<p>
+<pre>
+    ncl 'subregion="6.5,14.75,50.,55.5"' Germany_coastal_counties_DEU_adm.ncl
+</pre>
+<p>
+<li>Draw "Schleswig-Holstein" (default) and plot only the sub-region<p>
+<p>
+<pre>
+    ncl 'subregion="7.8,11.9,53.0,55.3"' Germany_coastal_counties_DEU_adm.ncl
+</pre>
+<p>
+
+<p>
+<li>Draw "Schleswig-Holstein" (default) but don't draw the border of all states
+<p>
+<pre>
+    ncl 'states_border=False' Germany_coastal_counties_DEU_adm.ncl
+</pre>
+<p>
+<li>Select the state "Hessen" but don't draw the borderline of Germany
+<p>
+<pre>
+    ncl 'state_name="Hessen"' 'country_border=False' Germany_coastal_counties_DEU_adm.ncl
+</pre>
+</ol>
+
+</div>
+
+<div class=ex>
+<a name="France"></a>
+<a href="Images/France_1_lg.png">
+<img src="Images/France_1_sm.png" align=left border=3></a>
+<a href="Images/France_3_lg.png">
+<img src="Images/France_3_sm.png" align=left border=3></a>
+<a href="Scripts/France_1.html">France_1.ncl</a> /
+<a href="Scripts/France_2.html">France_2.ncl</a> /
+<a href="Scripts/France_3.html">France_3.ncl</a>:
+
+The purpose of this example is to demonstrate the use of the
+<a href="../Document/Graphics/Resources/gs.html#gsSegments"><em>gsSegments</em></a> and
+<a href="../Document/Graphics/Resources/gs.html#gsColors"><em>gsColors</em></a>
+resources added in 
+added in <a href="../prev_releases.html#6.2.0">version 6.2.0</a>,
+and how much routines like 
+<a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polygons.html"><strong>gsn_add_shapefile_polygons</strong></a>,
+<a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polylines.html"><strong>gsn_add_shapefile_polylines</strong></a>,
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>,
+<a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>
+have been sped-up 
+in <a href="../prev_releases.html#6.2.0">version 6.2.0</a>.
+<p>
+
+If you run the <a href="Scripts/France_1.html">France_1.ncl</a> script
+with the France administrative shapefiles downloaded
+from <a href="http://gadm.org/country">gadm.org/country</a>, you will
+see significant speed-up mostly for the "FRA_adm5.shp" file, which has
+36,612 features to draw:
+
+<pre>
+--------------------------
+NCL V6.1.2 timing results:
+--------------------------
+. . . SNIP . . .
+---> Drawing FRA_adm/FRA_adm5.shp...
+     207.032 CPU seconds
+
+--------------------------
+NCL V6.2.0 timing results:
+--------------------------
+. . . SNIP . . .
+---> Drawing FRA_adm/FRA_adm5.shp...
+     2.87449 CPU seconds
+</pre>
+<p>
+
+Note: this scrip actually generates six images. The timing
+results and the image displayed above are from running this
+script with the "do" loop changed to "<tt>do i=5,5</tt>".<p>
+
+The <a href="Scripts/France_2.html">France_2.ncl</a> script produces
+identical plots, only it uses
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a> instead of
+<a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polylines.html"><strong>gsn_add_shapefile_polylines</strong></a>.  This
+script will only work with NCL V6.2.0, because it references the
+<a href="../Document/Graphics/Resources/gs.html#gsSegments"><em>gsSegments</em></a> resource directly.
+<p>
+
+The <a href="Scripts/France_3.html">France_3.ncl</a> script draws
+the "FRA_adm1.shp" shapefile as filled polygons, using
+<a href="../Document/Graphics/Resources/gs.html#gsColors"><em>gsColors</em></a> to specify a
+fill color for each segment.
+
+
+</div>
+
+<div class=ex>
+<!--shapefiles_15-->
+<a name=ex15></a>
+<a href="Images/shapefiles_15_lg.png">
+<img src="Images/shapefiles_15_sm.png" align=left border=2></a>
+<a href="Images/shapefiles_15_640_lg.png">
+<img src="Images/shapefiles_15_640_sm.png" align=left border=2></a>
+
+<a href="Scripts/shapefiles_15.html">shapefiles_15.ncl</a>: This
+example is another one showing the difference between map outlines in
+NCL and map outlines added from a shapefile.  The first plot in the
+panel shows the counties of Colorado as plotted from NCL, and the
+second plot shows the counties as plotted from the USA_adm2 shapefile
+downloaded from
+<a href="http://www.gadm.org/country">http://www.gadm.org/country</a>.
+<p>
+
+The left image is from running
+NCL <a href="../prev_releases.html#6.3.0">V6.3.0</a> on this
+script. The right image is from running
+NCL <a href="../prev_releases.html#6.4.0">V6.4.0</a>.
+<p>
+
+In NCL versions 6.3.0 and earlier, the NCL outlines will not show the
+county of Broomfield or the updated counties around Denver. In NCL
+version 6.4.0, the NCL map databases were updated to reflect the
+current Colorado counties.
+<p>
+
+</div>
+
+<div class=ex>
+<!--shapefiles_16-->
+<a name=ex16></a>
+<a href="Images/shapefiles_16_lg.png">
+<img src="Images/shapefiles_16_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_16.html">shapefiles_16.ncl</a>: This
+example shows the effect that shapefile masking will have on both a
+coarse (32 x 64) and fine (64 x 128) grid.
+<p>
+
+The <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> procedure is
+used to draw the lat/lon grid as a set of markers.
+<p>
+
+See <a href="#ex21">example 21</a> below for an example that compares
+masking data using shapefile_mask_data, and masking
+data by drawing the undesired areas in white.
+
+</div>
+
+<div class=ex>
+<!--shapefiles_17-->
+<a name=ex17></a>
+<a href="Images/shapefiles_17_lg.png">
+<img src="Images/shapefiles_17_sm.png" align=left border=3></a>
+
+<a href="Scripts/shapefiles_17.html">shapefiles_17.ncl</a>: This
+example shows two ways to mask data based out outlines in a
+shapefile: one is to use the <b>shapefile_mask_data</b> function
+mentioned in previous examples, and another is to simply fill
+in the undesired outlines in white over the original
+contour data, effectively masking it.
+<p>
+
+The <b>shapefile_mask_data</b> function is in
+the <b><a href="Scripts/shapefile_utils.html">shapefile_utils.ncl</a></b>
+script. See the <a href="#ShapefileMasking">description</a> of this
+function for important information.
+<p>
+
+</div>
+
+<div class=ex>
+<!--shapefiles_18-->
+<a name=ex18></a>
+<a href="Images/shapefiles_18_lg.png">
+<img src="Images/shapefiles_18_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_18.html">shapefiles_18.ncl</a>: This
+example uses a modified version of "shapefile_mask_data" to
+mask data based on a shapefile outline, and a "delta" distance
+(in km) outside the shapefile outline.   See "delta_kilometer"
+in the script.
+<p>
+
+This is useful if you want to keep some of your original data points
+that fall just outside a shapefile outline.
+<p>
+
+This script requires 
+<b><a href="Scripts/shapefile_mask_data_mod.html">shapefile_mask_data_mod.ncl</a></b>.
+
+</div>
+
+<div class=ex>
+<!--shapefiles_19-->
+<a name=ex19></a>
+<a href="Images/shapefiles_19_lg.png">
+<img src="Images/shapefiles_19_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_19.html">shapefiles_19.ncl</a>: 
+This example shows how to either mask (retain) or remove data, based on a shapefile
+outline. We get a lot of questions on this topic, so we decided to create a very
+basic example that shows both types of masking.
+<p>
+
+This example uses the <b>shapefile_mask_data</b> function found
+<b><a href="Scripts/shapefile_utils.html">shapefile_utils.ncl</a></b>.
+See the <a href="#ShapefileMasking">description</a> of this
+function for important information.
+<p>
+
+In order to mask data against outlines in a shapefile, you must
+provide the name of a variable on the shapefile that contains the list of
+names or values you want to mask against.
+<p>
+
+For example, here, the "USA_adm1.shp" shapefile is being used, which
+has a "NAME_1" string array containing feature names that are simply
+the U.S state names: "Alabama", "New Mexico", etc. You can reference
+one or more of these strings to indicate you want to mask or keep data
+in these areas.
+<p>
+
+The shapefile_mask_data function, in the
+<b><a href="Scripts/shapefile_utils.html">shapefile_utils.ncl</a></b>
+script, allows you to set the special "keep" option to False, which
+will cause data to be removed rather than retained.
+
+</div>
+
+<div class=ex>
+<!--shapefiles_20-->
+<a name=ex20></a>
+<a href="Images/shapefiles_20_1_lg.png">
+<img src="Images/shapefiles_20_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_20_2_lg.png">
+<img src="Images/shapefiles_20_2_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_20.html">shapefiles_20.ncl</a>: 
+This example shows how to use the <b>shapefile_mask_data</b> function in
+<a href="Scripts/shapefile_utils.html">shapefile_utils.ncl</a>
+to return a mask array, and then apply this mask array to a variable
+with multiple time steps.  The special option "return_mask" is
+set to True, telling the function to return the 0/1 mask array,
+instead of returning the masked data itself.
+<p>
+
+The <a href="../Document/Functions/Built-in/conform_dims.html"><strong>conform_dims</strong></a> function is used to conform the
+mask array to a 3D array, and then <a href="../Document/Functions/Built-in/mask.html"><strong>mask</strong></a> is used to
+apply the mask.
+
+<p>
+
+You can only do this kind of masking if your lat/lon grid remains the
+stationary across all time steps.
+<p>
+
+See the <a href="#ShapefileMasking">description</a> of <b>shapefile_mask_data</b>
+for important information.
+<p>
+
+</div>
+
+<div class=ex>
+<!--shapefiles_21-->
+<a name=ex21></a>
+<a href="Images/shapefiles_21_1_lg.png">
+<img src="Images/shapefiles_21_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_21_2_lg.png">
+<img src="Images/shapefiles_21_2_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_21_3_lg.png">
+<img src="Images/shapefiles_21_3_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_21.html">shapefiles_21.ncl</a>: 
+This example demonstrates two ways to mask data based on shapefile
+outlines of interest.
+<p>
+
+The first plot shows the original data with no masking.  The purple
+lines represent the shapefile areas that we want to apply the masking
+to.
+<p>
+
+The second plot shows the result of using
+the <b>shapefile_mask_data</b> function
+(in <a href="Scripts/shapefile_utils.html">shapefile_utils.ncl</a>) to
+mask the data based on an array of given areas to mask. (You can use
+strings or numeric types for the areas you want to mask, but the array
+values should match whatever type the variable is on the shapefile.)
+You will see the blockiness near the shapefile outlines, due to the
+fact that NCL will not contour data that is bordered by missing
+values. The black dots represent the WRF data that was kept by this
+function, and the red dots represent the data that was set to missing.
+<p>
+
+The third plot shows how to mask the data by filling the undesired
+areas in white.  This is a bit of a pain, because you have to make
+sure you fill in all the undesired areas, and set various "draw order"
+resources to make sure things are drawn in the correct order.  This
+method is only useful when doing graphics, and not if you need to mask
+the data for calculation purposes later.
+<p>
+
+Note that the third plot shows some white areas inside the purple shapefile
+outlines.  This is due to the fact that the script set 
+<a href="../Document/Graphics/Resources/mp.html#mpOceanFillColor"><em>mpOceanFillColor</em></a> to "white", which
+causes some shapefile areas to be covered up by the white ocean areas.
+
+</div>
+
+<div class=ex>
+<!--shapefiles_22-->
+<a name=ex22></a>
+<a href="Images/shapefiles_22_1_lg.png">
+<img src="Images/shapefiles_22_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_22_2_lg.png">
+<img src="Images/shapefiles_22_2_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_22_3_lg.png">
+<img src="Images/shapefiles_22_3_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_22_4_lg.png">
+<img src="Images/shapefiles_22_4_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_22_5_lg.png">
+<img src="Images/shapefiles_22_5_sm.png" align=left border=3></a>
+
+<a href="Scripts/shapefiles_22.html">shapefiles_22.ncl</a>: This
+example shows how to use two different shapefiles to mask data. One
+shapefile contains a single outline of the Caspian Sea, and the other
+contains outlines of isles inside the Caspian Sea.
+<p>
+
+If you want to keep the data inside the Caspian Sea, but not inside
+the isles, then you need to mask the data twice: first by setting the
+"keep" attribute to True to keep the values inside the single outline,
+and second by setting "keep" to False to throw away values in the isle
+areas:
+<p>
+
+<pre>
+  opt      = True
+  opt@keep = True   ; Keep values inside this shape
+  data_mask_casp = shapefile_mask_data(data,caspian_shape_name,opt)
+
+  opt@keep = False
+  data_mask_isles = shapefile_mask_data(data_mask_casp,isles_shape_name,opt)
+</pre>
+
+<b>Image #1</b>: The original data before masking<p>
+
+<b>Image #2</b>: The data after masking against the Caspian Sea outline. Note that the little isles
+still have data in them.<p>
+
+<b>Image #3</b>: The data after masking the previously-masked data against the isle outlines. Note
+that the isles no longer have data in them.<p>
+
+<b>Images #4-5</b>: Zoomed in versions of images #2-3.
+</div>
+<div class=ex>
+
+<!--shapefiles_23-->
+<a name=ex23></a>
+<a href="Images/shapefiles_23_1_lg.png">
+<img src="Images/shapefiles_23_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_23_2_lg.png">
+<img src="Images/shapefiles_23_2_sm.png" align=left border=3></a>
+
+<a href="Scripts/shapefiles_23.html">shapefiles_23.ncl</a>: This script
+shows how to use <b>shapefile_mask_data</b> to create a mask array for
+masking a WRF output variable against an outline in a shapefile. It
+then uses this mask array to mask select variables on the file.
+<p>
+
+Creating a mask array from a shapefile can take a long time if you
+have a big shapefile or lots of points to check. Once you have the
+mask array, use it with the <a href="../Document/Functions/Built-in/mask.html"><strong>mask</strong></a> function to mask
+other variables of the same size. This goes MUCH faster than
+using <b>shapefile_mask_data</b>. You can also write this
+mask array to a NetCDF file for use by other scripts.
+<p>
+
+Optionally, this script writes the masked variables to a new NetCDF
+file, and/or plots the original data versus the masked data for
+comparison.
+<p>
+
+This script uses a Mississippi River Basin shapefile
+(<a href="Data/index.html#shp">mrb.<i>xxx</i></a>) for demonstrative
+purposes. You should use your own shapefile data, but you can download
+the mrb files if needed.
+
+</div>
+
+<div class=ex>
+<!--shapefiles_24-->
+<a name=ex24></a>
+<a href="Images/shapefiles_24_1_lg.png">
+<img src="Images/shapefiles_24_1_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_24_2_lg.png">
+<img src="Images/shapefiles_24_2_sm.png" align=left border=3></a>
+<a href="Images/shapefiles_24_3_lg.png">
+<img src="Images/shapefiles_24_3_sm.png" align=left border=3></a>
+
+<a href="Scripts/shapefiles_24.html">shapefiles_24.ncl</a>: This script
+uses a shapefile outline to mask some data, and then calculates the
+approximate area (in km^2) of the valid data that was retained
+inside the shapefile area.
+<p>
+
+It does this by generating a series of quadrilaterals around every
+lat/lon point of valid data, and calling <a href="../Document/Functions/Built-in/gc_qarea.html"><strong>gc_qarea</strong></a> to
+get a sum of the area of all of them. This is only a rough
+approximation of the actual area of the data, which you can see by the
+pink squares in the third image.
+<p>
+
+For comparison purposes, the area (in km^2) of shapefile outline was
+also calculated, using <a href="../Document/Functions/Built-in/area_poly_sphere.html"><strong>area_poly_sphere</strong></a>.
+</div>
+
+<div class=ex>
+<!--shapefiles_25-->
+<a name=ex25></a>
+<a href="Images/shapefiles_25_lg.png">
+<img src="Images/shapefiles_25_sm.png" align=left border=3></a>
+
+<a href="Scripts/shapefiles_25.html">shapefiles_25.ncl</a>: 
+Read hourly METAR precipitation values for August 2018 at station locations.
+Calculate monthly total precipitation at each station. Use Barnes iterative 
+correction (<a href="../Document/Functions/Contributed/obj_anl_ic.html"><strong>obj_anl_ic</strong></a>) to regrid the
+data onto a user defined grid. Use a shape file to create grid mask to eliminate
+values outside the coterminus USA. Plot as 'raster' to illustrate the underlying
+grid resolution.  
+<p>
+The United States Census cartographic boundary shapefile, 
+<b>cb_2018_us_nation_5m.zip</b>, was downloaded from:  
+<a href="https://www.census.gov/geographies/mapping-files/2018/geo/carto-boundary-file.html">
+<b>https://www.census.gov/geographies/mapping-files/2018/geo/carto-boundary-file.html</b></a>
+</div>
+
+<div class=ex>
+<!--shapefiles_26-->
+<a name=ex26></a>
+<a href="Images/shapefiles_26_lg.png">
+<img src="Images/shapefiles_26_sm.png" align=left border=3></a>
+
+<a href="Scripts/shapefiles_26.html">shapefiles_26.ncl</a>: 
+Similar to <b>shapefiles_25</b> except values from four different sources
+(METAR, HRR, GOES, Stage4) are used. The mask file created and saved 
+in <b>shapefiles_25</b> is used to mask values outside the coterminus USA. 
+Plot as a panel.
+</div>
+
+<div class=ex>
+<!--Maponly_30-->
+<a name=ex30></a>
+<a href="Images/maponly_30_lg.png">
+<img src="Images/maponly_30_sm.png" align=left border=2></a>
+<a href="Scripts/maponly_30.html">maponly_30.ncl</a>: This script
+shows how to use the <a href="../Document/Graphics/Resources/mp.html#mpMaskOutlineSpecifiers"><em>mpMaskOutlineSpecifiers</em></a>
+to remove the outlines of India, while keeping outlines from surrounding
+countries. In the third plot, meteorological subdivisions of India
+were added using a shapefile downloaded off the web.
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/shapefiles.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:03:17 GMT -->
+</html>
+
+

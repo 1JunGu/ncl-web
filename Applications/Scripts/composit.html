@@ -1,0 +1,52 @@
+c     NCLFORTSTART
+      subroutine composit(sstD,sstN,lat,lon,nlat,nlon,miss,sst)
+
+      integer nlon,nlat
+      real sstD(nlon,nlat),sstN(nlon,nlat)
+      real lat(nlat),lon(nlon)
+      real sst(nlon,nlat)
+      real miss
+c     NCLEND
+c a note about the lat range
+      do i =1,nlon-1
+         do j=1,nlat
+            sst(i,j) = sstD(i,j)
+            if(sst(i,j).eq.miss)then 
+               if(sstN(i,j).ne.miss)then
+                  sst(i,j)=sstN(i,j)
+               endif
+            endif
+            if(sst(i,j).ne.miss)then
+               if(lat(j).ge.-8.7 .and. lon(i).lt.-76.)then
+                  if(sst(i+1,j).eq.miss)then
+                     sst(i,j) = miss
+                     go to 12
+                  else
+                     sst(i,j) = miss
+                  endif
+               endif
+ 12                        if(lat(j).ge.-14.5 .and. lon(i).lt.-83.5)then
+                  if(sst(i+1,j).eq.miss)then
+                     sst(i,j) = miss
+                     go to 14
+                  else
+                     sst(i,j) = miss
+                  endif
+               endif
+ 14                        if(lat(j).ge.-15. .and. lon(i).lt.-90.)then
+                  if(sst(i+1,j).eq.miss)then
+                     sst(i,j) = miss
+                     go to 16
+                  else
+                     sst(i,j) = miss
+                  endif
+               endif
+            endif
+ 16               enddo
+      enddo
+      
+      return
+      end
+
+
+

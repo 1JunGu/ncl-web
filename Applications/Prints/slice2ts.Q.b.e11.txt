@@ -1,0 +1,70 @@
+netcdf b.e11.B1850C5CN.ne30_g16.Q {
+dimensions:
+	time = UNLIMITED ; // (1 currently)
+	nbnd = 2 ;
+	ilev = 31 ;
+	lev = 30 ;
+	ncol = 48602 ;
+variables:
+	double time(time) ;
+		time:long_name = "time" ;
+		time:units = "days since 0001-01-01 00:00:00" ;
+		time:calendar = "noleap" ;
+		time:bounds = "time_bnds" ;
+	double time_bnds(time, nbnd) ;
+		time_bnds:long_name = "time interval endpoints" ;
+	int date(time) ;
+		date:long_name = "current date (YYYYMMDD)" ;
+	double hyai(ilev) ;
+		hyai:long_name = "hybrid A coefficient at layer interfaces" ;
+	double ilev(ilev) ;
+		ilev:long_name = "hybrid level at interfaces (1000*(A+B))" ;
+		ilev:units = "level" ;
+		ilev:positive = "down" ;
+		ilev:standard_name = "atmosphere_hybrid_sigma_pressure_coordinate" ;
+		ilev:formula_terms = "a: hyai b: hybi p0: P0 ps: PS" ;
+	double hybi(ilev) ;
+		hybi:long_name = "hybrid B coefficient at layer interfaces" ;
+	double hyam(lev) ;
+		hyam:long_name = "hybrid A coefficient at layer midpoints" ;
+	double lev(lev) ;
+		lev:long_name = "hybrid level at midpoints (1000*(A+B))" ;
+		lev:units = "level" ;
+		lev:positive = "down" ;
+		lev:standard_name = "atmosphere_hybrid_sigma_pressure_coordinate" ;
+		lev:formula_terms = "a: hyam b: hybm p0: P0 ps: PS" ;
+	double hybm(lev) ;
+		hybm:long_name = "hybrid B coefficient at layer midpoints" ;
+	double area(ncol) ;
+	double lat(ncol) ;
+		lat:long_name = "latitude" ;
+		lat:units = "degrees_north" ;
+	double lon(ncol) ;
+		lon:long_name = "longitude" ;
+		lon:units = "degrees_east" ;
+	double P0 ;
+		P0:long_name = "reference pressure" ;
+		P0:units = "Pa" ;
+	float Q(time, lev, ncol) ;
+		Q:mdims = 1 ;
+		Q:units = "kg/kg" ;
+		Q:long_name = "Specific humidity" ;
+		Q:cell_methods = "time: mean" ;
+
+// global attributes:
+		:creation_date = "Wed Oct 29 13:41:06 MDT 2014" ;
+		:np = 4 ;
+		:ne = 30 ;
+		:Conventions = "CF-1.0" ;
+		:source = "CAM" ;
+		:case = "b.e11.B1850C5CN.ne30_g16.tuning.004" ;
+		:title = "UNSET" ;
+		:logname = "hannay" ;
+		:host = "be0901en.ucar.ed" ;
+		:Version = "$Name$" ;
+		:revision_Id = "$Id$" ;
+		:initial_file = "b.e11.B1850C5CN.ne30_g16.tuning.003.cam.i.0006-01-01-00000.nc" ;
+		:topography_file = "/glade/proj3/cseg/inputdata/atm/cam/topo/USGS-gtopo30_ne30np4_16xdel2-PFC-consistentSGH.nc" ;
+		:history = "Wed Oct  8 18:47:06 2014: ncks -v hyam,hybm,hyai,hybi,P0,date,lat,lon,area,time_bnds,CLDTOT,CLOUD,LCLOUD,FLUT,H2O2,OMEGA,PRECL,PRECC,PRECT,Q,RELHUM,T,T700,T850,U,V,U10 b.e11.B1850C5CN.ne30_g16.tuning.004.cam.h0.0013-01.nc b.e11.B1850C5CN.ne30_g16.SUBSET.nc" ;
+		:NCO = "20141009" ;
+}

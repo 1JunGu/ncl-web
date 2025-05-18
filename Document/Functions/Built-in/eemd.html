@@ -1,0 +1,515 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/eemd.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:27 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (statistics)">
+<meta name="keywords" content="eemd">
+<title>eemd</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+<a class=crumb href="../statistics.html">Statistics</a>
+<br>
+<h1>eemd</h1>
+
+<p>
+Perform ensemble empirical mode decomposition (EEMD).
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.4.0">version 6.4.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function eemd (
+		x         : numeric,                            
+		nimf  [1] : integer,                            
+		nrep  [1] : integer,                            
+		noise [1] : numeric,        [ float, double ],  
+		opt   [1] : logical,                            
+		dims  [1] : integer                             
+	)
+
+	<a href="../return_val.html">return_val</a>  :  numeric
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>A variable of numeric type and any dimensionality.
+</p>
+<em>nimf</em>
+<p class=indent>Number of Intrinsic Mode Functions (IMFs) to compute.  If num_imfs is set to
+zero, an 'appropriate' value of num_imfs will be used. This corresponds
+to a maximal number of IMFs. Note that the final residual is also counted as an
+IMF in this respect, so you most likely want at least num_imfs=2.
+</p>
+<em>nrep</em>
+<p class=indent>Number of replications (ie, local ensemble) members to be used.
+</p>
+<em>noise</em>
+<p class=indent>Standard deviation of the Gaussian random numbers used as additional noise.
+This value is relative to the standard deviation of the input signal.
+</p>
+<em>opt</em>
+<p class=indent>Options parameter.
+<ul>
+<li> <b>S_number</b> - Use the (integer)  S-number to specify 
+stopping criterion for the EMD procedure Typical values are in the range 3-8.
+If S_number is zero, this stopping criterion is ignored. Default is 4
+<li> 
+<b>num_siftings</b> - Use a maximum number of siftings as a stopping criterion. If
+num_siftings is zero, this stopping criterion is ignored. Default is 50.
+<li>
+<b>rng_seed</b> -
+A seed for the random number generator.  A value of
+zero (default) denotes an implementation-defined default value.  
+</ul>
+</p>
+<em>dims</em>
+<p class=indent>The dimension of <em>x</em> on which to perform the EMD.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A variable  containing the Intrinsic Mode Functions (IMFs):    
+<ul>
+<li> <em>x</em>(time)         - returns IMF(nimf,time)  
+<li> <em>x</em>(time,npts)    - returns IMF(nimf,time,npts)  
+<li> <em>x</em>(time,lat,lon) - IMF(nimf,time,nlat,mlon)
+</ul>
+Double if <em>x</em> is double, float otherwise.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<b>EMD</b> (Empirical Mode Decomposition) 
+is an adaptive time-space analysis method suitable for processing series that
+are non-stationary and non-linear. EMD performs operations that partition a 
+series into 'modes' (IMFs; Intrinsic Mode Functions) without leaving the 
+time domain.  It can be compared to other time-space analysis methods like 
+Fourier Transforms and wavelet decomposition.  Like these methods, EMD is 
+not based on physics. However, the modes may provide insight into various 
+signals contained within the data.  In particular, the method is useful for 
+analyzing natural signals, which are most often non-linear and non-stationary.  
+Some common examples would include the Southern Oscillation Index (SOI), NINO-3.4 Index, etc.  
+<p>
+<b>EEMD</b> (Ensemble EMD) is a <i>noise assisted</i> data analysis method. 
+EEMD consists of 
+<a href="https://www.clear.rice.edu/elec301/Projects02/empiricalMode/process.html">
+<i>"sifting"</i></a> an ensemble of white noise-added signal. 
+EEMD can  separate scales naturally without any a priori subjective criterion 
+selection as in the intermittence test for the  original  EMD  algorithm. 
+<p>
+Wu and Huang (2005) state:
+"White noise is necessary to force the ensemble to exhaust all
+possible solutions in the sifting process, thus making the different
+scale signals to collate in the proper intrinsic mode functions (IMF)
+dictated by the dyadic filter banks.  As the EMD is a time space
+analysis method, the white noise is averaged out with sufficient
+number of trials; the only persistent part that survives the averaging
+process is the signal, which is then treated as the true and more
+physical meaningful answer." Further, they state: "[EEMD] represents a
+substantial improvement over the original EMD and is a truly noise
+assisted data analysis (NADA) method."
+<p>    
+<b>CEEMDAN</b> (Complete Ensemble Empirical Mode Decomposition with Adaptive Noise)
+is a variation of the EEMD algorithm that provides an exact reconstruction of the 
+original signal and a better spectral separation of the Intrinsic Mode Functions (IMFs).
+<p>
+
+<font color=red><b>IMPORTANT NOTE:</b></font> NCL interfaces to C code
+provided by Luukko et al. (2016).</b> There have been reports that for
+some of the modes, this code suffers from the mode mixing problem due
+to the stoppage criterion that is used in P. Luukko's code.  The NCL
+team is looking into another version of EEMD to see if this issue can
+be improved.
+<p>
+
+<pre>
+<b>REFERENCES:</b>
+
+Colominas, M. A., Schlotthauer, G., and Torres, M. E. (2014): 
+         Improved complete ensemble EMD: 
+                  A suitable tool for biomedical signal processing. 
+         Biomedical Signal Processing and Control, 14, 19-29.
+
+Hsuan, R. <et al> (2014): 
+         Ensemble Empirical Mode Decomposition Parameters Optimization for 
+         Spectral Distance Measurement in Hyperspectral Remote Sensing Data
+         Remote Sens. 2014, 6(3), 2069-2083; doi:10.3390/rs6032069 
+         http://www.mdpi.com/2072-4292/6/3/2069
+
+Kim, D., and HS. Uh (2009):
+         EMD: A Package for Empirical Mode Decomposition and Hilbert Spectrum
+         https://journal.r-project.org/archive/2009-1/RJournal_2009-1_Kim+Oh.pdf
+
+Lambert, M.  et al:
+         Empirical Mode Decomposition: A project website for the course ELEC 301 at Rice University.
+         https://www.clear.rice.edu/elec301/Projects02/empiricalMode/
+
+Luukko, P.J.J., Helske, J. and Rasanen, E. Comput Stat (2016) 31: 545-557:
+        <a href="https://doi.org/10.1007/s00180-015-0603-9"> Introducing libeemd: a program package for performing the ensemble empirical mode decomposition</a>
+        C-Code: <a href="https://bitbucket.org/luukko/libeemd"><b>https://bitbucket.org/luukko/libeemd</b></a>
+
+Salisbury, J.I. and Wimbush, M. (2002): 
+         Using modern time series analysis techniques to predict ENSO events from the SOI time series
+         Nonlinear Processes in Geophysics (2002) 9: 341–345
+         http://www.nonlin-processes-geophys.net/9/341/2002/npg-9-341-2002.pdf
+
+Torres, M. E., Colominas, M. A., Schlotthauer, G., & Flandrin, P. (2011, May): 
+        <a href="http://perso.ens-lyon.fr/patrick.flandrin/0004144.pdf"><b>A complete ensemble empirical mode decomposition with adaptive noise</b></a>
+        (ICASSP), 2011 (pp. 4144-4147). DOI: 10.1109/ICASSP.2011.5947265.
+        Also: http://ieeexplore.ieee.org/document/5947265
+
+Wang, T., M. Zhang, Q. Yu, and H. Zhang, 2012: 
+        Comparing the applications of EMD and EEMD on time–frequency analysis of seismic signal. 
+        J. Appl. Geophys., 83, 29–34, doi:https://doi.org/10.1016/j.jappgeo.2012.05.002.
+
+Wu, Z. and Huang, N. (2009): 
+        Ensemble Empirical Mode Decomposition: A Noise-Assisted Data Analysis Method. 
+        Advances in Adaptive Data Analysis. Vol. 1, No. 1 (2009) 1–41.
+
+Wu, Z, et al (2015):
+         Fast multidimensional ensemble empirical mode decomposition for the analysis of big spatio-temporal datasets
+         Philos Trans A Math Phys Eng Sci. 2016 Apr 13; 374(2065): 20150197.  doi:  10.1098/rsta.2015.0197
+         https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4792406/
+
+Wu, Y. and Shen, BW (2016):
+         <a href="http://journals.ametsoc.org/doi/full/10.1175/JTECH-D-15-0257.1">An Evaluation of the Parallel Ensemble Empirical Mode Decomposition Method      
+               in Revealing the Role of Downscaling Processes Associated with 
+               African Easterly Waves in Tropical Cyclone Genesis </a>
+         doi: http://dx.doi.org/10.1175/JTECH-D-15-0257.1
+         http://journals.ametsoc.org/doi/abs/10.1175/JTECH-D-15-0257.1
+         [lots of references]
+</pre>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="ceemdan.html"><strong>ceemdan</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+Please see the 
+<a href="../../../Applications/eemd.html"><b>EEMD Applications</b></a> page for more extensive examples. 
+<p>
+<b>Example 1:</b> 
+This example is based upon the simple sinusoid presented in 
+<a href="https://journal.r-project.org/archive/2009-1/RJournal_2009-1_Kim+Oh.pdf"><b>Kim and Oh (2009)</b></a>. 
+
+<pre>
+   N   = 3000
+   tt  = <a href="fspan.html"><strong>fspan</strong></a>(0, 9, N)           ; x-axis (float)
+   rad = <a href="../Contributed/get_r2d.html"><strong>get_r2d</strong></a>(<a href="typeof.html"><strong>typeof</strong></a>(tt))
+   pi  = <a href="../Contributed/get_pi.html"><strong>get_pi</strong></a> (<a href="typeof.html"><strong>typeof</strong></a>(tt))
+  
+   xt  = <a href="sin.html"><strong>sin</strong></a>(pi*tt) + <b>sin</b>(2*pi*tt) + <b>sin</b>(6*pi*tt) + 0.5*tt
+  ;<a href="print.html"><strong>print</strong></a>(tt+"   "+xt)
+
+; set 'eemd' arguments and options
+ 
+   nrep  = 250
+   nimf  = 10                     ; nimf=0 , function will calculate
+   noise = 0.2
+   dims  = 0
+   opt   = False
+
+   e     = <strong>eemd</strong>(xt,nimf,nrep,noise,opt,dims)     ; (nimf,N) 
+   e@long_name = "EEMD"
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(e)
+   <a href="../Contributed/printMinMax.html"><strong>printMinMax</strong></a>(e,0)
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/eemd.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:27 GMT -->
+</html>

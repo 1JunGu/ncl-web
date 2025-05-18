@@ -1,0 +1,476 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ezfftb.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:30 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (general applied math)">
+<meta name="keywords" content="ezfftb">
+<title>ezfftb</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>ezfftb</h1>
+
+<p>
+Perform a Fourier synthesis from real and imaginary coefficients.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function ezfftb (
+		cf    : numeric,  
+		xbar  : numeric   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>cf</em>
+<p class=indent>Fourier coefficients as created by <a href="ezfftf.html"><strong>ezfftf</strong></a>.
+The elements <I>cf</I>(0,...) are the
+real coefficients, and <I>cf</I>(1,...) are the
+imaginary coefficients.
+</p>
+<em>xbar</em>
+<p class=indent>The constant Fourier coefficient. This must be a scalar (or a single
+vector of the length of the product of the leftmost dimensions
+of <I>x</I>).
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A double array is returned if the input <I>cf</I> is
+double, otherwise a float array is returned.<P>
+If cf(2,kcoef), then <strong>ezfftb</strong> will construct
+a one-dimensional series using the coefficients and the
+value of <em>xbar</em>. The length of the one-dimensional series 
+may be odd or even depending upon the input coefficients.
+If cf(2,N,kcoef), where N refers to one or more dimensions 
+and xbar(N) then <strong>ezfftb</strong> will construct 
+a variable, say <i>x</i>, that that is of size x(N).
+<P>
+The example will clarify.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<font color=red>There's a bug in V6.1.2 and earlier of this function
+in which if "npts" is odd, the wrong values are returned. This is
+fixed in V6.2.0.</font><p>
+
+Given Fourier coefficients <I>cf</I> and the series mean(s) <I>xbar</I>,
+<strong>ezfftb</strong> computes the
+periodic sequences and returns an array of length <I>N</I> x
+<I>cf@npts</I>. 
+<p>
+
+If any missing values are encountered in one of the input arrays, then
+no calculations will be performed on that array, and the corresponding
+output array will be filled with missing values.
+<p>
+
+<b>Use <a href="ezfftb_n.html"><strong>ezfftb_n</strong></a> if the dimension to do the
+transform across is not the rightmost dimension. This function can
+be significantly faster than <strong>ezfftb</strong>.</b>
+
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="ezfftb_n.html"><strong>ezfftb_n</strong></a>, 
+<a href="ezfftf.html"><strong>ezfftf</strong></a>,
+<a href="ezfftf_n.html"><strong>ezfftf_n</strong></a>,
+<a href="cfftf.html"><strong>cfftf</strong></a>,
+<a href="cfftb.html"><strong>cfftb</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><P>
+The first example associated with <a href="ezfftf.html"><strong>ezfftf</strong></a>
+performed a Fourier analysis on a series of 24 values.
+It produced the real and imaginary coef. The following inputs
+(slightly truncated) coefficients to (approximately)
+reconstruct the series. Of course, if the full coefficients
+had been directly input the original values would be reproduced.
+
+
+<PRE>
+    cReal = (/1.34, -13.48, 2.17, 3.29, -5.40, 0.08, \   ; real coef
+             -2.72,   2.70, 2.17,-0.35,  2.95,-1.79 /)
+    cImag = (/3.73,   6.89, 3.36, 0.36,  3.02, 1.00, \   ; imag coef
+              4.11,   1.52, 2.53,-2.64,  2.81, 0.00 /)
+
+    cf    = (/ (/ cReal /) , (/ cImag /) /)              ; (2,12)
+    xbar  = 1011.04                                      ; mean 
+
+    x     = <strong>ezfftb</strong>(cf, xbar)          ; Fourier synthesis
+    <a href="print.html"><strong>print</strong></a>(x)
+                                                         ; original
+(0)     1002                                               1002
+(1)     1017.003                                           1017
+(2)     1018.001                                           1018
+(3)     1019.994                                           1020
+(4)     1017.994                                           1018
+(5)     1026.985                                           1027
+(6)     1027.99                                            1028
+(7)     1030.002                                           1030
+(8)     1011.988                                           1012
+(9)     1011.981                                           1012
+(10)     982.009                                            982
+(11)    1011.994                                           1012
+(12)    1000.98                                            1001
+(13)     996.011                                            996
+(14)     995.016                                            995
+(15)    1010.986                                           1011
+(16)    1027.022                                           1027
+(17)    1025                                               1025
+(18)    1029.99                                            1029
+(19)    1015.996                                           1016
+(20)     995.9965                                           996
+(21)    1005.999                                           1006
+(22)    1002.014                                           1002
+(23)     982.0076                                           982
+</PRE>
+
+<B> Example 2</B><P>
+
+In some instances, it may be appropriate to construct
+a series about a different mean (commonly, 0.0).
+The following is the same as Example 1 but 
+reconstruct the series about a mean of 0.0.
+
+<PRE>
+    X     = <strong>ezfftb</strong>(cf, 0.0)          ; Fourier synthesis
+</PRE>
+Here X would be a one-dimensional array containing:
+<PRE>
+   (/ -9.04,  5.96,  6.96, 8.95,  6.95, 15.94, \
+      16.95, 18.96,  0.95, 0.94,-29.03,  0.95, \
+     -10.06,-15.02,-16.02,-0.05, 15.98, 13.96, \
+      18.95,  4.96,-15.04,-5.04, -9.02,-29.03  /)
+</PRE>
+
+
+<B>Example 3</B><P>
+
+Let x(ntim,klvl,nlat,mlon) and <i>N</i> corresponds to
+(ntim,klvl,nlat) in this instance, and mlon is a number of longitude
+points:
+
+<PRE>
+    cf = <a href="ezfftf.html"><strong>ezfftf</strong></a> (x)       ; ==> cf(2,ntim,klvl,nlat,mlon/2)
+                          ; ==> cf@npts = mlon
+                          ; ==> cf@xbar ==> contains the means
+                                            length=ntim*klvl*nlat 
+</PRE>
+
+Reconstruct using only wave 3 and set all the means to 0.0:
+
+<PRE>
+  cf(:,:,:,:,0:1) = 0.0         ; waves 1 and 2 set to zero
+  cf(:,:,:,:,3:mlon-1) = 0.0    ; waves >3      set to zero
+</PRE>
+
+Here cf@xbar will be a one-dimensional array of length ntim*klvl*nlat.
+We want set all to 0.0 so this is readily done via:
+<p>
+ 
+<PRE>
+  cf@xbar = 0.0
+  xWave_3 = <strong>ezfftb</strong> (cf, cf@xbar)
+</PRE>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ezfftb.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:30 GMT -->
+</html>

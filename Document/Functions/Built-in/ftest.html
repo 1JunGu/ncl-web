@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ftest.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:31 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (statistics)">
+<meta name="keywords" content="ftest">
+<title>ftest</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+<a class=crumb href="../statistics.html">Statistics</a>
+<br>
+<h1>ftest</h1>
+
+<p>
+Applies F-test for variances and returns an estimate of the
+statistical significance.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function ftest (
+		var1    : numeric,  
+		s1      : numeric,  
+		var2    : numeric,  
+		s2      : numeric,  
+		opt [1] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="dimsizes.html"><strong>dimsizes</strong></a>(var1)] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>var1</em>
+<br>
+<em>var2</em>
+<p class=indent>Scalars or arrays of any dimension (they must be the same
+dimensionality as each other). They represent the variances calculated
+from two samples (i.e. sample variances).
+</p>
+<em>s1</em>
+<br>
+<em>s2</em>
+<p class=indent>Must be the same dimensionality as <em>var1</em> and <em>var2</em>, or
+else scalars. If the data within the two samples are significantly
+autocorrelated, then <em>s1</em> and <em>s2</em> should contain the
+equivalent sample sizes. It is best if the samples sizes are "large"
+(i.e. > 30).
+</p>
+<em>opt</em>
+<p class=indent>Currently not used. Set to zero.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The output array will be the same dimensionality as <em>var1</em>. If
+either of <em>var1</em> or <em>var2</em> are of type double, the
+returned values will be of type double. Otherwise, the returned values
+will be of type float.<P>
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The F-test uses the ratio of variances (F=<em>var1</em>/<em>var2</em>
+or F=<em>var2</em>/<em>var1</em>) where the numerator is the larger of
+the two variances. The F-test tests the null hypothesis that the
+sample variances are from the same population (i.e. H0:
+<em>var1</em>=<em>var2</em>). Rejection of the null hypothesis (i.e.
+acceptance of the alternative hypothesis) indicates that the sample
+variances are from two different populations. Note that values much
+smaller/larger than 1 indicate that the variances may be from
+different populations. Hence, a two-tailed significance test is
+used.<P>
+
+As noted by vonStorch and Zwiers(1998), the F-test is "not
+particularly powerful". One way to increase the power (at the cost of
+increased greater risk) is to test a critical significance level of
+0.1 (i.e. 10%).<P>
+
+The value(s) returned by <strong>ftest</strong> represent estimates
+of the statistical significance. Commonly, values of 0.10 or less are
+used as critical levels.  Note: the user should specify the critical
+significance level prior to the calculation.<P>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="ttest.html"><strong>ttest</strong></a>, <a href="rtest.html"><strong>rtest</strong></a>, <a href="betainc.html"><strong>betainc</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><p>
+
+Assume <em>X</em> and <em>Y</em> are one-dimensional arrays (they need
+not be the same size). Assume each of the values within <em>X</em> and
+<em>Y</em> are independent. Use the F-test to test if <em>X</em> and
+<em>Y</em> have the same population variance:
+
+<PRE> 
+  siglvl = 0.05              ; critical level
+  varX = <a href="variance.html"><strong>variance</strong></a> (X)
+  varY = <a href="variance.html"><strong>variance</strong></a> (Y)
+  sX   = <a href="dimsizes.html"><strong>dimsizes</strong></a> (X)        ; X and Y can be of
+  sY   = <a href="dimsizes.html"><strong>dimsizes</strong></a> (Y)        ; different sizes
+  prob = <strong>ftest</strong>(varX,sX,varY,sY,0)
+</PRE> 
+<p>
+
+<em>prob</em> will be a scalar containing the significance and will
+range between zero and one. Let's say <em>varX</em> = 72, <em>sX</em>
+= 31, <em>varY</em> = 18, and <em>sY</em> = 9. Then <em>prob</em> will
+be = 0.046 which is less than the critical level. Thus, the null
+hypothesis is rejected and the alternative hypothesis is accepted. <P>
+
+<B>Example 2</B><p>
+
+Assume <em>varX</em>, <em>sX</em>, <em>varY</em> and <em>sY</em> are
+dimensioned <em>nlat</em> x <em>mlon</em>.  Then:
+
+<PRE>
+  alpha = 100.*(1. - <strong>ftest</strong>(varX,sX,varY,sY, ))
+</PRE>
+<p>
+
+will yield <em>alpha</em> dimensioned <em>nlat</em> x <em>mlon</em>. A
+significance of 0.05 returned by <strong>ftest</strong> would yield
+95% for <em>alpha</em>. This is often done for plotting.<P>
+
+<B>Example 3</B><p>
+
+Assume <em>stdX</em> and <em>stdY</em> are dimensioned 12 x <em>nlat</em> x <em>mlon</em> and represent interannual variabilities (represented
+here as standard deviations) for each month. Assume <em>sx</em> and
+<em>sy</em> are scalars containing the number of years used to
+calculate the variances. (Generally, there is no significant
+year-to-year autocorrelation of monthly data [e.g. successive
+Januaries].)
+
+<PRE>
+  prob = <strong>ftest</strong>(stdX^2, sX, stdY^2, sY, 0)
+</PRE>
+
+will yield <em>prob</em> dimensioned 12 x <em>nlat</em> x
+<em>mlon</em>. Note that the standard deviations were squared to
+produce variances as required by the <strong>ftest</strong>
+function.<P>
+
+<B>Example 4</B><p>
+
+Assume <em>x</em> and <em>y</em> are dimensioned <em>time</em> x
+<em>lat</em> x <em>lon</em> where "time", "lat", "lon" are <a href="../../Manuals/Ref_Manual/NclVariables.html#Dimensions">dimension
+names</a>.
+
+<OL>
+
+<li>Use NCL's named dimensions to reorder in time;
+
+<li>calculate the temporal variances using the
+<a href="dim_variance.html"><strong>dim_variance</strong></a> function;
+
+<li>specify a critical significance level to test the lag-one
+auto-correlation coefficient and determine the (temporal) number of
+equivalent sample sizes in each grid point using
+<a href="equiv_sample_size.html"><strong>equiv_sample_size</strong></a>;
+
+<li>[optional] estimate a single global mean equivalent sample size
+using <a href="wgt_areaave.html"><strong>wgt_areaave</strong></a>;
+
+<li>specify a critical significance level for the F-test and test if
+the variances are different at each grid point.
+
+</OL>
+
+<PRE>
+                                  (1)
+  xtmp = x(lat|:,lon|:,time|:)       ; reorder but do it only once [temporary]
+  ttmp = y(lat|:,lon|:,time|:)
+    
+                                  (2)
+  xVar = <a href="dim_variance.html"><strong>dim_variance</strong></a> (xtmp)         ; calculate variances
+  yVar = <a href="dim_variance.html"><strong>dim_variance</strong></a> (ytmp)
+                                  (3)
+  sigr = 0.05                        ; critical sig lvl for r
+  xEqv = <a href="equiv_sample_size.html"><strong>equiv_sample_size</strong></a> (xtmp, sigr,0)  ; xEqv(nlat,nlon)
+  yEqv = <a href="equiv_sample_size.html"><strong>equiv_sample_size</strong></a> (ytmp, sigr,0)
+                                  (4)
+                                   ; xN and N will be scalars
+  xN   = <a href="wgt_areaave.html"><strong>wgt_areaave</strong></a> (xEqv, wgty, 1., 0)    ; wgty could be gaussian weights 
+  yN   = <a href="wgt_areaave.html"><strong>wgt_areaave</strong></a> (yEqv, wgty, 1., 0) 
+                                  (5)
+  sigf = 0.10                        ; any value of prob&lt;sigf is significant
+  prob = <strong>ftest</strong>(xVar,xN, yVar,yN, False) 
+
+  <a href="delete.html"><strong>delete</strong></a>(xtmp)
+  <a href="delete.html"><strong>delete</strong></a>(ytmp)
+</PRE>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ftest.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:31 GMT -->
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/skewt.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:20:03 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to create SKEWT plots.">
+<meta name="keywords" content="NCL, graphics, visualization, skewt, SKEWT">
+<TITLE>NCL Graphics: SKEWT</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_special.html">Special plots</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+    <h1>NCL Graphics: Skew-T</h1>
+
+
+    <div class=text>
+    The NCL script "skewt_func.ncl" is included with the NCL distribution.<br>
+    It is designed to reproduce the "USAF Skew-t, log p diagram (form 
+    dod-wpc 9-16-1)".<br>
+    It may be loaded via: <br>
+    <b>load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/skewt_func.ncl"</b> 
+    </div>
+    <div class=text>
+    All wind directions/speeds or u-v components are assumed to 
+    reflect conventional meteorological conventions. Missing values,
+    indicated by the _FillValue attribute, are allowed for any variable.
+    </div>
+    <div class=text>
+    The user may alter the default behavior of the  <b>"skewT_BackGround</b>" and 
+    <b>"skewT_PlotData"</b> functions.
+    <p>
+    [1] <b>function skewT_BackGround (wks:graphic,  Opts:logical)</b> <br> <br>
+    Setting the "Opts" argument to a variable set to True (eg: opt=True)
+    allows the user to alter the 'look' of the skewT background.            
+    This is demonstrated in Example 1. The following attributes             
+    may be changed from the default values: 
+<pre>                               
+    Attribute          Default                                             
+    --------------      ----                                                
+    DrawIsotherm      = True                                                
+    DrawIsobar        = True                                                
+    DrawMixRatio      = True                                                
+    DrawDryAdiabat    = True                                                 
+    DrawMoistAdiabat  = True  ; aka: saturation or pseudo adibat            
+    DrawWind          = True                                                
+    DrawStandardAtm   = True                                                
+    DrawColLine       = True                                                
+    DrawColAreaFill   = False                                               
+    DrawFahrenheit    = True  ; Fahrenheit "x" axis                         
+    DrawHeightScale   = False                                               
+    DrawHeightScaleFt = True  ;default is feet [otherwise km]              
+<br> <br>
+
+[2] <b>function skewT_PlotData (wks:graphic    ,skewt_bkgd:graphic \ 
+                            ,P[*]:numeric   ,TC[*]:numeric      \              
+                            ,TDC[*]:numeric ,Z[*]:numeric       \              
+                            ,WSPD[*]:numeric,WDIR[*]:numeric    \              
+                            ,dataOpts:logical                   )</b>
+</pre>                                                              
+    Setting 
+<pre>
+    dataOpts = True 
+</pre>
+    allows various other options. For example: 
+<pre>
+                                        ; <b>sounding colors</b>
+    dataOpts@colTemperature = "black"   ; default -> "Foreground"
+    dataOpts@colDewPt       = "green"   ; default -> "RoyalBlue"
+    dataOpts@colCape        = "orange"  ; default -> "Red"
+                                        ; Winds at <b>P</b>ressure levels
+    dataOpts@colWindP       = "black"   ; default -> "Foreground"
+                                        ; Winds at geopotential [<b>Z</b>] levels
+    dataOpts@colWindZ       = "black"   ; default -> "Foreground"
+                                        ; Winds at pibal <b>H</b>eight levels
+    dataOpts@colWindH       = "black"   ; default -> "Foreground"
+                                        
+                                        ; <b>sounding line patterns</b>
+    dataOpts@linePatternTemperature = 2 ; default=1 [solid]
+    dataOpts@linePatternDewPt       = 3 ; default=1 [solid]
+    dataOpts@linePatternCape        = 8 ; default=1 [solid]
+                                        
+                                        ; <b>"x" location for windbarbs</b>
+    dataOpts@xpWind                 =42 ; default=45
+
+                                        ; By default, <b>skewT_PlotData</b> expects
+                                        ; wind speed (<b>WSPD</b>) and direction (<b>WDIR</b>).
+    dataOpts@WspdWdir      = False      ; Set to False, if <b>u</b> and <b>v</b> are input.
+    dataOpts@DrawWindBarbThk = 2.0      ; make wind barbs thicker; default value is 1.0; NCL version 6.4.0 
+    dataOpts@hemisphere    = "NH"       ; "NH" -  Northern Hemisphere (default)
+                                        ; "SH" -  Southern Hemisphere
+    dataOpts@Wthin         = 1          ; Plot a subset of the winds. Default =1 
+                                        ; =1 means every wind barb
+                                        ; =5 would mean every 5<i>-th</i> 
+                                        ;    wind report would be plotted.
+</pre>
+    PIBAL reports generally consist of winds at height above the surface. 
+    Below let hght,hspd and hdir represent Pibal wind reports:
+<pre>
+    hght = (/1000.,3000.,7000.,25000. /)/3.208  ; hgt (M) 
+    hspd = (/  50.,  27., 123.,   13. /)        ; speed at each height   
+    hdir = (/  95., 185., 275.,  355. /)        ; direction              
+                 
+    dataOpts@PlotWindH      = True      ; if available, plot winds at height lvls 
+    dataOpts@HspdHdir       = True      ; wind speed and dir [else: u,v]         
+    dataOpts@Height         = hght      ; assign height of wind reports          
+    dataOpts@Hspd           = hspd      ; speed [or u component]          
+    dataOpts@Hdir           = hdir      ; dir   [or v component]          
+</pre>
+</div>
+    <div class=text>        
+<b>Version 5.1.0: </b>The information printed at the top of the skewT plot:
+<pre>
+   Cape  -  Convective Available Potential Energy [J]
+   Pwat  -  Precipitable Water [cm]
+   Shox  -  Showalter Index (stability)
+   Plcl  -  Pressure of the lifting condensation level [hPa]
+   Tlcl  -  Temperature at the lifting condensation level [C]
+</pre>
+is returned as attributes of the returned graphic object.
+<p>
+Example: Let <b>skewT</b> be the returned object. The data may be
+retrieved via:
+<pre>
+   cape = skewT@Cape
+   pwat = skewT@Pwat
+   shox = skewT@Shox
+   plcl = skewT@Plcl
+   tlcl = skewT@Tlcl
+</pre>
+
+    </div>
+
+
+    <div class=ex>
+    <!--Skewt_1-->
+    <a name=ex1></a>
+    <a href="Images/skewt_1_1_lg.png">
+    <img src="Images/skewt_1_1_sm.png" align=left border=2></a>
+    <a href="Images/skewt_1_2_lg.png">
+    <img src="Images/skewt_1_2_sm.png" align=left border=2></a>
+    <a href="Images/skewt_1_3_lg.png">
+    <img src="Images/skewt_1_3_sm.png" align=left border=2></a>
+    <a href="Scripts/skewt_1.html">skewt_1.ncl</a>: 
+    demonstrates the construction of three skew-T plot backgrounds. 
+    The left plot is the default. The center plot was created by setting the 
+    two attributes DrawColAreaFill and DrawHeightScale to "True". The third 
+    plot uses a centigrade scale [DrawFahrenheit  = False] and the heights 
+    are indicated in meters [DrawHeightScale=True and 
+    DrawHeightScaleFt=False ].
+    <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Skew-T/NCL_skewt_1.html#sphx-glr-gallery-skew-t-ncl-skewt-1-py">here</a>.
+    </div>
+
+    <div class=ex>
+    <!--skewt_2-->
+    <a name=ex2></a>
+    <a href="Images/skewt_2_1_lg.png">
+    <img src="Images/skewt_2_1_sm.png" align=left border=2></a>
+    <a href="Images/skewt_2_2_lg.png">
+    <img src="Images/skewt_2_2_sm.png" align=left border=2></a>
+    <a href="Images/skewt_2_3_lg.png">
+    <img src="Images/skewt_2_3_sm.png" align=left border=2></a>
+    <a href="Scripts/skewt_2.html">skewt_2.ncl</a>: Plots 
+    <a href="Data/asc/sounding.html"><b>sounding data</b></a>
+     on the skew-T plots. Check out those wind barbs! The winds from a (bogus)
+    pibal are indicated via a different color and thickness. 
+Printed under the [optional] figure title, are several reference quantities:<br>
+    <pre>
+    Plcl: Lifting Condensation Level [mb,  hPa]
+    Tlcl: Temperature at the LCL
+    Shox: Showalter Index
+    Pwat: Total Precipitable Water [cm]
+    Cape: Convective Available Potential Energy [Joules]
+    </pre>
+    <p>
+    A Python version of skewt_2_2 projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Skew-T/NCL_skewt_2_2.html#sphx-glr-gallery-skew-t-ncl-skewt-2-2-py">here</a>.
+    </div>
+
+    <div class=ex>
+    <!--skewt_3-->
+    <a name=ex3></a>
+    <a href="Images/skewt_3_1_lg.png">
+    <img src="Images/skewt_3_1_sm.png" align=left border=2></a>
+    <a href="Images/skewt_3_2_lg.png">
+    <img src="Images/skewt_3_2_sm.png" align=left border=2></a>
+    <a href="Scripts/skewt_3.html">skewt_3.ncl</a>:
+    Plots <a href="Data/asc/sounding_ATS.html"><b>sounding data</b></a>.
+    The left figure shows the full radiosonde while the right plot "thins" 
+    the number of wind barbs plotted and uses a Centigrade scale. Setting 
+    the Wthin attribute to 3 means plot every third wind barb.
+    <p>
+    The variables plotted are: T [C], TD [C, dew point temperature], 
+    Z [m], WSPD and WDIR [knots or m/s; wind speed and direction].        
+    The only required variable is P [mb; Pressure]. The required           
+    order is surface [ie, ground] to top.
+    <p>
+    A Python version of skewt_3_2 projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Skew-T/NCL_skewt_3_2.html#sphx-glr-gallery-skew-t-ncl-skewt-3-2-py">here</a>.
+    </div>
+
+    <div class=ex>
+    <!--skewt_4-->
+    <a name=ex4></a>
+    <a href="Images/skewt_4_lg.png">
+    <img src="Images/skewt_4_sm.png" align=left border=2></a>
+    <a href="Scripts/skewt_4.html">skewt_4.ncl</a>:
+     This shows how to plot two soundings on the same plot. Basically,
+     (a) draw the background; (b) draw each sounding upon
+     the background; (c) advance the frame after all soundings
+     have been plotted.  
+     Options  are used to change colors, line patterns, location of 
+     wind barbs [<b>xpWind</b>] and to thin
+     the number of wind barbs [<b>Wthin</b>]. 
+     The data file is
+     <a href="Data/asc/sounding_ATS.html"><b>here</b></a>.
+    </div>
+
+    <div class=ex>
+    <!--skewt_5-->
+    <a name=ex5></a>
+    <a href="Images/skewt_5_lg.png">
+    <img src="Images/skewt_5_sm.png" align=left border=2></a>
+    
+    <a href="Scripts/skewt_5.html">skewt_5.ncl</a>: Panel the skewT
+    diagrams. This is done via the special "Panel" attribute which you
+    set to True. This example just repeats the same plot for
+    demonstrative purposes. Unfortunately, at this time,
+    The <a href="../Document/Functions/Built-in/wmvect.html"><strong>wmvect</strong></a> drawn wind barbs can not be paneled.
+     The data file is
+     <a href="Data/asc/sounding.html"><b>here</b></a>.
+<p>
+    </div>
+
+    <div class=ex>
+    <!--skewt_6-->
+    <a name=ex6></a>
+    <a href="Images/skewt_6_1_lg.png">
+    <img src="Images/skewt_6_1_sm.png" align=left border=2></a>
+    <a href="Images/skewt_6_2_lg.png">
+    <img src="Images/skewt_6_2_sm.png" align=left border=2></a>
+    <a href="Scripts/skewt_6.html">skewt_6.ncl</a>: 
+Read a RUC (Rapid Update Cycle) GRIB file (here: <b>ruc2anl</b>). 
+Plot the skewT at the grid point(s) nearest user specified locations.
+The <a href="../Document/Functions/Contributed/getind_latlon2d.html"><strong>getind_latlon2d</strong></a> function 
+is used to find the nearest locations.
+    </div>
+
+    <div class=ex>
+    <!--skewt_7-->
+    <a name=ex7></a>
+<b>DSS Example: </b>    NCAR's <a href="http://rda.ucar.edu/">Data Support Section</a> has created an 
+ which plots a skewT diagram with 
+<a href="http://rda.ucar.edu/datasets/ds337.0/">
+NCEP ADP Global Upper Air and Surface (PREPBUFR and NetCDF formats) Weather Observations</a>.  
+<p>
+The keywords <i>station_icao</i> and <i>station_synop</i> should represent 
+the same observing station.  Thus, for Denver Stapleton, the values would be 
+station_icao = KDNR and station_synop = 72469.  Since the program is plotting a 
+skew-T log p diagram, the input NetCDF file should contain data from a valid 
+synoptic observing station where radiosondes are launched, and that the input 
+time is either 00 or 12Z (the synoptic times when radiosondes are launched).  
+The script assumes the user knows this beforehand and make the appropriate
+selection.
+<p>
+Since the program is plotting a skew-T log p diagram, the input NetCDF file 
+should contain ADPUPA observational data from a valid synoptic observing 
+station where radiosondes are launched, and that the input time is 
+either 00 or 12Z (the synoptic times when radiosondes are launched).
+<p>
+The DSS also provide <a href="http://rda.ucar.edu/datasets/ds337.0/software">IDL software </a> 
+to create a skewT.
+    </div>
+
+    <div class=ex>
+    <!--skewt_7-->
+    <a name=ex7></a>
+    <a href="Images/skewt_7_1_lg.png">
+    <img src="Images/skewt_7_1_sm.png" align=left border=2></a>
+    <a href="Images/skewt_7_2_lg.png">
+    <img src="Images/skewt_7_2_sm.png" align=left border=2></a>
+    <a href="Images/skewt_7_3_lg.png">
+    <img src="Images/skewt_7_3_sm.png" align=left border=2></a>
+    <a href="Scripts/skewt_7.html">skewt_7.ncl</a>: 
+This script  accesses upper air netCDF files from the <a href="http://rda.ucar.edu/datasets/ds336.0/#!description">Historical Unidata Internet Data Distribution (IDD) 
+Global Observational Data</a> archive (ds336.0).  
+It (a) reads raob data from user specified stations;
+(b) plots a skewT of each sounding; (c) creates a simple text (ascii) file containing mandatory 
+level upper air data. A sample text file (Bermuda_2013030612.ManLevels.txt) follows:
+<p>
+<pre>
+     P      HGT     T      TDEW    WSPD    WDIR  
+    mb       m      C        C      m/s          
+   1011       6    16.2     9.2     5.7     270
+   1000     131    15.6     7.6     6.7     270
+    925     786     9.4     5.8     9.3     270
+    850    1481     4.2    -0.2    11.8     280
+    700    3039    -2.1   -10.1    14.4     290
+    500    5640   -19.1   -27.1    24.2     285
+    400    7260   -29.5   -42.5    35.0     275
+    300    9260   -42.3   -69.3    55.6     275
+    250   10470   -51.1   -65.1    58.1     280
+    200   11910   -54.9   -77.9    62.8     275
+    150   13730   -57.9   -85.9    51.4     265
+    100   16250   -64.9   -86.9    26.2     275
+     70   18400   -64.3   -86.3    24.7     260
+     50   20460   -63.5   -86.5    13.9     255
+  99999   99999 99999.0 99999.0 99999.0   99999
+[snip]
+  99999   99999 99999.0 99999.0 99999.0   99999
+
+</pre> 
+The script will also plot wind barbs for significant wind levels ('sigW') if there
+are any on the file. In this case, none were available.
+
+<p>
+<b>NOTE:</b> [1] The units of the time variable ('synTime') contain parentheses. 
+These are non-standard. The script assigns the correct units. [2] The variable 
+'numSigW' has no attribute which indicates a missing value (<i>ie</i>, 
+<em>missing_value</em> or <em>_FillValue</em>). The script assigns the 
+appripriate <em>_FillValue</em>. A few other variables on the file have 
+missing _FillValue attributes.
+    </div>
+
+    <div class=ex>
+    <!--skewt_8-->
+    <a name=ex8></a>
+    <a href="Images/skewt_8_lg.png">
+    <img src="Images/skewt_8_sm.png" align=left border=2></a>
+    
+    <a href="Scripts/skewt_8.html">skewt_8.ncl</a>:  Manually panel the skewT
+    diagrams. This allows the wind barbs to be drawn (See Example 5).
+    For illustration the bottom (Temperature) and left axis (P) titles are turned off and on.
+    The ascii (text) data file is 
+    <a href="Data/asc/sounding.html"><b>here</b></a>.
+    </div>
+
+    <div class=ex>
+    <!--skewt_9-->
+    <a name=ex9></a>
+    <a href="Images/skewt_9_1_lg.png">
+    <img src="Images/skewt_9_1_sm.png" align=left border=2></a>
+    <a href="Images/skewt_9_2_lg.png">
+    <img src="Images/skewt_9_2_sm.png" align=left border=2></a>
+    
+    <a href="Scripts/skewt_9.html">skewt_9.ncl</a>:  
+    Use scripts donated by <b>Stavros Dafis</b> (National Observatory of Athens/IERSD, Greece; 
+    Polytechnic School of Paris, Laboratory of Dynamic Meteorology (LMD)) 
+    to create a hodograph and a skew-T onto which a number of derived quantities are printed. 
+    Click for scripts and data: 
+    <a href="Scripts/skewt_func_dafis.html"><b>skewt_func_dafis.ncl</b></a>; 
+    <a href="Scripts/hodograph_dafis.html"><b>hodograph_dafis.ncl</b></a>; 
+    <a href="Scripts/hodo_cartesian.html"><b>hodo_cartesian.ncl</b></a>; 
+    <a href="Data/asc/Athens_latest.txt"><b>Athens_latest.txt</b></a>.
+    </div>
+
+    <div class=ex>
+    <!--skewt_10-->
+    <a name=ex10></a>
+    <a href="Images/skewt_10_lg.png">
+    <img src="Images/skewt_10_sm.png" align=left border=2></a>
+    
+    <a href="Scripts/skewt_10.html">skewt_10.ncl</a>:  
+    Use a script donated by <b>Joe Grim</b> (RAL; Aviation Applications Program)
+    to create a single plot containing a hodograph superimposed onto skew-T. 
+    The 'sounding' values are extracted from a WRF netCDF file.
+    </div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/skewt.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:20:20 GMT -->
+</html>
+
+

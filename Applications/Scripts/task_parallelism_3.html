@@ -1,0 +1,31 @@
+/;
+ ; task_parallelism_3.ncl
+ ;
+ ; Generates a contour plot of SST at a specific timestamp.
+ ; The variable "timestamp" is expected to be passed in on the command line
+ ;
+ ;/
+begin
+  print(timestep)
+  f = addfile("sst8292.nc","r")
+  sst = f->SST(timestep,:,:)
+
+  plotfile = "sst" + sprinti("%03d", timestep)
+  wks = gsn_open_wks("png", plotfile) 
+
+  res                          = True
+
+  res@gsnMaximize              = True
+  res@cnFillOn                 = True
+  res@cnFillPalette            = "rainbow"
+
+  res@tmYROn                   = False
+
+  res@lbOrientation            = "Vertical"
+  res@pmLabelBarOrthogonalPosF = -0.02
+
+  yyyymm = cd_calendar(f->time(timestep), 0)
+  res@tiMainString = sprinti("%02d", floattoint(yyyymm(0,1))) + "/" + sprinti("%4d", floattoint(yyyymm(0,0)))
+
+  plot = gsn_csm_contour_map_ce(wks,sst,res)
+end

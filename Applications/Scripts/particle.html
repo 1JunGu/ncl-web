@@ -1,0 +1,141 @@
+C NCLFORTSTART
+      subroutine particle(path,xrot,yrot,nq,np,xpts_r,ypts_r,ncor) 
+      dimension xrot(nq,np),yrot(nq,np)
+      dimension xpts_r(ncor),ypts_r(ncor)
+      character*(*) path
+C NCLEND
+      real x(nq,np),y(nq,np),z(nq,np)
+      real tx(4,4),ty(4,4),tz(4,4),ti(4,4),t(4,4)
+      real xpts(8),ypts(8),zpts(8)
+c
+c     in this example x is east-west, y up-down, z north-south
+c
+      open (11, file=path)
+c
+c     *** provide your eye view direction by rotating x,y,z 
+c
+      pi = 4.0*atan(1.0)
+      angle_x = 4.0
+      angl_x  = (angle_x/180.0)*pi
+      angle_y = -30.0
+      angle_y = -60.0
+      angl_y  = (angle_y/180.0)*pi
+      angle_z = 3.0
+      angl_z  = (angle_z/180.0)*pi
+c
+      zfac = 4.
+c
+c     total numerical domain of the trajectory in conventional coordinate
+c
+      xl = 25000.0
+      zl = 2500.0 *zfac
+      yl = 1000.0 
+c
+      dx = xl/float(nq)
+      dz = zl/float(nq) 
+      dy = dx/5.
+c
+c     read trajectory path in conventional coordinate
+c     nq is the total time steps and np the number of particles
+c
+      do j=1,np
+         do i=1,nq
+            read(11,*)x(i,j),zraw,y(i,j)
+            z(i,j)=zl - zraw * zfac
+         enddo
+      enddo
+c
+c     the coordinate of the 3D box in conventional coordinate
+c
+      xpts(1) = 0.0
+      xpts(2) = xl
+      xpts(3) = xl
+      xpts(4) = 0.0
+      xpts(5) = 0.0
+      xpts(6) = xl
+      xpts(7) = xl
+      xpts(8) = 0.0
+      ypts(1) = 0.0
+      ypts(2) = 0.0
+      ypts(3) = 0.0
+      ypts(4) = 0.0
+      ypts(5) = yl
+      ypts(6) = yl
+      ypts(7) = yl
+      ypts(8) = yl
+      zpts(1) = 0.0
+      zpts(2) = 0.0
+      zpts(3) = zl
+      zpts(4) = zl
+      zpts(5) = 0.0
+      zpts(6) = 0.0
+      zpts(7) = zl
+      zpts(8) = zl
+c
+c     create the matrix for coordinate rotation
+c
+      do l=1,4
+         do i=1,4
+            tx(i,l) = 0.0
+            ty(i,l) = 0.0
+            tz(i,l) = 0.0
+            ti(i,l) = 0.0
+            t(i,l) = 0.0
+         enddo
+      enddo
+      tx(1,1) = 1.0
+      tx(2,2) = cos(angl_x)
+      tx(2,3) = sin(angl_x)
+      tx(3,2) = -tx(2,3)
+      tx(3,3) = tx(2,2)
+      tx(4,3) = 1.0
+      ty(1,1) = cos(angl_y)
+      ty(1,3) = -sin(angl_y)
+      ty(3,1) = sin(angl_y)
+      ty(3,3) = cos(angl_y)
+      ty(2,2) = 1.0
+      tz(1,1) = cos(angl_z)
+      tz(1,2) = -sin(angl_z)
+      tz(2,1) = sin(angl_z)
+      tz(2,2) = cos(angl_z)
+      tz(3,3) = 1.0
+c     
+      do j=1,4
+         do i=1,4
+            do k=1,4
+               ti(i,j) = ti(i,j) + ty(i,k)*tz(k,j)
+            enddo
+         enddo
+      enddo
+      do j=1,4
+         do i=1,4
+            do k=1,4
+               t(i,j) = t(i,j) + tx(i,k)*ti(k,j)
+            enddo
+         enddo
+      enddo
+c     
+c     --- do coordinate rotation to your eye view
+c     now only xrot and yrot can be seen by your eyes
+c     
+      do j=1,np
+         do i=1,nq
+            xrot(i,j) = 
+     +           x(i,j)*t(1,1) + y(i,j)*t(2,1) + z(i,j)*t(3,1)
+            yrot(i,j) = 
+     +           x(i,j)*t(1,2) + y(i,j)*t(2,2) + z(i,j)*t(3,2)
+         enddo
+      enddo
+c     
+c     the new rotated box coordinate
+c     
+      do m=1,8
+         xpts_r(m) = 
+     +        xpts(m)*t(1,1) + ypts(m)*t(2,1) + zpts(m)*t(3,1)
+         ypts_r(m) = 
+     +        xpts(m)*t(1,2) + ypts(m)*t(2,2) + zpts(m)*t(3,2)
+      enddo
+c     
+      return
+      end
+      

@@ -1,0 +1,491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/dim_gamfit_n.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:21 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (statistics)">
+<meta name="keywords" content="dim_gamfit_n">
+<title>dim_gamfit_n</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../drought.html">Drought</a>,
+<a class=crumb href="../statistics.html">Statistics</a>
+<br>
+<h1>dim_gamfit_n</h1>
+
+<p>
+Fit data to the two parameter gamma distribution.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.1.0">version 6.1.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function dim_gamfit_n (
+		x        : numeric,  ; float, double
+		optgam   : logical,  
+		dims [*] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>A variable of type 'float' or 'double' and any dimensionality. 
+Since a distribution is being fit, there should be a 'reasonably' 
+large sample size (say, at least 30 values).
+</p>
+<em>optgam</em>
+<p class=indent>If <em>optgam</em>=False, an estimate of the returned parameters will be provided
+regardless of the number of non-missing (_FillValue) observations.</p>
+<p class=indent>
+
+If <em>optgam</em>=True, the following attributes can be associated with <em>optgam</em>: 
+
+<ul>
+<li> <em>optgam@inv_scale</em>=True, the returned 'scale' value will be (1/scale). 
+The default is <em>optgam@inv_scale</em>=False.
+<li> <em>optgam@pcrit</em> specifies the minimum percent of observations 
+required for parameters to be returned.  The default is <em>pcrit</em>=0.  
+So, if it is desired that (say) 75% of the observation must be nonmissing, then
+<pre>
+
+       optgam = True
+       optgam@pcrit = 75
+
+</pre>
+</ul>
+</p>
+<em>dims</em>
+<p class=indent>The dimension(s) of <em>x</em> on which to estimate the distribution parameters. 
+Usually, this is the record ('time') dimension.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The estimated parameters returned will be the same type as <em>x</em>.
+The leftmost dimension will be size 3. The order will be
+[0] shape; [1] scale; [2] unconditional probability ( 0.0 <=> 1.0 ) of a 0.0 observation).
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The <strong>dim_gamfit_n</strong> will return estimates of the 
+<b>shape</b> and <b>scale</b> of the 2-parameter gamma distribution. 
+These estimates are derived using maximum likelihood as described in
+<pre>
+
+        A Note on the Gamma Distribution
+        Thom (1958): Monthly Weather Review, pp 117-122.
+                     specifically: eqn 22 for gamma; just above eqn 21
+        <a href="http://water.usgs.gov/osw/bulletin17b/MWR_Thom_1958.pdf"><b>http://water.usgs.gov/osw/bulletin17b/MWR_Thom_1958.pdf</b></a>
+
+</pre>
+
+In addition, a third value, the unconditional probability 
+of encountering an observation 
+equal to zero is returned. The latter parameter has nothing to do with the 
+gamma distribution. However, this function was included 
+to analyze precipitation observations and this <i>3rd</i> parameter
+is useful for certain applications. 
+<p>
+The 2-parameter gamma distribution is modeled via:
+<pre>
+    <b>gamma2_distribution = (x^(shape-1) * exp( -x/scale )) / (scale^shape * gamma(shape))</b>
+</pre>
+<b>Note_1:</b> The <b>scale</b> is returned as [1/<b>scale</b>] in some applications. 
+This is called the <b>rate</b>.
+<p>
+<b>Note_2</b>: 
+As an aside, the scale and shape parameters for the classic two-parameter
+gamma distribution can be estimated via the 
+<a href="http://en.wikipedia.org/wiki/Method_of_moments_(statistics)">"method of moments"</a>.
+<pre>
+
+     m1    = <a href="avg.html"><strong>avg</strong></a>(x)           ; 1st moment
+     m2    = <a href="avg.html"><strong>avg</strong></a>(x^2)         ; 2nd moment
+
+or, if (say) x(time,lat,lon)
+
+     m1    = <a href="dim_avg_n.html"><strong>dim_avg_n</strong></a>(x,0)   ; 1st moment
+     m2    = <a href="dim_avg_n.html"><strong>dim_avg_n</strong></a>(x^2,0) ; 2nd moment
+
+then
+
+     shape = m1^2 / (m2 - m1^2)              ; gamma
+     scale = (m2 - m1^2) / m1                ; beta
+
+----------
+<b>Zhou Xin</b> (11 Aug 2015) provided the following information:
+
+     I looked at the source codes used by dim_gamfit_n() and cdfgam_p(). If I understood it correctly, 
+     the "SCALE" parameter in dim_gamfit_n() means "beta" in the Thom (1958) paper Eqn (1), while 
+     the "SCALE" parameter in cdfgam_p() means "1/beta". So when using the output of dim_gamfit_n() 
+     for cdfgam_p(), the "SCALE" parameter has to be inverted.
+
+</pre>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="dim_spi_n.html"><strong>dim_spi_n</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><P>
+<pre>
+       ; The following data were from: <b>http://www.wessa.net/rwasp_fitdistrgamma.wasp</b> 
+     g = (/112,118,132,129,121,135,148,148,136,119,104,118 \
+          ,115,126,141,135,125,149,170,170,158,133,114,140 \
+          ,145,150,178,163,172,178,199,199,184,162,146,166 \
+          ,171,180,193,181,183,218,230,242,209,191,172,194 \
+          ,196,196,236,235,229,243,264,272,237,211,180,201 \
+          ,204,188,235,227,234,264,302,293,259,229,203,229 \
+          ,242,233,267,269,270,315,364,347,312,274,237,278 \
+          ,284,277,317,313,318,374,413,405,355,306,271,306 \
+          ,315,301,356,348,355,422,465,467,404,347,305,336 \
+          ,340,318,362,348,363,435,491,505,404,359,310,337 \
+          ,360,342,406,396,420,472,548,559,463,407,362,405 \
+          ,417,391,419,461,472,535,622,606,508,461,390,432 /)
+
+       ; Fit the 2-parameter (shape and scale) gamma distribution via the <a href="http://en.wikipedia.org/wiki/Method_of_moments_(statistics)">"method of moments"</a>
+
+     g1   = <a href="avg.html"><strong>avg</strong></a>(g)
+     g2   = <a href="avg.html"><strong>avg</strong></a>(g^2)
+
+     gshape = g1^2 / (g2 - g1^2)    ; alpha 
+     gscale = (g2 - g1^2) / g1      ; beta
+
+     <a href="print.html"><strong>print</strong></a>("gshape = "+gshape)
+     <a href="print.html"><strong>print</strong></a>("gscale = "+gscale)
+
+       ; Estimate the 2-parameter gamma distribution via maximum likelihood 
+
+     gpar = <strong>dim_gamfit_n</strong>(g, False, 0)   ; gpar(3)
+     <a href="print.html"><strong>print</strong></a>(gpar)
+
+</pre>
+The online results, which returned <b>rate</b> (=1/scale) were: 
+<pre>
+
+     shape=gamma=5.459,  rate=0.019476 ==>  scale= (1/rate) = 51.345 
+
+</pre>
+NCL's (edited) results from <strong>dim_gamfit_n</strong> are
+<pre>
+                               ; <b>Method of Moments</b>
+(0)	gshape  =  5.4973      ; shape 
+(0)	gscale  = 50.9884      ; scale
+
+                               ; <strong>dim_gamfit_n</strong>
+(0)	gpar[0] =  5.49911     ; shape 
+(0)	gpar[1] = 50.9716      ; scale
+(0)	gpar[2] =  0.0         ; pzero 
+</pre>
+
+<B>Example 2</B><P>
+If <em>x</em>(time,lat,lon) and it is desired that 60% of the values be present
+at each grid point before the parameters are calculated. Also, return the inverse scale (1/scale).
+
+<PRE> 
+     gopt = True
+     gopt@<em>pcrit</em>     = 60.0
+     gopt@<em>inv_scale</em> = True
+     xpar = <strong>dim_gamfit_n</strong>(x, gopt, 0)   ; xpar(3,nlat,mlon)
+</PRE> 
+<p>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/dim_gamfit_n.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:21 GMT -->
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/zonal_mpsi.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:25 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (meteorology)">
+<meta name="keywords" content="zonal_mpsi">
+<title>zonal_mpsi</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../meteo.html">Meteorology</a>
+<br>
+<h1>zonal_mpsi</h1>
+
+<p>
+Computes a zonal mean meridional stream function.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function zonal_mpsi (
+		v       : numeric,  
+		lat [*] : numeric,  
+		p   [*] : numeric,  
+		ps      : numeric   
+	)
+
+	<a href="../return_val.html">return_val</a> [(time),lev,lat] :  numeric
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>v</em>
+<p class=indent>A multi-dimensional array of meridional wind values in which the rightmost three 
+dimensions must be level, latitude, longitude e.g. [v(lev,lat,lon),
+v(time,lev,lat,lon)]. Units must be m/s. The level dimension must be ordered 
+top-to-bottom.
+</p>
+<em>lat</em>
+<p class=indent>A one-dimensional array of latitudes. The size must be the same as the
+corresponding dimension of <em>v</em>.
+</p>
+<em>p</em>
+<p class=indent>A one-dimensional array of pressure level values ordered top-to-bottom.
+The size must be the same as the corresponding dimension of <em>v</em>. The units
+must be in Pa.  The first value must be greater than 500 Pa (5mb), and
+the last value must be less than 100500 Pa (1005mb). 
+(e.e. 500 < p(0) < p(1) < ... < 100500.)
+</p>
+<em>ps</em>
+<p class=indent>A multi-dimensional numeric array of surface pressures. The size must be the
+same as the corresponding dimensions of <em>v</em>. Usually <em>ps</em> 
+corresponds with <em>v</em> in all but the level dimension. Units must be Pa.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A multi-dimensional numeric array in which the rightmost two dimensions are level and
+latitude. The level dimension is ordered top-to-bottom. 
+Missing values (<em>return_val</em>@<a href="../../Language/fillval.html">_FillValue</a>) are 
+assigned to where <em>v</em> occurs below ground.  Units are kg/s.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+Computes a zonal mean meridional stream function using a modified
+definition of the CESM Processor zonal mean meridional stream
+function. The modified definition used is given by:
+
+<PRE>
+                                            / PS
+                                            |
+                            2 pi a <a href="cos.html"><strong>cos</strong></a>(lat) |   
+   ZONAL_MPSI(lev,lat)  =   --------------- |  V(lev,lat) dp
+                                  g         |
+                                            |
+                                            / p
+</PRE>
+
+where <em>V</em> is the zonal mean meridional wind (calculated
+internally using the input variable <em>v</em>), <em>p</em> pressure,
+<em>PS</em> surface pressure, <em>a</em> the radius of the earth, and
+<em>g</em> the acceleration of gravity. 
+<pre>
+Buja, L. E. (1994) 
+CCM Processor User's Guide(Unicos Version). 
+NCAR Technical Note NCAR/TN-384+IA, 
+pages B-17 to B-18.
+</pre>
+<p>
+
+Use the <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a> function if metadata retention is desired.
+The interface is identical.<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B>
+<p>
+Let v be an array with dimension lev, lat, and lon. lat and p are one-dimensional 
+arrays with dimensions lat and lev respectively. ps is a two-dimensional array with
+dimensions lat and lon. The level dimensions of p and v are ordered top-to-bottom
+(i.e. p(0) < p(1) < p(2) ...). The units of p and ps must be Pascals. 
+(If they are millibars, multiply by 100.)
+
+<PRE>
+    zmpsi = <strong>zonal_mpsi</strong>(v,lat,p,ps) 
+;   returns zmpsi(klev,nlat)
+
+    ; Use <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a> if metadata retention is desired
+    ; zmpsi = <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a>(v,lat,p,ps)
+</PRE>
+<p>
+if v has <a href="../../Language/cv.html">coordinate variables</a> 
+and they are in the correct order, then the one-dimensional coordinate arrays 
+associated with v can be accessed directly using the & operator:
+
+<PRE>
+    zmpsi = <strong>zonal_mpsi</strong>(v,v&lat,v&lev,ps)   
+
+    ; Use <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a> if metadata retention is desired
+    ; zmpsi = <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a>(v,v&lat,v&lev,ps)
+</PRE>
+<p>
+if v has <a href="../../Language/cv.html">coordinate variables</a> 
+but they are in the incorrect order (e.g. bottom-to-top), then they can be
+accessed directly and reordered within the function call: 
+        
+<PRE>
+    zmpsi = <strong>zonal_mpsi</strong>(v(::-1,:,:),v&lat,v&lev(::-1),ps)
+
+    ; Use <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a> if metadata retention is desired
+    ; zmpsi = <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a>(v(::-1,:,:),v&lat,v&lev(::-1),ps)
+</PRE>
+
+<B>Example 2</B>
+<p>
+Now v has a time dimension. All other variables are the same as example 1.
+
+<PRE>
+    zmpsi = <strong>zonal_mpsi</strong>(v,lat,p,ps)   
+;   returns zmpsi(ntim,klev,nlat)
+
+    ; Use <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a> if metadata retention is desired
+    ; zmpsi = <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a>(v,lat,p,ps)
+</PRE>
+
+<B>Example 3</B>
+<p>
+Here the v and p are ordered bottom-to-top and require 
+<a href="../../Language/reorder.html">reordering</a>.
+Additionally, p and ps are in mb and must be converted to Pa.
+<PRE>
+    vt2b  = v(:,::-1,:,:)    ; reverse the "lev" order to top-to-bottom
+    pPa   = p(::-1)*100.     ; reverse and make Pa
+    psPa  = ps*100.          ; make Pa
+    zmpsi = <strong>zonal_mpsi</strong>(vt2b,lat,pPa,psPa)   ; zmpsi(ntim,klev,nlat)
+
+    ; Use <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a> if metadata retention is desired
+    ; zmpsi = <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a>(vt2b,lat,pPa,psPa)   ; zmpsi(ntim,klev,nlat)
+</PRE>
+<p>    
+Alternatively, the required conversions could be invoked directly in
+the function.
+<PRE>
+    zmpsi = <strong>zonal_mpsi</strong>(v(:,::-1,:,:),lat,p(::-1)*100.,ps*100.)   
+
+    ; Use <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a> if metadata retention is desired
+    ; zmpsi = <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a>(v(:,::-1,:,:),lat,p(::-1)*100.,ps*100.)
+</PRE>
+    
+
+<B>Example 4</B>
+<p>
+The level dimension of v is in hybrid coordinates and must be converted to 
+pressure coordinates before calling zonal_mpsi. The order of the level dimension
+is correct.
+
+<PRE>
+; <a href="vinth2p.html"><strong>vinth2p</strong></a> requires the lev_p to be expressed in mb [hPa]
+  lev_p           = (/  10, 20, 30, 50, 70,100,150,200,250
+                     , 300,400,500,600,700,850,925,1000 /)                
+  lev_p!0         = "lev_p"                  ; variable/dim name 
+  lev_p&lev_p     =  lev_p                   ; create coordinate variable
+  lev_p@long_name = "pressure"               ; attach some attributes
+  lev_p@units     = "hPa"
+  lev_p@positive  = "down"
+
+  hyam            = f->hyam         ; read from file
+  hybm            = f->hybm
+  P0mb            = f->P0*0.01
+  ps              = f->ps           ; these are in Pa
+  v               = f->V
+; convert to pressure levels
+  vp   = <a href="vinth2p.html"><strong>vinth2p</strong></a>(v,hyam,hybm,lev_p,ps,intyp,P0mb,1,False)
+; calculate zonal meridional streamfunction
+  zmpsi = <strong>zonal_mpsi</strong>(vp,lat,lev_p*100.,ps)   
+
+  ; Use <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a> if metadata retention is desired
+  ; zmpsi = <a href="../Contributed/zonal_mpsi_Wrap.html"><strong>zonal_mpsi_Wrap</strong></a>(vp,lat,lev_p*100.,ps)
+</PRE>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/zonal_mpsi.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:25 GMT -->
+</html>

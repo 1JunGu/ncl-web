@@ -1,0 +1,485 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/resize.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:14:32 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to resize a plot automatically.">
+<meta name="keywords" content="NCL, graphics, visualization, postscript,
+resize, enlarge, bigger">
+<TITLE>NCL Graphics: Resizing</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: Resizing</h1>
+
+
+<div class=text>
+
+There are various ways to resize an image created by NCL. It can depend
+on the type of output you are sending the graphics to (PNG, PS, PDF, X11, etc).
+<p>
+<ul>
+
+<li><a href="../Document/Graphics/Resources/wk.html#wkWidth"><em>wkWidth</em></a>
+/ <a href="../Document/Graphics/Resources/wk.html#wkHeight"><em>wkHeight</em></a> - for output like
+PNG and X11 window, this allows you to specify the pixel size of the
+output image.  Note: because NCL always draws its graphics to a square
+canvas, the PNG image will be resized to a square, using the largest
+of the two values, if you give it non-square values.
+<p>
+
+<li><a href="../Document/Graphics/Resources/wk.html#wkWidthF"><em>wkWidthF</em></a>
+/ <a href="../Document/Graphics/Resources/wk.html#wkHeightF"><em>wkHeightF</em></a> - for output like PS
+and PDF, these are special workstation to control the size of the
+paper.
+<p>
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnPaperMargin"><em>gsnPaperMargin</em></a> - this resource is
+only recognized by the "gsn" function, and it allows you to specify the
+margin left around the page. This is useful since most postscript
+printers have their own intrinsic margins. The default is 0.5.
+<p>
+</ul>
+
+</div>
+
+<div class=ex>
+<!--Resize_1-->
+<a name=ex1></a>
+<a href="Images/resize_1_lg.png">
+<img src="Images/resize_1_sm.png" align=left border=2></a>
+
+<a href="Scripts/resize_1.html">resize_1.ncl</a>: The resource <a href="../Document/Graphics/Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> will automatically enlarge a
+postscript, ngcm, or X11 plot to fill a page or window. Here is
+demonstrated for postscript files.
+<p>
+
+<a href="Images/resize_1_lg.ps">Download ps plot with gsnMaximize</a>
+<p>
+
+<a href="Images/resize_1_rg.ps">Download plot with default sizing</a>
+<p>
+
+For a single plot, place <a href="../Document/Graphics/Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> in
+with the regular plot resources.
+<p>
+
+A note about adding text: If you desire to add text using <a href="../Document/Graphics/Interfaces/gsn_text.html"><strong>gsn_text</strong></a> etc, to a panel plot that is being
+maximized, please do so after the call to <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>. The moment you call <a href="../Document/Graphics/Interfaces/gsn_text.html"><strong>gsn_text</strong></a>, you freeze the device coordinates
+of the plot, which means it will not be maximized if placed before the
+call to <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--Resize_2-->
+<a name=ex2></a>
+<a href="Images/resize_2_lg.png">
+<img src="Images/resize_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/resize_2.html">resize_2.ncl</a>: How to add a time
+stamp to a page that is maximized.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a>, works on the entire plot.
+If you try to enlarge the plot and then add text to it after the fact,
+it will not see the text and only enlarge the original plot. This will
+push the text off the page.  We get around this by telling <a href="../Document/Graphics/Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> that we anticipate placing text at
+the bottom of the page by allocating space for it using <a href="../Document/Graphics/Resources/gsn.html#gsnPanelBottom"><em>gsnPanelBottom</em></a> = 0.05.
+
+</div>
+
+<div class=ex>
+<!--Resize_3-->
+<a name=ex3></a>
+<a href="Images/resize_3_lg.png">
+<img src="Images/resize_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/resize_3.html">resize_3.ncl</a>: How to change the
+aspect ratio of a map plot.
+<p>
+
+<a href="../Document/Graphics/Resources/mp.html#mpShapeMode"><em>mpShapeMode</em></a> = "FreeAspect"<br>
+<a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a> = 0.8<br> <a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> = 0.4
+<p>
+
+Allows the user to change the aspect ratio of a map plot. For plain
+contour plots, the ShapeMode resource is not required.  For maps,
+unless ShapeMode is included, the plot manager will try to maintain
+the aspect ratio of the plot regardless of the values you input for
+Height and Width.
+
+</div>
+
+<div class=ex>
+<!--Resize_4-->
+<a name=ex4></a>
+<a href="Images/resize_4_lg.png">
+<img src="Images/resize_4_sm.png" align=left border=2></a>
+
+<a href="Scripts/resize_4.html">resize_4.ncl</a>: Creating a automatic
+landscape plot.
+<p>
+
+<a href="Images/resize_4.ps">Download</a> ps plot with 
+<a href="../Document/Graphics/Resources/gsn.html#gsnPaperOrientation"><em>gsnPaperOrientation</em></a> = "auto"
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnPaperOrientation"><em>gsnPaperOrientation</em></a> allows the user to
+either specify a "landscape" or "portrait" orientation.  Setting this
+resource to "auto" allows NCL to choose which orientation will make
+the plot larger. In the case of this single cylindrical equidistant
+plot, that orientation would be landscape.  Note that <a href="../Document/Graphics/Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> must also be set to true.
+
+</div>
+
+<div class=ex>
+<!--Resize_5-->
+<a name=ex5></a>
+<a href="Images/resize_5_lg.png">
+<img src="Images/resize_5_sm.png" align=left border=2></a>
+
+<a href="Scripts/resize_5.html">resize_5.ncl</a>: Creates a plot larger
+than 8.5 x 11.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnPaperWidth"><em>gsnPaperWidth</em></a> and <a href="../Document/Graphics/Resources/gsn.html#gsnPaperHeight"><em>gsnPaperHeight</em></a> can be used to set the size of the
+plot to any value desired.
+<p>
+
+Note about view this large ps file: You must use ghostview and use the
+media pull down menu to set the page size. This will enable scroll
+bars that all you to view the entire image.
+<p>
+
+You can only create large plots such as this in ".ps" mode. The
+bounding box in the NCL ".eps" file is hard-wired to 8.5 x 11, and
+you will not be able to view the entire image. 
+
+</div>
+
+<div class=ex>
+<!--Resize_6-->
+<a name=ex6></a>
+<a href="Images/resize_6_lg.png">
+<img src="Images/resize_6_sm.png" align=left border=2></a>
+
+<a href="Scripts/resize_6.html">resize_6.ncl</a>: Creates a European
+sized plot.
+
+</div>
+
+<div class=ex>
+<!--Resize_7-->
+<a name=ex7></a>
+<a href="Images/resize_7_lg.png">
+<img src="Images/resize_7_sm.png" align=left border=2></a>
+
+<a href="Scripts/resize_7.html">resize_7.ncl</a>: Uses the procedure
+<a href="../Document/Graphics/Interfaces/maximize_output.html"><strong>maximize_output</strong></a> to maximize a panel
+plot created using viewport specifications.
+
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/resize.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:14:36 GMT -->
+</html>
+
+

@@ -1,0 +1,242 @@
+======================================================================
+; ESMF_regrid_36.ncl
+;
+; Concepts illustrated:
+;   - Use NCL coordinate subscripting to extract a region from a global grid
+;   - Interpolating a regional rectilinear variable to a WRF grid
+;   - Perform 4 different interpolation methods
+;======================================================================
+;No need to load these after 6.1.2
+;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+
+; must load the 'ESMF-regridding.ncl' library
+load "$NCARG_ROOT/lib/ncarg/nclscripts/esmf/ESMF_regridding.ncl"
+
+begin
+;----------------------------------------------------------------------
+; Read source and destination grids, and variable to be regridded
+;----------------------------------------------------------------------
+
+;---Source grid is rectilinear (EDGAR)
+  path_edgar = "./"
+  fn_co2     = "v42_CO2_2008_TOT.0.1x0.1.nc"
+  f_co2      = addfile(path_edgar+fn_co2,"r")
+  sfile      = f_co2 
+  emi_co2    = f_co2->emi_co2
+
+;---Destination grid is curvilinear (WRF)
+  path_wrf   = "./"
+  fwrf       = addfile(path_wrf+"WRF.LatLon.nc","r")
+  lat2d      = fwrf->XLAT(0,:,:)
+  lon2d      = fwrf->XLONG(0,:,:)
+
+;---Create an 'extra' large boundary around the WRF grid
+  extra      = 2          ; arbitrary
+  minLat2D   = min(lat2d) - extra
+  maxLat2D   = max(lat2d) + extra
+  minLon2D   = min(lon2d) - extra
+  maxLon2D   = max(lon2d) + extra
+
+;----------------------------------------------------------------------
+; Extract *only* the EDGAR grid area surrounding China
+; Use NCL's coordinate subscripting which use the {...} syntax
+; This grid subset is now regional and not global.
+;----------------------------------------------------------------------
+
+  var = emi_co2({minLat2D:maxLat2D},{minLon2D:maxLon2D})
+
+;----------------------------------------------------------------------
+; It is always useful to 'look-at-the-data' be used. Print useful information.
+;----------------------------------------------------------------------
+  printVarSummary(var)    ; original units
+  printMinMax(var,0)
+  print("==================================================")
+  print("Source grid")
+  print("   Dimensions       : " + str_join(""+dimsizes(var)," x "))
+  print("   Min/max lat      : " + min(var&lat) + "/" + max(var&lat))
+  print("   Min/max lon      : " + min(var&lon) + "/" + max(var&lon))
+  print("   # valid values   : " + num(.not.ismissing(var)))
+  print("   # missing values : " + num(ismissing(var)))
+  print("==================================================")
+  print("Destination grid")
+  print("   Dimensions       : " + str_join(""+dimsizes(lat2d)," x "))
+  print("   Min/max lat      : " + min(lat2d) + "/" + max(lat2d))
+  print("   Min/max lon      : " + min(lon2d) + "/" + max(lon2d))
+  print("==================================================")
+
+;----------------------------------------------------------------------
+; Change units (not required)
+;----------------------------------------------------------------------
+
+  conv       = 1e9*3600/44  ; EDGAR in kg m-2 s-1  WRFchem need   mol km^-2 hr^-1 
+  var        = (/var*conv /) 
+  var@units  = "mol/km^2 hr^1"
+
+  printVarSummary(var)
+  printMinMax(var,0)
+  print("==================================================")
+
+;----------------------------------------------------------------------
+; Statistical distribution of t he source variable
+; Use this as a guide to set plot limits.
+; Note: There are outliers
+;----------------------------------------------------------------------
+
+  opt = True
+  opt@PrintStat = True
+  stat_var = stat_dispersion(var, opt )
+
+; snip
+; [3]          LowDec=0
+; [4]          LowOct=0
+; [5]          LowSex=0
+; [6]     LowQuartile=4.05303
+; [7]          LowTri=13.7226
+; [8]          Median=59.8534
+; [9]         HighTri=127.561
+; [10]   HighQuartile=260.186
+; [11]        HighSex=653.221
+; [12]        HighOct=954.981
+; [13]        HighDec=1229.15
+; [14]            Max=2.05781e+06 <=== outlier(s)
+; snip
+
+;----------------------------------------------------------------------
+; Regridding section
+;----------------------------------------------------------------------
+  interp_method      = "conserve" ; bilinear, neareststod, patch, conserve
+
+  Opt                = True
+  Opt@ForceOverwrite = True
+
+  Opt@SrcRegional    = True      ; These two are important! Do not
+  Opt@DstRegional    = True      ; set if you have a global lat/lon grid
+  
+  Opt@DstGridLat     = lat2d
+  Opt@DstGridLon     = lon2d
+
+  Opt@InterpMethod   = interp_method
+
+  Opt@Debug          = True
+  Opt@PrintTimings   = True
+
+  Opt@SrcFileName    = "WRF_SCRIP.html"
+  Opt@DstFileName    = "EDGAR_SCRIP.html"
+  Opt@WgtFileName    = "EDGAR_to_WRF_" + interp_method + ".nc"
+
+; Uncomment any one of these if the grid file and/or weights file is alreaay generated.
+;  Opt@SkipSrcGrid     = True
+;  Opt@SkipDstGrid     = True
+;  Opt@SkipWgtGen      = True
+
+; Uncomment any one of these to remove source/destination/weight 
+;  SCRIP grid files after program termination
+;  Opt@RemoveSrcFile   = True               
+;  Opt@RemoveDstFile   = True               
+;  Opt@RemoveWgtFile   = True               
+
+  var_regrid = ESMF_regrid(var,Opt)   ; Regrid 
+
+  printVarSummary(var_regrid)
+  printMinMax(var_regrid,0)
+  print("==================================================")
+
+;----------------------------------------------------------------------
+; Plotting section
+;----------------------------------------------------------------------
+  pltDir  = "./"
+  pltName = "ESMF_regrid_36_"+interp_method
+  pltPath = pltDir + pltName
+  wks     = gsn_open_wks("png",pltPath)  
+
+;---Set some basic plot options
+  res               = True
+  res@gsnMaximize   = True   ; maximize plot in frame
+  res@gsnDraw       = False  ; will panel later
+  res@gsnFrame      = False
+
+  res@tiMainFont    = "helvetica"     ; default is helvetica-bold
+
+  res@gsnAddCyclic  = False
+
+  res@cnFillOn      = True  
+  res@cnFillMode    = "RasterFill"
+  res@cnFillPalette = "WhiteBlueGreenYellowRed"
+  res@cnLinesOn     = False
+  res@cnLineLabelsOn= False
+
+  res@cnLevelSelectionMode = "ExplicitLevels"
+  res@cnLevels = (/ 10,20,30,40,50,60,70,80,90,100,125,150,175 \
+                 , 200,250,300,350,400,500,600,700,800,900,1000 \
+                 ,1250,1500,1750,2000,2250,2500,2750,3000,3500,4000,5000/)
+
+; res@lbOrientation = "Vertical"
+  res@lbLabelBarOn  = False        ; will add in panel
+
+  res@pmTickMarkDisplayMode = "Always"        ; nicer tickmarks
+  res@mpDataBaseVersion     = "MediumRes"     ; better and more map outlines
+  res@mpFillOn              =  False
+;
+;----------------------------------------------------------------------
+; Set resources to zoom in on lat/lon area of interest using either
+; the WRF map projection defined on the WRF file, or by setting the
+; lat/lon limits ourselves.
+;----------------------------------------------------------------------
+  USE_WRF_PROJECTION = True
+  if(USE_WRF_PROJECTION) then
+    res = wrf_map_resources(fwrf,res)
+
+;---Change some of the defaults set by wrf_map_resources.
+    res@mpOutlineBoundarySets       = "AllBoundaries"  ; more outlines
+    res@mpDataSetName               = "Earth..2"
+    res@mpGeophysicalLineColor      = "black"    ; gray
+    res@mpNationalLineColor         = "Black"    ; gray
+    res@mpNationalLineThicknessF    = 2.0        ; 0.5
+    res@mpGeophysicalLineThicknessF = 2.0        ; 0.5
+  else
+    res@mpProjection  = "CylindricalEquidistant"
+    res@mpMinLatF     = minLat2D
+    res@mpMaxLatF     = maxLat2D
+    res@mpMinLonF     = minLon2D
+    res@mpMaxLonF     = maxLon2D
+    res@tiMainOffsetYF= -0.03           ; Move the title down
+  end if
+
+;----------------------------------------------------------------------
+; Create both plots; draw later in panel
+;----------------------------------------------------------------------
+  res@tiMainString    = "Original Rectilinear (" + \
+                         str_join(tostring(dimsizes(var))," x ") + ")"
+  plot_orig = gsn_csm_contour_map(wks,var,res)
+
+  if(USE_WRF_PROJECTION) then
+;   res@tfDoNDCOverlay        = True          ; old method
+    res@tfDoNDCOverlay        = "NDCViewport" ; data will be plotted natively
+    delete(var_regrid@lat2d)
+    delete(var_regrid@lon2d)
+  end if
+
+  res@tiMainString = "Regridded WRF (" + interp_method + ": "+ \
+                      str_join(tostring(dimsizes(var_regrid))," x ") + ")"
+  plot_regrid = gsn_csm_contour_map(wks,var_regrid,res)
+ 
+;----------------------------------------------------------------------
+; Draw both plots in a single panel
+;----------------------------------------------------------------------
+  pres                    = True
+  pres@gsnMaximize        = True
+  pres@gsnPanelLabelBar   = True
+  pres@pmLabelBarWidthF   = 0.8    ; make labelbar longer
+  pres@gsnPanelMainFont   = "helvetica-bold" 
+  pres@lbLabelFontHeightF = 0.01
+
+  if(USE_WRF_PROJECTION) then
+    pres@gsnPanelMainString = "Native WRF map projection"
+  else
+    pres@gsnPanelMainString = "Cylindrical equidistant projection"
+  end if
+
+  gsn_panel(wks,(/plot_orig,plot_regrid/),(/1,2/),pres)
+end

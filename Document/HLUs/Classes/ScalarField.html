@@ -1,0 +1,539 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/ScalarField.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:30 GMT -->
+<head>
+<title>ScalarField class</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index.html">HLUs ></a>
+<a class=crumb href="index-2.html">Classes </a>
+
+<br>
+
+<h1>ScalarField class</h1>
+
+The <strong>ScalarField</strong> class supplies two-dimensional
+scalar field data.
+<hr>
+<h2>Synopsis</h2>
+
+<pre>
+Header file:		ncarg/hlu/ScalarField.h
+Class name:		scalarFieldClass
+Class pointer:		NhlscalarFieldClass
+Fortran class pointer:	NHLFSCALARFIELDCLASS
+Superclass:		<a href="DataItem.html">DataItem</a>
+Composite classes:	&lt;<em>None</em>&gt;
+</pre>
+<hr>
+<h2>Resources</h2>
+<p>
+<h3>Local resources</h3><p>
+<pre>
++---------------------------------------------------------------+
+|			<A name="ScalarField.res">ScalarField Resource Set</a>		|
+|---------------------------------------------------------------|
+| NAME				TYPE			ACCESS	|
+|	CLASS				DEFAULT			|
+|===============================================================|
+| <a href="../../Graphics/Resources/sf.html#sfDataArray"><em>sfDataArray</em></a>                   <A href="Base.html#NhlTGenArray">NhlTGenArray</a>            RCSG    |
+|       SfDataArray                     NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a>                      <A href="Base.html#NhlTGenArray">NhlTGenArray</a>            RCSG    |
+|       SfXArray                        NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a>                      <A href="Base.html#NhlTGenArray">NhlTGenArray</a>            RCSG    |
+|       SfYArray                        NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfCopyData"><em>sfCopyData</em></a>                    <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       diCopyData                      True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfExchangeDimensions"><em>sfExchangeDimensions</em></a>          <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       SfExchangeDimensions            False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfMissingValueV"><em>sfMissingValueV</em></a>               <A href="Base.html#NhlTVariable">NhlTVariable</a>            RCSG    |
+|       SfMissingValueV                 NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfDataMinV"><em>sfDataMinV</em></a>                    <A href="Base.html#NhlTVariable">NhlTVariable</a>            RCSG    |
+|       SfDataMinV                      &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfDataMaxV"><em>sfDataMaxV</em></a>                    <A href="Base.html#NhlTVariable">NhlTVariable</a>            RCSG    |
+|       SfDataMaxV                      &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfXCStartV"><em>sfXCStartV</em></a>                    <A href="Base.html#NhlTVariable">NhlTVariable</a>            RCSG    |
+|       SfXCStartV                      &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfXCEndV"><em>sfXCEndV</em></a>                      <A href="Base.html#NhlTVariable">NhlTVariable</a>            RCSG    |
+|       SfXCEndV                        &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfYCStartV"><em>sfYCStartV</em></a>                    <A href="Base.html#NhlTVariable">NhlTVariable</a>            RCSG    |
+|       SfYCStartV                      &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfYCEndV"><em>sfYCEndV</em></a>                      <A href="Base.html#NhlTVariable">NhlTVariable</a>            RCSG    |
+|       SfYCEndV                        &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfXCStartSubsetV"><em>sfXCStartSubsetV</em></a>              <A href="Base.html#NhlTVariable">NhlTVariable</a>            RCSG    |
+|       SfXCStartSubsetV                &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfXCEndSubsetV"><em>sfXCEndSubsetV</em></a>                <A href="Base.html#NhlTVariable">NhlTVariable</a>            RCSG    |
+|       SfXCEndSubsetV                  &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfYCStartSubsetV"><em>sfYCStartSubsetV</em></a>              <A href="Base.html#NhlTVariable">NhlTVariable</a>            RCSG    |
+|       SfYCStartSubsetV                &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfYCEndSubsetV"><em>sfYCEndSubsetV</em></a>                <A href="Base.html#NhlTVariable">NhlTVariable</a>            RCSG    |
+|       SfYCEndSubsetV                  &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfXCStartIndex"><em>sfXCStartIndex</em></a>                <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       SfXCStartIndex                  &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfXCEndIndex"><em>sfXCEndIndex</em></a>                  <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       SfXCEndIndex                    &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfYCStartIndex"><em>sfYCStartIndex</em></a>                <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       SfYCStartIndex                  &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfYCEndIndex"><em>sfYCEndIndex</em></a>                  <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       SfYCEndIndex                    &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfXCActualStartF"><em>sfXCActualStartF</em></a>              <A href="Base.html#NhlTFloat">NhlTFloat</a>               G       |
+|       SfXCActualStartF                &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfXCActualEndF"><em>sfXCActualEndF</em></a>                <A href="Base.html#NhlTFloat">NhlTFloat</a>               G       |
+|       SfXCActualEndF                  &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfYCActualStartF"><em>sfYCActualStartF</em></a>              <A href="Base.html#NhlTFloat">NhlTFloat</a>               G       |
+|       SfYCActualStartF                &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfYCActualEndF"><em>sfYCActualEndF</em></a>                <A href="Base.html#NhlTFloat">NhlTFloat</a>               G       |
+|       SfYCActualEndF                  &lt;Dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfXCStride"><em>sfXCStride</em></a>                    <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       SfXCStride                      1                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/sf.html#sfYCStride"><em>sfYCStride</em></a>                    <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       SfYCStride                      1                       |
++---------------------------------------------------------------+
+</pre>
+<p>
+<h3>Composite resources</h3><p>
+
+The <strong>ScalarField</strong> object class has no composite class
+objects.
+<p>
+<h3>Superclass resources</h3><p>
+
+Currently, no superclasses of the <strong>ScalarField</strong> object class
+define any resources.
+
+<hr>
+<h2>Description</h2>
+
+The <strong>ScalarField</strong> class encapsulates the functionality
+required to pass a two-dimensional scalar field data array to a
+receiving HLU object. One resource must be set to create a
+<strong>ScalarField</strong> object: the two-dimensional array
+resource <a href="../../Graphics/Resources/sf.html#sfDataArray"><em>sfDataArray</em></a>,
+which contains a reference to the storage location of the data array
+in memory. 
+
+<p>Along with the actual data, the
+<strong>ScalarField</strong> stores and communicates crucial
+information about the data, such as the value used to represent
+missing data, and information about the coordinate system in which the
+data is located. <strong>ScalarField</strong> supports both one and
+two dimensional coordinate arrays.
+
+<p>One dimensional coordinate axes may be regular or irregularly
+spaced. To specify a regular grid axis, you simply specify the start
+and end locations of the data, using <a href="../../Graphics/Resources/sf.html#sfXCStartV"><em>sfXCStartV</em></a> and <a href="../../Graphics/Resources/sf.html#sfXCEndV"><em>sfXCEndV</em></a> for the X Axis or <a href="../../Graphics/Resources/sf.html#sfYCStartV"><em>sfYCStartV</em></a> and <a href="../../Graphics/Resources/sf.html#sfYCEndV"><em>sfYCEndV</em></a> for the Y Axis. The spacing is
+implicitly determined based on the number of elements along each
+dimension of the data array.  To specify irregularly-spaced
+coordinates, you set one or both of the coordinate array resources,
+<a href="../../Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> or <a href="../../Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a>. Depending on the number of
+elements, these arrays either specify the location of data cell
+centers or cell boundaries along each of the grid axes.
+
+<p>You can also specify a two-dimensional coordinate grid by setting
+<a href="../../Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> and <a href="../../Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> with equally-sized 2-D
+coordinate arrays. In this case, corresponding elements of the X and Y
+arrays respectively specify data locations along the X and Y data grid
+axes. If the coordinate arrays are the same size as the data array,
+they specify grid cell centers; if they have one more element along
+each dimension than the data array, they specify cell boundaries.
+
+<p>The <strong>ScalarField</strong> object automatically converts data
+specified using a variety of numerical types into the NhlTFloat type
+expected by HLU data receiver objects. The types it currently handles
+are:
+
+<ul>
+<li><a href="Base.html#NhlTByte">NhlTByte</a>
+<li><a href="Base.html#NhlTCharacter">NhlTCharacter</a>
+<li><a href="Base.html#NhlTShort">NhlTShort</a>
+<li><a href="Base.html#NhlTInteger">NhlTInteger</a>
+<li><a href="Base.html#NhlTLong">NhlTLong</a>
+<li><a href="Base.html#NhlTFloat">NhlTFloat</a>
+<li><a href="Base.html#NhlTDouble">NhlTDouble</a>
+</ul>
+
+Many of the supplementary resources may also be set using any of these
+types. Note that scalar resources capable of accepting any type have the
+suffix 'V' at the end of their name.
+
+<p><strong>ScalarField</strong> can pre-process the array in a number
+of ways before handing it off to the receiving object. You can
+exchange the dimensions of the array, effectively turning the data on
+its side. You can reverse the direction of the data along either or
+both axes with suitable specification of the endpoints in data
+coordinate space. You can also make an overly dense array of data more
+sparse by specifying an index stride value along either or both the X
+and the Y dimensions. Note, however, that coordinate reversal and
+stride indexing are not supported when using 2D coordinate arrays.
+
+<p>Instead of sending the complete array to the receiver object, you
+can pass it any contiguous rectangular subset of the array, specified
+either by array index or, if not using 2D coordinate arrays, by
+location in the data coordinate space. Unless the data array dimension
+sizes also change, <strong>ScalarField</strong> preserves the subset
+resource settings when the data array changes.  This makes it easy to
+step through a subset of a time- or level-related series of data
+arrays. If the dimension sizes change, <strong>ScalarField</strong>
+assumes that the meaning of the data has also changed and that
+therefore the currently defined subset, besides potentially being out
+of range, is most likely not meaningful. In this case, the subset
+resources are reset to include all elements of the data arrays.
+
+<hr>
+<h2>Support functions</h2>
+
+The <strong>ScalarField</strong> object does not define any support
+functions, but inherits all the support functions available to its
+superclass.
+
+<hr>
+<h2>Status</h2>
+
+<p><A name="Status.1">1.</a> Note that even if the values of the
+coordinate array resources (<a href="../../Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> and <a href="../../Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a>) are actually equally spaced,
+plot objects such as <a href="ContourPlot.html"><strong>ContourPlot</strong></a> currently use
+the presence of a coordinate array as a signal that the data are
+irregularly spaced along the axis in question. In this case, the plot
+object uses an <a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> object
+rather than a <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> object when
+plotting the data. The practical consequence, besides a small
+performance penalty, is that it will then be necessary to overlay the
+plot on a <a href="LogLinPlot.html"><strong>LogLinPlot</strong></a> if it is desired to make the
+X-Axis logarithmic. If the axis is actually regularly spaced, you can
+avoid this problem by setting <em>sf...Array</em> to
+<code>NULL</code>, <em>sf...CStartV</em> to the value of the array's
+first element, and <em>sf...CEndV</em> to the value of the array's
+last element.
+
+<hr>
+<h2>See also</h2>
+<ul>
+<li><a href="../API/NhlCreate.html"><strong>NhlCreate</strong></a> function
+<li><a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> function
+<li><a href="../API/NhlGetValues.html"><strong>NhlGetValues</strong></a> function
+<li><a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a> function
+<li><a href="ContourPlot.html"><strong>ContourPlot</strong></a> object
+<li><a href="DataItem.html"><strong>DataItem</strong></a> object
+<li><a href="Base.html"><strong>Base</strong></a> object
+
+</ul>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/ScalarField.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:30 GMT -->
+</html>
+

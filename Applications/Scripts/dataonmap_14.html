@@ -1,0 +1,274 @@
+;---------------------------------
+; dataonmap_14.ncl
+;---------------------------------
+; Concepts illustrated:
+;   - Using the three settings of mpShapeMode in conjunction with the three settings of tfDoNDCOverlay
+;   - Overlaying contours on a map without having lat,lon coordinates
+;   - Combining two sets of paneled plots on one page
+;   - Adding a carriage return to a text string using a function code
+;   - Adding figure strings to paneled plots
+;----------------------------------------------------------------------
+; This script will only work with NCL Version 6.5.0 or later, because
+; we had to fix a bug in the gsn_csm scripts that didn't allow 
+; tfDoNDCOverlay to be set with a string value. 
+;
+; The purpose of this script is to illustrate how to use the three
+; different values of mpShapeMode:
+;
+; - FixedAspectFitBB   (default)
+; - FreeAspect
+; - FixedAspectNoFitBB
+;
+; in conjunction with the three values of tfDoNDCOverlay:
+;
+; - DataTransform (default)
+; - NDCViewport
+; - NDCDataExtent
+;
+; The first setting of tfDoNDCOverlay assumes you are plotting
+; data that has lat/lon information. The second two settings
+; (starting with "NDC") assume you are plotting data in its
+; native map projection.
+;
+; The first set of three plots are global plots.
+;
+; The second set of three plots are regional plots.
+;
+;----------------------------------------------------------------------
+
+;----------------------------------------------------------------------
+; This procedure panels two sets of plots. One is a panel with a 
+; single plot at the top. The second is a panel with two plots at the 
+; bottom. The reason it's done this way is because the single plot is
+; a different size and shape than the two bottom plots.
+;----------------------------------------------------------------------
+procedure panel_plots(wks,plots,title,data_type[1]:string)
+local pres, dq
+begin
+  dq   = str_get_dq()
+  pres = True
+
+;---Draw one plot as a panel at the top.
+  pres@gsnFrame                         = False 
+  pres@gsnMaximize                      = True
+  pres@gsnPanelTop                      = 0.94
+  pres@gsnPanelBottom                   = 0.52
+  pres@gsnPanelMainString               = title
+  pres@gsnPanelMainFont                 = "helvetica-bold" 
+  pres@gsnPanelMainFontHeightF          = 0.02 
+; pres@gsnPanelFigureStringsFont        = "courier-bold"
+  if(data_type.eq."no_metadata") then
+    pres@gsnPanelFigureStrings            = "res@tfDoNDCOverlay = NDCViewport~C~" + \
+                                            "res@mpShapeMode = FixedAspectFitBB"
+  else
+    pres@gsnPanelFigureStrings            = "res@tfDoNDCOverlay = DataTransform~C~" + \
+                                            "res@mpShapeMode = FixedAspectFitBB"
+  end if
+  pres@gsnPanelFigureStringsFontHeightF = 0.01
+  gsn_panel(wks,(/plots(0)/),(/1,1/),pres)
+
+;---Draw the other two plots as a panel at the bottom.
+  delete(pres@gsnPanelMainString) 
+  pres@gsnPanelTop                      = pres@gsnPanelBottom
+  pres@gsnPanelBottom                   = 0.0
+  if(data_type.eq."no_metadata") then
+    pres@gsnPanelFigureStrings            := (/"res@tfDoNDCOverlay = NDCViewport~C~" + \
+                                               "res@mpShapeMode = FreeAspect", \
+                                               "res@tfDoNDCOverlay = NDCDataExtent~C~" + \
+                                               "res@mpShapeMode = FixedAspectNoFitBB"/)
+  else
+    pres@gsnPanelFigureStrings            := (/"res@tfDoNDCOverlay = DataTransform~C~" + \
+                                               "res@mpShapeMode = FreeAspect",\
+                                               "res@tfDoNDCOverlay = DataTransform~C~" + \
+                                               "res@mpShapeMode = FixedAspectNoFitBB"/)
+  end if
+  pres@gsnPanelFigureStringsFontHeightF = 0.01
+  gsn_panel(wks,(/plots(1),plots(2)/),(/1,2/),pres)
+  frame(wks)
+end
+
+;----------------------------------------------------------------------
+; Main code
+;----------------------------------------------------------------------
+begin
+;---Open the file and read first timestep of "ts".
+  dir   = "$NCARGTEST/nclscripts/cdf_files/"
+  fname = dir+"ts_Amon_CESM1-CAM5_historical_r1i1p1_185001-200512.nc"
+
+;---Get some data
+  f  = addfile(fname,"r")
+  ts = f->ts(0,:,:)
+
+;
+; Make a copy of of ts with no metadata. This is so we can illustrate how to
+; overlay data that has no lat/lon coordinate arrays.
+;
+  ts_nometa = (/ts/)   
+
+;---Compare the two arrays. Note that ts_nometa has no lat/lon coordinate arrays
+  printVarSummary(ts)
+  printVarSummary(ts_nometa)
+
+;---Start the graphics section
+  wks = gsn_open_wks("png","dataonmap")
+
+;---Set common resources for all global contour/map plots.
+  res              = True
+
+  res@gsnMaximize  = True
+  res@gsnFrame     = False
+  res@gsnDraw      = False
+
+  res@vpWidthF     = 0.8    ; This square shap will be noticeable when
+  res@vpHeightF    = 0.8    ; mpShapeMode is set to "FreeAspect".
+  res@mpOutlineOn  = True
+  res@mpCenterLonF = 180    ; Important to set this for the "NDCViewport" case, because the 
+                            ; data array starts at lon=0 and goes to lon=360
+
+  res@pmTickMarkDisplayMode = "Always"    ; nicer tickmark labels
+
+  res@cnFillOn        = True
+  res@cnLinesOn       = False
+  res@cnLineLabelsOn  = False
+  res@cnLevelSpacingF = 2.5
+  res@lbLabelBarOn    = False   ; Turn this off so contour plots are same size as map plots
+  res@cnFillPalette   = "BlueYellowRed" ; "BlueWhiteOrangeRed"
+
+  res@pmTitleZone    = 4       ; Move title down
+  res@gsnRightString = ""
+  res@gsnLeftString  = ""
+  
+;---Make copies of this common resource list for both the regular data and metadata-free data
+  res_meta   =  res
+  res_nometa =  res
+
+;----------------------------------------------------------------------
+; Create the global contour/maps with data that contains lat/lon
+; coordinate arrays. 
+;----------------------------------------------------------------------
+  res_meta@tfDoNDCOverlay = "DataTransform"      ; This is the default, same as setting it to False
+
+;---Default map shape
+  res_meta@mpShapeMode    = "FixedAspectFitBB"
+  contour1_meta = gsn_csm_contour_map(wks,ts,res_meta)
+
+;---Force map into a square shape, thus skewing it
+  res_meta@mpShapeMode    = "FreeAspect"
+  contour2_meta   = gsn_csm_contour_map(wks,ts,res_meta)
+
+;---Map will be normal shaped, but the bounding box will be the full square
+  res_meta@mpShapeMode    = "FixedAspectNoFitBB"
+  contour3_meta = gsn_csm_contour_map(wks,ts,res_meta)
+
+;----------------------------------------------------------------------
+; Create the global contour/maps with data that contains NO lat/lon
+; coordinate arrays. 
+
+; In order to do an NDCViewport overlay, you need to make sure your
+; map has the exact parameters as your data. Since the longitudes go 
+; from 0 to 358.75, we need to make sure mpMaxLonF is set to 358.75, 
+; and not the default 360.
+;----------------------------------------------------------------------
+
+;---Default map shape
+  res_nometa@mpShapeMode    = "FixedAspectFitBB"
+  res_nometa@tfDoNDCOverlay = "NDCViewport"   ; same as setting it to True
+  contour1_nometa = gsn_csm_contour_map(wks,ts_nometa,res_nometa)
+
+;---Force map into a square shape, thus skewing it
+  res_nometa@mpShapeMode  = "FreeAspect"
+  contour2_nometa = gsn_csm_contour_map(wks,ts_nometa,res_nometa)
+
+;---Map will be normal shaped, but the bounding box will be the full square
+  res_nometa@tfDoNDCOverlay = "NDCDataExtent"        ; You must set this if you have no metadata and 
+  res_nometa@mpShapeMode    = "FixedAspectNoFitBB"   ; you've set mpShapeMode to FixedAspectNoFitBB.
+  contour3_nometa = gsn_csm_contour_map(wks,ts_nometa,res_nometa)
+
+  panel_plots(wks,(/contour1_meta,contour2_meta,contour3_meta/),\
+              "Global map with contours, lat/lon coordinate arrays","metadata")
+  panel_plots(wks,(/contour1_nometa,contour2_nometa,contour3_nometa/),\
+              "Global map with contours, no lat/lon coordinate arrays","no_metadata")
+
+;----------------------------------------------------------------------
+; This section shows how to zoom in on the data and do similar plots
+; with combinations of tfDoNDCOverlay and mpShapeMode.
+;
+; First create two new data arrays that contain only the zoomed in
+; area of interest. We will strip off the metadata of one of them.
+;----------------------------------------------------------------------
+  minlon    =  30
+  maxlon    = 150
+  minlat    = -30
+  maxlat    =  30
+
+  ts_zoom = ts({minlat:maxlat},{minlon:maxlon})
+
+;
+; Create a copy of ts_zoom that has no metadata. Again, this is for
+; illustrative purposes, to show how to overlay data on a map when you
+; have no lat/lon information.
+;
+  ts_zoom_nometa = ts_zoom * 1.     ; this effectively removes metadata, b/c we're doing a calculation on it.
+
+  delete(res@mpCenterLonF)
+  res@mpMinLonF    = minlon
+  res@mpMaxLonF    = maxlon
+  res@mpMinLatF    = minlat
+  res@mpMaxLatF    = maxlat
+  res@mpDataBaseVersion = "mediumres"
+
+;---Make new copies of this common resource list for both the regular data and metadata-free data
+  delete(res_nometa)
+  delete(res_meta)
+  res_meta   =  res
+  res_nometa =  res
+
+;----------------------------------------------------------------------
+; Create the regional contour/maps with data that contains lat/lon
+; coordinate arrays. 
+;----------------------------------------------------------------------
+
+;---Default map shape
+  res_meta@gsnAddCyclic   = False
+  res_meta@mpShapeMode    = "FixedAspectFitBB"
+  res_meta@tfDoNDCOverlay = "DataTransform"
+  contour1_meta = gsn_csm_contour_map(wks,ts_zoom,res_meta)
+
+;---Force map into a square shape, thus skewing it
+  res_meta@mpShapeMode    = "FreeAspect"
+  contour2_meta = gsn_csm_contour_map(wks,ts_zoom,res_meta)
+
+;---Map will be normal shaped, but the bounding box will be the full square
+  res_meta@mpShapeMode    = "FixedAspectNoFitBB"
+  contour3_meta = gsn_csm_contour_map(wks,ts_zoom,res_meta)
+
+;----------------------------------------------------------------------
+; Create the regional contour/maps with data that contains NO lat/lon
+; coordinate arrays. 
+;----------------------------------------------------------------------
+
+;---Default map shape
+  res_nometa@mpShapeMode    = "FixedAspectFitBB"
+  res_nometa@tfDoNDCOverlay = "NDCViewport"
+  res_nometa@mpMinLonF      := min(ts_zoom&lon)     ; Use the actual min/max of
+  res_nometa@mpMaxLonF      := max(ts_zoom&lon)     ; lat/lon attached to data 
+  res_nometa@mpMinLatF      := min(ts_zoom&lat)     ; array
+  res_nometa@mpMaxLatF      := max(ts_zoom&lat)
+  contour1_nometa = gsn_csm_contour_map(wks,ts_zoom_nometa,res_nometa)
+
+;---Force map into a square shape, thus skewing it
+  res_nometa@mpShapeMode    = "FreeAspect"
+  res_nometa@tfDoNDCOverlay = "NDCViewport"
+  contour2_nometa = gsn_csm_contour_map(wks,ts_zoom_nometa,res_nometa)
+
+;---Map will be normal shaped, but the bounding box will be the full square
+  res_nometa@mpShapeMode    = "FixedAspectNoFitBB"
+  res_nometa@tfDoNDCOverlay = "NDCDataExtent"
+  contour3_nometa = gsn_csm_contour_map(wks,ts_zoom_nometa,res_nometa)
+
+  panel_plots(wks,(/contour1_meta,contour2_meta,contour3_meta/),\
+              "Regional map with contours, lat/lon coordinate arrays","metadata")
+  panel_plots(wks,(/contour1_nometa,contour2_nometa,contour3_nometa/),\
+              "Regional map with contours, no lat/lon coordinate arrays","no_metadata")
+
+end

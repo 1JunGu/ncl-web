@@ -1,0 +1,790 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/text.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:14:40 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to add text to plots">
+<meta name="keywords" content="NCL, graphics, visualization, resources, 
+line, xy, text">
+<TITLE>NCL Graphics: Text</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a>
+<h1>NCL Graphics: Text (adding to a plot)</h1>
+
+<div class=mainimage>
+<img src="Images/text_1_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+There are many ways you can manipulate text, including:
+<p>
+<ul>
+<li>formatting the string (for floating point or integers) using
+<a href="../Document/Functions/Built-in/sprinti.html"><strong>sprinti</strong></a> and/or <a href="../Document/Functions/Built-in/sprintf.html"><strong>sprintf</strong></a>
+<li>changing the font (via <i>xxYYYY</i>Font resources, or a function code)
+<li>making it larger (via <i>xxYYYY</i>FontHeightF resources)
+<li>changing the color (via <i>xxYYYY</i>FontColor resources)
+</ul>
+<p>
+
+<b>Function codes</b>:<p>
+
+There are many
+<a href="../Document/Graphics/font_tables.html">fonts/character</a>
+sets in NCL (e.g. Greek). You change between sets by using
+a <a href="../Document/Graphics/function_code.html">function code</a>.
+The default code is a ":", but since this is a character that people
+often put into their strings, we recommend changing that to a non-used
+character like a "~" (in V6.1.0 of NCL and later, the default function
+code is a "~"). You can change this on the fly or in
+your <a href="../Document/Graphics/hlures.html">.hluresfile</a>.
+<p>
+
+To add a Greek character, use <a
+href="../Document/Graphics/font_tables.html">fonts/character</a> set
+F33 (e.g. ~F33~s is a sigma). See example <a
+href="Scripts/xy_10.html">xy_10.ncl</a> for details.
+<p>
+
+To superscript: ~S~ <br><br> To subscript: ~B~
+
+</div>
+
+<div class=ex>
+<!--Text_1-->
+<a name=ex1></a>
+<a href="Images/text_1_lg.png">
+<img src="Images/text_1_sm.png" align=left border=3></a>
+
+<a href="Scripts/text_add_1.html">text_add_1.ncl</a> / 
+<a href="Scripts/text_1.html">text_1.ncl</a>: Adds text to a plot using
+plot coordinates
+<p>
+
+There are two different ways you can put text on an existing plot
+using plot coordinates: using
+the <a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a> function
+(<a href="Scripts/text_add_1.html">text_add_1.ncl</a>), or
+the <a href="../Document/Graphics/Interfaces/gsn_text.html"><strong>gsn_text</strong></a>
+procedure <a href="Scripts/text_add_1.html">text_1.ncl</a>).
+<p>
+
+The <a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a> function is usually
+the better one to use. It actually attaches the text the plot, so if
+you resize the plot, the text will automatically resize (see example
+<a href="#ex9">text_9.ncl</a> below).  This is especially important if
+you plan to panel the text later. It's a little more work, because you
+have to call <a href="../Document/Functions/Built-in/draw.html"><strong>draw</strong></a> on the plot in order to see the
+text.  With the
+<a href="../Document/Graphics/Interfaces/gsn_text.html"><strong>gsn_text</strong></a> procedure, you see the
+text right away.
+<p>
+
+The default added text size is too large, so we have made it smaller
+using <a href="../Document/Graphics/Resources/tx.html#txFontHeightF"><em>txFontHeightF</em></a>. You could also
+change the color etc of the text here as well.
+</div>
+
+<div class=ex>
+<!--Text_2-->
+<a name=ex2></a>
+<a href="Images/text_2_lg.png">
+<img src="Images/text_2_sm.png" align=left border=3></a>
+
+<a href="Scripts/text_2.html">text_2.ncl</a>: Adds text to a plot using
+page (ndc) coordinates.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_text_ndc.html"><strong>gsn_text_ndc</strong></a> is the plot interface
+that adds text to an already created plot using page
+coordinates. Note: page coordinates are normalized. They go from
+0->1.0 in both directions.
+
+</div>
+
+<div class=ex>
+<!--Text_3-->
+<a name=ex3></a>
+<a href="Images/text_3_lg.png">
+<img src="Images/text_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/text_3.html">text_3.ncl</a>: Can be difficult to
+determine the NDC coordinates of a page. Adam Phillips created a nifty
+function that draws an NDC grid on a plot. This allows the user to
+determine their text placement in fewer iterations.
+<p>
+
+<a href="../Document/Functions/Shea_util/drawNDCGrid.html"><strong>drawNDCGrid</strong></a> draws the grid.
+</div>
+
+<div class=ex>
+<!--Text_4-->
+<a name=ex4></a>
+<a href="Images/text_4_lg.png">
+<img src="Images/text_4_sm.png" align=left border=2></a>
+<a href="Scripts/text_4.html">text_4.ncl</a>: Demonstrates adding data
+values to a contour plot. 
+<p>
+
+
+<a href="../Document/Functions/Built-in/sprintf.html"><strong>sprintf</strong></a> is the function that formats the text output. 
+</div>
+
+<div class=ex>
+<!--Text_5-->
+<a name=ex5></a>
+<a href="Images/text_5_lg.png">
+<img src="Images/text_5_sm.png" align=left border=2></a>
+<a href="Scripts/text_5.html">text_5.ncl</a>: Demonstrates adding
+a carriage return to a text string.
+<p>
+
+The ~C~ will put a carriage return in a text string. By default
+it is left justified. If you need it centered, you will have to
+add spaces.
+<p>
+
+The ~ is a function code. The default function code is a colon (:),
+but we have changed this to a ~ in our 
+<a href="../Document/Graphics/hlures.html">.hluresfile</a>
+</div>
+
+<div class=ex>
+<!--Text_6-->
+<a name=ex6></a>
+<a href="Images/text_6_lg.png">
+<img src="Images/text_6_sm.png" align=left border=2></a>
+<a href="Scripts/text_6.html">text_6.ncl</a>: Demonstrates how to
+put a double quote into a text string.
+</div>
+    
+<div class=ex>
+<!--Text_7-->
+<a name=ex7></a>
+<a href="Images/text_7_lg.png">
+<img src="Images/text_7_sm.png" align=left border=3></a>
+<a href="Scripts/text_7.html">text_7.ncl</a>: Demonstrates how to
+put a degree symbol into a string.
+</div>
+
+<div class=ex>
+<!--Text_8-->
+<a name=ex8></a>
+<a href="Images/text_8_lg.png">
+<img src="Images/text_8_sm.png" align=left border=2></a>
+
+<a href="Scripts/text_8.html">text_8.ncl</a>: A more complicated
+example of adding multiple text strings to a plot using
+<a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a>.
+
+</div>
+
+
+<div class=ex>
+<!--Text_9-->
+<a name=ex9></a>
+<a href="Images/text_9_1_lg.png">
+<img src="Images/text_9_1_sm.png" align=left border=2></a>
+<a href="Images/text_9_2_lg.png">
+<img src="Images/text_9_2_sm.png" align=left border=2></a>
+<a href="Images/text_9_3_lg.png">
+<img src="Images/text_9_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/text_9.html">text_9.ncl</a>: This example shows how to
+use <a href="../Document/Graphics/Interfaces/gsn_create_text.html"><strong>gsn_create_text</strong></a> to create text
+strings and <a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a> to attach text items to a
+plot.
+<p>
+
+By attaching the strings, they will get resized if you resize the plot
+(see last frame).
+<p>
+
+The default is to put the string in the center of the plot.  In order
+to change how the string is positioned, you can set some annotation
+resources: <a href="../Document/Graphics/Resources/am.html#amParallelPosF"><em>amParallelPosF</em></a>,
+<a href="../Document/Graphics/Resources/am.html#amOrthogonalPosF"><em>amOrthogonalPosF</em></a>, and <a href="../Document/Graphics/Resources/am.html#amJust"><em>amJust</em></a>. The <a href="../Document/Graphics/Resources/am.html#amParallelPosF"><em>amParallelPosF</em></a> and <a href="../Document/Graphics/Resources/am.html#amOrthogonalPosF"><em>amOrthogonalPosF</em></a> resources indicate
+where, relative to the plot's boundaries, to position the string, and
+the <a href="../Document/Graphics/Resources/am.html#amJust"><em>amJust</em></a> resource indicates
+which one of nine possible locations on the string ("CenterCenter",
+"TopCenter", "TopRight", "CenterRight", "BottomRight", "BottomCenter",
+"BottomLeft", "CenterLeft", "TopLeft") about which the string is
+positioned.
+<p>
+
+See example <a href="#ex18">text_18.ncl</a> below for a similar example
+that adds to strings to four plots and panels them.
+
+</div>
+
+<div class=ex>
+<!--Text_10-->
+<a name=ex10></a>
+<a href="Images/text_10_1_lg.png">
+<img src="Images/text_10_1_sm.png" align=left border=2></a>
+<a href="Images/text_10_2_lg.png">
+<img src="Images/text_10_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/text_10.html">text_10.ncl</a>: This example shows how
+to use <a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a> to add lots of
+strings to a map plot, and then how to determine which ones overlay
+other strings so you can remove them.
+<P>
+
+You can download the small <A
+HREF="Data/asc/istasyontablosu_son.txt">istasyontablosu_son.txt</A> data
+file for this example. Thanks to Ozan Mert Gokturk for providing the
+data file and the inspiration for this example.
+<p>
+
+This example is similar to "text_17.ncl" below, which removes strings
+that fall on the plot's borders.
+
+</div>
+
+<div class=ex>
+<!--Text_11-->
+<a name=ex11></a>
+<a href="Images/text_11_lg.png">
+<img src="Images/text_11_sm.png" align=left border=2></a>
+
+<a href="Scripts/text_11.html">text_11.ncl</a>: This example shows how
+to use <a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a> to add a string
+on the right Y axis, since you can't have both a right and left Y axis
+string using the usual <a
+href="../Document/Graphics/Resources/ti.html">ti</a>* resources.
+<p>
+
+The <a href="../Document/Graphics/Interfaces/gsn_create_text.html"><strong>gsn_create_text</strong></a> and <a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a> functions are used to
+create and attach the text strings.
+
+</div>
+
+<div class=ex>
+<!--Text_12-->
+<a name=ex12></a>
+<a href="Images/text_12_lg.png">
+<img src="Images/text_12_sm.png" align=left border=2></a>
+
+<a href="Scripts/text_12.html">text_12.ncl</a>: This example shows how
+to add three subtitles at the top of any plot, mimicing the subtitles
+you get in the <a
+href="../Document/Graphics/Interfaces/index.html">gsn_csm</a>
+functions.
+<p>
+
+The <a href="../Document/Graphics/Interfaces/gsn_create_text.html"><strong>gsn_create_text</strong></a> and <a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a> functions are used to
+create and attach the text strings.
+<p>
+
+The key to getting the strings to be either left-justified,
+right-justified, or centered is to use a combination of the <a href="../Document/Graphics/Resources/am.html#amJust"><em>amJust</em></a> and <a href="../Document/Graphics/Resources/am.html#amParallelPosF"><em>amParallelPosF</em></a> resources.  You also need
+to set <a href="../Document/Graphics/Resources/am.html#amOrthogonalPosF"><em>amOrthogonalPosF</em></a> to some
+small value to move the strings away from the top edge (tickmarks) of
+the plot. This value should be the same for all three strings, in
+order to keep them lined up.
+
+<dl>
+<dt>Left-justified string:
+<dd><a href="../Document/Graphics/Resources/am.html#amJust"><em>amJust</em></a> = "BottomLeft"<br>
+<a href="../Document/Graphics/Resources/am.html#amParallelPosF"><em>amParallelPosF</em></a> = -0.5
+
+<dt>Centered string:
+<dd><a href="../Document/Graphics/Resources/am.html#amJust"><em>amJust</em></a> = "BottomCenter"<br>
+<a href="../Document/Graphics/Resources/am.html#amParallelPosF"><em>amParallelPosF</em></a> = 0.0
+
+<dt>Right-justified string:
+<dd><a href="../Document/Graphics/Resources/am.html#amJust"><em>amJust</em></a> = "BottomRight"<br>
+<a href="../Document/Graphics/Resources/am.html#amParallelPosF"><em>amParallelPosF</em></a> = 0.5
+</dl>
+
+</div>
+
+<div class=ex>
+<!--Text_13-->
+<a name=ex13></a>
+<a href="Images/text_13_lg.png">
+<img src="Images/text_13_sm.png" align=left border=2></a>
+
+<a href="Scripts/text_13.html">text_13.ncl</a>: This example shows how
+to use the <a href="../Document/Graphics/Resources/tx.html#txJust"><em>txJust</em></a> resource to align
+text.
+<p>
+
+To place text using a <a
+href="../Document/Graphics/Interfaces/index.html">gsn_text*</a> routine, you
+specify X and Y positions of the text box that encloses the string.
+By default, the text string box is centered about that X,Y position,
+unless you set <a href="../Document/Graphics/Resources/tx.html#txJust"><em>txJust</em></a> to one of the
+other eight allowed values: "BottomRight", "CenterRight", "TopRight",
+"BottomCenter", "TopCenter", "BottomLeft", "CenterLeft", or
+"TopLeft". ("CenterCenter" is the default.)
+
+</div>
+
+<div class=ex>
+<!--Text_14-->
+<a name=ex14></a>
+<a href="Images/text_14_lg.png">
+<img src="Images/text_14_sm.png" align=left border=2></a>
+
+<a href="Scripts/text_14.html">text_14.ncl</a>: This example shows how
+to use <a href="../Document/Graphics/function_code.html">text function
+codes</a> to draw accented characters like the umlaut. This is
+done using the H and V function codes that allow you to do small
+vertical and horizontal moves as you are drawing text.
+<p>
+
+For example, the double dots in the umlaut are drawn by using
+character "H" from <a href="../Document/Graphics/Images/font35.png">font
+table 35</a>, and a series of horizontal and vertical moves to put
+the dots over the desired character.
+<p>
+
+This script was contributed by Mateus da Silva Teixeira from IPMet.
+
+</div>
+
+<div class=ex>
+<!--Text_15-->
+<a name=ex15></a>
+<a href="Images/text_15_lg.png">
+<img src="Images/text_15_sm.png" align=left border=2></a>
+
+<a href="Scripts/text_15.html">text_15.ncl</a>: This example shows how
+to use <a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a> to add
+data values to an existing cell-filled contour plot.
+<p>
+
+The <a href="../Document/Graphics/Resources/tx.html#txJust"><em>txJust</em></a> resource is set to
+"CenterCenter", unless the text string is on one of the four edges of
+the plot.
+
+</div>
+
+<div class=ex>
+<!--Text_16-->
+<a name=ex16></a>
+<a href="Images/text_16_lg.png">
+<img src="Images/text_16_sm.png" align=left border=2></a>
+
+<a href="Scripts/text_16.html">text_16.ncl</a>: This example shows how
+to use <a href="../Document/Functions/Built-in/sprintf.html"><strong>sprintf</strong></a> in conjunction with <res
+<a href="../Document/Graphics/Resources/tx.html#txJust"><em>txJust</em></a> to make sure text strings
+with floating point numbers line up at their decimal points.
+
+</div>
+
+<div class=ex>
+<!--newcolor_2-->
+<a name=ex2></a>
+<a href="Images/newcolor_2_lg.png">
+<img src="Images/newcolor_2_sm.png" align=left border=2></a>
+<a href="Scripts/newcolor_2.html">newcolor_2.ncl</a>: This example
+shows how to create a text string that is highly transparent by
+setting the <a href="../Document/Graphics/Resources/tx.html#txFontOpacityF"><em>txFontOpacityF</em></a> resource
+to 0.10. A value of 1.0 means fully opaque.
+<p>
+
+This capability was added in
+NCL <a href="../prev_releases.html#6.1.0">version 6.1.0</a>.
+
+</div>
+
+<div class=ex>
+<!--Text_17-->
+<a name=ex17></a>
+<a href="Images/text_17_1_lg.png">
+<img src="Images/text_17_1_sm.png" align=left border=2></a>
+<a href="Images/text_17_2_lg.png">
+<img src="Images/text_17_2_sm.png" align=left border=2></a>
+<a href="Images/text_17_3_lg.png">
+<img src="Images/text_17_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/text_17.html">text_17.ncl</a>: This example shows how
+to remove text strings that were added to a map that fall outside
+the map's borders. Since there's no way to clip these strings,
+you need to use <a href="../Document/Functions/Built-in/NhlRemoveAnnotation.html"><strong>NhlRemoveAnnotation</strong></a> to
+remove the offending text strings.
+<p>
+
+This example shows three versions of the map: the original plot with the 
+"bad" strings, the plot with the "bad" strings drawn in a different 
+color, and the plot with the "bad" strings removed.
+<p>
+
+This example is similar to "text_10.ncl", which shows how to remove
+overlapping strings.
+
+</div>
+
+<div class=ex>
+<!--Text_18-->
+<a name=ex18></a>
+<a href="Images/text_18_lg.png">
+<img src="Images/text_18_sm.png" align=left border=2></a>
+<a href="Scripts/text_18.html">text_18.ncl</a>: This example shows how
+to add text strings to the top left and right of four plots and
+then panel them. This is similar to example <a href="#ex9">text_9.ncl</a> above.
+<p>
+
+You can't do this kind of thing using
+<a href="../Document/Graphics/Resources/gsn.html#gsnPanelFigureStrings"><em>gsnPanelFigureStrings</em></a>, because this only
+allows for one label per plot be added.
+<p>
+
+The text strings are created with 
+<a href="../Document/Graphics/Interfaces/gsn_create_text.html"><strong>gsn_create_text</strong></a>, and then attached
+to each plot using 
+<a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a>.  You need to set
+the special
+resources <a href="../Document/Graphics/Resources/am.html#amParallelPosF"><em>amParallelPosF</em></a>
+and <a href="../Document/Graphics/Resources/am.html#amOrthogonalPosF"><em>amOrthogonalPosF</em></a> to correctly
+align the text strings as desired.
+
+</div>
+
+<div class=ex>
+<!--Text_19-->
+<a name=ex19></a>
+<a href="Images/text_19_lg.png">
+<img src="Images/text_19_sm.png" align=left border=2></a>
+<a href="Scripts/text_19.html">text_19.ncl</a>: This example shows how
+to draw text strings on a map that follow the curve of a lat/lon
+line.
+<p>
+
+The key is to use
+<a href="../Document/Graphics/Interfaces/gsn_polyline.html"><strong>gsn_polyline</strong></a> or 
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a> to define the
+lat/lon line, and set the special
+resources <a href="../Document/Graphics/Resources/gs.html#gsLineLabelString"><em>gsLineLabelString</em></a>
+resource to the desired string.
+<p>
+
+<b>Note</b>: we discovered a bug in NCL that causes this script not to
+work with NCL versions 6.2.0, 6.2.1, or 6.3.0. We have a ticket on
+this (NCL-2262), and hope to fix it for version 6.4.0.
+
+</div>
+<div class=ex>
+<!--Text_19-->
+<a name=ex20></a>
+<a href="Images/text_20_1_lg.png">
+<img src="Images/text_20_1_sm.png" align=left border=2></a>
+<a href="Images/text_20_2_lg.png">
+<img src="Images/text_20_2_sm.png" align=left border=2></a>
+<a href="Scripts/text_20.html">text_20.ncl</a>: This example shows how
+to use the <a href="../Document/Functions/Shea_util/drawNDCGrid.html"><strong>drawNDCGrid</strong></a> procedure
+to help you select locations for placing text outside the plot.
+<p>
+
+The first image is the plot with the NDC grid. The second image is
+the plot with text strings added.
+<p>
+
+Once the XY plot is created, you can use 
+<a href="../Document/Manuals/Ref_Manual/NclStatements.html#Setvalues">setvalues</a> 
+to retrieve the viewport area of the plot, and 
+<a href="../Document/Functions/Built-in/NhlGetBB.html"><strong>NhlGetBB</strong></a> to retrieve the bounding box that encloses all the
+plot elements.  This allows you to calculate the location of various text strings
+relative to the plot's size and location.
+
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/text.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:14:53 GMT -->
+</html>
+
+

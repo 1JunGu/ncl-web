@@ -1,0 +1,1125 @@
+<HTML>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/bar.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:54:45 GMT -->
+<Head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to create bar charts.">
+<meta name="keywords" content="NCL, graphics, visualization, bar chart">
+</head>
+<TITLE>NCL Graphics: Bar Charts</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: Bar Charts</h1>
+
+<div class=mainimage>
+<img src="Images/bar_4_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+Bar charts (in this context) are simply XY plots that are drawn with
+bars for each X,Y point. To get bars instead of curves when
+using <a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a>, set the
+special attribute res@<a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChart"><em>gsnXYBarChart</em></a> = True.
+<p>
+
+If you need to bin the data, see
+the <a href="histo.html">histograms</a> examples page which talks
+about binning data according to ranges of values or actual values, or
+the
+<a href="binning.html">binning satellite and observational data</a>
+which talks about summing and averaging binned data.
+<p>
+
+There are several "gsn" resources specific to customizing bars
+in an XY plot.
+<p>
+
+<b>Filling bars pivoted about an X or Y reference line</b>:<p>
+
+<ul>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnYRefLine"><em>gsnYRefLine</em></a> - Defines a Y reference line
+(horizontal) about which to pivot the bars either up or down. All Y
+values greater than this reference line will be drawn as bars pointing
+up, and all bars less than will be pointing down.<br>
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnXRefLine"><em>gsnXRefLine</em></a> - Defines an X reference line
+(vertical) about which to pivot the bars either left or right. All X
+values greater than this reference line will be drawn as bars pointing
+right, and all bars less than will be pointing left.  This feature
+will only work in NCL V6.4.0 and later.<br>
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartColors"><em>gsnXYBarChartColors</em></a> /
+<a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartColors2"><em>gsnXYBarChartColors2</em></a> - Defines the fill
+colors for each bar. See the descriptions for futher details.<br>
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartPatterns"><em>gsnXYBarChartPatterns</em></a> /
+<a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartPatterns2"><em>gsnXYBarChartPatterns2</em></a> - Defines the fill
+patterns for each bar. See the descriptions for futher details.<br>
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartOutlineOnly"><em>gsnXYBarChartOutlineOnly</em></a> - Outline
+only the outside edges of each bar.<br>
+</ul>
+<p>
+
+<b>Setting fill colors specifically for a vertically-oriented bar
+chart:</b>
+<p>
+
+<ul>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnBelowYRefLineBarColors"><em>gsnBelowYRefLineBarColors</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnBelowYRefLineBarPatterns"><em>gsnBelowYRefLineBarPatterns</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnAboveYRefLineBarColors"><em>gsnAboveYRefLineBarColors</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnAboveYRefLineBarPatterns"><em>gsnAboveYRefLineBarPatterns</em></a><p>
+</ul>
+<p>
+
+<b>Setting fill colors specifically for a horizontally-oriented bar
+chart.</b><br> These resources will only work in NCL V6.4.0 and later:
+<p>
+
+<ul>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnLeftXRefLineBarColors"><em>gsnLeftXRefLineBarColors</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnLeftXRefLineBarPatterns"><em>gsnLeftXRefLineBarPatterns</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnRightXRefLineBarColors"><em>gsnRightXRefLineBarColors</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnRightXRefLineBarPatterns"><em>gsnRightXRefLineBarPatterns</em></a><br>
+</ul>
+<p>
+
+<b>Setting fill colors for a vertically-oriented bar chart:</b>
+<p>
+
+<ul>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnBelowYRefLineBarColors"><em>gsnBelowYRefLineBarColors</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnBelowYRefLineBarPatterns"><em>gsnBelowYRefLineBarPatterns</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnAboveYRefLineBarColors"><em>gsnAboveYRefLineBarColors</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnAboveYRefLineBarPatterns"><em>gsnAboveYRefLineBarPatterns</em></a><p>
+</ul>
+<p>
+
+<b>Setting fill colors for a horizontally-oriented bar chart.</b><br>
+These resources will only work in NCL V6.4.0 and later:
+<p>
+
+<ul>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnLeftXRefLineBarColors"><em>gsnLeftXRefLineBarColors</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnLeftXRefLineBarPatterns"><em>gsnLeftXRefLineBarPatterns</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnRightXRefLineBarColors"><em>gsnRightXRefLineBarColors</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnRightXRefLineBarPatterns"><em>gsnRightXRefLineBarPatterns</em></a><p>
+</ul>
+<p>
+
+<b>Customizing the look of color or pattern filled bars:</b><p>
+<ul>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartBarWidth"><em>gsnXYBarChartBarWidth</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartFillDotSizeF"><em>gsnXYBarChartFillDotSizeF</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartFillScaleF"><em>gsnXYBarChartFillScaleF</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartFillLineThicknessF"><em>gsnXYBarChartFillLineThicknessF</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartFillOpacityF"><em>gsnXYBarChartFillOpacityF</em></a><br>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnBelowYRefLineBarFillScales"><em>gsnBelowYRefLineBarFillScales</em></a>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnAboveYRefLineBarFillScales"><em>gsnAboveYRefLineBarFillScales</em></a>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnLeftXRefLineBarFillScales"><em>gsnLeftXRefLineBarFillScales</em></a>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnRightXRefLineBarFillScales"><em>gsnRightXRefLineBarFillScales</em></a>
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartOutlineThicknessF"><em>gsnXYBarChartOutlineThicknessF</em></a><br>
+</ul>
+
+</div>
+
+<div class=ex>
+<!--Bar_1-->
+<a name=ex1></a>
+<a href="Images/bar_1_1_lg.png">
+<img src="Images/bar_1_1_sm.png" align=left border=2></a>
+<a href="Images/bar_1_2_lg.png">
+<img src="Images/bar_1_2_sm.png" align=left border=2></a>
+<a href="Images/bar_1_3_lg.png">
+<img src="Images/bar_1_3_sm.png" align=left border=2></a>
+<a href="Scripts/bar_1.html">bar_1.ncl</a>:
+
+This shows a series of bar charts.<p>
+
+The first frame sets <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChart"><em>gsnXYBarChart</em></a>
+to True, which causes each Y value to be represented by a bar pointing
+upward. The base of each bar is the minimum Y value or the value
+of <a href="../Document/Graphics/Resources/tr.html#trYMinF"><em>trYMinF</em></a>, if set. Each bar
+is centered about its corresponding X value.
+<p>
+
+The second frame additionally
+sets <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartOutlineOnly"><em>gsnXYBarChartOutlineOnly</em></a> to True,
+which causes each Y value to be represented by a horizontal bar,
+creating an outline plot. There are no individual bars drawn
+here. Here, each vertical line is exactly at the corresponding X
+value, and NOT centered about it
+like <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChart"><em>gsnXYBarChart</em></a>.
+<p>
+
+The third frame sets <a href="../Document/Graphics/Resources/gsn.html#gsnYRefLine"><em>gsnYRefLine</em></a> to 0,
+causing all the positive Y values to be drawn as bars pointing upward,
+and all negative Y values to be drawn as bars pointing downward.
+<p>
+
+</div>
+
+<div class=ex>
+<!--Bar_Horz_1-->
+<a name=exhrz1></a>
+<a href="Images/bar_horz_1_1_lg.png">
+<img src="Images/bar_horz_1_1_sm.png" align=left border=2></a>
+<a href="Images/bar_horz_1_2_lg.png">
+<img src="Images/bar_horz_1_2_sm.png" align=left border=2></a>
+<a href="Images/bar_horz_1_3_lg.png">
+<img src="Images/bar_horz_1_3_sm.png" align=left border=2></a>
+<a href="Scripts/bar_horz_1.html">bar_horz_1.ncl</a>:
+
+This example is similar to bar_1.ncl, except it shows how to draw the bars horizontally. Since the default for 
+<a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChart"><em>gsnXYBarChart</em></a> is to draw vertical bars, the way to get horizontal bars is 
+by setting <a href="../Document/Graphics/Resources/gsn.html#gsnXRefLine"><em>gsnXRefLine</em></a> to the desired value where you want the bars to point left or right. 
+You also need to swap the x and y data variables in the call to <a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a>. 
+<p>
+This capability is only available in NCL version 6.4.0 or later.
+
+</div>
+
+<div class=ex>
+<!--Bar_2-->
+<a name=ex2></a>
+<a href="Images/bar_2_lg.png">
+<img src="Images/bar_2_sm.png" align=left border=2></a>
+<a href="Scripts/bar_2.html">bar_2.ncl</a>: 
+
+Demonstrates coloring values above and below a reference line with a
+particular color.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnAboveYRefLineColor"><em>gsnAboveYRefLineColor</em></a> = "red", and
+<a href="../Document/Graphics/Resources/gsn.html#gsnBelowYRefLineColor"><em>gsnBelowYRefLineColor</em></a> = "blue", are the
+two resources required to shade the bars above and below the reference
+line.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Bar/NCL_bar_2.html#sphx-glr-gallery-bar-ncl-bar-2-py">here</a>.
+
+</div>
+
+<div class=ex>
+<!--Bar_3-->
+<a name=ex3></a>
+<a href="Images/bar_3_lg.png">
+<img src="Images/bar_3_sm.png" align=left border=2></a>
+<a href="Scripts/bar_3.html">bar_3.ncl</a>: 
+Demonstrates changing the size of the bars.
+<p>
+
+By default, the thickness of each bar is delta-x. You can make the
+bars smaller than this by setting <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartBarWidth"><em>gsnXYBarChartBarWidth</em></a> to a smaller number.  In
+this instance, delta-x is 0.66 and we have changed the width to
+0.1. Note that at this point it becomes hard to see the bar colors,
+because the bars are pretty thin.
+
+</div>
+
+<div class=ex>
+<!--Bar_4-->
+<a name=ex4></a>
+<a href="Images/bar_4_lg.png">
+<img src="Images/bar_4_sm.png" align=left border=2></a>
+<a href="Scripts/bar_4.html">bar_4.ncl</a>: 
+
+Demonstrates turning off bar outline around each bar.  This is useful
+when you have a lot of data points because the outline is drawn after
+the color fill, and a black line and can obscure it.
+<p>
+
+<a href="../Document/Graphics/Resources/xy.html#xyLineColors"><em>xyLineColors</em></a> = (/"red","blue"/),
+changes the outline color for the above and below color filled areas
+respectively.
+
+</div>
+
+<div class=ex>
+<!--Bar_Horz_4-->
+<a name=exhrz4></a>
+<a href="Images/bar_horz_4_lg.png">
+<img src="Images/bar_horz_4_sm.png" align=left border=2></a>
+<a href="Scripts/bar_horz_4.html">bar_horz_4.ncl</a>:
+
+
+This example is similar to bar_4.ncl, except it shows how to draw the bars horizontally and fill them in different colors 
+based on whether they fall to the right or left of <a href="../Document/Graphics/Resources/gsn.html#gsnXRefLine"><em>gsnXRefLine</em></a> = 0. 
+Use the resources <a href="../Document/Graphics/Resources/gsn.html#gsnRightXRefLineColor"><em>gsnRightXRefLineColor</em></a>
+and <a href="../Document/Graphics/Resources/gsn.html#gsnLeftXRefLineColor"><em>gsnLeftXRefLineColor</em></a> to set the desired colors.
+<p>
+This capability is only available in NCL version 6.4.0 or later.
+
+</div>
+
+<div class=ex>
+<!--Bar_5-->
+<a name=ex5></a>
+<a href="Images/bar_5_lg.png">
+<img src="Images/bar_5_sm.png" align=left border=2></a>
+<a href="Scripts/bar_5.html">bar_5.ncl</a>: 
+Multiple bar charts on one page. 
+</div>
+
+<div class=ex>
+<!--Bar_Horz_5-->
+<a name=exhrz5></a>
+<a href="Images/bar_horz_5_lg.png">
+<img src="Images/bar_horz_5_sm.png" align=left border=2></a>
+<a href="Scripts/bar_horz_5.html">bar_horz_5.ncl</a>:
+
+This example is similar to bar_5.ncl. The <a href="../Document/Graphics/Resources/gsn.html#gsnXRefLine"><em>gsnXRefLine</em></a> resource is set to an array
+of values to provide several X reference lines for multiple bar charts. As with example bar_horz_4.ncl, 
+the resources <a href="../Document/Graphics/Resources/gsn.html#gsnRightXRefLineColor"><em>gsnRightXRefLineColor</em></a> and <a href="../Document/Graphics/Resources/gsn.html#gsnLeftXRefLineColor"><em>gsnLeftXRefLineColor</em></a>
+are used set the desired fill colors for the bars.
+<p>
+This capability is only available in NCL version 6.4.0 or later.
+
+
+</div>
+
+<div class=ex>
+<!--Bar_6-->
+<a name=ex6></a>
+<a href="Images/bar_6_1_lg.png">
+<img src="Images/bar_6_1_sm.png" align=left border=2></a>
+<a href="Images/bar_6_2_lg.png">
+<img src="Images/bar_6_2_sm.png" align=left border=2></a>
+<a href="Scripts/bar_6.html">bar_6.ncl</a>: 
+
+Demonstrates how to make individual bars different colors within a bar 
+chart that has a reference line. The colors can be chosen separately
+for the above and below bars (first plot), or sequentially regardless
+of orientation (second plot).
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnAboveYRefLineBarColors"><em>gsnAboveYRefLineBarColors</em></a> controls the
+colors of the bars above the reference line. This is an array. The
+colors will repeat.  <a href="../Document/Graphics/Resources/gsn.html#gsnBelowYRefLineBarColors"><em>gsnBelowYRefLineBarColors</em></a> controls the colors
+below the reference line.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartColors2"><em>gsnXYBarChartColors2</em></a> will assign a
+sequence of colors regardless of bar orientation.
+
+</div>
+
+<div class=ex>
+<!--Bar_Horz_6-->
+<a name=exhrz6></a>
+<a href="Images/bar_horz_6_1_lg.png">
+<img src="Images/bar_horz_6_1_sm.png" align=left border=2></a>
+<a href="Images/bar_horz_6_2_lg.png">
+<img src="Images/bar_horz_6_2_sm.png" align=left border=2></a>
+<a href="Scripts/bar_horz_6.html">bar_horz_6.ncl</a>:
+
+bar_horz_6.ncl: This example is similar 
+to bar_6.ncl, except it shows how to draw the bars horizontally.
+
+The resources <a href="../Document/Graphics/Resources/gsn.html#gsnRightXRefLineBarColors"><em>gsnRightXRefLineBarColors</em></a> and res@<a href="../Document/Graphics/Resources/gsn.html#gsnLeftXRefLineBarColors"><em>gsnLeftXRefLineBarColors</em></a>
+are used to color the bars to the right and left of the X reference line in the first plot. 
+In the second plot, <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartColors2"><em>gsnXYBarChartColors2</em></a> is used in the same way as the bar_6.ncl example to specify the fill colors.
+<p>
+
+This capability is only available in NCL version 6.4.0 or later.
+
+</div>
+
+<div class=ex>
+<!--Bar_7-->
+<a name=ex7></a>
+<a href="Images/bar_7_1_lg.png">
+<img src="Images/bar_7_1_sm.png" align=left border=2></a>
+<a href="Images/bar_7_2_lg.png">
+<img src="Images/bar_7_2_sm.png" align=left border=2></a>
+<a href="Scripts/bar_7.html">bar_7.ncl</a>:
+
+A bar chart w/o a reference line, and individual colors. The second
+frame adds a labelbar. A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Bar/NCL_bar_7.html#sphx-glr-gallery-bar-ncl-bar-7-py">here</a>.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartColors"><em>gsnXYBarChartColors</em></a> controls the colors
+of the bars.
+
+</div>
+
+<div class=ex>
+<!--Bar_Horz_7-->
+<a name=exhrz7></a>
+<a href="Images/bar_horz_7_1_lg.png">
+<img src="Images/bar_horz_7_1_sm.png" align=left border=2></a>
+<a href="Images/bar_horz_7_2_lg.png">
+<img src="Images/bar_horz_7_2_sm.png" align=left border=2></a>
+<a href="Scripts/bar_horz_7.html">bar_horz_7.ncl</a>:
+
+This example is similar to bar_7.ncl, except it shows how to draw the
+bars horizontally. The <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartColors"><em>gsnXYBarChartColors</em></a>
+controls the colors of the horizontal bars the same way it does the
+vertical bars.
+<p>
+
+This capability is only available in NCL version 6.4.0 or later.<p>
+
+</div>
+
+
+<div class=ex>
+<!--Bar_8-->
+<a name=ex8></a>
+<a href="Images/bar_8_1_lg.png">
+<img src="Images/bar_8_1_sm.png" align=left border=2></a>
+<a href="Images/bar_8_2_lg.png">
+<img src="Images/bar_8_2_sm.png" align=left border=2></a> 
+<a href="Scripts/bar_8.html">bar_8.ncl</a>:
+
+Demonstrates how to make individual bars different colors and
+patterns within a bar chart that has a reference line. Colors are
+distributed separately for bars above and below the reference line 
+(first plot), or regardless of orientation of the bars (second plot).
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnAboveYRefLineBarPatterns"><em>gsnAboveYRefLineBarPatterns</em></a> controls the
+patterns of the bars above the reference line. This is an array. The
+patterns will
+repeat.  <a href="../Document/Graphics/Resources/gsn.html#gsnBelowYRefLineBarPatterns"><em>gsnBelowYRefLineBarPatterns</em></a>
+controls the patterns below the reference line.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartPatterns2"><em>gsnXYBarChartPatterns2</em></a> will apply the
+patterns regardless of the orientation of the bars.
+<p>
+
+There are several <a
+href="../Document/Graphics/fill_patterns.html">patterns</a> to choose
+from.
+
+</div>
+
+<div class=ex>
+<!--Bar_9-->
+<a name=ex9></a>
+<a href="Images/unique_5_lg.png">
+<img src="Images/unique_5_sm.png" align=left border=2></a>
+<a href="Scripts/unique_5.html">unique_5.ncl</a>: 
+
+This script creates a single bar chart showing 4 different timeseries
+with four different colors. The labelbar is created by using <a href="../Document/Graphics/Interfaces/gsn_labelbar_ndc.html"><strong>gsn_labelbar_ndc</strong></a>. A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Bar/NCL_unique_5.html#sphx-glr-gallery-bar-ncl-unique-5-py">here</a>.
+</div>
+
+<div class=ex>
+<!--poly_10-->
+<a href="Images/polyg_10_lg.png">
+<img src="Images/polyg_10_sm.png" align=left border=2></a>
+<a href="Scripts/polyg_10.html">polyg_10.ncl</a>:
+
+This example shows how to draw various polylines and polygons on a
+several generic tickmark backgrounds to create a series of bar
+charts. The <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a> and
+<a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> functions are used
+to create the polylines and polygons and <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> is used to panel all the plots on
+one frame.
+
+</div> 
+
+<div class=ex>
+<!--Bar_10-->
+<a name=ex10></a>
+<a href="Images/bar_10_lg.png">
+<img src="Images/bar_10_sm.png" align=left border=2></a>
+<a href="Images/bar_old_10_lg.png">
+<img src="Images/bar_old_10_sm.png" align=left border=2></a>
+<a href="Scripts/bar_10.html">bar_10.ncl</a> /  
+<a href="Scripts/bar_old_10.html">bar_old_10.ncl</a> /  
+
+This script shows how to create a horizontal series of filled bars using
+two methods.
+<p>
+
+<a href="Scripts/bar_10.html">bar_10.ncl</a> uses a newer method of
+setting <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChart"><em>gsnXYBarChart</em></a> to
+True, <a href="../Document/Graphics/Resources/gsn.html#gsnXRefLine"><em>gsnXRefLine</em></a> to 0, and filling the
+bars by setting <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartColors"><em>gsnXYBarChartColors</em></a>.
+This capability is only available in NCL version 6.4.0 or later.
+<p>
+
+<a href="Scripts/bar_old_10.html">bar_old_10.ncl</a> uses an older
+method of creating a blank plot
+with <a href="../Document/Graphics/Interfaces/gsn_blank_plot.html"><strong>gsn_blank_plot</strong></a> and attaching
+filled bars using <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--Bar_11-->
+<a name=ex11></a>
+<a href="Images/bar_11_lg.png">
+<img src="Images/bar_11_sm.png" align=left border=2></a>
+<a href="Scripts/bar_11.html">bar_11.ncl</a>: This script shows how to
+panel multiple bar charts and add a custom legend (using labelbars).
+<p>
+
+This example is similar to example 9 above, except it uses the
+<a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> procedure to overlay the individual bar
+plots. Finally, it uses <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> to
+panel the four sets of plots. A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Bar/NCL_bar_11.html#sphx-glr-gallery-bar-ncl-bar-11-py">here</a>.
+
+</div>
+
+<div class=ex>
+<!--Bar_Horz_11-->
+<a name=exhrz11></a>
+<a href="Images/bar_horz_11_lg.png">
+<img src="Images/bar_horz_11_sm.png" align=left border=2></a>
+<a href="Scripts/bar_horz_11.html">bar_horz_11.ncl</a>:
+
+This example is similar to bar_11.ncl, except it shows how to draw the bars horizontally. 
+Note that the legend is drawn a little differently because it's a narrower plot.
+<p>
+This capability is only available in NCL version 6.4.0 or later.
+
+</div>
+
+<div class=ex>
+<!--Bar_12-->
+<a name=ex12></a>
+<a href="Images/bar_12_lg.png">
+<img src="Images/bar_12_sm.png" align=left border=2></a>
+<a href="Scripts/bar_12.html">bar_12.ncl</a>: This script shows how to
+create four sets of "floating" bars given a set of minimum and maximum values
+for each set of bars.
+
+The trick is to draw the plot twice with the same bar color,
+first with the minimum values, and then with the maximum values.  Each set of
+bars has its own <a href="../Document/Graphics/Resources/gsn.html#gsnYRefLine"><em>gsnYRefLine</em></a> value.
+<p>
+
+</div>
+
+<div class=ex>
+<!--Bar_13-->
+<a name=ex13></a>
+<a href="Images/bar_13_lg.png">
+<img src="Images/bar_13_sm.png" align=left border=2></a>
+<a href="Scripts/bar_13.html">bar_13.ncl</a>: This script shows 
+a variation on creating "floating" bars, grouping each set of
+bars by a single month.
+<p>
+
+The data are read in from
+a <a href="Data/asc/dummy_model_data.txt">dummy data file</a> that
+contains min, max, and average values for seven different models.
+
+</div>
+
+<div class=ex>
+<!--Bar_Horz_13-->
+<a name=exhrz13></a>
+<a href="Images/bar_horz_13_lg.png">
+<img src="Images/bar_horz_13_sm.png" align=left border=2></a>
+<a href="Scripts/bar_horz_13.html">bar_horz_13.ncl</a>:
+
+This example is similar to bar_13.ncl, except it shows how to draw the bars horizontally.
+<p>
+The <a href="../Document/Graphics/Resources/gsn.html#gsnRightXRefLineColor"><em>gsnRightXRefLineColor</em></a> 
+and <a href="../Document/Graphics/Resources/gsn.html#gsnLeftXRefLineColor"><em>gsnLeftXRefLineColor</em></a> resources are used to fill the bar colors.
+<p>
+This capability is only available in NCL version 6.4.0 or later.
+
+</div>
+
+<div class=ex>
+<!--Bar_14-->
+<a name=ex14></a>
+<a href="Images/bar_14_lg.png">
+<img src="Images/bar_14_sm.png" align=left border=2></a>
+<a href="Scripts/bar_14.html">bar_14.ncl</a>: This script shows 
+how to draw an XY curve on top of a bar chart.
+<p>
+
+Two separate plots are created, and then they are drawn
+in the same space by making sure the 
+<a href="../Document/Graphics/Resources/vp.html#vpXF"><em>vpXF</em></a>,
+<a href="../Document/Graphics/Resources/vp.html#vpYF"><em>vpYF</em></a>,
+<a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a>, and
+<a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> resources
+are the same for both.
+
+
+</div>
+
+<div class=ex>
+<!--Bar_15-->
+<a name=ex15></a>
+<a href="Images/bar_15_1_lg.png">
+<img src="Images/bar_15_1_sm.png" align=left border=2></a>
+<a href="Images/bar_15_2_lg.png">
+<img src="Images/bar_15_2_sm.png" align=left border=2></a>
+<a href="Scripts/bar_15.html">bar_15.ncl</a>: This script shows 
+how to draw a bar chart with the bars colored according to ranges of
+values. The first frame colors the bars
+using <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartColors2"><em>gsnXYBarChartColors2</em></a>.  The second
+frame colors the bars using calls
+to <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>. This allows the
+top of the bars to follow the shape of the XY curve, instead of being
+flat.
+<p>
+
+<a href="../Document/Functions/User_contributed/time_axis_labels.html"><strong>time_axis_labels</strong></a> is used
+add nicely-formatted time labels to the X axis.
+
+</div>
+
+<div class=ex>
+<!--Bar_Horz_15-->
+<a name=exhrz15></a>
+<a href="Images/bar_horz_15_1_lg.png">
+<img src="Images/bar_horz_15_1_sm.png" align=left border=2></a>
+<a href="Images/bar_horz_15_2_lg.png">
+<img src="Images/bar_horz_15_2_sm.png" align=left border=2></a>
+<a href="Scripts/bar_horz_15.html">bar_horz_15.ncl</a>:
+
+This example is similar to bar_15.ncl, except it shows how to draw the bars horizontally.
+<p>
+You need to set <a href="../Document/Graphics/Resources/gsn.html#gsnXRefLine"><em>gsnXRefLine</em></a> to the minimum value of fice_avg, 
+which signals to <a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a> that this is a horizontal bar plot and not a vertical one.
+<p>
+This capability is only available in NCL version 6.4.0 or later.
+
+</div>
+
+<div class=ex>
+<!--Bar_16-->
+<a name=ex16></a>
+<a href="Images/bar_16_lg.png">
+<img src="Images/bar_16_sm.png" align=left border=2></a>
+<a href="Scripts/bar_16.html">bar_16.ncl</a>: This script shows 
+how to draw a basic stacked bar chart, similar to that in MS Excel.
+It uses dummy data, so you can run it as-is. The script was
+contributed by Rashed Mahmood at CIIT Islamabad.
+
+</div>
+
+<div class=ex>
+<!--Bar_17-->
+<a name=ex17></a>
+<a href="Images/bar_17_lg.png">
+<img src="Images/bar_17_sm.png" align=left border=2></a>
+<a href="Scripts/bar_17.html">bar_17.ncl</a>: This
+script shows how to customize a bar chart, using
+calls to 
+to <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>
+and <a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>.
+<p>
+
+In this case, the bars are filled in one color to the right of an
+X reference line, and a different color to the left.
+<p>
+
+You can customize the colors, line thicknesses, etc, by modifying
+the code in the "customize_bar_chart" procedure in this script.
+
+</div>
+
+<div class=ex>
+<!--Bar_Horz_17-->
+<a name=exhrz17></a>
+<a href="Images/bar_horz_17_lg.png">
+<img src="Images/bar_horz_17_sm.png" align=left border=2></a>
+<a href="Scripts/bar_horz_17.html">bar_horz_17.ncl</a>:
+
+This example is similar to bar_17.ncl, except it shows how to draw the
+bars horizontally.<p>
+
+In this case, the bars are filled in one color above a
+Y reference line, and a different color below.
+<p>
+
+This capability is only available in NCL version 6.4.0 or later.<p>
+
+</div>
+
+<div class=ex>
+<!--Bar_18-->
+<a name=ex18></a>
+<a href="Images/bar_18_lg.png">
+<img src="Images/bar_18_sm.png" align=left border=2></a>
+<a href="Scripts/bar_18.html">bar_18.ncl</a>: This script shows 
+how to draw a stacked bar chart with labelbars.
+It uses dummy data, so you can run it as-is. The script was
+contributed by Rashed Mahmood at CIIT Islamabad.
+
+</div>
+
+<div class=ex>
+<!--Bar_19-->
+<a name=ex19></a>
+<a href="Images/bar_19_1_lg.png">
+<img src="Images/bar_19_1_sm.png" align=left border=2></a>
+<a href="Images/bar_19_2_lg.png">
+<img src="Images/bar_19_2_sm.png" align=left border=2></a>
+<a href="Scripts/bar_19.html">bar_19.ncl</a>: This script shows 
+how to force the bars in a series of plots to be the same width.
+<p>
+
+By default, the width of the bars is based on the width of the plot divided by
+the number of bars. This means if one plot has 10 bars and another plot has
+5 bars, and the plots are the same width, then the bars in the 10-bar plot
+will be half the width of the bars in the 5-bar plot. To force the bars 
+to be the same width, you need to scale the larger bars using
+the <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartBarWidth"><em>gsnXYBarChartBarWidth</em></a> resource.
+
+</div>
+
+<div class=ex>  
+<!--Lb_22-->
+<a name=lbex22></a>
+<a href="Images/lb_22_1_lg.png">
+<img src="Images/lb_22_1_sm.png" align=left border=2></a>
+<a href="Images/lb_22_2_lg.png">
+<img src="Images/lb_22_2_sm.png" align=left border=2></a>
+<a href="Images/lb_22_3_lg.png">
+<img src="Images/lb_22_3_sm.png" align=left border=2></a>            
+<a href="Scripts/lb_22.html">lb_22.ncl</a>:
+This example shows how to apply different opacities to a bar plot    
+and a custom labelbar.
+<p>
+
+The first frame is the plot without any opacity. The second frame has
+the opacities applied to both the filled bars and labelbar, using
+an RGBA array of colors with the opacity index (index 3) set to
+a range of opacities.
+<p>
+
+The third frame uses a resource introduced in NCL V6.4.0,
+<a href="../Document/Graphics/Resources/lb.html#lbFillOpacityF"><em>lbFillOpacityF</em></a>, that allows you to
+set a single opacity value for a labelbar.  This resource is primarily
+meant to be used when creating a custom labelbar, and not with
+a labelbar associated with a filled contour or vector plot. As of NCL
+V6.4.0, any opacity applied to a contour or vector plot via resources
+like          
+<a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a>
+or <a href="../Document/Graphics/Resources/vc.html#vcGlyphOpacityF"><em>vcGlyphOpacityF</em></a> will have the
+same opacity applied to the labelbar.
+
+</div>
+
+<div class=ex>
+<!--Lb_Horz_22-->
+<a name=exlbhrz22></a>
+<a href="Images/lb_horz_22_1_lg.png">
+<img src="Images/lb_horz_22_1_sm.png" align=left border=2></a>
+<a href="Images/lb_horz_22_2_lg.png">
+<img src="Images/lb_horz_22_2_sm.png" align=left border=2></a>
+<a href="Images/lb_horz_22_3_lg.png">
+<img src="Images/lb_horz_22_3_sm.png" align=left border=2></a>
+<a href="Scripts/lb_horz_22.html">lb_horz_22.ncl</a>:
+
+This example is similar to lb_22.ncl, except it shows how to draw the
+bars horizontally.<p>
+
+This capability is only available in NCL version 6.4.0 or later.<p>
+
+</div>
+
+<div class=ex>
+<!--tm_3-->
+<a name=extm3></a>
+<a href="Images/tm_3_lg.png">
+<img src="Images/tm_3_sm.png" align=left border=2></a> 
+<a href="Scripts/tm_3.html">tm_3.ncl</a>:
+Shows how to remove axis borders, tick marks, and tick mark labels. Demonstrates how
+to adjust the font height of tick mark labels.
+<p>           
+(Top Panel) By setting <a href="../Document/Graphics/Resources/tm.html#tmYROn"><em>tmYROn</em></a> to False and <a href="../Document/Graphics/Resources/tm.html#tmYRBorderOn"><em>tmYRBorderOn</em></a> to False,
+the right Y-axis is completely turned off. (The right Y-axis and top X-axis labels are by default turned off.)
+The same is done to the top X-axis, using <a href="../Document/Graphics/Resources/tm.html#tmXTOn"><em>tmXTOn</em></a> and
+<a href="../Document/Graphics/Resources/tm.html#tmXTBorderOn"><em>tmXTBorderOn</em></a>.         
+<p>
+(Bottom Panel) <a href="../Document/Graphics/Resources/tm.html#tmXBLabelFontHeightF"><em>tmXBLabelFontHeightF</em></a> is used to set the bottom X-axis tick mark label
+font size, and <a href="../Document/Graphics/Resources/tm.html#tmYLLabelsOn"><em>tmYLLabelsOn</em></a> is used to remove the left Y-axis tick mark labels.
+</div>
+
+<div class=ex>
+<!--Tm_Horz_3-->
+<a name=extmhrz3></a>
+<a href="Images/tm_horz_3_lg.png">
+<img src="Images/tm_horz_3_sm.png" align=left border=2></a>
+<a href="Scripts/tm_horz_3.html">tm_horz_3.ncl</a>:
+
+This example is similar to tm_3.ncl, except it shows how to draw the
+bars horizontally, by setting:
+<p>
+<pre>
+  res@<a href="../Document/Graphics/Resources/gsn.html#gsnXRefLine"><em>gsnXRefLine</em></a> = 0.
+  res@<a href="../Document/Graphics/Resources/gsn.html#gsnRightXRefLineColor"><em>gsnRightXRefLineColor</em></a> = "White"
+  res@<a href="../Document/Graphics/Resources/gsn.html#gsnLeftXRefLineColor"><em>gsnLeftXRefLineColor</em></a>  = "Gray"
+</pre>
+<p>
+
+This capability is only available in NCL version 6.4.0 or later.<p>
+
+</div>
+
+<div class=ex>
+<!--Bar_20-->
+<a name=ex20></a>
+<a href="Images/bar_20_lg.png">
+<img src="Images/bar_20_sm.png" align=left border=2></a>
+<a href="Scripts/bar_20.html">bar_20.ncl</a>: This script shows how to
+fill bars using RGB or RGB/A arrays with
+the <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartColors"><em>gsnXYBarChartColors</em></a> resource, a
+feature added in NCL V6.4.0.
+<p>
+
+The second plot additionally adds text strings to each
+bar showing the "alpha" value used.
+
+</div>
+
+<div class=ex>
+<!--Bar_21-->
+<a name=ex21></a>
+<a href="Images/bar_21_1_lg.png">
+<img src="Images/bar_21_1_sm.png" align=left border=2></a>
+<a href="Images/bar_21_2_lg.png">
+<img src="Images/bar_21_2_sm.png" align=left border=2></a>
+<a href="Scripts/bar_21.html">bar_21.ncl</a>: This script shows how to
+create a bar chart of already binned data. Just for illustrative purposes,
+we first create a histogram of random 1D data using
+<a href="../Document/Graphics/Interfaces/gsn_histogram.html"><strong>gsn_histogram</strong></a>. This plotting
+function returns the binned data as an attribute called "NumInBins".
+You can use this to create a bar chart that looks similar to the histogram.
+<p>
+
+The <a href="../Document/Graphics/Resources/gsn.html#gsnXYBarChartBarWidth"><em>gsnXYBarChartBarWidth</em></a> resource is used
+to make the bars slightly smaller than the default width.
+
+</div>
+
+<div class=ex>
+<!--Bar_22-->
+<a name=ex22></a>
+<a href="Images/bar_22_lg.png">
+<img src="Images/bar_22_sm.png" align=left border=2></a>
+<a href="Scripts/bar_22.html">bar_22.ncl</a>: This script shows how to
+create a more customized bar plot that has a gray filled background,
+white grid lines, and thicker bar outlines. This plot uses the same
+data and looks similar
+to <a href="scatter.html#ex13">scatter_13.ncl</a> on the scatter
+plot page.
+<p>
+
+In order to get the bars on top of the gray
+background, <a href="../Document/Graphics/Interfaces/gsn_csm_blank_plot.html"><strong>gsn_csm_blank_plot</strong></a> is
+used to create canvases for the
+background, <a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a> is used to
+create the bar plots, and <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> is used to
+overlay each XY bar plot on the gray canvas.
+<p>
+
+A *lot* of tickmark resources are set to customize the labels, grid
+lines, and sizes.
+
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/bar.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:11 GMT -->
+</html>
+
+

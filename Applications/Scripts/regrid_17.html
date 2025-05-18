@@ -1,0 +1,262 @@
+load "./grid2geocircle.ncl"        ; radial interpolation library
+;================================================================================================
+;                               MAIN
+;================================================================================================
+
+;---Open & Read a TRMM file
+
+   vName = "precip"  
+
+   latS  =   0.0
+   latN  =  24.0
+   lonW  =  78.0      ; longitudes on the file are 0->360
+   lonE  =  98.0
+
+   dirTrmm  = "./" 
+   filTrmm  = "3B42.20121022_20121031.daily_V7.nc"
+   pthTrmm  = dirTrmm+filTrmm
+   f        = addfile(pthTrmm, "r")
+   x        = f->$vName$(:,{latS:latN},{lonW:lonE})    ; [time | 10] x [lat | 96] x [lon | 80]0]
+   printVarSummary(x)
+   printMinMax(x,0)
+   print("---------")
+
+   dimx  = dimsizes(x)             
+   rankx = dimsizes(dimx)          ; rankx=4
+   ntim  = dimx(0)   
+
+;---Specify the central lat/lon point(s). 
+
+   clat   = (/ 7.5,  10.0 /)    
+   clon   = (/85.0,  90.0 /)   
+   clat!0 = "center_lat"
+   clon!0 = "center_lon"
+   nctr   = dimsizes(clat)
+   print("nctr="+nctr)
+   print("---------")
+
+;---Specify radii: can be unequally spaced but must be monotonically increasing
+
+   km2d         = 111.1            
+   km2d@long_name = "conversion factor: km=>degree"
+   km2d@units   = "km"
+
+   kmdist       = 400                  ; user specified maximum radius in km
+   kmdist@units = "km"
+                                       ; 300km/111.1 ==> approx 2.7 degrees 
+   rmx          = kmdist/km2d          ; 600km/111.1 ==> approx 5.5 degrees
+   rmx@long_name= "maximum azimuthal radius"
+   rmx@units    = "great circle degrees"
+
+   nrad         = 17                   ; user specified; arbitrary
+   radius       = fspan(0,rmx,nrad)    ; radii (degrees)
+   radius!0     = "radius"
+   radius@units =  rmx@units 
+   radius@long_name = "Radii"
+
+;---Calculate the interpolated value and lat/lon locations of each circle at each radius
+    
+   N = 180
+   x_geocircle = rgrid2geocircle(x, clat, clon, radius, N, False)
+   printVarSummary(x_geocircle)
+   print("-----")
+
+;---Clarity: Explicitly extract the returned variables from the returned list variable
+
+   xrad = x_geocircle[0]          ; precipitation 
+   plat = x_geocircle[1]          ; radial [azimuthal] latitudes 
+   plon = x_geocircle[2]          ;   "        :       longutudes
+
+   printVarSummary(xrad)          ; [time | 2] x [center | 2] x [radius | 17] x [circle | 180]
+   printMinMax(xrad,0)
+   print("---------")
+   printVarSummary(plat)          ; [center | 2] x [radius | 17] x [circle | 180]          
+   printMinMax(plat,0)
+   print("---------")
+   printVarSummary(plon)          ; [center | 2] x [radius | 17] x [circle | 180]          
+   printMinMax(plon,0)
+   print("---------")
+
+;---Create a netCDF file
+
+   netCDF = False
+   if (isvar("netCDF") .and. netCDF) then
+        delete( [/plat@radii_input_values, plon@radii_input_values/] )  ; redundant
+
+        dirNC = "./"
+        filNC = "radial.3B42.20121022_20121031.daily_V7.nc"
+        pthNC = dirNC+filNC
+        system("/bin/rm -f "+pthNC)          ; explicitly remove any pre-existing file
+
+        clat@long_name = "geocircle center latitudes"
+        clat@units     = "degrees_north"
+        clon@long_name = "geocircle center latitudes"
+        clon@units     = "degrees_east"
+
+        ncdf = addfile(pthNC ,"c")           ; open output netCDF file
+
+;---Create global attributes of the file (optional)
+
+        fAtt               = True            ; assign file attributes
+        fAtt@title         = "Values at Specified Radii and Central Location"
+        fAtt@source_file   = fili
+        fAtt@Conventions   = "CF-1.0"
+        fAtt@creation_date = systemfunc ("date")
+        fileattdef( ncdf, fAtt )            ; copy file attributes
+
+;---Make time UNLIMITED ; recommended  for most applications
+
+        filedimdef(ncdf,"time",-1,True)
+
+;---Write variables to nc file
+
+        ncdf->CLAT         = clat
+        ncdf->CLON         = clon
+        ncdf->PLAT         = plat
+        ncdf->PLON         = plon
+        ncdf->PRECIP_RADIUS= xrad   
+    end if                               ; netCDF
+
+;================================================================================================
+;---CONVERT lat/lon to Cartesian
+;================================================================================================
+
+  rearth       = 6371.22                 ; average radius of earth 
+  rearth@units = "km"
+                                         ; convert azimuthal lat and lon to cartesian
+  xyzCart       = css2c(plat,plon)*rearth; [3] x [2] x [15] x [180] 
+  xyzCart@units = rearth@units   
+  copy_VarCoords(plat,xyzCart(0,:,:,:))
+  xyzCart!0      =  "cartesian"
+                                         ; [cartesian | 3] ===> x,y,z 
+  printVarSummary(xyzCart)               ; [cartesian | 3] x [center |2] x[radius | 17] x [ circle | 180]
+  printMinMax(xyzCart,0)
+  print("-----")
+
+;---Convert center latitudes and longitudes to Cartesian
+
+  xyzCtrCart = css2c(clat, clon)*rearth  ; [3] x [2]
+  copy_VarCoords(clat,xyzCtrCart(0,:))
+  xyzCtrCart!0 =  "cartesian"            ; left dimension refers to Cartesian x,y,z
+  xyzCtrCart@long_name = "Cartesian Center Locations"
+  xyzCtrCart@units = rearth@units 
+
+  printVarSummary(xyzCtrCart)            ; [cartesian | 3] x [center | 2]
+  printMinMax(xyzCtrCart,0)
+  print("-----")
+  print(xyzCtrCart)
+  print("-----")
+
+;================================================================================================
+;---ERROR CHECK: xyzCart: ALL distances should be 'rearth. 
+;---Allow for some rounding use an epsilon. 
+;---Not necessary ... just for completeness.
+;================================================================================================
+
+  do nc=0,nctr-1
+     RE    = sqrt(xyzCart(0,nc,:,:)^2 + xyzCart(1,nc,:,:)^2 + xyzCart(2,nc,:,:)^2)
+     REPS  = 0.01  ; small number relative to 'rearth' to allow for rounding [km]
+
+     if (all(RE.gt.(rearth-REPS)) .and. all(RE.lt.(rearth+REPS))) then
+         print("CHECK: GOOD:  all(RE) = rearth="+rearth)
+     else
+         print("CHECK: ERROR: all(RE) .ne. rearth="+rearth)
+     end if
+     print("-----")
+  end do              ; nc
+
+;================================================================================================
+;---Center the cartesin locations about clat/clon ==> xyzCtrCart
+;================================================================================================
+
+  do nc=0,nctr-1
+    do nr=0,nrad-1
+       xyzCart(0,nc,nr,:) = xyzCart(0,nc,nr,:)-xyzCtrCart(0,nc)
+       xyzCart(1,nc,nr,:) = xyzCart(1,nc,nr,:)-xyzCtrCart(1,nc)
+       xyzCart(2,nc,nr,:) = xyzCart(2,nc,nr,:)-xyzCtrCart(2,nc)
+    end do                ; nr  
+  end do                  ; nc
+
+;================================================================================================
+;---ERROR check; distance of the outermost radius from local center: should be approx 'kmdist'       
+;---             Not necessary. This is just acheck.
+;================================================================================================
+
+  do nc=0,nctr-1
+     KMDIST           = sqrt(xyzCart(0,nc,nrad-1,:)^2 \
+                            +xyzCart(1,nc,nrad-1,:)^2 \
+                            +xyzCart(2,nc,nrad-1,:)^2 )
+     KMDIST@long_name = "distances of the outermost radius from local center"
+     KMDIST@units     = kmdist@units 
+     
+     KMEPS = 1.0  
+     if (all(KMDIST.gt.(kmdist-KMEPS)) .and. all(KMDIST.lt.(kmdist+KMEPS))) then
+         print("CHECK: GOOD: all(KMDIST) = kmdist ="+kmdist)
+     else
+         print("CHECK ERROR: all(KMDIST) .ne. kmdist ="+kmdist)
+         print(KMDIST)
+     end if
+     print("-----")
+  end do                  ; nc
+
+  do nc=0,nctr-1          ; nc = 0
+     printMinMax(xyzCart(0,nc,:,:),1) 
+     printMinMax(xyzCart(1,nc,:,:),0) 
+     printMinMax(xyzCart(2,nc,:,:),0)
+  end do
+
+;================================================================================================
+;  PLOT
+;================================================================================================
+
+  ymdh = cd_calendar(x&time,-3)  ; used in plot totle 
+  print(ymdh)
+  print("-----")
+
+  pltDir  = "./"
+  pltType = "png"
+  pltName = "regrid_17"
+  pltPath = pltDir+pltName
+
+  wks  = gsn_open_wks(pltType,pltPath)
+
+  cnres               = True
+  cnres@gsnDraw       = False
+  cnres@gsnFrame      = False
+  cnres@cnFillOn      = True
+  cnres@cnLinesOn     = False
+  cnres@trGridType    = "TriangularMesh"
+  cnres@tiYAxisString = "KM from Center"
+  cnres@tiXAxisString = "KM from Center"
+
+  cnres@cnLevelSelectionMode = "ExplicitLevels"
+  colors             = (/"Snow","PaleTurquoise","PaleGreen","SeaGreen3" ,"Yellow"  \
+                        ,"Orange","HotPink","Red","Violet", "Purple", "Brown","Black"/)
+  cnres@cnLevels       = (/0.1,1,2.5,5,10,15,20,25,50,75,100/)
+  cnres@cnFillPalette  = colors       ; set color map
+  cnres@cnFillMode     = "RasterFill"
+
+  plres  = True
+  plres@gsMarkerIndex = 16          ; Filled Circle
+  plres@gsMarkerSizeF = 0.015     
+  plres@gsMarkerThicknessF = 0.10      
+  plres@gsMarkerColor = "foreground"; "white"  
+
+  do nt_plot=0, 0     ; ntim-1
+    do nc_plot=0,nctr-1
+
+       cnres@tiMainString = "Cartesian: "+ymdh(nt_plot)    \
+                           +": ["+sprintf("%5.1f",clat(nc_plot)) \
+                           +","  +sprintf("%5.1f",clon(nc_plot))+"]"
+
+       cnres@sfXArray = -xyzCart(0,nc_plot,:,:)    ; centered: do not know why - is necessary
+       cnres@sfYArray =  xyzCart(2,nc_plot,:,:)    ; centered
+     printMinMax(cnres@sfXArray ,1) 
+     printMinMax(cnres@sfYArray ,0) 
+
+       contour = gsn_csm_contour(wks,xrad(nt_plot,nc_plot,:,:),cnres)
+       contour@$unique_string("polymark")$ = gsn_add_polymarker(wks,contour, 0, 0, plres) 
+       draw(contour)
+       frame(wks)
+    end do
+  end do

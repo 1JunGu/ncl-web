@@ -1,0 +1,715 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/crop.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:06:28 GMT -->
+<head>
+<meta name="description" content="NCL data analysis example page. 
+Evapotranspiration: Penman-Monteith: Monthly Water Balance Model">
+<TITLE>Evapotranspiration: Penman-Monteith, Monthly Water Balance Model</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+<h1>Crop: Evapotranspiration: FAO 56, Penman-Monteith, Monthly Water Balance Model</h1>
+<div class=mainimage>
+<img src="Images/fao56.png"> 
+</div> 
+
+<div class=text>
+The <b>F</b>ood and <b>A</b>griculture <b>O</b>rganization (<b>FAO</b>) Irrigation and Drainage 
+paper <b>56</b> <a href="http://www.fao.org/docrep/X0490E/x0490e00.htm"><b>document</b></a> 
+provides the definitive standardized methodology for deriving estimates 
+of reference evapotranspiration (<i>aka</i>, <b>ET0</b>) for a hypothetical "short" crop. 
+Subsequently, the ASCE-ET (American Society of Civil Engineering) created additional parameters 
+for a hypothetical "tall" crop (full-cover alfalfa). See Example 1a.
+<p>
+The primary purpose of the Penman-Monteith method is to calculate the loss of water 
+from land surfaces due to evaporation. 
+</div> 
+<p>
+<div class=text>
+NCL has implemented virtually all the FAO referenced equations into a 
+<a href="../Document/Functions/crop.html"><b>library of functions</b></a> 
+which calculate many of the terms required to estimate evapotranspirtation. 
+The "crop" function category is documented
+ <a href="../Document/Functions/crop.html"><b>here</b></a>.
+</div>
+<p>
+<div class=text>
+The following [1]-[3] descriptions are quoted from <b>WikiPedia</b>: 
+<p>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Evapotranspiration"><b>Evapotranspiration (ET)</b></a> is the sum of evaporation and plant transpiration from the Earth's land and ocean surface to the atmosphere. Evaporation accounts for the movement of water to the air from sources such as the soil, canopy interception, and waterbodies. Transpiration accounts for the movement of water within a plant and the subsequent loss of water as vapor through stomata in its leaves. Evapotranspiration is an important part of the water cycle.
+<p>
+<li><a href="https://en.wikipedia.org/wiki/Evapotranspiration"><b>Reference evapotranspiration (ET0)</b></a>, sometimes incorrectly referred to as potential ET, is a representation of the environmental demand for evapotranspiration and represents the evapotranspiration rate of a short green crop (grass), completely shading the ground, of uniform height and with adequate water status in the soil profile. It is a reflection of the energy available to evaporate water, and of the wind available to transport the water vapour from the ground up into the lower atmosphere. Actual evapotranspiration is said to equal reference evapotranspiration when there is ample water. Some US states utilize a full cover alfalfa reference crop that is 0.5 m in height, rather than the short green grass reference, due to the higher value of ET from the alfalfa reference.
+<p>
+<li><a href="https://en.wikipedia.org/wiki/Potential_evaporation"> <b>Potential evaporation</b> or <b>potential evapotranspiration (PET)</b></a> is defined as the amount of evaporation that would occur if a sufficient water source were available. If the actual evapotranspiration is considered the net result of atmospheric demand for moisture from a surface and the ability of the surface to supply moisture, then PET is a measure of the demand side. Surface and air temperatures, insolation, and wind all affect this. A dryland is a place where annual potential evaporation exceeds annual precipitation.
+<p>
+<li> A brief description of the difference between potential evapotranspiration (PET) and reference evapotranspiration(ETo) is
+the Irman and Hamon (2003/2014) reference. It is available <a href="https://edis.ifas.ufl.edu/ae256"><b>here</b></a>.
+<p>
+<li> A brief description of the significance of evapotranspiration and its relationship to drought and the hydrological cycle is
+Hanson (1991). It is available <a href="https://geochange.er.usgs.gov/sw/changes/natural/et/"><b>here</b></a>.
+</ol>
+
+<p>
+<b>References: FAO-56: Penman-Monteith</b>
+<p>
+<pre>
+  Richard G. Allen, Luis S. Pereira, Dirk Raes, Martin Smith (1998) 
+  Crop Evapotranspiration - Guidelines for Computing Crop Water Requirements 
+       FAO Irrigation and drainage paper 56. Rome, Italy: 
+  Food and Agriculture Organization of the United Nations. 
+  WWW: <a href="http://www.fao.org/docrep/X0490E/x0490e00.htm"><b>http://www.fao.org/docrep/X0490E/x0490e00.htm</b></a>
+  In particular: Chapter 3 (Meteorological Data) & Chapter 4 (Determination of ET0)
+
+  --------------------------
+
+  Zotarelli, L. et al (2013)
+  Step by Step Calculation of the Penman-Monteith Evapotranspiration (FAO-56 Method)
+  WWW: <a href="http://edis.ifas.ufl.edu/pdffiles/ae/ae45900.pdf"><b>http://edis.ifas.ufl.edu/pdffiles/ae/ae45900.pdf</b></a>
+
+  --------------------------
+
+  Tools for Agro-Meteorology and Biophysical Modelling
+  <a href="http://agsys.cra-cin.it/tools/EvapoTranspiration/help/"><b>http://agsys.cra-cin.it/tools/EvapoTranspiration/help/</b></a>
+          Click <i>Equations</i>, <i>Evapotranspirations Equations</i>, <i>Supporting Equations</i>
+</pre>
+<p>
+<b>References: Actual, Reference and Potential Evapotranspiration</b>
+<p>
+<pre>
+  Pidwirny, M. (2006). 
+  Actual and Potential Evapotranspiration 
+  Fundamentals of Physical Geography, 2nd Edition.
+  WWW: <a href="http://www.physicalgeography.net/fundamentals/8j.html"><b>http://www.physicalgeography.net/fundamentals/8j.html</b></a>
+
+  Irmak, S. and D.Z. Haman (2003; original; 2014: most recent)
+  Evapotranspiration: Potential or Reference?
+  WWW: <a href="https://edis.ifas.ufl.edu/ae256"><b>https://edis.ifas.ufl.edu/ae256</b></a>
+  Agricultural and Biological Engineering Department, UF/IFAS Extension. 
+<p>
+<b>References: ASCE Standardized Reference Evapotranspiration Equation </b>
+<pre>
+  Jensen, M.E., R.D. Burman, and R.G. Allen. (1990) 
+  Evapotranspiration and Irrigation Water Requirements 
+  ASCE Manuals and Reports on Engineering Practice No. 70
+  Am. Soc. Civil Engr., New York, NY. 332 pp.
+</pre>
+</div>
+
+<div class=ex>
+<!--fao56_1-->
+<a name=ex1></a>
+<a href="Images/fao56_1_1_lg.png">
+<img src="Images/fao56_1_1_sm.png" align=left border=2></a>
+<a href="Images/fao56_1_2_lg.png">
+<img src="Images/fao56_1_2_sm.png" align=left border=2></a>
+<a href="Images/fao56_1_3_lg.png">
+<img src="Images/fao56_1_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/fao56_1.html">fao56_1.ncl</a>: 
+<b>Example 1:</b> Using data generated by the CESM-CLM component, 
+this example illustrates the <b>standardized approach</b> 
+to computing the Penman-Monteith reference evapotranspiration via FAO-56 methodology:
+(<a href="../Document/Functions/Crop/refevt_penman_fao56.html"><strong>refevt_penman_fao56</strong></a>). 
+<p>
+This example uses the FAO-56 recommended:
+<p>
+<ul>
+<li> <em>albedo</em>=0.23: This albedo is <b>not</b> the atmospheric or land surface albedo. Rather,
+the albedo refers to light reflected by the crop leaf surface ('leaf_albedo').
+<p>
+<li> <em>cnumer</em>=900 and <em>cdenom</em>=0.34. These are the FAO-56 values appropriate for the
+hypothetical (short) reference crop. They are appropriate for day and month estimates. 
+To apply to hourly data use (<em>cnumer</em>=37.5 [=900.0/24]) 
+</ul>
+<p>
+</div>
+
+<div class=ex>
+<!--fao56_1a-->
+<a name=ex1b></a>
+<a href="Images/fao56_1a_1_lg.png">
+<img src="Images/fao56_1a_1_sm.png" align=left border=2></a>
+<a href="Images/fao56_1a_2_lg.png">
+<img src="Images/fao56_1a_2_sm.png" align=left border=2></a>
+<a href="Images/fao56_1a_3_lg.png">
+<img src="Images/fao56_1a_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/fao56_1a.html">fao56_1a.ncl</a>: <b>Example 1a:</b> Same as Example 1 but use the "tall" 
+hypothetical reference crop coefficients specified by the ASCE-ET (American Society of Civil Engineering)
+for a hypothetical "tall" crop (<em>cnumer</em>=1600 and <em>cdenom</em>=0.38). 
+<p>
+</div>
+
+<div class=ex>
+<!--fao56_2-->
+<a name=ex2></a>
+<a href="Images/fao56_2_lg.png">
+<img src="Images/fao56_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/fao56_2.html">fao56_2.ncl</a>: <b>Example 2:</b>
+Use the <a href="../Document/Functions/Crop/radext_fao56.html"><strong>radext_fao56</strong></a> and <a href="../Document/Functions/Crop/daylight_fao56.html"><strong>daylight_fao56</strong></a>
+to calculate the extraterrestrial radiation and maximum number of daylight hours 
+as described in <a href="http://www.fao.org/docrep/x0490e/x0490e07.htm"><b>FAO 56</b></a>.
+<p>
+<b>NOTE_1:</b> The assumptions used to derive the 'simple' equations used 
+by FAO-56 are less appropriate for latitudes poleward of (say) 55-60 degrees. 
+<p>
+<b>NOTE_2:</b> Printed values (<b>W/m2</b>) at selected latitudes for each day of the year are 
+<a href="Prints/radext_day_lat.txt"><b>here</b></a>. These are from Example 3 at
+<a href="../Document/Functions/Crop/radext_fao56.html"><strong>radext_fao56</strong></a>.
+<p>
+<b>NOTE_3:</b> If the user wishes all returned _FillValue to be set to zero (0.0), then after the 
+<a href="../Document/Functions/Crop/radext_fao56.html"><strong>radext_fao56</strong></a> function use the <a href="../Document/Functions/Built-in/where.html"><strong>where</strong></a> 
+and <a href="../Document/Functions/Built-in/ismissing.html"><strong>ismissing</strong></a> functions to set all _FillValue to zero. Specifically:
+<p>
+<pre>
+  radext = <a href="../Document/Functions/Crop/radext_fao56.html"><strong>radext_fao56</strong></a>(jday, lat, ounit)
+  radext = <a href="../Document/Functions/Built-in/where.html"><strong>where</strong></a>(<a href="../Document/Functions/Built-in/ismissing.html"><strong>ismissing</strong></a>(radext), 0, radext)  ; set all _FillValue = 0.0
+</pre>
+</div>
+
+<div class=ex>
+<!--fao56_3-->
+<a name=ex3></a>
+<a href="Images/fao56_3_lg.png">
+<img src="Images/fao56_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/fao56_3.html">fao56_3.ncl</a>: <b>Example 3:</b>
+Use <a href="../Document/Functions/Crop/daylight_fao56.html"><strong>daylight_fao56</strong></a> to calculate the maximum daylight duration 
+as described in <a href="http://www.fao.org/docrep/x0490e/x0490e07.htm"><b>FAO 56</b></a>.
+Compare the theoretical maximum daylight with the modeled ('observed') sunshine duration 
+for a particular day by computing the ratio. 
+<p>
+Use two different types of label bars: (a) triangle ends and (b) fixed ends with no outer boxes.
+</div>
+<div class=text>
+<p>
+<b>Monthly Water-Balance Model</b>
+The McGabe and Markstrom (2007) Monthly Water Balance Model (<b>MWBM</b>)) allocates monthly water 
+to various components of the hydrologic system.  
+A visual diagram of the <b>MWBM</b> is contained within the McCabe and  Markstrom (2007) reference. 
+Also: <a href="https://alm.engr.colostate.edu/cb/wiki/17027"><b>here</b></a>. 
+<p>
+NCL's <a href="../Document/Functions/Contributed/mwbm_driver.html"><strong>mwbm_driver</strong></a> differs from the  
+McGabe and Markstrom (2007) implementation.  
+It allows the user to input monthly <em>pet</em> and <em>snow total</em> while the USGS 
+implementation calculates these variables internally. 
+An advantage of the <a href="../Document/Functions/Contributed/mwbm_driver.html"><strong>mwbm_driver</strong></a>
+approach is that users can precompute <em>pet</em> using one of NCL's suite of 
+'<b>PET</b>' functions (see below). Further, if available, the user can explicitly input 
+the observed snow (liquid equivalent) rather than use empirical estimates. 
+<p>
+Multiple hydrologic variables are returned, including:
+<ul>
+   <li> Actual EvapoTranspiration (AET): Actual amount of evapotranspiration that occurs,
+   <li> Direct RunOff (DRO): Water that flows over the ground surface <b>directly</b> into streams, rivers, or lakes.
+   <li> RunOff (RO) [Surplus runoff]: Precipitation that did not get (infiltrated) absorbed
+                         into the soil or did not evaporate.
+   <li> Soil Moisture Storage (SMS): Water that is held in the spaces between soil particles.
+               Commonly:  Surface soil moisture is the water that is in the upper 10 cm of soil,
+                          whereas root zone soil moisture is the water that is available to plants,
+                          which is generally considered to be in the upper 200 cm of soil.
+                          Soil moisture levels rise when there is sufficient rainfall to exceed losses
+                          to evapotranspiration and drainage to streams and groundwater.  Often, they
+                          are depleted during the summer when evapotranspiration rates are high.
+   <li> Snow Melt (SM): surface runoff produced from melting snow.
+</ul>
+<p>
+What is the difference between water holding capacity and field capacity?
+Available water is the difference between field capacity which is the maximum amount 
+of water the soil can hold and wilting point where the plant can no longer extract 
+water from the soil. Water holding capacity is the total amount of water a soil can 
+hold at field capacity.
+<p>
+See the <b>mwbm_*.ncl</b> examples for various methods of application..
+<p>
+<b>Primary Reference:</b>
+<pre>
+   <a href="https://pubs.usgs.gov/of/2007/1088/pdf/of07-1088_508.pdf"><b>A Monthly Water-Balance Model Driven By a Graphical User Interface</b></a>
+   Gregory J. McCabe and Steven L. Markstrom
+   U.S. Geological Survey; U.S. Department of the Interio
+   Open-File Report 2007–1088
+</pre>
+<b>Other References:</b>
+<pre>
+   <a href="https://doi.org/10.3133/ofr20161212"><b>The U.S. Geological Survey Monthly Water Balance Model Futures Portal</b></a>
+   Bock, A.R., Hay, L.E., Markstrom, S.L., Emmerich, Chris, and Talbert, Marian (2017)
+   U.S. Geological Survey Open-File Report 2016-1212, 21 p. 
+
+   <a href="https://www.hydrol-earth-syst-sci.net/20/2861/2016/hess-20-2861-2016.pdf"><b>Parameter regionalization of a monthly water balance model for
+              the conterminous United States</b></a>
+   Bock, A.R. et al
+   Hydrol. Earth Syst. Sci., 20, 2861-2876, 2016
+
+   <a href="https://doi.org/10.1016/j.jhydrol.2015.09.015"><b>Comparison of Performance of Twelve Monthly Water Balance Models 
+             in Different Climatic Catchments of China</b></a>
+   Peng Bai, Xiaomang Liu, Kang Liang, Changming Liu
+   Journal of Hydrology
+   Volume 529, Part 3, October 2015, Pages 1030-1040
+</pre>
+</div>
+<p>
+<div class=text>
+The <b>mwbm_driver</b> script is available <a href="Scripts/MWBM_DRIVER.html"><b>here</b></a>.
+</div>
+<p>
+<div class=ex>
+<!--mwbm_1-->
+<a name=ex1></a>
+<a href="Images/mwbm_1_1_lg.png">
+<img src="Images/mwbm_1_1_sm.png" align=left border=2></a>
+<a href="Images/mwbm_1_2_lg.png">
+<img src="Images/mwbm_1_2_sm.png" align=left border=2></a>
+<a href="Images/mwbm_1_3_lg.png">
+<img src="Images/mwbm_1_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/mwbm_1.html">mwbm_1.ncl</a>: 
+Read the <a href="Data/asc/MWBM_USGS.input_file.txt"><b>ascii text file</b></a> 
+(here: <b>MWBM_USGS.input_file.txt</b>) used by McGabe and Markstrom (2007). 
+Use <a href="../Document/Functions/Crop/_b_refevt_hamon_/b_.html"><strong><b>refevt_hamon</b></strong></a> to calculate the 
+potential evapotranspiration.  Print and plot selected hydrologic components.
+</div>
+
+<div class=ex>
+<!--mwbm_2-->
+<a name=ex2></a>
+<a href="Images/mwbm_2_1_lg.png">
+<img src="Images/mwbm_2_1_sm.png" align=left border=2></a>
+<a href="Images/mwbm_2_2_lg.png">
+<img src="Images/mwbm_2_2_sm.png" align=left border=2></a>
+<a href="Images/mwbm_2_3_lg.png">
+<img src="Images/mwbm_2_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/mwbm_2.html">mwbm_2.ncl</a>: 
+Same as Example 1 but read observed monthly data for Boulder, CO [USA]. The data are
+contained within netCDF files.  Print and plot selected hydrologic components.
+</div>
+
+<div class=ex>
+<!--mwbm_3-->
+<a name=ex3></a>
+<a href="Images/mwbm_3_1_lg.png">
+<img src="Images/mwbm_3_1_sm.png" align=left border=2></a>
+<a href="Images/mwbm_3_2_lg.png">
+<img src="Images/mwbm_3_2_sm.png" align=left border=2></a>
+<a href="Images/mwbm_3_3_lg.png">
+<img src="Images/mwbm_3_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/mwbm_3.html">mwbm_3.ncl</a>: 
+Read CESM time series from a 'control' experiment at user specified grid locations.
+Change units to mm/month.  Print and plot selected hydrologic components.
+<p>
+The example uses just one location corresponding to Manaus, Brazil. However, there can be
+multiple locations specified.
+</div>
+
+<div class=ex>
+<!--mwbm_4-->
+<a name=ex4></a>
+<a href="Images/mwbm_4_1_lg.png">
+<img src="Images/mwbm_4_1_sm.png" align=left border=2></a>
+<a href="Images/mwbm_4_2_lg.png">
+<img src="Images/mwbm_4_2_sm.png" align=left border=2></a>
+<a href="Images/mwbm_4_3_lg.png">
+<img src="Images/mwbm_4_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/mwbm_4.html">mwbm_4.ncl</a>: 
+Read CESM time series data from a grid section over Southern California.
+Use <a href="../Document/Functions/Shea_util/_b_landsea_mask_/b_.html"><strong><b>landsea_mask</b></strong></a> to create a mask 
+so that ocean locations are not used.  Average  all hydrolocal quantities for the grid section. 
+Print and plot averaged hydrologic components.
+</div>
+
+<div class=ex>
+<!--mwbm_5-->
+<a name=ex5></a>
+<a href="Images/mwbm_5_1_lg.png">
+<img src="Images/mwbm_5_1_sm.png" align=left border=2></a>
+<a href="Images/mwbm_5_2_lg.png">
+<img src="Images/mwbm_5_2_sm.png" align=left border=2></a>
+<a href="Images/mwbm_5_3_lg.png">
+<img src="Images/mwbm_5_3_sm.png" align=left border=2></a>
+<a href="Images/mwbm_5_4_lg.png">
+<img src="Images/mwbm_5_4_sm.png" align=left border=2></a>
+<a href="Images/mwbm_5_5_lg.png">
+<img src="Images/mwbm_5_5_sm.png" align=left border=2></a>
+<a href="Images/mwbm_5_6_lg.png">
+<img src="Images/mwbm_5_6_sm.png" align=left border=2></a>
+<a href="Images/mwbm_5_7_lg.png">
+<img src="Images/mwbm_5_7_sm.png" align=left border=2></a>
+<a href="Images/mwbm_5_8_lg.png">
+<img src="Images/mwbm_5_8_sm.png" align=left border=2></a>
+<p>
+<a href="Scripts/mwbm_5.html">mwbm_5.ncl</a>: 
+Read CESM gridded (<b>CMIP6-piControl</b>) monthly data for 99 years.
+Extract data from a region which includes the Mississippi River Basin (MRB).  Use 
+a <a href="shapefiles.html"><b>MRB shapefile [shapefile_4]</b></a> 
+to select grid points within the MRB.  Print and plot time series of MRB's averaged hydrologic components.
+Calculate the trend of each source and derived component.  Plot 30-year climatologies of soil moisture 
+storage for the first and last 30-years. Plot the differences. 
+<pre>
+
+   + <b>Figure 1:</b> Initial input variables (Temperature, Precipitation, PET, Snow)
+   + <b>Figure 2:</b> MWBM derived (a) Actual Evapotranspiration; (b) Snow Storage; (c) Runoff 
+   + <b>Figure 3:</b> MWBM derived (a) Soil Moisture Storage (SMS); (b) Surplus; (c) Deficit
+   + <b>Figure 4:</b> Annual means with trend estimate: "p" greater/equal to 0.95 is significant
+   + <b>Figure 5:</b> SMS: Monthly Climatology entire period 
+   + <b>Figure 6:</b> SMS: Monthly Climatology: First 30-years
+   + <b>Figure 7:</b> SMS: Monthly Climatology: Last  30-years
+   + <b>Figure 8:</b> SMS: Monthly Climatology Differences: (Last-First)-30 years
+</pre>
+</div>
+
+<div class=ex>
+<!--mwbm_6-->
+<a name=ex6></a>
+<a href="Images/mwbm_6_1_lg.png">
+<img src="Images/mwbm_6_1_sm.png" align=left border=2></a>
+<a href="Images/mwbm_6_2_lg.png">
+<img src="Images/mwbm_6_2_sm.png" align=left border=2></a>
+<a href="Images/mwbm_6_3_lg.png">
+<img src="Images/mwbm_6_3_sm.png" align=left border=2></a>
+<a href="Images/mwbm_6_4_lg.png">
+<img src="Images/mwbm_6_4_sm.png" align=left border=2></a>
+<a href="Images/mwbm_6_5_lg.png">
+<img src="Images/mwbm_6_5_sm.png" align=left border=2></a>
+<a href="Images/mwbm_6_6_lg.png">
+<img src="Images/mwbm_6_6_sm.png" align=left border=2></a>
+<a href="Images/mwbm_6_7_lg.png">
+<img src="Images/mwbm_6_7_sm.png" align=left border=2></a>
+<a href="Images/mwbm_6_8_lg.png">
+<img src="Images/mwbm_6_8_sm.png" align=left border=2></a>
+<p>
+<a href="Scripts/mwbm_6.html">mwbm_6.ncl</a>: 
+Same as <b>mwbm_5.ncl</b>: <b>CMIP6-piControl</b> monthly data for 600 years.
+</div>
+
+<div class=ex>
+<!--mwbm_7-->
+<a name=ex7></a>
+<a href="Images/mwbm_7_1_lg.png">
+<img src="Images/mwbm_7_1_sm.png" align=left border=2></a>
+<a href="Images/mwbm_7_2_lg.png">
+<img src="Images/mwbm_7_2_sm.png" align=left border=2></a>
+<a href="Images/mwbm_7_3_lg.png">
+<img src="Images/mwbm_7_3_sm.png" align=left border=2></a>
+<a href="Images/mwbm_7_4_lg.png">
+<img src="Images/mwbm_7_4_sm.png" align=left border=2></a>
+<a href="Images/mwbm_7_5_lg.png">
+<img src="Images/mwbm_7_5_sm.png" align=left border=2></a>
+<a href="Images/mwbm_7_6_lg.png">
+<img src="Images/mwbm_7_6_sm.png" align=left border=2></a>
+<a href="Images/mwbm_7_7_lg.png">
+<img src="Images/mwbm_7_7_sm.png" align=left border=2></a>
+<a href="Images/mwbm_7_8_lg.png">
+<img src="Images/mwbm_7_8_sm.png" align=left border=2></a>
+
+<p>
+<a href="Scripts/mwbm_7.html">mwbm_7.ncl</a>: 
+Same as <b>mwbm_6.ncl</b>: <b>CMIP6-abrupt4xCO2</b> monthly data for 600 years.
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/crop.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:06:56 GMT -->
+</html>
+
+

@@ -1,0 +1,484 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/equiv_sample_size.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:28 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (statistics)">
+<meta name="keywords" content="equiv_sample_size">
+<title>equiv_sample_size</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+<a class=crumb href="../statistics.html">Statistics</a>
+<br>
+<h1>equiv_sample_size</h1>
+
+<p>
+Estimates the number of independent values in a series of correlated values.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function equiv_sample_size (
+		x       : numeric,  
+		siglvl  : numeric,  
+		opt     : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  integer
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>Input array of any dimensionality.  
+Currently, the <strong>equiv_sample_size</strong> function will operate on the <b>rightmost dimension</b> only. 
+Typically, this will the <b>time</b> dimension.  Further, the function assumes the time steps are equally spaced. 
+</p>
+<p class=indent>
+<b>NOTE:</b> NCL's dimension reordering <a href="../../Language/reorder.html">Dimension reordering</a> 
+may have to be used to make 'time' the rightmost dimension.
+</p>
+<em>siglvl</em>
+<p class=indent>User specified critical significance level (0.0 < siglvl < 1.0).
+Typically, <I>siglvl</I> <= 0.10 (most frequently, <I>siglvl</I>=0.05
+or <I>siglvl</I>=0.01).
+</p>
+<em>opt</em>
+<p class=indent>Currently not used. Set to zero.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The return value(s) will be of type integer.
+The number of dimensions will be one less than the number of input dimensions (i.e. the
+rightmost dimension of <em>x</em> will no longer be present).
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+Given a time series of length <I>N</I> at one or more grid points or locations, this function 
+perform multiple steps. Specifically:
+
+<pre>
+   <b>+</b> Calculate the lag-one autocorrelation (hereafter, <b>r1</b>) at each grid point or location.
+   <b>+</b> Estimate the equivalent degrees of freedom using:  
+             <b>+</b> For <b>N</b>.ge.50: <b> Neqv = N*( (1-r1)/(1+r1) ) </b>
+             <b>+</b> For <b>N</b>.lt.50 use a more complicated formula.
+   <b>+</b> Test the null hypothesis [no correlation; H0: <b>r1</b>=0] at the user
+            specified critical level (<I>siglvl</I>) using <b>Neqv</b>
+   <b>+</b> If <b>r1</b> is significant, it will return <b>Neqv</b>, else return the original sample size, <I>N</I>
+</pre>
+
+<pre>
+<b>References</b>:
+
+    <a href="https://journals.ametsoc.org/doi/pdf/10.1175/1520-0442(1995)008%3C0336%3ATSCIAI%3E2.0.CO%3B2"><b>Taking Serial Correlation into Account in Tests of the Mean</b> </a>
+    F. W. Zwiers and H. von Storch, J. Climate 1995, pp336-351
+
+    Class Notes: C. Bretherton (2014): 
+    <a href="https://atmos.washington.edu/~breth/classes/AM582/lect/lect3-notes.pdf"><b>Lecture 3: Statistical sampling uncertainty</b></a>.
+
+</pre>
+
+There are caveats:<P>
+
+<UL>
+
+<LI>The input time series must be a Gaussian "red-noise" process (positive <I>r1</I>).  
+If the function calculates a negative <I>r1</I> ("blue-noise" process), it will return the original sample size, <I>N</I>.
+
+<LI><I>N</I> should be "large", say, greater-than or equal to 50.
+ 
+</UL>
+<p>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="esacr.html"><strong>esacr</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><P>
+
+Here <TT>x</TT> is a series of length <TT>N</TT> (=1000). 
+
+<PRE> 
+   siglvl = 0.01
+   neqv   = <strong>equiv_sample_size</strong> (x, siglvl,0)
+</PRE> 
+
+<TT>neqv</TT> will be a scalar with an estimate of the equivalent
+sample size. Some examples for N=200: 
+<PRE>
+        r       neqv             
+  
+     0.702441     34      
+     0.628879     45    
+     0.576756     53     
+     0.487207     68  
+     0.407399     83   
+     0.283313    111  
+     0.119770    156 
+     0.069794    200  
+</PRE>
+<P>
+
+<B>Example 2</B><P>
+
+If <TT>y</TT> has size (ntim,nlat,nlon) and named dimensions "time",
+"lat", "lon" [i.e., <TT>y</TT>(time,lat,lon)], where "ntim" is large,
+then use NCL's <a href="../../Manuals/Ref_Manual/NclVariables.html#NamedSubscripting">dimension reordering</a>:
+
+<PRE>
+   siglvl = 0.05
+   neqv   = <strong>equiv_sample_size</strong> (y(lat|:,lon|:,time|:), siglvl,0)   ; (nlat,mlon)
+</PRE>
+
+<TT>neqv</TT> will be size (nlat,mlon) containing at each grid point
+an estimate of the number of independent observations. Again, use the
+results carefully. Even if the data have no significant auto
+correlation, some grid points may indicate significant positive
+<I>r1</I> just due to sampling. One should use field significance
+testing to see if the sample sizes returned are indeed significant.<P>
+
+<B>Example 3</B><P>
+
+Let's say the above had monthly data and the users wanted to check to
+see if successive Januaries, Februaries, etc. were significantly
+correlated and, if so, get the equivalent samples sizes:
+
+<PRE>
+   siglvl = 0.01
+   do nmo=0,nmos-1     ; nmos=12
+      neqv = <strong>equiv_sample_size</strong> (y(lat|:,lon|:,time|nt:ntim-1,nmos), siglvl,0)
+      ; neqv ==>(nlat,mlon)
+   end do
+</PRE>
+
+Each pass through the loop will yield an estimate of the equivalent
+sample size.  Previous comments apply here also.<P>
+
+<B>Example 4</B><P>
+
+Let <TT>x</TT>(time,lat,lon) and <TT>y</TT>(time,lat,lon) where
+"time", "lat", "lon" are <a href="../../Manuals/Ref_Manual/NclVariables.html#Dimensions">dimension names</a>.
+
+<OL>
+
+<LI>Use NCL's named dimensions to reorder in time
+
+<LI>Specify a critical significance level to test the lag-one
+auto-correlation coefficient and determine the (temporal) number of
+equivalent sample sizes each grid point using <strong>equiv_sample_size</strong>;
+
+<LI>[optional] Estimate a single global mean equivalent sample size
+using <a href="wgt_areaave.html"><strong>wgt_areaave</strong></a> that could be used for
+the <a href="ttest.html"><strong>ttest</strong></a> or <a href="ftest.html"><strong>ftest</strong></a>.
+
+</OL>
+
+<PRE>
+                                  (1)
+  xtmp = x(lat|:,lon|:,time|:)       ; reorder but do it only once [temporary]
+  ytmp = y(lat|:,lon|:,time|:)
+                                  (2)
+  sigr = 0.05                        ; critical sig lvl for r
+  xEqv = <strong>equiv_sample_size</strong> (xtmp, sigr,0)
+  yEqv = <strong>equiv_sample_size</strong> (ytmp, sigr,0)
+                                  (3)
+  xN   = <a href="wgt_areaave.html"><strong>wgt_areaave</strong></a> (xEqv, wgtx, 1., 0)    ; wgtx could be gaussian weights 
+  yN   = <a href="wgt_areaave.html"><strong>wgt_areaave</strong></a> (yEqv, wgty, 1., 0) 
+</PRE>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/equiv_sample_size.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:28 GMT -->
+</html>

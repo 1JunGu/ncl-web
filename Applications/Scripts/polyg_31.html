@@ -1,0 +1,193 @@
+;----------------------------------------------------------------------
+; polyg_31.ncl
+;
+; Concepts illustrated:
+;   - Specify Hurricane Sandy information
+;   - Calculate latitude/longitude arrays that define the location 
+;     of a circles around multiple central locations.
+;   - Extracting circle information from a variable of type 'list'
+;   - Making sure that the circle longitudes match the range of the TRMM grid
+;   - Looping over each day and mask the data
+;----------------------------------------------------------------------
+; Hurricane Sandy source: Use for plot information
+; https://www.wunderground.com/hurricane/atlantic/2012/Post-Tropical-Cyclone-Sandy
+;----------------------------------------------------------------------
+
+;---Hurricane Sandy Information: will be used in plots
+
+  sdate = (/20121023, 20121024,20121025,20121026 \             ; Strorm dates
+           ,20121027, 20121028,20121029,20121030 /)
+  stype = (/"Tropical Storm","Tropical Storm","Cat 1","Cat 1" \  ; Storm Type
+           ,"Cat 1", "Cat 1","Cat 1", "Post-Trop Cyclone" /)  
+
+  swind = (/ 45, 60, 90, 90, 75, 75, 75, 75 /)                 ; max wind (mph)       
+  spsfc = (/998,989,954,968,969,960,950,952 /)                 ; central pressure
+
+;---Hurricane Sandy central locations
+
+  slat  = (/ 12.7, 15.2, 19.4, 25.3 \  ; lat: storm center
+           , 27.7, 30.9, 34.5, 39.8 /) 
+  slon  = (/-78.6,-77.2,-76.3,-76.1 \  ; lon: storm centers
+           ,-77.1,-74.3,-70.5,-75.4/)  
+
+  srad  = 750                          ; radii (great circle degrees)
+  sradu = 1                            ; 0=degrees, 1=km
+  N     = 90                           ; # of points; more points nicer 'circle'
+  optgeo= False
+
+  circle = geolocation_circle(slat, slon, srad, sradu, N, optgeo) ; circle is type list
+
+  printVarSummary(circle)                 ; list containing two variables
+  clat = circle[0]                        ; For clarity: explicitly extract list elements
+  clon = circle[1]               
+
+  dimc      = dimsizes(clat)
+  nCenter   = dimc(0)                      ; # of centers: same as: nCenter=dimsizes(slat)
+  nRadius   = dimc(1)                      ; # of circles: same as: nRadius=dimsizes(srad) 
+  nPoints   = dimc(2)                      ; # of points : same as: nPoints=N
+
+  printVarSummary(clat)                   ; [location | 8] x [radii | 1] x [circle | 90]
+  print("------------------")
+  printVarSummary(clon)                   ; [location | 8] x [radii | 1] x [circle | 90]
+  print("------------------")
+  
+  if (any(clon.lt.0)) then
+      clon = clon+360                     ; match TRMM grid spans: 0.125 to 359.875
+      printVarSummary(clon)               ; [location | 8] x [radii | 1] x [circle | 90]
+      print("------------------")
+  end if
+
+;---Extract max/min latitudes and longitudes for **ALL** 'circles'
+;---Work with this subset of the data.
+;---This can reduce the gc_inout cpu time
+
+  space= 1.00                              ; esthetics
+  latS = min(clat) - space
+  latN = max(clat) + space
+  lonW = min(clon) - space
+  lonE = max(clon) + space
+
+  print("latS="+latS)                      ; map region of interest
+  print("latN="+latN)
+  print("lonW="+lonW)
+  print("lonE="+lonE)
+
+;*************************************************
+; Read TRMM daily precip for each 'sdate' 
+;*************************************************
+
+  dirTrmm  = "./" 
+  filTrmm  = "3B42.20121022_20121031.daily_V7.nc"
+  pthTrmm  = dirTrmm+filTrmm
+  f        = addfile(pthTrmm, "r")
+  dateTrmm = f->date
+  it       = get1Dindex(dateTrmm, sdate)
+  prc      = f->precip(it,{latS:latN},{lonW:lonE})
+  printVarSummary(prc)
+  printMinMax(prc,0)
+  print("---")
+
+  dimprc   = dimsizes(prc)
+  ntim     = dimprc(0)
+
+  if (ntim.ne.nCenter) then
+      print("ntim is different from nCenter: ntim="+ntim+": nCenter="+nCenter)
+      print("Each time should correspond to a storm location")
+      exit  
+  end if
+
+;*************************************************
+; Plot 
+;*************************************************
+  plot    = new( nCenter, "graphic")
+
+  pltType = "png"   ; "x11", "png", "pdf", "eps"
+  pltDir  = "./"
+  pltName = "polyg"
+  pltPath = pltDir + pltName
+  wks     = gsn_open_wks(pltType, pltPath)
+
+  res                       = True
+  res@gsnDraw               = False
+  res@gsnFrame              = False
+  res@gsnAddCyclic          = False  ; extracted region is not cyclic in longitude
+ ;res@gsnStringFontHeightF  = 0.015  ; make subtitles smaller
+
+  res@mpDataBaseVersion     = "MediumRes"  ; higher map resolution  
+  res@pmTickMarkDisplayMode = "Always"     ; nicer tickmarks for regional plots
+  res@mpOutlineBoundarySets = "GeophysicalAndUSStates"
+
+  res@cnFillOn              = True
+  res@cnLinesOn             = False
+  res@cnLineLabelsOn        = False
+  res@cnFillMode            = "RasterFill"
+;;res@cnFillPalette         = "WhiteBlueGreenYellowRed"
+;;res@cnFillPalette         = "WhBlGrYeRe"
+  res@cnFillPalette         = "Example"
+      
+;---Manually: specify contour levels
+
+  res@cnLevelSelectionMode = "ExplicitLevels"                 ; "mm/day
+  res@cnLevels             = (/0.1, 1,3,5,7.5,10,15,20,25  \  ; many levels
+                              ,50,75,100,125,150,175,200,225,250     /)
+  res@lbLabelBarOn         = False  ; turn off individual label bars 
+                             
+  resP                     = True   ; panel
+  resP@gsnMaximize         = True   ; Maximize Panel
+  resP@gsnPanelMainString  = "Hurricane Sandy: Oct 23-30 03GMT: "+srad+"km: mm/day"     ; set main title
+  resP@gsnPanelLabelBar    = True   ; add common colorbar
+  resP@lbLabelFontHeightF  = 0.0125 ; make labels smaller
+  resP@pmLabelBarOrthogonalPosF = -0.02           ; move down
+ ;resP@gsnPanelRowSpec     = True   ; tell panel what order to plot
+
+  do nr=0,nRadius-1
+    do nc=0,nCenter-1                      ; each nc corresponds to to different location [day]
+       poly_lat = clat(nc,nr,:)            ; clarity; place into separate variable  
+       poly_lon = clon(nc,nr,:) 
+
+       min_lat  = min(poly_lat)            ; min of *current* latitude polygon
+       max_lat  = max(poly_lat)            ; max        "
+       min_lon  = min(poly_lon)            ; min        "     longitude polygon
+       max_lon  = max(poly_lon)            ; max        "
+
+      ;print("min_lat="+min_lat)
+      ;print("max_lat="+max_lat)
+      ;print("min_lon="+min_lon)
+      ;print("max_lon="+max_lon)
+
+       extra = 1.0                         
+       res@mpMinLonF    = min_lon - extra
+       res@mpMaxLonF    = max_lon + extra
+       res@mpMinLatF    = min_lat - extra
+       res@mpMaxLatF    = max_lat + extra
+       res@mpCenterLonF = (res@mpMinLonF + res@mpMaxLonF)/2
+
+;---Extract the desired rectangle of data 
+
+       PRC  := prc(nc,{min_lat:max_lat},{min_lon:max_lon})
+      ;printVarSummary(PRC)
+      ;printMinMax(PRC,0)
+
+;---Set points that are outside of the circle of data to missing
+
+       lat2d := conform(PRC, PRC&lat, 0)
+       lon2d := conform(PRC, PRC&lon, 1)
+
+       latlon_circle := gc_inout(lat2d,lon2d, poly_lat,poly_lon)
+       PRC    = where(latlon_circle,  PRC, PRC@_FillValue)
+
+;---Print some information about the current subset
+      ;print("===========================================================")
+      ;print("   File:             " + filTrmm)
+      ;print("   Lat/Lon location: " + slat(nc) + "/" + slon(nc))
+      ;print("   Min/max of data:  " + min(PRC) + "/" + max(PRC))
+
+;---Create a plot with the date as the main title
+       res@gsnLeftString  = sdate(nc)
+       res@gsnCenterString = "("+sprintf("%4.1f", slat(nc))+","+sprintf("%4.1f", slon(nc))+")"
+       res@gsnRightString  = spsfc(nc)+"/"+swind(nc)
+       plot(nc) = gsn_csm_contour_map(wks,PRC,res)
+     end do   ; nc, time
+
+     gsn_panel(wks,plot,(/2,4/),resP)
+   end do     ; nr

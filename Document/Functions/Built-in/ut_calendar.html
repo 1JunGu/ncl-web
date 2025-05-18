@@ -1,0 +1,807 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ut_calendar.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:19 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (date routines)">
+<meta name="keywords" content="ut_calendar">
+<title>ut_calendar</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../date.html">Date routines</a>
+<br>
+<h1>ut_calendar</h1>
+
+<p>
+Converts a mixed Julian/Gregorian date to a UT-referenced date
+(<font color=red>deprecated</font>; use <a href="cd_calendar.html"><strong>cd_calendar</strong></a>).
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function ut_calendar (
+		time       : numeric,  
+		option [1] : integer   
+	)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>time</em>
+<p class=indent>A multi-dimensional array of time values in a mixed Julian/Gregorian,
+360, 365, or no leap calendaring system (the last three options were
+added in <a href="../../../prev_releases.html#5.1.0">version
+5.1.0</a>).
+</p>
+<p class=indent>
+
+Must have a
+units <a href="../../Language/attributes.html">attribute</a>
+in one of the formats recognized by
+the <a href="http://www.unidata.ucar.edu/software/udunits/udunits-2/udunits2.html">UDUNITS-2</a>
+library.
+</p>
+<p class=indent>
+
+May additionally have a "calendar" attribute with one of the following
+values:
+
+<ul>
+<li>noleap
+<li>360_day
+<li>365_day
+</ul>
+
+The "standard" and "gregorian" calendars are the only ones recognized
+by the Udunits library. The other calendars were added by David W.
+Pierce, the developer of <a
+href="http://meteora.ucsd.edu/~pierce/ncview_home_page.html">ncview</a>.
+</p>
+<p class=indent>
+
+No other calendaring systems are recognized by this function,
+including:
+
+<pre>
+command_year
+n kyr B.P.
+</pre>
+</p>
+<em>option</em>
+<p class=indent>A scalar integer indicating the format of the output. See description below.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The format of the output is dependent upon the value of <em>option</em>. In all
+cases the first dimension is the same size as <em>time</em>.
+<UL>
+  <LI><em>option</em> = 0
+  <P>
+  The array returned will be of type float and dimensioned 
+  <a href="dimsizes.html"><strong>dimsizes</strong></a>(time) x 6:
+  <BLOCKQUOTE>
+   utc_date(:,0)  --> years<BR>
+   utc_date(:,1)  --> months<BR>
+   utc_date(:,2)  --> days<BR>
+   utc_date(:,3)  --> hours<BR>
+   utc_date(:,4)  --> minutes<BR>
+   utc_date(:,5)  --> seconds
+  </BLOCKQUOTE>
+  </li>
+<p>
+
+  <LI><em>option</em> = -1 or 1
+  <P>
+  The values returned will be in the format YYYYMM and will
+  be type double for <em>option</em> = 1, and type integer for
+  <em>option</em> = -1.
+  <p>
+  Note that for <em>option</em> = 1, even though the return value is
+  double, the value will be the same as if an integer had been
+  returned (no fraction is returned, so days, hours, minutes, and
+  seconds are basically truncated).
+  </li>
+
+  <LI><em>option</em> = -2 or 2
+  <P>
+  The values returned will be in the format YYYYMMDD and will
+  be type double for <em>option</em> = 2, and type integer for
+  <em>option</em> = -2.
+  <p>
+  Note that for <em>option</em> = 2, even though the return value is
+  double, the value will be the same as if an integer had been
+  returned (no fraction is returned, so hours, minutes, and seconds
+  are basically truncated).
+  </li>
+
+  <LI><em>option</em> = -3 or 3
+  <P>
+
+  The values returned will be in the format YYYYMMDDHH and will
+  be type double for <em>option</em> = 3, and type integer for
+  <em>option</em> = -3. Note that this option can produce some big numbers.  
+  If your year values go higher than 2147, then then you should use option 3.
+  <p>
+  Note that for <em>option</em> = 3, even though the return value is
+  double, the value will be the same as if an integer had been
+  returned (no fraction is returned, so minutes, and seconds are
+  basically truncated).
+  </li>
+
+  <LI><em>option</em> = 4
+  <P>
+  The values returned will be in the format YYYY.fraction_of_year and 
+  will be type double. fraction_of_year is the total number of seconds 
+  in the current day of the year, divided by the total number of seconds 
+  in that year.
+  </li>
+
+  <LI><em>option</em> = -5
+  <P>
+ <font color="red"><i>Available in <a href="../../../prev_releases.html#5.1.0">version 5.1.0</a> and later.</i></font>
+ <P>
+  The same as option=0, except the values returned will be integers.
+  This means that the <i>seconds</i> values may be truncated, as they are
+  floating point values.
+  </li>
+
+  </UL>
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+Unidata no longer supports the internal code
+that <strong>ut_calendar</strong> is based on. We therefore strongly
+recommend that you use the <a href="cd_calendar.html"><strong>cd_calendar</strong></a> function
+instead.  Important note: <strong>ut_calendar</strong>
+and <a href="cd_calendar.html"><strong>cd_calendar</strong></a> treat "year 0" differently.  See
+the caveats below.
+<p>
+
+Converts a mixed Julian/Gregorian date to a UT-referenced date using
+the <a href="http://www.unidata.ucar.edu/software/udunits/udunits-2/udunits2.html">UDUNITS-2</a>
+library.
+
+<p>
+
+As of <a href="../../../prev_releases.html#5.1.0">version
+5.1.0</a>, other calendars are also recognized, if <em>time</em>
+contains a "calendar" attribute set to one of these values:
+
+<ul>
+<li>"360", "360_day"
+<li>"365", "365_day"
+<li>"noleap"
+</ul>
+<p>
+
+Thanks to David W. Pierce, the developer of <a
+href="http://meteora.ucsd.edu/~pierce/ncview_home_page.html">ncview</a>,
+for providing these calendar additions.
+<p>
+
+<font color=red>Known bug in NCL V6.4.0 and earlier</font>: Many users
+have reported a "60 second" bug in several of NCL's date conversion
+routines, in which you get a value of "<i>n</i> minutes, 60 seconds"
+instead of "<i>n+1</i> minutes, 0 seconds". See
+the <a href="../../../current_release.html#DateConversionsBugsFixed6.4.0">6.4.0 release notes</a>
+for details. If you encounter this bug, please email the
+<a href="../../../Support/email_lists.html">ncl-talk</a> group with the
+details.  Meanwhile, you can try <a href="cd_calendar.html"><strong>cd_calendar</strong></a>.  You
+can also try the <i>temporary</i>
+<a href="ut_calendar_fix.html"><strong>ut_calendar_fix</strong></a> function, which was added in NCL
+V6.4.0 for test purposes and potentially as a replacement function. A
+decision will be made about this function in a future release of NCL.
+<p>
+
+If the input data does not contain a units 
+<a href="../../Language/attributes.html">attribute</a>,
+then an error message will be printed and all 
+<a href="../../Language/fillval.html">missing values</a> returned.
+
+<P>
+To quote the 
+<a href="http://www.unidata.ucar.edu/software/udunits/udunits-2/udunits2.html">UDUNITS-2</a> man page:
+<BLOCKQUOTE>
+The udunits(3) package uses a mixed Gregorian/Julian calendar system.
+Dates prior to 1582-10-15 are assumed to use the Julian calendar,
+which was introduced by Julius Caesar in 46 BCE and is based on a year
+that is exactly 365.25 days long.  Dates on and after 1582-10-15 are
+assumed to use the Gregorian calendar, which was introduced on that
+date and is based on a year that is exactly 365.2425 days long.  (A
+year is actually approximately 365.242198781 days long.)  Seemingly
+strange behavior of the udunits(3) package can result if a user-given
+time interval includes the changeover date.  For example,
+<strong>ut_calendar</strong> and 
+<a href="ut_inv_calendar.html"><strong>ut_inv_calendar</strong></a> can be used to show that
+1582-10-15 *preceded* 1582-10-14 by 9 days.
+</BLOCKQUOTE>
+<p>
+Caveats of 
+<a href="http://www.unidata.ucar.edu/software/udunits/udunits-2/udunits2.html">UDUNITS-2</a>:
+<UL>
+  <LI>Year 0 is treated as year 1, because year 0 does not exist in the
+   real world calendar.
+  <p>
+
+  <LI>The length of a month is fixed at 1/12 of a tropical year or
+  2629743.831225 seconds.  This means if you have a units of something
+  like "months since 1870-1-1", then at time = 0 you will get:
+  <p>
+
+  <PRE>
+    year   = 1870
+    month  = 1
+    day    = 1
+    hour   = 0
+    second = 0
+  </PRE>
+
+  However, at time = 1, you will get:
+
+  <PRE>
+    year   = 1870
+    month  = 1
+    day    = 31
+    hour   = 10
+    second = 3.83122
+  </PRE>
+
+  <li>Udunits doesn't like uppercase values in the "units" string.
+  For example, "HOURS since 1-1-1 00:00:0.0" is not a valid string,
+  but "hours since 1-1-1 00:00:0.0" is.
+   
+  </UL>
+<p>
+
+<b>Important notes</b><p>
+
+<ul>
+
+<li><strong>ut_calendar</strong> is based on an external software
+package
+called <a href="http://www.unidata.ucar.edu/software/udunits/udunits-2/udunits2.html">UDUNITS-2</a>,
+which has phased out the support for these types of calendaring
+routines. Caution should be used when using this routine with special
+calendars like the above, or negative values.  If you have problems,
+then check out the user-contributed
+routine, <a href="../User_contributed/calendar_decode2.html"><strong>calendar_decode2</strong></a>.</b>
+<p>
+
+<li>As of NCL version 5.2.0, this code is being linked against
+UDUNITS-2, which has a dependency on some xml files that come installed
+with NCL. There's a bug in 5.2.0 that if you are setting the
+environment variable UDUNITS_PATH, you may see the error message:
+
+<pre>
+<font color=red>
+  warning:ut_calendar: Invalid specification string. Missing values will
+  be returned.</font>
+</pre>
+
+There are two possible work-arounds:
+<p>
+
+<ol>
+<li>Set the UDUNITS2_XML_PATH environment variable:
+<p>
+
+<pre>
+   setenv UDUNITS2_XML_PATH $NCARG_ROOT/lib/ncarg/udunits/udunits2.xml
+or
+   export UDUNITS2_XML_PATH=$NCARG_ROOT/lib/ncarg/udunits/udunits2.xml
+</pre>
+<p>
+
+<li>Unset the UDUNITS_PATH environment variable before you run NCL.
+</ol>
+<p>
+
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="cd_calendar.html"><strong>cd_calendar</strong></a>,
+<a href="cd_inv_calendar.html"><strong>cd_inv_calendar</strong></a>,
+<a href="ut_inv_calendar.html"><strong>ut_inv_calendar</strong></a>,
+<a href="../Contributed/cd_convert.html"><strong>cd_convert</strong></a>,
+<a href="../User_contributed/cd_string.html"><strong>cd_string</strong></a>,
+<a href="../User_contributed/calendar_decode2.html"><strong>calendar_decode2</strong></a>,
+<a href="../Contributed/yyyymm_to_yyyyfrac.html"><strong>yyyymm_to_yyyyfrac</strong></a>,
+<a href="../Contributed/yyyymmdd_to_yyyyfrac.html"><strong>yyyymmdd_to_yyyyfrac</strong></a>,
+<a href="../Contributed/yyyymmddhh_to_yyyyfrac.html"><strong>yyyymmddhh_to_yyyyfrac</strong></a>,
+<a href="../User_contributed/time_axis_labels.html"><strong>time_axis_labels</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B>
+  <P>
+  Assume five time values that represent "hours since 1-1-1 00:00:0.0". 
+  Convert these values to UTC time in the format "hhZ dd mmm yyyy", where
+  "mmm" represents a month abbreviation (and not a numerical month). 
+  <a href="sprinti.html"><strong>sprinti</strong></a> is used to create the desired string:
+  <PRE>
+  begin
+  ;
+  ; Array to hold month abbreviations. Don't store anything in index
+  ; '0' (i.e. let index 1=Jan, 2=Feb, ..., index 12=Dec).
+  ;
+   month_abbr = (/"","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep", \
+                    "Oct","Nov","Dec"/)
+  ;
+  ; Time values and units.
+  ;
+    time = (/17522904, 17522928, 17522952, 17522976, 17523000/)
+    time@units = "hours since 1-1-1 00:00:0.0"
+ ;
+ ; Convert to UTC time.
+ ;
+   utc_date = <strong>ut_calendar</strong>(time, 0)
+ ;
+ ; Store return information into more meaningful variables.
+ ;
+   year   = <a href="tointeger.html"><strong>tointeger</strong></a>(utc_date(:,0))    ; Convert to integer for
+   month  = <a href="tointeger.html"><strong>tointeger</strong></a>(utc_date(:,1))    ; use <a href="sprinti.html"><strong>sprinti</strong></a> 
+   day    = <a href="tointeger.html"><strong>tointeger</strong></a>(utc_date(:,2))
+   hour   = <a href="tointeger.html"><strong>tointeger</strong></a>(utc_date(:,3))
+   minute = <a href="tointeger.html"><strong>tointeger</strong></a>(utc_date(:,4))
+   second = utc_date(:,5)
+ ;
+ ; Write out strings in the format "hhZ dd mmm yyyy".
+ ;
+
+   date_str = <a href="sprinti.html"><strong>sprinti</strong></a>("%0.2iZ ", hour) + <a href="sprinti.html"><strong>sprinti</strong></a>("%0.2i ", day) + \
+              month_abbr(month) + " "  + <a href="sprinti.html"><strong>sprinti</strong></a>("%0.4i", year)
+ 
+   print(date_str) 
+ end
+ </PRE>
+ <p>
+ The above script will produce the following output:
+
+ <PRE>
+ Variable: date_str
+ Type: string
+ Total Size: 20 bytes
+            5 values
+ Number of Dimensions: 1
+ Dimensions and sizes:   [5]
+ Coordinates:
+ (0)     00Z 01 Jan 2000
+ (1)     00Z 02 Jan 2000
+ (2)     00Z 03 Jan 2000
+ (3)     00Z 04 Jan 2000
+ (4)     00Z 05 Jan 2000
+ </PRE>
+
+ <B>Example 2</B>
+ <P>
+ Using the same time values as above, here's what the various
+ options return:
+
+ <PRE>
+   dym      = <strong>ut_calendar</strong>(time,  1)     ; Double array of length 5 with all
+                                       ; values equal to 200001.
+   iym      = <strong>ut_calendar</strong>(time, -1)     ; Same, only type integer
+
+   dymd     = <strong>ut_calendar</strong>(time,  2)     ; (/20000101,20000102,20000103,
+   iymd     = <strong>ut_calendar</strong>(time, -2)     ;   20000104,20000105/)
+
+   dymdh    = <strong>ut_calendar</strong>(time,  3)     ; (/2000010100,2000010200,2000010300,
+   iymdh    = <strong>ut_calendar</strong>(time, -3)     ;   2000010400,2000010500/)
+
+   yearfrac = <strong>ut_calendar</strong>(time,  4)     ; (/2000,2000.002732240437,
+                                        ;        2000.005464480874,
+                                        ;        2000.008196721311,
+                                        ;        2000.010928961749/)
+ </PRE>
+
+ <B>Example 3</B>
+ <P>
+ Use <strong>ut_calendar</strong> and <a href="day_of_year.html"><strong>day_of_year</strong></a>
+ to create a new time variable with units of day_of_year.fraction_of_day.
+ <a href="day_of_year.html"><strong>day_of_year</strong></a> requires integer arguments. Use
+ <a href="tointeger.html"><strong>tointeger</strong></a> to convert. To make the results as precise 
+ as possible the calculation is done in double precision.
+
+ <PRE>
+ ;
+ ; Time values and units.
+ ;
+   time = (/3356, 3356.083, 3356.333, 3356.917, 3357.042, 3358.208/)
+   time@units = "days since 1995-01-01 00:00:0.0"
+ 
+   utc_date = <strong>ut_calendar</strong>(time, 0)
+
+   dyear = <a href="day_of_year.html"><strong>day_of_year</strong></a>(<a href="tointeger.html"><strong>tointeger</strong></a>(utc_date(:,0)) \
+                       ,<a href="tointeger.html"><strong>tointeger</strong></a>(utc_date(:,1)) \
+                       ,<a href="tointeger.html"><strong>tointeger</strong></a>(utc_date(:,2)) )*1.d0   ; make double
+   dyear = dyear + \                         
+          (date(:,3)*3600.d0 + date(:,4)*60.d0 + date(:,5)*1.d0)/86400.d0
+                                        ; (/70, 70.08299768518519,
+                                        ;   70.33299768518519,
+                                        ;   70.91699074074074,
+                                        ;   71.04199074074074,
+                                        ;   72.20799768518519/)
+
+ </PRE>
+
+
+
+ <B>Example 4</B>
+ <P>
+ As of <a href="../../../prev_releases.html#5.1.0">version
+ 5.1.0</a>, you can use <tt>option</tt> = -5 (instead of
+ <tt>option</tt> = 0) to return integers:
+
+ <PRE>
+ ;
+ ; Time values and units.
+ ;
+   time = (/3356, 3356.083, 3356.333, 3356.917, 3357.042, 3358.208/)
+   time@units = "days since 1995-01-01 00:00:0.0"
+ 
+   utc_date = <strong>ut_calendar</strong>(time, -5)
+
+   dyear = <a href="day_of_year.html"><strong>day_of_year</strong></a>(utc_date(:,0),utc_date(:,1),utc_date(:,2))
+ </PRE>
+
+<p>
+ <B>Example 5</B>
+ <P>
+<b>CAVEAT:</b> The one 'subtle' difference between CAM 'time/date'
+and NCL's   <strong>ut_calendar</strong> and <a href="ut_inv_calendar.html"><strong>ut_inv_calendar</strong></a> 
+function occurs when the time units are ".... since 0000..." <br>
+NCL uses Unidata's udunits and the updated 
+<a href="http://meteora.ucsd.edu/~pierce/ncview_home_page.html">ncview</a>
+calendar software.
+Technically, in the 'time' world, there is no such thing as year 0000.
+The difference is illustrated by the following:
+<pre>
+ncl 0> f    = addfile ("camdev07_cam3_6_15_gust_up00.cam2.h1.0000-09-01-00000.nc","r")
+ncl 1> time = f->time                   ; days since 0000-09-01 00:00:00
+ncl 2> printVarSummary(time)
+
+Variable: time
+Type: double
+[snip]
+Dimensions and sizes:   [time | 30]
+Coordinates:
+            time: [   0..  29]
+Number Of Attributes: 4
+  long_name :   time
+  units :       days since 0000-09-01 00:00:00              <*** note 0000
+  calendar :    noleap
+  bounds :      time_bnds
+
+ncl 3> date = f->date                   ; yyyymmdd [CAM]
+ncl 4> DATE = ut_calendar(time, -2)     ; YYYYMMDD [NCL]
+ncl 5> DATE1 = DATE - 10000             ; subtract one YYYY
+
+ncl 6> print(date+"   "+DATE+"   "+DATE1)
+        CAM    NCL    NCL-one_YYYY
+(0)     901   10901       901
+(1)     902   10902       902
+(2)     903   10903       903
+(3)     904   10904       904
+(4)     905   10905       905
+(5)     906   10906       906
+(6)     907   10907       907
+(7)     908   10908       908
+(8)     909   10909       909
+(9)     910   10910       910
+[snip]
+</pre>
+
+As noted in the documentation ...
+<pre>
+Caveats of Unidata's Udunits:
+    * Year 0 is treated as year 1, because year 0 does not exist
+      in the real world calendar.
+</pre>
+
+Punch line: if you use the CAM file's date variable
+you can readily break down to other units.
+NCL's <strong>ut_calendar</strong> function is <b>not</b> needed.
+<pre>
+   date    = f->date                 ; CAM  date (yyyymmdd)
+   year    = date/10000
+   mmdd    = date-year*10000
+   month   = mmdd/100
+   day     = mmdd-month*100
+</pre>
+Again, the difference between CAM and NCL calendars
+only occurs when the units are "xxxx since 0000".
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ut_calendar.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:19 GMT -->
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/pot_temp_equiv_tlcl.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:04 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (meteorology)">
+<meta name="keywords" content="pot_temp_equiv_tlcl">
+<title>pot_temp_equiv_tlcl</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../meteo.html">Meteorology</a>
+<br>
+<h1>pot_temp_equiv_tlcl</h1>
+
+<p>
+Compute equivalent potential temperature using the lifting condensation temperature.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.5.0">version 6.5.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function pot_temp_equiv_tlcl (
+		p           : numeric,  
+		t           : numeric,  
+		tlcl        : numeric,  
+		w           : numeric,  
+		iounits [4] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(<em>t</em>)] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>p</em>
+<p class=indent>Scalar or array containing pressure levels (hPa, Pa, kPa).
+</p>
+<em>t</em>
+<p class=indent>Scalar or array containing temperatures (degC, degK, degF).
+</p>
+<em>tlcl</em>
+<p class=indent>Scalar or array containing the lifting condensation level temperatures (Same units as <em>t</em>).
+</p>
+<em>w</em>
+<p class=indent>Scalar or array containing the mixing ratio (kg/kg, g/kg).
+</p>
+<em>iounits</em>
+<p class=indent>An integer array of length 3 which specifies the units of the input <em>t</em> 
+and <em>w</em> and returned enthalpy units.
+<ul>
+<li> <em>iounits(0)</em>=0 input <em>p</em> is hPa  
+<li> <em>iounits(0)</em>=1 input <em>p</em> is Pa      
+<li> <em>iounits(0)</em>=2 input <em>p</em> is kPa
+</p>
+<p class=indent>
+<li> <em>iounits(1)</em>=0 input <em>t</em> is degrees Celcius (degC)
+<li> <em>iounits(1)</em>=1 input <em>t</em> is degrees Kelvin  (degK)
+<li> <em>iounits(1)</em>=2 input <em>t</em> is degrees Farenheit (degF)
+</p>
+<p class=indent>
+<li> <em>iounits(2)</em>=0 input <em>w</em> are kg/kg
+<li> <em>iounits(2)</em>=1 input <em>w</em> are  g/kg
+</p>
+<p class=indent>
+<li> <em>iounits(3)</em>=0 output <em>theta_e</em> is degrees Celcius (degC)
+<li> <em>iounits(3)</em>=1 output <em>theta_e</em> is degrees Kelvin  (degK)
+<li> <em>iounits(3)</em>=2 output <em>theta_e</em> is degrees Farenheit (degF)
+</ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A multi-dimensional array of the same size and shape as <em>t</em>. The output will be double 
+if <em>t</em>, <em>p</em> or <em>w</em> is of type double. All appropriate meta data is returned.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<p>
+Calculate the equivalent potential temperature (theta_e) as derived by Bolton (1980): specifically, equation 39.
+<b>The results are essentially the same as those returned by the WRF function <a href="../Built-in/wrf_eth.html"><strong>wrf_eth</strong></a>.</b>
+<pre>
+<b>References:</b>
+
+   Bolton, D. (1980): <a href="http://dx.doi.org/10.1175/1520-0493(1980)108<1046:TCOEPT>2.0.CO;2"><b>The Computation of Equivalent Potential Temperature </b></a> 
+   Monthly Weather Review, vol. 108, no. 7 (july),  p. 1047
+
+   Wikipedia: <a href="https://en.wikipedia.org/wiki/Lifted_condensation_level"><b>Lifted Condensation Level</b></a>
+</pre>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Built-in/wrf_eth.html"><strong>wrf_eth</strong></a>,
+<a href="tlcl_evp_bolton.html"><strong>tlcl_evp_bolton</strong></a>,
+<a href="tlcl_mixr_bolton.html"><strong>tlcl_mixr_bolton</strong></a>,
+<a href="tlcl_rh_bolton.html"><strong>tlcl_rh_bolton</strong></a>,
+<a href="tlcl_td_bolton.html"><strong>tlcl_td_bolton</strong></a>,
+<a href="mixhum_convert.html"><strong>mixhum_convert</strong></a>,
+<a href="pot_temp_equiv.html"><strong>pot_temp_equiv</strong></a>,
+<a href="../meteo.html"><b>Meteorology functions</b></a>,
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+<b>Example 1:</b> Use NCL's (6.5.0) <strong>pot_temp_equiv_tlcl</strong>  to 
+calculate theta_e at constant pressure and relative humidity while varying both temperatures and 
+mixing ratios. Compare with the NCL 6.4.0 
+<a href="pot_temp_equiv.html"><strong>pot_temp_equiv</strong></a> and  WRF <a href="../Built-in/wrf_eth.html"><strong>wrf_eth</strong></a> results.   
+<pre>
+      tc      = (/ 27, 28, 29, 30, 31 /)            ; degC
+      N       = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a> (tc)
+    
+      w       = (/ 0.0168645, 0.0178942, 0.0189793\
+                 , 0.0201224, 0.0213262 /)          ; kg/kg
+      p       = <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a> ( N, 1000, -1 )       ; hPa; replicate
+      rh      = <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a> ( N,   75, -1 )       ; %  ; replicate
+    
+      t0      = 273.15
+      tk      = tc + t0
+    
+    ; Calculate 'theta_e' using the 6.4.0 pot_temp_equiv function.
+    ; The source for the formulation used was Wikipedia.
+    ; As noted in the documentation, this systematically underestimates the correct value(s).
+    
+                                                          ; requires Pa, degK, kg/kg
+      te_640  = <a href="pot_temp_equiv.html"><strong>pot_temp_equiv</strong></a> ((p*100), tk, w, -1, "r")   ; degk
+    
+    ; Calculate the temperature at the lifting condensation level. For 'fun' return degC.
+    
+      tlcl    = <a href="tlcl_rh_bolton.html"><strong>tlcl_rh_bolton</strong></a> (tc, rh, (/0,0/))           ; degC, degC
+    
+    ; Calculate 'theta_e' using the 6.5.0 pot_temp_equiv_tlcl function
+    
+      te_tlcl = <strong>pot_temp_equiv_tlcl</strong> (p, tc, tlcl, w, (/0,0,1,0/)) ; iounits ==>  hPa, degC, kg/kg, degC
+    
+    ; Calculate 'theta_e' using the WRF '<b>wrf_eth</b>' function.
+    ; The WRF function requires a 3-or-4 dimensional array with variable units Pa, degK, kg/kg
+    ; Use <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a>  to replicate the 1D-arrays to 3D arrays 
+    
+      p3      = <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a> ((/N,1,1/), p*100, 0)  ; Pa     (N,1,1)
+      t3      = <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a> ((/N,1,1/), tk   , 0)  ; degK   (N,1,1)
+      w3      = <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a> ((/N,1,1/),  w   , 0)  ; kg/kg  (N,1,1)
+    
+      te_wrf  = <a href="../Built-in/wrf_eth.html"><strong>wrf_eth</strong></a>( w3, t3, p3)                 ; degK;  [N] x [1] x [1]
+      te_wrf := te_wrf(:,0,0)-t0                      ; degC and redefine shape (convenience)
+    
+      diff    = te_wrf - te_tlcl                      ; WRF - NCL_650
+    
+      <a href="../Built-in/print.html"><strong>print</strong></a> (<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a> ("%5.2f",(te_640-t0))+sprintf("%9.2f",te_tlcl) \
+                                        +sprintf("%9.2f",te_wrf ) \
+                                        +sprintf("%9.2f",diff) )
+</pre>
+The slightly edited output:
+<pre>
+
+   <b>     te_640   te_tlcl  te_wrf     diff</b>      
+         69.13    76.56    76.60     0.04
+         72.71    80.83    80.87     0.04
+         76.42    85.30    85.35     0.05
+         80.27    89.99    90.06     0.07
+         84.28    94.92    95.00     0.08
+</pre>
+<p>
+<B>Example 2:</B> Compare with the WRF function, <a href="../Built-in/wrf_eth.html"><strong>wrf_eth</strong></a>. Differences may
+be due to different algorithms and/or constants. Note that extra coding is necessary to 
+replicate 
+the one-dimensional (1D) arrays to 3D for use by the WRF function.   
+
+<pre>
+
+; pressure (Pa)
+     p  = (/ 97067.80, 96040.00, 94825.50, 93331.30, 91371.40, 88947.80, 86064.70, 82495.50 \
+           , 78140.20, 73035.40, 67383.70, 61327.50, 54994.70, 48897.30, 43034.60, 37495.20 \
+           , 32555.80, 28124.40, 24201.00, 20693.00, 17600.60, 14877.30, 12477.20, 10400.20 \
+           ,  8553.98,  6984.69,   646.18 /)
+
+; temperature (K)
+     t  = (/  291.15,    291.60,   292.05,  292.13,    292.06,   291.17,   289.11,  287.49 \
+           ,  286.25,    282.14,   277.42,  272.91,    266.99,   261.64,   254.40,  246.38 \
+           ,  238.10,    229.76,   220.88,  213.65,    212.42,   212.58,   212.91,  213.34 \
+           ,  213.73,    214.55,   216.59 /)  
+     
+; specific humidity (kg/kg; dimensionless))
+     q  = (/0.012258,  0.012111, 0.011914, 0.011483, 0.010575, 0.008992, 0.006021,0.002559 \
+           ,0.005169,  0.005746, 0.001608, 0.001645, 0.001382, 0.000235, 0.000094,0.000178 \
+           ,0.000136,  0.000079, 0.000050, 0.000025, 0.000023, 0.000023, 0.000014,0.000010 \
+           ,0.000008,  0.000007, 0.000007 /)
+
+
+; 6.4.0 version does not use lifting condensation level temperature
+
+     ept_640 = <a href="pot_temp_equiv.html"><strong>pot_temp_equiv</strong></a>(p, t, q, 0, "q")       ; degk
+
+; Convert specific humidity to mixing ratio for use in <b>tlcl_mixr_bolton</b>
+
+     w  = <a href="mixhum_convert.html"><strong>mixhum_convert</strong></a>(q, "w", (/0,0/))            ; kg/kg, kg/kg
+
+; Compute temperature of the lifting condensation level
+
+     tlcl = <a href="tlcl_mixr_bolton.html"><strong>tlcl_mixr_bolton</strong></a>(t, w, p, (/1,0,1,1/))    ; (/ degK, kg/kg, Pa, degC /)
+
+; 6.5.0 version; uses 'tlcl'
+
+     ept_650 = <strong>pot_temp_equiv_tlcl</strong>(p, t, tlcl, w, (/1,1,1,1/) )
+
+; Compare with WRF function: <b>wrf_eth</b> which requires 3D or 4D input. 
+; Use <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a>
+
+     klvl = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(p)
+     p3   = <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a>((/klvl,1,1/), p, 0)   ; Pa
+     t3   = <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a>((/klvl,1,1/), t, 0)   ; degK
+     w3   = <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a>((/klvl,1,1/), w, 0)   ; kg/kg
+
+     ept_wrf = <a href="../Built-in/wrf_eth.html"><strong>wrf_eth</strong></a> ( w3, t3, p3 )     ; [klvl] x [1] x [1]
+     ept_dif = ept-ept_wrf(:,0,0)         ; difference
+
+     <a href="../Built-in/print(_funcref_sprintf.html"><strong>print(<funcref>sprintf</strong></a>("%8.2f", p)    +"  " \
+          +sprintf("%11.6f", w)              \
+          +sprintf("%11.6f", q)              \
+          +sprintf("%10.2f", t)              \
+          +sprintf("%10.2f", tlcl)           \
+          +sprintf("%10.2f", ept_640)        \
+          +sprintf("%10.2f", ept_650)        \
+          +sprintf("%10.2f", ept_wrf(:,0,0)) \
+          +sprintf("%9.2f",  ept_dif) )
+
+</pre>
+would yield (slightly edited):
+<pre>
+<b>
+         P (Pa)    W(kg/kg)   Q(kg/kg)     t(K)      tlcl      ept     ept_tlcl   ept_wrf    diff</b>   
+   (0)	97067.80   0.012110   0.012258    291.15    289.06    324.91    328.34    328.35    -0.00
+   (1)	96040.00   0.011966   0.012111    291.60    288.53    325.97    329.50    329.50    -0.01
+   (2)	94825.50   0.011774   0.011914    292.05    287.87    327.10    330.71    330.72    -0.01
+   (3)	93331.30   0.011353   0.011483    292.13    286.87    327.55    331.15    331.16    -0.01
+   (4)	91371.40   0.010464   0.010575    292.06    284.99    327.09    330.57    330.59    -0.02
+   (5)	88947.80   0.008912   0.008992    291.17    281.79    324.52    327.65    327.68    -0.03
+   (6)	86064.70   0.005985   0.006021    289.11    274.74    317.57    319.93    319.98    -0.06
+   (7)	82495.50   0.002552   0.002559    287.49    260.89    310.51    311.85    311.93    -0.07
+   (8)	78140.20   0.005142   0.005169    286.25    271.19    321.08    323.18    323.26    -0.08
+   (9)	73035.40   0.005713   0.005746    282.14    272.64    324.44    326.47    326.55    -0.08
+   (10)	67383.70   0.001605   0.001608    277.42    253.14    315.05    315.89    315.99    -0.10
+   (11)	61327.50   0.001642   0.001645    272.91    252.94    318.56    319.35    319.46    -0.12
+   (12)	54994.70   0.001380   0.001382    266.99    250.14    320.83    321.44    321.57    -0.13
+   (13)	48897.30   0.000235   0.000235    261.64    228.50    321.70    321.82    321.94    -0.13
+   (14)	43034.60   0.000094   0.000094    254.40    219.03    324.00    324.00    324.14    -0.14
+   (15)	37495.20   0.000178   0.000178    246.38    225.04    326.67    326.69    326.86    -0.17
+   (16)	32555.80   0.000136   0.000136    238.10    222.13    328.57    328.54    328.73    -0.19
+   (17)	28124.40   0.000079   0.000079    229.76    216.76    330.41    330.33    330.54    -0.21
+   (18)	24201.00   0.000050   0.000050    220.88    212.55    331.47    331.35    331.59    -0.24
+   (19)	20693.00   0.000025   0.000025    213.65    206.39    335.20    335.05    335.32    -0.26
+   (20)	17600.60   0.000023   0.000023    212.42    204.59    349.04    348.86    349.17    -0.30
+   (21)	14877.30   0.000023   0.000023    212.58    203.26    366.49    366.29    366.63    -0.35
+   (22)	12477.20   0.000014   0.000014    212.91    198.19    385.94    385.70    386.10    -0.40
+   (23)	10400.20   0.000010   0.000010    213.34    194.50    407.35    407.07    407.53    -0.46
+   (24)	 8553.98   0.000008   0.000008    213.73    191.64    431.52    431.20    431.72    -0.53
+   (25)	 6984.69   0.000007   0.000007    214.55    189.38    458.99    458.62    459.23    -0.61
+   (26)	  646.18   0.000007   0.000007    216.59    175.61    914.72    913.30    915.59    -2.2
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/pot_temp_equiv_tlcl.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:04 GMT -->
+</html>

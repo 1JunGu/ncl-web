@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/extreme_value.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:08:08 GMT -->
+<head>
+<meta name="description" content="Basic Extreme Value and Recurrence Statisticrs."> 
+<TITLE>NCL: Basic Extreme Value Statistics</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+    <h1>NCL: Basic Extreme Value Statistics</h1>
+<p>
+  <div class=mainimage>
+  <img src="Images/extval_99_lg.png" align=left border=0></a>
+  </div>
+<p>
+<div class=text>
+NCL has a small number of basic extreme value (EV) and recurrence  statistical functions. 
+However, NCL is not <b>R</b> or <b>S+</b> or <b>Matlab</b> or <b>IDL</b> or <b>Excel</b> 
+or <b>Python's SciPy</b>. These tools contain many more EV related functions.  
+That said: <b>none of these tools is NCL either!</b> 
+<p>
+The Gilleland et al reference below provides an overview of selected EV software.
+</div>
+<div class=text>
+Extreme value theory (EVT) is a branch of statistics dealing with the extreme deviations from the median 
+of probability distributions.  There exists a well elaborated statistical theory for extreme values.
+It applies to (almost) all (univariate) extremal problems.
+From EVT, extremes from a very large domain of stochastic processes
+follow one of the three distribution types: Gumbel, Frechet/Pareto, or Weibull.
+<p>
+The <a href="https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution"> 
+<b>generalized extreme value (GEV) distribution </b></a>
+is a family of continuous probability distributions developed within EVT. 
+The GEV combines three distributions into a single framework.  The distributions are:
+<ul>
+<li><b>Type I</b>: <a href="https://en.wikipedia.org/wiki/Gumbel_distribution"><b>Gumbel</b></a>
+<li><b>Type II</b>:<a href="https://en.wikipedia.org/wiki/Frechet_distribution"><b>Frechet</b></a>;
+     (<i>aka</i>: 
+<a href="https://en.wikipedia.org/wiki/Pareto_distribution"><b>Pareto</b></a>; Fat-tailed Pareto)</b> 
+<li><b>Type III</b>:<a href="https://en.wikipedia.org/wiki/Weibull_distribution"><b>Weibull</b></a> 
+</ul>
+The GEV allows for a continuous range of possible shapes. 
+The shape parameter, <em>S</em>, governs the tail behavior of the distribution. 
+The sub-families defined by, 
+ <em>S</em> ~ 0, <em>S</em> > 0 and <em>S</em> < 0 correspond, respectively, 
+to the Gumbel, Frechet and Weibull families.  
+Note the differences in the ranges of interest for the three extreme
+value distributions: Gumbel is unlimited, Frechet has a lower limit, while the reversed 
+Weibull has an upper limit.
+<p>
+The GEV facilitates making decisions on which distribution is appropriate.
+The GEV distribution is often used as an approximation to model the minima or maxima 
+of long (finite) sequences of random variables. 
+<b>In general, the GEV distribution provides better fit than the individual Gumbel, Frehet, and Weibull models.</b>
+For example, in most hydrological applications, the distribution fitting is via the GEV 
+as this avoids imposing the assumption that the distribution does not have a lower bound 
+(as required by the Frechet distribution).
+</div>
+<div class=text>
+From Wikipedia:
+<p>
+The maximum value (or last order statistic) in a sample of a random variable 
+following an exponential distribution approaches the Gumbel distribution closer with increasing sample size.[4]
+In hydrology, therefore, the Gumbel distribution is used to analyze such variables as monthly and 
+annual maximum values of daily rainfall and river discharge volumes,[5] and also to describe droughts.
+<p>    
+Most commonly, extreme value analyses focus on high extremes: maxima.
+It should be noted that dealing with minima follows the same approaches except for a sign reversal:
+<pre>
+                               min[x(i)] = -max[-x(i)]
+</pre>
+</div>
+<div class=text>
+From Wikipedia:
+<p>
+Two approaches exist for practical extreme value analysis. The first method relies on deriving <b>block maxima (minima)</b> series as a preliminary step. In many situations it is customary and convenient to extract the annual maxima (minima), generating an "Annual Maxima Series" (AMS). The second method relies on extracting, from a continuous record, the peak values reached for any period during which values exceed a certain threshold (falls below a certain threshold). This method is generally referred to as the "<b>Peak Over Threshold</b>" [1] method (POT) and can lead to several or no values being extracted in any given year
+<p>
+<b>Example 6</b> (below) offers a <b>sample block maxima</b> approach based on extracting the maximum rate of river flow ineach year.
+</div>
+
+<div class=text>
+An estimate of the likelihood of an event, such as a flood or heat wave, is commonly called the
+<a href="https://en.wikipedia.org/wiki/Return_period"><b>return period</b></a>. 
+However, other terms are used, including:
+<b>repeat interval</b>, <b>recurrence interval</b>, <b>exceedance probability</b>,
+<b>expected frequency</b> and  <b>return interval</b>.  These terms are synonymous. 
+</div>
+
+<div class=text>
+<b>General References:</b>
+<pre>
+   Alexandersson, H. et al (2001): <a href="http://www.smhi.se/hfa_coord/nordklim/old/report03_2001.pdf">Extreme Value Analysis in Nordic countries: 
+                                   Pilot Studies of minimum temperatue and maximum daily precipitation
+                                   and a review of methods in use</a> 
+
+   Coles, S. (2001): An Introduction to Statistical Modeling of Extreme Values. 
+   Springer ISBN 978-1-4471-3675-0
+
+   Coles, S. and A. Davison (2008): <a href="http://www.cces.ethz.ch/projects/hazri/EXTREMES/talks/colesDavisonDavosJan08.pdf"> Statistical Modelling of Extreme Values</a>
+
+   Gilleland, E. et al (2013): <a href="https://www.isse.ucar.edu/extremevalues/exsoft2.pdf">A software review for extreme value analysis</a> 
+   Extremes 16:103-119
+   DOI 10.1007/s10687-012-0155-0
+
+   Gilleland, E. and Katz, R.W. (2014): <a href="http://www.ral.ucar.edu/staff/ericg/extRemes/extRemes2.pdf">extRemes 2.0:  An Extreme Value Analysis Package R</a>
+
+   Gong, S. (2012): <a href="https://uu.diva-portal.org/smash/get/diva2:549768/FULLTEXT01.pdf">Estimation of hot and cold spells with extreme value theory</a>. 
+   U.U.D.M. Project Report 2012:19 (Uppsala Universitet). 
+
+   Katz, R. (???): <a href="http://www.isse.ucar.edu/staff/katz/docs/pdf/health1.pdf">Introduction to Statistical Theory of Extreme Values</a> 
+
+   Katz, R. et al (2002): 
+<a href="https://infoscience.epfl.ch/record/53928/files/katz_2002.pdf">Statistics of Extremes in Hydrology</a>. Advances in Water Resources: <b>25</b>: 1287–1304.
+
+   NASA: <a href="http://gmao.gsfc.nasa.gov/research/subseasonal/atlas/GEV-RV-html/GEV-RV-description.html">Generalized Extreme Value Distribution and Calculation of Return Value</a>
+
+   Rieder, H.E. (2014): <a href="http://www.ldeo.columbia.edu/~amfiore/eescG9910_f14_ppts/Rieder_EVTPrimer.pdf"> Extreme Value Theory: A primer</a>.  
+   Lamont Doherty Earth Observatory.
+
+
+   Wikipedia: (a) <a href="https://en.wikipedia.org/wiki/Extreme_value_theory"><b>Extreme Value Theory</b></a>
+              (b) <a href="https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution"><b>Generalized Extreme Value Distribution</b></a>
+   
+   Wilks, D. (2006): Statistical Methods in the Atmospheric Sciences. Academic Press.  
+</pre>
+</div>
+<p>
+<div class=text>
+NCL (6.4/5.0) currently has several GEV statistical functions.
+Currently, the only ones documented are:
+<p>
+<ul>
+<li> <a href="../Document/Functions/Built-in/extval_mlegev.html"><strong>extval_mlegev</strong></a>
+<li> <a href="../Document/Functions/Ext_val/extval_mlegam.html"><strong>extval_mlegam</strong></a>
+<li> <a href="../Document/Functions/Ext_val/extval_mlegev.html"><strong>extval_mlegev</strong></a>
+<li> <a href="../Document/Functions/Ext_val/extval_gev.html"><strong>extval_gev</strong></a>
+<li> <a href="../Document/Functions/Ext_val/extval_gumbel.html"><strong>extval_gumbel</strong></a>
+<li> <a href="../Document/Functions/Ext_val/extval_frechet.html"><strong>extval_frechet</strong></a>
+<li> <a href="../Document/Functions/Ext_val/extval_pareto.html"><strong>extval_pareto</strong></a>
+<li> <a href="../Document/Functions/Ext_val/extval_weibull.html"><strong>extval_weibull</strong></a>
+<li> <a href="../Document/Functions/Ext_val/extval_recurrence_table.html"><strong>extval_recurrence_table</strong></a>
+<li> <a href="../Document/Functions/Ext_val/extval_return_period.html"><strong>extval_return_period</strong></a>
+<li> <a href="../Document/Functions/Ext_val/extval_return_prob.html"><strong>extval_return_prob</strong></a>
+<li> others may be added
+</ul>
+Several of the above functions use the following parameters:
+<p>
+<ul>
+<li> <b>shape</b> - affects the distribution shape  [ ;-) ] 
+<li> <b>scale</b> - stretches or shrinks the distribution
+<li> <b>center, location</b> - shifts the distribution 
+</ul>
+<p>
+The <a href="../Document/Functions/Built-in/extval_mlegev.html"><strong>extval_mlegev</strong></a> and <a href="../Document/Functions/Ext_val/extval_mlegam.html"><strong>extval_mlegam</strong></a> provide 
+maximum-liklihood estimates of these parameters for the GEV and Gamma distributions, respectively. 
+The <a href="https://en.wikipedia.org/wiki/Method_of_moments_(statistics)method"><b>method of moments</b></a> 
+can readily be used to derive parameter estimates for other extreme value distributions.  
+However, the moment method ahs some issues (biases).
+</div>
+<p>
+<div class=ex>
+<!--Extreme Value-->
+<a name=1></a>
+<a href="Images/extval_1_lg.png">
+<img src="Images/extval_1_sm.png" align=left border=2></a>
+<a href="Scripts/extval_1.html">extval_1.ncl</a>:
+Plot the PDFs and CDFs of the 
+<a href="https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution">
+<b>GEV distribution</b></a> for user specified 'shape', 'scale' and 'center' parameters.
+This example uses a function that returns to PDF and CDF
+of the GEV distribution given the shape, center (location) and scale parameters:
+<pre>
+
+     pdfcdf = <a href="../Document/Functions/Ext_val/extval_gev.html"><strong>extval_gev</strong></a>(x, shape, scale, center, 0)   ; [/ PDF, CDF /]
+</pre>
+</div>
+
+<div class=ex>
+<!--Extreme Value-->
+<a name=2></a>
+<a href="Images/extval_2_1_lg.png">
+<img src="Images/extval_2_1_sm.png" align=left border=2></a>
+<a href="Images/extval_2_2_lg.png">
+<img src="Images/extval_2_2_sm.png" align=left border=2></a>
+<a href="Scripts/extval_2.html">extval_2.ncl</a>:
+Plot the PDFs and CDFs of the 
+<a href="https://en.wikipedia.org/wiki/Gumbel_distribution"><b>Gumbel distribution</b></a>
+for user specified 'scale' and 'center' (location) parameters.
+This example uses the following function:
+<pre>
+
+    pdfcdf = <a href="../Document/Functions/Ext_val/extval_gumbel.html"><strong>extval_gumbel</strong></a>(x, scale, center, 0)   ; [/ PDF, CDF /]
+
+</pre>
+<b>Note:</b> The extreme value Type I distribution has two forms. 
+One is based on the smallest extreme ('minima')  and the other 
+is based on the largest extreme ('maxima').
+</div>
+
+<div class=ex>
+<!--Extreme Value-->
+<a name=3></a>
+<a href="Images/extval_3_lg.png">
+<img src="Images/extval_3_sm.png" align=left border=2></a>
+<a href="Scripts/extval_3.html">extval_3.ncl</a>:
+Plot the PDFs and CDFs of the <a href="https://en.wikipedia.org/wiki/Frechet_distribution"><b>Frechet distribution</b></a>
+for user specified 'shape', 'scale' and 'center' (location) parameters.
+This example uses the following function:
+<pre>
+
+    pdfcdf = <a href="../Document/Functions/Ext_val/extval_frechet.html"><strong>extval_frechet</strong></a>(x, shape, scale, center, 0)   ; [/ PDF, CDF /]
+</pre>
+</div>
+
+<div class=ex>
+<!--Extreme Value-->
+<a name=4></a>
+<a href="Images/extval_4_lg.png">
+<img src="Images/extval_4_sm.png" align=left border=2></a>
+<a href="Scripts/extval_4.html">extval_4.ncl</a>:
+Plot the PDFs and CDFs of the 
+<a href="https://en.wikipedia.org/wiki/Weibull_distribution"><b>Weibull distribution</b></a>
+for user specified 'shape', 'scale' and 'center' (location) parameters.
+This example uses the following function:
+<pre>
+
+    pdfcdf = <a href="../Document/Functions/Ext_val/extval_weibull.html"><strong>extval_weibull</strong></a>(x, shape, scale, center, 0)   ; [/ PDF, CDF /]
+</pre>
+</div>
+
+<div class=ex>
+<!--Extreme Value-->
+<a name=5></a>
+<a href="Images/extval_5_1_lg.png">
+<img src="Images/extval_5_1_sm.png" align=left border=2></a>
+<a href="Images/extval_5_2_lg.png">
+<img src="Images/extval_5_2_sm.png" align=left border=2></a>
+<a href="Images/extval_5_3_lg.png">
+<img src="Images/extval_5_3_sm.png" align=left border=2></a>
+<a href="Scripts/extval_5.html">extval_5.ncl</a>:
+Plot the PDFs and CDFs of the specified
+<a href="https://en.wikipedia.org/wiki/Pareto_distribution"><b>Pareto distribution.</b></a>
+for user specified 'shape', 'scale' and 'center' (location) parameters.
+Specifying <em>ptype</em>={0,1,2) creates the Pareto General, Type I and II distributions.
+This example uses the following function:
+<pre>
+
+    pdfcdf = <a href="../Document/Functions/Ext_val/extval_pareto.html"><strong>extval_pareto</strong></a>(x, shape, scale, center, ptype, 0)   ; [/ PDF, CDF /]
+</pre>
+</div>
+<p>
+
+<div class=ex>
+<!--Extreme Value-->
+<a name=6></a>
+<a href="Images/extval_6_1_lg.png">
+<img src="Images/extval_6_1_sm.png" align=left border=2></a>
+<a href="Images/extval_6_2_lg.png">
+<img src="Images/extval_6_2_sm.png" align=left border=2></a>
+<a href="Images/extval_6_3_lg.png">
+<img src="Images/extval_6_3_sm.png" align=left border=2></a>
+<a href="Scripts/extval_6.html">extval_6.ncl</a>:
+<p>
+Examine 'Maximum Annual River Flow Rate' data using graphics and conventional statistics.
+Derive the shape, scale and center (location) parameters using the <a href="../Document/Functions/Built-in/extval_mlegev.html"><strong>extval_mlegev</strong></a> function.
+Using the returned parameter estimates calculate the PDF and CDF associated with the GEV distribution using the
+<a href="../Document/Functions/Ext_val/extval_gev.html"><strong>extval_gev</strong></a> function.
+<p>
+The shape parameter is near zero (<em>S</em>=0.094). Hence, the distribuion is similar to the Gumbel distribution.
+<p>
+This example can be viewed as a 'block maxima' approach. Here the maximum river flow rate
+is recorded for each year. This selected subset of maximum flow rates was used for the statistics.
+<p>
+Example 5 for the <a href="../Document/Functions/Ext_val/extval_recurrence_table.html"><strong>extval_recurrence_table</strong></a> uses the  
+the same data. It provides a 'table-based' approach to examining the data.
+</div>
+<p>
+
+    </div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</body>    
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/extreme_value.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:08:15 GMT -->
+</html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+

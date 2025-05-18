@@ -1,0 +1,203 @@
+;----------------------------------------------------------------------
+; qvector_1.ncl
+;
+; Concepts illustrated:
+;   - Reading and reordering variables
+;   - Using spherical harmonic (SPH)  and centered finite difference (CFD) procedures 
+;     to calculate the desired quantities over the globe.
+;   - Using centered finite difference (CFD) procedure
+;     to calculate the desired quantities over a specifed region.
+;   - Print each variable's information
+;   - Plotting with symmetric contour bounds
+;   - Plot SPH and CFD quantities on the same plots for visual comparison 
+;===========================================================
+;                  MAIN: requires NCL 6.6.0 onward
+;                  No libraries need be loaded
+;===========================================================
+
+;-------------------------------------------
+  diri = "/Users/shea/Data/CDC/"
+  ft   = addfile(diri+"air.2008.nc","r")
+  fu   = addfile(diri+"uwnd.2008.nc","r")
+  fv   = addfile(diri+"vwnd.2008.nc","r")
+
+  ntStrt = 0
+  ntLast = 6
+
+  t    = ft->air(ntStrt:ntLast,:,::-1,:)    ; (time, level, lat, lon) ; level=17
+  u    = fu->uwnd(ntStrt:ntLast,:,::-1,:)
+  v    = fv->vwnd(ntStrt:ntLast,:,::-1,:)
+  ymdh = cd_calendar(u&time, -3)           ; ymdh(time)
+
+  printVarSummary(t)
+  printMinMax(t,0)
+  print("---")
+  printVarSummary(u)
+  printMinMax(u,0)
+  print("---")
+  printVarSummary(v)
+  printMinMax(v,0)
+  print("---")
+
+  pPa  = 100*t&level   ; clarity;  P[*]
+  pPa@units = "Pa"
+
+  opt_ss  = 1           ; =1: return 3 varaibles as part of a list
+  pdim    = 1           ; (time,level,lat,lon), (0,1,2,3)   
+
+  if (opt_ss.eq.0) then 
+      ss    = static_stability (pPa, t, pdim, opt_ss)
+  else
+      SS    = static_stability (pPa, t, pdim, opt_ss)
+      printVarSummary(SS)
+      print("---")
+      ss    = SS[0]   ; explicitly extract each variable from the list
+     ;pt    = SS[1]   ; not necessary but clearer
+     ;dthdp = SS[2]
+      delete(SS)
+
+     ;printVarSummary(pt)
+     ;printMinMax(pt,0)
+     ;print("---")
+     ;printVarSummary(dthdp)
+     ;printMinMax(dthdp,0)
+     ;print("---")
+  end if
+
+  printVarSummary(ss)
+  printMinMax(ss,0)
+  print("---")
+
+;---Globe  
+
+  grdTyp = 1    ; =1 fixed
+  cyclic = True
+  opt_qv = 0
+
+  qvList = qvector_isobaric(u,v,t,ss, pPa,pdim, grdTyp, t&lat,t&lon, opt_qv)
+
+  qviSPH = qvList[0]              ; SPH==>Spherical Harmonics
+  qviSPH@long_name = "qviSPH" 
+  qvjSPH = qvList[1]
+  qvjSPH@long_name = "qvjSPH" 
+
+  printVarSummary(qviSPH)
+  printMinMax(qviSPH,0)
+  print("===")
+  printVarSummary(qvjSPH)
+  printMinMax(qvjSPH,0)
+  print("===")
+  
+  qvList = qvector_isobaric_cfd(u,v,t,ss, pPa,pdim, t&lat,t&lon, cyclic,opt_qv)
+  qviCFD = qvList[0]
+  qviCFD@long_name = "qviCFD"     ; CFD==>Centered Finite Differences
+  qvjCFD = qvList[1]
+  qvjCFD@long_name = "qvjCFD" 
+  delete(qvList)
+
+  printVarSummary(qviCFD)
+  printMinMax(qviCFD,0)
+  print("===")
+  printVarSummary(qvjCFD)
+  printMinMax(qvjCFD,0)
+  print("===")
+
+;---Region
+
+  latS =  25.          ; region USA   
+  latN =  50.
+  lonL = 230.
+  lonR = 300.
+
+  U  =  u(:,:,{latS:latN},{lonL:lonR}) 
+  V  =  v(:,:,{latS:latN},{lonL:lonR}) 
+  T  =  t(:,:,{latS:latN},{lonL:lonR}) 
+  SS = ss(:,:,{latS:latN},{lonL:lonR}) 
+
+  cyclic = False  ; region
+  qvList = qvector_isobaric_cfd(U,V,T,SS, pPa,pdim, T&lat,T&lon, cyclic,opt_qv)
+
+  qviCFD_region = qvList[0]
+  qviCFD_region@long_name = "qviCFD_region"
+  qvjCFD_region = qvList[1]
+  qvjCFD_region@long_name = "qvjCFD_region"
+  delete(qvList)
+
+  printVarSummary(qviCFD_region)
+  printMinMax(qviCFD_region,0)
+  print("===")
+  printVarSummary(qvjCFD_region)
+  printMinMax(qvjCFD_region,0)
+  print("===")
+
+;************************************************
+; create plot
+;************************************************
+
+  nt   = 0
+  lev  = 300
+  plot = new(4,"graphic")
+
+  wks_type = "png"
+ ;wks_type@wkWidth  = 1500
+ ;wks_type@wkHeight = 1500
+  wks  = gsn_open_wks(wks_type ,"qvector")   ; send graphics to PNG file
+
+  res                  = True     ; plot mods desired
+  res@gsnDraw          = False
+  res@gsnFrame         = False
+  res@cnFillOn         = True     ; turn on color fill
+  res@cnLinesOn        = False    ; turn of contour lines
+  res@cnLineLabelsOn   = False    ; turn of contour line labels
+
+  res@mpFillOn         = False    ; turn off light gray
+ ;res@cnFillPalette    = "BlAqGrYeOrReVi200"     ; yellow-orange in the middle
+  res@cnFillPalette    = "ViBlGrWhYeOrRe"        ; white-in-middle
+ ;res@lbOrientation    = "Vertical"
+  res@lbLabelBarOn     = False                   ; turn off individual cb's
+
+  resP                 = True                    ; modify the panel plot
+  resP@gsnMaximize     = True
+  resP@gsnPanelLabelBar= True                    ; add common colorbar
+ ;resP@lbOrientation   = "Vertical"
+  resP@gsnPanelMainString = ymdh(nt)+": "+lev+"hPa"  
+
+  symMinMaxPlt (qviSPH(nt,{lev},:,:),20,False,res)  ; symmetric labels
+  res@cnLevelSpacingF      = 0.5*res@cnLevelSpacingF
+
+  res@gsnCenterString = "qvector_isobaric"
+  plot(0) = gsn_csm_contour_map(wks,qviSPH(nt,{lev},:,:), res)
+  res@gsnCenterString = "qvector_isobaric_cfd"
+  plot(1) = gsn_csm_contour_map(wks,qviCFD(nt,{lev},:,:), res)
+  gsn_panel(wks,plot(0:1),(/2,1/),resP)               ; now draw as one plot
+
+  res@gsnCenterString = "qvector_isobaric"
+  plot(0) = gsn_csm_contour_map(wks,qvjSPH(nt,{lev},:,:), res)
+  res@gsnCenterString = "qvector_isobaric_cfd"
+  plot(1) = gsn_csm_contour_map(wks,qvjCFD(nt,{lev},:,:), res)
+  gsn_panel(wks,plot(0:1),(/2,1/),resP)               ; now draw as one plot
+
+  res@mpMinLatF    = latS
+  res@mpMaxLatF    = latN
+  res@mpMinLonF    = lonL
+  res@mpMaxLonF    = lonR
+  res@mpCenterLonF = (lonL+lonR)*0.5   ; avoid 'nuisance' warning message
+  res@gsnAddCyclic = False   
+
+  res@gsnCenterString = "qvector_isobaric"
+  plot(0) = gsn_csm_contour_map(wks,qviSPH(nt,{lev},{latS:latN},{lonL:lonR}), res)
+  res@gsnCenterString = "qvector_isobaric_cfd: Globe-to-Region"
+  plot(1) = gsn_csm_contour_map(wks,qviCFD(nt,{lev},{latS:latN},{lonL:lonR}), res)
+  res@gsnCenterString = "qvector_isobaric_cfd: Region"
+  plot(2) = gsn_csm_contour_map(wks,qviCFD_region(nt,{lev},:,:), res)
+
+  gsn_panel(wks,plot(0:2),(/3,1/),resP)               ; now draw as one plot
+
+  res@gsnCenterString = "qvector_isobaric"
+  plot(0) = gsn_csm_contour_map(wks,qvjSPH(nt,{lev},{latS:latN},{lonL:lonR}), res)
+  res@gsnCenterString = "qvector_isobaric_cfd: Globe-to-Region"
+  plot(1) = gsn_csm_contour_map(wks,qvjCFD(nt,{lev},{latS:latN},{lonL:lonR}), res)
+  res@gsnCenterString = "qvector_isobaric_cfd: Region"
+  plot(2) = gsn_csm_contour_map(wks,qvjCFD_region(nt,{lev},:,:), res)
+
+  gsn_panel(wks,plot(0:2),(/3,1/),resP)               ; now draw as one plot

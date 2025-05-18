@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/getfilevarnames.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:32 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (file io)">
+<meta name="keywords" content="getfilevarnames">
+<title>getfilevarnames</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../io.html">File I/O</a>
+<br>
+<h1>getfilevarnames</h1>
+
+<p>
+Returns an array of file variable names on the given file.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function getfilevarnames (
+		thefile [1] : file   
+	)
+
+	<a href="../return_val.html">return_val</a> [*] :  string
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>thefile</em>
+<p class=indent>A reference to a file created from a call to
+<a href="addfile.html"><strong>addfile</strong></a> or <a href="addfiles.html"><strong>addfiles</strong></a>. The
+file referenced must be one in the <a href="../../Manuals/Ref_Manual/NclFormatSupport.html">supported file format</a>
+list.
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function returns an array of strings containing the name of each
+variable in the given file. The length of this array is equal to the
+number of variables in the file.
+<p>
+
+If the file is a NetCDF4 file containing groups, then this function
+returns the variable names with group name(s) inserted at the
+beginning. If it is at the root group, then a "/" is inserted. See
+example below for more details.
+<p>
+
+This function is useful when accessing file variables by string name.
+(See <a href="../../Manuals/Ref_Manual/NclVariables.html#Files">Files</a>.)
+<p>
+
+Note: since <a href="addfiles.html"><strong>addfiles</strong></a> returns a variable of
+type "list", you must subscript the list before calling
+this function.
+<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="getfilevardimsizes.html"><strong>getfilevardimsizes</strong></a>,
+<a href="getfilevardimnames.html"><strong>getfilevardimnames</strong></a>,
+<a href="getfilevaratts.html"><strong>getfilevaratts</strong></a>,
+<a href="getfilevartypes.html"><strong>getfilevartypes</strong></a>,
+<a href="getfiledimsizes.html"><strong>getfiledimsizes</strong></a>,
+<a href="getfiledimnames.html"><strong>getfiledimnames</strong></a>,
+<a href="getfileatts.html"><strong>getfileatts</strong></a>,
+<a href="addfile.html"><strong>addfile</strong></a>, <a href="addfiles.html"><strong>addfiles</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<b>Example 1</b><p>
+
+The following example gets all the variables names from a netCDF file. It
+will work for any file referenced by <a href="addfile.html"><strong>addfile</strong></a>. 
+The dollar sign syntax used in this example is described at 
+"<a href="../../Manuals/Ref_Manual/NclVariables.html#StringRef">NCL Variables</a>". 
+
+<PRE>
+    f = <a href="addfile.html"><strong>addfile</strong></a> ("X.nc" , "r")   ; could also have ccm, grb or hdf suffix
+    vNames = <strong>getfilevarnames</strong> (f) ; get names of all variables on file
+      
+    nNames = <a href="dimsizes.html"><strong>dimsizes</strong></a> (vNames)   ; number of variables on the file
+      
+    <a href="print.html"><strong>print</strong></a> (vNames)               ; print all variable names on file
+      
+    do n=0,nNames-1              ; loop thru each variable
+       v = f->$vNames(n)$        ; read the varible to memory
+         
+       dimv = <a href="dimsizes.html"><strong>dimsizes</strong></a>(v)        ; dimension size of the variable
+       rank = <a href="dimsizes.html"><strong>dimsizes</strong></a>(dimv)     ; rank [ie: number of dimensions]
+         
+       [SNIP]
+         
+       <a href="delete.html"><strong>delete</strong></a> ([v,rank/])
+   end do
+</PRE>
+
+<p>
+<B>Example 2</B><p>
+
+Consider a list of WRF output files starting with the prefix
+"wrfout_d01_2008-09". To retrieve the variable names across the files,
+you must subscript the list variable returned
+by <a href="addfiles.html"><strong>addfiles</strong></a>:
+<p>
+
+<pre>
+  wrf_files = <a href="systemfunc.html"><strong>systemfunc</strong></a>("ls wrfout_d01_2008-09*")
+  f = <a href="addfiles.html"><strong>addfiles</strong></a>(wrf_files+".nc","r")
+  print(<a href="str_join.html"><strong>str_join</strong></a>(<strong>getfilevarnames</strong>(f[0]),", "))
+</pre>
+<p>
+
+Output (new lines were added to the output to make it more readable):
+<p>
+
+<pre>
+(0)     Times, LU_INDEX, ZNU, ZNW, ZS, DZS, U, Z_FORCE, U_G, U_G_TEND, 
+V, V_G, V_G_TEND, W, W_SUBS, W_SUBS_TEND, PH, PHB, T, TH_UPSTREAM_X,
+TH_UPSTREAM_X_TEND, TH_UPSTREAM_Y, TH_UPSTREAM_Y_TEND, QV_UPSTREAM_X,
+QV_UPSTREAM_X_TEND, QV_UPSTREAM_Y, QV_UPSTREAM_Y_TEND, U_UPSTREAM_X,
+U_UPSTREAM_X_TEND, U_UPSTREAM_Y, U_UPSTREAM_Y_TEND, V_UPSTREAM_X,
+V_UPSTREAM_X_TEND, V_UPSTREAM_Y, V_UPSTREAM_Y_TEND, MU, MUB, NEST_POS,
+P, PB, SR, POTEVP, SNOPCX, SOILTB, FNM, FNP, RDNW, RDN, DNW, DN, CFN,
+CFN1, Q2, T2, TH2, PSFC, U10, V10, RDX, RDY, RESM, ZETATOP, CF1, CF2,
+CF3, ITIMESTEP, XTIME, QVAPOR, QCLOUD, QRAIN, QICE, QSNOW, QGRAUP,
+LANDMASK, TSLB, SMOIS, SH2O, SEAICE, XICEM, SFROFF, UDROFF, IVGTYP,
+ISLTYP, VEGFRA, GRDFLX, ACGRDFLX, SNOW, SNOWH, RHOSN, CANWAT, SST,
+SSTSK, LAI, Z0, VAR, CON, OA1, OA2, OA3, OA4, OL1, OL2, OL3, OL4,
+H_DIABATIC, MAPFAC_M, MAPFAC_U, MAPFAC_V, MAPFAC_MX, MAPFAC_MY,
+MAPFAC_UX, MAPFAC_UY, MAPFAC_VX, MF_VX_INV, MAPFAC_VY, F, E, SINALPHA,
+COSALPHA, HGT, HGT_SHAD, TSK, P_TOP, T00, P00, TLP, TISO, MAX_MSTFX,
+MAX_MSTFY, RAINC, RAINNC, I_RAINC, I_RAINNC, SNOWNC, GRAUPELNC,
+EDT_OUT, SWDOWN, GLW, OLR, XLAT, XLONG, XLAT_U, XLONG_U, XLAT_V,
+XLONG_V, ALBEDO, ALBBCK, EMISS, NOAHRES, TMN, XLAND, UST, PBLH, HFX,
+QFX, LH, ACHFX, ACLHF, SNOWC, SAVE_TOPO_FROM_REAL
+</pre>
+
+<b>Example 3</b><p>
+
+When opening a NetCDF4 file, the variable names have group names
+inserted at the beginning. If it is a root (group), then a "/" is
+inserted (to represent the root group).
+
+<PRE>
+ fn = "nc4_out_nc4uvt.nc"
+ fi = <a href="addfile.html"><strong>addfile</strong></a>(fn, "r")
+
+ vNames = <strong>getfilevarnames</strong>(fi) ; get variable names of all groups on file
+      
+ <a href="print.html"><strong>print</strong></a> (vNames)               ; print all variable names on file
+</PRE>
+
+<p>
+The above script produces:
+<p>
+
+<PRE>
+Variable: vNames
+Type: string
+Total Size: 112 bytes
+            14 values
+Number of Dimensions: 1
+Dimensions and sizes:   [14]
+Coordinates: 
+(0)     /time
+(1)     /lev
+(2)     /lat
+(3)     /lon
+(4)     /T
+(5)     /U
+(6)     /V
+(7)     /grp1/time
+(8)     /grp1/lev
+(9)     /grp1/lat
+(10)    /grp1/lon
+(11)    /grp1/T
+(12)    /grp1/U
+(13)    /grp1/V
+</PRE>
+
+<p>
+
+Here, one can see that there are T, U, V, and other variables under
+the "/" (root) group and the group "grp1".
+<p>
+
+<b>Example 4</b><p>
+
+For each variable on a file, print its type, attributes, dimension
+names, and dimension sizes. It's possible for a variable to
+not contain dimension names and/or attributes, so the 
+<a href="any.html"><strong>any</strong></a> and <a href="ismissing.html"><strong>ismissing</strong></a> functions are
+used to check for this:
+<p>
+
+<pre>
+  f = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/Ustorm.cdf","r")
+
+  vnames = getfilevarnames(f)           ; all variable names
+  nvars  = dimsizes(vnames)
+
+  do nv = 0,nvars-1
+    vtype  = getfilevartypes(f,vnames(nv))
+    vatts  := getfilevaratts(f,vnames(nv))       ; The := is important because these
+    dnames := getfilevardimnames(f,vnames(nv))   ; variables may be a different size
+    dsizes := getfilevardimsizes(f,vnames(nv))   ; the next time through the loop
+
+;   print("==================================================")
+    print("Variable '" + vnames(nv) + "'")
+    print("  type            : " + vtype)
+    if(.not.any(ismissing(dnames))) then
+      print("  dimension names : " + str_join(dnames,","))
+    else
+      print("  dimension names : <none>")
+    end if
+    print("  dimension sizes : " + str_join(""+dsizes,","))
+    if(.not.any(ismissing(vatts))) then
+      print("  attributes      : " + str_join(vatts,","))
+    else
+      print("  attributes      : <none>")
+    end if
+ end do
+</pre>
+<p>
+
+Output:
+<p>
+<pre>
+Variable 'u'
+  type            : float
+  dimension names : timestep,lat,lon
+  dimension sizes : 64,33,36
+  attributes      : _FillValue
+Variable 'timestep'
+  type            : integer
+  dimension names : timestep
+  dimension sizes : 64
+  attributes      : <none>
+Variable 'lat'
+  type            : float
+  dimension names : lat
+  dimension sizes : 33
+  attributes      : <none>
+Variable 'lon'
+  type            : float
+  dimension names : lon
+  dimension sizes : 36
+  attributes      : <none>
+Variable 'reftime'
+  type            : character
+  dimension names : timelen
+  dimension sizes : 20
+  attributes      : units,long_name
+</pre>
+<p>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/getfilevarnames.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:32 GMT -->
+</html>

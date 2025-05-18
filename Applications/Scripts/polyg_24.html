@@ -1,0 +1,107 @@
+;----------------------------------------------------------------------
+; polyg_24.ncl
+;
+; Concepts illustrated:
+;   - Calculating latitude/longitude arrays that define the location 
+;     of multiple circles around the central location .
+;   - Extracting variables from a variable of type 'list'
+;   - Print the latitude and locations of the outermost radii (circle)
+;   - Drawing the circles with different colors and thicknesses
+;   - Adding a polymarker [ + ] to identify the central location
+;----------------------------------------------------------------------
+
+;---One station
+
+  slat      =   30.192                     ; lat: station or storm
+  slon      =  280.477                     ; lon: station or storm
+  srad      = (/ 50, 150, 300, 500, 750/)  ; station radii (km)
+  srad_unit = 1                            ; km
+  N         = 180                          ; # of points; more points nicer 'circle'
+  opt       = False
+
+  nLoc      = dimsizes(slat)
+  nRad      = dimsizes(srad)
+
+  circle    = geolocation_circle(slat, slon, srad, srad_unit, N, opt) ; circle is type list
+
+  printVarSummary(circle)                  ; variable of type list with 2 variables
+  circle_lat = circle[0]                   ; For clarity: explicitly extract list elements
+  circle_lon = circle[1]
+                                           
+  printVarSummary(circle_lat)              ; [location | 1] x [radii | 5] x [circle | 180]
+  print("------------------")
+  printVarSummary(circle_lon)              ; [location | 1] x [radii | 5] x [circle | 180]
+  print("------------------")
+  
+  nl = 0                                   ; only one location
+  print(circle_lat(nl,nRad-1,:)+"  "+circle_lon(nl,nRad-1,:))   ; print the outermost 'circle'
+  print("------------------")
+   
+;*************************************************
+; Plot
+;*************************************************
+
+  pltType          = "png" 
+  pltDir           = "./" 
+  pltName          = "poly" 
+  pltPath          = pltDir + pltName
+
+  res              = True   
+  res@gsnDraw      = False                  
+  res@gsnFrame     = False    
+  res@gsnMaximize  = True    
+
+ ;res@mpProjection = "CylindricalEquidistant"            ; choose map projection
+ ;res@mpLimitMode  = "LatLon"                            ; default
+  res@mpOutlineBoundarySets = "GeophysicalAndUSStates"   ; add state boundaries
+  res@mpGeophysicalLineColor= "Gray"
+  res@mpUSStateLineColor    = "LightGray"
+  res@mpMinLatF    = slat - 7.5                          ; add arbitrary 'buffer'
+  res@mpMaxLatF    = slat + 7.5
+  res@mpMinLonF    = slon - 10
+  res@mpMaxLonF    = slon + 10
+  res@mpCenterLonF = (res@mpMinLonF  + res@mpMaxLonF )*0.5 
+  res@mpGeophysicalLineThicknessF  = 1.5
+  res@mpFillOn                     = False          
+
+  res@tiMainString   = "Center: ("+sprintf("%5.1f", slat)+","+sprintf("%5.1f", slon)+")"
+
+  res@gsnStringFontHeightF = 0.0125 
+  res@gsnLeftString  = "Radii: km: "
+  res@gsnRightString = "dg: "
+  do nr=0,nRad-2
+     res@gsnLeftString  =  res@gsnLeftString  + sprinti("%2.2i", srad(nr))+","
+     res@gsnRightString =  res@gsnRightString + sprintf("%4.2f", circle_lat@radii_converted_values(nr) )+","
+  end do
+  res@gsnLeftString  = res@gsnLeftString  + sprinti("%2.2i", srad(nRad-1))
+  res@gsnRightString = res@gsnRightString + sprintf("%4.2f", circle_lat@radii_converted_values(nRad-1) )
+
+;*****************************************************
+;               Plot
+;*****************************************************
+
+  wks  = gsn_open_wks(pltType, pltPath)
+  plot = gsn_csm_map(wks,res)
+
+  plres  = True
+  plres@gsMarkerIndex = 2           ; Plus sign ( + )
+ ;plres@gsMarkerIndex = 15          ; Circle with x
+ ;plres@gsMarkerIndex = 16          ; Filled Circle
+  plres@gsMarkerSizeF = 10.       
+  plres@gsMarkerColor = "black"  
+  plot@$"marker"$ = gsn_add_polymarker(wks, plot, slon, slat, plres) ; name is arbitrary
+
+  colors = (/ "magenta", "orange", "red", "DarkGreen", "blue"  /)
+  thick  = (/    1     ,  1.5    ,  2.0 ,   3.0      ,   4.0   /) 
+
+  do nl=0,nLoc-1
+    do nr=0,nRad-1
+       plres@gsLineColor      = colors(nr)
+       plres@gsLineThicknessF = thick(nr)
+       circ_id = "radii_"+nl+"_"+nr                         ; any unique name
+       plot@$circ_id$ = gsn_add_polyline(wks, plot, circle_lon(nl,nr,:), circle_lat(nl,nr,:), plres)
+    end do
+  end do
+
+  draw(plot)
+  frame(wks)

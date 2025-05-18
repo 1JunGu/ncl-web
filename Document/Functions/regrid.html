@@ -1,0 +1,815 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/regrid.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:26 GMT -->
+<head>
+<title>NCL Function Documentation: Regridding</title>
+</head>
+<body>
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="index.html" class="subitem">Category Listing</a></li>
+						<li><a href="list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+
+			      <div id="general_main">
+
+<h1>Regridding</h1>
+
+You can look at this <a
+href="Images/OLD_NCL_RegriddingDecisionTree.pdf">decision tree
+figure</a> created several years ago to help you figure out which
+interpolation or regridding routine to use. This is a bit out-of-date;
+we'll try to update it when we can.  <p>
+
+For interpolation routines, see the full list in the <a
+href="interp.html">interpolation category list</a>.
+
+<table cellspacing=4 cellpadding=10 width=100% border=1>
+
+<!--area_conserve_remap-->
+<tr>
+<td valign=top>
+<a href="Built-in/area_conserve_remap.html">
+area_conserve_remap</a></td>
+<td>
+Performs areal conservative remapping from one rectilinear grid to another.
+</td>
+</tr>
+<!--area_conserve_remap_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/area_conserve_remap_Wrap.html">
+area_conserve_remap_Wrap</a></td>
+<td>
+Performs areal conservative remapping from one rectilinear grid to another and retains metadata.
+</td>
+</tr>
+<!--area_hi2lores-->
+<tr>
+<td valign=top>
+<a href="Built-in/area_hi2lores.html">
+area_hi2lores</a></td>
+<td>
+Interpolates from high resolution rectilinear grids to low resolution recitlinear grids using local area averaging.
+</td>
+</tr>
+<!--area_hi2lores_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/area_hi2lores_Wrap.html">
+area_hi2lores_Wrap</a></td>
+<td>
+Interpolates from high resolution rectilinear grids to low resolution rectilinear grids using local area averaging and retains metadata.
+</td>
+</tr>
+<!--bin_avg-->
+<tr>
+<td valign=top>
+<a href="Built-in/bin_avg.html">
+bin_avg</a></td>
+<td>
+Calculates gridded binned averages and counts on a rectilinear grid using randomly spaced data.
+</td>
+</tr>
+<!--curvilinear_to_SCRIP-->
+<tr>
+<td valign=top>
+<a href="ESMF/curvilinear_to_SCRIP.html">
+curvilinear_to_SCRIP</a></td>
+<td>
+Writes the description of a curvilinear grid to a SCRIP file.
+</td>
+</tr>
+<!--ESMF_regrid-->
+<tr>
+<td valign=top>
+<a href="ESMF/ESMF_regrid.html">
+ESMF_regrid</a></td>
+<td>
+Regrids data from one lat/lon grid to another, using ESMF software.
+</td>
+</tr>
+<!--ESMF_regrid_gen_weights-->
+<tr>
+<td valign=top>
+<a href="ESMF/ESMF_regrid_gen_weights.html">
+ESMF_regrid_gen_weights</a></td>
+<td>
+Writes a weight file using the offline ESMF weight generator.
+</td>
+</tr>
+<!--ESMF_regrid_with_weights-->
+<tr>
+<td valign=top>
+<a href="ESMF/ESMF_regrid_with_weights.html">
+ESMF_regrid_with_weights</a></td>
+<td>
+Using the provided weight file, regrids data from one lat/lon grid to another.
+</td>
+</tr>
+<!--f2fosh-->
+<tr>
+<td valign=top>
+<a href="Built-in/f2fosh.html">
+f2fosh</a></td>
+<td>
+Interpolates a scalar quantity from a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid (including pole points) to a <a href="sphpk_grids.html#FixedOffsetGrids">fixed-offset</a> grid.
+</td>
+</tr>
+<!--f2fosh_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/f2fosh_Wrap.html">
+f2fosh_Wrap</a></td>
+<td>
+Interpolates a scalar quantity from a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid (including pole points) to a <a href="sphpk_grids.html#FixedOffsetGrids">fixed-offset</a> grid (retains metadata).
+</td>
+</tr>
+<!--f2foshv-->
+<tr>
+<td valign=top>
+<a href="Built-in/f2foshv.html">
+f2foshv</a></td>
+<td>
+Interpolates a vector quantity on a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid (including pole points) to a <a href="sphpk_grids.html#FixedOffsetGrids">fixed-offset</a> grid.
+</td>
+</tr>
+<!--f2foshv_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/f2foshv_Wrap.html">
+f2foshv_Wrap</a></td>
+<td>
+Interpolates a vector quantity on a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid (including pole points) to a <a href="sphpk_grids.html#FixedOffsetGrids">fixed-offset</a> grid (retains metadata).
+</td>
+</tr>
+<!--f2fsh-->
+<tr>
+<td valign=top>
+<a href="Built-in/f2fsh.html">
+f2fsh</a></td>
+<td>
+Interpolates a scalar quantity from one <a href="sphpk_grids.html#FixedGrids">fixed</a> grid to another.
+</td>
+</tr>
+<!--f2fsh_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/f2fsh_Wrap.html">
+f2fsh_Wrap</a></td>
+<td>
+Interpolates a scalar quantity from one <a href="sphpk_grids.html#FixedGrids">fixed</a> grid to another (retains metadata).
+</td>
+</tr>
+<!--f2fshv-->
+<tr>
+<td valign=top>
+<a href="Built-in/f2fshv.html">
+f2fshv</a></td>
+<td>
+Interpolates a vector quantity from one <a href="sphpk_grids.html#FixedGrids">fixed</a> grid to another.
+</td>
+</tr>
+<!--f2fshv_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/f2fshv_Wrap.html">
+f2fshv_Wrap</a></td>
+<td>
+Interpolates a vector quantity from one <a href="sphpk_grids.html#FixedGrids">fixed</a> grid to another (retains metadata).
+</td>
+</tr>
+<!--f2gsh-->
+<tr>
+<td valign=top>
+<a href="Built-in/f2gsh.html">
+f2gsh</a></td>
+<td>
+Interpolates a scalar quantity from a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid to a <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid (with optional truncation).
+</td>
+</tr>
+<!--f2gsh_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/f2gsh_Wrap.html">
+f2gsh_Wrap</a></td>
+<td>
+Interpolates a scalar quantity from a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid to a <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid (with optional truncation) (retains metadata).
+</td>
+</tr>
+<!--f2gshv-->
+<tr>
+<td valign=top>
+<a href="Built-in/f2gshv.html">
+f2gshv</a></td>
+<td>
+Interpolates a vector quantity on a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid to a <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid (optional truncation).
+</td>
+</tr>
+<!--f2gshv_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/f2gshv_Wrap.html">
+f2gshv_Wrap</a></td>
+<td>
+Interpolates a vector quantity on a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid to a <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid (optional truncation) (retains metadata).
+</td>
+</tr>
+<!--fo2fsh-->
+<tr>
+<td valign=top>
+<a href="Built-in/fo2fsh.html">
+fo2fsh</a></td>
+<td>
+Interpolates a scalar quantity from a <a href="sphpk_grids.html#FixedOffsetGrids">fixed-offset</a> grid to a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid.
+</td>
+</tr>
+<!--fo2fsh_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/fo2fsh_Wrap.html">
+fo2fsh_Wrap</a></td>
+<td>
+Interpolates a scalar quantity from a <a href="sphpk_grids.html#FixedOffsetGrids">fixed-offset</a> grid to a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid (retains metadata).
+</td>
+</tr>
+<!--fo2fshv-->
+<tr>
+<td valign=top>
+<a href="Built-in/fo2fshv.html">
+fo2fshv</a></td>
+<td>
+Interpolates a vector quantity from a <a href="sphpk_grids.html#FixedOffsetGrids">fixed-offset</a> grid to a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid.
+</td>
+</tr>
+<!--fo2fshv_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/fo2fshv_Wrap.html">
+fo2fshv_Wrap</a></td>
+<td>
+Interpolates a vector quantity from a <a href="sphpk_grids.html#FixedOffsetGrids">fixed-offset</a> grid to a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid (retains metadata).
+</td>
+</tr>
+<!--g2fsh-->
+<tr>
+<td valign=top>
+<a href="Built-in/g2fsh.html">
+g2fsh</a></td>
+<td>
+Interpolates a scalar quantity from a <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid to a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid.
+</td>
+</tr>
+<!--g2fsh_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/g2fsh_Wrap.html">
+g2fsh_Wrap</a></td>
+<td>
+Interpolates a scalar quantity from a <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid to a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid (retains metadata).
+</td>
+</tr>
+<!--g2fshv-->
+<tr>
+<td valign=top>
+<a href="Built-in/g2fshv.html">
+g2fshv</a></td>
+<td>
+Interpolates a vector quantity from a <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid to a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid.
+</td>
+</tr>
+<!--g2fshv_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/g2fshv_Wrap.html">
+g2fshv_Wrap</a></td>
+<td>
+Interpolates a vector quantity from a <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid to a <a href="sphpk_grids.html#FixedGrids">fixed</a> grid (retains metadata).
+</td>
+</tr>
+<!--g2gsh-->
+<tr>
+<td valign=top>
+<a href="Built-in/g2gsh.html">
+g2gsh</a></td>
+<td>
+Interpolates a scalar quantity from one <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid to another (with optional truncation).
+</td>
+</tr>
+<!--g2gsh_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/g2gsh_Wrap.html">
+g2gsh_Wrap</a></td>
+<td>
+Interpolates a scalar quantity from one <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid to another (with optional truncation) (retains metadata).
+</td>
+</tr>
+<!--g2gshv-->
+<tr>
+<td valign=top>
+<a href="Built-in/g2gshv.html">
+g2gshv</a></td>
+<td>
+Interpolates a vector quantity from one <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid to another (with optional truncation).
+</td>
+</tr>
+<!--g2gshv_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/g2gshv_Wrap.html">
+g2gshv_Wrap</a></td>
+<td>
+Interpolates a vector quantity from one <a href="sphpk_grids.html#GaussianGrids">Gaussian</a> grid to another (optional truncation) (retains metadata).
+</td>
+</tr>
+<!--latlon_to_SCRIP-->
+<tr>
+<td valign=top>
+<a href="ESMF/latlon_to_SCRIP.html">
+latlon_to_SCRIP</a></td>
+<td>
+Writes the description of a lat/lon grid to a SCRIP file.
+</td>
+</tr>
+<!--linint2-->
+<tr>
+<td valign=top>
+<a href="Built-in/linint2.html">
+linint2</a></td>
+<td>
+Interpolates from a rectilinear grid to another rectilinear grid using bilinear interpolation.
+</td>
+</tr>
+<!--linint2_points-->
+<tr>
+<td valign=top>
+<a href="Built-in/linint2_points.html">
+linint2_points</a></td>
+<td>
+Interpolates from a rectilinear grid to an unstructured grid or locations using bilinear interpolation.
+</td>
+</tr>
+<!--linint2_points_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/linint2_points_Wrap.html">
+linint2_points_Wrap</a></td>
+<td>
+Interpolates from a rectilinear grid to an unstructured grid using bilinear interpolation, and retains metadata.
+</td>
+</tr>
+<!--linint2_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/linint2_Wrap.html">
+linint2_Wrap</a></td>
+<td>
+Interpolates from a rectilinear grid to another rectilinear grid using bilinear interpolation, and retains metadata.
+</td>
+</tr>
+<!--obj_anal_ic-->
+<tr>
+<td valign=top>
+<a href="Built-in/obj_anal_ic.html">
+obj_anal_ic</a></td>
+<td>
+Iterative improvement objective analysis.
+</td>
+</tr>
+<!--obj_anal_ic_deprecated-->
+<tr>
+<td valign=top>
+<a href="Contributed/obj_anal_ic_deprecated.html">
+obj_anal_ic_deprecated</a></td>
+<td>
+Iterative correction objective analysis (Cressman, Barnes) (<font color="red">deprecated</font>)
+</td>
+</tr>
+<!--obj_anal_ic_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/obj_anal_ic_Wrap.html">
+obj_anal_ic_Wrap</a></td>
+<td>
+Iterative improvement objective analysis and returns meta data.
+</td>
+</tr>
+<!--poisson_grid_fill-->
+<tr>
+<td valign=top>
+<a href="Built-in/poisson_grid_fill.html">
+poisson_grid_fill</a></td>
+<td>
+Replaces all missing (_FillValue) values in a grid with values derived from solving Poisson's equation via relaxation.
+</td>
+</tr>
+<!--pop_remap-->
+<tr>
+<td valign=top>
+<a href="Built-in/pop_remap.html">
+pop_remap</a></td>
+<td>
+Regrids a POP ocean model grid to another grid.
+</td>
+</tr>
+<!--PopLatLon-->
+<tr>
+<td valign=top>
+<a href="Pop_remap/PopLatLon.html">
+PopLatLon</a></td>
+<td>
+Regrids a scalar variable on a POP grid to a lat/lon grid or vice-versa.
+</td>
+</tr>
+<!--PopLatLonV-->
+<tr>
+<td valign=top>
+<a href="Pop_remap/PopLatLonV.html">
+PopLatLonV</a></td>
+<td>
+Converts vectors on a POP grid to a lat/lon grid  and vice-versa.
+</td>
+</tr>
+<!--rcm2points-->
+<tr>
+<td valign=top>
+<a href="Built-in/rcm2points.html">
+rcm2points</a></td>
+<td>
+Interpolates data on a curvilinear grid (i.e. RCM, WRF, NARR) to  an unstructured grid.
+</td>
+</tr>
+<!--rcm2points_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/rcm2points_Wrap.html">
+rcm2points_Wrap</a></td>
+<td>
+Interpolates data on a curvilinear grid (i.e. RCM, WRF, NARR) to  an unstructured grid and retains metadata.
+</td>
+</tr>
+<!--rcm2rgrid-->
+<tr>
+<td valign=top>
+<a href="Built-in/rcm2rgrid.html">
+rcm2rgrid</a></td>
+<td>
+Interpolates data on a curvilinear grid (i.e. RCM, WRF, NARR) to a rectilinear grid.
+</td>
+</tr>
+<!--rcm2rgrid_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/rcm2rgrid_Wrap.html">
+rcm2rgrid_Wrap</a></td>
+<td>
+Interpolates data on a curvilinear grid (i.e. RCM, WRF, NARR) to a rectilinear grid and retains metadata.
+</td>
+</tr>
+<!--rectilinear_to_SCRIP-->
+<tr>
+<td valign=top>
+<a href="ESMF/rectilinear_to_SCRIP.html">
+rectilinear_to_SCRIP</a></td>
+<td>
+Writes the description of a rectilinear grid to a SCRIP file.
+</td>
+</tr>
+<!--rgrid2rcm-->
+<tr>
+<td valign=top>
+<a href="Built-in/rgrid2rcm.html">
+rgrid2rcm</a></td>
+<td>
+Interpolates data on a rectilinear lat/lon grid to a curvilinear grid like those used by the RCM, WRF and NARR models/datasets.
+</td>
+</tr>
+<!--rgrid2rcm_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/rgrid2rcm_Wrap.html">
+rgrid2rcm_Wrap</a></td>
+<td>
+Interpolates data on a rectilinear lat/lon grid to a curvilinear grid like those used by the RCM, WRF and NARR models/datasets and retains metadata.
+</td>
+</tr>
+<!--triple2grid-->
+<tr>
+<td valign=top>
+<a href="Built-in/triple2grid.html">
+triple2grid</a></td>
+<td>
+Places unstructured (randomly-spaced) data onto the nearest locations of a rectilinear grid.
+</td>
+</tr>
+<!--triple2grid2d-->
+<tr>
+<td valign=top>
+<a href="Built-in/triple2grid2d.html">
+triple2grid2d</a></td>
+<td>
+Places unstructured (randomly-spaced) data onto the nearest locations of a curvilinear grid.
+</td>
+</tr>
+<!--triple2grid_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/triple2grid_Wrap.html">
+triple2grid_Wrap</a></td>
+<td>
+Places unstructured (randomly-spaced) data onto the nearest locations of a rectilinear grid and retains metadata.
+</td>
+</tr>
+<!--unstructured_to_ESMF-->
+<tr>
+<td valign=top>
+<a href="ESMF/unstructured_to_ESMF.html">
+unstructured_to_ESMF</a></td>
+<td>
+Writes the description of an unstructured grid to an ESMF file.
+</td>
+</tr>
+
+</table><p>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/regrid.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:26 GMT -->
+</html>

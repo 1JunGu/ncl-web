@@ -1,0 +1,136 @@
+;**************************************************
+; polyg_26.ncl
+;
+; Concepts illustrated:
+;   - Drawing polygons to mask data
+;   - Using solid-fill polygons and patterned areas
+;   - Removing primitives from a plot
+;**************************************************
+
+
+begin
+  col1  = "red"      ; define colors for 
+  col2  = "green4"   ; each of 3 curves
+  col3  = "blue4"
+;
+; Create three curves with different start and end X values and of 
+; different lengths. Use random_uniform to generate dummy Y values.
+;
+  npts1 = 12
+  npts2 = 15
+  npts3 = 18
+  x1 = fspan(3,75,npts1)
+  x2 = fspan(1,70,npts2)
+  x3 = fspan(2,60,npts3)
+  y1 = toint(random_uniform( -7,12,npts1))
+  y2 = toint(random_uniform(-10,10,npts2))
+  y3 = toint(random_uniform( -5, 8,npts3))
+
+;---These will be used later for axis limits and hatching
+  x1min = min(x1)
+  x1max = max(x1)
+  x2min = min(x2)
+  x2max = max(x2)
+  x3min = min(x3)
+  x3max = max(x3)
+  y1min = min(y1)
+  y1max = max(y1)
+  y2min = min(y2)
+  y2max = max(y2)
+  y3min = min(y3)
+  y3max = max(y3)
+  xmin  = min((/x1min,x2min,x3min/))
+  xmax  = max((/x1max,x2max,x3max/))
+  ymin  = min((/y1min,y2min,y3min/))
+  ymax  = max((/y1max,y2max,y3max/))
+  
+  wks   = gsn_open_wks ("png","polyg")
+
+;---Set resources common to all three plots
+  res                   = True
+  res@gsnMaximize       = True   ; Maximize size of each plot
+  res@gsnDraw           = False
+  res@gsnFrame          = False
+
+  res@vpWidthF          = 0.75   ; Change aspect ratio of
+  res@vpHeightF         = 0.4    ;   all three plots.
+  res@xyLineThicknessF  = 3.     ; Thicken the lines
+
+
+;---Set resources for first plot (plot1) and create it
+  res@xyLineColor       = col1
+  res@xyMarkerColor     = col1
+  res@tiMainString      = col1 + " curve only"
+  plot1 = gsn_csm_xy (wks,x1,y1,res)
+
+;---Set resources for second plot (plot2) and create it
+  res@xyLineColor       = col2
+  res@tiMainString      = col2 + " curve only"
+  res@tiXAxisString     = "X axis for plot2"
+  res@tiYAxisString     = "Y axis for plot2"
+  plot2 = gsn_csm_xy (wks,x2,y2,res)
+
+;---Set resources specific to the base plot (plot3)
+  res@xyLineColor     = col3
+  res@tiMainString    = col1 + ", " + col2 + " curves overlaid on " + \
+                        col3 + " curve"
+  res@tiXAxisString   = "X axis inherited from third plot"
+  res@tiYAxisString   = "Y axis inherited from third plot"
+
+;---Set axis limits for base plot to encompass all three curves
+  res@trXMinF         = xmin
+  res@trYMinF         = ymin
+  res@trXMaxF         = xmax
+  res@trYMaxF         = ymax
+
+  plot3 = gsn_csm_xy (wks,x3,y3,res)
+
+;--Overlay plot1 and plot2 on plot3
+  overlay(plot3,plot1)
+  overlay(plot3,plot2)
+
+;--Set coordinates for the left and right polygons
+  xmin  = min((/x1min,x2min,x3min/))
+  xmax  = max((/x1min,x2min,x3min/))
+  ymin  = min((/y1min,y2min,y3min/))
+  ymax  = max((/y1max,y2max,y3max/))
+  xptl  = (/xmin,xmax,xmax,xmin,xmin/)
+  yptl  = (/ymin,ymin,ymax,ymax,ymin/)
+
+  xmin  = min((/x1max,x2max,x3max/))
+  xmax  = max((/x1max,x2max,x3max/))
+  ymin  = min((/y1min,y2min,y3min/))
+  ymax  = max((/y1max,y2max,y3max/))
+  xptr  = (/xmin,xmax,xmax,xmin,xmin/)
+  yptr  = (/ymin,ymin,ymax,ymax,ymin/)
+
+;--Add solid fill polygons to plot and draw
+
+  polyres                = True    
+  polyres@gsFillColor    = "black"
+  polyres@gsFillOpacityF = 0.2
+  plot3@left_fill        = gsn_add_polygon(wks,plot3,xptl,yptl,polyres) ; add polygon on left side
+  plot3@right_fill       = gsn_add_polygon(wks,plot3,xptr,yptr,polyres) ; add polygon on right side
+
+  draw(plot3)
+  frame(wks)
+
+;--Add hatching pattern to plot and draw
+
+  polyres@gsFillColor = "black"
+  polyres@gsFillIndex = 6
+  plot3@left_hatch    = gsn_add_polygon(wks,plot3,xptl,yptl,polyres) ; add polygon on left side
+  plot3@right_hatch   = gsn_add_polygon(wks,plot3,xptr,yptr,polyres) ; add polygon on right side
+
+  draw(plot3)
+  frame(wks)
+
+;--Remove solid fill polygons from plot and draw
+
+  NhlRemovePrimitive(plot3,(/plot3@left_fill,plot3@right_fill/))
+  draw(plot3)
+  frame(wks)
+
+
+end
+

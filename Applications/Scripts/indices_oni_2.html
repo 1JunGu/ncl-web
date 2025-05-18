@@ -1,0 +1,376 @@
+;----------------------------------------------------------------------
+; indices_oni_2.ncl
+;
+; Concepts illustrated:
+;   - Computing the Oceanic Nino Index
+;   - Drawing time series plots
+;   - Create a table of ONI        
+;----------------------------------------------------------------------
+; NOAA's operational definitions of El Nino and La Nina conditions are based
+; upon the Oceanic Nino Index [ONI]. The ONI is defined as the 3-month running
+; means of SST anomalies in the Nino 3.4 region [5N-5S, 120-170W]. The anomalies
+; are derived from the 1971-2000 SST climatology.
+;
+; The Nino 3.4 anomalies may be thought of as representing the average equatorial
+; SSTs across the Pacific from about the dateline to the South American coast.
+;
+; To be classified as a full-fledged El Nino and La Nina episode the ONI must exceed
+; +0.5 [El Nino] or -0.5 [La Nina] for at least five consecutive months. 
+;---------------------------------------------------------------------------
+;                         User input
+;---------------------------------------------------------------------------
+
+  latS    = -5.0
+  latN    =  5.0
+  lonL    = 190.0
+  lonR    = 240.0
+  
+  nrun    = 3             ; length of running average
+
+  ymStrt  = 187001
+
+  ymLast  = 201712        ; last full year  on file
+  YMLAST  = 201803        ; last YYYYMM on file
+
+  clStrt  = 196001        ; climatology start    
+  clLast  = 198912        ;             last
+
+  yrStrt  = ymStrt/100
+  yrLast  = ymLast/100
+  YRLAST  = YMLAST/100
+
+  pltType = "png"       ; send graphics to PNG file
+  pltDir  = "./"        ; dir to which plots are sent
+
+ ;pltName = "ONI."+yrStrt+"-"+YRLAST
+  pltName = "indices_oni"
+
+  pltTitle= "ONI: "+yrStrt+"-"+YRLAST \
+          + ": Reference: "+(clStrt/100)+"-"+(clLast/100)
+
+;-------------------- End User Input ---------------------------------------
+
+  diri  = "/Users/shea/Data/SST/HURRELL/"
+  fili  = "MODEL.SST.HAD187001-198110.OI198111-201803.nc"
+  in    = addfile(diri+fili,"r")
+
+  YYYYMM= (in->date)/100             ; ALL date(=yyyymmdd) on file
+  tStrt = ind(YYYYMM.eq.ymStrt)      ; indices of selected times
+ ;tLast = ind(YYYYMM.eq.ymLast)
+  tLast = ind(YYYYMM.eq.YMLAST)
+  delete(YYYYMM)
+                                     ; read only desired area & times
+  x     = in->SST(tStrt:tLast,{latS:latN},{lonL:lonR})
+
+  if (YMLAST.ne.ymLast) then         ; if last year is not 'complete'
+                                     ; fill out the rest of the year
+      timeSave = x&time
+      dateSave = cd_calendar(timeSave, 0)
+      ntimSave = dimsizes(timeSave)
+      mmLast   = dateSave(ntimSave-1,1)
+      yrLast   = YMLAST/100
+
+      x       := dim_pad_modulo(x, 12, 0, False)    ; 6.5.0
+
+      dimNew   = dimsizes(x)
+      ntimNew  = dimNew(0)
+      timeNew  = new(ntimNew, typeof(timeSave), "No_FillValue")
+      timeNew(0:ntimSave-1) = (/ timeSave /)
+
+      nn = -1
+      do mm=mmLast+1,12
+         nn   = nn+1
+         timeNew(ntimSave+nn) = (/ cd_inv_calendar(yrLast,mm,16,0,0,0,timeSave@units, 0) /)
+      end do
+      timeNew!0 = "time"
+      timeNew@units = timeSave@units
+      x!0       = "time"
+      x&time    =  timeNew 
+  end if
+  printVarSummary(x)
+  print("---")
+
+  yyyymm = cd_calendar( x&time, -1)
+  ntim   = dimsizes(yyyymm)
+  yrfrac = yyyymm_to_yyyyfrac(yyyymm, 0.0)   ; used for graphics
+
+;*********************************
+; time indices for base climatology 
+;*********************************
+
+  iClmStrt = ind(yyyymm.eq.clStrt)     
+  iClmLast = ind(yyyymm.eq.clLast)    
+ ;print(date(iClmStrt:iClmLast))
+
+;*********************************
+; Climatology and anomalies from base climatology   
+;*********************************
+
+  xClm     = clmMonTLL(x(iClmStrt:iClmLast,:,:))
+  printVarSummary(xClm)
+
+  xAnom    = calcMonAnomTLL (x,  xClm ) 
+  xAnom@long_name = "SST Anomalies"
+  printVarSummary(xAnom)
+
+;*********************************
+; Unweighted areal average anomalies (time series)
+; Small latitudinal extent so no need to weight    
+;*********************************
+
+  oni = wgt_areaave_Wrap(xAnom, 1.0, 1.0, 1)
+  oni@long_name = "ONI"
+  oni@information = "areal means of SST anomalies in the Nino 3.4 region [5N-5S, 120-170W]"
+  printVarSummary(oni)
+  printMinMax(oni,0)
+  print("---")
+
+;*********************************
+; Perform an unweighted 'nrun' month running average
+;*********************************
+
+  oni = runave_n_Wrap (oni, nrun, 1, 0)
+
+;*********************************
+; Print Moderate and Strong El Nino and La Nina
+;*********************************
+
+  ElStr = ind(yyyymm.ge.195001 .and. oni.ge. 2.0)
+  ElMod = ind(yyyymm.ge.195001 .and. oni.gt. 1.0 .and. oni.lt. 2.0)
+  LaMod = ind(yyyymm.ge.195001 .and. oni.gt.-2.0 .and. oni.lt.-1.0)
+  LaStr = ind(yyyymm.ge.195001 .and. oni.le.-2.0)
+
+  print("El Nino:   Strong: "+ElStr+"  "+sprintf("%7.2f", yrfrac(ElStr))+"   "+yyyymm(ElStr)+"  "+oni(ElStr))
+  print("---")
+  print("El Nino: Moderate: "+ElMod+"  "+sprintf("%7.2f", yrfrac(ElMod))+"   "+yyyymm(ElMod)+"  "+oni(ElMod))
+  print("---")
+  print("La Nina: Moderate: "+LaMod+"  "+sprintf("%7.2f", yrfrac(LaMod))+"   "+yyyymm(LaMod)+"  "+oni(LaMod))
+  print("---")
+  print("La Nina:   Strong: "+LaStr+"  "+sprintf("%7.2f", yrfrac(LaStr))+"   "+yyyymm(LaStr)+"  "+oni(LaStr))
+  print("---")
+
+;*********************************
+; Plot 1
+;*********************************
+
+  wks = gsn_open_wks(pltType, pltDir+pltName)     
+
+  resxy                  = True       
+  resxy@gsnMaximize      = True
+  resxy@gsnFrame         = False
+  resxy@gsnYRefLine      = 0.0            ; create a reference line 
+  resxy@gsnAboveYRefLineColor = "red"              ; above ref line fill red
+  resxy@gsnBelowYRefLineColor = "blue"             ; below ref line fill blue
+
+  resxy@vpHeightF        = 0.4            ; change aspect ratio of plot
+  resxy@vpWidthF         = 0.8            
+  resxy@vpXF             = 0.1            ; start plot at x ndc coord 
+  
+  resxy@trYMinF          = -3.0           ; min value on y-axis
+  resxy@trYMaxF          =  3.0           ; max value on y-axis
+
+  resxy@tiMainString     = pltTitle                            
+  
+ ;resxy@tiYAxisString    = "Anomalies (C)"    ; y-axis label      
+  delete(oni@long_name)
+  plot = gsn_csm_xy (wks,yrfrac,oni,resxy)
+  
+  
+  lnres = True
+  lnres@gsLineThicknessF = 2.0
+  lnres@gsLineColor      = "red"
+  gsn_polyline(wks,plot,(/yrfrac(0),yrfrac(ntim-1)/),(/ 1, 1/),lnres)
+  gsn_polyline(wks,plot,(/yrfrac(0),yrfrac(ntim-1)/),(/ 2, 2/),lnres)
+  lnres@gsLineColor      = "blue"
+  gsn_polyline(wks,plot,(/yrfrac(0),yrfrac(ntim-1)/),(/-1,-1/),lnres)
+  gsn_polyline(wks,plot,(/yrfrac(0),yrfrac(ntim-1)/),(/-2,-2/),lnres)
+
+  txres       =  True
+  txres@txFontHeightF    = 0.03
+  txres@txFontThicknessF = 2.0
+
+  txres@txFontColor      = "red"
+  gsn_text(wks,plot,"El Nino",1950, 2.50, txres)
+
+  txres@txFontColor   = "blue"
+  gsn_text(wks,plot,"La Nina",1950,-2.50, txres)
+  frame(wks)
+
+;*********************************
+; Plot 2
+;*********************************
+
+  res          = True
+ ;res@gsnScale = True
+  res@gsnFrame = False
+  res@gsnMaximize = True      ; make as large as possible
+ ;res@gsnPaperOrientation = "portrait"
+  res@xyMonoDashPattern   = True      ; Define line pattern.
+  res@xyLineThicknessF    = 2.0       ; default is 1.0        
+  res@tmYLFormat          = "f"       ; No unnecessary zeroes 
+ 
+  res@trYMinF   = -3                  ; min Y to plot
+  res@trYMaxF   =  3                  ; max Y to plot
+  res@trXMinF   = 1950                ; min X to plot
+  res@trXMaxF   = 2020                ; yrLast+1            ; max X to plot
+  res@tiMainString = "ONI: 1950-"+YRLAST \
+          + ": Base: "+(clStrt/100)+"-"+(clLast/100)
+;;res@tiYAxisString= "Nino 3.4: Areal Anomalies"       
+ 
+  res@vpYF      = 0.80                 ; Change size and location of plot.
+  res@vpXF      = 0.175
+  res@vpWidthF  = 0.78 
+  res@vpHeightF = 0.55 
+
+  res@gsnYRefLine           = 1.0     ; create a reference line   
+  res@gsnAboveYRefLineColor = "red"
+  res@gsnBelowYRefLineColor = "transparent"
+  res@gsnYRefLineColor      = res@gsnAboveYRefLineColor
+  res@gsnYRefLineThicknessF = 1.0
+
+  tStrt= ind(yyyymm.eq.(res@trXMinF*100 + 1))
+  tLast= ind(yyyymm.eq.(yrLast*100+12))
+  plot = gsn_csm_xy (wks,yrfrac(tStrt:tLast),oni(tStrt:tLast),res)
+
+  res@gsnYRefLine           = -1.0   ; create a reference line   
+  res@gsnAboveYRefLineColor = "transparent"
+  res@gsnBelowYRefLineColor = "blue"
+  res@gsnYRefLineColor      = res@gsnBelowYRefLineColor
+  plot = gsn_csm_xy (wks,yrfrac(tStrt:tLast),oni(tStrt:tLast),res)
+  
+  gsLine             = True            
+  gsLine@gsLineColor = "Foreground"      ; Set polyline color
+  gsLine@gsLineDashPattern = 0           ; solid
+  gsLine@gsLineThicknessF  = 1.          ; default 1.0                                 
+  line = new ( dimsizes(yrfrac(tStrt:tLast)) , float)
+  line = 0.0
+  gsn_polyline(wks,plot,yrfrac(tStrt:tLast),line,gsLine) 
+
+  line = 2.0
+  gsLine@gsLineThicknessF  = 2.0
+  gsLine@gsLineColor       = "red"       ; Set polyline color
+  gsn_polyline(wks,plot,yrfrac(tStrt:tLast),line,gsLine) 
+
+  line =-2.0
+  gsLine@gsLineThicknessF  = 2.0         
+  gsLine@gsLineColor       = "blue" 
+  gsn_polyline(wks,plot,yrfrac(tStrt:tLast),line,gsLine) 
+
+  txres@txJust           = "CenterLeft"
+  txres@txFontColor      = "red"
+  txres@txFontHeightF    = 0.03
+  gsn_text(wks,plot,"El Nino"  ,1951, 2.50, txres)
+  txres@txFontColor   = "blue"
+  gsn_text(wks,plot,"La Nina"  ,1951,-2.50, txres)
+
+  txres@txFontHeightF    = 0.02
+ ;gsn_text(wks,plot,"Strong"   ,1961, 2.50, txres)    ; too busy
+ ;gsn_text(wks,plot,"Moderate" ,1961, 1.75, txres)
+ ;gsn_text(wks,plot,"Strong"   ,1961,-2.50, txres)
+ ;gsn_text(wks,plot,"Moderate" ,1961,-1.75, txres)
+
+                                                      ; indices: yyyymm of min and max values
+  La_yyyymm = ind(yyyymm.eq.195511 .or. yyyymm.eq.197312 .or. yyyymm.eq.197512 .or. yyyymm.eq.198811 .or. \
+                  yyyymm.eq.199812 .or. yyyymm.eq.200001 .or. yyyymm.eq.200801 .or. yyyymm.eq.201010)
+
+  El_yyyymm = ind(yyyymm.eq.196510 .or. yyyymm.eq.197211 .or. yyyymm.eq.198301 .or. yyyymm.eq.198708 .or. \
+                  yyyymm.eq.199201 .or. yyyymm.eq.199711 .or. yyyymm.eq.200211 .or. yyyymm.eq.200912 .or. \
+                  yyyymm.eq.201512)
+
+  print("La: "+La_yyyymm+"  "+yyyymm(La_yyyymm))           
+  print("---")
+  print("El: "+El_yyyymm+"  "+yyyymm(El_yyyymm))           
+  print("---")
+
+  txres@txFontHeightF    = 0.0125
+  txres@txJust           = "CenterCenter"
+  txres@txFontColor      = "Foreground"
+  txres@txFontThicknessF = 1.0             ; default
+
+ ;txres@txFontColor      = "blue"
+  do n=0,dimsizes(La_yyyymm)-1
+     La_yyyy = yyyymm(La_yyyymm(n))/100
+     La_mm   = yyyymm(La_yyyymm(n)) - La_yyyy*100
+     if (La_yyyy.lt.2000) then
+         La_yy = La_yyyy - 1900
+     else
+         La_yy = La_yyyy - 2000
+     end if
+     La_txt  = sprinti("%0.2i", La_mm) +"/"+ sprinti("%0.2i", La_yy)
+     if (La_yyyy.ne.2000) then
+         gsn_text(wks,plot,La_txt,yrfrac(La_yyyymm(n)), oni(La_yyyymm(n))-0.10, txres)
+     else
+         gsn_text(wks,plot,La_txt,yrfrac(La_yyyymm(n)), oni(La_yyyymm(n))-0.15, txres)  ; tweak; no overwrite
+     end if
+  end do
+
+ ;txres@txFontColor      = "red"
+  do n=0,dimsizes(El_yyyymm)-1
+     El_yyyy = yyyymm(El_yyyymm(n))/100
+     El_mm   = yyyymm(El_yyyymm(n)) - El_yyyy*100
+     if (El_yyyy.lt.2000) then
+         El_yy = El_yyyy - 1900
+     else
+         El_yy = El_yyyy - 2000
+     end if
+     El_txt  = sprinti("%0.2i", El_mm) +"/"+ sprinti("%0.2i", El_yy)
+     gsn_text(wks,plot,El_txt,yrfrac(El_yyyymm(n)), oni(El_yyyymm(n))+0.10, txres)
+  end do
+
+  frame (wks)
+
+;*********************************
+; Plot Table: about 40 years is the max for a page
+;*********************************
+  NYRMAX = 40
+  wkstab = gsn_open_wks(pltType, pltDir+pltName+"_table")     
+
+  yrStrtTab = 1950
+
+  do ntab=1,2
+    yrLastTab = min( (/yrStrtTab+NYRMAX-1, yrLast/) ) 
+    print("TABLE: "+yrStrtTab+" - "+yrLastTab)
+  
+    nmos   = 12
+    nyrs   = yrLastTab-yrStrtTab+1 ; number of rows (nrows) 
+    ncols  = nmos+1                ; year and 12 monthly values
+    nrc    = (/nyrs,ncols/)        ; (/nrows,ncols/)
+  
+    tStrtTab = ind(yyyymm.eq.(yrStrtTab*100 + 1))
+    tLastTab = ind(yyyymm.eq.(yrLastTab*100 +12))
+  
+    data  := onedtond(oni(tStrtTab:tLastTab), (/nyrs,nmos/)) 
+  
+    frac   = tofloat(nyrs)/NYRMAX
+    xx     = (/0.10 ,0.90 /)                          ; Start and End X
+    yy     = (/0.005+(1-frac),0.995/)                 ; Start and End Y
+  
+    year  := ispan(yrStrtTab,yrLastTab,1)  
+  
+    tabtxt:= new( nrc, "string")                      ; allocate space for table
+    tabtxt(:,0) = sprinti("%0.4i", year)              ; 1st column (0) for 'year'
+  
+    do nyr=0,nyrs-1                                   ; each year (row)
+       tabtxt(nyr,1:) = sprintf("%6.2f", data(nyr,:)) ; 12 values (col) for each year
+                                                      ; ?missing? ... fill with spaces
+       tabtxt(nyr,1:) = where(ismissing(data(nyr,:)), "    ", tabtxt(nyr,1:)) 
+    end do
+  
+    tabcol:= tabtxt                                   ; colors same size/shape as text
+    tabcol = "transparent"                            ; initialize
+                                                      ; change fill color if appropriate
+    tabcol(:,1:) = where(data.le.-1.0 ,"DodgerBlue" , tabcol(:,1:))
+    tabcol(:,1:) = where(data.gt.-1.0 .and. data.lt.-0.5 ,"lightskyblue", tabcol(:,1:))
+    tabcol(:,1:) = where(data.ge. 1.0 ,"red"        , tabcol(:,1:))
+    tabcol(:,1:) = where(data.lt. 1.0 .and. data.gt. 0.5 ,"rosybrown1", tabcol(:,1:))
+    tabcol(:,1:) = where(ismissing(data),"transparent", tabcol(:,1:))
+  
+    rest  = True
+    rest@txFontHeightF = 0.0125
+    rest@gsFillColor  := tabcol
+  
+    gsn_table(wkstab,nrc,xx,yy,tabtxt,rest)
+    frame(wkstab)
+
+    yrStrtTab = yrLastTab+1
+  end do

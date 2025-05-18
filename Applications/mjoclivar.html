@@ -1,0 +1,811 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/mjoclivar.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:09:04 GMT -->
+<head>
+<meta name="description" content="NCL data analysis example page. 
+Madden Julian Oscillation Climate Variability.">
+<TITLE>NCL: Madden Julian Oscillation Climate Variability</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+<h1>NCL: Madden Julian Oscillation Climate Variability</h1>
+<div class=mainimage>
+<img src="Images/mjoclivar_15_lg.png"> 
+</div>
+
+<div class=text>
+Prior to NCL 6.2.0, the following four libraries needed to be loaded prior to invoking the diagnostic scripts:
+<pre>
+   load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+   load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+   load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+   load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/diagnostics_cam.ncl"
+</pre>  
+<p>
+From NCL 6.2.0 onward, only the following need be loaded:
+<pre>
+   load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/diagnostics_cam.ncl"
+</pre>  
+</div>
+
+<div class=text>
+The scripts below are intended to be 'guides' to usage. They may
+work directly but, generally, the user will have to make
+some changes to the scripts. For example, the changes may involve
+making the time variable similar to those used in the examples.
+</div>
+
+<div class=text>
+The <a href="https://usclivar.org/working-groups/mjo"><b>US-CLIVAR MJO working
+group</b></a> developed diagnostics for objectively evaluating the MJO. 
+Unfortunately, the original <b>official US-CLIVAR MJO diagnostics website</b> is no longer
+available. It provided data, C-shell and GrADS scripts and Fortran code to 
+implement and display the suggested diagnostics.  The NCL examples presented below 
+perform the suggested diagnostics. 
+<p>
+<b>Reference</b>
+<pre>
+   <a href="https://journals.ametsoc.org/doi/full/10.1175/2008JCLI2731.1"><b>MJO Simulation Diagnostics</b></a>
+   Waliser et al.
+   2009, J. Clim.,  <b>22</b>: 3006-3030 
+   DOI: 10.1175/2008JCLI2731.1
+
+   <a href="https://link.springer.com/article/10.1007/s00382-017-3558-4"><b>MJO simulation in CMIP5 climate models: MJO skill metrics and process-oriented diagnosis</b></a>
+   Ahn M-S et al.
+   2017, Climate Dynamics, <b>49</b>: 4023-4045
+</pre>
+<b>MJO Diagnostic Semantics</b>
+<p>
+The diagnostics are categorized into two (really, three) levels:
+<ol>
+   <li><b>Level 1</b>: Diagnostics meant to provide a basic indication 
+of the spatial and temporal intraseasonal variability that can be 
+easily understood and/or calculated by the non-MJO expert. 
+
+   <li><b>Level 2</b>: Diagnostics that provide a more comprehensive 
+diagnosis of the MJO through multivariate EOF analysis and 
+frequency wave-number decomposition.
+
+   <li><b>Other</b> or <b> Supplemental</b>:
+Diagnostics that provide additional measures that have in some 
+cases been found to play an important role in MJO simulation 
+fidelity (e.g., mean state) or characterize the manner the MJO 
+interacts with other important weather/climate processes (e.g., ENSO)
+</ol>
+<p>
+<b>Observational Datasets</b> used here [mainly netCDF]
+<pre>
+       <a href="http://www.cdc.noaa.gov/cdc/data.ncep.reanalysis.html">daily and monthly mean NCEP winds </a>
+       <a href="http://www.cdc.noaa.gov/cdc/data.interp_OLR.html">daily and monthly NOAA  Interpolated OLR </a>
+       <a href="http://www.cdc.noaa.gov/cdc/data.cmap.html">monthly and pentad CMAP</a>
+       <a href="http://www.cdc.noaa.gov/cdc/data.gpcp.html">monthly GPCP</a>
+       <a href="ftp://rsd.gsfc.nasa.gov/pub/1dd/">daily GPCP</a>
+       <a href="http://precip.gsfc.nasa.gov/">pentad GPCP</a>
+       <a href="http://disc.sci.gsfc.nasa.gov/data/datapool/TRMM/01_Data_Products/02_Gridded/06_3-hour_Gpi_Cal_3B_42/index.htm">daily TRMM</a>
+       <a href="http://www.cdc.noaa.gov/cdc/data.noaa.oisst.v2.html">monthly OI SST V2</a>
+</pre>
+
+<b>Anomalies and Prewhitening</b>
+<p>
+Generally, it is suggested that the diagnostics 
+should be performed on daily anomalies.
+Unfiltered anomalies are computed by subtracting the climatological 
+daily (or pentad where appropriate) means calculated using all years 
+of the data. 
+<p>
+There are two approaches: <b>(a)</b> Compute the climatology
+and the anomalies 'on-the-fly', or, <b>(b)</b> Compute
+anomalies and save them to a file. For convenience, the latter
+approach is used in many of the examples.  
+<p>
+Removing the climatological annual cycle is a form a "prewhitening".
+Prewhitening is the the removal of known signals prior to
+analysis so they will not confound the interpretation of the results.
+For example, a model may have a known bias. This should be removed
+prior to applying the methods shown below.
+<p>
+<b>Active MJO periods and MJO Forecasts</b>
+<p>
+When focusing on a specific period, several examples use the winter of 
+1996-1997.  This was a particulary active period and is sometimes 
+considered the "gold standard"  for MJO activity. 
+<p>
+Matt Wheeler (CAWCR: The Centre for Australian Weather and Climate Research)
+has several <a href="http://cawcr.gov.au/staff/mwheeler/maproom/RMM/index.htm"> WWW links</a> that perform real-time monitoring of the MJO.
+These show other periods of strong MJO activity. NOAA  provides access to
+<a href="http://www.cdc.noaa.gov/mjo/Forecasts/index_phase.html">
+experimental MJO forecasts</a>. 
+<p>
+Carl Schreck (<a href="http://www.cicsnc.org/"> CICS:
+Cooperative Institute for Climate and Satellites</a>) has additional WWW site for 
+<a href="http://monitor.cicsnc.org/mjo/current/">Monitoring the MJO and Tropical Waves</a>.
+<p>
+<b>Lanczos Filter Weights</b>
+<p>
+<a href="Images/mjoclivar_bandpass_1_lg.png">
+<img src="Images/mjoclivar_bandpass_1_sm.png" align=left border=2></a>
+When needed, the weights for the suggested 20-100 day bandpass Lanczos filter
+are generated 'on-the-fly' using:  
+<pre>
+  ihp      = 2                             ; bpf=>band pass filter
+  nWgt     = 201
+  sigma    = 1.0                           ; Lanczos sigma
+  fca      = 1./100.
+  fcb      = 1./20.
+  wgt      = <a href="../Document/Functions/Built-in/filwgts_lanczos.html"><strong>filwgts_lanczos</strong></a> (nWgt, ihp, fca, fcb, sigma )
+</pre>
+The band pass filter (BPF) weights are applied via a weighted running average.
+For example, an array x(time,lat,lon)  would be filtered via
+<pre>
+    xBPF = <a href="../Document/Functions/Contributed/wgt_runave_Wrap.html"><strong>wgt_runave_Wrap</strong></a> (x(lat|:, lon|:, time|:), wgt, 0)
+</pre>
+The resulting array would be xBPF(lat,lon,time).
+More <a href="filter.html">filter examples</a>
+</div>
+
+<div class=ex>
+<!--Mjoclivar_1-->
+<a name=ex1></a>
+<a href="Images/mjoclivar_1_1_lg.png">
+<img src="Images/mjoclivar_1_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_1_2_lg.png">
+<img src="Images/mjoclivar_1_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_1.html">mjoclivar_1.ncl</a>: 
+This example illustrates plotting what is referred to as the 
+<B>Mean State</b> which is a supplemental diagnostic. Specifically:
+<p>
+
+<pre>
+     <b>(a)</b> Read files containing year-month data, 
+     <b>(b)</b> Create climatologies spanning user specified years 
+     <b>(c)</b> Plot November-April and May-October climatologies
+                over a user specified region
+</pre>
+</div>
+
+<div class=ex>
+<!--Mjoclivar_2-->
+<a name=ex2></a>
+<a href="Images/mjoclivar_2_1_lg.png">
+<img src="Images/mjoclivar_2_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_2_2_lg.png">
+<img src="Images/mjoclivar_2_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_2.html">mjoclivar_2.ncl</a>:
+<p>
+The MJO reference suggests using daily anomalies for the diagnostics.
+The following illustrates the process of creating anomalies.
+<p>
+Calculate the daily mean annual cycle and daily anomalies from the mean
+annual cycle. For illustration: 
+<pre>
+     <b>(a)</b> Read the raw daily data.
+     <b>(b)</b> Compute raw and smoothed annual cycles
+     <b>(c)</b> Create netCDF file containing the anomalies
+     <b>(d)</b> Plots: (i) daily climatologies at different locations 
+               (ii) sample anomalies using smooth and raw climatologies 
+</pre>
+This example uses 26-years (1980-2005) of daily data. 
+The variability of the raw climatological day-to-day values is a direct
+function of the number of years used to create the climatologies.
+Generally speaking, using more/fewer years will result in
+smaller/greater day-to-day variability. Note: the  the
+scales are different for each plot on the leftmost figure.
+<p>
+Which is the proper climatological daily annual 
+cycle to use: raw or smoothed?
+It depends on your usage. The smoothed annual cycle
+can be thought of as the values that would be obtained
+if there was an infinite ensemble of data under the same
+forcing conditions.
+<p>
+</div>
+
+<div class=ex>
+<!--Mjoclivar_3-->
+<a name=ex3></a>
+<a href="Images/mjoclivar_3_1_lg.png">
+<img src="Images/mjoclivar_3_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_3_2_lg.png">
+<img src="Images/mjoclivar_3_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_3.html">mjoclivar_3.ncl</a>:
+This example uses 10-years (1990-1999) of daily anomaly data 
+to compute seasonal variances and the ratio of the bandpass
+variance to the unfiltered variance. Here, the base (color) 
+plot contains the *ratios*. The overlay plot (contour lines)
+are the filtered variance ate each grid point.
+</div>
+
+<div class=ex>
+<!--Mjoclivar_4-->
+<a name=ex4></a>
+<a href="Images/mjoclivar_4_lg.png">
+<img src="Images/mjoclivar_4_sm.png" align=left border=2></a>
+<a href="Scripts/mjoclivar_4.html">mjoclivar_4.ncl</a>:
+Use <a href="../Document/Functions/Diagnostics/band_pass_area_time.html"><strong>band_pass_area_time</strong></a> to:
+<pre>
+     <b>(a)</b> Create a single time series of areal averaged data
+     <b>(b)</b> Band pass filter the resulting area averaged time series
+     <b>(c)</b> Calculate a running 91-day variance of <b>(b)</b>
+     <b>(d)</b> plot using <a href="../Document/Functions/Diagnostics/band_pass_area_time_plot.html"><strong>band_pass_area_time_plot</strong></a>
+</pre>
+<b>Note:</b> The MJO-WG recommended band pass filter is used. However, the <a href="../Document/Functions/Diagnostics/band_pass_area_time.html"><strong>band_pass_area_time</strong></a> function can create and use other band pass weights.
+<p>
+</div>
+
+<div class=ex>
+<!--Mjoclivar_5-->
+<a name=ex5></a>
+<a href="Images/mjoclivar_5_lg.png">
+<img src="Images/mjoclivar_5_sm.png" align=left border=2></a>
+<a href="Scripts/mjoclivar_5.html">mjoclivar_5.ncl</a>:
+Use <a href="../Document/Functions/Diagnostics/band_pass_hovmueller.html"><strong>band_pass_hovmueller</strong></a> to create a band-pass filtered time series suitable 
+for a time vs longitude (Hovmueller) plot. The returned values are plotted via <a href="../Document/Functions/Diagnostics/band_pass_hovmueller_plot.html"><strong>band_pass_hovmueller_plot</strong></a>.
+<p>
+<b>Note:</b> The MJO-WG recommended band pass filter is used. However, the <a href="../Document/Functions/Diagnostics/band_pass_area_time.html"><strong>band_pass_area_time</strong></a> function can create and use other band pass weights.
+</div>
+
+<div class=ex>
+<!--Mjoclivar_6-->
+<a name=ex6></a>
+<a href="Images/mjoclivar_6_lg.png">
+<img src="Images/mjoclivar_6_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_6.html">mjoclivar_6.ncl</a>:
+
+Create band-pass filtered time series at each lat/lon grid point via
+<a href="../Document/Functions/Diagnostics/band_pass_latlon_time.html"><strong>band_pass_latlon_time</strong></a>. Plot the total anomaly pattern and the corresponding
+band pass filtered pattern at a specific date.  <b>Note:</b> A movie could
+readily be created.
+<p>
+</div>
+
+<div class=ex>
+<!--Mjoclivar_7-->
+<a name=ex7></a>
+<a href="Images/mjoclivar_7_1_lg.png">
+<img src="Images/mjoclivar_7_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_7_2_lg.png">
+<img src="Images/mjoclivar_7_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_7.html">mjoclivar_7.ncl</a>:
+
+Unfiltered anomaly data are averaged over user specified
+domains described in 
+<a href="http://climate.snu.ac.kr/mjo_diagnostics/descrip_level_1.htm">
+Table 1</a> 
+of the 'MJO Clivar' website. 
+
+The spectra are calculated separately for each season and 
+averaged across all years for the given season. The number of degrees
+of freedom is approximately 2*(number of seasons). The null, 5% and 95% 
+red noise significance levels are included. Plot spectra with x-axis 
+as frequency with log scaling and y-axis as power times frequency. 
+The data are cosine area-weighted in latitude as specified
+by MJO Clivar.
+<p>
+The <a href="../Document/Functions/Diagnostics/mjo_spectra.html"><strong>mjo_spectra</strong></a> procedure is a driver which computes 
+and plots the seasonally averaged spectra. 
+The seasonal spectra are calculated via the <a href="../Document/Functions/Diagnostics/mjo_spectra_season.html"><strong>mjo_spectra_season</strong></a> function.
+</div>
+
+<div class=ex>
+<!--Mjoclivar_8-->
+<a name=ex8></a>
+<a href="Images/mjoclivar_8_1_lg.png">
+<img src="Images/mjoclivar_8_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_8_2_lg.png">
+<img src="Images/mjoclivar_8_2_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_8_3_lg.png">
+<img src="Images/mjoclivar_8_3_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_8_4_lg.png">
+<img src="Images/mjoclivar_8_4_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_8.html">mjoclivar_8.ncl</a>:
+
+For a <b>specific season</b> [here, winter 2000-2001], 
+compute a lag correlation diagram using <b>unfiltered</b> 
+and <b>filtered</b> daily data. 
+The reference time series is the central Indian Ocean regional 
+precipitation time series 
+(See  <a href="http://climate.snu.ac.kr/mjo_diagnostics/descrip_level_1.htm">
+Table 1</a>). 
+This is correlated with precipitation 
+and zonal wind anomalies in specified regions at different lags. 
+Lag-longitude and lag-latitude plots of correlation values for different
+regions are shown. Color is for precipitation correlations while
+the lagged correlations for the zonal winds are the contours.
+These are analogous the Figures 5 and 6 in the reference article except
+they are for one season.
+The two leftmost are for unfiltered data while the two rightmost
+are for 20-100 day band passed filtered data.
+<p>
+The lag-cross-correlations for each season are  calculated via the <a href="../Document/Functions/Diagnostics/mjo_xcor_lag_season.html"><strong>mjo_xcor_lag_season</strong></a> function. 
+The results are plotted via <a href="../Document/Functions/Diagnostics/mjo_xcor_lag_ovly.html"><strong>mjo_xcor_lag_ovly</strong></a> procedure. 
+<p>
+</div>
+
+<div class=ex>
+<!--Mjoclivar_9-->
+<a name=ex9></a>
+<a href="Images/mjoclivar_9_1_lg.png">
+<img src="Images/mjoclivar_9_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_9_2_lg.png">
+<img src="Images/mjoclivar_9_2_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_9_3_lg.png">
+<img src="Images/mjoclivar_9_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_9.html">mjoclivar_9.ncl</a>:
+
+Same as <b>Example 8</b> except compute the climatological cross correlations
+over the period of record using 20-100 band pass filtered data.
+<p>
+The lag-cross-correlations for each season are  calculated via the <a href="../Document/Functions/Diagnostics/mjo_xcor_lag_season.html"><strong>mjo_xcor_lag_season</strong></a> function. Each seasonal cross correlation is averaged by using
+the Fischer-z-transform.
+The results are plotted via <a href="../Document/Functions/Diagnostics/mjo_xcor_lag_ovly_panel.html"><strong>mjo_xcor_lag_ovly_panel</strong></a> procedure. 
+<p>
+</div>
+
+<div class=ex>
+<!--Mjoclivar_10-->
+<a name=ex10></a>
+<a href="Images/mjoclivar_10_1_lg.png">
+<img src="Images/mjoclivar_10_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_10_2_lg.png">
+<img src="Images/mjoclivar_10_2_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_10_3_lg.png">
+<img src="Images/mjoclivar_10_3_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_10_4_lg.png">
+<img src="Images/mjoclivar_10_4_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_10.html">mjoclivar_10.ncl</a>:
+
+The wavenumber - frequency spectra for each season are  calculated via the <a href="../Document/Functions/Diagnostics/mjo_wavenum_freq_season.html"><strong>mjo_wavenum_freq_season</strong></a> function. 
+The results are plotted via <a href="../Document/Functions/Diagnostics/mjo_wavenum_freq_season_plot.html"><strong>mjo_wavenum_freq_season_plot</strong></a> procedure. 
+The vertical 
+reference lines indicating "day" are drawn for 30 and 80 days (default).
+The option "dayLine" (introduced in <b>v5.1.1</b>) could be used to alter 
+these. EG: opt@dayLines = (/40,90/) would draw these reference lines
+at 40 and 90 days, respectively. The two leftmost figures were generated when the OLR
+anomaly file was used. The two rightmost figures were generated when the NCEP 
+zonal wind [U] anomaly file was used.
+<p>
+</div>
+
+
+<div class=ex>
+<!--Mjoclivar_11-->
+<a name=ex11></a>
+<a href="Images/mjoclivar_11_1_lg.png">
+<img src="Images/mjoclivar_11_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_11_2_lg.png">
+<img src="Images/mjoclivar_11_2_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_11_3_lg.png">
+<img src="Images/mjoclivar_11_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_11.html">mjoclivar_11.ncl</a>:
+
+Cross-spectra: coherence-squared and phase relationships in  wavenumber-frequency space via <a href="../Document/Functions/Diagnostics/mjo_cross.html"><strong>mjo_cross</strong></a> function. This is a driver that calls the 
+   <a href="../Document/Functions/Diagnostics/mjo_cross.html"><strong>mjo_cross</strong></a> function.
+The results are plotted via <a href="../Document/Functions/Diagnostics/mjo_cross_plot.html"><strong>mjo_cross_plot</strong></a> procedure.  The leftmost figure shows 
+the default plot with both coherence-squared and phase.
+The center plot uses the option to plot only where the probability
+is greater than 0.925 (not much difference here).
+The rightmost plot shows only the coherence-squared with no phases
+plotted.
+<p>
+</div>
+
+<div class=ex>
+<!--Mjoclivar_12-->
+<a name=ex12></a>
+<a href="Images/mjoclivar_12_1_lg.png">
+<img src="Images/mjoclivar_12_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_12_2_lg.png">
+<img src="Images/mjoclivar_12_2_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_12_3_lg.png">
+<img src="Images/mjoclivar_12_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_12.html">mjoclivar_12.ncl</a>:
+
+Conventional (covariance) univariate EOF analysis for 20-100 day band-pass 
+filtered data:
+OLR (left), U850 (center), U200 (right). The time span used is 1995-1999
+and the latitude span is 30S to 30N.
+</div>
+
+<div class=ex>
+<!--Mjoclivar_13-->
+<a name=ex13></a>
+<a href="Images/mjoclivar_13_1_lg.png">
+<img src="Images/mjoclivar_13_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_13_2_lg.png">
+<img src="Images/mjoclivar_13_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_13.html">mjoclivar_13.ncl</a>:
+
+Average the 20-100 day band-pass filtered data fields from 15S to 15N; 
+normalize each of the averaged fields by the square-root of the zonal 
+mean of their temporal variance; then perform a conventional univariate 
+EOF analysis.
+The left figure shows the (spatial) longitude pattern for EOFs 1 and 2.
+The right figure show lag (+/- 25 day) correlations
+between EOF 1 and 2 time series for each variable. 
+
+</div>
+
+<div class=ex>
+<!--Mjoclivar_14-->
+<a name=ex14></a>
+<a href="Images/mjoclivar_14_1_lg.png">
+<img src="Images/mjoclivar_14_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_14_2_lg.png">
+<img src="Images/mjoclivar_14_2_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_14_3_lg.png">
+<img src="Images/mjoclivar_14_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_14.html">mjoclivar_14.ncl</a>:
+
+Multivariate (Combined) EOF; cross-correlations between EOF1 and EOF2;
+time-series of (PC1^2 + PC2^2) and 91-day running mean. 
+<p>
+<b>This script was updated 2 March 2015</b>. 
+Marcus N. Morgan (Florida Institute of Technology) submitted the code segment that calculates the 
+percent variance for each component in the multivariate  EOF.
+<p>
+<b>This script was updated 29 July 2016</b>. 
+Eun-Pa Lim: Bureau of Meteorology, Australis
+<p>
+For comparison, the equivalent 3 plots from the <a href="http://climate.snu.ac.kr/mjo_diagnostics/index.htm">
+<b> Korean MJO-Diagnostics</b></a> are 
+(a) <a href="Images/mjoclivar.eof.all.Korea.png"><b>eof_all</b></a>; 
+(b) <a href="Images/mjoclivar.pcl.Korea.png"><b>lag_all</b></a>
+(c) <a href="Images/mjoclivar.ceof.Korea.png"><b>time series</b></a></a>
+. 
+</div>
+
+<div class=ex>
+<!--Mjoclivar_15-->
+<a name=ex15></a>
+<a href="Images/mjoclivar_15_lg.png">
+<img src="Images/mjoclivar_15_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_15.html">mjoclivar_15.ncl</a>:
+
+Read the simple netCDF file created in the previous example and
+plot a phase space diagram for a specified time period.
+Each month is indicated by a separate line color. 
+The numbers correspond to the day of the month. The 'nice' plot
+is typical of very active MJO periods.
+</div>
+
+<div class=ex>
+<!--Mjoclivar_16-->
+<a name=ex16></a>
+<a href="Images/mjoclivar_16_1_lg.png">
+<img src="Images/mjoclivar_16_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_16_2_lg.png">
+<img src="Images/mjoclivar_16_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_16.html">mjoclivar_16.ncl</a>:
+
+Create composite life cycles.  This example uses 20-100 day 
+band passed filtered anomaly OLR, U850, V850 for the 
+years 1995-1999.  The netCF file created in
+Example 14, which contains the PC1 and PC2, is used
+to derive the appropriate MJO phase category.  
+The size of the reference anomaly wind vector is in 
+the upper right. The phase (<i>eg</i> P3, means "Phase 3")
+and the number of days used to create
+the composite are at the lower right.
+<p>
+<b>This script was updated 29 July 2016</b>. (Source: Eun-Pa Lim, Bureau of Meteorology, Australia) 
+<p>
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/mjoclivar.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:09:23 GMT -->
+</html>
+
+

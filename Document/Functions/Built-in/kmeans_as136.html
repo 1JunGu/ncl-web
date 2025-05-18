@@ -1,0 +1,650 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/kmeans_as136.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:44 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (statistics)">
+<meta name="keywords" content="kmeans_as136">
+<title>kmeans_as136</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+<a class=crumb href="../statistics.html">Statistics</a>
+<br>
+<h1>kmeans_as136</h1>
+
+<p>
+Performs k-means clustering via the Hartigan and Wong AS-136 algorithm.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.3.0">version 6.3.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function kmeans_as136 (
+		x       : numeric,  ; float or double
+		k   [1] : integer,  
+		opt [1] : logical   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>An array of <b>N</b> variables (eg, grid points, stations) and <b>M</b> observations. 
+At this time, the <em>_FillValue</em> attribute is not recognized for this function.
+The user should remove or replace these values prior to input. </p>
+<p class=indent>
+
+Here, <b>M</b> can only be the righmost dimension, and all dimensions
+to the left of this dimension will be considered to be the 'variable'
+dimension(s) (represented collectively by <b>N</b>).  Most commonly,
+the observation (rightmost) dimension is the 'time' dimension.
+</p>
+<p class=indent>
+
+It may be necessary to 
+<a href="../../Language/reorder.html"><b>reorder the
+array</b></a> to obtain the required order expected by
+<strong>kmeans_as136</strong>. 
+See examples 3 and 4 below.
+</p>
+<em>k</em>
+<p class=indent>User-specified number of clusters.
+</p>
+<em>opt</em>
+<p class=indent>Specifies whether optional arguments should be used. If
+<em>opt</em>=True, then the following attributes are recognized:
+</p>
+<p class=indent>
+
+<ul>
+<li><em>iter</em> - the maximum iteration count (default=25)
+</p>
+<p class=indent>
+
+<li><em>iseed</em> - an integer option specifing how the
+input <em>x</em> should be sampled to initialize the cluster centers
+(default=1)
+</p>
+<p class=indent>
+
+
+<ul>
+<li><em>opt</em>@iseed=1 results in the center clusters being set to
+the first <em>k</em> sets of observations
+</p>
+<p class=indent>
+
+<li><em>opt</em>@iseed=2 results in the cluster centers being set to a
+random set of observations
+</ul>
+</p>
+<p class=indent>
+
+Currently, the user can not explicitly set the actual cluster centers.
+
+</ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The return array (say), <em>clcnter</em>, will contain the cluster
+centers.  It will be dimensioned (<em>k</em>,<b>N</b>), where <b>N</b>
+collectively represents the 'variable' dimension(s).
+<p>
+<em>clcnter</em> will have the following attributes associated with it:
+<p>
+ 
+<ul>
+
+<li><b><em>id</em></b> - a one-dimensional integer array of
+size <b>M</b> indicating the cluster to which each observation is
+assigned.
+
+<li><b><em>npts</em></b> - a one-dimensional integer array of
+size <em>k</em> containing the number of points in each cluster.
+
+<li><b><em>ss2</em></b> - a one-dimensional double array of
+size <em>k</em> containing the within-cluster sum of squares.
+
+</ul>
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<p>
+<a href="http://en.wikipedia.org/wiki/K-means_clustering">K-means</a> is a centroid-based cluster method.  
+The observations are allocated to <em>k</em> clusters in such a way that the
+within-cluster sum of squares is minimized. K-means clustering requires that 
+the number of clusters to be extracted be specified in advance.
+<p>
+As noted by <a href="http://www.onmyphd.com/?p=k-means.clustering">
+<b>http://www.onmyphd.com/?p=k-means.clustering</a></b>: "The number of clusters should match the data. An incorrect choice of the number of clusters will invalidate the whole process. An empirical way to find the best number of clusters is to try K-means clustering with different number of clusters and measure the resulting sum of squares."
+<p>
+The k-means algorithm works reasonably well when the data fits the cluster model:
+<ul>
+<li> The number of clusters is 'consistent' with the data.
+<li> The data points within a cluster are centered around that cluster
+<li> The spread/variance of the clusters is similar, <i>ie</i> each data point belongs to the closest cluster
+</ul>
+<p>
+<b>Limitations:</b> K-means may have problems when clusters are of very differing sizes; 
+outliers are present; or empty clusters exist.
+<p>
+The original code is created for Cartesian grids. If the application requires using grid points
+or stations located at high latitudes, it is suggested that 
+<a href="css2c.html"><b>css2c</b></a> be used
+to interpolate to Cartesian coordinates. These better reflect the true distances and should be input to the function. 
+<p>
+The modified code used by this function was downloaded from 
+<a href="http://people.sc.fsu.edu/~jburkardt/"><b>John Burkardt's website</b></a>. 
+The original Hartigan & Wong Fortran code was from:
+<p>
+<pre>
+   John Hartigan, Manchek Wong,
+   Algorithm AS 136:
+   A K-Means Clustering Algorithm,
+   Applied Statistics,
+   Volume 28, Number 1, 1979, pages 100-108.
+</pre>
+
+
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+<B>Example 1</B>:  The source of this example is 
+<a href="http://mnemstudio.org/clustering-k-means-example-1.htm"><b>here</b></a>.
+Default options are used.
+<pre>
+
+   v0 = (/1.0, 1.5, 3.0, 5.0, 3.5, 4.5, 3.5/)      ; 1st variable
+   v1 = (/1.0, 2.0, 4.0, 7.0, 5.0, 5.0, 4.5/)      ; 2nd variable
+   
+   m  = <a href="dimsizes.html"><strong>dimsizes</strong></a>(v1)    ; # observations
+   n  = 2               ; # variables
+   k  = 2               ; # clusters (user specified)
+
+   x  = <a href="new.html"><strong>new</strong></a>((/n,m/), <a href="typeof.html"><strong>typeof</strong></a>(v1), "No_FillValue")
+   x(0,:) = v0     
+   x(1,:) = v1
+
+   clcntr = <strong>kmeans_as136</strong>(x, k, False)  ; use default options
+   <a href="print.html"><strong>print</strong></a>(clcntr)      ; (1.25,1.5) and (3.9,5.1)
+</pre>
+An edited version of the output follows:
+<pre>
+
+   Variable: clcntr
+   Type: float
+   Total Size: 16 bytes
+               4 values
+   Number of Dimensions: 2
+   Dimensions and sizes:   [2] x [2]            <b><=== (k,n), (# clusters, # variables)</b>
+   (0,0)   1.25
+   (0,1)   1.5
+
+   (1,0)   3.9
+   (1,1)   5.1
+   
+   Number of Attributes: 3
+     <b>id</b>  : (1, 1, 2, 2, 2, 2, 2)
+     <b>npts</b> : (2, 5)
+     <b>ss2</b> : (0.625, 7.9)                       <b><=== type double </b>
+
+</pre>
+
+<p>
+<B>Example 2</B>: Same as Example 1 but with three clusters (k=3).
+For illustration only, the maximum iteration count and the seed values are set.
+<p>
+<pre>
+   x  = (/ (/1.0, 1.5, 3.0, 5.0, 3.5, 4.5, 3.5/) \   ; create 'x' directly
+         , (/1.0, 2.0, 4.0, 7.0, 5.0, 5.0, 4.5/) /)
+
+   dimx = <a href="dimsizes.html"><strong>dimsizes</strong></a>(x)
+   n    = dimx(0)         ; # variables    (2)
+   m    = dimx(1)         ; # observations (7)
+   k    = 3               ; # clusters
+
+   opt            = True
+   opt@iter       = 40     ; change the default max # iterations 
+
+   clcntr = <strong>kmeans_as136</strong>(x, k, opt)  
+   <a href="print.html"><strong>print</strong></a>(clcntr)      
+
+</pre>
+An edited version of the output follows:
+<pre>
+
+   Variable: clcntr
+   Type: float
+   Total Size: 24 bytes
+               6 values
+   Number of Dimensions: 2
+   Dimensions and sizes:   [3] x [2]            <b><=== (k,n), (# clusters,# variables)</b>
+   (0,0)    1
+   (0,1)    1
+
+   (1,0)   1.5
+   (1,1)    2
+
+   (2,0)   3.9
+   (2,1)   5.1
+
+   Number of Attributes: 3
+     <b>id</b>  : (1, 2, 3, 3, 3, 3, 3)
+     <b>npts</b> : (1, 1, 5)
+     <b>ss2</b> : (0.0, 0.0, 7.9)                    <b><=== type double </b>
+</pre>
+
+<p>
+<B>Example 3</B>: Use the "famous" <a href="http://en.wikipedia.org/wiki/Iris_flower_data_set"> <b>Anderson-Fischer IRIS data set</b></a> 
+and perform a K-Means analysis. Here the cluster centers are set using opt@iseed=1.
+To get the data in the required order, the variable is reordered upon input to the function.
+
+<p>
+
+<pre>
+
+   diri = "./"
+   fili = "IRIS.txt"
+
+   nvar = 4                    ; # of variables
+   x    = <a href="../Contributed/readAsciiTable.html"><strong>readAsciiTable</strong></a>(diri+fili, nvar, "float", 2)
+   x!0  = "obs"
+   x!1  = "var"
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(x)
+
+   dimx = <a href="dimsizes.html"><strong>dimsizes</strong></a>(x)
+   mobs = dimx(0)              ; # observations
+   k    = 3                    ; # clusters (user specified)
+
+   opt       = True
+   opt@iseed = 2
+   clcntr = <strong>kmeans_as136</strong>(x(<b>var|:,obs|:</b>), k, opt)    ; temporarily reorder
+   <a href="print.html"><strong>print</strong></a>(clcntr)      
+</pre>
+The edited output is
+<pre>
+
+   Variable: clcntr
+   Type: float
+   Total Size: 24 bytes
+               12 values
+   Number of Dimensions: 2
+   Dimensions and sizes:   [3] x [4]      <b><=== (k,n), (# clusters, # variables)</b>
+   (0,0)   5.902
+   (0,1)   2.748
+   (0,2)   4.394
+   (0,3)   1.434
+
+   (1,0)   5.006
+   (1,1)   3.425
+   (1,2)   1.467
+   (1,3)   0.246
+
+   (2,0)   6.850
+   (2,1)   3.074
+   (2,2)   5.742
+   (2,3)   2.071
+
+   Number of Attributes: 3
+     <b>id</b>   : (2,2,2,...,3,1,3,3,1)
+     <b>npts</b> : (62, 48, 38)
+     <b>ss2</b>  : (39.82097, 15.02396, 23.87947)  <b><=== type double </b>
+</pre>
+The <a href="http://www.r-project.org/"><b>statistical package R</b></a> returns the following. 
+<p>
+<pre>
+    =============================R==============================
+      http://www.rdatamining.com/examples/kmeans-clustering
+    ============================================================
+    > (kc <- kmeans(newiris, 3)) 
+   
+    K-means clustering with 3 clusters of sizes 38, 48, 62
+    
+    Cluster means:
+      Sepal.Length Sepal.Width Petal.Length Petal.Width
+    1     6.850000    3.073684     5.742105    2.071053
+    2     5.006000    3.428000     1.462000    0.246000
+    3     5.901613    2.748387     4.393548    1.433871
+    
+    Clustering vector:
+      [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+     [30] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 1 3 3 3 3 3
+     [59] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3
+     [88] 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 1 1 1 1 3 1 1 1 1 1 1 3 3 1
+    [117] 1 1 1 3 1 3 1 3 1 1 3 3 1 1 1 1 1 3 1 1 1 1 3 1 1 1 3 1 1
+    [146] 1 3 1 1 3
+    
+    Within cluster sum of squares by cluster:
+    [1] 23.87947 15.15100 39.82097
+</pre>
+<p>
+<B>NOTE:</B> NCL's <b>npts</b> is in a different
+order than R's cluster sizes (38, 50, 62). Further, NCL's <b>id</b>
+is associating the 1st elements with cluster 3 while R is associating
+the elements with cluster 2. Why the difference? The reason is that differing
+initial seeds may yield different cluster assignments. There is no significance
+associated with the cluster assignments. Being in cluster 1 is not more 
+significant than being in cluster 3. It is arbitrary.   
+
+<p>
+<B>Example 4</B>: Consider X(time,lat,lon): Perform a K-means cluster using data from 30S to 30N. 
+Here the array is rectilinear and the specified region does not extend to high latitudes. 
+Hence, we will treat the data as if it is on a Cartesian grid.
+<p>
+<pre>
+    x  = f->X(:,<b>{-30:30}</b>,:)               ; x(time,lat,lon)   
+                                          ; <b>reorder</b> via NCL's named dimension reordering
+    xr = x(<b>lat|:,lon|:,time|:</b>)            ; make 'time' (observations; M) the rightmost dimension
+                                          ; the lat,lon are the 'variables' (N)
+
+    k  = 3                                ; # clusters (user specified)
+
+    opt       = True
+    opt@iseed = 1
+    clcntr    = <strong>kmeans_as136</strong>(<b>xr</b>, k, opt)   ; <b>input the reordered array</b>    
+              :                            ; <b>clcntr(3,nlat,mlon)</b>              
+              :
+              :
+    <a href="delete.html"><strong>delete</strong></a>(xr)                ; delete if no longer needed (not necessary)
+        
+</pre>
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/kmeans_as136.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:44 GMT -->
+</html>

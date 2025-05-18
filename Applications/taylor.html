@@ -1,0 +1,686 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/taylor.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:17:51 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+the creation of Taylor diagrams [normalized].">
+<meta name="keywords" content="NCL, graphics, visualization, iso surfaces">
+<TITLE>NCL Graphics: Taylor Diagrams</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_special.html">Special plots</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+    <h1>NCL Graphics: Taylor Diagrams</h1>
+
+    <div class=mainimage>
+    <img src="Images/taylor_4_1_lg.png" align=left border=0></a>
+    </div>
+
+    <div class=text>
+<p>
+    Taylor diagrams provide a visual framework for comparing a suite of variables
+    from one or more test data sets to one or more reference data sets. 
+    Commonly, the test data sets are model experiments while the reference data set
+    is a control experiment or some reference observations (eg, ECMWF Reanalyses).
+    Generally, the plotted values are derived from <b>climatological</b> monthly, 
+    seasonal or annual means. Because the 
+    different variables (eg: precipitation, temperature) may have widely varying 
+    numerical values, the results are normalized by the reference variables. 
+    The ratio of the normalized variances indicates the relative amplitude 
+    of the model and observed variations.
+<p>
+    <b>For the classic Taylor Diagram (Karl, 2005), the pertinent statistics are the weighted 
+    <i>centered</i> pattern correlation(s) (<a href="../Document/Functions/Contributed/pattern_cor.html"><strong>pattern_cor</strong></a>) and 
+    the ratio(s) of the normalized root-mean-square (RMS) differences
+    between 'test' dataset(s) and 'reference' dataset(s). An additional <i>bias</i> statistic,
+    developed by R. Neale (NCAR), may added to the classic Taylor Diagram. See taylor_7b below.</b>
+<p>
+    <a href="../prev_releases.html#6.5.0">NCL V6.5.0</a> contains a
+    function, <b><a href="../Document/Functions/Contributed/taylor_stats.html"><strong>taylor_stats</strong></a></b>,
+    which creates the statistics needed for the taylor diagram:
+    pattern_correlation, ratio and bias. Optionally, additional
+    statistics can be returned.  Prior to the release of NCL 6.5.0,
+    the <b>taylor_stats</b> function may be downloaded from
+    <a href="Scripts/taylor_stats.html"><b>here</b></a>.
+<P>
+<B>Reference:</B> 
+<PRE>
+Taylor, K.E. (2005): <a href="http://www-pcmdi.llnl.gov/about/staff/Taylor/CV/Taylor_diagram_primer.pdf"> <b>Taylor Diagram Primer</b></a>:  
+A brief 4-page overview which summarizes the important aspects of these useful plots. 
+---
+
+Taylor, K.E. (2001): <a href="http://dx.doi.org/10.1029/2000JD900719">
+<I>Summarizing multiple aspects of model performance in a single diagram</I></a>
+JGR, vol 106, no. D7, 7183-7192, April 16, 2001. 
+
+Gleckler, P. J., K. E. Taylor, and C. Doutriaux (2008): 
+<a href="http://dx.doi.org/10.1029/2007JD008972"><i>Performance metrics for climate models</i></a> 
+J. Geophys. Res., 113, D06104
+
+Baker, N.C., Taylor, P.C (2016): 
+<a href="http://journals.ametsoc.org/doi/10.1175/JCLI-D-15-0114.1"><i>A Framework for Evaluating Climate Model Performance Metrics</i></a> 
+Journal of Climate, 2016, 29, 5, 1773.
+</PRE>
+
+<P>
+    The following examples use 
+    <a href="Scripts/taylor_diagram.html"><b>taylor_diagram.ncl</b></a> 
+    or
+    <a href="Scripts/taylor_diagram_cam.html"><b>taylor_diagram_cam.ncl</b></a>
+    to generate the background upon which the normalized statistics
+    are plotted. The advantage of using the normalized version
+    of the Taylor diagram is that variables with widely varying
+    variances can be viewed on one figure. 
+<p>
+The classic taylor_diagram function is prototyped as follows:
+<pre>
+    function <b>taylor_diagram</b> ( wks:graphic\    ; pre-created workstation
+                   , RATIO[*][*]:numeric \    ; ratios
+                   , CC[*][*]:numeric    \    ; pattern correlations: range 0-1
+                   , rOpts:logical)           ; scalar to which attributes are assigned
+</pre>
+The version that includes the bias is prototyped as:
+<pre>
+
+    function <b>taylor_diagram_cam</b> ( wks:graphic\; pre-created workstation
+                   , RATIO[*][*]:numeric \    ; ratios
+                   , CC[*][*]:numeric    \    ; pattern correlations: range 0-1
+                   , BIAS[*][*]:numeric  \    ; rlative bias (%)
+                   , rOpts:logical)           ; scalar to which attributes are assigned
+
+</pre>
+The arguments are:
+<p>
+<ul>
+    <li> RATIO[*][*]: ratio of the standardized variances
+    <li> CC[*][*]: pattern correlations: range 0-to-1 
+    <li> BIAS[*][*]: relative bias (%): See taylor_8
+    <li> rOpts: options     
+</ul>
+<p>
+The <b>RATIO</b>, <b>CC</b> and <b>BIAS</b> arguments are two dimensional. 
+The left dimension refers to the number of test data sets used (eg: model experiments and/or observational). 
+The right dimension holds the actual values to be plotted. If only one comparison dataset is used, the
+ratio, cc and bias are scalars. to plot, the user must create a two dimensional array prior to calling the function. EG:  
+<pre> 
+    CC    = <a href="../Document/Functions/Built-in/conform_dims.html"><strong>conform_dims</strong></a>( (/<b>1,1</b>/), cc)
+    RATIO = <a href="../Document/Functions/Built-in/conform_dims.html"><strong>conform_dims</strong></a>( (/<b>1,1</b>/), ratio)
+    BIAS  = <a href="../Document/Functions/Built-in/conform_dims.html"><strong>conform_dims</strong></a>( (/<b>1,1</b>/), bias)
+</pre>
+
+<p>
+The procedure <a href="Scripts/taylor_metrics_table.html"><b>taylor_metrics_table.ncl</b></a>
+can be used to create a table containing a specified statistic. See taylor_{7,8}.
+<pre>
+    procedure <b>taylor_metrics_table</b> (mfname[1]:string \ ; plot name
+                   ,varNames[*]:string      \   ; variable names
+                   ,cases[*]:string         \   ; case (model) names
+                   ,seasons[*]:string       \   ; season names
+                   ,values[*][*][*]:numeric \   ; 3d array w values
+                   ,topt:logical            )   ; table options
+</pre>
+<P>
+    By default, the taylor diagram functions can handle up to 10 variable comparisons. 
+    Different colors and 
+    <a href="../Document/Graphics/Images/markers.png">markers</a>
+    are used to differentiate between different models/cases. 
+    The 10 default colors and markers are: 
+<pre>
+
+      Markers = (/ 4, 6, 8,  0, 9, 12, 7, 2, 11, 16/) ; Marker Indices 
+      Colors  = (/ "red"      , "blue" , "green" , "cyan"  , "orange" \   
+                 , "turquoise", "brown", "yellow", "purple", "black" /)  
+</pre>
+    The markers and colors can readily be changed by the user.
+<p>
+The taylor_diagram plot options are activated by setting the option argument,
+(say) "opt", to True and setting various attributes. The user specified 
+attribute options include:
+<pre>
+      opt   = True                      ; taylor diagram with options 
+      opt@tiMainString  = "......"      ; title 
+      opt@Markers       = (/  ...  /)   ; markers   
+      opt@Colors        = (/  ...  /)   ; colors
+      opt@caseLabels    = (/  ...  /)   ; case Labels 
+      opt@varLabels     = (/  ...  /)   ; variable Labels 
+
+      opt@caseLabelsFontHeightF =       ; caseLabels size [default=0.12  ]   
+      opt@varLabelsFontHeightF  =       ; varLabels  size [default=0.013 ]
+      opt@varLabelsYloc =               ; Move location of variable labels 
+                                        ; [default=0.45]
+      opt@gsMarkerSizeF =               ; marker size     [default=0.0085]
+
+                                        ; BACKGROUND options
+      opt@stnRad        = (/  ...  /)   ; additional standard radii
+      opt@ccRays        = (/  ...  /)   ; correlation rays 
+      opt@centerDiffRMS = True          ; RMS 'circles'                                            
+      opt@ccRays_color  = "LightGray"          ; default is black
+      opt@centerDiffRMS_color  = "LightGray"   ; default is black
+
+                                        ; OTHER recognized options
+      opt@taylorFrame   = False         ; do <b>not</b> advance frame [default is True]
+</pre>
+The following examples illustrate the most commonly used options.
+<p>
+The <b>taylor_metrics_table</b> options are activated by setting the option argument,
+(say) <em>opt</em>=True and setting various attributes. The user specified 
+attribute options include:
+<pre>
+      opt   = True                      ; taylor metric table with options 
+      opt@tiMainString  = "......"      ; title [default="CAM METRICS"]
+                                        ; make roughly the same length 
+</pre>
+
+</div>
+
+<div class=ex>
+<!--Taylor_1-->
+<a name=ex1></a>
+<a href="Images/taylor_1_lg.png">
+<img src="Images/taylor_1_sm.png" align=left border=2></a>
+<a href="Scripts/taylor_1.html">taylor_1.ncl</a>: 
+Default classic Taylor diagram. 
+</div>
+
+<div class=ex>
+<!--Taylor_2-->
+<a name=ex2></a>
+<a href="Images/taylor_2_lg.png">
+<img src="Images/taylor_2_sm.png" align=left border=2></a>
+<a href="Scripts/taylor_2.html">taylor_2.ncl</a>: 
+ Set background options.
+</div> 
+
+<div class=ex>
+<!--Taylor_3-->
+<a name=ex3></a>
+<a href="Images/taylor_3_lg.png">
+<img src="Images/taylor_3_sm.png" align=left border=2></a>
+<a href="Scripts/taylor_3.html">taylor_3.ncl</a>: 
+ Add labeling to the default Taylor background.
+</div> 
+
+<div class=ex>
+<!--Taylor_4-->
+<a name=ex4></a>
+<a href="Images/taylor_4_1_lg.png">
+<img src="Images/taylor_4_1_sm.png" align=left border=2></a>
+<a href="Images/taylor_4_2_lg.png">
+<img src="Images/taylor_4_2_sm.png" align=left border=2></a>
+<a href="Scripts/taylor_4.html">taylor_4.ncl</a>: 
+ Create a taylor plot and a table displaying the CAM metrics. 
+</div> 
+
+<div class=ex>
+<!--Taylor_5-->
+<a name=ex5></a>
+<a href="Images/taylor_5_1_lg.png">
+<img src="Images/taylor_5_1_sm.png" align=left border=2></a>
+<a href="Images/taylor_5_2_lg.png">
+<img src="Images/taylor_5_2_sm.png" align=left border=2></a>
+<a href="Images/taylor_5_3_lg.png">
+<img src="Images/taylor_5_3_sm.png" align=left border=2></a>
+<a href="Images/taylor_5_4_lg.png">
+<img src="Images/taylor_5_4_sm.png" align=left border=2></a>
+<a href="Scripts/taylor_5.html">taylor_5.ncl</a>: 
+ Create sample tables displaying the CAM metrics. 
+</div> 
+
+<div class=ex>
+<!--Taylor_6-->
+<a name=ex6></a>
+<a href="Images/taylor_6_1_lg.png">
+<img src="Images/taylor_6_1_sm.png" align=left border=2></a>
+<a href="Images/taylor_6_2_lg.png">
+<img src="Images/taylor_6_2_sm.png" align=left border=2></a>
+<a href="Images/taylor_6_3_lg.png">
+<img src="Images/taylor_6_3_sm.png" align=left border=2></a>
+<a href="Scripts/taylor_6.html">taylor_6.ncl</a>: 
+<b>Requires NCL 4.2.0.a034 or newer: </b> 
+ This demonstration script illustrates paneling multiple Taylor plots. Obviously, paneling
+ figures can make the features small. To make the figures less 'busy' the opt@varLabels and 
+ opt@caseLabels could be deleted after the first plot.
+ <br><br>
+ The panel's component figures need not have the same number
+ of variables or cases. Each figure is independent of the others.
+</div> 
+
+<div class=ex>
+<!--Taylor_7-->
+<a name=ex7></a>
+<a href="Images/taylor_7_1_lg.png">
+<img src="Images/taylor_7_1_sm.png" align=left border=2></a>
+<a href="Images/taylor_7_2_lg.png">
+<img src="Images/taylor_7_2_sm.png" align=left border=2></a>
+<a href="Images/taylor_7_3_lg.png">
+<img src="Images/taylor_7_3_sm.png" align=left border=2></a>
+<a href="Images/taylor_7_4_lg.png">
+<img src="Images/taylor_7_4_sm.png" align=left border=2></a>
+<a href="Scripts/taylor_7.html">taylor_7.ncl</a>: 
+ A simple processing script that compares a single test model versus a reference (control) case. 
+ The 'classic' Taylor diagram quantities (pattern correlations and ratios)
+ were calculated using  <b><a href="../Document/Functions/Contributed/taylor_stats.html"><strong>taylor_stats</strong></a></b>.
+ The <a href="Scripts/taylor_diagram.html"><b>taylor_diagram.ncl</b></a> plotting function is used.
+ For convenience, The annual [ANN] and seasonal [eg: JJA, DJF] quantities 
+are derived from the monthly climatologies. 
+</div> 
+
+<div class=ex>
+<!--Taylor_7b-->
+<a name=ex7b></a>
+<a href="Images/taylor_7b_1_lg.png">
+<img src="Images/taylor_7b_1_sm.png" align=left border=2></a>
+<a href="Images/taylor_7b_2_lg.png">
+<img src="Images/taylor_7b_2_sm.png" align=left border=2></a>
+<a href="Images/taylor_7b_3_lg.png">
+<img src="Images/taylor_7b_3_sm.png" align=left border=2></a>
+<a href="Scripts/taylor_7b.html">taylor_7b.ncl</a>: 
+ Similar to the <b>taylor_7</b> example except the relative bias is plotted.
+ The pertinent  statistics are calculated using 
+ <b><a href="../Document/Functions/Contributed/taylor_stats.html"><strong>taylor_stats</strong></a></b>.  This requires using the 
+ <a href="Scripts/taylor_diagram_cam.html"><b>taylor_diagram_cam.ncl</b></a> plotting function.
+</div> 
+
+<div class=ex>
+<!--Taylor_8-->
+<a name=ex8></a>
+<a href="Images/taylor_8_lg.png">
+<img src="Images/taylor_8_sm.png" align=left border=2></a>
+<a href="Scripts/taylor_8.html">taylor_8.ncl</a>: 
+The following example uses 
+<a href="Scripts/taylor_diagram_cam.html"><b>taylor_diagram_cam.ncl</b></a>
+to plot the <b>percent bias</b> of each case for each variable (<b>nv</b>). 
+Further, it plots negative correlations and standard deviations > 1.65
+as text at the bottom of the figure.
+<p>
+If <b>mean_case</b> 
+represents the weighted areal mean for each case (<b>nc</b>) and each variable (<b>nv</b>) and 
+<b>mean_ref(nv)</b> is the areal mean of the reference case variable, then the 
+<b>percent bias</b> is calculated via
+
+<pre>
+   bias = new(nCase,nVar), "double", 1d20)
+   . . .
+   bias(nc,nv)  = mean_case(nc,nv) - mean_ref(nv)              
+   if (mean_ref(nv).ne.0) then
+       bias(nc,nv) = (bias(nc,nv)/mean_ref(nv))*100    ; bias [%]
+   end if
+</pre>
+
+The percent bias is indicated by different symbols.
+The <a href="Scripts/taylor_diagram_cam.html"><b>taylor_diagram_cam.ncl</b></a>
+also handles negative pattern correlation coefficients by adding text
+information.<p><p><p>
+
+</div> 
+
+<div class=ex>
+<!--Taylor_9-->
+<a name=Erik_taylor_panel_Example></a>
+
+<a href="Images/Erik_taylor_panel_Example_1_lg.png">
+<img src="Images/Erik_taylor_panel_Example_1_sm.png" align=left border=2></a>
+<a href="Images/Erik_taylor_panel_Example_2_lg.png">
+<img src="Images/Erik_taylor_panel_Example_2_sm.png" align=left border=2></a>
+<a href="Scripts/Erik_taylor_panel_Example_1.html">Erik_taylor_panel_Example_1.ncl</a> and
+<a href="Scripts/Erik_taylor_panel_Example_2.html">Erik_taylor_panel_Example_2.ncl</a>: 
+
+The following two taylor diagram panel examples were contributed by Erik Noble of NASA.
+This has no support from  the NCL developers. 
+<p>
+
+They are mostly identical, except the second one adds additional labels to the diagram
+using <a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a>.
+<p>
+
+They differ from the above examples in that they do not use labels and
+show how one could use the plot for many models. Erik is using it to
+look at 64 model results at once.
+<p>
+
+These scripts require that you
+load <a href="Scripts/taylor_diagram_enoble.html"><b>taylor_diagram_enoble.ncl</b></a>.
+
+</div>
+
+<div class=ex>
+<!--Taylor_10-->
+<a name=Taylor Diagram function with less hard-coding: jatin.kala.jk AT gmail.com></a>
+The following was contributed by Jatin.Kala.JK  *AT* gmail.com.
+This has no support from  the NCL developers. 
+<p>
+"The following is a slightly modified taylor_diagram function, with less
+hard-coding of axis limits etc. Also, I have passed the very many
+variables to local (would be nice if someone double-checked). <b>The
+drawing of RMS "semi-circles" is automated provided there is enough
+space for a "full semi-circle".</b> I need to figure out a nice way to make
+the RMS circles end nicely on the "outer arc" where is there not enough
+space, but I have no time, and maybe someone else can automate that?
+There are ample comments of my changes at the start of the script."
+<p>
+For more info, and any improvements or bugs,
+please contact Jatin Kala (Jatin.Kala.JK  *AT* gmail.com)
+<p>
+The script is <a href="Scripts/taylor_diagram_less_hardcoded.html"><b>taylor_diagram_less_hardcoded.ncl</b></a>.
+
+</div>
+
+<div class=ex>
+<!--Taylor_11-->
+<a name=Rashed_Mahmood_rashidcomsis@gmail.com_half_circle</a>
+
+<a href="Images/taylor_11_lg.png">
+<img src="Images/taylor_11_sm.png" align=left border=2></a>
+<a href="Scripts/taylor_11.html">taylor_11..ncl</a> and
+The 'half-circle' version of the Taylor Diagram was contributed by 
+Rashed Mahmood (Postdoc, University of Victoria, Victoria BC).
+This has no support from the NCL developers. 
+<p>
+These script requires that you 
+<pre>
+   load <a href="Scripts/taylor_diagram_cam_uvic.html"><b>taylor_diagram_cam_uvic.ncl</b></a>.
+</pre>
+</div>
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/taylor.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:18:13 GMT -->
+</html>
+
+

@@ -1,0 +1,58 @@
+;----------------------------------------------------------------------
+; This is a basic NCL template for creating a map and then using
+; shapefile data to attach more information to the map, like more 
+; detailed outlines. Even though this example uses gsn_csm_map,
+; the same code can be use for any plot return from 
+; gsn_csm_contour_map, gsn_csm_vector_map, etc.
+;
+; This particular template attaches Germany shapefile polylines that
+; were downloaded from gadm.org/country.  This is a great website
+; for downloading many levels of outlines for countries.
+;----------------------------------------------------------------------
+
+; Note: as of NCL V6.2.0, you don't need these load commands
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+  shapefile_name = "DEU_adm/DEU_adm2.shp"
+
+  wks = gsn_open_wks("x11","map_shapefile")   ; "ps", "pdf", "png"
+
+;---Set some resources
+  res                   = True
+
+  res@gsnMaximize       = True     ; maximize plot in frame
+  res@gsnDraw           = False    ; don't draw plot
+  res@gsnFrame          = False    ; don't advance frame
+
+  res@tiMainString      = "Germany shapefile from gadm.org/country"
+
+  res@mpFillOn          = False    ; Turn these off because we're
+  res@mpOutlineOn       = False    ; adding our own outlines
+
+;---Read lat/lon off shapefile.
+  a   = addfile(shapefile_name,"r")
+  lat = a->y
+  lon = a->x
+
+;---Zoom in on map if desired
+  res@mpMinLatF         = min(lat)
+  res@mpMaxLatF         = max(lat)
+  res@mpMinLonF         = min(lon)
+  res@mpMaxLonF         = max(lon)
+  res@mpCenterLonF      = (res@mpMinLonF + res@mpMaxLonF) / 2.
+
+  res@pmTickMarkDisplayMode = "Always"   ; Better tickmarks
+
+  plot = gsn_csm_map(wks,res)
+
+;---Attach the shapefile polylines
+  lnres                  = True
+  lnres@gsLineColor      = "red"
+  lnres@gsLineThicknessF = 2.0
+  dum = gsn_add_shapefile_polylines(wks,plot,shapefile_name,lnres)
+
+  draw(plot)       ; This will draw the map and the shapefile outlines.
+  frame(wks)       ; Advance the frame
+end

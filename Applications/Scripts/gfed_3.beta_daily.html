@@ -1,0 +1,259 @@
+;*****************************************************************
+; gfed_3.beta_daily.ncl
+;
+; Concepts illustrated:
+;   - Creating function to perform specific tasks
+;     Create a 'group' path; access data; rearrange data; add meyta data
+;   - Getting all file names
+;   - Looping over files 
+;   - Extracting specific variables from nested hdf5 groups
+;   - Creating CF conforming netCDF
+;
+;******************************************************************
+; GFED: Global Fire Emmisions Database
+; Convert hdf5 with embedded 'groups' to CF conformant netCDF-4
+; Make the variables conform to the same ordering of CESM spatial coordinates
+; This latter step is not necessary. It facilitates CESM post processing.
+;******************************************************************
+;
+undef("time_create")
+function time_create(yyyy[1]:numeric, tunit[1]:string)
+local NDAY, time, ymdh, yddd, nt
+begin
+  if (isleapyear(yyyy)) then
+      NDAY = 366
+  else
+      NDAY = 365
+  end if
+
+  time = new( NDAY, "double" , "No_FillValue") 
+  ymdh = new( NDAY, "integer", "No_FillValue")
+  yddd = new( NDAY, "integer", "No_FillValue")
+  nt   = -1
+
+  hh   = 12   ; mid-day
+  mn   =  0
+  sc   =  0
+  nmos = 12
+  do mm=1,nmos
+     ndmon = days_in_month(yyyy,mm)
+    do dd=1,ndmon 
+       nt = nt+1
+       time(nt) = cd_inv_calendar(yyyy,mm,dd,hh,mn,sc,tunit,0)
+       ymdh(nt) = yyyy*1000000 + mm*10000 + dd*100 + hh
+       yddd(nt) = yyyy*1000    + day_of_year(yyyy,mm,dd)
+    end do
+  end do
+
+  time!0 = "time"
+  ymdh!0 = "time"
+  yddd!0 = "time"
+
+  time@long_name = "TIME: mid-day"
+  ymdh@long_name = "YMDH"
+  yddd@long_name = "YYYY and day-of-year"
+
+  return([/time, ymdh, yddd /])
+end
+;----
+undef("addMeta")
+procedure addMeta(x:numeric, time[*]:numeric, lat[*]:numeric, lon[*]:numeric)
+;
+; [1] add meta data
+; [2] For consistency with CESM:
+;     (a) make South-to-North ordering
+;     (b) make array start at GM: all positive longitudes 
+; Options 2a and 2b can be commented if they are not desired
+;
+local dimx, rankx, xx
+begin
+     dimx   = dimsizes(x)
+     rankx  = dimsizes(dimx)
+            ; only 2D or 3D
+     if (.not.(rankx.eq.2 .or. rankx.eq.3)) then
+         print("addMeta: rankx="+rankx+" not supported")
+         print(dimx)
+         exit
+     end if 
+     
+     if (rankx.eq.2) then
+         x!0   = "lat"       
+         x!1   = "lon"      
+         x&lat = lat
+         x&lon = lon
+         x = x(::-1,:)        ;make S->N
+     else                       
+         x!0   = "time"       
+         x!1   = "lat"     
+         x!2   = "lon"    
+
+         x&time= time
+         x&lat = lat
+         x&lon = lon
+         x   = x(:,::-1,:)    ;make S->N
+     end if
+                         ;for consistency with CESM order
+     x = lonFlip(x)      ;make start at/near Grenwich Meridion
+end
+
+;---
+
+undef("get_gefd_var_daily")
+function get_gefd_var_daily(f:file, grp_name[*]:string, var_name[1]:string  \
+                           ,yyyy[1]:integer,time[*], lat[*], lon[*]     )
+;
+;---Create an appropriate group path
+;---Loop over the 12 monthly groups and, where appropriate sub-groups
+;---Create and 'fill' array with appropriate values
+;---Add meta data
+;
+local nlat, mlon, ngrp, nmo, nmos, varType, grp_month, pth_name, x
+begin
+  nmos = 12
+  nlat = dimsizes(lat)
+  mlon = dimsizes(lon)
+  ntim = dimsizes(time)
+
+  varType = "float"
+  x       = new ( (/ntim,nlat,mlon/), varType, "No_FillValue") 
+
+  nt = -1
+  do nmo=1,nmos
+     grp_month = sprinti("%0.2i",nmo)        ; "01", "02",..., "12"
+     pth_name  = "/"+grp_name+"/"+grp_month+"/"+var_name
+     ndymo     = days_in_month(yyyy,nmo)
+    do dd=1,ndymo
+       path_day = pth_name +"/day_"+dd       ; "day_1",...,"day_9","day_10",...
+       nt       = nt+1
+       x(nt,:,:)= f->$path_day$              ; entire grid for current day
+    end do
+  end do
+
+; procedure to add appropriate meta data to each variable
+  addMeta(x , time, lat, lon)
+  return(x)
+end
+
+;**********************************************************
+;                           MAIN
+;***********************************************************
+;---Avoid printing Warning messages
+    err = NhlGetErrorObjectId()
+    setvalues err
+      "errLevel" : "Fatal"          ; only report Fatal errors
+    end setvalues
+
+;---netCDF
+    netCDF = True                   ; =True  create netCDF-4
+                                    ; =False print only; no file creation
+    dirnc  = "./NC4/"               ; any directory
+     
+;---read names of source files which are GFED.1s_*.hdf5   
+    diri   = "./"                   ; directory with source hdf5 files
+
+   ;all_files = systemfunc ("cd "+diri+" ; ls GFED4.1s_*hdf5")       
+    all_files = systemfunc ("cd "+diri+" ; ls GFED4.1s_*beta.hdf5")       
+    print(all_files)
+    pthi   = diri+all_files     ;create file path
+    print(pthi)
+
+    nfil   = dimsizes(pthi)
+    print("nfil="+nfil)
+ 
+    varName= "daily_fraction"  ; could be (/"daily_fraction","var2","var3"../)
+;---loop over each year file. The year is in the file name. 
+;---There is no time internal to the file.
+
+  do nf=0,nfil-1
+     print("File loop: "+all_files(nf))
+
+;---extract time with "_" and "." delimiters ; convert string to integer
+
+    year  = toint(str_get_field(all_files(nf),3,"_."))
+    units = "days since 1997-01-01 00:00:00" ; "seconds/hours/days since ...."
+
+    TIME  = time_create(year, units)
+    time  = TIME[0]
+    ymdh  = TIME[1]
+    yddd  = TIME[2]
+
+;---import data from current hdf5 file   
+    f = addfile(pthi(nf),"r")        ; open file
+   ;print(f)                         ; file overview
+
+    if (nf.eq.0) then                ; time invariant information
+        LAT     = f->lat             ; (:,:) .... replicated
+        LON     = f->lon             ; (:,:)
+                                     ; create 'coordinate variables'
+        lat     = (/LAT(:,0)/)
+        lon     = (/LON(0,:)/)
+        lat@units = LAT@units
+        lon@units = LON@units
+        lat!0   = "lat"
+        lon!0   = "lon"
+        lat&lat =  lat
+        lon&lon =  lon
+                                     ; sizes
+        nlat    = dimsizes(lat)
+        mlon    = dimsizes(lon)
+                                     ; invariant variables: 'ancill' group: add meta data
+        basis_regions = f->/ancill/basis_regions
+        addMeta(basis_regions, time, lat, lon)
+        printVarSummary(basis_regions)       ; [lat | 720] x [lon | 1440]
+    
+        grid_cell_area = f->/ancill/grid_cell_area
+        addMeta(grid_cell_area, time, lat, lon)
+        printVarSummary(grid_cell_area)      ; [lat | 720] x [lon | 1440]
+
+        delete([/ LAT,LON /])
+    end if   ; nf=0   =1
+
+;---Desired variables
+
+    df   = get_gefd_var_daily(f, "emissions"  , varName, year, time, lat,lon)
+
+;---Information: only for 1st file (nf=0; year)
+    if (nf.eq.0) then
+        printVarSummary(df)     ; [time | NDAY] x [lat | 720] x [lon | 1440]
+        printMinMax(df,1)
+    end if
+
+;---netCDF 
+  if (netCDF) then
+
+;---remove any preexisting file
+     filnc = "GFED4.1s_"+year+"."+varName+".nc"
+     pthnc = dirnc+filnc
+     system("/bin/rm -f "+pthnc)     ;remove any pre-existing file
+
+;---open file, set file for nc4 [standard compression]
+     setfileoption("nc", "Format", "NetCDF4")
+     ncdf = addfile(pthnc,"c")       ;open output netCDF file
+
+;---create global attributes of the file
+     fAtt               = True
+     fAtt@title         = "GFED: Global Fire Emissions DataBase"
+     fAtt@GFED_WWW      = "http://www.globalfiredata.org/"
+     fAtt@Conventions   = "CF-1.0"
+     fAtt@NCL           = get_ncl_version() 
+     fAtt@creation_date = systemfunc ("date")
+
+     fileattdef(ncdf, fAtt)                    ;copy file attributes
+
+;---make time an 'UNLIMITED' dimension [NCO operators]
+     filedimdef(ncdf,"time",-1,True)
+    
+     ncdf->time            = time              ; 'time' variable
+     ncdf->ymdh            = ymdh              ; auxiliary 'time' variable
+     ncdf->yddd            = yddd              ; auxiliary 'time' variable
+
+                                               ; 2D static variables 
+     ncdf->BASIS_REGIONS   = basis_regions     ; (lat,lon)
+     ncdf->GRID_CELL_AREA  = grid_cell_area    ;     "
+                                               ; 3D variables
+     ncdf->$varName$       = df
+
+  end if  ; netCDF
+
+end do    ; file
+

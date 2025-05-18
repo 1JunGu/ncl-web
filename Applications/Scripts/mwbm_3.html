@@ -1,0 +1,323 @@
+;***************************************************************
+; mwbm_3.ncl   
+;
+; Concepts illustrated:
+;   - Read multiple CMIP6 files containing needed variables
+;   - Extract data from individual, user specified, grid locations
+;   - Calculate maximum number of sun hours
+;   - Use a simple USGS montly water balance model 
+;     Set Initial values for each location 
+;   - Print and plot the results
+;***************************************************************
+; This requires NCL 6.6.2      
+;***************************************************************
+; REFERENCE:
+; A Monthly Water-Balance Model Driven By a Graphical User Interface
+; G.J. McCabe and S.L. Markstrom (2007)
+; https://pubs.usgs.gov/of/2007/1088/pdf/of07-1088_508.pdf
+;***************************************************************
+; Data used: 1000yrs from the CESM2 pre-industrial monthly atmospheric data
+;            CMIP6-piControl
+;***************************************************************
+load "/Users/shea/NCL/GIT/ncl/ni/src/examples/gsun/crop.ncl"
+load "/Users/shea/NCL/GIT/ncl/ni/src/examples/gsun/contributed.ncl"
+load "./MWBM_DRIVER.ncl"
+;=============================================================================
+;                           Function with bug fix
+;=============================================================================
+undef("time_reassign_cv2var")
+function time_reassign_cv2var(f, timeName[1]:string, varName[1]:string)
+;
+;   f1   = addfile ("foo.nc","r")
+;   temp = time_reassign_cv2var(f1, "time", "T")
+; or
+;   f2   = addfiles(  fils   ,"r")
+;   temp = time_reassign_cv2var(f2, "time", "T")
+begin
+  if (.not.(typeof(f).eq."file" .or. typeof(f).eq."list")) then
+      print("getVar_time_reassign: FATAL: input argument f must be of type list or file: type is "+typeof(f)) 
+      exit
+  end if
+
+  time = time_reassign(f, timeName)   ; new time coordinate
+
+  if (typeof(f).eq."file") then
+      if (isfilevar(f,varName)) then
+          var = f->$varName$
+      else
+          print("time_reassign_cv2var: FATAL: variable "+varName+" on file") 
+          exit
+      end if
+  else                                ; must be type list
+      if (isfilevar(f[0],varName)) then
+          var = f[:]->$varName$       ; changed 4 March 2019:    f to f[:]
+      else
+          print("time_reassign_cv2var: FATAL: variable "+varName+" on file") 
+          exit
+      end if
+  end if
+
+  var&$timeName$ = time               ; rassign time coordinate variable (cv)
+  var@NCL = "function time_reassign_cv2var used to reassign time coordinate variable to mid-value of bounds"
+  return(var)
+end
+;=============================================================================
+;                            MAIN
+;=============================================================================
+ ;diri    = "/project/yampa02/asphilli/b.e21.B1850.f09_g17.CMIP6-piControl.001/" 
+  diri    = "/Users/shea/Data/CESM/"
+
+  fPRECT  = "b.e21.B1850.f09_g17.CMIP6-piControl.001.cam.h0.PRECT.*.nc"
+  fPRECSC = "b.e21.B1850.f09_g17.CMIP6-piControl.001.cam.h0.PRECSC.*.nc" 
+  fPRECSL = "b.e21.B1850.f09_g17.CMIP6-piControl.001.cam.h0.PRECSL.*.nc"  
+  fTREFHT = "b.e21.B1850.f09_g17.CMIP6-piControl.001.cam.h0.TREFHT.*.nc"
+
+  filprc  = systemfunc("cd "+diri+" ; ls "+fPRECT )  ; Total (convective & large-scale) prc rate (liq + ice)" 
+  filsnc  = systemfunc("cd "+diri+" ; ls "+fPRECSC)  ; Convective snow rate (water equivalent)
+  filsnl  = systemfunc("cd "+diri+" ; ls "+fPRECSL)  ; Large scale snow rate (water equivalent)
+  filtmp  = systemfunc("cd "+diri+" ; ls "+fTREFHT)  ; Reference temperature
+      
+  pthprc  =  diri + filprc
+  pthsnc  =  diri + filsnc
+  pthsnl  =  diri + filsnl
+  pthtmp  =  diri + filtmp
+
+  nfils   = dimsizes(filprc)
+
+  nfStrt  = 0
+  nfLast  = 0        ; read only one file
+;;nfLast = nfils-1
+
+  fprc    = addfiles(pthprc(nfStrt:nfLast), "r")            ; span one-or-more files
+  fsnc    = addfiles(pthsnc(nfStrt:nfLast), "r")
+  fsnl    = addfiles(pthsnl(nfStrt:nfLast), "r")
+  ftmp    = addfiles(pthtmp(nfStrt:nfLast), "r")
+                                                            ; correct the dates
+  prc     = time_reassign_cv2var(fprc, "time", "PRECT" )
+  snoc    = time_reassign_cv2var(fsnc, "time", "PRECSC")   
+  snol    = time_reassign_cv2var(fsnl, "time", "PRECSL")   
+  tmp     = time_reassign_cv2var(ftmp, "time", "TREFHT")
+
+  sno     = snoc + snol    ; Richard Neale: Total snow is PRECSC+PRESCL (conv + large scale).
+  sno@long_name = "Total Snow"
+  sno@info      = "Total snow is PRECSC+PRESCL (conv + large scale): Rich Neale (2/5/19)"
+  copy_VarCoords(snoc, sno)
+  delete( [/ snoc, snol /] )
+
+; Extract assorted 'time' variables
+
+  time    = prc&time
+  ntim    = dimsizes(time)
+
+  yyyymmdd= cd_calendar(time, -2)
+  yyyy    = yyyymmdd/10000
+  yyyymm  = yyyymmdd/100
+  mmdd    = yyyymmdd - (yyyy*10000)
+  mm      = mmdd/100
+  dd      = mmdd - mm*100
+
+  yyyy@calendar = time@calendar
+  dmm     = days_in_month(yyyy, mm) 
+  doy     = day_of_year(yyyy, mm, dd)  
+;;print(yyyymmdd+"  "+yyyy+"  "+yyyymm+"  "+mmdd+"  "+mm+"  "+dd+"  "+dmm+"  "+doy)
+
+  DMM  = conform(prc, dmm, 0)
+  DOY  = conform(prc, doy, 0)
+
+; Change units
+
+  tmp     = tmp - 273.15
+  tmp@units = "degC"
+
+  prc  = prc*86400*DMM*1000    ; [m]*86400 [sec/day] * dmm [day/month] * 1000 [mm/m]
+  prc@long_name = "Prc Total"  ; short name for plot
+  prc@units = "mm"
+  
+  sno = sno*86400*DMM*1000    
+  sno@long_name = "Snow Total"
+  sno@units = "mm"
+                                      ; Give location of nearby cities
+;;NAME      = (/"Atlanta", "Boulder", "Manaus", "Wuhan", "Fairbanks" /)
+;;LAT       = (/  33.7,  40.0,  -3.1, 30.6,  64.8 /) 
+;;LON       = (/ 275.6, 255.0, 300.0,114.3, 212.3 /)
+;;npt       = dimsizes(LAT)
+
+;;PRESTOR   = (/ 250, 150,   0, 200, 200/)       
+;;WHC       = (/ 500, 150, 300, 200, 200/)       
+;;TRAIN     = conform_dims( npt,  3.3, -1)
+;;TSNOW     = conform_dims( npt,-10.0, -1) 
+;;MELTMAX   = (/0.75, 0.5, 0.0, 0.50, 0.25/)
+;;REMAIN    = (/1.00,25.0, 0.0,25.0 ,25.0/)
+;;DROFRAC   = conform_dims( npt, 0.05, -1) 
+;;RUNOFF_FAC= conform_dims( npt, 0.50, -1) 
+
+                                      ; Give location of nearby cities
+  NAME      = (/"Manaus" /)
+  LAT       = (/  -3.1 /) 
+  LON       = (/ 300.0 /)
+  npt       = dimsizes(LAT)
+
+  PRESTOR   = (/   0 /)       
+  WHC       = (/ 800 /)       
+  TRAIN     = conform_dims( npt,  3.3, -1)   ; not used here
+  TSNOW     = conform_dims( npt,-10.0, -1)   ;  "   "    "
+  MELTMAX   = (/ 0.0 /)                      ;  "   "    "
+  REMAIN    = (/ 0.0 /)
+  DROFRAC   = conform_dims( npt, 0.05, -1) 
+  RUNOFF_FAC= conform_dims( npt, 0.50, -1) 
+
+  TMP    = new( (/ntim, npt/), typeof(tmp), getFillValue(tmp))
+  PRC    = new( (/ntim, npt/), typeof(prc), getFillValue(prc))
+  SNO    = new( (/ntim, npt/), typeof(sno), getFillValue(sno))
+      
+  do np=0,npt-1
+     TMP(:,np) = tmp(:,{LAT(np)},{LON(np)})
+     PRC(:,np) = prc(:,{LAT(np)},{LON(np)})
+     SNO(:,np) = sno(:,{LAT(np)},{LON(np)})
+  end do
+
+  delete( TMP&lat )               ; delete coord var ... it is not a CV)
+  delete( PRC&lat )  
+  delete( SNO&lat ) 
+
+  TMP!1  = "nloc"
+  PRC!1  = "nloc"
+  SNO!1  = "nloc"
+
+  TMP@LAT  = LAT
+  TMP@LON  = LON
+  PRC@LAT  = LAT
+  PRC@LON  = LON
+  SNO@LAT  = LAT
+  SNO@LON  = LON
+  TMP@NAME = NAME
+  PRC@NAME = NAME
+  SNO@NAME = NAME
+
+  tmp := TMP
+  prc := PRC
+  sno := SNO
+  delete( [/ TMP, PRC, SNO /] )
+
+  np   = npt/2
+  lat  = LAT
+    
+; Pre-Compute Sunlight hours: strictly a function of latitude and day-of-year
+
+  sunhrx  = daylight_fao56(doy, lat)       ; max daylight/sun hr per day
+  sunhrx := conform( prc, sunhrx, (/0,1/))
+  copy_VarCoords(prc, sunhrx)
+
+; Pre-Compute Potential Evapotranspiration
+
+  pet  = refevt_hamon_mwbm(tmp, sunhrx, (/0,0/))
+  pet  = pet*conform(pet,dmm,0)                             ; mm/month
+  pet@units = "mm/month"
+
+; MWBM: Transfer initial MWBM setting to 'opt_mwbm'  
+
+  opt_mwbm   = True   
+  opt_mwbm@PRESTOR  = PRESTOR
+  opt_mwbm@WHC      = WHC
+  opt_mwbm@TRAIN    = TRAIN
+  opt_mwbm@TSNOW    = TSNOW
+  opt_mwbm@MELTMAX  = MELTMAX
+  opt_mwbm@REMAIN   = REMAIN
+  opt_mwbm@DROFRAC  = conform_dims( npt, 0.05, -1) 
+  opt_mwbm@RUNOFF_FACTOR= conform_dims( npt, 0.50, -1) 
+
+  lsmask = 1
+  MWBM   = mwbm_driver(prc, tmp, pet, sno, lsmask, opt_mwbm)      ; Type: list <fifo> Total items: ?
+
+  print("##################################################")
+  printVarSummary(MWBM)
+  print("##################################################")
+  
+  pmpe     = MWBM[0]
+  sms      = MWBM[1]
+  aet      = MWBM[2]
+  deficit  = MWBM[3]
+  snstor   = MWBM[4]
+  surplus  = MWBM[5]
+  runoff   = MWBM[6]
+  rodirect = MWBM[7]
+  smelt    = MWBM[8]
+  rain     = MWBM[9]
+
+  pmpe@long_name    = "net Prc"
+  aet@long_name     = "aet"
+  runoff@long_name  = "runoff"
+  surplus@long_name = "surplus"
+  deficit@long_name = "deficit"
+  snstor@long_name  = "snow storage"
+  sms@long_name     = "soil moist storage"
+  smelt@long_name   = "snow melt"
+  rodirect@long_name= "direct runoff"
+
+;---Print values
+  print(" YYYY MM dmm doy     T    PRC    PET    diff  PRAIN  PSNOW  SURPLUS RUNOFF DEFICIT SNSTOR   SMS")
+  print("-----")
+ 
+  print(sprinti("%5.0i",yyyy)         +sprinti("%3.0i", mm)          \
+       +sprinti("%4.0i",dmm)          +sprinti("%4.0i",doy)        \
+       +sprintf("%7.1f", tmp(:,np))   +sprintf("%7.2f", prc(:,np))   \
+       +sprintf("%7.2f", pet(:,np))   +sprintf("%7.2f",pmpe(:,np))   \
+       +sprintf("%7.1f", rain(:,np))  +sprintf("%7.1f", sno(:,np)) \
+       +sprintf("%7.2f",surplus(:,np))+sprintf("%7.2f",runoff(:,np)) \
+       +sprintf("%8.2f",deficit(:,np))                               \
+       +sprintf("%8.2f",snstor(:,np)) +sprintf("%7.1f",  sms(:,np))  )  
+
+;=============================================================================
+;                            PLOT
+;=============================================================================
+
+  plot          = new (10 , "graphic")
+  pltType       = "png"        ; "pdf", "x11", "ps", "png"
+  pltDir        = "./"
+  pltName       = "MWBM_CESM_"+NAME(np)
+
+  yrfrac        = yyyymm_to_yyyyfrac(yyyymm, 0.0)  ; x-axis
+
+  wks           = gsn_open_wks (pltType, pltDir+pltName)
+ ;wks@wkWidth   = 800                    ; default  => 1024
+ ;wks@wkHeight  = 800                    ;    "        "
+  res           = True                   ; plot mods desired
+  res@gsnDraw   = False                  ; don't draw yet      
+  res@gsnFrame  = False                  ; don't advance frame yet      
+
+  res@vpHeightF = 0.4                    ; change aspect ratio of plot
+  res@vpWidthF  = 0.8                  
+  res@vpXF      = 0.15                   ; start plot at x ndc coord 
+  res@trXMinF   = yrfrac(0)
+  res@trXMaxF   = yrfrac(ntim-1)
+  res@tiMainString   = pltName+": "+yyyymm(0)+"-"+yyyymm(ntim-1)
+
+  rain  = prc - sno
+  rain@long_name = "Rain"
+  rain@units     = prc@units  
+
+  plot(0) = gsn_csm_xy (wks,yrfrac, tmp(:,np)    ,res)    
+  plot(1) = gsn_csm_xy (wks,yrfrac, prc(:,np)    ,res)    
+  plot(2) = gsn_csm_xy (wks,yrfrac, rain(:,np)   ,res)    
+  plot(3) = gsn_csm_xy (wks,yrfrac, sno(:,np)    ,res)    
+  plot(4) = gsn_csm_xy (wks,yrfrac, aet(:,np)    ,res)    
+  plot(5) = gsn_csm_xy (wks,yrfrac, snstor(:,np) ,res)    
+  plot(6) = gsn_csm_xy (wks,yrfrac, runoff(:,np) ,res)    
+  plot(7) = gsn_csm_xy (wks,yrfrac, sms(:,np)    ,res)    
+  plot(8) = gsn_csm_xy (wks,yrfrac, surplus(:,np),res)    
+  plot(9) = gsn_csm_xy (wks,yrfrac, deficit(:,np),res)    
+
+  res1                     = True
+  res2                     = True
+  res2@gsnAttachPlotsXAxis = True
+  amid  = gsn_attach_plots(plot(0),(/plot(1),plot(2),plot(3)/),res1,res2)
+  draw(plot(0))            ; 'base' plot   
+  frame(wks)
+
+  amid := gsn_attach_plots(plot(4),(/plot(5),plot(6)/),res1,res2)
+  draw(plot(4))            ; 'base' plot   
+  frame(wks)
+
+  amid := gsn_attach_plots(plot(7),(/plot(8),plot(9)/),res1,res2)
+  draw(plot(7))            ; 'base' plot   
+  frame(wks)

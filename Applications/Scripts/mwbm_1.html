@@ -1,0 +1,183 @@
+;***************************************************************
+; mwbm_1.ncl   
+;
+; Concepts illustrated:
+;   - Reading ascii file used by the USGS 
+;   - Partition total precipitation into rain and snow via an empirical method 
+;   - Calculate maximum number of sun hours
+;   - Use a simple USGS montly water balance model 
+;   - Print and plot the results
+;***************************************************************
+; REFERENCE:
+; A Monthly Water-Balance Model Driven By a Graphical User Interface
+; G.J. McCabe and S.L. Markstrom
+; https://pubs.usgs.gov/of/2007/1088/pdf/of07-1088_508.pdf
+;***************************************************************
+; This requires NCL 6.6.2      
+;***************************************************************
+load "/Users/shea/NCL/GIT/ncl/ni/src/examples/gsun/crop.ncl"
+load "/Users/shea/NCL/GIT/ncl/ni/src/examples/gsun/contributed.ncl"
+load "./MWBM_DRIVER.ncl"
+;=============================================================================
+;                            MAIN
+;=============================================================================
+
+;--Read ascii file 
+
+  diri   = "./"
+  fili   = "MWBM_USGS.input_file.txt"              ; from USGS
+  pthi   = diri + fili
+  
+  lat    = 35.0   ; 38.5                           ; 38.50 matches better 'pet' better       
+
+  ncol   = 4 
+  ntim   = numAsciiRow(pthi)
+  data   = asciiread(pthi, (/ntim, ncol/), "float")
+  data@_FillValue = -999.0
+
+;---Explicitly extract date information ; create info to be used later
+
+  yyyy   = toint(data(:,0))
+  mm     = toint(data(:,1))
+  yyyymm = yyyy*100 + mm
+  yyyymm!0 = "time"
+  dmm    = days_in_month(yyyy, mm) 
+  dyyyy  = day_of_year(yyyy, mm, conform(mm, 15, -1))  ; mid-month: eg: 19850715 => 196 
+;---Extract temperature and precipitation
+;---Assign meta information (not required)
+ 
+  tmp    = data(:,2)         ; [*] 
+  prc    = data(:,3)         ; [*]
+
+  tmp@long_name = "temp"
+  tmp@units     = "degC"
+  tmp!0         = "time"
+  tmp&time      = yyyymm
+
+  prc@long_name = "precipitation"
+  prc@units     = "mm"
+  prc!0         = "time"
+  prc&time      = yyyymm
+
+;---Partition total precipitation into 'rain' and 'snow' components 
+    
+  train  =   3.3                    ;   3.3C     default
+  tsnow  = -10.0                    ; -10.0C     default
+  work   = precip_rain_snow(prc, tmp, train, tsnow )  
+  rain   = work[0]                  ; extract from list variable 
+  snow   = work[1]            
+  delete(work)
+      
+;---Sunlight hours
+
+  sunhrx = daylight_fao56(dyyyy, lat)       ; max daylight/sun hr per day
+  sunhrx := sunhrx(:,0)
+  copy_VarCoords(prc, sunhrx)
+
+;---Pre-Compute Potential Evapotranspiration
+
+  pet = refevt_hamon_mwbm(tmp, sunhrx, (/0,0/))
+  pet = pet*dmm                             ; mm/month
+  pet@units = "mm/month"
+
+;---MWBM
+
+  lsmask = 1                  ; land
+  opt    = True
+  opt@WHC       = 200.0       ; Soil Water Holding Capacity; Default is 200 mm
+  opt@PRESTOR   = 150.0       ; Soil Prestorage; Default is 150 mm 
+
+  MWBM   = mwbm_driver(prc, tmp, pet, snow, lsmask, opt)      ; Type: list 
+
+;---Extract returned variables from list variable    
+
+  pmpe     = MWBM[0]
+  sms      = MWBM[1]
+  aet      = MWBM[2]
+  deficit  = MWBM[3]
+  snstor   = MWBM[4]
+  surplus  = MWBM[5]
+  runoff   = MWBM[6]
+  rodirect = MWBM[7]
+  smelt    = MWBM[8]
+
+;---Create short long_names which will be used in graphics
+
+  pmpe@long_name    = "net Prc"
+  aet@long_name     = "aet"
+  runoff@long_name  = "runoff"
+  surplus@long_name = "surplus"
+  deficit@long_name = "deficit"
+  snstor@long_name  = "snow storage"
+  sms@long_name     = "soil moist storage"
+  smelt@long_name   = "snow melt"
+  rodirect@long_name= "direct runoff"
+
+;---Print overview of one variable
+
+  printVarSummary(sms)
+  printMinMax(sms,0)
+  print("-----")
+  
+;---Print values
+  print(" YYYY MM dmm doy     T    PRC    PET    diff  PRAIN  PSNOW  SURPLUS RUNOFF DEFICIT SNSTOR   SMS")
+  print("-----")
+  print(sprinti("%5.0i",yyyy)    +sprinti("%3.0i", mm)       \
+       +sprinti("%4.0i",dmm)     +sprinti("%4.0i",dyyyy)     \
+       +sprintf("%7.1f", tmp)    +sprintf("%7.2f", prc)      \
+       +sprintf("%7.2f", pet)    +sprintf("%7.2f",pmpe)      \
+       +sprintf("%7.1f", rain)   +sprintf("%7.1f",snow)      \
+       +sprintf("%7.2f",surplus) +sprintf("%7.2f",runoff)    \
+       +sprintf("%8.2f",deficit)                             \
+       +sprintf("%8.2f",snstor)  +sprintf("%7.1f",  sms)     )  
+
+;=============================================================================
+;                            PLOT
+;=============================================================================
+
+  pltType       = "png"        ; "pdf", "x11", "ps", "png"
+  pltDir        = "./"
+  pltName       = "mwbm"
+  plot          = new (10 , "graphic")
+
+  yrfrac        = yyyymm_to_yyyyfrac(yyyymm, 0.0)  ; x-axis
+
+  wks           = gsn_open_wks (pltType, pltDir+pltName)
+  wks@wkWidth   = 800                    ; default  => 1024
+  wks@wkHeight  = 800                    ;    "        "
+  res           = True                   ; plot mods desired
+  res@gsnDraw   = False                  ; don't draw yet      
+  res@gsnFrame  = False                  ; don't advance frame yet      
+
+  res@vpHeightF = 0.4                    ; change aspect ratio of plot
+  res@vpWidthF  = 0.8                  
+  res@vpXF      = 0.15                   ; start plot at x ndc coord 
+  res@trXMinF   = yrfrac(0)
+  res@trXMaxF   = yrfrac(ntim-1)
+  res@tiMainString   = "MWBM: USGS: "+yyyymm(0)+"-"+yyyymm(ntim-1)
+
+  plot(0) = gsn_csm_xy (wks,yrfrac, tmp    ,res)    
+  plot(1) = gsn_csm_xy (wks,yrfrac, prc    ,res)    
+  plot(2) = gsn_csm_xy (wks,yrfrac, rain   ,res)    
+  plot(3) = gsn_csm_xy (wks,yrfrac, snow   ,res)    
+  plot(4) = gsn_csm_xy (wks,yrfrac, aet    ,res)    
+  plot(5) = gsn_csm_xy (wks,yrfrac, snstor ,res)    
+  plot(6) = gsn_csm_xy (wks,yrfrac, runoff ,res)    
+  plot(7) = gsn_csm_xy (wks,yrfrac, sms    ,res)    
+  plot(8) = gsn_csm_xy (wks,yrfrac, surplus,res)    
+  plot(9) = gsn_csm_xy (wks,yrfrac, deficit,res)    
+
+  res1                     = True
+  res2                     = True
+  res2@gsnAttachPlotsXAxis = True
+  amid  = gsn_attach_plots(plot(0),(/plot(1),plot(2),plot(3)/),res1,res2)
+  draw(plot(0))            ; 'base' plot   
+  frame(wks)
+
+  amid := gsn_attach_plots(plot(4),(/plot(5),plot(6)/),res1,res2)
+  draw(plot(4))            ; 'base' plot   
+  frame(wks)
+
+  amid := gsn_attach_plots(plot(7),(/plot(8),plot(9)/),res1,res2)
+  draw(plot(7))            ; 'base' plot   
+  frame(wks)

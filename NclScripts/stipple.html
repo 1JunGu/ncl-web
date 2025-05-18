@@ -1,0 +1,62 @@
+load "$NCARG_ROOT/lib/ncarg/nclex/gsun/gsn_code.ncl"
+
+begin
+  cdf_file = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/sstdata_netcdf.nc","r")
+
+  sst = cdf_file->sst(0,:,:)
+
+  wks = gsn_open_wks("ncgm","stipple")
+
+  setvalues wks
+    "wkBackgroundColor" : (/1.,1.,1./)
+    "wkForegroundColor" : (/0.,0.,0./)
+  end setvalues
+
+  cnres              = True
+  cnres@gsnMaximize  = True
+
+  cnres@sfXArray     = cdf_file->lon
+  cnres@sfYArray     = cdf_file->lat
+
+  cnres@mpProjection = "Orthographic" ; Change the map projection.
+
+  cnres@cnLevelSelectionMode = "ManualLevels" ; Define your own
+  cnres@cnMinLevelValF       = 0
+  cnres@cnMaxLevelValF       = 28
+  cnres@cnLevelSpacingF      = 2
+
+  cnres@cnFillOn             = True
+  cnres@cnMonoFillColor      = True
+  cnres@cnMonoFillPattern    = False
+  cnres@cnFillPatterns       =  (/-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, \
+                                  -1,-1,17,17/)
+
+  cnres@cnLineLabelFont      = 21
+  cnres@cnInfoLabelFont      = 21
+  cnres@tiMainFont           = 26
+  cnres@tiMainFontHeightF    = 0.015
+  cnres@tiMainString         = "Default stipple dots"
+  
+  map = gsn_contour_map(wks,sst,cnres)
+
+;
+; Change fill scale of stipple dots.
+;
+  scale = 0.5
+
+  cnres@cnFillScaleF = scale
+  cnres@tiMainString = "Increase density of stipple dots, cnFillScaleF = " + scale
+  map = gsn_contour_map(wks,sst,cnres)
+
+;
+; Change fill scale back to default, and increase stipple dot size.
+;
+  scale   = 1.0
+  dotsize = 0.005  
+  cnres@tiMainString   = "Increase size of stipple dots, cnFillDotSizeF = " + dotsize
+  cnres@cnFillScaleF   = scale
+  cnres@cnFillDotSizeF = dotsize
+
+  map = gsn_contour_map(wks,sst,cnres)
+
+end

@@ -1,0 +1,201 @@
+;***************************************************************
+; cloudsat_4.ncl
+;
+; Concepts illustrated:
+;   - Read one or more CLOUDSAT files 
+;   - Plot the data amd cross sections
+;***************************************************************
+; Credit: Srishti Dasarathy [U. California, San Diego]
+;***************************************************************
+
+;----------------------------------------------  
+;CALIPSO Test Code for Total Backscatter at 532 nm 
+;Multiple files
+;---------------------------------------------- 
+load "$NCARG_ROOT/lib/ncarg/nclscripts/contrib/ut_string.ncl"
+begin
+
+;---------------------------------------------- 
+; Create a string array containing one or more  CALIPSO file names
+;---------------------------------------------- 
+
+  dir_name  = "./"
+  file_name = systemfunc("cd "+dir_name+" ; ls CAL_LID_L2_05kmAPro-Prov-V3-01.*.hdf")
+  nfile     = dimsizes(file_name)
+  print(file_name)
+  print("---")
+  print("nfile="+nfile)
+  print("---")
+
+  fig_root  = "CAL_LID_L2_05kmAPr"
+
+;---------------------------------------------- 
+; Create a string array containing one or more  HGT file names
+;---------------------------------------------- 
+
+  dir_hgt   = "./"
+ ;hgt_name  = systemfunc("cd "+dir_hgt+" ; ls altitude*)
+ ;nhgt      = dimsizes(hgt_name)
+
+;---------------------------------------------- 
+; Plot destination
+;---------------------------------------------- 
+  fig_dir  = "./"
+  fig_type = "png"
+
+;---------------------------------------------- 
+; LOOP ALL FILES: OPEN CALIPSO FILES AND A WORKSTATION for EACH FILE
+;---------------------------------------------- 
+
+  do nf=0,nfile-1
+     print("==============================================")
+     print("nf="+sprinti("%0.3i",nf)+": "+file_name(nf))
+
+     hdf4_path = dir_name+file_name(nf)
+     hdf4_file = addfile(hdf4_path, "r") 
+
+     fig_name = "CAL."+str_get_cols(file_name(nf),31,51)    ; date
+     fig_path = fig_dir+fig_name 
+     wks = gsn_open_wks(fig_type, fig_path) 
+
+;---------------------------------------------- 
+;Print information about the file to know what variables and attributes are 
+;available for plotting.
+;---------------------------------------------- 
+     if (nf.eq.0) then
+         print(hdf4_file)
+     end if
+
+;----------------------------------------------
+;  READ CALIPSO DATA
+;----------------------------------------------
+
+     TBC_532           := hdf4_file->Total_Backscatter_Coefficient_532   ; [fakeDim70 | 3001] x [fakeDim71 | 399]
+    ;printVarSummary(TBC_532) ; Info:
+     TBC_532            = TBC_532(:,::-1) ; need to reverse this 2D array (altitude is also reversed when viewing text file)
+     TBC_532@_FillValue = -9999.0
+
+;----------------------------------------------
+;  GET LATITUDE AND LONGITUDE FOR THE X-AXIS AND FORMAT THE LABELING
+;----------------------------------------------
+
+     Latitude       := hdf4_file->Latitude
+     Latitude@units  = "degrees_north"
+    ;printVarSummary(Latitude)
+
+     Longitude      := hdf4_file->Longitude
+     Longitude@units = "degrees_east"
+    ;printVarSummary(Longitude)
+     xlabel = sprintf("%.2f",Latitude)+"~C~"+sprintf("%.2f",Longitude) ; format labeling on x-axis
+
+;----------------------------------------------
+;  GET TIME FIELDS TO GET A TIME STRING, WHICH WILL BE USED TO STRIDE X-AXIS LATITUDE AND LONGITUDE
+;----------------------------------------------
+     time      := (/hdf4_file->Profile_Time/)
+     time@units = "seconds since 1993-01-01 00:00"
+     tstring    = ut_string(time(:,0), "%Y-%N-%D %H:%M:%S")
+     stride     = dimsizes(tstring)/15
+
+;----------------------------------------------
+;  GET ALTITUDE VALUES; Figure out a way to extract metadata
+     ;asciiread function: If you don't know how many data values you have, you can use the special "-1" value for the dimension size. 
+     ;When you use -1, data values will be read from left-to-right, top-to-bottom, 
+     ;into a 1D array, until there are no values left.
+     ;once converted into a text file, it should theoretically be accessed through:
+;----------------------------------------------
+     hgt   := asciiread(dir_hgt+"altitudes.txt",-1,"float") ; hgt = height 
+     hgt    = hgt(::-1) ; Reverse this array 
+     hgt!0  = "hgt" ; first dimension being referenced, which is altitude.
+     hgt@long_name = "Altitude, km"
+     hgt@units     = "km"
+     printVarSummary(hgt) ;Info:
+     
+;----------------------------------------------
+;  ASSIGN NEW DIMENSIONS AND ATTRIBUTES TO COORDINATE CALIPSO Total Backscatter Coefficient WITH ALTITUDE
+;----------------------------------------------
+
+     TBC_532!1   = "hgt" ; assigning hgt as first dimension
+     TBC_532&hgt =  hgt ; 
+     xcoord     := ispan(0,dimsizes(Latitude(:,0)) - 1,1) ;ispan creates an array of equally-spaced values.
+     TBC_532!0   = "xcoord"
+     TBC_532&xcoord = xcoord 
+     
+;---------------------------------------------- 
+; PLOTTING RESOURCES
+;---------------------------------------------- 
+
+     setvalues NhlGetWorkspaceObjectId()
+          "wsMaximumSize": 300000000
+     end setvalues
+
+     res = True
+     res@cnFillOn            = True            ; color plot desired
+     res@cnLinesOn           = False
+     res@cnFillPalette 	     = "BlAqGrYeOrReVi200"
+     res@cnRasterModeOn      = True
+     res@gsnAddCyclic        = False
+     res@gsnMaximize         = True
+     res@gsnLeftString       = "UTC: "+tstring(0)+" to "+tstring(dimsizes(tstring)-1)
+     res@tiMainString        = "Attenuated Depolarization Ratio"
+     res@tiMainFontHeightF   = 0.025
+     res@tiYAxisFontHeightF  = 0.02
+     res@sfYArray = hgt
+    
+;---------------------------------------------
+;  HERE, SET SPECIAL LABEL HEIGHTS AND ORIENTATION
+;---------------------------------------------
+     res@lbLabelFontHeightF = 0.01
+     res@lbLabelAngleF = 0.0
+     res@lbOrientation = "vertical"
+     res@vpWidthF = 1.0
+     
+;---------------------------------------------
+;  HERE YOU CAN SET A MAXIMUM ALTITUDE
+;---------------------------------------------
+
+     res@trYMaxF = 10  ; THIS IS IN KILOMETERS. Needed? Check once plot has been constructed
+     
+;---------------------------------------------
+;  SET SPECIAL LEVELS
+;---------------------------------------------
+
+    res@cnLevelSelectionMode = "ExplicitLevels" 
+    res@cnLevels             = (/ 0.0001, 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.0007, 0.0008, 0.0009, \
+                                    0.001, 0.0015,  0.002, 0.0025,  0.003, 0.0035,  0.004, 0.0045,  0.005, \
+                                   0.0055,  0.006, 0.0065,  0.007,  0.0075, 0.008, \ 
+                                     0.01,   0.02,   0.03,   0.04,   0.05,   0.06,   0.07,   0.08,   0.09,  0.1 /) 
+                                     
+    ;levels from example NCL script. Appears to be correct from Browse Images section in Subsetter Tool                                
+
+;---------------------------------------------
+;  HERE IS WHERE YOU STRIDE THE DATA AND PLOT LATITUDE AND LONGITUDE ON X-AXIS
+;---------------------------------------------
+
+    ;tm = tickmark
+     res@tmXTOn = False ; turns top tick marks off
+     res@tmXBMode = "Explicit" ;uses the array resource tmXBValues to determine the coordinate positions of the tick marks
+     res@tmXBValues := xcoord(::stride)  ;(::stride) is used to subsample an array. subsamples xcoord. 
+     res@tmXBLabels := xlabel(::stride,0)
+     res@tmXBLabelFontHeightF = 0.01 ; toggle this if you want
+     
+;---------------------------------------------
+;  HERE, SET SPECIAL LABEL HEIGHTS AND ORIENTATION
+;---------------------------------------------
+
+     res@lbLabelFontHeightF = 0.01
+     res@lbLabelAngleF = 0.0
+     res@lbOrientation = "vertical"
+     res@vpWidthF = 1.0
+     
+;---------------------------------------------
+;  PLOT
+;---------------------------------------------
+    
+     res@gsnDraw = True
+     res@gsnFrame = False
+    ;printVarSummary(TBC_532)                                  ; [xcoord | 3001] x [hgt | 399]
+     plot = gsn_csm_contour(wks,TBC_532(hgt|:,xcoord|:),res)   ; make 'hgt' the Y-Axis
+     frame(wks)
+  end do
+
+end

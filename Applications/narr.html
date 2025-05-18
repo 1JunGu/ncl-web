@@ -1,0 +1,545 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/narr.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:02:25 GMT -->
+<head>
+<meta name="description" content="Use of NCL to visualize station data.">
+<meta name="keywords" content="NCL, graphics, visualization, station data">
+<meta http-equiv="expires" content="Tues Mar 23 16:33:45 MST 1999">
+<TITLE>NCL: NARR data</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_data.html">Data sets</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL: NARR (North American Regional Reanalysis) Data</h1>
+
+<div class=mainimage>
+<img src="Images/narr_1_lg.png"><br><br>
+</div>
+
+<div class=text>
+
+The NCEP North American Regional Reanalysis (NARR) products are on a
+Lambert conformal conic grid (32km) at 29 pressure levels. They were
+produced using Eta 32km/45-layer model. The input data includes all
+observations used in NCEP/NCAR Global Reanalysis project, and
+additional precipitation data, TOVS-1B radiances, profiler data, land
+surface and moisture data, etc. The output analyses are 3-hourly with
+additional 9 variables in the 3-hour forecasts to reflect
+accumulations or averages.
+<p>
+NARR data is distributed on a native lambert conformal grid with 2D latitudes 
+and longitudes. For a description of native lambert
+conformal grids and how to plot them accurately in NCL, click 
+<a href="lcnative.html">here</a>, or refer to any of the examples below.
+<p>
+NARR data is available from 
+<a href="http://rda.ucar.edu/datasets/ds608.0/">NCAR's Research Data Archive</a> 
+in GRIB format, a subset of NARR data is also available from NOAA's 
+<a href="http://www.esrl.noaa.gov/psd/data/gridded/data.narr.html">
+Earth Systems Research Laboratory</a> (formerly, the Climate 
+Diagnostics Center [CDC]) in netCDF format. See Example 2. 
+<p>
+
+<b>Important note:</b> in the corners of the images on this page, you
+may notice some small slivers of missing data.  The original NARR
+Eta-12 model grid is regridded to standard NCEP grid 221 for public
+distribution, Lambert conformal conic, which you see here.
+<p>
+
+There is a slight mismatch between the chosen grid boundaries,
+resulting in the slivers of missing data.  This is discussed on pages
+39, 41, 42 of this early Powerpoint summary from NCEP (2005).  Page 42
+is the picture that speaks a thousand words:
+<p>
+
+<blockquote>
+<a href="http://www.emc.ncep.noaa.gov/mmb/rreanl/narr.ppt">http://www.emc.ncep.noaa.gov/mmb/rreanl/narr.ppt</a>
+</blockquote>
+
+</div>
+
+<div class=ex>
+<!--narr_1-->
+<a name=1></a>
+<a href="Images/narr_1_lg.png">
+<img src="Images/narr_1_sm.png" align=left border=2></a>
+<a href="Scripts/narr_1.html">narr_1.ncl</a>:
+This script demonstrates how to quickly read a NARR GRIB
+file into NCL, and shows how to plot the data on the NARR native grid.
+The file used in the example was obtained from 
+<a href="http://rda.ucar.edu/datasets/ds608.0/">NCAR's Research Data Archive</a>.
+<p>
+Note that NCL can read GRIB files directly. In addition, NCL provides
+additional information [eg, geographical coordinates] that
+are not on the original GRIB formatted file. The 
+<a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a>
+utility can be used to view any GRIB [nc, hdf-sds, hdf-eos] file as seen via NCL.  
+</div>
+
+<div class=ex>
+<!--narr_2-->
+<a name=2></a>
+<a href="Images/narr_2_lg.png">
+<img src="Images/narr_2_sm.png" align=left border=2></a>
+<a href="Scripts/narr_2.html">narr_2.ncl</a>:
+This script demonstrates how to read in a NARR netCDF file into NCL. In this case, the data
+is stored as 16-bit integers (referred to as type "short"). In general, data of type short
+must be transformed prior to calculations and plotting . The contributed function 
+<a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a> may be used to directly read the data. Note 
+that <a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a> will automatically apply the add_offset and
+scale_factor attributes during the conversion from short to float.
+<p>
+<B>NOTE:</b> <i>Some</i> of the NARR 
+files from NOAA/PSD contain a _FillValue attribute that differs from 
+the missing_value attribute. This problem has been reported. If
+the values look bad, add the following fix suggested by David Allured.
+<p>
+Replace:
+<pre>
+           x       = <a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a>( f->air(10,:,:,:) ) 
+</pre>
+with
+<pre>
+           xShort  = f->air(10,:,:,:)                
+           if (<a href="../Document/Functions/Built-in/isatt.html"><strong>isatt</strong></a>(xShort,"_FillValue") .and. <a href="../Document/Functions/Built-in/isatt.html"><strong>isatt</strong></a>(xShort,"missing_value")) then
+               if (xShort@_FillValue .ne. xShort@missing_value) then
+                   xShort@_FillValue = xShort@missing_value   ; use alt. missing value
+               end if                                         ; only if needed
+           end if
+
+           x       = <a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a>( xShort) 
+           <a href="../Document/Functions/Built-in/delete.html"><strong>delete</strong></a>(xShort)                                     ; no longer needed
+</pre>
+</div>
+
+<div class=ex>
+<!--narr_3-->
+<a name=3></a>
+<a href="Images/narr_3_lg.png">
+<img src="Images/narr_3_sm.png" align=left border=2></a>
+<a href="Scripts/narr_3.html">narr_3.ncl</a>:
+
+This script uses the <a href="../Document/Functions/Built-in/triple2grid.html"><strong>triple2grid</strong></a> function to place
+values from the NARR Lambert Conformal grid on a 2 degree by 2 degree
+grid. Note that no interpolation is done here!
+<p>
+
+The original grid is plotted in the top panel, while the regridded
+data is shown in the bottom panel. The sample script outputs a netCDF
+file containing the interpolated 2x2 grid. An
+<a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a> of the
+netCDF file is <a href="Prints/merged_AWIP32.1979010100.3D.NARR.2x2.html">here</a>.
+</div>
+
+<div class=ex>
+<!--narr_4-->
+<a name=4></a>
+<a href="Images/narr_4_lg.png">
+<img src="Images/narr_4_sm.png" align=left border=2></a>
+<a href="Scripts/narr_4.html">narr_4.ncl</a>:
+
+This script uses the same files used in Example 1. The data
+are on a Lambert Conformal projection. The narr_4.ncl script 
+plots the region of the lower 48 United States using two different 
+map projections: Cylindrical Equidistant and Robinson.
+Further, the <b><i>mpLimitMode</i>= "LatLon"</b> is used to manually
+set the appropriate limits for each projection.
+</div>
+
+<div class=ex>
+<!--narr_5-->
+<a name=5></a>
+<a href="Images/narr_5_1_lg.png">
+<img src="Images/narr_5_1_sm.png" align=left border=2></a>
+<a href="Images/narr_5_2_lg.png">
+<img src="Images/narr_5_2_sm.png" align=left border=2></a>
+<a href="Images/narr_5_3_lg.png">
+<img src="Images/narr_5_3_sm.png" align=left border=2></a>
+<a href="Scripts/narr_5.html">narr_5.ncl</a>:
+
+This script uses an ESMF generated weight file 
+(see <a href="ESMF.html#ex30">ESMF example 30</b></a>) to efficiently regrid a 
+source NARR curvilinear grid to a rectilinear grid. Then three cross sections are plotted:
+(a) pressure x longitude; (b) pressure x latitude; and, (c) pressure x user_specfiied_set_of_points.
+For this example the user specified latitude/longitude locations lie along a great circle path 
+between two user specified locations (see <a href="../Document/Functions/Built-in/gc_latlon.html"><strong>gc_latlon</strong></a>). They could be 
+latitude/longitude locations along a (say) cold front.
+<p>
+<a href="ESMF.html#ex30">ESMF example 30</a> 
+was run twice: bilinear and conservative interpolation. Bilinear interpolation
+would generally be appropriate for any reasonably smooth variable. Conservation interpolation
+would be recommended for interpolating flux quantities and variables that can be fractal (eg precipitation).
+
+</div>
+
+<div class=ex>
+<!--narr_6-->
+<a name=6></a>
+<a href="Images/narr_6_1_lg.png">
+<img src="Images/narr_6_1_sm.png" align=left border=2></a>
+<a href="Images/narr_6_2_lg.png">
+<img src="Images/narr_6_2_sm.png" align=left border=2></a>
+<a href="Images/narr_6_3_lg.png">
+<img src="Images/narr_6_3_sm.png" align=left border=2></a>
+<a href="Images/narr_6_4_lg.png">
+<img src="Images/narr_6_4_sm.png" align=left border=2></a>
+<a href="Images/narr_6_5_lg.png">
+<img src="Images/narr_6_5_sm.png" align=left border=2></a>
+<a href="Scripts/narr_6.html">narr_6.ncl</a>:
+
+The NARR grid is curvilinear. This  means that the grid point locations require
+two-dimensional latitude and longitude arrays. The leftmost figure shows the
+north, south, west and east boundaries (black outline); 
+selected east-west grid lines (blue); selected north-south grid lines (red); and, 
+user specified subsets of grid lines. Sample 'grid line following' cross sections
+are created.
+
+</div>
+
+<div class=ex>
+<!--narr_7-->
+<a name=7></a>
+<a href="Scripts/narr_7.html">narr_7.ncl</a>:
+<b>ncl-talk question:</b> How can I interpolate NARR data to particular points 
+in space at specific heights (lat_pt, lon_pt, height)?
+<p>
+This example creates a function to perform the necessary tasks: 
+(i) vertical interpolation to specified height levels; 
+(ii) interpolate from a NARR curvilinear grid to a rectilinear grid; and
+(iii) use <a href="../Document/Functions/Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a> to interpolate to specified locations.  
+<p>
+The interpolated variable at 3 heights and 2 locations (pts) looks like:
+<pre>
+      Variable: x_pts
+      Number of Dimensions: 3
+      Dimensions and sizes:	[initial_time0_hours | 1] x <b>[hgt | 3] x [pts | 2]</b>
+      Coordinates: 
+                  initial_time0_hours: [1852632..1852632]
+                  hgt: [375..1865]
+                  pts: [0..1]
+      Number Of Attributes: 16
+        ycoord :	(  22.3, 47.8 )   <=== interpolated locations
+        xcoord :	(-135.3, 157.2)   <===      "          "
+      [SNIP]
+</pre>
+The values are:
+<pre>
+	 nt=0  hgt=375
+	 
+	 22.30  -135.30   289.85
+	 47.80  157.20   279.61
+	 ----------------------
+
+	 nt=0  hgt=1340
+	 
+	 22.30  -135.30   288.19
+	 47.80  157.20   277.27
+	 ----------------------
+	 nt=0  hgt=1865
+	 
+	 22.30  -135.30   284.37
+	 47.80  157.20   274.01
+</pre>
+
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/narr.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:02:29 GMT -->
+</html>
+
+

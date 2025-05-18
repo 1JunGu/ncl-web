@@ -1,0 +1,711 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/eof.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:07:21 GMT -->
+<head>
+<meta name="description" content="NCL data analysis example page. Describes
+special techniques for eofs.">
+<meta name="keywords" content="NCL, graphics, visualization, eof, EOF">
+<TITLE>NCL Graphics: EOFs</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+<h1>NCL Graphics: EOFs</h1>
+
+<div class=mainimage>
+<img src = "Images/eof_1_1_lg.png">
+</div>
+
+<div class=text>
+For historical reasons, NCL contains a suite of <a href="../Document/Functions/eofs.html">EOF functions</a>.
+The recommended functions are: 
+<a href="../Document/Functions/Contributed/eofunc_n_Wrap.html"><strong>eofunc_n_Wrap</strong></a>, 
+<a href="../Document/Functions/Contributed/eofunc_ts_n_Wrap.html"><strong>eofunc_ts_n_Wrap</strong></a> and
+<a href="../Document/Functions/Contributed/eofunc_north.html"><strong>eofunc_north</strong></a>.
+If no meta data is desired: 
+<a href="../Document/Functions/Built-in/eofunc_n.html"><strong>eofunc_n</strong></a> and
+<a href="../Document/Functions/Built-in/eofunc_ts_n.html"><strong>eofunc_ts_n</strong></a>.
+<p>
+See the eof_<i>n</i>_640.ncl scripts below for examples of using the new <i>xxxx</i>_n functions.
+</div>
+
+<div class=text>
+<b>EOF:</b> <a href="https://en.wikipedia.org/wiki/Empirical_orthogonal_functions"><b>Standard Empirical Orthogonal Analysis</b></a>
+<p>
+<p>Standard EOF (<i>aka</i> eigenvector, 
+<a href="https://en.wikipedia.org/wiki/Principal_component_analysis"><b>principal component</b></a>) 
+analysis yields patterns and time series which are both orthogonal. 
+The derived patterns are a function of the domain and the time period being used.  
+The EOF represntation is optimal in the sense that maximum variance 
+may be accounted for by choosing in order the eigenvectors associated with the 
+largest eigenvalues of the covariance matrix (Kutzback, 1967).
+However, <b>the EOF procedure is strictly mathematical and
+is not based upon physics</b>.  The results may produce patterns that are similar 
+to physical modes within the the system.  However, physical meaning is dependent 
+on your interpretation of the mathematical result.
+<p>
+To be clear, EOF analysis is not a statistical procedure. However, because the results
+are orthoganal (ie, independent), they have been used as predictor variables
+in some statistical applications.
+<p>
+<B>Note on signs of EOF analysis</B> (conributed by Andrew Dawson, U. East Anglia)
+<p>
+EOFs are eigenvectors of the covariance matrix formed from the input data. Since an eigenvector can be multiplied by any scalar and still remain an eigenvector, the sign is arbitrary. In a mathematical sense the sign of an eigenvector is rather unimportant. This is why the EOF analysis may yield different signed EOFs for slightly different inputs. Sign only becomes an issue when you wish to interpret the physical meaning (if any) of an eigenvector.
+<p>
+You should approach the interpretation of EOFs by looking at both the EOF pattern and the associated time series together. For example, consider an EOF of sea surface temperature. If your EOF has a positive centre and the associated time series is increasing, then you will interpret this centre as a warming signal. If your EOF had come out the other sign (ie. a negative centre), then the associated time series would also be the opposite sign and you would still interpret the centre as a warming signal.
+<p>
+In essence, the sign flip does not change the physical interpretation of the result. Hence, it is up to you to choose which sign to associate with your EOF patterns for visualisation (remembering that any sign change to an EOF must be applied to the associated time series also). Usually you would simply adjust the sign so that all your EOF patterns with the same physical interpretation also look the same
+</div>
+<div class=text>
+<b>EEOF: Extended Empirical Orthogonal Analysis</b>
+<p>
+<b>EEOF</b> provides the ability to discern 'common patterns of variability'
+shared among multiple datasets in both space and time. 
+The "extension" may be in space (<b>S-mode</b>)
+or in time (<b>T-mode</b>). A visual depiction of these modes is
+<a href="https://doi.org/10.1016/j.rse.2014.03.015"><b>Figure 1</b></a>
+of the Neeti and Eastman (2014) reference.
+
+A disadvantage of EEOF "is the possibility that
+little coherrent persistence exists in the data field so that the
+functions may obfuscate the spatial coherence identified by traditional technique" (Weare, 1982). 
+<p>
+See <b>EEOF</b> examples below.
+</div>
+
+<div class=text>
+<b>References:</b>
+<pre>
+     <a href="https://journals.ametsoc.org/doi/full/10.1175/1520-0442(2002)015%3C0216%3AACNOTI%3E2.0.CO%3B2">
+     <b>A Cautionary Note on the Interpretation of EOFs</b></a>
+     Dietmar, D. and Latif, M.
+     J. Climate, 2002:  15: 216-225.
+     <a href="https://doi.org/10.1175/1520-0450(1967)006<0791:EEOSLP>2.0.CO;2">
+     <b>Empirical eigenvectors of sea-level pressure, surface temperature and precipitation 
+        complexes over North America</b></a>
+     Kutzbach, J.E.
+     Journal of Applied Meteorology (1967): 6, pp. 791-802
+     <a href="https://doi.org/10.1016/j.rse.2014.03.015">
+     <b>Novel approaches in Extended Principal Component Analysis to compare 
+        spatio-temporal patterns among multiple image time series</b></a>
+      Neeti, N. and J.R. Eastman
+      Remote Sensing of Environment: 148, 25 May 2014, Pages 84-96 
+     <a href="http://dx.doi.org/10.1175/1520-0493(1982)110<0699:SEITEO>2.0.CO;2">
+     <b>Sampling Errors in the Estimation of Empirical Orthogonal Functions</b></a>
+     North, G. R., T. L. Bell, R. F. Cahalan, and F. J. Moeng 
+     Mon. Wea. Rev., 1982: 110, 699-706.
+     <a href="https://doi.org/10.1175/1520-0493(1986)114<1603:AOEEOF>2.0.CO;2">
+     <b>Application of Extended Empirical Orthogonal Function Analysis to 
+        Interrelationships and Sequential Evolution of Monsoon Fields</b></a> 
+     Singh, S,V., R.H. Kriplani
+     Mon. Wea. Rev., 1986: 114, 1603-1610.
+     <a href="https://rmets.onlinelibrary.wiley.com/doi/10.1002/qj.49710343707">
+     <b>Empirical  Orthogonal Function Analysis of Atlantic Ocean Surface Temperatures</b></a>
+     Weare, B.C., R.E. Newell  
+     Quart. J. Roy. Meteor. Soc., 1977: 103, 467-478.
+     <a href="https://doi.org/10.1175/1520-0493(1982)110<0481:EOEEOF>2.0.CO;2">
+     <b>Examples of Extended Empirical Orthogonal Function Analyses</b></a> 
+      Weare, B.C., J.S. Nasstrom
+      Mon. Wea. Review, 1982: 481-485 
+</pre>
+</div>
+
+<p>
+
+<div class=ex>
+<!--Eof_0-->
+
+<a href="Scripts/eof_0.html">eof_0.ncl</a> / 
+<a href="Scripts/eof_0_640.html">eof_0_640.ncl</a>: 
+
+These scripts verify the output from <a href="../Document/Functions/Built-in/eofunc.html"><strong>eofunc</strong></a> and <a href="../Document/Functions/Built-in/eofunc_ts.html"><strong>eofunc_ts</strong></a>
+by reading an ascii file containing box data from the book:
+<pre>
+
+   John C Davis
+   Satistics and Data Analysis in Geology
+   Wiley, 2nd Edition, 1986
+   Source Data: page 524 , EOF results: page 537
+
+</pre>
+<b>The results match the book exactly.</b>
+<p>
+
+The eof_0.ncl and eof_0_640.ncl scripts produce identical results;
+eof_0_640.ncl uses functions <a href="../Document/Functions/Built-in/eofunc_n.html"><strong>eofunc_n</strong></a>
+and <a href="../Document/Functions/Built-in/eofunc_ts_n.html"><strong>eofunc_ts_n</strong></a> (added in NCL V6.4.0) to avoid
+having to reorder the data.
+<p>
+Further illustrated:
+<ul>
+<li> reconstructing the original array from the calculated EOFs and Principal Components (time series)
+<li> computing the sum-of-squares of each EOF to verify that they are normalized
+<li> computing cross correlations of each component to verify there are no cross-component correlations 
+</ul>
+<p>
+The source data is available <a href="Data/asc/eoftest.html"><b>here</b></a>. <br>
+The output from running the above script is <a href="Prints/out.html"><b>here</b></a>.
+</div>
+
+<div class=ex>
+<!--Eof_0a-->
+<a href="Scripts/eof_0a.html">eof_0a.ncl</a>: 
+Same as <b>Eof_0</b> but here the data are weighted (cosine of latitude). The script illustrates how to 'unweight' the data.
+<p>
+The output from running the above script is <a href="Prints/out-2.html"><b>here</b></a>.
+</div>
+
+<div class=ex>
+<!--Eof_1-->
+<a name=ex1></a>
+<a href="Images/eof_1_1_lg.png">
+<img src="Images/eof_1_1_sm.png" align=left border=2></a>
+<a href="Images/eof_1_2_lg.png">
+<img src="Images/eof_1_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/eof_1.html">eof_1.ncl</a> /  
+<a href="Scripts/eof_1_640.html">eof_1_640.ncl</a>: 
+Read sea level pressure;
+extract the data spanning 1979-2003; calculate the first three EOFs 
+over the North Atlantic region for the winter (DJF) season.  
+The first EOF pattern is commonly identified as the 
+North Atlantic Oscillation (NAO) mode.
+<p>
+
+<a href="../Document/Functions/Contributed/lonFlip.html"><strong>lonFlip</strong></a> is used to rearrange the
+data to span -180 to 180. Then
+<a href="../Document/Language/subscript_coord.html">coordinate
+subscripting</a> is used to extract the region of interest.
+<p>
+
+Finally, the resulting principal component time series is normalized
+by the weights used to get the time series of the mean areal
+amplitudes.
+<p>
+
+The eof_0.ncl and eof_0_640.ncl scripts produce identical results;
+eof_0_640.ncl uses functions <a href="../Document/Functions/Built-in/eofunc_n.html"><strong>eofunc_n</strong></a>
+and <a href="../Document/Functions/Built-in/eofunc_ts_n.html"><strong>eofunc_ts_n</strong></a> (added in NCL V6.4.0) to avoid
+having to reorder the data.
+<p>
+The dataset use can be downloaded from:
+<p>
+http://www.esrl.noaa.gov/psd/data/gridded/data.ncep.reanalysis.surface.html
+<p>
+A Python version of eof_1 is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Contours/NCL_eof_1_1.html#sphx-glr-gallery-contours-ncl-eof-1-1-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Eof_2-->
+<a name=ex2></a>
+<a href="Images/eof_2_1_lg.png">
+<img src="Images/eof_2_1_sm.png" align=left border=2></a>
+<a href="Images/eof_2_2_lg.png">
+<img src="Images/eof_2_2_sm.png" align=left border=2></a>
+<p>
+<a href="Scripts/eof_2.html">eof_2.ncl</a>
+<a href="Scripts/eof_2_640.html">eof_2_640.ncl</a>: 
+This is an example posted by 
+<a href="http://meteora.ucsd.edu/~pierce/eof/eofs.html">
+David Pierce (Scripps)</a>. NCL uses code posted at the the
+Scripps site.  The Scripps example only shows the results
+from the first EOF. This example shows three patterns and time series.
+This example was created to illustrate that NCL's <a href="../Document/Functions/Built-in/eofunc.html"><strong>eofunc</strong></a> /
+<a href="../Document/Functions/Built-in/eofunc_n.html"><strong>eofunc_n</strong></a>
+and <a href="../Document/Functions/Built-in/eofunc_ts.html"><strong>eofunc_ts</strong></a> / <a href="../Document/Functions/Built-in/eofunc_ts_n.html"><strong>eofunc_ts_n</strong></a> results match Pierce's. 
+Note that no areal weighting was performed.  
+<p>
+</div>
+
+<div class=ex>
+<!--Eof_3-->
+<a name=ex3></a>
+<a href="Images/eof_3_1_lg.png">
+<img src="Images/eof_3_1_sm.png" align=left border=2></a>
+<a href="Images/eof_3_2_lg.png">
+<img src="Images/eof_3_2_sm.png" align=left border=2></a>
+<p>
+<a href="Scripts/eof_3.html">eof_3.ncl</a> / 
+<a href="Scripts/eof_3_640.html">eof_3_640.ncl</a>: 
+From a directory with many POP files, (1) read 30 years spanning 
+years 270-279; (2) compute climatology; (3) compute anomalies;  
+(4) mask out all regions but the Atlantic basin; 
+(5) weight grid by area; (5) compute EOFs; and, (7) plot. 
+<p>
+</div>
+
+<div class=ex>
+<!--Eof_4-->
+<a name=ex4></a>
+<a href="Images/eof_4_1_lg.png">
+<img src="Images/eof_4_1_sm.png" align=left border=2></a>
+<a href="Images/eof_4_2_lg.png">
+<img src="Images/eof_4_2_sm.png" align=left border=2></a>
+<p>
+<a href="Scripts/eof_4.html">eof_4.ncl</a> / 
+<a href="Scripts/eof_4_640.html">eof_4_640.ncl</a>: 
+Use the approach outlined at the 
+<a href:"http://www.cpc.ncep.noaa.gov/products/precip/CWlink/daily_ao_index/aao/aao.shtml"> Climate Prediction Center</a>
+to compute the Antarctic Oscillation (AAO) for the period 1979-2000:
+Read geopotential height data (source: Reanalysis-2); select
+700hPa and data poleward of 20S; compute monthly climatologies
+and anomalies; weight observations; compute EOFs; 
+normalize the principal components; and project the anomalies via regression.  
+<p>
+</div>
+
+<div class=ex>
+<!--Eof_5-->
+<a name=ex5></a>
+<a href="Images/eof_5_1_lg.png">
+<img src="Images/eof_5_1_sm.png" align=left border=2></a>
+<a href="Images/eof_5_2_lg.png">
+<img src="Images/eof_5_2_sm.png" align=left border=2></a>
+<a href="Images/eof_5_3_lg.png">
+<img src="Images/eof_5_3_sm.png" align=left border=2></a>
+<p>
+<a href="Scripts/eof_5.html">eof_5.ncl</a> / 
+<a href="Scripts/eof_5_640.html">eof_5_640.ncl</a>: 
+Compute EOFs for the northern hemisphere height field at 500hPa.
+Use <a href="../Document/Functions/Built-in/cd_calendar.html"><strong>cd_calendar</strong></a> to create an array containing 
+time in the form of YYYYMM. Then use <a href="../Document/Functions/Built-in/ind.html"><strong>ind</strong></a> 
+to determine the index values corresponding data from 1979-2011.
+Read the desired data using NCL's coordinate subscripting.
+Compute standard EOFs via <a href="../Document/Functions/Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a> and the
+corresponding time series via <a href="../Document/Functions/Contributed/eofunc_ts_Wrap.html"><strong>eofunc_ts_Wrap</strong></a>.
+Because we want to do a varimax rotation
+6 EOFs were computed. This (neof=6) is arbitrary but it should be large enough to
+allow <a href="../Document/Functions/Contributed/eofunc_varimax_Wrap.html"><strong>eofunc_varimax_Wrap</strong></a>
+to reorthogonalize the subset. Finally,
+ <a href="../Document/Functions/Contributed/eofunc_varimax_reorder.html"><strong>eofunc_varimax_reorder</strong></a> 
+is used to place the output into descending order. The attribute <b>pcvar_varimax</b>
+represents the variance explained after the varimax rotation has been applied.
+</div>
+
+<div class=ex>
+<!--Eof_6-->
+<a name=ex6></a>
+<a href="Images/eof_6_1_lg.png">
+<img src="Images/eof_6_1_sm.png" align=left border=2></a>
+<a href="Images/eof_6_2_lg.png">
+<img src="Images/eof_6_2_sm.png" align=left border=2></a>
+<p>
+<a href="Scripts/eof_6.html">eof_6.ncl</a> / 
+<a href="Scripts/eof_6_640.html">eof_6_640.ncl</a>: 
+Compute EOFs for the northern hemisphere January  sea level pressures from 1989-2009.
+The <a href="../Document/Functions/Contributed/eofunc_north.html"><strong>eofunc_north</strong></a> is used to assess if eigenvalues
+are distinct.
+<p>             
+if the <em>prinfo</em> argument is set to True. The following will be printed.
+<pre>
+          dlam      low      pcvar     high    <b>sig</b>
+(0)	8.28161   18.5539   26.8355   35.1171  True
+(1)	5.68727   12.7416   18.4289   24.1161  True
+(2)	3.76075   8.42548   12.1862   15.947   True
+(3)	2.67866   6.00119   8.67985   11.3585  False
+
+</pre>
+where 'dlam' is the 'shift' (North's term).
+
+</div>
+
+<div class=text>
+<b>EEOF: Extended Empirical Orthogonal Analysis Examples</b>
+<p>
+Shikha Singh (Scientist, Indian Institute of Tropical Meteorology, Pune, India) 
+has suggested multiple methods for combining different variables with common dimensionality:  (time,lat,lon).
+<p>
+For simplicity, two variables (var1, var2) with dimensionality (ntim,nlat,mlon) are used
+to illustrate the T-mode approach.  Generally for climate, it is assumed that the variables 
+contain anomalies from the mean annual cycle. Because the anomaly variables may have different 
+variances, normalized values should be input to the function.  Specifically:
+<pre>
+  var1 = ...anomalies...
+  var2 = ...anomalies...
+
+  dimv = <a href="../Document/Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a>(var1)
+  ntim = dimv(0)
+  nlat = dimv(1)
+  mlon = dimv(2) 
+
+  std1 = <a href="../Document/Functions/Built-in/dim_stddev_n.html"><strong>dim_stddev_n</strong></a>(var1,0)  ; local (grid point, station)  standard deviations
+  std2 = <a href="../Document/Functions/Built-in/dim_stddev_n.html"><strong>dim_stddev_n</strong></a>(var2,0)
+or
+  std1 = <a href="../Document/Functions/Built-in/stddev.html"><strong>stddev</strong></a>(var1)           ; overall (field) standard deviation
+  std2 = <a href="../Document/Functions/Built-in/stddev.html"><strong>stddev</strong></a>(var2)
+
+  nvar = 2
+                    ; T-mode
+                    ; 0  ,  1  ,  2  ,  3   ;  dimension numbers
+  new_data = <a href="../Document/Functions/Built-in/new.html"><strong>new</strong></a>((/nvar, ntim, nlat, mlon/), <a href="../Document/Functions/Built-in/typeof.html"><strong>typeof</strong></a>(var1),<a href="../Document/Functions/Built-in/getFillValue.html"><strong>getFillValue</strong></a>(var1))
+  new_data(0,:,:,:) =  var1/std1
+  new_data(1,:,:,:) =  var2/std2
+
+  NEW_DATA = <a href="../Document/Functions/Built-in/reshape.html"><strong>reshape</strong></a>(new_data,(/2*ntim,nlat,mlon/))
+  <a href="../Document/Functions/Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(NEW_DATA)
+
+  neof = 3          ; # of desired EOFs
+  ndim = 1          ; dimension number for 'time'
+  eeof = <a href="../Document/Functions/Built-in/_b_eofunc_n_/b_.html"><strong><b>eofunc_n</b></strong></a>(NEW_DATA, neof, False, ndim)
+  <a href="../Document/Functions/Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(eeof)
+
+</pre>
+Dr. Singh also suggested the following for <b>S-mode</b> EEOF using 
+longitude and latitude spatial extensions.
+<pre>
+
+  ; Joining the data along the longitude axis
+
+  new_data1 = <a href="../Document/Functions/Built-in/new.html"><strong>new</strong></a>((/2*mlon, nlat, time/),<a href="../Document/Functions/Built-in/typeof.html"><strong>typeof</strong></a>(var1),<a href="../Document/Functions/Built-in/getFillValue.html"><strong>getFillValue</strong></a>(var1))
+  new_data1(0:mlon-1,:,:)       = var1
+  new_data1(mlon:2*mlon-1,:,:)  = var2
+
+  ; Joining the data along latitude axis
+  new_data2 =new((/mlon, 2*nlat, time/), typeof(var1),<a href="../Document/Functions/Built-in/typeof.html"><strong>typeof</strong></a>(var1),<a href="../Document/Functions/Built-in/getFillValue.html"><strong>getFillValue</strong></a>(var1))
+  new_data2(:,0:nlat-1,:,:)     = var1
+  new_data2(:,nlat:2*nlat-1,:,:)= var2
+</pre>
+</div>
+<p>
+<div class=text>
+<!--Mjoclivar_14-->
+<a name=ex14></a>
+<a href="Images/mjoclivar_14_1_lg.png">
+<img src="Images/mjoclivar_14_1_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_14_2_lg.png">
+<img src="Images/mjoclivar_14_2_sm.png" align=left border=2></a>
+<a href="Images/mjoclivar_14_3_lg.png">
+<img src="Images/mjoclivar_14_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/mjoclivar_14.html">mjoclivar_14.ncl</a>:
+
+<p>
+The data from OLR, Uwind, Vwind are averaged along latitude to make 2D data. 
+The 3 variables are then combined into a bigger matrix: (time,space).
+<p>
+Multivariate (Combined) EOF; cross-correlations between EOF1 and EOF2;
+time-series of (PC1^2 + PC2^2) and 91-day running mean. 
+<p>
+<b>This script was updated 2 March 2015</b>. 
+Marcus N. Morgan (Florida Institute of Technology) submitted the code segment that calculates the 
+percent variance for each component in the multivariate  EOF.
+<p>
+<b>This script was updated 29 July 2016</b>. 
+Eun-Pa Lim: Bureau of Meteorology, Australis
+<p>
+For comparison, the equivalent 3 plots from the <a href="http://climate.snu.ac.kr/mjo_diagnostics/index.htm">
+<b> Korean MJO-Diagnostics</b></a> are 
+(a) <a href="Images/mjoclivar.eof.all.Korea.png"><b>eof_all</b></a>; 
+(b) <a href="Images/mjoclivar.pcl.Korea.png"><b>lag_all</b></a>
+(c) <a href="Images/mjoclivar.ceof.Korea.png"><b>time series</b></a></a>
+</div>
+
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/eof.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:07:34 GMT -->
+</html>
+					</div>
+
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+
+

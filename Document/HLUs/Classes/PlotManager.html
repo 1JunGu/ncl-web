@@ -1,0 +1,1016 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/PlotManager.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:30 GMT -->
+<head>
+<title>PlotManager class</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index.html">HLUs ></a>
+<a class=crumb href="index-2.html">Classes </a>
+
+<br>
+
+
+<h1>PlotManager class</H1>
+
+The <strong>PlotManager</strong> allows a plot object to manage
+overlays and annotations.
+
+<hr>
+
+<h2>Synopsis</h2>
+
+<pre>
+Header file:		ncarg/hlu/PlotManager.h
+Class name:		plotManagerClass
+Class pointer:		&lt;<em>Not referenceable</em>&gt;
+Fortran class function:	&lt;<em>Not referenceable</em>&gt;
+Superclass:		<a href="Transform.html">Transform</a>
+Composite classes:	<a href="LabelBar.html">LabelBar</a>,<a href="Legend.html">Legend</a>,<a href="TickMark.html">TickMark</a>,<a href="Title.html">Title</a>
+</pre>
+<h3>Class-defined types</h3>
+<pre>
+Type name:		<a name="NhlTAnnotationDisplayMode">NhlTAnnotationDisplayMode</a>
+Definition:
+typedef enum _NhlAnnotationDisplayMode {
+	NhlNOCREATE	= -1,	/* "NoCreate"	 */
+	NhlNEVER	= 0,	/* "Never"	 */
+	NhlALWAYS	= 1,	/* "Always" 	 */
+	NhlCONDITIONAL	= 2	/* "Conditional" */
+} NhlAnnotationDisplayMode;
+</pre>
+
+<hr>
+<h2>Resources</h2>
+<h3>Local resources</h3>
+
+<strong>PlotManager</strong> resources are available to objects of the
+<strong>Transform</strong> class that include
+<strong>PlotManager</strong> as a <a href="../../glossary.html#CompositeClassMember">composite
+class member</a>, providing that the <strong>Transform</strong>
+class resource <a href="../../Graphics/Resources/tf.html#tfPlotManagerOn"><em>tfPlotManagerOn</em></a> is
+set to its default value, True, when the object is created. Currently,
+there are seven composite classes that include the
+<strong>PlotManager</strong>:
+
+<ul>
+
+<li><A href="ContourPlot.html"><strong>ContourPlot</strong> object</a>
+<li><A href="IrregularPlot.html"><strong>IrregularPlot</strong> object</a>
+<li><A href="LogLinPlot.html"><strong>LogLinPlot</strong> object</a>
+<li><A href="MapPlot.html"><strong>MapPlot</strong> object</a>
+<li><A href="StreamlinePlot.html"><strong>StreamlinePlot</strong> object</a>
+<li><A href="VectorPlot.html"><strong>VectorPlot</strong> object</a>
+<li><A href="XyPlot.html"><strong>XyPlot</strong> object</a>
+
+</ul>
+
+<pre>
++---------------------------------------------------------------+
+|		<A name="PlotManager.res">PlotManager Resource Set</a>			|
+|---------------------------------------------------------------|
+| NAME				TYPE			ACCESS	|
+|	CLASS				DEFAULT			|
+|===============================================================|
+| <a href="../../Graphics/Resources/pm.html#pmOverlaySequenceIds"><em>pmOverlaySequenceIds</em></a>		<A href="Base.html#NhlTObjIdGenArray">NhlTObjIdGenArray</a>	G	|
+|	PmOverlaySequenceIds		NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmAnnoViews"><em>pmAnnoViews</em></a>			<A href="Base.html#NhlTObjIdGenArray">NhlTObjIdGenArray</a>	CSG	|
+|	PmAnnoViews			NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmAnnoManagers"><em>pmAnnoManagers</em></a>		<A href="Base.html#NhlTObjIdGenArray">NhlTObjIdGenArray</a>	G	|
+|	PmAnnoManagers			NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmTitleDisplayMode"><em>pmTitleDisplayMode</em></a>		<A href="PlotManager.html#NhlTAnnotationDisplayMode">NhlTAnnotationDisplayMode</a> RCSG	|
+|	PmDisplayTitles			NoCreate		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmTitleZone"><em>pmTitleZone</em></a>			<A href="Base.html#NhlTInteger">NhlTInteger</a>		RCSG	|
+|	PmTitleZone			4			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmTickMarkDisplayMode"><em>pmTickMarkDisplayMode</em></a>		<A href="PlotManager.html#NhlTAnnotationDisplayMode">NhlTAnnotationDisplayMode</a> RCSG	|
+|	PmDisplayTickMarks		NoCreate		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmTickMarkZone"><em>pmTickMarkZone</em></a>		<A href="Base.html#NhlTInteger">NhlTInteger</a>		RCSG	|
+|	PmTickMarkZone			2			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLabelBarDisplayMode"><em>pmLabelBarDisplayMode</em></a>		<A href="PlotManager.html#NhlTAnnotationDisplayMode">NhlTAnnotationDisplayMode</a> RCSG	|
+|	PmDisplayLabelBar		NoCreate		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLabelBarWidthF"><em>pmLabelBarWidthF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	PmLabelBarWidthF		0.15			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLabelBarHeightF"><em>pmLabelBarHeightF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	PmLabelBarHeightF		0.6			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLabelBarKeepAspect"><em>pmLabelBarKeepAspect</em></a>		<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RCSG	|
+|	PmLabelBarKeepAspect		False			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLabelBarZone"><em>pmLabelBarZone</em></a>		<A href="Base.html#NhlTInteger">NhlTInteger</a>		RCSG	|
+|	PmLabelBarZone			6			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLabelBarSide"><em>pmLabelBarSide</em></a>		<A href="View.html#NhlTJustification">NhlTJustification</a>	RCSG	|
+|	PmLabelBarSide			Right			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLabelBarParallelPosF"><em>pmLabelBarParallelPosF</em></a>	<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	PmLabelBarParallelPosF		0.5			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLabelBarOrthogonalPosF"><em>pmLabelBarOrthogonalPosF</em></a>	<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	PmLabelBarOrthogonalPosF	0.02			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLegendDisplayMode"><em>pmLegendDisplayMode</em></a>		<A href="PlotManager.html#NhlTAnnotationDisplayMode">NhlTAnnotationDisplayMode</a> RCSG	|
+|	PmDisplayLegend			NoCreate		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLegendWidthF"><em>pmLegendWidthF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	PmLegendWidthF			0.55			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLegendHeightF"><em>pmLegendHeightF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	PmLegendHeightF			0.18			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLegendKeepAspect"><em>pmLegendKeepAspect</em></a>		<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RCSG	|
+|	PmLegendKeepAspect		False			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLegendZone"><em>pmLegendZone</em></a>			<A href="Base.html#NhlTInteger">NhlTInteger</a>		RCSG	|
+|	PmLegendZone			7			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLegendSide"><em>pmLegendSide</em></a>			<A href="View.html#NhlTPosition">NhlTPosition</a>		RCSG	|
+|	PmLegendSide			Bottom			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLegendParallelPosF"><em>pmLegendParallelPosF</em></a>	 	<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	PmLegendParallelPosF		0.5			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/pm.html#pmLegendOrthogonalPosF"><em>pmLegendOrthogonalPosF</em></a>	<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	PmLegendOrthogonalPosF		0.02			|
++---------------------------------------------------------------+
+</pre>
+<h3>Composite resources</h3>
+<A name="TickMark.res"></a>
+<A href="TickMark.html#TickMark.res"><h4>TickMark resources</h4></a>
+
+If <em>pmTickMarkDisplayMode</em> has the value <code>NoCreate</code> when a
+<strong>PlotManager</strong> composite object is created, no
+<strong>TickMark</strong> resources are available.  Otherwise, you can
+set all <strong>TickMark</strong> resources for
+<strong>PlotManager</strong> composite objects except for the following
+resources that <strong>PlotManager</strong> disables:
+
+<ul>
+<li><a href="../../Graphics/Resources/tm.html#tmXBDataLeftF"><em>tmXBDataLeftF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXBDataRightF"><em>tmXBDataRightF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXBStyle"><em>tmXBStyle</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXBIrregularPoints"><em>tmXBIrregularPoints</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXBIrrTensionF"><em>tmXBIrrTensionF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTDataLeftF"><em>tmXTDataLeftF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTDataRightF"><em>tmXTDataRightF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTStyle"><em>tmXTStyle</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTIrregularPoints"><em>tmXTIrregularPoints</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTIrrTensionF"><em>tmXTIrrTensionF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLDataBottomF"><em>tmYLDataBottomF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLDataTopF"><em>tmYLDataTopF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLStyle"><em>tmYLStyle</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLIrregularPoints"><em>tmYLIrregularPoints</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLIrrTensionF"><em>tmYLIrrTensionF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRDataBottomF"><em>tmYRDataBottomF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRDataTopF"><em>tmYRDataTopF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRStyle"><em>tmYRStyle</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRIrregularPoints"><em>tmYRIrregularPoints</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRIrrTensionF"><em>tmYRIrrTensionF</em></a>
+</ul>
+
+<strong>PlotManager</strong> sets these resources itself based on its
+knowledge of the current transformation. Note that the
+<strong>TickMark</strong> object does not currently support ticks for
+Map transformations.
+
+<A name="Title.res"></a>
+<h4><A href="Title.html#Title.res">Title resources</a></h4>
+
+If <em>pmTitleDisplayMode</em> has the value <code>NoCreate</code>
+when a <strong>PlotManager</strong> composite object is created, no
+<strong>Title</strong> resources are available.  Otherwise, you can
+set all <strong>Title</strong> resources for <strong>PlotManager</strong>
+composite objects. However, note that <strong>PlotManager</strong>
+intercepts three <strong>Title</strong> resources, as follows:
+
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/ti.html#tiMainFontHeightF"><em>tiMainFontHeightF</em></a>
+
+<dd><strong>PlotManager</strong> sets the default value of
+<em>tiMainFontHeightF</em> dynamically based on the ratio of
+the actual plot viewport width to a reference viewport width of 0.6
+and a reference font height of 0.025.
+
+</dl>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/ti.html#tiXAxisFontHeightF"><em>tiXAxisFontHeightF</em></a>
+
+<dd><strong>PlotManager</strong> sets the default value of
+<em>tiXAxisFontHeightF</em> dynamically based on the ratio of
+the actual plot viewport width to a reference viewport width of 0.6
+and a reference font height of 0.025.
+
+</dl>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/ti.html#tiYAxisFontHeightF"><em>tiYAxisFontHeightF</em></a>
+
+<dd><strong>PlotManager</strong> sets the default value of
+<em>tiYAxisFontHeightF</em> dynamically based on the ratio of
+the actual plot viewport height to a reference viewport height of 0.6
+and a reference font height of 0.025.
+
+</dl>
+</ul>
+
+
+<A name="LabelBar.res"></a>
+<h4><A href="LabelBar.html#LabelBar.res">LabelBar resources</a></h4>
+
+If <em>pmLabelBarDisplayMode</em> has the value <code>NoCreate</code> when a
+<strong>PlotManager</strong> composite object is created,
+no <strong>LabelBar</strong> resources are available.  Otherwise, you
+can set all <strong>LabelBar</strong> resources for 
+<strong>PlotManager</strong> composite objects, except for the 
+following disabled resource:
+<ul>
+
+<li><a href="../../Graphics/Resources/lb.html#lbLabelBarOn"><em>lbLabelBarOn</em></a>
+</ul>
+
+<strong>PlotManager</strong> intercepts two <strong>LabelBar</strong>
+resources, as follows:
+
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lb.html#lbJustification"><em>lbJustification</em></a> 
+
+<dd> <strong>PlotManager</strong> sets the initial default value of
+<em>lbJustification</em> to <code>CenterCenter</code>. It then
+constrains the value of this resource using the rules of the <a
+href="#PlotManager-Location-Control-Model">PlotManager Location Control
+Model.</a>
+
+</dl>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lb.html#lbOrientation"><em>lbOrientation</em></a> 
+
+<dd>At initialization and whenever the value of <em>lbOrientation</em>
+changes, <strong>PlotManager</strong> checks the currently set values of
+<em>pmLabelBarWidthF</em> and <em>pmLabelBarHeightF</em>. If neither
+resource is explicitly set, it swaps their values if the longest dimension
+is not currently parallel to the orientation. 
+
+</dl>
+</ul>
+
+<A name="Legend.res"></a>
+<h4><A href="Legend.html#Legend.res">Legend resources</a></h4>
+
+If <em>pmLegendDisplayMode</em> has the value <code>NoCreate</code>
+when a <strong>PlotManager</strong> composite object is created, no
+<strong>Legend</strong> resources are available.  Otherwise, you can
+set all <strong>Legend</strong> resources for <strong>PlotManager</strong>
+composite objects, except for the following disabled resource:
+
+<ul> 
+<li><a href="../../Graphics/Resources/lg.html#lgLegendOn"><em>lgLegendOn</em></a>
+</ul>
+
+
+<strong>PlotManager</strong> intercepts one <strong>Legend</strong>
+resource, as follows:
+
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lg.html#lgJustification"><em>lgJustification</em></a> 
+
+<dd> <strong>PlotManager</strong> sets the initial default value of
+<em>lgJustification</em> to <code>CenterCenter</code>. It then
+constrains the value of this resource using the rules of the <a
+href="#PlotManager-Location-Control-Model">PlotManager Location Control
+Model.</a>
+</dl>
+</ul>
+
+
+<h3>Superclass resources</h3>
+
+You can set all resources defined by the superclasses of the
+<strong>PlotManager</strong> object class in any plot object containing a
+<strong>PlotManager</strong>, including:
+
+<ul>
+<li><A href="Transform.html#Transform.res"><strong>Transform</strong>
+resources</a>
+<li><A href="View.html#View.res"><strong>View</strong>
+resources</a>
+</ul>
+
+<hr> 
+<h2>Description</h2>
+
+When an instance of the <a
+href="Transform.html"><strong>Transform</strong></a> class is
+instantiated with an active <strong>PlotManager</strong>, it becomes a
+<a href="../../glossary.html#PlotObject"><em>plot
+object</em></a>.  A plot object can assume control of an
+arbitrary number of <strong>View</strong> objects, effectively
+organizing a collection of unrelated objects into a single plottable
+entity called simply a <a href="../../glossary.html#Plot"><em>plot</em></a>. The controlling plot object is
+known as the <a href="../../glossary.html#BasePlot"><em>base plot</em></a>; the objects it controls
+are <a href="../../glossary.html#PlotMember"><em>plot
+members</em></a>.  When the base plot is drawn, all its plot members
+are drawn automatically. If you reposition the base plot, or resize
+it, or modify the data coordinate space in some way, all the plot
+members adjust themselves appropriately.
+
+<p>You never create an object belonging to the
+<strong>PlotManager</strong> class directly. Instead, the
+functionality of the <strong>PlotManager</strong> class becomes
+available to classes derived from <strong>Transform</strong> that
+include the <strong>PlotManager</strong> as a <a href="../../glossary.html#CompositeClassMember">composite
+class member</a>. By convention, these classes include the word
+<em>Plot</em> as part of their name. Currently, the following
+composite classes contain the <strong>PlotManager</strong> class:
+<strong>ContourPlot</strong>, <strong>MapPlot</strong>,
+<strong>LogLinPlot</strong>, <strong>IrregularPlot</strong>,
+<strong>StreamlinePlot</strong>, <strong>VectorPlot</strong>, and
+<strong>XyPlot</strong>. Each of these classes provides the
+capabilities of the <strong>PlotManager</strong> class by default, and
+therefore their instantiations are, by default, plot objects. Note
+that since all plot objects incorporate <strong>PlotManager</strong>
+functionality as an integral part of their behavior, it is equivalent
+-- when speaking of something that a plot object's
+<strong>PlotManager</strong> does -- simply to say that the plot
+object does it.
+
+<p>You may turn off the <strong>PlotManager</strong> capabilities for
+a <strong>Transform</strong> object by setting the
+<strong>Transform</strong> class resource <a href="../../Graphics/Resources/tf.html#tfPlotManagerOn"><em>tfPlotManagerOn</em></a>
+to False when the object is created. However, note that you cannot
+turn the object's <strong>PlotManager</strong> capabilities back on at
+a later time. An object created with its <strong>PlotManager</strong>
+disabled is <em>not</em> a plot object; instead it is called a
+<a href="../../glossary.html#SimpleTransform"><em>simple transform</em></a>. A simple
+transform can still function as a plot member.
+
+<p>There are two basic kinds of plot members: <a href="../../glossary.html#Overlay"><em>overlays</em></a> and <a href="../../glossary.html#Annotation"><em>annotations</em></a>.  An overlay must be
+a <a href="../../glossary.html#Transform"><em>transform</em></a>, either a plot object
+(with or without its own plot members) or a simple transform.  An
+annotation, on the other hand, can be any <a href="../../glossary.html#ViewableObject"><em>view</em></a> from a simple
+<strong>TextItem</strong> to a plot object with its own plot members.
+
+<p>The base plot transforms an overlay's <a href="../../glossary.html#DataCoordinateSpace">data
+coordinate space</a> into its own coordinate space.  Any portion
+of the overlay's coordinate space that lies outside the coordinate
+space of the base plot is clipped. The viewport of the overlay is
+modified to match that of the base plot. In addition, if the overlay
+is a plot object with plot members of its own, the base plot assumes
+responsibility for sizing and locating the overlay's plot members,
+just as if it owned them.
+
+<p>The base plot locates and sizes an annotation relative to its
+viewport or to its data coordinate space. Unlike an overlay, however,
+there is no fixed relationship between the base plot's data coordinate
+space and the annotation's data coordinate space.  In fact, ordinary
+views, from which annotations are created, do not even have a data
+coordinate space. The viewport of an annotation may fall inside or
+outside the viewport of the base plot. If the annotation happens to be
+a plot object, it does <em>not</em> give up control of its own plot
+members to the base plot. Indeed, an <a href="../../glossary.html#AnnotationPlot"><em>annotation
+plot</em></a> is itself a base plot. However, since an
+annotation is itself managed by a base plot, an annotation plot is a
+<a href="../../glossary.html#SubordinateBasePlot">subordinate base plot</a>. A
+subordinate base plot and the plot members it manages are known
+collectively as a <a href="../../glossary.html#Subplot"><em>subplot</em></a>.
+
+<p>In contrast to a subordinate base plot, a base plot that manages
+itself (i.e. is not a plot member) is called a <a href="../../glossary.html#PrimaryBasePlot">primary base
+plot</a>. Note that all plot objects are, at creation, primary
+base plots. When a plot object becomes an overlay, it loses its base
+plot status. If it is added as an annotation, its status changes to
+subordinate base plot. The primary base plot controls the drawing of
+all its plot members, and you can only cause a plot member to be drawn
+by calling the <strong>NhlDraw</strong> function on the primary base
+plot. Attempting to draw any plot member (even a subordinate base
+plot) directly results in an error. Similarly, you cannot change the
+workstation of a plot member directly. When you change the workstation
+of the primary base plot, the workstation of all its plot members
+changes to match. Also, while an object is a plot member, you cannot
+add it to any other (or even the same) plot object, either as an
+overlay or as an annotation. If you need to do any of these things
+with a plot member, you must first remove it from the plot object that
+owns it.
+
+<h3>Adding and removing overlays</h3>
+
+You add the plot object that is to become an overlay to a base plot
+using the <a href="../API/NhlAddOverlay.html"><strong>NhlAddOverlay</strong></a>
+function. The plot object must belong to the same
+<strong>Workstation</strong> as the base plot. You may call the
+function repeatedly to overlay multiple plot objects over a single
+base plot. Note that you can <em>only</em> add an overlay to a primary
+or subordinate base plot. Attempts to add an overlay to a plot that is
+itself an overlay will result in an error.
+
+<p>The overlays under the control of a single base plot are ordered,
+with the base plot first and each overlay following sequentially.  The
+<a href="../API/NhlAddOverlay.html"><strong>NhlAddOverlay</strong></a>
+function has a parameter that allows you to specify where to add a
+plot into the <a href="../../glossary.html#OverlaySequence">overlay sequence</a>. This sequence
+determines the basic drawing order of the plot: the base plot is drawn
+first; each succeeding overlay is drawn on top of previous objects in
+the sequence.  However, the <strong>PlotManager</strong> actually
+supports three drawing phases, known as the <em>predraw</em> phase,
+the <em>draw</em> phase, and the <em>postdraw</em> phase. Some plot
+objects, such as <strong>ContourPlot</strong> and
+<strong>MapPlot</strong> also support these drawing phases, allowing
+you to specify that certain elements of the plot, such as labels,
+fill, or lines, be rendered during a specific drawing phase. When the
+<strong>PlotManager</strong> executes a <strong>Draw</strong> command,
+it first performs the predraw phase for each plot object in the
+overlay sequence, then the draw, and finally the postdraw.  By
+manipulating both the overlay sequence and the draw phase, you gain
+considerable flexibility in controlling which elements of the plot
+appear on top.
+
+<p>You can remove an overlay from a base plot by calling the function
+<a href="../API/NhlRemoveOverlay.html"><strong>NhlRemoveOverlay</strong></a>.  If the overlay
+you are removing is a plot object with overlays of its own, you can
+choose to remove them along with the specified overlay, or leave them
+behind with the base plot. Annotations originally belonging to the
+overlay are always removed along with it. If you call <a href="../API/NhlRemoveOverlay.html"><strong>NhlRemoveOverlay</strong></a> on the
+base plot, the effect is to restore all its plot members to their
+original state before being added to the current base plot.
+
+<h3>Adding and removing annotations</h3>
+
+There are three ways for a <strong>View</strong> class object to
+become an annotation. First, it may be a <a href="../../glossary.html#CompositeClassMember">composite
+class member</a> of the <strong>PlotManager</strong> class, and
+therefore instantiated along with the <strong>PlotManager</strong>
+object itself when the plot object is created. The
+<strong>PlotManager</strong> class contains four composite classes
+that are used as annotations: <strong>TickMark</strong>,
+<strong>Title</strong>, <strong>LabelBar</strong>, and
+<strong>Legend</strong>. These are known as <a href="../../glossary.html#IntrinsicAnnotation"><em>intrinsic
+annotations</em></a>. Second, a plot object may create
+<strong>View</strong> objects of its own and then depend on the
+<strong>PlotManager</strong> to manage them as annotations. An example
+is the <strong>ContourPlot</strong> object's informational label. An
+annotation such as this is called an <a href="../../glossary.html#EmbeddedAnnotation"><em>embedded
+annotation</em></a>. Finally, you may create arbitrary
+<strong>View</strong> objects at the user level and add them as
+annotations to a plot object. These are called <a href="../../glossary.html#ExternalAnnotation"><em>external
+annotations</em></a>.
+
+<p>You may add a group of <strong>View</strong> objects as annotations
+to any plot object by setting the <strong>PlotManager</strong> array
+resource <a href="../../Graphics/Resources/pm.html#pmAnnoViews"><em>pmAnnoViews</em></a> with
+the ids of the <strong>View</strong> objects. Annotations added in
+this manner replace any previously added external
+annotations. Alternatively, you can add a single <strong>View</strong>
+object as an annotation by calling the function <a href="../API/NhlAddAnnotation.html"><strong>NhlAddAnnotation</strong></a>. In this
+case, the <strong>View</strong> id is appended to the existing
+<em>pmAnnoViews</em> array. Either way, for each <strong>View</strong>
+object added, the <strong>PlotManager</strong> creates an <a
+href="AnnoManager.html"><strong>AnnoManager</strong></a> object
+containing resources that allow all external annotations to be
+controlled in a uniform manner. Unlike overlays, you can add an
+annotation to any plot object, even if it is not currently a primary
+or subordinate base plot. The base plot that manages the plot object
+will immediately assume responsibility for locating and sizing the
+annotation.
+
+<p>If you add the annotation by calling <a href="../API/NhlAddAnnotation.html"><strong>NhlAddAnnotation</strong></a>, the id of
+the <strong>AnnoManager</strong> object created to control the view is
+the return value of the function. In any case, you can retrieve the id
+of the <strong>AnnoManager</strong> object by getting the value of the
+<strong>PlotManager</strong> array resource <a href="../../Graphics/Resources/pm.html#pmAnnoManagers"><em>pmAnnoManagers</em></a>.
+Each element of this array contains the id of the
+<strong>AnnoManager</strong> for the <strong>View</strong> object
+whose id is contained in the corresponding element of <a href="../../Graphics/Resources/pm.html#pmAnnoViews"><em>pmAnnoViews</em></a>.
+Since the view has been informed of its status as an annotation, you
+can also retrieve the <strong>AnnoManager</strong> object id from the
+view itself, by getting the value of the resource <a href="../../Graphics/Resources/vp.html#vpAnnoManagerId"><em>vpAnnoManagerId</em></a>. You
+may remove external annotations one at a time by calling the function
+<a href="../API/NhlRemoveAnnotation.html"><strong>NhlRemoveAnnotation</strong></a>.
+Note that the <a href="../../Graphics/Resources/pm.html#pmAnnoViews"><em>pmAnnoViews</em></a> and
+<a href="../../Graphics/Resources/pm.html#pmAnnoManagers"><em>pmAnnoManagers</em></a>
+arrays <em>only</em> apply to external annotations (annotations added
+by the user). The <strong>PlotManager</strong> handles intrinsic and
+embedded annotations internally.
+
+<p>The <strong>AnnoManager</strong> object contains resources that
+allow you to fix the location and size of the annotation view
+relative to the viewport or the data coordinate
+space of the base plot. If the annotation is placed relative to the
+viewport, you use <strong>AnnoManager</strong> resources that conform
+to the <em>PlotManager Location Control Model</em>.
+
+<h3><A name="PlotManager-Location-Control-Model">PlotManager Location
+Control Model</a></h3>
+
+The <strong>PlotManager</strong> implements a scheme of <em>annotation
+zones</em> to simplify management of multiple annotations. Although at
+first glance it may seem somewhat complex, in practice it should be
+quite simple to use. You can place an annotation relative to any side
+of the plot viewport without reference to the viewport size or
+position. Simply by assigning different zones you can ensure (except
+under certain circumstances involving <a href="../../glossary.html#AnnotationPlot">annotation
+plots</a>, discussed below) that annotations do not overlap each
+other.  And if you decide to change the viewport side where an
+annotation is located, you can generally expect that the new location
+will still look reasonable. Note, however, that the scheme does not
+currently prevent annotations from being located partially or
+completely outside the plot frame. If an annotation seems to have
+disappeared, you should check to make sure the current configuration
+has not caused it to appear outside the viewable area.
+
+<h4>Standard zones</h4>
+
+Zones are numbered beginning at 0, and you may use as many zones as
+necessary to locate annotations. <A href="#Special-Zones">Zones 0 and
+1</a> have special characteristics that differ from the standard
+zones. However, note that for the purposes of establishing zonal
+boundaries, the bounding box of zone 1 is considered to be the plot
+viewport boundary.  Beginning with zone 2, each zone extends outward
+from the bounding box of the previous zone. When the size and/or position
+of objects within a zone change, causing the zone's bounding box to
+expand or contract, the zones outside automatically adjust their shape
+and position to accommodate.
+
+<p>
+For an external annotation, you choose the zone by setting the
+<strong>AnnoManager</strong> resource, <a href="../../Graphics/Resources/am.html#amZone"><em>amZone</em></a>. Intrinsic and embedded
+annotations that adhere to the <em>PlotManager Location Control
+Model</em> will have an equivalent resource with a name specific to
+the particular resource. Thus, the <strong>PlotManager's</strong>
+intrinsic <strong>LabelBar</strong> annotation has the resource
+<a href="../../Graphics/Resources/pm.html#pmLabelBarZone"><em>pmLabelBarZone</em></a>, and
+<strong>ContourPlot</strong> provides the resource <a href="../../Graphics/Resources/cn.html#cnInfoLabelZone"><em>cnInfoLabelZone</em></a> for its embedded
+informational label annotation.
+
+<p>
+
+Once you have established the zone, you decide which side of the
+zone's interior boundary to use as a basis for determining the
+annotation's relative position. Here you use the
+<strong>AnnoManager</strong> resource <a href="../../Graphics/Resources/am.html#amSide"><em>amSide</em></a> or some intrinsic or
+embedded equivalent. Selection of a side determines a coordinate
+system with one axis parallel to the side and another orthogonal to
+it. The origin of this system is on the side line at the point where
+the projection of the left or bottom edge of the viewport (whichever
+is perpendicular) crosses. The direction of the parallel axis is
+always toward increasing NDC values, while the direction of the
+orthogonal axis is outward from the center of the plot. You establish
+a position for the annotation relative to the zonal side origin by
+setting parallel and orthogonal positional resources. For the
+<strong>AnnoManager</strong> object, these are <a href="../../Graphics/Resources/am.html#amParallelPosF"><em>amParallelPosF</em></a> and <a href="../../Graphics/Resources/am.html#amOrthogonalPosF"><em>amOrthogonalPosF</em></a>. The units of
+the parallel position resource are 'fraction of the viewport width' if
+the side resource is <code>Top</code> or <code>Bottom</code> and
+'fraction of viewport height' otherwise. Thus the value 1.0 in
+parallel position units represents either the right or top edge of the
+viewport, depending on the value of the side resource. When the units
+of the parallel position resource are 'fraction of the viewport width'
+the units of the orthogonal position resource are 'fraction of
+viewport height' and vice versa. This implies that, unless the
+viewport is square, the parallel and orthogonal units are not equal in
+size. The orthogonal position resource is constrained to positive
+values in order to prevent location of an annotation within a zone
+lower than its assigned zone.
+
+<p>
+Finally, you control the point of the annotation to be placed at the
+established location. Annotations that follow the model support a
+resource of type <a
+href="View.shtml/index.html#NhlTJustification">NhlJustification</a>. However the
+justification point of these annotations is constrained to fall along
+the side of the annotation parallel with and closest to the zone's
+interior boundary side. Therefore, depending on the side, you have a
+choice of three different possibilities.  For the top or bottom sides,
+you can choose between left, center, and right.  For left or right
+sides, you can choose between bottom, center, and top.  Effectively,
+this constraint enforces the requirement that no part of an
+annotation's extent be located in a zone with a lower number than its
+assigned zone. Note that <em>constraining</em> the justification point
+does not imply that the value of the resource as set by the user is
+modified; rather it means that the lower-level code acts as if the
+justification were set to the constrained value.
+
+<h4><A name="Annotation-Plots">Annotation plots</a></h4>
+
+<p>Note that while the outer boundary of each annotation zone is based
+on the bounding boxes of the annotations it contains, annotations are
+positioned within a zone based on their viewports. For a basic view,
+such as a <strong>TextItem</strong>, its viewport and bounding box are
+the same. However, the bounding box of an <a href="../../glossary.html#AnnotationPlot">annotation
+plot</a> (a <a href="../../glossary.html#SubordinateBasePlot">subordinate base plot</a>) with its
+own annotations may extend outside its viewport.  If the bounding box
+is outside the viewport in the negative orthogonal direction (toward
+the base plot's center), the subordinate base plot's annotations will
+overlap elements of the base plot. To avoid overlap in this case, you
+must remove all annotations along the inner side of the subordinate
+base plot.
+
+<h4><A name="Special-Zones">Special zones</a></h4>
+
+An annotation in one of the standard annotation zones cannot appear
+within the viewport of the base plot, and there is no way to make
+it overlay another annotation. Annotations placed in zones 0 and 1
+have neither of these restrictions. Moreover, the actual bounding box
+of the annotation objects in these zones does not influence the
+boundaries of the standard annotation zones. Basically, zones 0
+and 1 offer several convenient coordinate systems for placing objects
+anywhere within the plot frame.
+
+<p>
+
+The origin of zone 0 is the plot or subplot viewport center. The side
+resource (<a href="../../Graphics/Resources/am.html#amSide"><em>amSide</em></a> for the
+<strong>AnnoManager</strong> object) still determines the directions
+of the parallel and orthogonal axes, just as for the standard
+annotation zones. Units are still either 'fraction of viewport width'
+or 'fraction of viewport height,' as appropriate. The positive
+direction for the parallel axis is still in the direction of
+increasing NDC values, and for the orthogonal axis away from the
+viewport center. Note that this means that values of 0.5, either for
+the parallel position resource or for the orthogonal position
+resource, fall on the viewport boundary. Both the parallel position
+and the orthogonal position may take on negative values. The
+justification resource is also unconstrained and therefore can take on
+any of the nine values available for the <a
+href="View.html#NhlTJustification">NhlJustification</a> type.
+
+<p>
+
+Zone 1 has its origin at one of the viewport corners, and its parallel
+axis is coincident with the viewport side specified by the side
+resource.  Unlike all other annotation zones, however, the direction
+of the orthogonal axis is <em>toward</em> rather than away from the
+viewport center. The parallel axis is still directed toward
+increasing NDC values, and like all other zones, the units are either
+'fraction of viewport width' or 'fraction of viewport height,' as
+appropriate. As with zone 0, both the parallel position and the
+orthogonal position may take on negative values, and the justification
+resource is unconstrained. Note in particular that when the side
+resource is set to <code>Bottom</code>, the coordinate system has the
+origin at the lower left and the directionality of a standard
+Cartesian system (although the units are not necessarily of equal
+length in the X and Y directions).  Also note that whatever the value
+of side, if you set both the parallel and orthogonal position
+resources to 1.0, you specify the location of the viewport corner
+opposite the origin.
+
+<h4>Data-tracking annotations</h4>
+
+Annotations positioned relative to the data coordinate space of the
+base plot are called <em>data-tracking annotations</em>. You set their
+location using a different set of positional resources. In the
+<strong>AnnoManager</strong> object, these are the resources <a href="../../Graphics/Resources/am.html#amDataXF"><em>amDataXF</em></a> and <a href="../../Graphics/Resources/am.html#amDataYF"><em>amDataYF</em></a>. There is no
+restriction on data-tracking annotations overlaying another plot
+feature.  Therefore, these annotations are treated as belonging to
+zone 0 as far as their relationship to other annotations is
+concerned. Like other zone 0 annotations, data-tracking annotations
+can take on any value of the justification resource.
+
+<hr>
+<h2>Support functions</h2>
+
+<strong>PlotManager</strong> does not define any support functions.
+However, a number of the <strong>Transform</strong> <a
+href="Transform.html#functions">support functions</a> are designed
+to be used with objects of classes that use the
+<strong>PlotManager</strong> as a <a href="../../glossary.html#CompositeClassMember">composite
+class member</a>.
+
+<hr>
+<h2>Status</h2>
+
+<p><A name="Status.1">1.</a> Resources allowing the user to control
+the order of drawing of overlays within a single draw phase, have not yet
+been implemented.
+
+<p><A name="Status.2">2.</a> Resources allowing the user to restrict
+the bounding box of the complete plot to a portion of the viewspace
+have not yet been implemented.
+
+<hr>
+<h2>See also</h2>
+<ul>
+<li><a href="AnnoManager.html"><strong>AnnoManager</strong></a> object
+<li><a href="LabelBar.html"><strong>LabelBar</strong></a> object
+<li><a href="Legend.html"><strong>Legend</strong></a> object
+<li><a href="TickMark.html"><strong>TickMark</strong></a> object
+<li><a href="Title.html"><strong>Title</strong></a> object
+<li><a href="ContourPlot.html"><strong>ContourPlot</strong></a> object
+<li><a href="IrregularPlot.html"><strong>IrregularPlot</strong></a> object
+<li><a href="LogLinPlot.html"><strong>LogLinPlot</strong></a> object
+<li><a href="MapPlot.html"><strong>MapPlot</strong></a> object
+
+<li><a href="../API/NhlAddOverlay.html"><strong>NhlAddOverlay</strong></a> function
+<li><a href="../API/NhlRemoveOverlay.html"><strong>NhlRemoveOverlay</strong></a> function
+<li><a href="../API/NhlAddAnnotation.html"><strong>NhlAddAnnotation</strong></a> function
+<li><a href="../API/NhlRemoveAnnotation.html"><strong>NhlRemoveAnnotation</strong></a> function
+
+</ul>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/PlotManager.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:30 GMT -->
+</html>
+

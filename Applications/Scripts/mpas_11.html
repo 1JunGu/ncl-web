@@ -1,0 +1,283 @@
+;----------------------------------------------------------------------
+; mpas_11.ncl
+;
+; Concepts illustrated:
+;   - Plotting MPAS data using cell fill
+;   - Comparing data on two MPAS meshes using paneled plots
+;   - Turning on edges for cell-fill
+;   - Constructing the lat/lon edges of an MPAS mesh for cell fill
+;   - Using get_cpu_time to calculate timings for various parts of the script
+;   - Using functions for cleaner code
+;   - Using command line options to set variables
+;----------------------------------------------------------------------
+; This script creates cell-filled contour plots of a variable read off
+; two different resolutions of MPAS files, and creates zoomed-in plots
+; over three areas of interest: Colorado, Florida,  or the Tibet / Nepal
+; region (see "region_of_interest"). You can add your own region of
+; interest by setting the minlat / maxlat / minlon / maxlon of the 
+; desired area, and modifying the code to recognize this as a valid 
+; "region_of_interest". You can also set the region using command line
+; arguments:
+;
+;    ncl 'region_of_interest="Tibet"' mpas_11.ncl
+;
+; Because we're using CellFill, we can set a resource that turns on the 
+; outline of each cell. See the setting for cnCellFillEdgeColor below.
+;
+; The data are subsetted using the map area of interest, which makes
+; the plotting go significantly faster than if you plot the whole
+; globe.
+;
+; The lower resolution MPAS file is a quasi-uniform 15 km global
+; forecast file that has 2.6 million cells. 
+;
+; The higher resolution MPAS file is a mixed-resolution mesh of 15 km
+; and 3 km cells, where the 3 km region is over the United States.
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+;----------------------------------------------------------------------
+; Prints elapsed time given a start and end time, and a title.
+;----------------------------------------------------------------------
+procedure print_elapsed_time(start_time,end_time,title)
+begin
+  print("----------------------------------------------------------------------")
+  print("Elapsed time : " + title + " : " + (end_time-start_time) + " CPU seconds.")
+  print("----------------------------------------------------------------------")
+end
+
+;----------------------------------------------------------------------
+; Given:
+;   - indexes containing the map area of interest
+;   - an array of lat/lon vertexes
+;   - an array containing the number of edges
+;   - an array containing indexes for the cell edges
+;
+; this function constructs the polygon cells that surround each cell
+; center, but only for the map area of interest.
+;----------------------------------------------------------------------
+function construct_vertices_on_cell(map_ind,latv,lonv,voc,noc)
+local dims, ncells, maxedges, voc_subset, noc_subset, ii, i
+begin
+  start_create_boundaries = get_cpu_time()   
+
+  dims      = dimsizes(voc)
+  ncells    = dims(0)
+  maxedges  = dims(1)
+  ncells_subset = dimsizes(map_ind)
+  voc_subset    = voc(map_ind,:)
+  noc_subset    = noc(map_ind)
+;
+; In order to do a CellFill plot, you need to provide the boundaries
+; of each cell. This section can be slow, since we are subsetting the
+; data over the area of interest, this code goes much faster.
+;
+  latvoc_subset = new((/ ncells_subset, maxedges /),typeof(latv))
+  lonvoc_subset = new((/ ncells_subset, maxedges /),typeof(lonv))
+
+;---Construct the lat/lon edges for each data point. This can be slow.
+  do i = 0, maxedges - 1
+    latvoc_subset(:,i)  = latv(voc_subset(:,i) - 1)
+    lonvoc_subset(:,i)  = lonv(voc_subset(:,i) - 1)
+  end do
+
+;---For polygons that don't use the full maxedges, fill in the rest of them.
+  ii = ind(noc_subset.lt.maxedges)
+  do i = 0, dimsizes(ii)-1
+    latvoc_subset(ii(i), noc_subset(ii(i)):maxedges-1 ) = latvoc_subset(ii(i),noc_subset(ii(i))-1)
+    lonvoc_subset(ii(i), noc_subset(ii(i)):maxedges-1 ) = lonvoc_subset(ii(i),noc_subset(ii(i))-1)
+  end do
+
+  print_elapsed_time(start_create_boundaries,get_cpu_time(),"creating cell boundaries")
+  return([/latvoc_subset,lonvoc_subset,map_ind/])
+end
+
+;----------------------------------------------------------------------
+; Main code
+;----------------------------------------------------------------------
+begin
+  start_code = get_cpu_time()   
+
+;
+; Area of interest to plot. You can select a different area
+; if desired.
+;
+  if(.not.isvar("region_of_interest")) then
+    region_of_interest = "Florida"    ; "Colorado", "Tibet", "Florida"
+  end if
+  if(.not.any(region_of_interest.eq.(/"Tibet","Colorado","Florida"/))) then
+    print("Don't recognize the region of interest. Will default to 'Florida'")
+    region_of_interest = "Florida"
+  end if
+  if(region_of_interest.eq."Colorado") then
+    minlat  =  39    ; Inside Colorado
+    maxlat  =  41
+    minlon  = 254
+    maxlon  = 257
+  else if(region_of_interest.eq."Tibet") then
+    minlat  = 25      ; Tibet /Nepal region
+    maxlat  = 42
+    minlon  = 75
+    maxlon  = 100
+  else if(region_of_interest.eq."Florida") then
+    minlat  =  23   ; Florida and Gulf of Mexico
+    maxlat  =  28
+    minlon  = 274
+    maxlon  = 281
+  end if
+  end if
+  end if
+
+;---Directories containing the two resolutions of MPAS data files.
+  dirs  = (/"../Data/2017082400_uni/","../Data/2017082400_hwt/"/)
+  ndir = dimsizes(dirs)
+
+  mpas_init_file = "init.nc"
+  mpas_diag_file = "diag.2017-08-24_12.00.00.nc"
+  varname        = "relhum_700hPa"                ; variable name to plot
+
+;---Start the graphics
+  start_graphics = get_cpu_time()   
+
+  wks = gsn_open_wks("png","mpas")
+  res                       = True              ; Plot mods desired.
+
+  res@gsnMaximize           = True              ; Maximize plot
+  res@gsnDraw               = False             ; Will panel later
+  res@gsnFrame              = False
+  res@gsnAddCyclic          = False             ; don't add a longitude cyclic point
+
+  res@cnFillOn              = True              ; color plot desired
+  res@cnFillOpacityF        = 0.6               ; apply a little opacity so we can see mesh lines better
+  res@cnFillMode            = "CellFill"
+  res@cnFillPalette         = "WhiteBlueGreenYellowRed"
+  res@cnLinesOn             = False             ; turn off contour lines
+  res@cnLineLabelsOn        = False             ; turn off contour labels
+  res@cnLevelSelectionMode  = "ExplicitLevels"  ; use same levels as "uni" plot so we can
+  res@cnLevels              = ispan(16,85,1)    ; directly compare them.
+  res@cnCellFillEdgeColor   = "black"           ; Setting this outlines each cell in black; you'll
+
+  res@lbLabelBarOn          = False             ; Will turn on in panel
+
+  res@tiMainFontHeightF     = 0.017
+  res@pmTitleZone           = 4                 ; move title down
+  res@mpFillOn              = False             ; turn off map fill
+  res@pmTickMarkDisplayMode = "Always"          ; nicer map tickmark labels
+  res@mpDataBaseVersion     = "MediumRes"       ; better map outlines
+  res@mpOutlineBoundarySets = "GeophysicalAndUSStates"
+
+  res@mpOutlineOn           = True
+  res@mpOutlineBoundarySets = "AllBoundaries"
+  res@mpDataBaseVersion     = "MediumRes"
+  if(any(region_of_interest.eq.(/"Colorado","Florida"/))) then
+    res@mpDataSetName         = "Earth..2"      ; U.S. counties
+  else if(region_of_interest.eq."Tibet") then
+    res@mpDataSetName         = "Earth..4"      ; Provinces of other countries
+  end if
+  end if
+
+  res@mpNationalLineThicknessF    = 3.0      ; for better looking images
+  res@mpGeophysicalLineThicknessF = 3.0
+  res@mpCountyLineThicknessF      = 3.0
+  res@mpProvincialLineThicknessF  = 3.0
+
+;---Zoom in on area of interest
+  res@mpLimitMode           = "LatLon"
+  res@mpMinLatF             = minlat
+  res@mpMaxLatF             = maxlat
+  res@mpMinLonF             = minlon
+  res@mpMaxLonF             = maxlon
+  res@mpCenterLonF          = (maxlon+minlon)*.5
+
+  res@gsnRightString        = ""
+  res@gsnLeftString         = ""
+
+  plots = new(ndir,graphic)
+
+;
+; Loop through both files and create a filled contour plot. This
+; loop also constructs the cell edges needed for CellFill plotting.
+;
+  do nf=0,ndir-1
+;---Open MPAS files and read data variable to plot
+    fi = addfile(dirs(nf)+mpas_init_file,"r")
+    fd = addfile(dirs(nf)+mpas_diag_file,"r")
+    data := fd->$varname$(0,:)                      ; Grab first time step
+
+;---Read lat/lon arrays and convert from radians to degrees
+    latCell := fi->latCell
+    lonCell := fi->lonCell
+    RAD2DEG = get_r2d(typeof(lonCell))      ; Radian to Degree
+    latCell = latCell*RAD2DEG
+    lonCell = lonCell*RAD2DEG
+    latVertex := fi->latVertex
+    lonVertex := fi->lonVertex
+    latVertex = latVertex*RAD2DEG
+    lonVertex = lonVertex*RAD2DEG
+
+;---Select the indexes for the area of interest.
+    map_ind := ind(latCell.ge.minlat-1.and.latCell.le.maxlat+1.and.\
+                   lonCell.ge.minlon-1.and.lonCell.le.maxlon+1)
+
+;---Subset data using these indexes
+    data_subset      := data(map_ind)
+    latCell_subset   := latCell(map_ind)
+    lonCell_subset   := lonCell(map_ind)
+    ncells           = dimsizes(latCell)
+    ncells_subset    = dimsizes(latCell_subset)
+
+;---Construct lat/lon polygons for each cell, using area of interest.
+    verticesOnCell := fi->verticesOnCell
+    nEdgesOnCell   := fi->nEdgesOnCell
+    latlon_list = construct_vertices_on_cell(map_ind,latVertex,lonVertex,verticesOnCell,nEdgesOnCell)
+    latVerticesOnCell_subset := latlon_list[0]
+    lonVerticesOnCell_subset := latlon_list[1]
+    delete(latlon_list)
+
+;---Print some information
+    print("==================================================")
+    print("Region selected        : " + region_of_interest)
+    print("Directory              : " + dirs(nf))
+    print("Diag file              : " + mpas_diag_file)
+    print("Init file              : " + mpas_init_file)
+    print("Variable               : " + varname)
+
+    print("Original # cells       : " + ncells)
+    print("Subsetted # cells      : " + ncells_subset)
+
+    print("Original data min/max  : " + min(data) + "/" + max(data))
+    print("Subsetted data min/max : " + min(data_subset) + "/" + max(data_subset))
+
+    print("Original lat min/max   : " + min(latCell) + "/" + max(latCell))
+    print("Subsetted lat min/max  : " + min(latCell_subset) + "/" + max(latCell_subset))
+
+    print("Original lon min/max   : " + min(lonCell) + "/" + max(lonCell))
+    print("Subsetted lon min/max  : " + min(lonCell_subset) + "/" + max(lonCell_subset))
+
+;---Set the necessary resources for plotting data
+    res@sfXArray      := lonCell_subset               ; necessary for plotting MPAS
+    res@sfYArray      := latCell_subset
+    res@sfYCellBounds := latVerticesOnCell_subset     ; necessary for CellFill 
+    res@sfXCellBounds := lonVerticesOnCell_subset
+    res@tiMainString  = dirs(nf) + mpas_diag_file + " (" + ncells_subset + " cells)"
+
+    plots(nf) = gsn_csm_contour_map(wks,data_subset,res)  
+
+    print_elapsed_time(start_graphics,get_cpu_time(),"plotting data")
+  end do
+
+;---Panel both plots on one page for easier comparison
+  pres                    = True
+  pres@gsnPanelMainString = "Comparing MPAS resolutions : " + varname
+  pres@gsnPanelMainFont   = "helvetica-bold"
+  pres@gsnMaximize        = True       ; maximize plot
+  pres@gsnPanelLabelBar   = True       ; turn on common labelbar
+  pres@lbBoxLinesOn       = False      ; turn off labelbar box lines
+  pres@lbLabelFontHeightF = 0.01
+
+  gsn_panel(wks,plots,(/2,1/),pres)
+
+  print_elapsed_time(start_code,get_cpu_time(),get_script_prefix_name()) 
+end

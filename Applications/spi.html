@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/spi.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:10:33 GMT -->
+<head>
+<meta name="description" content="NCL data analysis example page. 
+Demonstrates how to calculate the Standardized Precipitation Index (SPI).">
+<TITLE>NCL: Standardized Precipitation Index (SPI)</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+    <h1>NCL: Standardized Precipitation Index (SPI)</h1>
+ 
+
+    <div class=text>
+
+The <b>Standardized Precipitation Index (SPI)</b> is a probability (ie: statistical) 
+index that gives a representation of abnormal wetness and dryness.
+It is an alternative to the (more complicated) physically based
+<a href="http://climatedataguide.ucar.edu/guidance/palmer-drought-severity-index-pdsi">
+<b>Palmer Severe Drought Index (PSDI)</b></a> which uses a simple water balance model.
+<p>
+In 2009, the World Meteorological Organization (WMO) approved the
+<a href="http://www.wmo.int/pages/prog/wcp/agm/meetings/wies09/documents/Lincoln_Declaration_Drought_Indices.pdf">
+<b>Lincoln Declaration on Drought Indices (LDDI)</b></a>. The LDDI recommends that
+"the Standardized Precipitation Index (SPI) be used to characterize the meteorological
+droughts around the world", in addition to other drought indices that were in use in their service.
+In support of this recommendation, it was suggested that a
+"<a href="https://library.wmo.int/pmb_ged/wmo_1090_en.pdf"><b>comprehensive  user  manual</b></a>"
+describing the SPI  should  be  developed. The manual provides  a  description  of  the  index,
+the  computation  methods,  specific  examples  of  where  it  is
+currently being used, the strengths and limitations and mapping capabilities.
+<p>
+Some advantages of the SPI:
+<ul>
+<li> It requires only monthly precipitation.
+<li> It can be compared across regions with markedly different climates. 
+<li> The standardization of the SPI allows the index to determine the rarity of a current drought. 
+<li> It can be created for differing periods of 1-to-36 months.
+
+</ul>
+<p>
+A shortcoming of the SPI, as noted by <a href="http://www.nature.com/nclimate/journal/v4/n1/full/nclimate2067.html">Trenbert et al (2014)</a>: 
+<p>
+<ul>
+<li> "the SPI are based on precipitation alone and provide a measure only for water supply. 
+     They are very useful as a measure of precipitation deficits or meteorological drought 
+     but are limited because they do not deal with the ET [evapotranspiration] side of the issue."
+</ul>
+<p>
+<p>
+The SPI is obtained by fitting a gamma or a Pearson Type III distribution to monthly precipitation values.
+The default implementation of <a href="../Document/Functions/Built-in/dim_spi_n.html"><strong>dim_spi_n</strong></a> uses a 2-parameter gamma distribution fit
+(<a href="../Document/Functions/Built-in/dim_gamfit_n.html"><strong>dim_gamfit_n</strong></a>)
+where the shape and scale parameters are maximum liklihood estimates as described in
+<pre>
+
+        A Note on the Gamma Distribution
+        Thom (1958): Monthly Weather Review, pp 117-122.
+                     specifically: eqn 22 for gamma; just above eqn 21
+
+</pre>
+However, there is some variation in the methods used to derive the SPI.  
+Guttman (1998, 1999) recommends that the Pearson III distribution be used.
+Generally, this is likely to give essentially equivalent results to the 2-parameter 
+gamma distribution fit. In some instances, where monthly and seasonal precipitation 
+of zero is common, slightly better results. 
+<p>
+Generally, monthly precipitation is not normally distributed so a transformation 
+is performed such that the derived SPI values follow a normal distribution.  
+The SPI is the number of standard deviations that the observed value 
+would deviate from the long-term mean, for a normally distributed random variable.
+<a href="http://lwf.ncdc.noaa.gov/oa/climate/research/prelim/drought/spi.html">
+<b>One interpretation of the resultant values</b></a> is:
+<pre>
+
+         [+,-]2.00 and above/below: exceptionally [wet,dry] 
+         [+,-]1.60 to 1.99: extremely [wet,dry]
+         [+,-]1.30 to 1.59: severely [wet,dry] 
+         [+,-]0.80 to 1.29: moderately [wet,dry] 
+         [+,-]0.51 to 0.79: abnormally [wet,dry] 
+         [+,-]0.50:  near normal
+
+</pre>
+
+An  <a href="http://www.in.gov/dnr/water/4864.htm">
+<b>explanation of the SPI at different lengths</b> </a>  and
+<a href="http://lwf.ncdc.noaa.gov/oa/climate/research/prelim/drought/spi.html"><b>sample spatial pattterns
+over the USA</b></a> at different run times are available.
+<p>
+More information can be obtained at the 
+<a href="http://climatedataguide.ucar.edu/guidance/standardized-precipitation-index-spi">
+<b>ClimateDataGuide</b></a>.
+<p>
+
+<pre>
+<b>References:</b>
+
+      McKee, T.B., N.J. Doesken, and J. Kleist, 1993. 
+      The relationship of drought frequency and duration ot time scales. 
+      Eighth Conference on Applied Climatology, American Meteorological Society 
+      Jan 17-23, 1993, Anaheim CA, pp. 179-186.
+
+      McKee, T.B., N.J. Doesken, and J. Kleist, 1995. 
+      Drought monitoring with multiple time scales. 
+      Ninth Conference on Applied Climatology, American Meteorological Society 
+      Jan 15-20, 1995, Dallas TX, pp. 233-236.
+
+      Guttman, N.B., 1998. 
+      Comparing the Palmer Drought Index and the Standardized Precipitation Index. 
+      Journal of the American Water Resources Association, 34(1), 113-121.
+
+      Guttman, N.B., 1999. Accepting the Standardized Precipitation Index: A calculation algorithm. 
+      Journal of the American Water Resources Association, 35(2), 311-322.
+
+      Trenberth et al (2014)
+      Global warming and changes in drought
+      Nature Climate Change 4, 17-22;   doi:10.1038/nclimate2067
+
+<b>WMO:</b>
+      <a href="https://library.wmo.int/pmb_ged/wmo_1173_en.pdf"><b>Handbook of Drought Indicators</b></a>
+      <a href="http://www.wmo.int/pages/prog/wcp/agm/meetings/wies09/documents/Lincoln_Declaration_Drought_Indices.pdf"><b>Lincoln Declaration on Drought Indices</b></a>
+      <a href="https://public.wmo.int/en/resources/library/standardized-precipitation-index-user-guide"><b>Standardized Precipitation Index User Guide</b></a>
+
+</pre>
+
+    </div>
+    <div class=text>
+<b>As noted in the <a href="../Document/Functions/Built-in/dim_spi_n.html"><strong>dim_spi_n</strong></a> documentation, at least 30 years of
+monthly values (12*30=360) are recommended.</b> This would provide at least 30 monthly values to fit 
+a specific month's distribution.
+<p> 
+<b>NOTE: </b>When a statistical distribution is being fit, 
+there is <b>no substitute for a large sample size</b>.  The longer the period used to calculate the  
+distribution parameters, the more likely you are to get better results (e.g. 50 years better 
+than 20 years).
+    </div>
+
+
+
+    <div class=ex>
+    <!--SPI_1-->
+    <a name=ex1></a>
+    <a href="Images/spi_1_lg.png">
+    <img src="Images/spi_1_sm.png" align=left border=2></a>
+
+    <a href="Scripts/spi_1.html">spi_1.ncl</a>: Read Boulder, CO monthly precipitation
+    and compute the SPI for different run lengths. Plot the time series. 
+    </div>
+
+    <div class=ex>
+    <!--spi_2-->
+    <a name=ex2></a>
+    <a href="Images/spi_2_1_lg.png">
+    <img src="Images/spi_2_1_sm.png" align=left border=2></a>
+    <a href="Images/spi_2_2_lg.png">
+    <img src="Images/spi_2_2_sm.png" align=left border=2></a>
+
+    <a href="Scripts/spi_2.html">spi_2.ncl</a>: Read the monthly  
+<a href="http://climatedataguide.ucar.edu/guidance/global-precipitation-climatology-project-gpcp">
+Global Precipitation Climatology Project (GPCP)</a> spanning 1979-2010 and compute the SPI
+for 12 and 24 month run lengths. Plot two arbitrarily selected maps. 
+
+    </div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>    
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/spi.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:10:33 GMT -->
+</html>
+
+

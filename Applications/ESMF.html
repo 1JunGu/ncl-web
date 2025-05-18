@@ -1,0 +1,1510 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/ESMF.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:07:34 GMT -->
+<head>
+<meta name="description" content="NCL data analysis example page. 
+Demonstrates how to regrid data to various grids using Earth System Modeling Framework (ESMF) software">
+<title>NCL: Regridding data using NCL with Earth System Modeling Framework (ESMF) software</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+<h1>NCL: Regridding using NCL with Earth System Modeling Framework (ESMF) software</h1>
+<p>
+
+<div class=mainimage>
+<img src="Images/ESMF_all_13_lg.png" align=left border=0></a>
+</div>
+<p>
+
+<div class=text>
+
+For a general overview on regridding, see the
+"<a href="http://climatedataguide.ucar.edu/processing/regridding/overview">Regridding
+Overview</a>" section in
+the <a href="http://climatedataguide.ucar.edu/">Climate Data
+Guide</a>.
+</div>
+<p>
+
+<div class=text>
+<i>Quick note:</i> if the examples on this page are not
+helpful, visit <a href="Templates/index.html">NCL templates page</a>
+for a list of generic ESMF regridding template scripts.
+</div>
+<p>
+
+<div class=text>
+This page shows how you can use ESMF regridding functions to
+regrid data on
+<a href="../Document/glossary.html#RectilinearGrid">rectilinear</a>,
+<a href="../Document/glossary.html#CurvilinearGrid">curvilinear</a>, and
+<a href="../Document/glossary.html#UnstructuredGrid">unstructured</a>
+"source" grids, to "destination" grids of any of these types.
+ESMF regridding creates a weights file that you can use to 
+regrid other variables on the same grid. See
+the <a href="#WeightsAndMasking">special note below</a>
+about weights and missing values.
+<p>
+
+<b>This software is only available in
+NCL <a href="../prev_releases.html#6.1.0">version 6.1.0</a> and
+later.</b>
+<p>
+
+The <a href="http://www.earthsystemmodeling.org/">Earth System
+Modeling Framework</a> (ESMF) is "software for building and coupling
+weather, climate, and related models". The ESMF "ESMF_RegridWeightGen"
+tool has been incorporated into NCL for generating weights for
+interpolating (regridding) data from a one grid to another.
+<p>
+
+Many thanks go to Robert Oehmke of NOAA---one of the developers of
+ESMF---for his consulting and patience in helping us learn and
+incorporate this software. Many thanks also go to Mohammad Abouali,
+who developed the original version of these NCL functions as part of a
+CISL <a href="http://www2.cisl.ucar.edu/siparcs/">SIParCS summer
+internship program.</a>
+<p>
+
+The basic steps of NCL/ESMF regridding involve:
+
+<ol>
+<li>Reading or generating the "source" grid.
+<li>Reading or generating the "destination" grid.
+<li>Creating special NetCDF files that describe these two grids.
+<li><font color=red><b>*</b></font>Generating a NetCDF file that
+contains the weights.
+<li>Applying the weights to data on the source grid, to
+interpolate the data to the destination grid.
+<li>Copying over any metadata to the newly regridded data.
+</ol>
+<p>
+
+<font color=red><b>*</b></font>This is the most important step. Once
+you have a weights file, you can skip steps #1-4 if you are
+interpolating data on the same grids.
+<p>
+
+ESMF regridding in NCL can be done one of three ways; each
+method has its advantages:
+<p>
+
+<ol>
+
+<li>Via a single call to the function
+<a href="../Document/Functions/ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a> - this method does most
+of all of the above steps for you, but can be redundant if you 
+are generating the same weights file over and over.
+<p>
+
+<li>Via a call to the function 
+<a href="../Document/Functions/ESMF/ESMF_regrid_with_weights.html"><strong>ESMF_regrid_with_weights</strong></a> - this
+method is straight-forward and faster; it requires that you already
+have the weights file. You can use the weights file generated
+from an initial call to <a href="../Document/Functions/ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a>,
+or from the third method described below.
+<p>
+
+<li>Via a multi-step process - this method is the most complicated,
+but allows for individual control over all the regridding steps. This
+method is not really recommended, unless you understand the multi-step
+regridding process well.  See the <a href="#MultiStepDescription">detailed
+description</a> below.
+<p>
+</ol>
+<p>
+
+Several of the examples below include more than one script showing you
+the various methods:
+
+<ul>
+<li>Method 1: ESMF_regrid_<i>n</i>.ncl
+<li>Method 2: ESMF_wgts_regrid_<i>n</i>.ncl
+<li>Method 3: ESMF_all_<i>n</i>.ncl
+</ul>
+<p>
+
+</div>
+
+<div class=text>
+
+<b>More detailed description of ESMF regridding</b><p>
+
+For the special NetCDF files that are generated to describe the source
+and destination grids: SCRIP
+(<a href="http://climate.lanl.gov/Software/SCRIP/">Spherical
+Coordinate Remapping and Interpolation Package</a>) is used to
+describe the rectilinear and curvilinear grids, and an internal ESMF
+format is used to describe the unstructured grids.
+<p>
+
+When the weights file is generated, there are five types of
+interpolation methods supported by ESMF software:
+<p>
+
+<ol>
+
+<li><b>"bilinear"</b> - the algorithm used by this application to generate
+the bilinear weights is the standard one found in many textbooks. Each
+destination point is mapped to a location in the source mesh, the
+position of the destination point relative to the source points
+surrounding it is used to calculate the interpolation weights.
+<p>
+
+<li><b>"patch"</b> - this method is the ESMF version of a technique called
+"patch recovery" commonly used in finite element modeling. It
+typically results in better approximations to values and derivatives
+when compared to bilinear interpolation.
+<p>
+
+<li><b>"conserve"</b> - this method will typically have a larger
+interpolation error than the previous two methods, but will do a much
+better job of preserving the value of the integral of data between the
+source and destination grid.
+<p>
+
+<b>The <b>"conserve"</b> method requires that the corners of the lat/lon grid
+be input.</b> NCL will try to provide a guess at the corners if you
+don't provide them, but this could likely result in failure.  
+<p>
+
+You can (and are highly recommended to) provide your own grid corners
+via the special Src/Dst/GridCornerLat/Lon resources. They must be
+provided as an <i>N</i> x 4 array, where <i>N</i> represents the
+dimensionality of the center lat/lon grid. For example, if the center
+lat/lon grid is dimensioned 256 x 220, then the corner arrays must be
+256 x 220 x 4.  Sometimes the corner grids are provided on the file
+along with the center grids, with names like
+"lat_vertices"/"lon_vertices" or "lat_bounds"/"lon_bounds".
+<p>
+
+<li><b><b>"neareststod"</b></b> / "nearestdtos"
+- <font color="red"><i>Available in <a href="../prev_releases.html#6.2.0">version 6.2.0</a> and later.</i></font> The nearest neighbor methods work by
+associating a point in one set with the closest point in another
+set. If two points are equally close then the point with the smallest
+index is arbitrarily used (i.e. the point with that would have the
+smallest index in the weight matrix). There are two versions of this
+type of interpolation available in the regrid weight generation
+application. One of these is the nearest source to destination method
+("neareststod"). In this method each destination point is mapped to
+the closest source point. The other of these is the nearest
+destination to source method ("nearestdtos"). In this method each
+source point is mapped to the closest destination point. Note, that
+with this method the unmapped destination point detection doesn't
+work, so no error will be returned even if there destination points
+which don't map to any source point.
+
+</ol>
+<p>
+</div>
+
+<a name="WeightsAndMasking"></a>
+<div class=text>
+
+<b>Special note about weights files and missing values:</b><p>
+
+You can use the same weights file to regrid across other levels and
+timesteps of the same variable, or across other variables, as long as
+the lat/lon grid that you are regridding from and to are exactly the
+same, <i>and</i>, if you use the special SrcMask2D/DstMask2D/Mask2D
+options, that your masks are exactly the same. The masks are 2D arrays
+filled with 0's and 1's that indicate where your data values and/or
+lat/lon values are missing. Here's a description from Robert Oehmke of
+ESMF about this:
+<p>
+
+What the mask does is remove the entity (cell or point depending on
+the type of regridding) from consideration by the regridder. If it's a
+source cell then no destination entities are mapped to it. If it's a
+destination entity, then it's not interpolated to. There is a little
+more <a href="http://earthsystemmodeling.org/esmf_releases/non_public/ESMF_6_1_1/ESMF_refdoc/node5.html#SECTION05012600000000000000">in-depth
+discussion</a> in the ESMF reference manual.
+<p>
+
+Right now, masking needs to be done before weight calculation so the
+regridding knows what it should ignore, so if the mask changes then
+you need to regenerate weights. We actually have a feature request
+ticket for handling this type of missing value situation more
+fluidly. The plan is to have the interpolation automatically not use
+missing values when they are encountered in a data field. Which would
+allow the same weights to be used for all the levels.
+<p>
+
+One trick you can do right now with missing values and a weight file
+is to do two interpolations to tell you where the missing values will
+spread in the destination field. First interpolate a field containing
+all 0's except for where the missing values are set the missing value
+locations to 1, the result of this interpolation tells you which
+destination locations (the ones whose values >0.0) will be affected by
+the missing values, so you can ignore them after interpolating the
+data. (You could also do something like this in one step during the
+data interpolation if you have a restricted range for your data and
+you use a value way outside that range for your missing value.) This,
+of course, will give you a coarser result than using the masking, but
+will probably be more efficient than recalculating the weights each
+time.
+<p>
+
+</div>
+
+<a name="MultiStepDescription"></a>
+<div class=text>
+
+<b>Detailed description of the multi-step regridding process (method #3)</b>
+<p>
+
+<ol>
+
+<li>Write the description of the source grid to an intermediate SCRIP
+or ESMF file using one of the following functions:
+<p>
+
+<ul>
+<li><a href="../Document/Functions/ESMF/latlon_to_SCRIP.html"><strong>latlon_to_SCRIP</strong></a>
+<li><a href="../Document/Functions/ESMF/rectilinear_to_SCRIP.html"><strong>rectilinear_to_SCRIP</strong></a>
+<li><a href="../Document/Functions/ESMF/curvilinear_to_SCRIP.html"><strong>curvilinear_to_SCRIP</strong></a>
+<li><a href="../Document/Functions/ESMF/unstructured_to_ESMF.html"><strong>unstructured_to_ESMF</strong></a>
+</ul>
+<p>
+
+<li>Write the description of the destination grid to an intermediate
+SCRIP or ESMF file using the same functions as above.
+<p>
+
+<li>Generate the weights file
+using <a href="../Document/Functions/ESMF/ESMF_regrid_gen_weights.html"><strong>ESMF_regrid_gen_weights</strong></a>.
+<p>
+
+[The weights are generated internally using the offline ESMF
+regridding tool called
+"<a href="http://www.earthsystemmodeling.org/esmf_releases/last_built/ESMF_refdoc/node3.html">ESMF_RegridWeightGen</a>". This weight file can be
+reused for other variables with the same source and destination grids,
+enabling you to skip steps #1-3.]
+<p>
+
+<li>Interpolate the data from the source grid to the destination grid
+using <a href="../Document/Functions/ESMF/ESMF_regrid_with_weights.html"><strong>ESMF_regrid_with_weights</strong></a>.
+</ol>
+<p>
+
+</div>
+
+<div class=text>
+<b>Regrid and create netCDF files containing regridded variables</b>
+<p>
+Most of the following examples show: (a)  how to generate the weights needed to regrid
+variables; (b) apply the weights to a variable and (c) generate a plot showing the
+original and regridded variable.
+<p>
+Another approach is to regrid all or selected variables
+and then save the regridded data to a netCDF file for later use. 
+In NCL, there are <a href="write_netcdf.html">
+<b>two methods that can be used to generate netCDF</b></a> files. 
+The following scripts, which operate on the CAM SE grid (See Example 25), illustrate 
+how to save the regridded data via methods 1 and 2. The latter is considerably more 
+complicated because it uses two steps to create the netCDF. However, the advantage is
+that it is the more efficient way to generate the netCDF file. The first step is to 
+predefine the contents of the output file. No data values are written during this
+step. The second step is to regrid each variable and then write the regridded
+values into the predefined file structure.
+
+<pre>
+             <b>Method 1:</b> <a href="Scripts/se2fv_esmf.regrid2file.html"><b>se2fv_esmf.regrid2file.ncl</b></a>
+             <b>Method 2:</b> <a href="Scripts/se2fv_esmf.regrid2file-2.html"><b>se2fv_esmf.regrid2file.ncl_predefine</b></a>
+</pre>
+
+Many of the examples below are being updated to include examples of
+writing results to NetCDF files. See
+examples <a href="#ex1">1</a>, <a href="#ex2">2</a>,
+and <a href="#ex27">27</a>.
+
+</div>
+
+<div class=ex>
+<!--ESMF_1-->
+<a name=ex1></a>
+<a href="Images/ESMF_all_1_lg.png">
+<img src="Images/ESMF_all_1_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_1.html">ESMF_regrid_1.ncl</a> /
+<a href="Scripts/ESMF_wgts_1.html">ESMF_wgts_1.ncl</a> /
+<a href="Scripts/ESMF_all_1.html">ESMF_all_1.ncl</a>:
+<p>
+
+This example shows how to to regrid data on a global NCEP rectilinear
+grid (64 x 181) to a 5x5 degree lat/lon grid (25 x 72), using the
+"bilinear" interpolation method.  The NCEP file, "sst.nc", can be
+found on our <a href="Data/index-2.html#cdf">data</a> page.
+<p>
+
+The regridded results are written to a new NetCDF file using
+the <a href="write_netcdf.html">"easy" but inefficient method</a>.
+<p>
+
+The original data contains missing values, so it's important to set
+the special SrcMask2D option to indicate where the missing values
+are. For more information on weights files and masking, see
+the <a href="#WeightsAndMasking">special note above</a>.
+<p>
+
+The three scripts produce identical results:
+<ol>
+
+<li>ESMF_all_1.ncl - does the regridding in several steps
+
+<li>ESMF_regrid_1.ncl - does the regridding in a single call
+to <a href="../Document/Functions/ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a>
+
+<li>ESMF_wgts_1.ncl - uses an existing weights file
+and does the regridding with a call 
+to <a href="../Document/Functions/ESMF/ESMF_regrid_with_weights.html"><strong>ESMF_regrid_with_weights</strong></a>
+
+</ol>
+<p>
+
+This example was taken from the
+"<a href="regrid.html#ex1">regrid_1.ncl</a>" example on the
+original <a href="regrid.html">regridding</a> examples page, which
+uses the <a href="../Document/Functions/Built-in/linint2.html"><strong>linint2</strong></a> function to do the regridding.
+
+</div>
+
+<div class=ex>
+<!--ESMF_2-->
+<a name=ex2></a>
+<a href="Images/ESMF_all_2_1_lg.png">
+<img src="Images/ESMF_all_2_1_sm.png" align=left border=2></a>
+<a href="Images/ESMF_all_2_2_lg.png">
+<img src="Images/ESMF_all_2_2_sm.png" align=left border=2></a>
+<a href="Images/ESMF_all_2_3_lg.png">
+<img src="Images/ESMF_all_2_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_2.html">ESMF_regrid_2.ncl</a> /
+<a href="Scripts/ESMF_wgts_2.html">ESMF_wgts_2.ncl</a> /
+<a href="Scripts/ESMF_all_2.html">ESMF_all_2.ncl</a>:
+<p>
+
+This example shows how to regrid from a 1x1 degree global rectilinear
+grid (180 x 360) to lower resolution 2x3 degree (90 x 120) and 5x5
+degree grid (36 x 72), using three interpolation methods: bilinear,
+patch, and conserve.
+<p>
+
+The regridded results are written to separate NetCDF files using the
+<a href="write_netcdf.html">"easy" but inefficient method</a>.
+<p>
+
+This example was taken from the
+"<a href="regrid.html#ex6">regrid_6.ncl</a>" example on the
+original <a href="regrid.html">regridding</a> examples page, which
+uses
+the <a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a>
+function to do the regridding.
+<p>
+
+ESMF_regrid_2.ncl does the regridding in a single call
+to <a href="../Document/Functions/ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a>.<p>
+
+</div>
+
+<div class=ex>
+<!--ESMF_3-->
+<a name=ex3></a>
+<a href="Images/ESMF_all_3_1_lg.png">
+<img src="Images/ESMF_all_3_1_sm.png" align=left border=2></a>
+<a href="Images/ESMF_all_3_2_lg.png">
+<img src="Images/ESMF_all_3_2_sm.png" align=left border=2></a>
+<a href="Images/ESMF_all_3_3_lg.png">
+<img src="Images/ESMF_all_3_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_3.html">ESMF_regrid_3.ncl</a> /
+<a href="Scripts/ESMF_wgts_3.html">ESMF_wgts_3.ncl</a> /
+<a href="Scripts/ESMF_all_3.html">ESMF_all_3.ncl</a>:
+<p>
+
+This example shows how to regrid from a 0.25 degree global grid (400 x
+1440) to a T42 (36 x 128) and T85 grid (72 x 256), using three
+interpolation methods: bilinear, patch, and conserve.
+<p>
+
+This example was taken from the
+"<a href="regrid.html#ex11">regrid_11.ncl</a>" example on the
+original <a href="regrid.html">regridding</a> examples page, which
+uses
+the <a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a>
+function to do the regridding.
+<p>
+
+ESMF_regrid_3.ncl does the regridding in a single call
+to <a href="../Document/Functions/ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a>.<p>
+
+</div>
+
+<div class=ex>
+<!--ESMF_4-->
+<a name=ex4></a>
+<a href="Images/ESMF_all_4_lg.png">
+<img src="Images/ESMF_all_4_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_4.html">ESMF_regrid_4.ncl</a> /
+<a href="Scripts/ESMF_wgts_4.html">ESMF_wgts_4.ncl</a> /
+<a href="Scripts/ESMF_all_4.html">ESMF_all_4.ncl</a>:
+<p>
+
+This example shows how to regrid from a subset (511 x 1081) of a
+high-resolution rectilinear global elevation grid (5401 x 10801) to a
+low-resolution 0.5 degree regional grid (35 x 73), using the
+"conserve" interpolation method.
+<p>
+
+This example was taken from the
+"<a href="regrid.html#ex13">regrid_13.ncl</a>" example on the
+original <a href="regrid.html">regridding</a> examples page, which
+uses
+the <a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a> to
+do the regridding.
+
+</div>
+
+<div class=ex>
+<!--ESMF_5-->
+<a name=ex5></a>
+<a href="Images/ESMF_all_5_1_lg.png">
+<img src="Images/ESMF_all_5_1_sm.png" align=left border=2></a>
+<a href="Images/ESMF_all_5_2_lg.png">
+<img src="Images/ESMF_all_5_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_5.html">ESMF_regrid_5.ncl</a> /
+<a href="Scripts/ESMF_wgts_5.html">ESMF_wgts_5.ncl</a> /
+<a href="Scripts/ESMF_all_5.html">ESMF_all_5.ncl</a>:
+<p>
+
+This example shows how to regrid two different datasets from a
+curvilinear WRF grid to a rectilinear grid of the same size (369 x
+369), using the default "bilinear" interpolation method.
+<p>
+
+The weights are generated just once, and used to regrid two different
+variables on the file.
+<p>
+
+The variables plotted have 19 levels, but only the 19th level is
+plotted.  If you want to interpolate and plot all 19 levels, set the
+LEVEL variable to -1.
+</div>
+
+<div class=ex>
+<!--ESMF_6-->
+<a name=ex6></a>
+<a href="Images/ESMF_all_6_1_lg.png">
+<img src="Images/ESMF_all_6_1_sm.png" align=left border=2></a>
+<a href="Images/ESMF_all_6_2_lg.png">
+<img src="Images/ESMF_all_6_2_sm.png" align=left border=2></a>
+<a href="Images/ESMF_all_6_3_lg.png">
+<img src="Images/ESMF_all_6_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_6.html">ESMF_regrid_6.ncl</a> /
+<a href="Scripts/ESMF_wgts_6.html">ESMF_wgts_6.ncl</a> /
+<a href="Scripts/ESMF_all_6.html">ESMF_all_6.ncl</a>:
+<p>
+
+This example shows how to regrid from a curvilinear CMIP5 global grid
+(220 x 256) to a 1x1 degree grid, using three interpolation
+methods. Note that the grid corners are needed for the "conserve"
+method, and they are provided on the file as variables called
+"lat_vertices" and "lon_vertices". The special attributes
+"GridCornerLat" and "GridCornerLon" were set to these arrays before
+calling <a href="../Document/Functions/ESMF/curvilinear_to_SCRIP.html"><strong>curvilinear_to_SCRIP</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--ESMF_7-->
+<a name=ex7></a>
+<a href="Images/ESMF_all_7_lg.png">
+<img src="Images/ESMF_all_7_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_7.html">ESMF_regrid_7.ncl</a> /
+<a href="Scripts/ESMF_wgts_7.html">ESMF_wgts_7.ncl</a> /
+<a href="Scripts/ESMF_all_7.html">ESMF_all_7.ncl</a>:
+<p>
+
+This example shows how to regrid from a curvilinear ORCA global grid
+(292 x 362) to a 1x1 degree grid, using the default "bilinear" method.
+
+</div>
+
+<div class=ex>
+<!--ESMF_8-->
+<a name=ex8></a>
+<a href="Images/ESMF_all_8_lg.png">
+<img src="Images/ESMF_all_8_sm.png" align=left border=2></a>
+<a href="Images/ESMF_regrid_zoomed_8_lg.png">
+<img src="Images/ESMF_regrid_zoomed_8_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_8.html">ESMF_regrid_8.ncl</a> /
+<a href="Scripts/ESMF_wgts_8.html">ESMF_wgts_8.ncl</a> /
+<a href="Scripts/ESMF_all_8.html">ESMF_all_8.ncl</a> /
+<a href="Scripts/ESMF_regrid_zoomed_8.html">ESMF_regrid_zoomed_8.ncl</a>:
+<p>
+
+This example shows how to regrid curvilinear regional swath data (265
+x 185) to a rectilinear grid (238 x 250) read off a file. Three
+interpolation methods are compared here.
+<p>
+
+The ESMF_regrid_zoomed_8.ncl example is similar to ESMF_regrid_8.ncl, except it shows how to zoom in on an area of interest in 
+the map so you can see more detail of the regridding results. The grid lines for both the source grid and destination grids were 
+added with a call to <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a>.
+</div>
+
+<div class=ex>
+<!--ESMF_9-->
+<a name=ex9></a>
+<a href="Images/ESMF_all_9_lg.png">
+<img src="Images/ESMF_all_9_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_9.html">ESMF_regrid_9.ncl</a> /
+<a href="Scripts/ESMF_all_9.html">ESMF_all_9.ncl</a>:
+<p>
+
+This example hows how to regrid CCSM4 rectilinear data (192 x 288) to
+a curvilinear EASE grid (721 x 721), using the "patch" method.
+<p>
+
+This script took 148 CPU seconds on a MacBook Pro, using a
+single-threaded version of the ESMF_RegridWeightGen tool.
+
+</div>
+
+<div class=ex>
+<!--ESMF_10-->
+<a name=ex10></a>
+<a href="Images/ESMF_all_10_lg.png">
+<img src="Images/ESMF_all_10_sm.png" align=left border=2></a>
+<a href="Images/ESMF_regrid_neareststod_10_lg.png">
+<img src="Images/ESMF_regrid_neareststod_10_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_10.html">ESMF_regrid_10.ncl</a> /
+<a href="Scripts/ESMF_wgts_10.html">ESMF_wgts_10.ncl</a> /
+<a href="Scripts/ESMF_all_10.html">ESMF_all_10.ncl</a> /
+<a href="Scripts/ESMF_regrid_neareststod_10.html">ESMF_regrid_neareststod_10.ncl</a>:
+<p>
+
+This example shows how to regrid unstructured MPAS data, which is on a
+hexagonal grid (163842 cells) to a 0.25 degree grid (719 x 440).
+<p>
+
+The first three scripts use the default "bilinear" method, and the
+last one uses the nearest neighbor algorithm, added in
+NCL <a href="../prev_releases.html#6.2.0">version 6.2.0</a> and
+<p>
+
+</div>
+
+<div class=ex>
+<!--ESMF_11-->
+<a name=ex11></a>
+<a href="Images/ESMF_all_11_lg.png">
+<img src="Images/ESMF_all_11_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_11.html">ESMF_regrid_11.ncl</a> /
+<a href="Scripts/ESMF_wgts_11.html">ESMF_wgts_11.ncl</a> /
+<a href="Scripts/ESMF_all_11.html">ESMF_all_11.ncl</a>:
+<p>
+
+This example uses the same unstructured MPAS data as the previous
+example, but regrids it to a curvilinear tripolar grid (300 x 360)
+read off a file. The "patch" interpolation method is used.
+<p>
+
+</div>
+
+<div class=ex>
+<!--ESMF_12-->
+<a name=ex12></a>
+<a href="Images/ESMF_all_conserve_12_lg.png">
+<img src="Images/ESMF_all_conserve_12_sm.png" align=left border=2></a>
+<a href="Images/ESMF_all_patch_12_lg.png">
+<img src="Images/ESMF_all_patch_12_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_12.html">ESMF_regrid_12.ncl</a> /
+<a href="Scripts/ESMF_wgts_12.html">ESMF_wgts_12.ncl</a> /<br>
+<a href="Scripts/ESMF_all_conserve_12.html">ESMF_all_conserve_12.ncl</a>:
+<a href="Scripts/ESMF_all_patch_12.html">ESMF_all_patch_12.ncl</a>:
+<p>
+
+This example is the reverse of the previous example: it regrids data
+from a curvilinear tripolar grid (300 x 360) to an unstructured MPAS
+grid (hexagonal grid, 163842 cells). Both the "patch" and "conserve"
+interpolation methods are used.
+<p>
+
+The "conserve" method requires the grid corners in addition to the
+grid centers. If you don't provide the grid corners (via the special
+"GridCornerLat/GridCornerLon" attributes), then NCL will try to
+approximate them for you. It's better to provide them if possible.
+<p>
+
+When you regrid to an unstructured grid, you MUST set
+Opt@DstGridType = "unstructured" so the ESMF regridding code
+knows you have an unstructured grid, and not a rectilinear grid
+that has the same length for its lat/lon arrays.
+
+</div>
+
+<div class=ex>
+<!--ESMF_13-->
+<a name=ex13></a>
+<a href="Images/ESMF_all_13_lg.png">
+<img src="Images/ESMF_all_13_sm.png" align=left border=2></a>
+<a href="Images/ESMF_regrid_unstruct_13_lg.png">
+<img src="Images/ESMF_regrid_unstruct_13_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_13.html">ESMF_regrid_13.ncl</a> /
+<a href="Scripts/ESMF_regrid_unstruct_13.html">ESMF_regrid_unstruct_13.ncl</a> /
+<a href="Scripts/ESMF_wgts_13.html">ESMF_wgts_13.ncl</a> /
+<a href="Scripts/ESMF_all_13.html">ESMF_all_13.ncl</a>:
+<p>
+
+This example regrids data from a curvilinear EASE grid (721 x 721) to
+a 0.25 degree global grid (359 x 1439). The "patch" interpolation
+method is used.<p>
+<p>
+
+The EASE lat/lon grid contains missing values, so it's important to
+set the special SrcMask2D option to indicate where the missing values
+are. For more information on weights files and masking, see
+the <a href="#WeightsAndMasking">special note above</a>.  Note that
+because there are so many missing values, you will see numerous
+warnings "Entire input array contains missing values, can't compute
+average".  These can be safely ignored.
+<p>
+
+To see a version of this script that removes all the missing lat/lon
+values by turning it into an unstructured grid, see
+"ESMF_regrid_unstruct_13.ncl".  This script will take longer to run,
+because it has to generate a triangular mesh under the hood.  The
+second image above is the one generated by this script.  It shows
+plots of the data on the original curvilinear grid, the unstructured
+grid with missing values removed, and regridded to the 0.25 degree
+grid.
+<p>
+
+
+</div>
+
+
+<div class=ex>
+<!--ESMF_14-->
+<a name=ex14></a>
+<a href="Images/ESMF_all_14_lg.png">
+<img src="Images/ESMF_all_14_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_14.html">ESMF_regrid_14.ncl</a> /
+<a href="Scripts/ESMF_wgts_14.html">ESMF_wgts_14.ncl</a> /
+<a href="Scripts/ESMF_all_14.html">ESMF_all_14.ncl</a>:
+<p>
+
+This example regrids triangular mesh (unstructured) data from the
+ICON model (20480 cells) to a 5 degree grid (37 x 73).
+<p>
+
+For more examples on plotting ICON data, see the
+"<a href="icon.html">Visualizing ICON model data</a>" examples
+page.
+
+</div>
+
+<div class=ex>
+<!--ESMF_15-->
+<a name=ex15></a>
+<a href="Images/ESMF_all_15_1_lg.png">
+<img src="Images/ESMF_all_15_1_sm.png" align=left border=2></a>
+<a href="Images/ESMF_all_15_2_lg.png">
+<img src="Images/ESMF_all_15_2_sm.png" align=left border=2></a>
+<a href="Images/ESMF_all_15_3_lg.png">
+<img src="Images/ESMF_all_15_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_15.html">ESMF_regrid_15.ncl</a> /
+<a href="Scripts/ESMF_wgts_15.html">ESMF_wgts_15.ncl</a> /
+<a href="Scripts/ESMF_all_15.html">ESMF_all_15.ncl</a>:
+<p>
+
+This example shows how to regrid curvilinear regional swath data (406
+x 270) to a 0.25 degree regional grid (84 x 100) using three
+interpolation methods.
+
+</div>
+
+<div class=ex>
+<!--ESMF_16-->
+<a name=ex16></a>
+<a href="Images/ESMF_regrid_16_lg.png">
+<img src="Images/ESMF_regrid_16_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_16.html">ESMF_regrid_16.ncl</a>:
+<p>
+
+This example shows how to regrid from a WRF curvilinear regional grid
+(546 x 480) to a much coarser MM5 curvilinear grid (34 x 19) using
+bilinear interpolation.
+<p>
+
+The variable regridded is "td2" (2m dewpoint temperature), but you
+can modify this script to do any 2D or 3D variable on the file.
+It should also work for more dimensions with slight modification.
+
+</div>
+
+<div class=ex>
+<!--ESMF_17-->
+<a name=ex17></a>
+<a href="Images/ESMF_regrid_17_lg.png">
+<img src="Images/ESMF_regrid_17_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_17.html">ESMF_regrid_17.ncl</a> /
+<a href="Scripts/ESMF_wgts_17.html">ESMF_wgts_17.ncl</a>:
+<p>
+
+This example shows how to regrid from a CAM-SE (cubed sphere)
+unstructured grid with 48602 cells to a 96 x 144 finite volume (FV)
+rectilinear grid.
+<p>
+
+In this script, if you want to regrid to a subregion of the FV grid,
+then set SUBREGION to True, and set minlat/maxlat/minlon/maxlon to the
+desired region.
+
+</div>
+
+<div class=ex>
+<!--ESMF_18-->
+<a name=ex18></a>
+<a href="Images/ESMF_regrid_18_1_lg.png">
+<img src="Images/ESMF_regrid_18_1_sm.png" align=left border=2></a>
+<a href="Images/ESMF_regrid_18_2_lg.png">
+<img src="Images/ESMF_regrid_18_2_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_18.html">ESMF_regrid_18.ncl</a>:
+<p>
+
+This example shows how to regrid two variables (PSL and T) on a HOMME
+cubed-sphere (unstructured) finite volume grid (48602 cells) to a 96 x
+144 finite volume (FV) rectilinear grid.
+<p>
+
+Once the first variable has been regridded using <a href="../Document/Functions/ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a>, you will have a NetCDF weights
+file. You can then use this weights file to regrid the second variable
+using <a href="../Document/Functions/ESMF/ESMF_regrid_with_weights.html"><strong>ESMF_regrid_with_weights</strong></a>.
+This can be much faster than using <a href="../Document/Functions/ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a> again.
+</div>
+
+<div class=ex>
+<!--ESMF_19-->
+<a name=ex19></a>
+<a href="Images/ESMF_regrid_19_lg.png">
+<img src="Images/ESMF_regrid_19_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_19.html">ESMF_regrid_19.ncl</a>:
+<p>
+
+This example shows how to regrid data on a HOMME cubed-sphere
+(unstructured) grid to POP curvilinear gx1v3 grid (384 x 320).
+<p>
+
+In this case, the POP grid was retrieved from an old weights file from
+a previous regridding that went from a 1x1 degree grid to a POP grid.
+<p>
+
+The destination lat/lon arrays on this weights file have corresponding
+names "yc_b" and "xc_b", and are one-dimensional. You have
+to <a href="../Document/Functions/Built-in/reshape.html"><strong>reshape</strong></a> these 1D arrays to their original 2D structure
+using the "dst_grid_dims" variable on the file.  The POP weights file
+also contains a mask grid called "mask_b" that you must apply via the
+special "DstMask2D" option.
+
+</div>
+
+<div class=ex>
+<!--ESMF_20-->
+<a name=ex20></a>
+<a href="Images/ESMF_regrid_20_lg.png">
+<img src="Images/ESMF_regrid_20_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_20.html">ESMF_regrid_20.ncl</a>:
+<p>
+
+This example shows how to regrid from a 27km WRF grid to a coarser
+81km WRF grid using bilinear interpolation.
+<p>
+
+The color scheme used here is similar to the one used on the
+<a href="http://www.mmm.ucar.edu/wrf/OnLineTutorial/Graphics/NCL/Examples/PRECIP/wrf_Precip.htm">precipitation
+page</a> of
+the <a href="http://www.mmm.ucar.edu/wrf/OnLineTutorial/index.htm">WRF-ARW
+Online Tutorial</a>.  Set USE_WRF_COLORS to False if you want to
+<a href="../Document/Graphics/ColorTables/WhViBlGrYeOrReWh.html">"WhViBlGrYeOrRe"</a>
+color table and a slightly different set of contour levels.
+ 
+</div>
+
+<div class=ex>
+<!--ESMF_21-->
+<a name=ex21></a>
+<a href="Images/ESMF_regrid_21_lg.png">
+<img src="Images/ESMF_regrid_21_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_21.html">ESMF_regrid_21.ncl</a>:
+<p>
+
+This example shows how to regrid from random (unstructured) data
+to a 0.1 degree grid.
+<p>
+
+Since this grid is not global, it is important to set
+the special "DstLLCorner" and "DstURCorner" resources to
+further zoom in on the 0.1 degree grid that the original data 
+lies on.  If you don't set these resources, then a global 0.1 degree
+grid will be created, causing the regridding to take a MUCH longer time.
+<p>
+
+
+</div>
+
+<div class=ex>
+<!--ESMF_22-->
+<a name=ex22></a>
+<a href="Images/ESMF_regrid_22_lg.png">
+<img src="Images/ESMF_regrid_22_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_22.html">ESMF_regrid_22.ncl</a>:
+<p>
+
+This example shows how to regrid from data on a curvilinear grid
+that contains missing lat/lon values, to data on a curvilinear grid
+that covers a much smaller region.
+<p>
+
+Since the source grid contains missing values, it's important to
+set the SrcMask2D option:
+<p>
+
+<pre>
+  Opt@SrcMask2D         = where(ismissing(src_lat2d).or.\
+                                ismissing(src_lon2d),0,1)
+
+</pre>
+<p>
+
+For plotting the data on the original grid, it is important to set:
+<p>
+<pre>
+  res@<a href="../Document/Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> = "TriangularMesh"
+</pre>
+<p>
+
+so it handles these missing values correctly.
+
+</div>
+
+<div class=ex>
+<!--ESMF_23-->
+<a name=ex23></a>
+<a href="Images/ESMF_regrid_23_lg.png">
+<img src="Images/ESMF_regrid_23_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_23.html">ESMF_regrid_23.ncl</a>: This
+example was taken from the <a href="HDF.html">HDF examples
+page</a>.  It shows how to regrid data from a 9 km MODIS Aqua Level-3
+HDF4 file to a 0.5 degree grid. The file attributes contain the
+geographical information, which is used to generate coordinate
+variables for the source grid. 
+<p>
+
+The generation of the required files for regridding can be slow for
+this data, so once you have the "MODIST_to_0.5deg.nc" weights file,
+you can use <a href="../Document/Functions/ESMF/ESMF_regrid_with_weights.html"><strong>ESMF_regrid_with_weights</strong></a>
+instead of <a href="../Document/Functions/ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a> to do the
+regridding. Look for HAVE_WGTS in the script for more information.
+
+</div>
+
+<div class=ex>
+<!--ESMF_24-->
+<a name=ex24></a>
+<a href="Images/ESMF_regrid_24_1_lg.png">
+<img src="Images/ESMF_regrid_24_1_sm.png" align=left border=2></a>
+<a href="Images/ESMF_regrid_24_2_lg.png">
+<img src="Images/ESMF_regrid_24_2_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_24.html">ESMF_regrid_24.ncl</a>: This
+example shows how to regrid data from a POP curvilinear gx1v3 grid
+(384 x 320) to a 1.0 degree world grid. It plots sea water potential
+temperature on the new grid.
+<p>
+<b>Note:</b> Conservative interpolation will fail because grid vertex information
+needed by the ESMF software is not available.
+</div>
+
+<div class=ex>
+<!--ESMF_25-->
+<a name=ex25></a>
+<a href="Images/ESMF_regrid_25_lg.png">
+<img src="Images/ESMF_regrid_25_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_25.html">ESMF_regrid_25.ncl</a> /
+<a href="Scripts/ESMF_wgts_25.html">ESMF_wgts_25.ncl</a>: This
+example shows how to regrid CLM data on the 'ne30' to a finite volume grid. 
+<p>
+<b>Note 1:</b> For some reason, in the CLM, grid <bi>locations</ib> over the oceans are
+set to _FillValue. This is not consistent with the treatment of land values 
+in the POP model. The POP provides valid non-missing locations and sets the 
+values to _FillValue. 
+<p>
+<b>Note 2:</b> Conservative interpolation will fail because grid vertex information
+needed by the ESMF software is not available.
+<p>
+
+<b>Note 3:</b> Once you have the weights file generated by
+ESMF_regrid_25.ncl, you can
+use <a href="../Document/Functions/ESMF/ESMF_regrid_with_weights.html"><strong>ESMF_regrid_with_weights</strong></a> to do
+the regridding using this file.
+
+</div>
+
+<div class=ex>
+<!--ESMF_26-->
+<a name=ex26></a>
+<a href="Images/ESMF_regrid_26_lg.png">
+<img src="Images/ESMF_regrid_26_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_26.html">ESMF_regrid_26.ncl</a>: 
+This shows how to regrid a ROMS model output to a rectilinear grid.
+The ROMS grid information and the model variable output are 
+contained on separate files. 
+This specific version of ROMS is for the "Coral configuration."
+The original grid has 5km spacing. The rectilinear grid is set to 0.05
+degree spacing which corresponds to approximately 5km (~0.05*111km). 
+</div>
+
+<div class=ex>
+<!--ESMF_27-->
+<a name=ex27></a>
+<a href="Images/ESMF_regrid_27_lg.png">
+<img src="Images/ESMF_regrid_27_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_27.html">ESMF_regrid_27.ncl</a>: 
+This example shows how to regrid variables from a suite of ECMWF files
+that contain an Operational Model Analysis grid with a 1280 x 2560
+regular Gaussian grid to a lower resolution 2.5 degree grid.
+<p>
+
+The results are written to individual NetCDF files using the
+<a href="write_netcdf.html">efficient method</a>.
+<p>
+
+Only one weight file needs to be generated here, so 
+<a href="../Document/Functions/ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a> is used to create the
+weights file, and
+then <a href="../Document/Functions/ESMF/ESMF_regrid_with_weights.html"><strong>ESMF_regrid_with_weights</strong></a> is
+used to do the regridding of all the variables. If you were to run
+the script again with a different set of files that have the same grids,
+you can set "GEN_WEIGHTS" to False so the weights file is not regenerated.
+<p>
+
+Just for something different, the
+"<a href="../Document/Graphics/ColorTables/cb_rainbow_inv.html">cb_rainbow_inv</a>"
+color map was used here.  This color map may be useful
+for <a href="../Document/Graphics/ColorTables/Aid_in_color_blindness_cat.html">color
+blindness and color deficient viewers</a>.
+
+
+</div>
+
+
+<div class=ex>
+<!--ESMF_28-->
+<a name=ex28></a>
+<a href="Images/ESMF_regrid_28_lg.png">
+<img src="Images/ESMF_regrid_28_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_28.html">ESMF_regrid_28.ncl</a>:
+The demonstrates how to regrid variables on a rectilinear grid onto
+a POP curvilinear grid. The source variable is type short and 
+must be unpacked prior to regridding. Further, only the 1st time
+step is read because only the spatial information (latitudes 
+and longitudes) is needed for weight generation. POP variables have no values
+over land. Hence, a variable from the target POP file is read
+and used to generate a mask.
+
+</div>
+<div class=ex>
+<!--ESMF_29-->
+<a name=ex29></a>
+<a href="Images/ESMF_regrid_29_lg.png">
+<img src="Images/ESMF_regrid_29_sm.png" align=left border=2></a>
+<a href="Images/ESMF_wgts_29_lg.png">
+<img src="Images/ESMF_wgts_29_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_29.html">ESMF_regrid_29.ncl</a> /
+<a href="Scripts/ESMF_wgts_29.html">ESMF_wgts_29.ncl</a>:
+These scripts show how you can use a two-step process to regrid WRF data.<p>
+The <b>ESMF_regrid_29.ncl</b> script creates two weights files: (1) WRF grid to a rectilinear grid and (2) rectilinear grid back 
+to the original WRF grid. A 3-panel plot is created: (1) an arbitrary variable plotted on the original WRF grid, (2) the same variable 
+regridded to the rectilinear grid, (3) the same variable regridded from the rectilinear grid back to the WRF grid.<p>
+
+The <b>ESMF_wgts_29.ncl</b> script shows how you can now use the WRF-to-rectilinear weights file created by the previous script 
+to interpolate the zonal and meridional wind components to a rectilinear grid. 
+It then uses the <a href="../Document/Functions/Built-in/uv2dv_cfd.html"><strong>uv2dv_cfd</strong></a> function to compute divergence on a 
+rectilinear grid and then regrids this quantity back onto the original WRF grid 
+using the rectilinear-to-WRF weight file generated by the previous script.<p>
+
+</div>
+
+<div class=ex>
+<!--ESMF_30-->
+<a name=ex30></a>
+<a href="Images/ESMF_wgts_30_1_lg.png">
+<img src="Images/ESMF_wgts_30_1_sm.png" align=left border=2></a>
+<a href="Images/ESMF_wgts_30_2_lg.png">
+<img src="Images/ESMF_wgts_30_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_wgts_30.html">ESMF_wgts_30.ncl</a>:
+This script regrids a NARR grid which is a curvilinear grid to a 0.25 rectilinear grid (Part A).
+Then for illustration it regrids the rectilinear grid back to the original NARR grid (Part B).
+The rectilinear->NARR section (Part B) could easily be extracted and used as a template to regrid any
+rectilinear grid to the NARR grid. 
+<p>
+
+The rightmost plot shows the difference after reinterpolating the 0.25
+rectilinear gridded field back to the original curvilinear grid.  The
+differences are quite small and are expected: (a) the 0.25 grid is
+slightly coarser than the original NARR grid; (b) the largest
+magnitudes are over regions affected by topography. If (say) 200 hPA
+had been chosen, the differences would be even smaller.
+<p>
+
+Use <b>ESMF_wgts_30.ncl</b> to generate two weight files: (a) NARR
+grid to rectilinear grid; (b) rectilinear to NARR grid. This is done
+only once for each grid.
+<p>
+
+<a href="narr.html"><b>NARR
+Example 5</b></a> shows how a user could use an ESMF-generated weight
+file to quickly interpolate the NARR to a rectilinear grid and then
+create cross-sections.
+
+</div>
+
+<div class=ex>
+<!--ESMF_31-->
+<a name=ex31></a>
+<a href="Images/ESMF_regrid_31_lg.png">
+<img src="Images/ESMF_regrid_31_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_31.html">ESMF_regrid_31.ncl</a>:
+This script regrids IGBP vegetation categorical data which is on
+a high-resolution 1080 x 2160 grid, to a 1 degree lat/lon grid. 
+<p>
+
+Because of the size of the grid, this example takes about 14 minutes to
+run on a Mac system.  Once you have the weights file however, you can regrid
+data on the same grid using the weights file. See the "have_wgts_file" 
+variable in the script.
+
+</div>
+
+<div class=ex>
+<!--ESMF_32-->
+<a name=ex32></a>
+<a href="Images/ESMF_regrid_32_lg.png">
+<img src="Images/ESMF_regrid_32_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_32.html">ESMF_regrid_32.ncl</a>: This
+example regrids WRF output temperature data to both a 1.0 and 0.5 degree
+grid, and compares them in a panel plot.
+<P>
+
+The <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> procedure is
+used to draw the lat/lon grid on all three plots.
+
+</div>
+
+<div class=ex>
+<!--ESMF_33-->
+<a name=ex33></a>
+<a href="Images/ESMF_regrid_33_lg.png">
+<img src="Images/ESMF_regrid_33_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_33.html">ESMF_regrid_33.ncl</a>: This
+example regrids the 'gland5.nc' (Greenland Developmental Data Set: Greenland_5km_dev1.1.nc)
+data on a very high resolution 5km grid to a 0.5 degree grid using the bilinear, patch and conserve
+interpolation methods. A subsequent run generated a separate regrid weight file for a 1x1 resolution.
+See: <a href="ice.html"><b>gland_2/3</b> </a>
+for application of these weight files.
+</div>
+
+<div class=ex>
+<!--ESMF_34-->
+<a name=ex34></a>
+<a href="Images/ESMF_regrid_34_lg.png">
+<img src="Images/ESMF_regrid_34_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_34.html">ESMF_regrid_34.ncl</a>: 
+
+This interpolates data on a NARR grid to a WRF grid. Here, the WRF grid covers a much smaller area than the source NARR grid. This is a curvilinear to curvilinear interpolation.
+
+</div>
+
+<div class=ex>
+<!--ESMF_35-->
+<a name=ex35></a>
+<a href="Images/ESMF_regrid_35_lg.png">
+<img src="Images/ESMF_regrid_35_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_35.html">ESMF_regrid_35.ncl</a>: 
+
+Using the ESMF 'bilinear', 'patch' and 'conserve' methods to interpolate a high-resolution 
+(0.1x0.1) rectilinear regional grid a lower resolution (1x1) rectilinear grid.  
+This is similar to several 
+other ESMF examples. However, the source data is a 'bit fractal' in nature. It illustrates
+the results of the three methods.  
+</div>
+
+<div class=ex>
+<!--ESMF_36-->
+<a name=ex36></a>
+<a href="Images/ESMF_regrid_36_1_lg.png">
+<img src="Images/ESMF_regrid_36_1_sm.png" align=left border=2></a>
+<a href="Images/ESMF_regrid_36_2_lg.png">
+<img src="Images/ESMF_regrid_36_2_sm.png" align=left border=2></a>
+<a href="Images/ESMF_regrid_36_3_lg.png">
+<img src="Images/ESMF_regrid_36_3_sm.png" align=left border=2></a>
+<a href="Images/ESMF_regrid_36_4_lg.png">
+<img src="Images/ESMF_regrid_36_4_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_36.html">ESMF_regrid_36.ncl</a>: 
+
+Interpolate data from a high resolution (0.1x0.1 [1800x3600]) global grid 
+to a regional curvilinear (WRF) grid using 'bilinear', 'patch', 'nearestod', 
+and 'conserve' methods. NCL's 
+<a href="../Document/Language/subscript_coord.html"><b>coordinate
+subscripting</b></a> is used to extract an area subset surrounding China. This reduces the 
+interpolation time.
+<p>
+The <a href="../Document/Functions/WRF_arw/wrf_map_resources.html">
+<b>wrf_map_resources</b></a> function is used to extract the WRF map projection information 
+defined on the WRF file.  
+
+</div>
+
+<div class=ex>
+<!--ESMF_37-->
+<a name=ex37></a>
+<a href="Images/ESMF_regrid_37_1_lg.png">
+<img src="Images/ESMF_regrid_37_1_sm.png" align=left border=2></a>
+<a href="Images/ESMF_regrid_37_2_lg.png">
+<img src="Images/ESMF_regrid_37_2_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_37.html">ESMF_regrid_37.ncl</a>:
+
+The is similar to the <b>ESMF_wgts_29.ncl</b> script. It regrids the WRF's zonal 
+and meridional wind components onto a rectilinear grid. It then uses
+the <b><a href="../Document/Functions/Built-in/uv2dv_cfd.html"><strong>uv2dv_cfd</strong></a></b> function to compute divergence on the rectilinear 
+grid and then regrids the divergence back onto the original WRF grid.
+<p>
+
+</div>
+
+
+					</div>
+
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/ESMF.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:08:08 GMT -->
+</html>
+
+

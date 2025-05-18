@@ -1,0 +1,56 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"   
+
+begin
+;
+; Generate some dummy data.
+;
+  z = (/1,2,2,3,3,3,4,4,4,4,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,7,7,7, \
+        8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,10,10,10/)
+  z@_FillValue = -999
+
+  wks = gsn_open_wks("ncgm","histogram")
+;
+; Generate default plot.
+;
+  res              = True
+  res@gsnMaximize  = True
+  res@tiMainString = "Default histogram"
+  plot = gsn_histogram(wks,z,res)
+;
+; Bin values above maximum (9) and below minimum (2).
+;
+  res                           = True
+  res@gsnMaximize               = True
+  res@gsnHistogramBinIntervals  = ispan(2,9,1)
+  res@gsnHistogramMinMaxBinsOn  = True
+  res@tiMainString              = "Bin values outside 2 and 9"
+  plot = gsn_histogram(wks,z,res)
+  delete(res@gsnHistogramBinIntervals)
+
+;
+; Generate a histogram with missing values counted in the percentage
+; calculation. Also, mix discrete and class values (discrete
+; values are indicated by including the same value twice in the
+; gsnHistogramClassIntervals or gsnHistogramBinIntervals resource).
+;
+  z(20:30) = z@_FillValue
+  res@gsnHistogramClassIntervals     = (/4,4,5,6,7,8,8,9,9/)
+  res@gsnHistogramMinMaxBinsOn       = True
+  res@gsnHistogramComputePercentages = True
+  res@tiMainString                   = "Mix ranges and discrete values"
+  plot = gsn_histogram(wks,z,res)
+
+;
+; Same plot, only don't include missing values in percentage calculation.
+;
+  res@gsnHistogramComputePercentagesNoMissing = True
+  res@tiMainString                            = "Don't include missing values:C:in percentage calculation"
+  plot = gsn_histogram(wks,z,res)
+
+;
+; Same as previous plot, only horizontal.
+;
+  res@gsnHistogramHorizontal = True
+  res@tiMainString           = "horizontal histogram"
+  plot = gsn_histogram(wks,z,res)
+end

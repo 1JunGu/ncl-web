@@ -1,0 +1,32 @@
+
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+    minlat = -80
+    maxlat = -30
+    minlon = -90
+    maxlon = -30
+
+    wks = gsn_open_wks("x11","lambert")
+;
+; Set up some resources.
+;
+    mpres                         = True
+    mpres@gsnMaximize             = True
+    mpres@mpProjection            = "LambertConformal"
+    mpres@mpGridAndLimbOn         = True
+    mpres@mpOutlineOn             = True
+    mpres@mpMinLatF               = minlat
+    mpres@mpMaxLatF               = maxlat
+    mpres@mpMinLonF               = minlon
+    mpres@mpMaxLonF               = maxlon
+;
+; The "gsnMaskLambertConformal" resource tells NCL to mask the 
+; Lambert Conformal projection in the areas outside the given
+; min/max/lat/lon values.
+;
+    mpres@gsnMaskLambertConformal          = True
+
+    plot = gsn_csm_map(wks,mpres)
+end

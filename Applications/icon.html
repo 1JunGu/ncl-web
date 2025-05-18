@@ -1,0 +1,565 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/icon.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:04:36 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to analyze data from the ICON model.">
+<meta name="keywords" content="NCL, graphics, visualization, ICON model data">
+<TITLE>NCL Graphics: ICON model data</TITLE>
+</head> 
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_models.html">Models</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: ICON model data</h1>
+
+<div class=mainimage>
+<img src="Images/icon_2_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+This page describes various ways to visualize ICON model data.
+<p>
+
+In <a href="../prev_releases.html#6.2.0">NCL Version 6.2.0</a>, new
+resources were introduced that significantly speed up the drawing of
+ICON data done with filled polygons.  See examples #2, #3, and #5
+below for more information and sample scripts.
+
+</div>
+
+<div class=ex>
+<!--Icon_1--> <a name=ex1></a> <a
+href="Images/icon_1_lg.png"> <img src="Images/icon_1_sm.png"
+align=left border=2></a> <a
+href="Scripts/icon_1.html">icon_1.ncl</a>: This script, which was
+contributed by Hui Wan of MPI-M, creates a filled contour plot of the
+"divergence" variable from an ICON model data file.
+<p>
+
+The variables "clon" and "clat" on the file are used to indicate the center
+lat/lon locations of the triangles, so we can overlay this data on a map.
+<p>
+
+Because these arrays are all one-dimensional, internally NCL is using
+a triangular mesh algorithm to create the contours.
+
+</div>
+
+<div class=ex>
+<!--Icon_2-->
+<a name=ex2></a>
+<a href="Images/icon_2_lg.png">
+<img src="Images/icon_2_sm.png" align=left border=2></a> 
+<a href="Images/icon_faster_2_lg.png">
+<img src="Images/icon_faster_2_sm.png" align=left border=2></a> 
+<a href="Scripts/icon_2.html">icon_2.ncl</a> / 
+<a href="Scripts/icon_faster_2.html">icon_faster_2.ncl</a>:  
+This example is identical to the previous one, except additionally,
+each triangle is drawn, filled, and outlined using the triangle vertex
+information on the file ("clon_vertices" and "clat_vertices").
+The <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> procedure is used to
+add the triangles to the plot. Various draw order resources are set in
+order to control the order of the various plot elements:
+<p>
+<a href="../Document/Graphics/Resources/cn.html#cnFillDrawOrder"><em>cnFillDrawOrder</em></a> = "PreDraw"<br>
+<a href="../Document/Graphics/Resources/tf.html#tfPolyDrawOrder"><em>tfPolyDrawOrder</em></a> = "Draw"<br>
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineDrawOrder"><em>mpOutlineDrawOrder</em></a> = "PostDraw"
+<p>
+
+With <a href="../prev_releases.html#6.2.0">NCL Version 6.2.0</a>, there's
+a faster way of drawing these triangles, using new resources
+<a href="../Document/Graphics/Resources/gs.html#gsSegments"><em>gsSegments</em></a> and 
+<a href="../Document/Graphics/Resources/gs.html#gsColors"><em>gsColors</em></a>. The second
+image and "<a href="Scripts/icon_faster_2.html">icon_faster_2.ncl</a>"
+show how to use these resources.<p>
+
+Note that this example is a bit of an overkill, because the contout
+plot is being drawn and then completely covered by the filled
+triangles.  It is necessary to create and draw the contour plot so we
+get tickmarks and a labelbar. We also use the contour plot to retrieve
+what levels and colors to use for the filled triangles.
+<p>
+
+The next example shows how to create and draw the filled triangles
+using just a map plot.
+
+</div>
+
+<div class=ex>
+<!--Icon_3--> <a name=ex3></a>
+<a href="Images/icon_3_lg.png">
+<img src="Images/icon_3_sm.png" align=left border=2></a> <a
+<a href="Images/icon_faster_3_lg.png">
+<img src="Images/icon_faster_3_sm.png" align=left border=2></a> 
+<a href="Scripts/icon_3.html">icon_3.ncl</a> /
+<a href="Scripts/icon_faster_3.html">icon_faster_3.ncl</a>:  
+This example is identical to
+the previous one, except this time just a map plot is created for
+drawing the filled triangles on top.
+<p>
+
+Doing things this way requires us to set our own levels
+and colors that we want for the filled triangles. We also
+have to create our own labelbar using
+<a href="../Document/Graphics/Interfaces/gsn_create_labelbar.html"><strong>gsn_create_labelbar</strong></a>
+and <a href="../Document/Graphics/Interfaces/gsn_add_annotation.html"><strong>gsn_add_annotation</strong></a>.
+<p>
+
+Similar to the "icon_faster_2.ncl" script above, you can create a
+faster version of this script using new resources
+<a href="../Document/Graphics/Resources/gs.html#gsSegments"><em>gsSegments</em></a> and 
+<a href="../Document/Graphics/Resources/gs.html#gsColors"><em>gsColors</em></a>, which are available
+in <a href="../prev_releases.html#6.2.0">NCL Version 6.2.0</a>.  See
+the "<a href="Scripts/icon_faster_3.html">icon_faster_3.ncl</a>"
+script. The "icon_3.ncl" script took about 1.64 CPU seconds on a Mac, and
+"icon_faster_3.ncl" took about 0.33 CPU seconds.
+
+</div>
+
+<div class=ex>
+<!--Icon_4--> <a name=ex4></a>
+<a href="Images/icon_4_1_lg.png">
+<img src="Images/icon_4_1_sm.png" align=left border=2></a> <a
+<a href="Images/icon_4_2_lg.png">
+<img src="Images/icon_4_2_sm.png" align=left border=2></a> <a
+align=left border=2></a> <a
+href="Scripts/icon_4.html">icon_4.ncl</a>: The first frame is
+a simple filled contour plot over a map of divergence, again
+using 1D lat/lon arrays for the overlay.
+<p>
+
+The second frame draws filled triangles over a map, this time using
+<a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> to attach the filled
+triangles. Note that it takes a long time to draw this second frame, 
+because there are thousands of individual triangles being filled. Also,
+some triangles "wrap" around the globe, so these have to be fixed.
+
+</div>
+
+<div class=ex>
+<!--Icon_5--> <a name=ex5></a>
+<a href="Images/icon_5_1_lg.png">
+<img src="Images/icon_5_1_sm.png" align=left border=2></a> <a
+<a href="Images/icon_5_2_lg.png">
+<img src="Images/icon_5_2_sm.png" align=left border=2></a> <a
+<a href="Images/icon_faster_5_1_lg.png">
+<img src="Images/icon_faster_5_1_sm.png" align=left border=2></a> <a
+<a href="Images/icon_faster_5_2_lg.png">
+<img src="Images/icon_faster_5_2_sm.png" align=left border=2></a>
+<a align=left border=2></a>
+<a href="Scripts/icon_5.html">icon_5.ncl</a> /
+<a href="Scripts/icon_faster_5.html">icon_faster_5.ncl</a>:
+This dataset is similar to that from the first three examples, except
+this time instead of triangles, you have hexagons.  The code is very
+similar to that in example 3, except the vlon/vlat and
+vlon_vertices/vlat_vertices variables on the file are used to
+determine the centers and edges of the data.
+<p>
+
+Similar to the "icon_faster_2.ncl" script above, you can create a
+faster version of this script using new resources
+<a href="../Document/Graphics/Resources/gs.html#gsSegments"><em>gsSegments</em></a> and 
+<a href="../Document/Graphics/Resources/gs.html#gsColors"><em>gsColors</em></a>, which are available
+in <a href="../prev_releases.html#6.2.0">NCL Version 6.2.0</a>.  See
+the "<a href="Scripts/icon_faster_5.html">icon_faster_5.ncl</a>"
+script. The "icon_5.ncl" script took about 38 CPU seconds on a Mac, and
+"icon_faster_5.ncl" took about 0.55 CPU seconds.
+
+</div>
+
+<div class=ex>
+<!--Icon_6--> <a name=ex6></a>
+<a href="Images/icon_6_lg.png">
+<img src="Images/icon_6_sm.png" align=left border=2></a> <a
+align=left border=2></a>
+
+<a href="Scripts/icon_6.html">icon_6.ncl</a>: This example shows how to
+overlay contours from two high-resolution fields onto a coarse global
+field. These are contours of 750 hPa vorticity for the
+mountain-induced Rossby wave train test.
+<p>
+
+The <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> procedure is used to overlay the two
+high-resolution fields onto the global field.  <a href="../Document/Graphics/Resources/cn.html#cnFillDrawOrder"><em>cnFillDrawOrder</em></a> and <a href="../Document/Graphics/Resources/cn.html#cnLineDrawOrder"><em>cnLineDrawOrder</em></a> are set to "PostDraw" for
+the overlaid plots to make sure they get drawn on top of all the
+elements from the global field.
+<p>
+
+This example was contributed by Daniel Reinert of Deutscher
+Wetterdienst (the German Meteorological Service).
+
+</div>
+
+<div class=ex>
+<!--ESMF_14-->
+<a name=ex14></a>
+<a href="Images/ESMF_all_14_lg.png">
+<img src="Images/ESMF_all_14_sm.png" align=left border=2></a>
+
+<a href="Scripts/ESMF_regrid_14.html">ESMF_regrid_14.ncl</a> /
+<a href="Scripts/ESMF_wgts_14.html">ESMF_wgts_14.ncl</a> /
+<a href="Scripts/ESMF_all_14.html">ESMF_all_14.ncl</a>:
+<p>
+
+This example regrids triangular mesh (unstructured) data from the
+ICON model (20480 cells) to a 5 degree grid (37 x 73).
+<p>
+
+</div>
+
+<div class=ex>
+<!--NUG_1-->
+<a name=nugex1></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_triangular_grid_ICON_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_triangular_grid_ICON_sm.png" align=left border=2></a>
+
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_triangular_grid_ICON.html">NUG_triangular_grid_ICON.ncl</a>:
+<p>
+
+This example shows how to use <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> to color fill the triangles of
+an ICON grid based on which level the 'wet_c' value falls in.<p>
+
+As with the previous ICON examples, the <a href="../Document/Graphics/Resources/gs.html#gsSegments"><em>gsSegments</em></a> and 
+<a href="../Document/Graphics/Resources/gs.html#gsColors"><em>gsColors</em></a> resources are used to set the array of segments and
+the colors to use for each segment. This makes the polygon draw go much faster than using a loop to draw each triangle.<p>
+
+A unique feature of this example is that it first creates a contour/map plot of the ICON grid, but doesn't draw it. 
+This is done in order to retrieve the contour levels and colors that NCL chose for this grid, and then this information
+is used to draw the filled polygons.
+
+
+</div>
+
+
+<div class=ex>
+<!--jetstream_icon_1-->
+<a name=jiex1></a>
+<a href="Images/plot_jetstream_icon_lg.png">
+<img src="Images/plot_jetstream_icon_sm.png" align=left border=2></a>
+
+<a href="Scripts/plot_jetstream_icon.html">plot_jetstream_icon.ncl</a>:
+<p>
+
+This is a nice example of drawing geopotential line contours over filled contours of wind intensity, using
+the <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> procedure to overlay the line contour plot on the contour/map plot. The filled contours
+are drawn using raster fill, with the first contour level set to transparency. <p>
+
+There's a quirk with raster contours and transparency in NCL. It's not enough to simply set 
+the alpha value to 0.0. You must also set the color to black as well:
+
+<pre>
+  cmap_r      = <a href="../Document/Functions/Built-in/read_colormap_file.html"><strong>read_colormap_file</strong></a>("<a href="../Document/Graphics/ColorTables/wind_17lev.html">wind_17lev</a>")
+  cmap_r(0,:) = 0.0  ; Sets desired color to black and transparent at same time
+</pre>
+<p>
+
+This example was contributed by Guido Cioni, who has created a number of nice graphics using NCL and other
+packages which you can see at 
+<a href="http://guidocioni.altervista.org/nuovosito/modelli/icon-globe-forecasts/">http://guidocioni.altervista.org/nuovosito/modelli/icon-globe-forecasts/</a>.
+
+</div>
+
+
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/icon.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:04:45 GMT -->
+</html>
+

@@ -1,0 +1,635 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/date.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:25 GMT -->
+<head>
+<title>NCL Function Documentation: Date routines</title>
+</head>
+<body>
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="index.html" class="subitem">Category Listing</a></li>
+						<li><a href="list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+
+			      <div id="general_main">
+
+<h1>Date routines</h1>
+
+<table cellspacing=4 cellpadding=10 width=100% border=1>
+
+<!--box_percentile_plot-->
+<tr>
+<td valign=top>
+<a href="User_contributed/box_percentile_plot.html">
+box_percentile_plot</a></td>
+<td>
+Creates a box percentile plot. <font color="red">Documentation under construction</font>
+</td>
+</tr>
+<!--calendar_decode2-->
+<tr>
+<td valign=top>
+<a href="User_contributed/calendar_decode2.html">
+calendar_decode2</a></td>
+<td>
+Translates numeric time coordinates to calendar times.
+</td>
+</tr>
+<!--calendar_decode2_fix-->
+<tr>
+<td valign=top>
+<a href="User_contributed/calendar_decode2_fix.html">
+calendar_decode2_fix</a></td>
+<td>
+Translates numeric time coordinates to calendar times (<font color=red>temporary function</font>; see the <a href="../../current_release.html#DateConversionsBugsFixed6.4.0">6.4.0 release notes</a> for details).
+</td>
+</tr>
+<!--cd_calendar-->
+<tr>
+<td valign=top>
+<a href="Built-in/cd_calendar.html">
+cd_calendar</a></td>
+<td>
+Converts a mixed Julian/Gregorian date to a UT-referenced date.
+</td>
+</tr>
+<!--cd_convert-->
+<tr>
+<td valign=top>
+<a href="Contributed/cd_convert.html">
+cd_convert</a></td>
+<td>
+Converts a time variable from one set of units to another.
+</td>
+</tr>
+<!--cd_inv_calendar-->
+<tr>
+<td valign=top>
+<a href="Built-in/cd_inv_calendar.html">
+cd_inv_calendar</a></td>
+<td>
+Converts a UT-referenced date to a mixed Julian/Gregorian date.
+</td>
+</tr>
+<!--cd_inv_string-->
+<tr>
+<td valign=top>
+<a href="User_contributed/cd_inv_string.html">
+cd_inv_string</a></td>
+<td>
+Converts string time values to numeric values, using the given format string.
+</td>
+</tr>
+<!--cd_string-->
+<tr>
+<td valign=top>
+<a href="User_contributed/cd_string.html">
+cd_string</a></td>
+<td>
+Converts time values into nicely formatted strings.
+</td>
+</tr>
+<!--day_of_week-->
+<tr>
+<td valign=top>
+<a href="Built-in/day_of_week.html">
+day_of_week</a></td>
+<td>
+Calculates the day of the week given month, day, and year (Gregorian calendar).
+</td>
+</tr>
+<!--day_of_year-->
+<tr>
+<td valign=top>
+<a href="Built-in/day_of_year.html">
+day_of_year</a></td>
+<td>
+Calculates the day of the year (sometimes erroneously referred to as 'julian day') given Gregorian calendar month, day, and year.
+</td>
+</tr>
+<!--days_in_month-->
+<tr>
+<td valign=top>
+<a href="Built-in/days_in_month.html">
+days_in_month</a></td>
+<td>
+Calculates the number of days in a month given month and year.
+</td>
+</tr>
+<!--greg2jul-->
+<tr>
+<td valign=top>
+<a href="Built-in/greg2jul.html">
+greg2jul</a></td>
+<td>
+Converts Gregorian dates to <a href="http://en.wikipedia.org/wiki/Julian_day"><b>astronomical Julian days</b>.
+</td>
+</tr>
+<!--grib_stime2itime-->
+<tr>
+<td valign=top>
+<a href="Contributed/grib_stime2itime.html">
+grib_stime2itime</a></td>
+<td>
+Converts grib initial_time (string) to time (integer).
+</td>
+</tr>
+<!--isleapyear-->
+<tr>
+<td valign=top>
+<a href="Built-in/isleapyear.html">
+isleapyear</a></td>
+<td>
+Determines if a given year is a leap year.
+</td>
+</tr>
+<!--jul2greg-->
+<tr>
+<td valign=top>
+<a href="Built-in/jul2greg.html">
+jul2greg</a></td>
+<td>
+Converts an astronomical Julian day to a Gregorian date.
+</td>
+</tr>
+<!--monthday-->
+<tr>
+<td valign=top>
+<a href="Built-in/monthday.html">
+monthday</a></td>
+<td>
+Calculates a concatenated month_day given a day and year.
+</td>
+</tr>
+<!--time_axis_labels-->
+<tr>
+<td valign=top>
+<a href="User_contributed/time_axis_labels.html">
+time_axis_labels</a></td>
+<td>
+Sets resources necessary to draw nice tickmark labels using a format of date/time on an axis.
+</td>
+</tr>
+<!--time_reassign-->
+<tr>
+<td valign=top>
+<a href="Contributed/time_reassign.html">
+time_reassign</a></td>
+<td>
+Reassign (replace) a CF-conforming "time" variable by calculating the mid-time values using the "bounds" attribute.
+</td>
+</tr>
+<!--time_reassign_cv2var-->
+<tr>
+<td valign=top>
+<a href="Contributed/time_reassign_cv2var.html">
+time_reassign_cv2var</a></td>
+<td>
+Reassign (replace) a CF-conforming "time" coordinate variable associated with a variable  by calculating the mid-time values using the "bounds" attribute.
+</td>
+</tr>
+<!--time_to_newtime-->
+<tr>
+<td valign=top>
+<a href="Contributed/time_to_newtime.html">
+time_to_newtime</a></td>
+<td>
+Change a "udunits" recognized time unit to a new (different) "udunits" recognized time unit.
+</td>
+</tr>
+<!--time_to_newtime_fix-->
+<tr>
+<td valign=top>
+<a href="Contributed/time_to_newtime_fix.html">
+time_to_newtime_fix</a></td>
+<td>
+Change a "udunits" recognized time unit to a new (different) "udunits" recognized time unit (<font color=red>temporary function</font>; see the <a href="../../current_release.html#DateConversionsBugsFixed6.4.0">6.4.0 release notes</a> for details</font>).
+</td>
+</tr>
+<!--ut_calendar-->
+<tr>
+<td valign=top>
+<a href="Built-in/ut_calendar.html">
+ut_calendar</a></td>
+<td>
+Converts a mixed Julian/Gregorian date to a UT-referenced date (<font color=red>deprecated</font>; use <a href="Built-in/cd_calendar.html"><strong>cd_calendar</strong></a>).
+</td>
+</tr>
+<!--ut_calendar_fix-->
+<tr>
+<td valign=top>
+<a href="Built-in/ut_calendar_fix.html">
+ut_calendar_fix</a></td>
+<td>
+Converts a mixed Julian/Gregorian date to a UT-referenced date (<font color=red>temporary function</font>; see the <a href="../../current_release.html#DateConversionsBugsFixed6.4.0">6.4.0 release notes</a> for details).
+</td>
+</tr>
+<!--ut_convert-->
+<tr>
+<td valign=top>
+<a href="Contributed/ut_convert.html">
+ut_convert</a></td>
+<td>
+Converts a time variable from one set of units to another (<font color=red>deprecated</font>; use <a href="Contributed/cd_convert.html"><strong>cd_convert</strong></a>).
+</td>
+</tr>
+<!--ut_convert_fix-->
+<tr>
+<td valign=top>
+<a href="Contributed/ut_convert_fix.html">
+ut_convert_fix</a></td>
+<td>
+Converts a time variable from one set of units to another (<font color=red>temporary function</font>; see the <a href="../../current_release.html#DateConversionsBugsFixed6.4.0">6.4.0 release notes</a> for details</font>).
+</td>
+</tr>
+<!--ut_inv_calendar-->
+<tr>
+<td valign=top>
+<a href="Built-in/ut_inv_calendar.html">
+ut_inv_calendar</a></td>
+<td>
+Converts a UT-referenced date to a mixed Julian/Gregorian date (<font color=red>deprecated</font>; use <a href="Built-in/cd_inv_calendar.html"><strong>cd_inv_calendar</strong></a>).
+</td>
+</tr>
+<!--ut_inv_calendar_fix-->
+<tr>
+<td valign=top>
+<a href="Built-in/ut_inv_calendar_fix.html">
+ut_inv_calendar_fix</a></td>
+<td>
+Converts a UT-referenced date to a mixed Julian/Gregorian date (<font color=red>temporary function</font>; see the <a href="../../current_release.html#DateConversionsBugsFixed6.4.0">6.4.0 release notes</a> for details).
+</td>
+</tr>
+<!--ut_string-->
+<tr>
+<td valign=top>
+<a href="User_contributed/ut_string.html">
+ut_string</a></td>
+<td>
+Converts time values into nicely formatted strings (<font color=red>deprecated</font>; use <a href="User_contributed/cd_string.html"><strong>cd_string</strong></a>)
+</td>
+</tr>
+<!--ut_string_fix-->
+<tr>
+<td valign=top>
+<a href="User_contributed/ut_string_fix.html">
+ut_string_fix</a></td>
+<td>
+Converts time values into nicely formatted strings (<font color=red>temporary function</font>; see the <a href="../../current_release.html#DateConversionsBugsFixed6.4.0">6.4.0 release notes</a> for details</font>).
+</td>
+</tr>
+<!--yyyyddd_to_yyyymmdd-->
+<tr>
+<td valign=top>
+<a href="Contributed/yyyyddd_to_yyyymmdd.html">
+yyyyddd_to_yyyymmdd</a></td>
+<td>
+Given concatenated year and day-of-year (yyyyddd) create a one-dimensional array containing concatenated year, month and day-of-month (yyyymmdd) values.
+</td>
+</tr>
+<!--yyyymm_time-->
+<tr>
+<td valign=top>
+<a href="Contributed/yyyymm_time.html">
+yyyymm_time</a></td>
+<td>
+Creates a one-dimensional array containing year-month (yyyymm) values.
+</td>
+</tr>
+<!--yyyymm_to_yyyyfrac-->
+<tr>
+<td valign=top>
+<a href="Contributed/yyyymm_to_yyyyfrac.html">
+yyyymm_to_yyyyfrac</a></td>
+<td>
+Converts a one dimensional array containing yyyymm values to yyyy and fractional year.
+</td>
+</tr>
+<!--yyyymmdd_time-->
+<tr>
+<td valign=top>
+<a href="Contributed/yyyymmdd_time.html">
+yyyymmdd_time</a></td>
+<td>
+Creates a one-dimensional array containing year-month-day (yyyymmdd) values.
+</td>
+</tr>
+<!--yyyymmdd_to_yyyyddd-->
+<tr>
+<td valign=top>
+<a href="Contributed/yyyymmdd_to_yyyyddd.html">
+yyyymmdd_to_yyyyddd</a></td>
+<td>
+Given concatenated year-month-day_of_month (yyyymmdd) create a one-dimensional array containing concatenated year and day_of_year (yyyyddd) values.
+</td>
+</tr>
+<!--yyyymmdd_to_yyyyfrac-->
+<tr>
+<td valign=top>
+<a href="Contributed/yyyymmdd_to_yyyyfrac.html">
+yyyymmdd_to_yyyyfrac</a></td>
+<td>
+Converts a one-dimensional array containing yyyymmdd values to yyyy and fractional year.
+</td>
+</tr>
+<!--yyyymmddhh_time-->
+<tr>
+<td valign=top>
+<a href="Contributed/yyyymmddhh_time.html">
+yyyymmddhh_time</a></td>
+<td>
+Creates a one-dimensional array containing year-month-day-hour (yyyymmddhh) values.
+</td>
+</tr>
+<!--yyyymmddhh_to_yyyyfrac-->
+<tr>
+<td valign=top>
+<a href="Contributed/yyyymmddhh_to_yyyyfrac.html">
+yyyymmddhh_to_yyyyfrac</a></td>
+<td>
+Converts a one-dimensional array containing yyyymmddhh values to yyyy and fractional year.
+</td>
+</tr>
+
+</table><p>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/date.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:25 GMT -->
+</html>

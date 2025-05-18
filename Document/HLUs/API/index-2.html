@@ -1,0 +1,833 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/API/index.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 16:17:00 GMT -->
+<head>
+<title>HLU API functions</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index.html">HLUs </a>
+
+<h1>HLU API functions</h1>
+
+<dl>
+<dt>
+<a href="NHLPERROR-2.html">NHLPERROR</a>
+<dd>
+The Fortran name of this function is <strong>NhlFPError</strong>.<p>
+Error handling functions for the HLU library.
+<dt>
+<a href="NhlAddAnnotation.html">NhlAddAnnotation</a>
+<dd>
+The Fortran name of this function is <strong>NhlFAddAnnotation</strong>.
+<p>This function adds an arbitrary <strong>View</strong> object to a
+plot object as an external annotation, and returns an
+<strong>AnnoManager</strong> object to manage it.
+<dt>
+<a href="NhlAddData.html">NhlAddData</a>
+<dd>
+The Fortran name of this function is <strong>NhlFAddData</strong>.<p>
+This function is used to associate a <strong>DataItem</strong> object
+with a data resource in a <strong>DataComm</strong> object.
+<dt>
+<a href="NhlAddOverlay.html">NhlAddOverlay</a>
+<dd>
+The Fortran name of this function is <strong>NhlFAddOverlay</strong>.
+<p>This function adds an overlay plot member to a base plot.
+<dt>
+<a href="NhlAppGetDefaultParentId.html">NhlAppGetDefaultParentId</a>
+<dd>
+The Fortran name of this function is
+<strong>NhlFAppGetDefaultParentId</strong>.<p>
+This function retrieves the Id of the current <em>default parent</em>
+<strong>App</strong> object.
+<dt>
+<a href="NhlChangeWorkstation.html">NhlChangeWorkstation</a>
+<dd>
+The Fortran name of this function is <strong>NhlFChangeWorkstation</strong>.<p>
+This function is used to change the Workstation parent of any graphical
+HLU object. It is provided as an access function to objects that are
+<a href="../Classes/Base.html"><strong>Base</strong></a> class.
+<dt>
+<a href="NhlClassName.html">NhlClassName</a>
+<dd>
+The Fortran name of this function is <strong>NhlFClassName</strong>.<p>
+Returns the name of the class of an object.
+<dt>
+<a href="NhlClearWorkstation.html">NhlClearWorkstation</a>
+<dd>
+The Fortran name of this function is <strong>NhlFClearWorkstation</strong>.<p>
+This function clears the drawing area of an instance of a
+<strong>Workstation</strong> object.
+<dt>
+<a href="NhlClose.html">NhlClose</a>
+<dd>
+The Fortran name of this function is <strong>NhlFClose</strong>.<p>
+HLU library clean-up function.
+<dt>
+<a href="NhlCreate.html">NhlCreate</a>
+<dd>
+The Fortran name of this function is <strong>NhlFCreate</strong>.<p>
+This function is used to create an instance of any HLU object. It is provided
+as an access function to objects that are
+<a href="../Classes/Base.html"><strong>Base</strong></a> class.
+<dt>
+<a href="NhlDataPolygon.html">NhlDataPolygon</a>
+<dd>
+The Fortran name of this function is <strong>NhlFDataPolygon</strong>.<p>
+Given arrays containing the X and Y coordinates of points in data
+coordinate space, this function outputs an immediate-mode polygon
+connecting each of the points.
+<dt>
+<a href="NhlDataPolyline.html">NhlDataPolyline</a>
+<dd>
+The Fortran name of this function is <strong>NhlFDataPolyline</strong>.<p>
+Given arrays containing the X and Y coordinates of points in data
+coordinate space, this function outputs an immediate-mode polyline
+connecting each of the points.
+<dt>
+<a href="NhlDataPolymarker.html">NhlDataPolymarker</a>
+<dd>
+The Fortran name of this function is <strong>NhlFDataPolymarker</strong>.<p>
+Given arrays containing the X and Y coordinates of points in data
+coordinate space, this function outputs an immediate-mode marker
+at each of the points.
+<dt>
+<a href="NhlDataToNDC.html">NhlDataToNDC</a>
+<dd>
+The Fortran name of this function is <strong>NhlFDataToNDC</strong>.<p>
+Given arrays containing the X and Y coordinates of points in data
+coordinate space, this function returns arrays containing the X and Y
+coordinates of the same points in NDC space.
+<dt>
+<a href="NhlDestroy.html">NhlDestroy</a>
+<dd>
+The Fortran name of this function is <strong>NhlFDestroy</strong>.<p>
+This function is used to destroy an HLU object.
+<dt>
+<a href="NhlDraw.html">NhlDraw</a>
+<dd>
+The Fortran name of this function is <strong>NhlFDraw</strong>.<p>
+This function is used to make an HLU graphical object draw.
+<dt>
+<a href="NhlErrAddTable.html">NhlErrAddTable</a>
+<dd>
+No corresponding Fortran function.<p>
+Error handling functions for the HLU library.
+<dt>
+<a href="NhlErrClearMsgs.html">NhlErrClearMsgs</a>
+<dd>
+The Fortran name of this function is <strong>NhlFErrCleanMsgs</strong>.<p>
+Error handling functions for the HLU library.
+<dt>
+<a href="NhlErrFPrintMsg.html">NhlErrFPrintMsg</a>
+<dd>
+The Fortran name of this function is <strong>NhlFErrFPrintMsg</strong>.<p>
+Error handling functions for the HLU library.
+<dt>
+<a href="NhlErrGetId.html">NhlErrGetId</a>
+<dd>
+The Fortran name of this function is <strong>NhlFErrGetId</strong>.<p>
+Error handling functions for the HLU library.
+<dt>
+<a href="NhlErrGetMsg.html">NhlErrGetMsg</a>
+<dd>
+The Fortran name of this function is <strong>NhlFErrGetMsg</strong>.<p>
+Error handling functions for the HLU library.
+<dt>
+<a href="NhlErrNumMsgs.html">NhlErrNumMsgs</a>
+<dd>
+The Fortran name of this function is <strong>NhlFErrNumMsgs</strong>.<p>
+Error handling functions for the HLU library.
+<dt>
+<a href="NhlErrSPrintMsg.html">NhlErrSPrintMsg</a>
+<dd>
+The Fortran name of this function is <strong>NhlFErrSprintMsg</strong>.<p>
+Error handling functions for the HLU library.
+<dt>
+<a href="NhlFrame.html">NhlFrame</a>
+<dd>
+The Fortran name of this function is <strong>NhlFFrame</strong>.<p>
+This function first updates and then clears the drawing area of an
+instance of a <strong>Workstation</strong> object.
+<dt>
+<a href="NhlFree.html">NhlFree</a>
+<dd>
+No corresponding Fortran function. <p>
+Memory allocation functions.
+<dt>
+<a href="NhlFreeColor.html">NhlFreeColor</a>
+<dd>
+The Fortran name of this function is <strong>NhlFFreeColor</strong>.<p>
+This function removes a color, specified by its HLU index, from the
+<strong>Workstation</strong> color map.
+<dt>
+<a href="NhlGetBB.html">NhlGetBB</a>
+<dd>
+The Fortran name of this function is <strong>NhlFGetBB</strong>.<p>
+This function returns the coordinates of the left, right, top, and
+bottom edges of a <strong>View</strong> class object's bounding box in
+NDC units.
+<dt>
+<a href="NhlGetGksCi.html">NhlGetGksCi</a>
+<dd>
+The Fortran name of this function is <strong>NhlFGetGksCi</strong>.<p>
+This function returns the low-level GKS color index from an HLU color
+index and an instance of a <strong>Workstation</strong> object.
+<dt>
+<a href="NhlGetValues.html">NhlGetValues</a>
+<dd>
+The Fortran name of this function is <strong>NhlFGetValues</strong>.<p>
+This function is used to retrieve the resource values of an instance of any
+HLU object. It is provided as an access function to objects that are
+<a href="../Classes/Base.html"><strong>Base</strong></a> class.
+<dt>
+<a href="NhlGetWorkspaceObjectId.html">NhlGetWorkspaceObjectId</a>
+<dd>
+The Fortran name of this function is <strong>NhlFGetWorkspaceObjectId</strong>.<p>
+This function retrieves the <strong>Workspace</strong> objects id.
+<dt>
+<a href="NhlInitialize.html">NhlInitialize</a>
+<dd>
+The Fortran names of this function is <strong>NhlFInitialize</strong>.<p>
+HLU library initialization functions.
+<dt>
+<a href="NhlIsAllocatedColor.html">NhlIsAllocatedColor</a>
+<dd>
+The Fortran name of this function is <strong>NhlFIsAllocatedColor</strong>.<p>
+This boolean function returns True if a color has been assigned to a
+particular HLU color index, and False otherwise.
+<dt>
+<a href="NhlIsApp.html">NhlIsApp</a>
+<dd>
+The Fortran name of this function is <strong>NhlFIsApp</strong>.<p>
+This boolean function returns True if the given id identifies an
+<strong>App</strong> class object, and False otherwise.
+<dt>
+<a href="NhlIsDataComm.html">NhlIsDataComm</a>
+<dd>
+The Fortran name of this function is <strong>NhlFIsDataComm</strong>.<p>
+This boolean function returns True if the given id identifies a
+<strong>DataComm</strong> class object, and False otherwise.
+<dt>
+<a href="NhlIsDataItem.html">NhlIsDataItem</a>
+<dd>
+The Fortran name of this function is <strong>NhlFIsDataItem</strong>.<p>
+This boolean function returns True if the given id identifies a
+<strong>DataItem</strong> class object, and False otherwise.
+<dt>
+<a href="NhlIsDataSpec.html">NhlIsDataSpec</a>
+<dd>
+The Fortran name of this function is <strong>NhlFIsDataSpec</strong>.<p>
+This boolean function returns True if the given id identifies a
+<strong>DataSpec</strong> class object, and False otherwise.
+<dt>
+<a href="NhlIsTransform.html">NhlIsTransform</a>
+<dd>
+The Fortran name of this function is <strong>NhlFIsTransform</strong>.<p>
+This boolean function returns True if the given id identifies a
+<strong>Transform</strong> class object, and False otherwise.
+<dt>
+<a href="NhlIsView.html">NhlIsView</a>
+<dd>
+The Fortran name of this function is <strong>NhlFIsView</strong>.<p>
+This boolean function returns True if the given id identifies a
+<strong>View</strong> class object, and False otherwise.
+<dt>
+<a href="NhlIsWorkstation.html">NhlIsWorkstation</a>
+<dd>
+The Fortran name of this function is <strong>NhlFIsWorkstation</strong>.<p>
+This boolean function returns True if the given id identifies a
+<strong>Workstation</strong> class object, and False otherwise.
+<dt>
+<a href="NhlMalloc.html">NhlMalloc</a>
+<dd>
+No corresponding Fortran function. <p>
+Memory allocation functions.
+<dt>
+<a href="NhlNDCPolygon.html">NhlNDCPolygon</a>
+<dd>
+The Fortran name of this function is <strong>NhlFNDCPolygon</strong>.<p>
+Given arrays containing the X and Y coordinates of points in NDC space,
+this function outputs an immediate-mode polygon connecting each of
+the points.
+<dt>
+<a href="NhlNDCPolyline.html">NhlNDCPolyline</a>
+<dd>
+The Fortran name of this function is <strong>NhlFNDCPolyline</strong>.<p>
+Given arrays containing the X and Y coordinates of points in NDC space,
+this function outputs an immediate-mode polyline connecting each of
+the points.
+<dt>
+<a href="NhlNDCPolymarker.html">NhlNDCPolymarker</a>
+<dd>
+The Fortran name of this function is <strong>NhlFNDCPolymarker</strong>.<p>
+Given arrays containing the X and Y coordinates of points in NDC space,
+this function outputs an immediate-mode marker at each of
+the points.
+<dt>
+<a href="NhlNDCToData.html">NhlNDCToData</a>
+<dd>
+The Fortran name of this function is <strong>NhlFNDCToData</strong>.<p>
+Given arrays containing the X and Y coordinates of points in NDC space,
+this function returns arrays containing the X and Y coordinates of
+the same points in data coordinate space.
+<dt>
+<a href="NhlName.html">NhlName</a>
+<dd>
+The Fortran name of this function is <strong>NhlFName</strong>.<p>
+This function returns the "name" of an object.
+<dt>
+<a href="NhlNewColor.html">NhlNewColor</a>
+<dd>
+The Fortran name of this function is <strong>NhlFNewColor</strong>.<p>
+This function adds a color specified as an RGB triple to the colormap
+of a <strong>Workstation</strong> instance and returns its HLU color
+index.
+<dt>
+<a href="NhlNumber.html">NhlNumber</a>
+<dd>
+No corresponding Fortran function.<p>
+This cpp macro determines the number of elements in a fixed-size array.
+<dt>
+<a href="NhlOpen.html">NhlOpen</a>
+<dd>
+The Fortran name of this function is <strong>NhlFOpen</strong>.<p>
+HLU library initialization functions.
+<dt>
+<a href="NhlPError.html">NhlPError</a>
+<dd>
+The Fortran name of this function is <strong>NhlFPError</strong>.<p>
+Error handling functions for the HLU library.
+<dt>
+<a href="NhlRLClear.html">NhlRLClear</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLClear</strong>.<p>
+<em>ResList</em> support function.
+<dt>
+<a href="NhlRLCreate.html">NhlRLCreate</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLCreate</strong>.<p>
+<em>ResList</em> support functions.
+<dt>
+<a href="NhlRLDestroy.html">NhlRLDestroy</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLDestroy</strong>.<p>
+<em>ResList</em> support functions.
+<dt>
+<a href="NhlRLGet.html">NhlRLGet</a>
+<dd>
+No corresponding Fortran function.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetArray.html">NhlRLGetArray</a>
+<dd>
+No corresponding Fortran function.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetDouble.html">NhlRLGetDouble</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLGetDouble</strong>.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetDoubleArray.html">NhlRLGetDoubleArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLGetDoubleArray</strong>.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetFloat.html">NhlRLGetFloat</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLGetFloat</strong>.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetFloatArray.html">NhlRLGetFloatArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLGetFloatArray</strong>.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetInteger.html">NhlRLGetInteger</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLGetInteger</strong>.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetIntegerArray.html">NhlRLGetIntegerArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLGetIntegerArray</strong>.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetMDArray.html">NhlRLGetMDArray</a>
+<dd>
+No corresponding Fortran function.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetMDDoubleArray.html">NhlRLGetMDDoubleArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLGetMDDoubleArray</strong>.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetMDFloatArray.html">NhlRLGetMDFloatArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLGetMDFloatArray</strong>.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetMDIntegerArray.html">NhlRLGetMDIntegerArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLGetMDIntegerArray</strong>.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetString.html">NhlRLGetString</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLGetString</strong>.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLGetStringArray.html">NhlRLGetStringArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLGetStringArray</strong>.<p>
+Used to add the given <em>name</em> and <em>val_addr</em> to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLIsSet.html">NhlRLIsSet</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLIsSet</strong>.<p>
+<em>ResList</em> support functions.
+<dt>
+<a href="NhlRLSet.html">NhlRLSet</a>
+<dd>
+No corresponding Fortran function.<p>
+Used to add the given <em>name</em> and <em>value</em> to the <em>ResList</em>.
+<dt>
+<a href="NhlRLSetArray.html">NhlRLSetArray</a>
+<dd>
+No corresponding Fortran function.<p>
+Used to add the given <em>name</em> and <em>value</em> array to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLSetDouble.html">NhlRLSetDouble</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLSetDouble</strong>.<p>
+Used to add the given <em>name</em> and <em>value</em> to the <em>ResList</em>.
+<dt>
+<a href="NhlRLSetDoubleArray.html">NhlRLSetDoubleArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLSetDoubleArray</strong>.<p>
+Used to add the given <em>name</em> and <em>value</em> array to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLSetFloat.html">NhlRLSetFloat</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLSetFloat</strong>.<p>
+Used to add the given <em>name</em> and <em>value</em> to the <em>ResList</em>.
+<dt>
+<a href="NhlRLSetFloatArray.html">NhlRLSetFloatArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLSetFloatArray</strong>.<p>
+Used to add the given <em>name</em> and <em>value</em> array to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLSetInteger.html">NhlRLSetInteger</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLSetInteger</strong>.<p>
+Used to add the given <em>name</em> and <em>value</em> to the <em>ResList</em>.
+<dt>
+<a href="NhlRLSetIntegerArray.html">NhlRLSetIntegerArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLSetIntegerArray</strong>.<p>
+Used to add the given <em>name</em> and <em>value</em> array to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLSetMDArray.html">NhlRLSetMDArray</a>
+<dd>
+No corresponding Fortran function.<p>
+Used to add the given <em>name</em> and <em>value</em> array to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLSetMDDoubleArray.html">NhlRLSetMDDoubleArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLSetMDDoubleArray</strong>.<p>
+Used to add the given <em>name</em> and <em>value</em> array to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLSetMDFloatArray.html">NhlRLSetMDFloatArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLSetMDFloatArray</strong>.<p>
+Used to add the given <em>name</em> and <em>value</em> array to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLSetMDIntegerArray.html">NhlRLSetMDIntegerArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLSetMDIntegerArray</strong>.<p>
+Used to add the given <em>name</em> and <em>value</em> array to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLSetString.html">NhlRLSetString</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLSetString</strong>.<p>
+Used to add the given <em>name</em> and <em>value</em> to the <em>ResList</em>.
+<dt>
+<a href="NhlRLSetStringArray.html">NhlRLSetStringArray</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLSetStringArray</strong>.<p>
+Used to add the given <em>name</em> and <em>value</em> array to the
+<em>ResList</em>.
+<dt>
+<a href="NhlRLUnSet.html">NhlRLUnSet</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRLUnSet</strong>.<p>
+<em>ResList</em> support functions.
+<dt>
+<a href="NhlRealloc.html">NhlRealloc</a>
+<dd>
+No corresponding Fortran function.<p>
+Memory allocation functions.
+<dt>
+<a href="NhlRemoveAnnotation.html">NhlRemoveAnnotation</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRemoveAnnotation</strong>.<p>
+This function removes an arbitrary <strong>View</strong> object
+annotation from a Plot Object, destroying its
+<strong>AnnoManager</strong> object.
+<dt>
+<a href="NhlRemoveData.html">NhlRemoveData</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRemoveData</strong>.<p>
+This function is used to dissociate a <strong>DataItem</strong> object
+from a data resource in a <strong>DataComm</strong> object.
+<dt>
+<a href="NhlRemoveOverlay.html">NhlRemoveOverlay</a>
+<dd>
+The Fortran name of this function is <strong>NhlFRemoveOverlay</strong>.
+<p>This function removes an overlay plot member from a base plot.
+<dt>
+<a href="NhlSetColor.html">NhlSetColor</a>
+<dd>
+The Fortran name of this function is <strong>NhlFSetColor</strong>.<p>
+This function sets the RGB color value for a specified HLU color
+index.
+<dt>
+<a href="NhlSetValues.html">NhlSetValues</a>
+<dd>
+The Fortran name of this function is <strong>NhlFSetValues</strong>.<p>
+This function is used to change the resource values of an instance of any
+HLU object. It is provided as an access function to objects that are
+<a href="../Classes/Base.html"><strong>Base</strong></a> class.
+<dt>
+<a href="NhlUpdateData.html">NhlUpdateData</a>
+<dd>
+The Fortran name of this function is <strong>NhlFUpdateData</strong>.<p>
+This function is used to force a <strong>DataComm</strong> object to
+update its internal state to any changes that have occurred in associated
+<strong>DataItems</strong>.
+<dt>
+<a href="NhlUpdateWorkstation.html">NhlUpdateWorkstation</a>
+<dd>
+The Fortran name of this function is <strong>NhlFUpdateWorkstation</strong>.<p>
+This function updates the drawing area of an instance of a
+<strong>Workstation</strong> object.
+</dl>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/API/index.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 16:17:00 GMT -->
+</html>
+

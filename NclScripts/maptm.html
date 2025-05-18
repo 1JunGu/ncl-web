@@ -1,0 +1,24 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;
+; Create an XWorkstation object.
+;
+  wks = gsn_open_wks("x11","plot")
+;
+; Set up some map resources.
+;
+  mpres                       = True
+  mpres@gsnMaximize           = True
+  mpres@mpLimitMode           = "LatLon"
+  mpres@mpMinLonF             = -125.
+  mpres@mpMaxLonF             =  -60.
+  mpres@mpMinLatF             =   25.
+  mpres@mpMaxLatF             =   50.
+  mpres@pmTickMarkDisplayMode = "Always"
+;
+; Draw a cylindrical equidistant map, with the above resources set.
+;
+  map = gsn_map(wks,"CylindricalEquidistant",mpres)
+end

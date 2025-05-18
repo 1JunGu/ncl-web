@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/dim_variance_n.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:22 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (statistics)">
+<meta name="keywords" content="dim_variance_n">
+<title>dim_variance_n</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+<a class=crumb href="../statistics.html">Statistics</a>
+<br>
+<h1>dim_variance_n</h1>
+
+<p>
+Computes the unbiased estimates of the variance of a variable's given
+dimension(s) at all other dimensions.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function dim_variance_n (
+		x        : numeric,  
+		dims [*] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>A variable of numeric type and any dimensionality.
+</p>
+<em>dims</em>
+<p class=indent>The dimension(s) of <em>x</em> on which to calculate the variance.
+Must be consecutive and monotonically increasing.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The output will be double if <em>x</em> is double, and float
+otherwise.<P> The output dimensionality will be the same as all but the
+<em>dims</em>'s dimensions of the input variable.  The dimension rank
+of the input variable will be reduced by the rank of <em>dims</em>.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The <strong>dim_variance_n</strong> function computes the unbiased
+estimate of the variance of all elements of the dimensions indicated
+by <em>dims</em> for each index of the remaining dimensions.  <a href="../../Language/fillval.html">Missing values</a> are
+ignored.
+<p>
+
+Technically, this function calculates an estimate of the sample variance.
+This means that it divides by [1/(N-1)] where N is 
+the total number of non-missing values.<P>
+
+Use the <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a> function if metadata retention is desired.
+The interface is identical.<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a>, 
+<a href="../Contributed/dim_variance_Wrap.html"><strong>dim_variance_Wrap</strong></a>, 
+<a href="variance.html"><strong>variance</strong></a>,
+<a href="dim_avg.html"><strong>dim_avg</strong></a>, <a href="dim_median.html"><strong>dim_median</strong></a>,
+<a href="dim_num.html"><strong>dim_num</strong></a>, <a href="dim_product.html"><strong>dim_product</strong></a>,
+<a href="dim_rmsd.html"><strong>dim_rmsd</strong></a>, <a href="dim_rmvmean.html"><strong>dim_rmvmean</strong></a>,
+<a href="dim_rmvmed.html"><strong>dim_rmvmed</strong></a>, <a href="dim_standardize.html"><strong>dim_standardize</strong></a>,
+<a href="dim_stat4.html"><strong>dim_stat4</strong></a>, <a href="dim_sum.html"><strong>dim_sum</strong></a>,
+<a href="dim_variance.html"><strong>dim_variance</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<b>Example 1</b><p>
+The following calculates the population and sample variance of 5 values. 
+For illustration, a step-by-step calculation of the variance is done.
+The variances returned by NCL's three built-in variance functions are
+included.<p>
+<pre>
+  f      = (/ 7, 9, -2, -8, 2/)
+
+  favg   = <a href="avg.html"><strong>avg</strong></a>(f)             ; average
+  fdev   = f-favg             ; deviations
+  fdev2  = fdev^2             ; deviations squared
+  nf     = <a href="dimsizes.html"><strong>dimsizes</strong></a>(f)        ; N
+
+  pvar   = <a href="sum.html"><strong>sum</strong></a>(fdev2)/nf      ; population variance 
+
+  svar   = <a href="sum.html"><strong>sum</strong></a>(fdev2)/(nf-1)  ; sample variance 
+  var1   = <a href="variance.html"><strong>variance</strong></a>(f)
+  var2   = <a href="dim_variance.html"><strong>dim_variance</strong></a>(f)
+  var3   = <strong>dim_variance_n</strong>(f,0)
+
+  ; Use <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a> if metadata retention is desired
+  ; var3   = <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a>(f,0)
+
+
+  <a href="print.html"><strong>print</strong></a>("pvar="+pvar+"  svar="+svar+"  var1="+var1+"  var2="+var2+"  var3="+var3)
+
+===
+<b>output:</b>   pvar=37.84  svar=47.3  var1=47.3  var2=47.3  var3=47.3
+
+</pre>
+<P>
+
+
+<B>Example 2</B><P>
+
+Create a variable q of size (3,5,10) array.
+Then calculate the sample variance of the rightmost dimension.
+
+<PRE>
+    q   = <a href="random_uniform.html"><strong>random_uniform</strong></a>(-20,100,(/3,5,10/))
+    qVar= <strong>dim_variance_n</strong>(q,2)   ;==>  qVar(3,5)
+
+    ; Use <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a> if metadata retention is desired
+    ; qVar= <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a>(q,2)   ;==>  qVar(3,5)
+</PRE>
+
+<B>Example 3</B> <P>
+
+Let x be of size (ntim,nlat,mlon) and with named dimensions "time",
+"lat" and  "lon", respectively. Then, for each time and latitude, the variance is:
+
+<PRE>
+    xVarLon= <strong>dim_variance_n</strong>(x,2)    ; ==> xVarLon(ntim,nlat)
+
+    ; Use <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a> if metadata retention is desired
+    ; xVarLon = <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a>(x,2)    ; ==> xVarLon(time,lat)
+</PRE>
+<B>Example 4</B> <P>
+
+Let x be defined as in Example 3: x(time,lat,lon). Compute the
+temporal sample variance at each latitude/longitude grid point.
+
+<PRE>
+    xVarTime = <strong>dim_variance_n</strong>(x,0)    ; ==> xVarTime(nlat,nlon)
+
+    ; Use <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a> if metadata retention is desired
+    ; xVarTime = <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a>(x,0)    ; ==> xVarTime(lat,lon)
+</PRE>
+
+<B>Example 5</B><P>
+
+Let x be defined as x(time,lev,lat,lon). Compute the sample variance at each
+latitude/longitude grid point.
+
+<PRE>
+    xVar = <strong>dim_variance_n</strong>(x,(/0,1/))    ; ==> xVar(nlat,nlon)
+
+    ; Use <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a> if metadata retention is desired
+    ; xVar = <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a>(x,(/0,1/))    ; ==> xVar(nlat,nlon)
+
+</PRE>
+
+To compute the variance at each time/lev grid point:
+<p>
+<PRE>
+    xVar = <strong>dim_variance_n</strong>(x,(/2,3/))    ; ==> xVar(ntim,nlev)
+
+    ; Use <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a> if metadata retention is desired
+    ; xVar = <a href="../Contributed/dim_variance_n_Wrap.html"><strong>dim_variance_n_Wrap</strong></a>(x,(/2,3/))    ; ==> xVar(ntim,nlev)
+</PRE>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/dim_variance_n.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:22 GMT -->
+</html>

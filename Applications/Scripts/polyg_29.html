@@ -1,0 +1,173 @@
+;----------------------------------------------------------------------
+; polyg_29.ncl
+;
+; Concepts illustrated:
+;   - Read TRMM 3hrly data for a single day                 
+;   - Compute daily total precipitation
+;   - Specifying geolocation_circle parameters
+;   - Use geolocation_circle to  calculate circular polygons
+;     at different location centers
+;   - Using gc_inout to mask out data outside a great circle
+;   - Extract a region that spans area of interest
+;   - plot in panel
+;----------------------------------------------------------------------
+  ymd   = 20060101
+
+  diri  = "./"
+  fili  = "3B42."+ymd+".nc"        ; TRMM 3-hrly totals
+  pthi  = diri+fili
+  fi    = addfile(pthi, "r")
+  prc3h = fi->precip
+  printVarSummary(prc3h)           ; [time | 8] x [lat | 400] x [lon | 1440]
+  print("------------------")
+
+;---Compute daily total prc at all grid points
+;---Here the time dimension is eliminated.
+
+  prcDay= dim_sum_n_Wrap(prc3h, 0) 
+  printVarSummary(prcDay)          ; [lat | 400] x [lon | 1440]
+  printMinMax(prcDay,0)
+  print("------------------")
+
+;---Specify center locations 
+
+  slat      = (/ 27.0, 31.5, 34.7 /)       
+  slon      = (/273.5,280.0,284.3/)-360    ; TRMM are -180 to +180       
+  srad      = (/ 500  /)                   ; one or mor radii (great circle distance)
+  srad_unit = 1                            ; 0=degrees; 1=km
+  N         = 90                           ; # of points; more points nicer 'circle'
+  opt_gc    = False
+
+;---Derive circle polygons
+ 
+  circle    = geolocation_circle(slat, slon, srad, srad_unit, N, opt_gc) ; circle is type list
+  printVarSummary(circle)                  ; list containing two variables
+  print("------------------")
+
+  clat      = circle[0]                    ; For clarity: explicitly extract list elements
+  clon      = circle[1]
+                                           ; For *each* location and radius
+                                           ; rightmost dimension contains polygon lat and lon
+  printVarSummary(clat)                    ; [location | 3] x [radii | 1] x [circle | 90]
+  print("------------------")
+  printVarSummary(clon)                    ; [location | 3] x [radii | 1] x [circle | 90]
+  print("------------------")
+
+;---For graphics: Source data spans: lat: [-49.875..49.875] lon: [-179.875..179.875]
+;---Extract max/min latitudes and longitudes for all 'circles'
+;---This can reduce the gc_inout cpu time
+
+  space= 0.50                              ; esthetics
+  latS = min(clat) - space
+  latN = max(clat) + space
+  lonW = min(clon) - space
+  lonE = max(clon) + space
+
+;---Graphic resources
+
+  pltType = "png"   ; "x11", "png", "pdf", "eps"
+  pltDir  = "./"
+  pltName = "polyg"
+  pltPath = pltDir + pltName
+
+  wks = gsn_open_wks(pltType, pltPath)
+
+  res                       = True
+  res@gsnDraw               = False
+  res@gsnFrame              = False
+  res@gsnAddCyclic          = False  ; extracted region is not cyclic in longitude
+ ;res@gsnStringFontHeightF  = 0.015  ; make subtitles smaller
+
+  res@mpMinLonF             = lonW
+  res@mpMaxLonF             = lonE
+  res@mpMinLatF             = latS
+  res@mpMaxLatF             = latN
+  res@mpCenterLonF          = (lonW+lonE)/2
+  res@mpDataBaseVersion     = "MediumRes"  ; higher map resolution  
+  res@pmTickMarkDisplayMode = "Always"     ; nicer tickmarks for regional plots
+  res@mpOutlineBoundarySets = "GeophysicalAndUSStates"
+
+  res@cnFillOn              = True
+  res@cnLinesOn             = False
+  res@cnLineLabelsOn        = False
+  res@cnFillMode            = "RasterFill"
+;;res@cnFillPalette         = "WhiteBlueGreenYellowRed"
+;;res@cnFillPalette         = "WhBlGrYeRe"
+  res@cnFillPalette         = "Example"
+      
+;---Select a 'nice' contour level range for all plots
+;---Method 1: It will give a common contour spacing
+
+;;mnmxint = nice_mnmxintvl( min(prcDay({latS:latN},{lonW:lonE})) \
+;;                        , max(prcDay({latS:latN},{lonW:lonE})), 18, False)
+;;res@cnLevelSelectionMode  = "ManualLevels"
+;;res@cnMinLevelValF        = mnmxint(0)
+;;res@cnMaxLevelValF        = mnmxint(1)
+;;res@cnLevelSpacingF       = mnmxint(2)
+;;res@cnLevelSpacingF       = mnmxint(2)/2  ; make even finer
+
+;---Manually: specify contour levels
+;---Method 2: It will allow unequal contour spacing  
+
+  res@cnLevelSelectionMode = "ExplicitLevels"          ; "mm/day
+  res@cnLevels             = (/0.1, 1, 2, 3, 4, 5, 7.5, 10  /)          
+  res@lbLabelBarOn         = False  ; turn off individual label bars 
+                             
+  resP                     = True   ; panel
+  resP@gsnMaximize         = True   ; Maximize Panel
+  resP@gsnPanelMainString  = "Example: geolocation_circle, gc_inout"     ; set main title
+  resP@gsnPanelLabelBar    = True   ; add common colorbar
+ ;resP@lbLabelFontHeightF  = 0.007  ; make labels smaller
+  resP@gsnPanelRowSpec     = True   ; tell panel what order to plot
+
+;---For each center and radius: extract extent of each circle [ reduce gc_inout time ]
+;---Use NCL's 'reassignment syntax [ := ] to accomodate possiblr changing array sizes
+
+  nCenter   = dimsizes(slat)               ; # of locations
+  nRadii    = dimsizes(srad)               ; # of circles at each location
+  cdim      = dimsizes(clat)
+  nCenter   = cdim(0)                      ; # of centers: same as: nCenter=dimsizes(slat)
+  nRadius   = cdim(1)                      ; # of circles: same as: nRadius=dimsizes(srad) 
+  nPoints   = cdim(2)                      ; # of points : same as: nPoints=N
+ 
+  plot      = new ( nCenter, "graphic")
+
+  do nr=0,nRadius-1
+    do nc=0,nCenter-1
+       poly_lat = clat(nc,nr,:)            ; clarity; place into separate variable  
+       poly_lon = clon(nc,nr,:) 
+
+       min_lat  = min(poly_lat)            ; min of current latitude polygon
+       max_lat  = max(poly_lat)            ; max       "
+       min_lon  = min(poly_lon)            ; min       "    longitude polygon
+       max_lon  = max(poly_lon)
+
+;---Extract the desired rectangle of data 
+
+       PRC  := prcDay({min_lat:max_lat},{min_lon:max_lon})
+
+;---Set points that are outside of the circle of data to missing
+
+       lat2d := conform(PRC, PRC&lat, 0)
+       lon2d := conform(PRC, PRC&lon, 1)
+
+       latlon_circle := gc_inout(lat2d,lon2d, poly_lat,poly_lon)
+       PRC    = where(latlon_circle,  PRC, PRC@_FillValue)
+
+;---Print some information about the data
+       print("===========================================================")
+       print("   File:             " + fili)
+       print("   Lat/Lon location: " + slat(nc) + "/" + slon(nc))
+       print("   Min/max of data:  " + min(PRC) + "/" + max(PRC))
+
+;---Create a plot with the date as the main title
+     ;;res@tiMainString = fili
+       res@gsnCenterString = "("+sprintf("%4.1f", slat(nc))+","+sprintf("%4.1f", slon(nc))+")"
+       plot(nc) = gsn_csm_contour_map(wks,PRC,res)
+     end do   ; nc
+
+     resP@gsnPanelMainString  = "Example: geolocation_circle, gc_inout: radius=" \     ; set main title
+                              +  sprintf("%4.1f", srad(nr))+"km"
+
+     gsn_panel(wks,plot,(/1,2/),resP)
+   end do     ; nr

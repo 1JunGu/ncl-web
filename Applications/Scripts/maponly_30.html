@@ -1,0 +1,66 @@
+;----------------------------------------------------------------------
+;  maponly_30.ncl
+;----------------------------------------------------------------------
+; Concepts illustrated:
+;   - Masking out particular areas in a map
+;   - Drawing map outlines with India outlines removed
+;   - Drawing the meteorological subdivisions of India using a shapefile
+;----------------------------------------------------------------------
+; The "indian_met_zones v2.shp" shapefile was found on the web by
+; googling "Meteorological Subdivisions of India shapefile".
+;----------------------------------------------------------------------
+begin 
+  wks = gsn_open_wks("png","maponly")
+
+  res                       = True  
+  res@gsnMaximize           = True         ; Maximize plot in frame.
+  res@gsnDraw               = False
+  res@gsnFrame              = False
+
+  res@mpOutlineOn           = True
+  res@mpFillOn              = False
+
+  res@mpMinLatF             =   6         ; India limits
+  res@mpMaxLatF             =  38
+  res@mpMinLonF             =  65
+  res@mpMaxLonF             = 100
+
+  res@mpDataSetName         = "Earth..4"
+  res@mpDataBaseVersion     = "MediumRes"
+
+  res@tiMainFont            = "helvetica"
+  res@tiMainFontHeightF     = 0.016
+  res@pmTickMarkDisplayMode = "Always"     ; Turn on nice map tickmarks
+
+;---Indicate what map boundaries you want NCL to draw.
+  res@mpOutlineBoundarySets = "AllBoundaries"    
+
+;---Create three maps; third one will have shapefile outlines added to it.
+
+  res@tiMainString = "NCL map outlines w/India outlines intact"
+  plot1 = gsn_csm_map(wks,res)
+
+;---Turn on masking and indicate what outlines you want to mask (remove).
+  res@mpOutlineMaskingOn      = True       ; doesn't appear to be necessary
+  res@mpMaskOutlineSpecifiers = "India"
+
+  res@tiMainString = "NCL map outlines w/India outlines removed"
+  plot2 = gsn_csm_map(wks,res)
+
+  res@tiMainString = "India met zone outlines from shapefile added"
+  plot3 = gsn_csm_map(wks,res)
+
+;---Add shapefile outlines from indian_met_zones shapefile
+  lnres = True
+  lnres@gsLineColor = "Brown"
+  lnres@gsLineThicknessF = 3.0
+  sname = "indian_met_zones v2.shp"
+  id = gsn_add_shapefile_polylines(wks,plot3,sname,lnres)
+
+;---Compare map plot with and without shapefile outlines.
+  pres                 = True  
+  pres@gsnMaximize     = True
+  pres@gsnPanelRowSpec = True
+  pres@gsnPanelMainString = "Removing NCL outlines and adding shapefile outlines"
+  gsn_panel(wks,(/plot1,plot2,plot3/),(/2,1/),pres)
+end 

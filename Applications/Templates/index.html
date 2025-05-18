@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/Templates/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:22:14 GMT -->
+<head>
+<meta name="description" content="NCL plotting templates">
+<title>Script templates for NCL regridding and graphics</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="index.html" class="subitem">Templates</a></li>
+						<li><a href="../list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../list_models.html" class="subitem">Models</a></li>
+						<li><a href="../list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+
+<h1>Script templates for NCL regridding and graphics</h1>
+
+This page contains some NCL scripts that you can download for doing
+creating visualizations of your data, adding shapefile outlines,
+adding primitives, or doing ESMF regridding. Most of these are short
+scripts with a minimal number of resources set.
+<p>
+
+For more "real world" scripts with lots of graphics, visit
+the <a href="../index.html">Examples page</a>.
+
+<ul>
+<li><a href="#PlotsOverMapsTemplates">Plots over maps</a>
+<li><a href="#PlotsNotOverMapsTemplates">Plots (not over maps)</a>
+<li><a href="#WRFPlots">WRF Plots</a>
+<li><a href="#MapsOnlyTemplates">Maps only</a>
+<li><a href="#AddingShapefileOutlinesTemplates">Adding shapefile outlines to a map plot</a>
+<li><a href="#AttachingPrimitivesTemplates">Attaching primitives (lines, markers, polygons)</a>
+<li><a href="#ESMFRegriddingTemplates">ESMF regridding templates</a>
+</ul>
+
+<a name="PlotsOverMapsTemplates"></a>
+<p>
+<hr>
+<p>
+<b>Plots over maps</b><p>
+
+<ul>
+
+<li><a href="contour_map_nores_template.html">contour_map_nores_template.ncl</a> -
+template for creating contours over a map, no resources are set
+<p>
+
+<li><a href="vector_map_nores_template.html">vector_map_nores_template.ncl</a> -
+template for creating vectors over a map, no resources are set
+<p>
+
+<li><a href="contour_map_template.html">contour_map_template.ncl</a> -
+template for creating contours over a map
+<p>
+
+<li><a href="contour_map_lc_template.html">contour_map_lc_template.ncl</a> -
+template for creating contours over a Lambert Conformal map
+<p>
+
+<li><a href="vector_map_template.html">vector_map_template.ncl</a> - template
+for creating vectors over a map
+<p>
+
+</ul>
+
+<a name="PlotsNotOverMapsTemplates"></a>
+<p>
+<hr>
+<p>
+<b>Plots (not over maps)</b><p>
+<ul>
+
+<li><a href="xy_template.html">xy_template.ncl</a> - template for
+creating XY plots
+<p>
+
+<li><a href="scatter_template.html">scatter_template.ncl</a> - template for
+creating scatter plots
+<p>
+
+<li><a href="contour_template.html">contour_template.ncl</a> - template
+for creating contour plots
+<p>
+
+<li><a href="vector_template.html">vector_template.ncl</a> - template
+for creating vectors
+<p>
+
+</ul>
+
+<a name="MapsOnlyTemplates"></a>
+<p>
+<hr>
+<p>
+<b>Maps only</b><p>
+<ul>
+<li><a href="map_minres_template.html">map_minres_template.ncl</a> -
+template for creating map plots, using a minimal set of resources.
+<p>
+
+<li><a href="map_template.html">map_template.ncl</a> - template for
+creating map plots, with many resource options included.
+<p>
+</ul>
+
+
+<a name="WRFPlots"></a>
+<p>
+<hr>
+<p>
+<b>WRF plots</b><p>
+<ul>
+<li><a href="wrf_simple_gsn_template.html">wrf_simple_gsn_template.ncl</a>
+- very basic template for creating a color contour/map plot of WRF data.
+This script doesn't set many resources.
+<p>
+
+<li><a href="wrf_contour_map_gsn_template.html">wrf_contour_map_gsn_template.ncl</a>
+- template for creating color contours over a map of WRF data.  This
+script sets more resources than the "wrf_simple_template.ncl" script,
+and it also gives you the option to use the WRF map projection
+information on the file.
+<p>
+
+<li><a href="wrf_simple_native_template.html">wrf_simple_native_template.ncl</a>
+- very basic template for creating color contour/map plot of WRF data, using
+native projection supplied on WRF output file. This script doesn't set many resources.
+<p>
+
+<li><a href="wrf_hgt_shapefile_template.html">wrf_hgt_shapefile_template.ncl</a>
+- template for creating color contours over a map of WRF data, and attaching
+shapefile outlines from USA and Canada shapefiles downloaded from 
+<a href="http://www.gadm.org/country/">http://www.gadm.org/country</a>.
+This script uses WRF functions to do the plotting, and a gsn function
+to add the shapefile outlines.
+<p>
+
+</ul>
+
+<a name="AddingShapefileOutlinesTemplates"></a>
+<p>
+<hr>
+<p>
+<b>Adding shapefile outlines to a map plot</b><p>
+<ul>
+
+<li><a href="map_shapefile_template.html">map_shapefile_template.ncl</a>
+- template for adding shapefile polyline outlines to a map
+<p>
+
+<li><a href="wrf_hgt_shapefile_template.html">wrf_hgt_shapefile_template.ncl</a>
+- template for creating color contours over a map of WRF data, and attaching
+shapefile outlines from USA and Canada shapefiles downloaded from 
+<a href="http://www.gadm.org/country/">http://www.gadm.org/country</a>.
+This script uses WRF functions to do the plotting, and a gsn function
+to add the shapefile outlines.
+<p>
+
+</ul>
+
+<a name="AttachingPrimitivesTemplates"></a>
+<p>
+<hr>
+<p>
+<b>Attaching primitives (lines, markers, polygons)</b><p>
+<ul>
+
+<li><a href="adding_polylines_template.html">adding_polylines_template.ncl</a>
+- template for attaching polylines to a map plot
+<p>
+
+<li><a href="adding_polymarkers_template.html">adding_polymarkers_template.ncl</a>
+- template for attaching polymarkers to a map plot
+<p>
+
+<li><a href="adding_polygons_template.html">adding_polygons_template.ncl</a>
+- template for attaching polygons to a map plot
+<p>
+
+</ul>
+
+<a name="ESMFRegriddingTemplates"></a>
+<p>
+<hr>
+<p>
+<b>ESMF regridding templates</b>
+<p>
+
+<b>Note:</b> If you are using NCL version 6.1.0-beta and not 6.1.0,
+then please consider upgrading to version 6.1.0. Otherwise, be sure to
+download the
+latest <a href="../Files/ESMF_regridding.html">ESMF_regridding.ncl</a>
+script before using these templates. This file should be used in place
+of the "$NCARG_ROOT/lib/ncarg/nclscripts/esmf/ESMF_regridding.ncl" one
+provided in V6.1.0-beta.<p>
+
+For more ESMF regridding examples, you can visit the
+the <a href="../ESMF.html">ESMF Regridding examples page</a>.
+<p>
+
+<ul>
+<li><b>rectilinear ---> 5 degree grid</b>
+(<a href="ESMF_rect_to_5deg.html">ESMF_rect_to_5deg.ncl</a>)<p>
+
+<li><b>rectilinear ---> curvilinear</b>
+(<a href="ESMF_rect_to_curv.html">ESMF_rect_to_curv.ncl</a>)<p>
+
+<li><b>rectilinear ---> unstructured</b>
+(<a href="ESMF_rect_to_unstruct.html">ESMF_rect_to_unstruct.ncl</a>)<p>
+
+<li><b>curvilinear ---> 1 degree grid</b>
+(<a href="ESMF_curv_to_1deg.html">ESMF_curv_to_1deg.ncl</a>)<p>
+<p>
+
+<li><b>curvilinear ---> rectilinear</b>
+(<a href="ESMF_curv_to_rect.html">ESMF_curv_to_rect.ncl</a>)<p>
+
+<li><b>curvilinear ---> curvilinear</b>
+(<a href="ESMF_curv_to_curv.html">ESMF_curv_to_curv.ncl</a>)<p>
+
+<li><b>curvilinear ---> unstructured</b>
+(<a href="ESMF_curv_to_unstruct.html">ESMF_curv_to_unstruct.ncl</a>)<p>
+
+<li><b>curvilinear ---> WRF</b>
+(<a href="ESMF_curv_to_WRF.html">ESMF_curv_to_WRF.ncl</a>)
+<p>
+
+<li><b>unstructured ---> 0.25 degree grid</b>
+(<a href="ESMF_unstruct_to_0.25deg.html">ESMF_unstruct_to_0.25deg.ncl</a>)<p>
+<p>
+
+<li><b>unstructured ---> rectilinear</b>
+(<a href="ESMF_unstruct_to_rect.html">ESMF_unstruct_to_rect.ncl</a>)
+<p>
+
+<li><b>unstructured ---> curvilinear</b>
+(<a href="ESMF_unstruct_to_curv.html">ESMF_unstruct_to_curv.ncl</a>)
+<p>
+
+<li><b>WRF ---> rectilinear</b>
+(<a href="ESMF_WRF_to_rect.html">ESMF_WRF_to_rect.ncl</a>)
+<p>
+
+<li><b>WRF ---> curvilinear</b>
+(<a href="ESMF_WRF_to_curv.html">ESMF_WRF_to_curv.ncl</a>)
+<p>
+
+<li><b>generic template</b>
+(<a href="ESMF_regrid_template.html">ESMF_regrid_template.ncl</a>) -
+uses the single <a href="../../Document/Functions/ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a> function
+<p>
+
+<li><b>generic template</b>
+(<a href="ESMF_regrid_with_weights_template.html">ESMF_regrid_with_weights_template.ncl</a>)
+- uses the <a href="../../Document/Functions/ESMF/ESMF_regrid_with_weights.html"><strong>ESMF_regrid_with_weights</strong></a>
+function to do the regridding. You must already have the weights file
+to use this.
+<p>
+
+<li><b>generic template</b>
+(<a href="ESMF_template.html">ESMF_template.ncl</a>) - 
+does the regridding in several steps
+</ul>
+<hr>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/Templates/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:22:24 GMT -->
+</html>
+

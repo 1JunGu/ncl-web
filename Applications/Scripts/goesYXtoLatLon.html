@@ -1,0 +1,115 @@
+;----------------------------------------------------------------------
+; This is a utility script for plotting GOES16 data. The main 
+; function is scaledgoesYXtoLatLon, which calculates the lat/lon
+; values needed for plotting (and potentially regridding) GOES16 data.
+;----------------------------------------------------------------------
+PI = get_pi("double")
+
+;----------------------------------------------------------------------
+; Given a start CPU time, calculate the elapsed CPU time and 
+; print w/a title.
+;----------------------------------------------------------------------
+undef("print_elapsed_time")
+procedure print_elapsed_time(stime,title)
+local diff_time
+begin
+  diff_time = get_cpu_time() - stime
+  print("=====> CPU Elapsed Time: " + title + ": " + diff_time + " seconds <=====")
+end
+
+;----------------------------------------------------------------------
+; Given an array, set all NaNs to missing.
+;----------------------------------------------------------------------
+undef("fix_nans")
+function fix_nans(x,xname)
+begin
+  if(any(isnan_ieee(x))) then
+;;  print("Found NaNs in " + xname + ", will set to missing")
+    if(.not.isatt(x,"_FillValue")) then
+      x@_FillValue = default_fillvalue(typeof(x))
+    end if
+    x = where(isnan_ieee(x), x@_FillValue, x)
+  end if
+  return(x)
+end
+
+;----------------------------------------------------------------------
+; Given an opened GOES16 file, calculate the lat/lon from the map
+; projection parameters and YX values on the file.
+;----------------------------------------------------------------------
+undef ("scaledgoesYXtoLatLon")
+function scaledgoesYXtoLatLon(goesFile : file )
+local x, y, rMajor2, rMinor2, rMaj2OverrMin2, lambda0, H, a, b, c, rs, sx, sy, sz, phi, lambda, \
+      cosX_2d, sinX_2d, cosY_2d, sinY_2d, cos2X_2d, sin2X_2d, cos2Y_2d, sin2Y_2d
+begin
+  debug  = False    ; set True to get debug prints
+
+  x = goesFile->x
+  y = goesFile->y
+  x := x * x@scale_factor + x@add_offset
+  y := y * y@scale_factor + y@add_offset
+
+  if(debug) then
+    print("==================================================")
+    print("Min/max of x,y")
+    printMinMax(x,0)
+    printMinMax(y,0)
+  end if
+
+  ;; These values were an example from the documentation
+  ;;  x := -0.024052
+  ;;  y := 0.095340
+
+  ;
+  ; compute terms that only need to be calculated once...
+  ;
+
+  major = 1.0d
+  scale = major / goesFile->goes_imager_projection@semi_major_axis
+  minor = goesFile->goes_imager_projection@semi_minor_axis * scale
+
+  rMajor2 = major*major  ;goesFile->goes_imager_projection@semi_major_axis * goesFile->goes_imager_projection@semi_major_axis
+  rMinor2 = minor*minor  ;goesFile->goes_imager_projection@semi_minor_axis * goesFile->goes_imager_projection@semi_minor_axis
+  rMaj2OverrMin2 = rMajor2 / rMinor2
+  lambda0 = goesFile->goes_imager_projection@longitude_of_projection_origin
+  H = (goesFile->nominal_satellite_height*1000. + goesFile->goes_imager_projection@semi_major_axis) * scale
+  c = H*H - rMajor2
+
+  nx = dimsizes(x)
+  ny = dimsizes(y)
+  dims_2d = (/ny,nx/)
+
+  cosX_2d  = conform_dims(dims_2d,cos(x),1)
+  sinX_2d  = conform_dims(dims_2d,sin(x),1)
+  cosY_2d  = conform_dims(dims_2d,cos(y),0)
+  sinY_2d  = conform_dims(dims_2d,sin(y),0)
+  cos2X_2d = cosX_2d * cosX_2d
+  sin2X_2d = sinX_2d * sinX_2d
+  cos2Y_2d = cosY_2d * cosY_2d
+  sin2Y_2d = sinY_2d * sinY_2d
+ 
+  ; free up some memory...
+  delete([/ x, y/])
+
+  a = sin2X_2d + cos2X_2d*(cos2Y_2d + rMaj2OverrMin2 * sin2Y_2d)
+  b = -2.0*H*cosX_2d*cosY_2d
+  rs = (-b - sqrt(b*b - 4.0*a*c)) / (2.0*a)
+  sx = rs * cosX_2d * cosY_2d
+  sy = -rs * sinX_2d
+  sz = rs * cosX_2d * sinY_2d
+
+  phi = (atan(rMaj2OverrMin2 * sz / (sqrt((H-sx)*(H-sx) + sy*sy)) )) * (180. / PI)
+  lambda = lambda0 - (atan(sy / (H-sx)) * 180. / PI)
+
+  phi = where(isnan_ieee(phi), phi@_FillValue, phi)
+  lambda = where(isnan_ieee(lambda), lambda@_FillValue, lambda)
+
+  if(debug) then
+    print("==================================================")
+    print("Min/max of phi,lambda")
+    printMinMax(phi,0)
+    printMinMax(lambda,0)
+  end if
+
+  return([/ phi, lambda /])
+end

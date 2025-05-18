@@ -1,0 +1,33 @@
+      SUBROUTINE EX05(M,N,X,Y,FXY)
+      REAL X(M),Y(N),FXY(M,N)
+      INTEGER M,N
+C
+C  Calculate FXY(I,J) = 2*I+J
+C
+      DO 10 J=1,N
+        DO 20 I=1,M
+          FXY(I,J) = 2.*REAL(I) + REAL(J)
+ 20          CONTINUE
+ 10           CONTINUE
+C
+      RETURN
+      END
+      SUBROUTINE PRT2D(M,N,A)
+      REAL A(M,N)
+      INTEGER M,N
+C
+C  Print the array A by rows using an F6.1 format with
+C  7 values per line.
+C
+      DO 10 J=1,N
+        PRINT *,'Row',J,':'
+        DO 20 I=1,M/7
+          WRITE(6,500) (A(LL,J),LL=(I-1)*7+1,I*7)
+ 500           FORMAT(7F6.1)
+ 20               CONTINUE
+        IF (MOD(M,7) .NE. 0) WRITE(6,500) (A(LL,J),LL=(M/7)*7+1,M)
+        PRINT *,' '
+ 10      CONTINUE
+C
+      RETURN
+      END

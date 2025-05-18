@@ -1,0 +1,132 @@
+;----------------------------------------------------------------------
+; overlay_16.ncl
+;
+; Concepts illustrated:
+;   - Overlaying XY plots on each other
+;   - Drawing vertical grid lines on an XY plot
+;   - Using "setvalues" to change titles and axis limits of an existing plot
+;   - Generating dummy data using "random_uniform"
+;   - Changing the aspect ratio of an XY plot
+;   - Drawing XY plot curves with both lines and markers
+;----------------------------------------------------------------------
+
+begin
+  col1  = "red"      ; define colors for 
+  col2  = "green4"   ; each of 3 curves
+  col3  = "blue4"
+;
+; Create three curves with different start and end X values and of 
+; different lengths. Use random_uniform to generate dummy Y values.
+;
+  npts1 = 12
+  npts2 = 15
+  npts3 = 18
+  x1 = fspan(3,75,npts1)
+  x2 = fspan(1,70,npts2)
+  x3 = fspan(2,60,npts3)
+  y1 = toint(random_uniform( -7,12,npts1))
+  y2 = toint(random_uniform(-10,10,npts2))
+  y3 = toint(random_uniform( -5, 8,npts3))
+
+  x1min = min(x1)
+  x1max = max(x1)
+  x2min = min(x2)
+  x2max = max(x2)
+  x3min = min(x3)
+  x3max = max(x3)
+  y1min = min(y1)
+  y1max = max(y1)
+  y2min = min(y2)
+  y2max = max(y2)
+  y3min = min(y3)
+  y3max = max(y3)
+
+  wks   = gsn_open_wks ("png","overlay")  ; send graphics to PNG file
+
+;---Set resources common to all three plots
+  res                        = True
+  res@gsnMaximize            = True   ; Maximize size of each plot
+  res@vpWidthF               = 0.75   ; Change aspect ratio of
+  res@vpHeightF              = 0.4    ;   all three plots.
+  res@xyLineThicknessF       = 3.     ; Thicken the lines
+  res@xyMarkLineMode         = "MarkLines"
+  res@xyMarker               = 16
+
+;---Draw vertical grid lines to help see start/end location of each curve
+  res@tmXMajorGrid           = True   ; Turn on X major grid lines
+  res@tmXMinorGrid           = True   ; Turn on X minor grid lines
+  res@tmXMajorGridLineColor  = "gray" 
+  res@tmXMinorGridLineColor  = "gray" 
+  res@tmXMajorGridThicknessF = 1.0
+
+;---Create two individual plots that will later become the "overlay" plots.
+  str1 = " x: " + x1min + " to " + x1max + "~C~" + \
+         " y: " + y1min + " to " + y1max
+  str2 = " x: " + x2min + " to " + x2max + "~C~" + \
+         " y: " + y2min + " to " + y2max
+  str3 = " x: " + x3min + " to " + x3max + "~C~" + \
+         " y: " + y3min + " to " + y3max
+
+  res@xyLineColor            = col1
+  res@xyMarkerColor          = col1
+  res@gsnLeftString          = str1
+  res@gsnLeftStringFontColor = col1
+  res@tiMainString           = col1 + " curve only"
+  res@tiXAxisString          = "X axis for plot1"
+  res@tiYAxisString          = "Y axis for plot1"
+  plot1 = gsn_csm_xy (wks,x1,y1,res)
+
+  res@xyLineColor              = col2
+  res@xyMarkerColor            = col2
+  res@gsnLeftString            = ""     ; not needed for second plot
+  res@gsnCenterString          = str2
+  res@gsnCenterStringFontColor = col2
+  res@tiMainString             = col2 + " curve only"
+  res@tiXAxisString            = "X axis for plot2"
+  res@tiYAxisString            = "Y axis for plot2"
+  plot2 = gsn_csm_xy (wks,x2,y2,res)
+;
+; Create the plot that will become the base plot (plot3).
+;
+; Note that the X and Y axes associated with the base plot will be
+; used. If the overlaid plots have a wider range for the X/Y axes,
+; then you must set the trX/Y/Min/MaxF resources to change the range
+; of the axes as desired.
+;
+; Note that the gsnXXXXString from each plot are preserved when you
+; do the overlay, but the tiMainString is only inherited from the
+; base plot.
+;
+  res@xyLineColor             = col3
+  res@xyMarkerColor           = col3
+  res@gsnCenterString         = ""     ; not needed for third plot
+  res@gsnRightString          = str3
+  res@gsnRightStringFontColor = col3
+  res@tiMainString            = col3 + " curve only"
+  res@tiXAxisString           = "X axis for plot3"
+  res@tiYAxisString           = "Y axis for plot3"
+  plot3 = gsn_csm_xy (wks,x3,y3,res)
+
+;---Change the title of the base plot before we do the overlay
+  main_title  = col1 + ", " + col2 + " curves overlaid on " + col3 + " curve"
+  yaxis_title = "Y axis expanded to cover all curves"
+  xaxis_title = "X axis expanded to cover all curves"
+  setvalues plot3
+    "tiMainString"      : main_title
+    "tiXAxisString"     : xaxis_title
+    "tiYAxisString"     : yaxis_title
+    "tiMainFontHeightF" : 0.03
+    "trXMinF"           : min((/x1min,x2min,x3min/))-1
+    "trYMinF"           : min((/y1min,y2min,y3min/))-1
+    "trXMaxF"           : max((/x1max,x2max,x3max/))+1
+    "trYMaxF"           : max((/y1max,y2max,y3max/))+1
+  end setvalues
+
+;--Overlay plot1 and plot2 on plot3
+  overlay(plot3,plot1)   ; plot1 becomes part of plot3
+  overlay(plot3,plot2)   ; plot2 becomes part of plot3
+
+  draw(plot3)   ; This will draw all three plots, using plot3 as the base.
+  frame(wks)
+end
+

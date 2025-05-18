@@ -1,0 +1,160 @@
+;***************************************************************
+; amsr_1.ncl
+;
+; Concepts illustrated:
+;   - Reading am AMSRE h5 file containing "soil moisture"               
+;   - Creating the appropriate grid and time coordinates
+;   - Read hdf variables the contain a space:   $:..."& or $var_string$
+;   - Lack of documentation: Two missing values: -32767s and -32768s
+;   - Change unrecognized variable attributes: 'SCALE FACTOR' and 'UNIT'
+;     to attributes recognized by 'short2flt': 'scale_factor', 'units'
+;   - Unpack variables of type 'short'
+;   - Use print and printVarSummary to examine variables
+;   - Demonstrate NCL's 'block commemt' introduced in 6.4.0
+;   - plot
+;***************************************************************
+; Always examine file contents:
+;     %> ncl_filedump foo.h5 | less
+;***************************************************************
+; Advanced Microwave Scanning Radiometer (AMSR)
+;
+; This Level 3 (gridded) data set’s land surface parameters, surface soil moisture [here]
+; land surface (skin) temperature, and vegetation water content, are derived from 
+; passive microwave remote sensing data from the Advanced Microwave Scanning Radiometer 2 (AMSR2), 
+; using the Land Parameter Retrieval Model (LPRM). 
+;
+; There are two files per day, one ascending (daytime) and one descending (nighttime), ... 
+;
+; Global attributes [selected h5 file attributes]
+;   ProductName :       AMSR2-L3
+;   GeophysicalName     :       Soil Moisture Content
+;   MeanType    :       DayMean
+;   Projection  :       EQR
+;   Resolution  :       0.25deg
+;   ObservationStartDateTime    :       2017-10-01T00:00:00.082Z
+;   ObservationEndDateTime      :       2017-10-01T23:36:57.891Z
+;   StartOrbitNumber    :       28581
+;   StopOrbitNumber     :       28595
+;   OrbitDirection      :       Descending
+;   PlatformShortName   :       GCOM-W1
+; -----------------
+; File has type short  -32767 and -32768 .... not sure but some form of _FillValue
+; -----------------
+;
+  nlat = 720
+  lat  = latGlobeFo(nlat, "lat", "latitude", "degrees_north")
+  lat  = lat(::-1)               ; make N->S
+
+  mlon = 1440
+  lon  = lonGlobeFo(mlon, "lon", "longitude", "degrees_east")
+
+  diri = "./"
+  fili = systemfunc("cd "+diri+" ; ls GW1AM2_2017*h5")
+  nfil = dimsizes(fili)
+
+  var  = "Geophysical Data"               ; variable has a space
+  fill = toshort(-32767)
+
+  PLOT = True
+  if (PLOT) then
+     nt      = 0
+     pltDir  = "./"                       ; directory for plot(s) 
+     pltType = "png"
+     pltName = "AMSR2_L3.SoilMoisture."   ; Root name
+
+     res                       = True     ; plot mods desired
+    ;res@gsnAddCyclic          = False    ; when regional data
+     res@gsnMaximize           = True     ; affects ps, eps, pdf, png only
+   
+     res@cnFillOn              = True     ; turn on color fill (default 6.1.0)
+     res@cnFillPalette         = "BlAqGrYeOrReVi200"  ; set color map
+     res@cnLinesOn             = False    ; turn of contour lines
+     res@cnLineLabelsOn        = False    ; turn of contour lines labels
+     res@cnFillMode            = "RasterFill"  
+
+     res@cnLevelSelectionMode  = "ManualLevels"; set manual contour levels
+     res@cnMinLevelValF        =   5.          ; set min contour level
+     res@cnMaxLevelValF        =  75.          ; set max contour level [ 95.0 ]
+     res@cnLevelSpacingF       =   5.          ; set contour spacing
+
+                                               ; Regional
+    ;res@pmTickMarkDisplayMode = "Always"      ; use NCL default lat/lon labels
+    ;res@mpFillOn              = False         ; default is True (gray land)				       
+    ;res@mpMinLatF             = latS
+    ;res@mpMaxLatF             = latN
+    ;res@mpMinLonF             = lonL
+    ;res@mpMaxLonF             = lonR
+  end if
+
+
+  do nf=0,nfil-1                               ; Loop over files
+     pthi  = diri+fili(nf)
+     f     = addfile(pthi, "r")
+
+     datas = f->$var$                          ;  short;  720 <DIM_000> x 1440 <DIM_001> x 1 <DIM_002> ]
+     datas@long_name    = "Soil Moisture"
+     datas@units        = datas@UNIT
+
+     datas = where(datas.le.fill, fill, datas) ;  create a single value for _FillValue
+     datas@_FillValue   = fill
+     datas@scale_factor = datas@$"SCALE FACTOR"$          ; has space
+     delete( [/ datas@UNIT, datas@$"SCALE FACTOR"$ /] )
+
+     data     := short2flt( datas )
+     data!0    = "lat"
+     data!1    = "lon"
+     data!2    = "time"
+     data&lat  =  lat
+     data&lon  =  lon
+;
+; Use file name to create a 'time' coordinate .... yyyymmdd is 'good enough' for this example
+; GW1AM2_20171003_01D_EQMD_L3SGSMCLF3300300.h5
+; 01234567890123456789
+;
+     data&time = toint( str_get_cols(fili(nf), 7,14) )      ; yyyymmdd
+
+              ; conventional order
+     data    := data(time|:, lat|:, lon|:)                  ; Global
+    ;data    := data(time|:, {latS:latN}, {lonL:lonR})      ; Regional
+     if (nf.eq.0) then
+         printVarSummary(data)
+         printMinMax(data,0)
+         print("---")
+     end if
+      
+; Time for each observation grid point onservation
+; Not used so comment. For 'fun' use 6.4.0 BLOCK COMMENt
+ 
+;/   ------------------> Block Comment --------------------------
+     Times    = f->$"Time Information"$       ; short; [ 720 <DIM_000> x 1440 <DIM_001> ]
+     Times  = where(Times.le.fill, fill, Times)
+     Times@long_name  = "Observation Time: Relative to Mid-Time"
+     Times@units      = Times@UNIT
+     Times@_FillValue = fill
+     Times@scale_factor = Times@$"SCALE FACTOR"$
+     delete( [/ Times@UNIT, Times@$"SCALE FACTOR"$ /] )
+
+     Time    := short2flt( Times )
+     Time!0   = "lat"
+     Time!1   = "lon"
+     Time&lat = lat
+     Time&lon = lon
+
+     if (nf.eq.0) then
+         printVarSummary(Time)
+         printMinMax(Time,0)
+         print("---")
+     end if
+;/   -----------------> Block Comment --------------------------
+;************************************************
+; create plot
+;************************************************
+     if (PLOT) then
+         pltPath = pltDir + pltName + data&time(nt)
+         wks      = gsn_open_wks(pltType, pltPath)        ; send graphics to PNG file
+         res@tiMainString         = fili(nf)
+         res@gsnCenterString      = data&time(nt)+": "+f@OrbitDirection
+         plot = gsn_csm_contour_map(wks,data(nt,:,:), res)
+      end if   ; PLOT
+     
+  end do

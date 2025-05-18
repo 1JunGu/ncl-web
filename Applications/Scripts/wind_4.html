@@ -1,0 +1,109 @@
+;*************************************************
+; wind_4.ncl
+;
+; Concepts illustrated:
+;   - Use spherical harmonics on a global grid
+;   - Use uv2dvG_Wrap and uv2vr_Wrap to compute divergence and vortivity
+;     and maintain meta data
+;   - Use ilapsG_Wrap to compute velocity potential and streamfunction
+;     and maintain meta data
+;   - Plot vector winds and scalr quantities
+;*************************************************
+  f    = addfile ("$NCARG_ROOT/lib/ncarg/data/cdf/uv300.nc", "r")
+  u    = f->U                      ; (time,lat,lon)
+  v    = f->V
+;*************************************************
+; Calculate divergence and vortivity
+; Use Wrap version to maintain meta data
+;*************************************************
+  div = uv2dvG_Wrap(u,v)           ; u,v ==> divergence
+  vrt = uv2vrG_Wrap(u,v)           ; u,v ==> vorticity
+
+;*************************************************
+; Calculate velocity potential and stream function
+; Use Wrap version to maintain meta data
+;*************************************************
+  chi = ilapsG_Wrap ( div , 0)
+  chi@long_name = "velocity potential"
+  chi@units     = "m/s" 
+
+  psi = ilapsG_Wrap ( vrt , 0)
+  psi@long_name = "streamfunction"
+  psi@units     = "m/s" 
+
+;*************************************************
+; Calculate divergent and rotational wind components 
+; Use Wrap version to maintain meta data
+;*************************************************    
+  
+  uvd = dv2uvG_Wrap(div) ; div  ==> divergent  wind components
+  uvr = vr2uvG_Wrap(vrt) ; vrt  ==> divergent  wind components
+
+;*************************************************
+; For clarity, extract the wind components from the returned variables
+;*************************************************    
+  ud  = uvd(0,:,:,:) 
+  vd  = uvd(1,:,:,:)
+  ur  = uvr(0,:,:,:)
+  vr  = uvr(1,:,:,:)
+
+  ud@long_name  = "Zonal Divergent Wind"
+  vd@long_name  = "Meridional Divergent Wind"
+  ur@long_name  = "Zonal Rotational Wind"
+  vr@long_name  = "Meridional Rotational Wind"
+
+   delete((/uvd,uvr/))   ; no longer needed
+;*************************************************
+; plot results
+;*************************************************    
+  nt    = 0                                        ;time index (1st time)
+  scale = 1e6                                      ; arbitrary: used for nicer plot values
+  psi   = psi/scale
+  chi   = chi/scale
+
+  wks  = gsn_open_wks("png","wind")                ; send graphics to PNG file
+
+  res                         = True
+
+  res@vcRefMagnitudeF         = 3.                 ; make vectors larger
+  res@vcRefLengthF            = 0.050              ; ref vector length
+  res@vcGlyphStyle            = "CurlyVector"      ; turn on curly vectors
+  res@vcMinDistanceF          = 0.012              ; thin the vectors
+  res@vcRefAnnoOrthogonalPosF = -1.0               ; move ref vector up
+
+  res@gsnScalarContour        = True               ; vectors over contours
+  res@gsnDraw                 = False              ; don't draw
+  res@gsnFrame                = False              ; don't advance frame
+
+  res@cnLineLabelPerimOn      = True           ; line label box on
+  res@cnLineLabelFontHeightF  = .013           ; label font height
+  res@cnInfoLabelOn           = False          ; no contour info label
+
+  res@cnHighLabelsOn             = True           ; high labels on
+  res@cnHighLabelBackgroundColor = "white"        ; background white
+  res@cnHighLabelPerimOn         = True           ; box on
+
+  res@cnLowLabelsOn             = True            ; low label on
+  res@cnLowLabelBackgroundColor = "white"         ; background white
+  res@cnLowLabelPerimOn         = True            ; box on
+
+  res@tiMainString              = "Velocity Potential" ; title
+  res@gsnCenterString           = "Chi scaled by 1e6"  ; center string
+  res@gsnLeftString             = "Divergent Wind"     ; left string
+
+  plot=gsn_csm_vector_scalar_map(wks,ud(nt,:,:),vd(nt,:,:),chi(nt,:,:),res)
+  plot = ZeroNegDashLineContour(plot)             ; neg lines dashed 
+						  ; zero line double thick
+  draw(plot) 
+  frame(wks)
+
+  res@tiMainString         = "Streamfunction"     ; title
+  res@gsnCenterString      = "Psi scaled by 1e6"  ; center string
+  res@gsnLeftString        = "Streamfunction"     ; left string
+
+  plot=gsn_csm_vector_scalar_map(wks,ur(nt,:,:),vr(nt,:,:),psi(nt,:,:),res)
+  plot = ZeroNegDashLineContour(plot)             ; neg lines dashed 
+						  ; zero line double thick
+  draw(plot) 
+  frame(wks)
+

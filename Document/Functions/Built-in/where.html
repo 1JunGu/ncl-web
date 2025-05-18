@@ -1,0 +1,518 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/where.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:57:05 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (array manipulators)">
+<meta name="keywords" content="where">
+<title>where</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../array_manip.html">Array manipulators</a>
+<br>
+<h1>where</h1>
+
+<p>
+Performs array assignments based on a conditional array.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function where (
+		condtnl_expr  ,    
+		true_value    ,    
+		false_value        
+	)
+
+	return_val [<a href="dimsizes.html"><strong>dimsizes</strong></a>(condtnl_expr)] 
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>condtnl_expr</em>
+<p class=indent>A logical expression or value of any dimensionality.
+</p>
+<em>true_value</em>
+<p class=indent>An array with the same rank and dimension sizes as
+<em>condtnl_expr</em>, or a scalar. For all elements of
+<em>condtnl_expr</em> that evaluate to True, the corresponding element
+of <em>true_value</em> is inserted into the return value array.
+</p>
+<em>false_value</em>
+<p class=indent>An array with the same rank and dimension sizes as
+<em>condtnl_expr</em>, or a scalar. For all elements of
+<em>condtnl_expr</em> that evaluate to False, the corresponding
+element of <em>false_value</em> is inserted into the return value
+array.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The return value has the same dimensionality as
+<em>condtnl_expr</em>. Its type is the same as the type of
+<em>true_value</em> if <em>false_value</em> has the same type as
+<em>true_value</em> or can be coerced to the type of
+<em>true_value</em>. Otherwise it is the type of <em>false_value</em>
+if <em>true_value</em> can be coerced to the type of
+<em>false_value</em>. If neither type can be coerced to the other
+type, an error is returned.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+At all locations where <em>condtnl_array</em> evaluates to True, the
+<strong>where</strong> function inserts the corresponding value of
+<em>true_value</em> into the return array. Likewise, at all locations
+where <em>condtnl_array</em> evaluates to False, this function
+inserts the corresponding value of <em>false_value</em>.
+<p>
+
+See the <a name="#Return">return value</a> section above for more
+information about the type of the return value.
+<p>
+
+<blockquote>
+<b>Note:</b> if you need to have the indices where a particular
+expression in NCL is True returned to you, then see instead the
+<a href="ind.html"><strong>ind</strong></a> and <a href="ind_resolve.html"><strong>ind_resolve</strong></a> functions.
+</blockquote>
+
+If any elements of <em>condtnl_expr</em> are missing (i.e.
+equal to <em>condtnl_array</em>@_FillValue), then the corresponding
+elements of the return array become missing values equal to the
+missing value of whatever type is returned.  The missing value is set
+to <em>true_value</em>@_FillValue or <em>false_value</em>@_FillValue,
+depending on which type the return value is coerced to.
+<p>
+
+While syntactically different, the NCL <strong>where</strong> function 
+can operate analogous to the Fortran 90 WHERE statement: 
+<pre>
+  WHERE(x < 0) x = x + 256                     ; f90 WHERE statement
+  x = <strong>where</strong>(x.lt.0, x+256, x)                ; NCL
+</pre>
+
+More generally it operates like a one-level/one-statement 
+form of the Fortran 90 WHERE construct.
+
+<pre>
+  WHERE(z >= pi .and. z < pi2)                 ; f90 construct
+        q = pi*z                               ; True
+  ELSEWHERE
+        q = 0.5*z                              ; False
+  ENDWHERE
+
+  q = <strong>where</strong>(z.gt.pi .and. z.lt.pi2, pi*z, 0.5*z)   ; NCL
+</pre>
+<p>
+
+<b>Caveat</b>: NCL evaluates the entire expression inside the
+<strong>where</strong> function, which will cause problems if it's
+an expression NCL would normally fail on. For example, if you try to
+execute:
+
+<pre>
+  yinv = <strong>where</strong>(y.ne.0, 1./y, 0.)
+</pre>
+
+and <em>y</em> contains values equal to 0, you will get a fatal error:
+
+<pre>
+
+  fatal:divide: Division by 0, Can't continue
+</pre>
+
+There are two approaches to use <strong>where</strong>. 
+<p>
+<ul>
+<li> yinv = 1. / <strong>where</strong>(y.ne.0,y,y@_FillValue)
+<p>
+<li>
+ 
+Set <em>y</em> to a _FillValue value where it is equal to 0, 
+and then can do the divide:
+
+<pre>
+  y    = <strong>where</strong>(y.ne.0,y,y@_FillValue)
+  yinv = 1. / y
+</pre>
+
+If you further want to set <tt>y</tt> back to where it originally
+contained zeros:
+
+<pre>
+  y = <strong>where</strong>(<a href="ismissing.html"><strong>ismissing</strong></a>(y),0,y)
+</pre>
+</ul>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="mask.html"><strong>mask</strong></a>, <a href="ind.html"><strong>ind</strong></a>,
+<a href="ind_resolve.html"><strong>ind_resolve</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<examples>
+
+<b>Example 1</b><p>
+
+Assume you have a multi-dimensional numeric array <tt>x</tt> with a
+missing value (<tt>x</tt>@_FillValue). Use <strong>where</strong> to
+take the square root of <tt>x</tt> only at locations where <tt>x</tt>
+is positive, and set it to a missing value otherwise:
+
+<pre>
+   xsqrt = <strong>where</strong>(x.gt.0,<a href="sqrt.html"><strong>sqrt</strong></a>(x),x@_FillValue)
+</pre>
+<p>
+
+On some systems, taking the square root of a negative number results
+in a "sqrt: DOMAIN error" message, but it's not a fatal message. You
+will still get the correct results.
+<p>
+
+<b>Example 2</b><p>
+
+Assume you have a 2-dimensional mask array <tt>oro</tt> in which 1
+represents land and 0 represents water. Use <strong>where</strong>
+to do two different calculations on another variable <tt>a</tt>,
+depending on whether you are over land or water:
+
+<pre>
+ x = <strong>where</strong>(oro.eq.1 , a+273.15, 1.8*a+32)
+</pre>
+<p>
+
+Note: for an integer array, any values equal to 0 also evaluate as
+False, so the above expression could also be accomplished with:
+
+<pre>
+ x = <strong>where</strong>(oro, a+273.15, 1.8*a+32)
+</pre>
+<p>
+
+<b>Example 3</b><p>
+
+Assume <tt>x</tt> is a 2-dimensional array with 2-dimensional
+coordinate arrays <tt>lat2d</tt> and <tt>lon2d</tt>. To set all values
+outside some user-specified region as specified by <tt>latMin</tt>,
+<tt>latMax</tt>, <tt>lonMin</tt>, and <tt>lonMax</tt>, to a missing
+value, use:
+
+<pre>
+    x = f->X
+    x@lat2d = f->latitude    ; 2D coordinate arrays
+    x@lon2d = f->longitude
+   
+    latMin  = -20
+    latMax  =  60
+    lonMin  = 110
+    lonMax  = 270
+    
+    x = <strong>where</strong>((x@lat2d.ge.latMin .and. x@lat2d.le.latMax  .and. \
+               x@lon2d.ge.lonMin .and. x@lon2d.le.lonMax), x, x@_FillValue)
+</pre>
+
+<b>Example 4</b><p>
+
+Say you have two multi-dimensional arrays of the same size,
+<em>v1</em> and <em>v2</em>. To do an element-by-element minimum or
+maximum between the two:
+
+<pre>
+   vmin = <strong>where</strong>(v1.lt.v2,v1,v2) 
+   vmax = <strong>where</strong>(v1.gt.v2,v1,v2) 
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/where.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:57:05 GMT -->
+</html>

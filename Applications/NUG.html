@@ -1,0 +1,1135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/NUG.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:16:18 GMT -->
+<head>
+<meta name="description" content="NCL User Guide examples">
+<meta name="keywords" content="NCL, user guide, graphics, visualization, file I/O, interpolation">
+<title>NCL User Guide Examples</title>
+</head>
+
+<body>
+
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+
+			      <div id="general_main">
+
+   <font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+   <h1>NCL User Guide examples</h1>
+<div class=mainimage>
+<img width=500 height=500 src="../Document/Manuals/NCL_User_Guide/Images/NUG_globe_orography_grid_resolution_lg.png">
+</div>
+
+<div class=text>
+
+These are the NCL scripts referenced in the <a href="../Document/Manuals/NCL_User_Guide/index.html">NCL User Guide</a> (NUG)
+in the order they appear in the document.<p>
+
+The NUG was created by Karin Meier-Fleischer and Michael
+B&ouml;ttinger of <a href="https://www.dkrz.de/">DKRZ</a> (Deutsches
+Klimarechenzentrum) with input from NCL developers.<p> 
+DKRZ has developed an <a href="https://www.dkrz.de/up/services/analysis/visualization/sw/ncl/ncl-examples">NCL User Portal</a>
+containing some very nice and unique NCL graphical examples.<p>
+
+For the examples that appear on this page, you can copy any one of them from this page, or, if
+you have NCL V6.4.0 installed, you can run the ng4ex command from a UNIX terminal window:<p>
+
+<pre>
+   ng4ex <i>xxxxxx</i>
+</pre>
+
+where <i>xxxxxx</i> is the name of the script without the ".ncl" suffix. For example:<p>
+<pre>
+   ng4ex NUG_curvilinear_grid
+</pre><p>
+
+To see the full list of NUG examples, type the following on the UNIX command line:<p>
+<pre>
+   ng4ex -nug -list
+</pre><p>
+
+Some of these examples require one or more data files, which you can download from:<p>
+<a href="../Document/Manuals/NCL_User_Guide/Data/index.html">http://www.ncl.ucar.edu/Document/Manuals/NCL_User_Guide/Data/</a><p>
+</div>
+
+<div class=ex>
+<!--NUG_plot_in_5_steps-->
+<a name=NUG_plot_in_5_steps></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_plot_in_5_steps_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_plot_in_5_steps_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_plot_in_5_steps.html">NUG_plot_in_5_steps.ncl</a>:
+Template NCL graphics script for creating line contours over a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_read_ASCII_1-->
+<a name=NUG_read_ASCII_1></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_read_ASCII_1.html">NUG_read_ASCII_1.ncl</a>:
+Reading ASCII data that contains one value per line.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_read_ASCII_2-->
+<a name=NUG_read_ASCII_2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_read_ASCII_2.html">NUG_read_ASCII_2.ncl</a>:
+Reading ASCII data that contains a header line.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_read_ASCII_3-->
+<a name=NUG_read_ASCII_3></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_read_ASCII_3.html">NUG_read_ASCII_3.ncl</a>:
+Reading ASCII data that contains multiple columns of data.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_read_CSV_1-->
+<a name=NUG_read_CSV_1></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_read_CSV_1_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_read_CSV_1_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_read_CSV_1.html">NUG_read_CSV_1.ncl</a>:
+Reading a simple CSV (comma separated values) file.<p>
+</div>
+
+<div class=ex>
+<!--NUG_read_CSV_2-->
+<a name=NUG_read_CSV_2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_read_CSV_2_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_read_CSV_2_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_read_CSV_2.html">NUG_read_CSV_2.ncl</a>:
+Reading a more complex CSV file with mixed types.<p>
+</div>
+
+<div class=ex>
+<!--NUG_read_Binary_1-->
+<a name=NUG_read_Binary_1></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_read_Binary_1.html">NUG_read_Binary_1.ncl</a>:
+Reading a big-endian binary file.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_read_Binary_GrADS-->
+<a name=NUG_read_Binary_GrADS></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_read_Binary_GrADS.html">NUG_read_Binary_GrADS.ncl</a>:
+Reading a GrADS binary data file.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_write_ASCII_1-->
+<a name=NUG_write_ASCII_1></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_write_ASCII_1.html">NUG_write_ASCII_1.ncl</a>:
+Writing a simple ASCII file.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_write_ASCII_2-->
+<a name=NUG_write_ASCII_2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_write_ASCII_2.html">NUG_write_ASCII_2.ncl</a>:
+Writing an ASCII file with a mix of string, float, and integer data.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_write_ASCII_3-->
+<a name=NUG_write_ASCII_3></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_write_ASCII_3.html">NUG_write_ASCII_3.ncl</a>:
+Writing an ASCII file with formatted columns.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_write_ASCII_4-->
+<a name=NUG_write_ASCII_4></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_write_ASCII_4.html">NUG_write_ASCII_4.ncl</a>:
+Writing 2D subsets of a 3D array to an ASCII file.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_write_ASCII_5-->
+<a name=NUG_write_ASCII_5></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_write_ASCII_5.html">NUG_write_ASCII_5.ncl</a>:
+Writing nicely formatted 2D arrays of numeric data to an ASCII file.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_write_Binary_1-->
+<a name=NUG_write_Binary_1></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_write_Binary_1.html">NUG_write_Binary_1.ncl</a>:
+Writing an unformatted Fortran binary file.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_write_Binary_2-->
+<a name=NUG_write_Binary_2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_write_Binary_2.html">NUG_write_Binary_2.ncl</a>:
+Writing and reading three dummy variables to a Fortran binary file.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_write_netCDF_1-->
+<a name=NUG_write_netCDF_1></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_write_netCDF_1.html">NUG_write_netCDF_1.ncl</a>:
+Writing data to a NetCDF file using the "inefficient" method.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_write_netCDF_2-->
+<a name=NUG_write_netCDF_2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_write_netCDF_2.html">NUG_write_netCDF_2.ncl</a>:
+Writing data to a NetCDF file using the "efficient" method.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_statistics_linear_regression-->
+<a name=NUG_statistics_linear_regression></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_statistics_linear_regression_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_statistics_linear_regression_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_statistics_linear_regression.html">NUG_statistics_linear_regression.ncl</a>:
+Calculating a linear regression line.<p>
+</div>
+
+<div class=ex>
+<!--NUG_statistics_running_mean-->
+<a name=NUG_statistics_running_mean></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_statistics_running_mean_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_statistics_running_mean_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_statistics_running_mean.html">NUG_statistics_running_mean.ncl</a>:
+Calculating a running mean.<p>
+</div>
+
+<div class=ex>
+<!--NUG_date_format-->
+<a name=NUG_date_format></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_date_format_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_date_format_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_date_format.html">NUG_date_format.ncl</a>:
+Using calendar functions to create date strings for axis labels.<p>
+</div>
+
+<div class=ex>
+<!--NUG_map_default-->
+<a name=NUG_map_default></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_map_default_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_map_default_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_map_default.html">NUG_map_default.ncl</a>:
+Drawing a simple map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_map_grid_and_tickmark_settings-->
+<a name=NUG_map_grid_and_tickmark_settings></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_map_grid_and_tickmark_settings_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_map_grid_and_tickmark_settings_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_map_grid_and_tickmark_settings.html">NUG_map_grid_and_tickmark_settings.ncl</a>:
+Customizing map grid lines and tickmarks.<p>
+</div>
+
+<div class=ex>
+<!--NUG_map_land_ocean_settings-->
+<a name=NUG_map_land_ocean_settings></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_map_land_ocean_settings_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_map_land_ocean_settings_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_map_land_ocean_settings.html">NUG_map_land_ocean_settings.ncl</a>:
+Customizing map land and ocean fill colors.<p>
+</div>
+
+<div class=ex>
+<!--NUG_map_countries-->
+<a name=NUG_map_countries></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_map_countries_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_map_countries_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_map_countries.html">NUG_map_countries.ncl</a>:
+Adding country outlines to a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_map_selected_countries-->
+<a name=NUG_map_selected_countries></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_map_selected_countries_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_map_selected_countries_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_map_selected_countries.html">NUG_map_selected_countries.ncl</a>:
+Colorizing select countries in a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_projections_mollweide-->
+<a name=NUG_projections_mollweide></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_projections_mollweide_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_projections_mollweide_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_projections_mollweide.html">NUG_projections_mollweide.ncl</a>:
+Drawing filled contours over a Mollweide map projection.<p>
+</div>
+
+<div class=ex>
+<!--NUG_map_settings-->
+<a name=NUG_map_settings></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_map_settings_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_map_settings_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_map_settings.html">NUG_map_settings.ncl</a>:
+Drawing filled contours over a subregion of a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_polar_NH-->
+<a name=NUG_polar_NH></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_polar_NH_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_polar_NH_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_polar_NH.html">NUG_polar_NH.ncl</a>:
+Drawing contours over the northern hemisphere.<p>
+</div>
+
+<div class=ex>
+<!--NUG_map_resolutions-->
+<a name=NUG_map_resolutions></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_map_resolutions_1_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_map_resolutions_1_sm.png" align=left border=2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_map_resolutions_2_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_map_resolutions_2_sm.png" align=left border=2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_map_resolutions_3_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_map_resolutions_3_sm.png" align=left border=2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_map_resolutions.html">NUG_map_resolutions.ncl</a>:
+Setting various resolutions for map outlines.<p>
+</div>
+
+<div class=ex>
+<!--NUG_xy_plot-->
+<a name=NUG_xy_plot></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_xy_plot_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_xy_plot_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_xy_plot.html">NUG_xy_plot.ncl</a>:
+Drawing a simple XY plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_xy_plot_timeseries-->
+<a name=NUG_xy_plot_timeseries></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_xy_plot_timeseries_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_xy_plot_timeseries_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_xy_plot_timeseries.html">NUG_xy_plot_timeseries.ncl</a>:
+Drawing an XY timeseries plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_contour_map-->
+<a name=NUG_contour_map></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_map_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_map_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_contour_map.html">NUG_contour_map.ncl</a>:
+Drawing a simple plot of contour lines over a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_contour_filled_map-->
+<a name=NUG_contour_filled_map></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_filled_map_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_filled_map_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_contour_filled_map.html">NUG_contour_filled_map.ncl</a>:
+Drawing color-filled contours over a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_contour_fillpattern-->
+<a name=NUG_contour_fillpattern></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_fillpattern_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_fillpattern_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_contour_fillpattern.html">NUG_contour_fillpattern.ncl</a>:
+Drawing pattern-filled contours over a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_vector_default-->
+<a name=NUG_vector_default></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_vector_default_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_vector_default_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_vector_default.html">NUG_vector_default.ncl</a>:
+Drawing simple line vectors over a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_vector_curly-->
+<a name=NUG_vector_curly></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_vector_curly_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_vector_curly_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_vector_curly.html">NUG_vector_curly.ncl</a>:
+Drawing curly vectors over a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_vector_plot_colorized-->
+<a name=NUG_vector_plot_colorized></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_vector_plot_colorized_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_vector_plot_colorized_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_vector_plot_colorized.html">NUG_vector_plot_colorized.ncl</a>:
+Drawing vectors colored by temperature over a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_vector_plot_overlay-->
+<a name=NUG_vector_plot_overlay></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_vector_plot_overlay_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_vector_plot_overlay_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_vector_plot_overlay.html">NUG_vector_plot_overlay.ncl</a>:
+Drawing vectors over filled contours on a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_slice_plot-->
+<a name=NUG_slice_plot></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_slice_plot_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_slice_plot_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_slice_plot.html">NUG_slice_plot.ncl</a>:
+Drawing a vertical slice of data at latitude=40.<p>
+</div>
+
+<div class=ex>
+<!--NUG_bar_chart-->
+<a name=NUG_bar_chart></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_bar_chart_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_bar_chart_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_bar_chart.html">NUG_bar_chart.ncl</a>:
+Drawing a bar plot instead of XY curves.<p>
+</div>
+
+<div class=ex>
+<!--NUG_bar_chart_multi-->
+<a name=NUG_bar_chart_multi></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_bar_chart_multi_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_bar_chart_multi_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_bar_chart_multi.html">NUG_bar_chart_multi.ncl</a>:
+Drawing multiple bars in a plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_bar_chart_col_above_below-->
+<a name=NUG_bar_chart_col_above_below></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_bar_chart_col_above_below_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_bar_chart_col_above_below_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_bar_chart_col_above_below.html">NUG_bar_chart_col_above_below.ncl</a>:
+Filling in bars above and below a Y reference line.<p>
+</div>
+
+<div class=ex>
+<!--NUG_histograms-->
+<a name=NUG_histograms></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_histograms_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_histograms_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_histograms.html">NUG_histograms.ncl</a>:
+Drawing a histogram plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_transparent_filled_contour-->
+<a name=NUG_transparent_filled_contour></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_transparent_filled_contour_1_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_transparent_filled_contour_1_sm.png" align=left border=2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_transparent_filled_contour_2_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_transparent_filled_contour_2_sm.png" align=left border=2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_transparent_filled_contour.html">NUG_transparent_filled_contour.ncl</a>:
+Using transparency to highlight an area in a filled contour plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_multi_timeseries-->
+<a name=NUG_multi_timeseries></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_multi_timeseries_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_multi_timeseries_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_multi_timeseries.html">NUG_multi_timeseries.ncl</a>:
+Drawing multiple timeseries of different lengths with a legend.<p>
+</div>
+
+<div class=ex>
+<!--NUG_grid_resolution_comparison-->
+<a name=NUG_grid_resolution_comparison></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_grid_resolution_comparison_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_grid_resolution_comparison_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_grid_resolution_comparison.html">NUG_grid_resolution_comparison.ncl</a>:
+Overlaying filled contours of datasets at three different resolutions.<p>
+</div>
+
+<div class=ex>
+<!--NUG_panel_plot-->
+<a name=NUG_panel_plot></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_panel_plot_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_panel_plot_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_panel_plot.html">NUG_panel_plot.ncl</a>:
+Paneling two plots on a page.<p>
+</div>
+
+<div class=ex>
+<!--NUG_panel_plot_3x2-->
+<a name=NUG_panel_plot_3x2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_panel_plot_3x2_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_panel_plot_3x2_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_panel_plot_3x2.html">NUG_panel_plot_3x2.ncl</a>:
+Paneling plots in three rows and two columns.<p>
+</div>
+
+<div class=ex>
+<!--NUG_panel_control-->
+<a name=NUG_panel_control></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_panel_control_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_panel_control_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_panel_control.html">NUG_panel_control.ncl</a>:
+Paneling plots of different sizes.<p>
+</div>
+
+<div class=ex>
+<!--NUG_panel_vp-->
+<a name=NUG_panel_vp></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_panel_vp_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_panel_vp_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_panel_vp.html">NUG_panel_vp.ncl</a>:
+Using viewport resources to draw multiple plots on a page.<p>
+</div>
+
+<div class=ex>
+<!--NUG_polyline_polygon_polymarker-->
+<a name=NUG_polyline_polygon_polymarker></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_polyline_polygon_polymarker_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_polyline_polygon_polymarker_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_polyline_polygon_polymarker.html">NUG_polyline_polygon_polymarker.ncl</a>:
+Drawing lines, markers, filled polygons, and text on a existing plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_shapefile_plot-->
+<a name=NUG_shapefile_plot></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_shapefile_plot_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_shapefile_plot_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_shapefile_plot.html">NUG_shapefile_plot.ncl</a>:
+Adding outlines from a shapefile to an existing map plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_shapefile_plot_data-->
+<a name=NUG_shapefile_plot_data></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_shapefile_plot_data_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_shapefile_plot_data_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_shapefile_plot_data.html">NUG_shapefile_plot_data.ncl</a>:
+Adding country outlines from a shapefile to an existing contour/map plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_colormaps-->
+<a name=NUG_colormaps></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_colormaps_1_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_colormaps_1_sm.png" align=left border=2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_colormaps_2_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_colormaps_2_sm.png" align=left border=2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_colormaps_3_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_colormaps_3_sm.png" align=left border=2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_colormaps.html">NUG_colormaps.ncl</a>:
+Changing the color map for filled contours and drawing color maps.<p>
+</div>
+
+<div class=ex>
+<!--NUG_curvilinear_basic-->
+<a name=NUG_curvilinear_basic></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_curvilinear_basic_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_curvilinear_basic_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_curvilinear_basic.html">NUG_curvilinear_basic.ncl</a>:
+Drawing filled contours of a curvilinear (2D lat/lon) dataset.<p>
+</div>
+
+<div class=ex>
+<!--NUG_curvilinear_grid-->
+<a name=NUG_curvilinear_grid></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_curvilinear_grid_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_curvilinear_grid_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_curvilinear_grid.html">NUG_curvilinear_grid.ncl</a>:
+Drawing filled contours of a subset of a curvilinear grid.<p>
+</div>
+
+<div class=ex>
+<!--NUG_bipolar_grid_MPI-ESM-->
+<a name=NUG_bipolar_grid_MPI-ESM></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_bipolar_grid_MPI-ESM_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_bipolar_grid_MPI-ESM_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_bipolar_grid_MPI-ESM.html">NUG_bipolar_grid_MPI-ESM.ncl</a>:
+Drawing cell-filled contours of a curvilinear grid with grid outlines on.<p>
+</div>
+
+<div class=ex>
+<!--NUG_bipolar_grid_MPI-ESM_subregion-->
+<a name=NUG_bipolar_grid_MPI-ESM_subregion></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_bipolar_grid_MPI-ESM_subregion_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_bipolar_grid_MPI-ESM_subregion_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_bipolar_grid_MPI-ESM_subregion.html">NUG_bipolar_grid_MPI-ESM_subregion.ncl</a>:
+Drawing a subregion of cell-filled contours over a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_tripolar_grid_STORM-->
+<a name=NUG_tripolar_grid_STORM></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_tripolar_grid_STORM_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_tripolar_grid_STORM_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_tripolar_grid_STORM.html">NUG_tripolar_grid_STORM.ncl</a>:
+Drawing filled contours of a tripolar curvilinear grid.<p>
+</div>
+
+<div class=ex>
+<!--NUG_unstructured_grid-->
+<a name=NUG_unstructured_grid></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_unstructured_grid_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_unstructured_grid_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_unstructured_grid.html">NUG_unstructured_grid.ncl</a>:
+Drawing filled contours of an unstructured dataset using old method.<p>
+</div>
+
+<div class=ex>
+<!--NUG_unstructured_grid_640-->
+<a name=NUG_unstructured_grid_640></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_unstructured_grid_640_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_unstructured_grid_640_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_unstructured_grid_640.html">NUG_unstructured_grid_640.ncl</a>:
+Drawing filled contours of an unstructured dataset using new method.<p>
+</div>
+
+<div class=ex>
+<!--NUG_triangular_grid_ICON-->
+<a name=NUG_triangular_grid_ICON></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_triangular_grid_ICON_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_triangular_grid_ICON_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_triangular_grid_ICON.html">NUG_triangular_grid_ICON.ncl</a>:
+Drawing filled contours of an icosahedral unstructured grid using old method.<p>
+</div>
+
+<div class=ex>
+<!--NUG_triangular_grid_ICON_640-->
+<a name=NUG_triangular_grid_ICON_640></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_triangular_grid_ICON_640_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_triangular_grid_ICON_640_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_triangular_grid_ICON_640.html">NUG_triangular_grid_ICON_640.ncl</a>:
+Drawing filled contours of an icosahedral unstructured grid using new method.<p>
+</div>
+
+<div class=ex>
+<!--NUG_plot_rotated_grid-->
+<a name=NUG_plot_rotated_grid></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_plot_rotated_grid_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_plot_rotated_grid_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_plot_rotated_grid.html">NUG_plot_rotated_grid.ncl</a>:
+Drawing filled contours on a rotated lat/lon grid.<p>
+</div>
+
+<div class=ex>
+<!--NUG_globe_orography_grid_resolution-->
+<a name=NUG_globe_orography_grid_resolution></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_globe_orography_grid_resolution_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_globe_orography_grid_resolution_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_globe_orography_grid_resolution.html">NUG_globe_orography_grid_resolution.ncl</a>:
+Drawing two orography datasets of different resolutions on one map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_title_strings-->
+<a name=NUG_title_strings></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_title_strings_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_title_strings_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_title_strings.html">NUG_title_strings.ncl</a>:
+Customizing titles on an NCL plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_text_settings-->
+<a name=NUG_text_settings></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_text_settings_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_text_settings_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_text_settings.html">NUG_text_settings.ncl</a>:
+Drawing special text characters like umlaut, superscript, and subscript.<p>
+</div>
+
+<div class=ex>
+<!--NUG_axis_annotations-->
+<a name=NUG_axis_annotations></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_axis_annotations_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_axis_annotations_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_axis_annotations.html">NUG_axis_annotations.ncl</a>:
+Customizing the X and Y axis titles and tickmarks.<p>
+</div>
+
+<div class=ex>
+<!--NUG_contour_labels-->
+<a name=NUG_contour_labels></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_labels_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_labels_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_contour_labels.html">NUG_contour_labels.ncl</a>:
+Customizing contour labels on a plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_color_Land_Ocean-->
+<a name=NUG_color_Land_Ocean></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_color_Land_Ocean_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_color_Land_Ocean_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_color_Land_Ocean.html">NUG_color_Land_Ocean.ncl</a>:
+Setting ocean and land fill colors on a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_color_country_user-->
+<a name=NUG_color_country_user></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_color_country_user_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_color_country_user_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_color_country_user.html">NUG_color_country_user.ncl</a>:
+Setting country fill colors on a map.<p>
+</div>
+
+<div class=ex>
+<!--NUG_labelbars-->
+<a name=NUG_labelbars></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_labelbars_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_labelbars_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_labelbars.html">NUG_labelbars.ncl</a>:
+Customizing a labelbar (mainly used for color contour and vector plots).<p>
+</div>
+
+<div class=ex>
+<!--NUG_legends-->
+<a name=NUG_legends></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_legends_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_legends_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_legends.html">NUG_legends.ncl</a>:
+Customizing a legend (mainly used for XY plots).<p>
+</div>
+
+<div class=ex>
+<!--NUG_insert_logo-->
+<a name=NUG_insert_logo></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_insert_logo_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_insert_logo_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_insert_logo.html">NUG_insert_logo.ncl</a>:
+Inserting a logo on an NCL plot using ImageMagick's "composite" program.<p>
+</div>
+
+<div class=ex>
+<!--NUG_regrid_curvilinear_to_rectilinear_bilinear_weights_ESMF-->
+<a name=NUG_regrid_curvilinear_to_rectilinear_bilinear_weights_ESMF></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_regrid_curvilinear_to_rectilinear_bilinear_weights_ESMF.html">NUG_regrid_curvilinear_to_rectilinear_bilinear_weights_ESMF.ncl</a>:
+Regridding data from a curvilinear grid to a 1-degree grid; writing results to NetCDF file.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_regrid_curvilinear_to_rectilinear_bilinear_wgts_destgrid_ESMF-->
+<a name=NUG_regrid_curvilinear_to_rectilinear_bilinear_wgts_destgrid_ESMF></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_regrid_curvilinear_to_rectilinear_bilinear_wgts_destgrid_ESMF.html">NUG_regrid_curvilinear_to_rectilinear_bilinear_wgts_destgrid_ESMF.ncl</a>:
+Regridding data from a curvilinear to rectilinear grid; writing results to NetCDF file.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_destgrid_ESMF-->
+<a name=NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_destgrid_ESMF></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_destgrid_ESMF_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_destgrid_ESMF_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_destgrid_ESMF.html">NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_destgrid_ESMF.ncl</a>:
+Regridding data from an unstructured triangular mesh to a 1-degree grid; writing results to NetCDF file.<p>
+</div>
+
+<div class=ex>
+<!--NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_ESMF-->
+<a name=NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_ESMF></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_ESMF_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_ESMF_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_ESMF.html">NUG_regrid_unstructured_to_rectilinear_bilinear_wgts_ESMF.ncl</a>:
+Regridding data from an unstructured triangular mesh to a rectilinear grid; writing results to NetCDF file.<p>
+</div>
+
+<div class=ex>
+<!--NUG_regrid_rectilinear_to_curvilinear_bilinear_wgts_destgrid_ESMF-->
+<a name=NUG_regrid_rectilinear_to_curvilinear_bilinear_wgts_destgrid_ESMF></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_regrid_rectilinear_to_curvilinear_bilinear_wgts_destgrid_ESMF_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_regrid_rectilinear_to_curvilinear_bilinear_wgts_destgrid_ESMF_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_regrid_rectilinear_to_curvilinear_bilinear_wgts_destgrid_ESMF.html">NUG_regrid_rectilinear_to_curvilinear_bilinear_wgts_destgrid_ESMF.ncl</a>:
+Regridding data from a rectilinear to curvilinear grid; writing results to NetCDF file.<p>
+</div>
+
+<div class=ex>
+<!--NUG_regrid_bilinear_CMIP5_grid_to_1x1deg_grid-->
+<a name=NUG_regrid_bilinear_CMIP5_grid_to_1x1deg_grid></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_regrid_bilinear_CMIP5_grid_to_1x1deg_grid_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_regrid_bilinear_CMIP5_grid_to_1x1deg_grid_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_regrid_bilinear_CMIP5_grid_to_1x1deg_grid.html">NUG_regrid_bilinear_CMIP5_grid_to_1x1deg_grid.ncl</a>:
+Regridding data from a curvilinear CMIP5 grid to a 1-degree grid.<p>
+</div>
+
+<div class=ex>
+<!--NUG_projections-->
+<a name=NUG_projections></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_projections_1_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_projections_1_sm.png" align=left border=2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_projections_2_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_projections_2_sm.png" align=left border=2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_projections_3_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_projections_3_sm.png" align=left border=2></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_projections.html">NUG_projections.ncl</a>:
+Generating all of the NCL map projections.<p>
+</div>
+
+<div class=ex>
+<!--NUG_contour_dashpattern-->
+<a name=NUG_contour_dashpattern></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_dashpattern_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_dashpattern_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_contour_dashpattern.html">NUG_contour_dashpattern.ncl</a>:
+Drawing contour lines with dash patterns.<p>
+</div>
+
+<div class=ex>
+<!--NUG_contour_map_add_zonal_average-->
+<a name=NUG_contour_map_add_zonal_average></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_map_add_zonal_average_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_contour_map_add_zonal_average_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_contour_map_add_zonal_average.html">NUG_contour_map_add_zonal_average.ncl</a>:
+Adding a zonal average plot to a filled contour/map plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_function_procedure-->
+<a name=NUG_function_procedure></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_function_procedure_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_function_procedure_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_function_procedure.html">NUG_function_procedure.ncl</a>:
+Creating and calling your own NCL functions and procedures.<p>
+</div>
+
+<div class=ex>
+<!--NUG_GrADS_binary_data-->
+<a name=NUG_GrADS_binary_data></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_GrADS_binary_data_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_GrADS_binary_data_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_GrADS_binary_data.html">NUG_GrADS_binary_data.ncl</a>:
+Reading and plotting data from a GrADS binary file.<p>
+</div>
+
+<div class=ex>
+<!--NUG_histograms-transparent-->
+<a name=NUG_histograms-transparent></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_histograms-transparent_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_histograms-transparent_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_histograms-transparent.html">NUG_histograms-transparent.ncl</a>:
+Drawing a histogram plot with transparency.<p>
+</div>
+
+<div class=ex>
+<!--NUG_ICON_triangles_colored-->
+<a name=NUG_ICON_triangles_colored></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_ICON_triangles_colored_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_ICON_triangles_colored_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_ICON_triangles_colored.html">NUG_ICON_triangles_colored.ncl</a>:
+Plotting ICON data using filled polygons.<p>
+</div>
+
+<div class=ex>
+<!--NUG_labelbar_title-->
+<a name=NUG_labelbar_title></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_labelbar_title_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_labelbar_title_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_labelbar_title.html">NUG_labelbar_title.ncl</a>:
+Customizing a labelbar and its title.<p>
+</div>
+
+<div class=ex>
+<!--NUG_masking-->
+<a name=NUG_masking></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_masking_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_masking_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_masking.html">NUG_masking.ncl</a>:
+Masking data based on land/sea mask read off a NetCDF file.<p>
+</div>
+
+<div class=ex>
+<!--NUG_multiple_plots_along_y-->
+<a name=NUG_multiple_plots_along_y></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_multiple_plots_along_y_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_multiple_plots_along_y_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_multiple_plots_along_y.html">NUG_multiple_plots_along_y.ncl</a>:
+Adding a zonal XY plot next to a filled contour/map plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_primitives-->
+<a name=NUG_primitives></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_primitives_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_primitives_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_primitives.html">NUG_primitives.ncl</a>:
+Drawing lines, markers, filled polygons, and text on an existing plot.<p>
+</div>
+
+<div class=ex>
+<!--NUG_projections_robinson-->
+<a name=NUG_projections_robinson></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_projections_robinson_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_projections_robinson_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_projections_robinson.html">NUG_projections_robinson.ncl</a>:
+Drawing filled contours over a Robinson map projection.<p>
+</div>
+
+<div class=ex>
+<!--NUG_strings-->
+<a name=NUG_strings></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_strings.html">NUG_strings.ncl</a>:
+Using various string parsing and manipulation functions.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_system_calls-->
+<a name=NUG_system_calls></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_system_calls.html">NUG_system_calls.ncl</a>:
+Using various system and timing calls.<p>
+This example does not produce any graphics.<p>
+</div>
+
+<div class=ex>
+<!--NUG_transparent_land_sea_mask_Africa-->
+<a name=NUG_transparent_land_sea_mask_Africa></a>
+<a href="../Document/Manuals/NCL_User_Guide/Images/NUG_transparent_land_sea_mask_Africa_lg.png">
+<img src="../Document/Manuals/NCL_User_Guide/Images/NUG_transparent_land_sea_mask_Africa_sm.png" align=left border=2></a><a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_transparent_land_sea_mask_Africa.html">NUG_transparent_land_sea_mask_Africa.ncl</a>:
+Overlaying two filled contour plots map using transparency.<p>
+</div>
+
+<div class=ex>
+<!--NUG_use_Fortran_subroutines-->
+<a name=NUG_use_Fortran_subroutines></a>
+<a href="../Document/Manuals/NCL_User_Guide/Scripts/NUG_use_Fortran_subroutines.html">NUG_use_Fortran_subroutines.ncl</a>:
+Calling Fortran subroutines from an NCL script.<p>
+This example does not produce any graphics.<p>
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/NUG.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:17:36 GMT -->
+</html>
+

@@ -1,0 +1,75 @@
+;----------------------------------------------------------------------
+; vector_9.ncl
+;
+; Concepts illustrated:
+;   - Create a panel plot
+;   - Adjusting vector thickness to enhance plot readability
+;   - Masking vector plots with missing values
+;   - Changing the magnitude of the vectors
+;   - Drawing line and curly vectors
+;----------------------------------------------------------------------
+;
+; These files are loaded by default in NCL V6.2.0 and newer 
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;---Generate dummy vector data.
+  M  = 30
+  N  = 25
+
+  PI = 3.14159
+
+  U  = transpose(10.0 * cos(onedtond((2.0 * PI / N) * ispan(0,N-1,1),(/M,N/))))
+  V  = 10.0 * cos(onedtond((2.0 * PI / M) * ispan(0,M-1,1),(/N,M/)))
+  U@_FillValue = 1.20
+  V@_FillValue = 1.e20
+
+;---Open workstation
+  wks  = gsn_open_wks ("png", "vector" )        ; send graphics to PNG file
+
+;---Set GSN resources
+  res                           = True
+  res@gsnDraw                   = False
+  res@gsnFrame                  = False
+  res@gsnMaximize               = True
+
+;---Set vector resources
+  res@vcMinMagnitudeF           = 9.
+  res@vcRefLengthF              = 0.03          ; define length of vec ref
+  res@vcRefAnnoArrowLineColor   = "black"       ; change ref vector color
+  res@vcRefAnnoArrowUseVecColor = False         ; don't use vec color for ref
+  res@vcLineArrowThicknessF     = 2.5           ; change vector thickness
+  res@vcMinDistanceF            = 0.017
+  res@vcMinFracLengthF          = 0.0
+
+;---Set remaining resources and create first plot
+  res@tiMainString      = "LineArrow: vcMinMagnitudeF = " + res@vcMinMagnitudeF
+  res@tiMainFontHeightF = 0.02
+
+  plot = new(3,graphic)
+
+  plot(0) = gsn_csm_vector(wks, U, V, res)
+
+;---Reset specific resources and create second plot
+  res@vcGlyphStyle            = "CurlyVector"     ; turn on curly vectors
+  res@tiMainString            = "CurlyVector: vcMinMagnitudeF has no effect"
+  res@vcLineArrowHeadMinSizeF = 0.0
+  res@vcMinFracLengthF        = 0.0
+
+  plot(1) = gsn_csm_vector(wks, U, V, res)
+
+;---Set U to missing where wind is less than 9
+  wind = sqrt(U^2+V^2)
+  U = where(wind.lt.9, U@_FillValue, U)
+
+  res@tiMainString = "CurlyVector: masked by magnitude of vectors"
+
+;---Create final plot
+  plot(2) = gsn_csm_vector(wks, U, V, res)
+
+;---Panel and draw all plots
+  gsn_panel(wks,plot,(/2,2/),False)
+end
+
+

@@ -1,0 +1,603 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/scatter.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:11:23 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes how to create scatter plots.">
+<meta name="keywords" content="NCL, graphics, visualization, scatter">
+<TITLE>NCL Graphics: scatter plots</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_gsn_csm.html">gsn_csm graphical interfaces</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL Graphics: Scatter Plots</h1>
+
+<div class=mainimage>
+<img src="Images/scatter_4_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+This suite of examples shows how to create scatter plots. Some of
+these are basic XY plots in "marker" mode. Others are drawn using
+polymarkers.
+<p>
+
+You can use the NCL table
+of <a href="../Document/Graphics/Images/markers.png">predefined
+markers</a>, or you can define your own using the 
+<a href="../Document/Functions/Built-in/NhlNewMarker.html"><strong>NhlNewMarker</strong></a> function.
+
+</div>
+
+<div class=ex>
+<!--Scatter_1-->
+<a name=ex1></a>
+<a href="Images/scatter_1_lg.png">
+<img src="Images/scatter_1_sm.png" align=left border=2></a>
+
+<a href="Scripts/scatter_1.html">scatter_1.ncl</a>: Basic scatter plot
+using <a href="../Document/Graphics/Interfaces/gsn_y.html"><strong>gsn_y</strong></a> to create an XY plot,
+and setting the resource <a href="../Document/Graphics/Resources/xy.html#xyMarkLineMode"><em>xyMarkLineMode</em></a> to "Markers" to get markers
+instead of lines.
+<p>
+
+The appearance of the markers are changed using
+<a href="../Document/Graphics/Resources/xy.html#xyMarker"><em>xyMarker</em></a> to get a filled dot, <a href="../Document/Graphics/Resources/xy.html#xyMarkerColor"><em>xyMarkerColor</em></a> to change the color, and <a href="../Document/Graphics/Resources/xy.html#xyMarkerSizeF"><em>xyMarkerSizeF</em></a> to change the size.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Scatter/NCL_scatter_1.html#sphx-glr-gallery-scatter-ncl-scatter-1-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Scatter_2--> <a name=ex2></a> <a href="Images/scatter_2_1_lg.png">
+<img src="Images/scatter_2_1_sm.png" align=left border=2></a> <a
+href="Images/scatter_2_2_lg.png"> <img src="Images/scatter_2_2_sm.png"
+align=left border=2></a> <a
+href="Scripts/scatter_2.html">scatter_2.ncl</a>: This is similar to the
+previous example, except <a href="../Document/Functions/Built-in/NhlNewMarker.html"><strong>NhlNewMarker</strong></a> is used to
+create a new marker (clover, character 'p' in <a
+href="../Document/Graphics/Images/font35.png">font
+table #35</a>).  You can create your own marker using any character
+from any of NCL's <a
+href="../Document/Graphics/font_tables.html">font
+tables</a>.
+<p>
+
+The second frame of this example shows how you can clip
+the markers by setting <a href="../Document/Graphics/Resources/vp.html#vpClipOn"><em>vpClipOn</em></a> to True.
+
+</div>
+
+
+<div class=ex>
+<!--Scatter_3--> <a name=ex3></a> <a href="Images/scatter_3_1_lg.png">
+<img src="Images/scatter_3_1_sm.png" align=left border=2></a> <a
+href="Images/scatter_3_2_lg.png"> <img src="Images/scatter_3_2_sm.png"
+align=left border=2></a> <a
+href="Scripts/scatter_3.html">scatter_3.ncl</a>: This example
+shows how to create a scatter plot over a map. The
+<a href="../Document/Graphics/Interfaces/gsn_csm_map.html"><strong>gsn_csm_map</strong></a> function
+is used to create and draw the map, and then
+<a href="../Document/Graphics/Interfaces/gsn_polymarker.html"><strong>gsn_polymarker</strong></a> is used to
+draw markers on top of the map.
+<p>
+
+In the second frame, the map is zoomed further in, and the markers are
+"attached" to the map using <a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a>. This means you won't see
+the markers until you draw the map. This is the preferred method,
+especially if you plan to resize or panel this plot later.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Scatter/NCL_scatter_3.html#sphx-glr-gallery-scatter-ncl-scatter-3-py">here</a>.
+<p>
+</div>
+
+
+    <div class=ex>
+    <!--Scatter_4-->
+    <a name=ex4></a>
+    <a href="Images/scatter_4_lg.png">
+    <img src="Images/scatter_4_sm.png" align=left border=2></a>
+
+    <a href="Scripts/scatter_4.html">scatter_4.ncl</a>: Demonstrates a
+    scatter plot with a regression line.
+    <p>
+
+    The function <a href="../Document/Functions/Built-in/regline.html"><strong>regline</strong></a> calculates the least
+    squared regression for a one dimensional array.
+    <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Scatter/NCL_scatter_4.html#sphx-glr-gallery-scatter-ncl-scatter-4-py">here</a>.
+    </div>
+
+    <div class=ex>
+    <!--Scatter_5-->
+    <a name=ex5></a>
+    <a href="Images/scatter_5_lg.png">
+    <img src="Images/scatter_5_sm.png" align=left border=2></a>
+
+    <a href="Scripts/scatter_5.html">scatter_5.ncl</a>: Demonstrates 
+    how to take a 1D array of data, and group the values so you can
+    mark each group with a different marker and color using <a href="../Document/Graphics/Interfaces/gsn_csm_y.html"><strong>gsn_csm_y</strong></a>.
+    <p>
+    The function <a href="../Document/Functions/Built-in/nice_mnmxintvl.html"><strong>nice_mnmxintvl</strong></a> is used to create a 
+    nice set of equally-spaced levels through the data. You can then
+    create a 2D array, where the leftmost dimension represents each level
+    and the rightmost dimension the number of values grouped in that level.
+    <p>
+    <a href="../Document/Graphics/Resources/xy.html#xyMarkers"><em>xyMarkers</em></a> and
+    <a href="../Document/Graphics/Resources/xy.html#xyMarkerColors"><em>xyMarkerColors</em></a> are used to to
+    define different colors and markers for each group.
+    <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Scatter/NCL_scatter_5.html#sphx-glr-gallery-scatter-ncl-scatter-5-py">here</a>.
+    </div>
+
+    <div class=ex>
+    <!--Scatter_6-->
+    <a name=ex6></a>
+    <a href="Images/scatter_6_lg.png">
+    <img src="Images/scatter_6_sm.png" align=left border=2></a>
+
+    <a href="Scripts/scatter_6.html">scatter_6.ncl</a>: Demonstrates 
+    how to draw outlined, filled markers over a polar map plot.
+    <p>
+
+    The <a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a> function
+    is called twice for each range of values: once to draw a filled
+    dot (<a href="../Document/Graphics/Resources/gs.html#gsMarkerIndex"><em>gsMarkerIndex</em></a>=16) and
+    one to draw an outlined dot
+    (<a href="../Document/Graphics/Resources/gs.html#gsMarkerIndex"><em>gsMarkerIndex</em></a>=4). This
+    gives the appearance of outlined markers.  The marker sizes
+    (<a href="../Document/Graphics/Resources/gs.html#gsMarkerSizeF"><em>gsMarkerSizeF</em></a>) range in 
+    value from 0.025 to 0.075.
+    <p>
+    The <a href="../Document/Functions/Built-in/random_uniform.html"><strong>random_uniform</strong></a> function is used to generate
+    random data.<p>
+    <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Scatter/NCL_scatter_6.html#sphx-glr-gallery-scatter-ncl-scatter-6-py">here</a>.
+    <p>
+    </div>
+
+    <div class=ex>
+    <!--newcolor_4-->
+    <a name=ex4></a>
+    <a href="Images/newcolor_4_2_lg.png">
+    <img src="Images/newcolor_4_2_sm.png" align=left border=2></a>
+    <a href="Scripts/newcolor_4.html">newcolor_4.ncl</a>: 
+
+    This example is identical to the previous scatter_6.ncl example,
+    except it uses the
+    new <a href="../Document/Graphics/Resources/gs.html#gsMarkerOpacityF"><em>gsMarkerOpacityF</em></a>
+    resource introduced in
+    NCL <a href="../prev_releases.html#6.1.0">6.1.0</a> to make
+    the filled markers partially transparent.<p>
+    
+    Only the second frame is shown here. Notice how markers that are
+    obscured in the first version are visible in the second plot.
+    </div>
+
+    <div class=ex>
+    <!--Scatter_7-->
+    <a name=ex7></a>
+    <a href="Images/scatter_7_lg.png">
+    <img src="Images/scatter_7_sm.png" align=left border=2></a>
+
+    <a href="Scripts/scatter_7.html">scatter_7.ncl</a>: Demonstrates how to 
+    draw hollow markers of different sizes and colors, and then use
+    labelbars, markers, and text to create a legend.<p>
+
+    The original version of example was contributed by Larry McDaniel
+    of <a href="http://www2.image.ucar.edu/">IMAGe</a>
+    / <a href="http://ncar.ucar.edu/">NCAR</a>. It was pared down
+    significantly to remove all the data processing calls.
+    </div>
+
+    <div class=ex>
+    <!--Scatter_8-->
+    <a name=ex8></a>
+    <a href="Images/scatter_8_lg.png">
+    <img src="Images/scatter_8_sm.png" align=left border=2></a>
+
+    <a href="Scripts/scatter_8.html">scatter_8.ncl</a>: Demonstrates how to 
+    draw filled square markers of different colors, and then 
+    attach a labelbar to the outside of the plot.<p>
+
+    </div>
+
+    <div class=ex>
+    <!--Scatter_9-->
+    <a name=ex9></a>
+    <a href="Images/scatter_9_lg.png">
+    <img src="Images/scatter_9_sm.png" align=left border=2></a>
+
+    <a href="Scripts/scatter_9.html">scatter_9.ncl</a>: Demonstrates
+    how to use <a href="../Document/Functions/Built-in/lspoly.html"><strong>lspoly</strong></a> to calculate a least-squares
+    polynomial fit through a random set of points.
+
+    </div>
+
+    <div class=ex>
+    <!--Scatter_10-->
+    <a name=ex10></a>
+    <a href="Images/scatter_10_lg.png">
+    <img src="Images/scatter_10_sm.png" align=left border=2></a>
+
+    <a href="Scripts/scatter_10.html">scatter_10.ncl</a>: Demonstrates how to 
+    overlay a scatter plot (of filled squares) on a map plot, when the
+    scatter plot is not in lat/lon space.  The key is to use
+    <a href="../Document/Graphics/Interfaces/gsn_csm_blank_plot.html"><strong>gsn_csm_blank_plot</strong></a> to create a 
+    canvas for drawing the filled polygons, making sure that the four
+    corners of the blank plot correspond with the four corners of the
+    cylindrical equidistant map plot that is created. 
+     <p>
+    You then set <a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> to
+    True to make sure that when the blank plot is overlaid on the map
+    plot using the <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> procedure, it simply
+    lines up the corners of the two plots and does the draw.
+    <p>
+    In this example, the blank plot goes from 0,ny+1 in the Y direction,
+    and 0,nx+1 in the x direction. This corresponds to the following
+    lat/lon locations:<p>
+    <pre>
+     x = 0    --> lon = -180
+     x = nx+1 --> lon =  180
+     y = 0    --> lon =  -90
+     y = ny+1 --> lon =   90
+   </pre>
+</div>
+
+<div class=ex>
+<!--Scatter_11--> <a name=ex11></a> 
+<a href="Images/scatter_11_1_lg.png">
+   <img src="Images/scatter_11_1_sm.png" align=left border=2>
+</a> 
+<a href="Images/scatter_11_2_lg.png"> 
+   <img src="Images/scatter_11_2_sm.png" align=left border=2>
+</a> 
+<a href="Scripts/scatter_11.html">scatter_11.ncl</a>
+: Adapted from scatter_5.ncl, illustrates the use of new XYPlot 
+opacities resources for controlling the transparency of markers on a
+scatter plot (new with NCL 6.4.0).  See <a href="../Document/Graphics/Resources/xy.html#
+xyMarkerOpacityF"><em>
+xyMarkerOpacityF</em></a> and <a href="../Document/Graphics/Resources/xy.html#
+xyMarkerOpacities"><em>
+xyMarkerOpacities</em></a>
+</div>
+
+<div class=ex>
+<!--Scatter_12-->
+<a name=ex12></a> 
+<a href="Images/scatter_12_lg.png">
+<img src="Images/scatter_12_sm.png" align=left border=2> </a> 
+<a href="Scripts/scatter_12.html">scatter_12.ncl</a>: Draw separate error 
+bars in the x and y directions.
+<p>
+
+Based on an ncl-talk question (11/2016) by Rashed Mahmood. 
+He 'self-answered' his question with some example code. 
+Alan Brammer (U. Albany) created the x and y separate procedures shown
+in the script.
+
+</div>
+
+<div class=ex>
+<!--Scatter_13-->
+<a name=ex13></a> 
+<a href="Images/scatter_13_lg.png">
+<img src="Images/scatter_13_sm.png" align=left border=2> </a> 
+<a href="Scripts/scatter_13.html">scatter_13.ncl</a>: This script shows
+how to draw a more custom scatter plot with the plot area filled in
+gray and white grid lines added. This plot uses the same data and is similar
+to <a href="bar.html#ex22">bar_22.ncl</a> on the bar plot page.
+<p>
+
+In order to draw the white grid lines under the dots, the
+<a href="../Document/Graphics/Resources/tm.html#tmGridDrawOrder"><em>tmGridDrawOrder</em></a> resource must be set
+to "PreDraw". This resource was added
+in <a href="../prev_releases.html#6.5.0">NCL V6.5.0</a>.  If you try to
+run this script with NCL V6.4.0 or earlier, the grid lines will show
+up on top of the filled dots and you'll get a warning that the
+resource is not valid.
+<p>
+
+There's quite a bit of customization going on with the tickmark
+labels, in order to turn them on and off for various plots.
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/scatter.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:11:30 GMT -->
+</html>
+

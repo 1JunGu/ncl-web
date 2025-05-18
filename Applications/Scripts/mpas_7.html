@@ -1,0 +1,115 @@
+;----------------------------------------------------------------------
+; mpas_7.ncl
+;
+; Concepts illustrated:
+;   - Plotting MPAS data using raster fill
+;   - Using get_cpu_time to calculate timings for various parts of the script
+;   - Using command line options to set variables
+;----------------------------------------------------------------------
+; This script plots the first time step of a two-dimensional variable 
+; (Time x nCells) that's on an MPAS mesh.
+;
+; The default variable plotted is "relhum_200hPa". To select a
+; different variable, set it on the command line:
+;
+;    ncl 'vname="relhum_700hPa"' mpas_7.ncl
+;
+; This particular MPAS file is a quasi-uniform 15 km global forecast
+; file with 2.6 million cells. The lat/lon arrays are in a file
+; called "init.nc", and the data is on a separate file called 
+; "diag.2017-08-24_12.00.00.nc". This data takes about 7 seconds to plot.
+;
+; To see a similar plot from a mixed-resolution file with 6.4 million
+; cells, see mpas_8.ncl.
+;
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+;----------------------------------------------------------------------
+; Prints elapsed time given a start and end time, and a title.
+;----------------------------------------------------------------------
+procedure print_elapsed_time(start_time,end_time,title)
+begin
+  print("----------------------------------------------------------------------")
+  print("Elapsed time : " + title + " : " + (end_time-start_time) + " CPU seconds.")
+  print("----------------------------------------------------------------------")
+end
+
+;----------------------------------------------------------------------
+; Main code
+;----------------------------------------------------------------------
+begin
+    start_code = get_cpu_time()   
+
+;---Set defaults for varname, if not provided on command line.
+    if(.not.isvar("varname")) then
+      varname = "relhum_200hPa"
+    end if
+      
+    dir            = "../Data/2017082400_uni/"
+    mpas_init_file = "init.nc"
+    mpas_diag_file = "diag.2017-08-24_12.00.00.nc"
+    fi = addfile(dir+mpas_init_file,"r")
+    fd = addfile(dir+mpas_diag_file,"r")
+
+    if(.not.isfilevar(fd,varname)) then
+      print("Variable '" + varname + "' doesn't exist on " + dir+mpas_diag_file)
+      exit
+    end if
+    data = fd->$varname$(0,:)     ; Grab first time step
+
+;---Read lat/lon and convert from radians to degrees
+    latCell = fi->latCell
+    lonCell = fi->lonCell
+    RAD2DEG = get_r2d(typeof(lonCell))      ; Radian to Degree
+    lonCell = lonCell*RAD2DEG
+    latCell = latCell*RAD2DEG
+    ncells  = dimsizes(latCell)
+
+;---Print some information, look at your data!
+    print("==================================================")
+    print("Diag file  : " + dir+mpas_diag_file)
+    print("Init file  : " + dir+mpas_init_file)
+    print("# cells    : " + ncells)
+
+    printVarSummary(data)
+    printMinMax(data,0)
+    printMinMax(latCell,0)
+    printMinMax(lonCell,0)
+
+;---Start the graphics
+    start_graphics = get_cpu_time()   
+
+    wks = gsn_open_wks("png","mpas")
+
+    res                       = True              ; Plot mods desired.
+
+    res@gsnMaximize           = True              ; Maximize plot
+
+    res@cnFillOn              = True              ; color plot desired
+    res@cnFillMode            = "RasterFill"      ; USES LESS MEMORY AND IS FASTER
+    res@cnFillPalette         = "BlGrYeOrReVi200"
+    res@cnLinesOn             = False             ; turn off contour lines
+    res@cnLineLabelsOn        = False             ; turn off contour labels
+    res@lbBoxLinesOn          = False             ; turn off labelbar box lines
+    res@pmLabelBarWidthF      = 0.8               ; increase width of labelbar
+    res@cnMaxLevelCount       = 256               ; default is 16
+    res@pmTitleZone           = 4                 ; move title down
+
+    res@mpFillOn              = False
+    res@pmTickMarkDisplayMode = "Always"          ; nicer map tickmark labels
+
+    res@sfXArray              = lonCell           ; necessary for plotting MPAS
+    res@sfYArray              = latCell
+    res@gsnAddCyclic          = False
+
+    res@tiMainString          = mpas_diag_file + " (" + varname + ", " + ncells + " cells)"
+    res@tiMainFontHeightF     = 0.02
+
+    plot = gsn_csm_contour_map(wks,data,res)  
+
+    print_elapsed_time(start_graphics,get_cpu_time(),"plotting data")
+    print_elapsed_time(start_code,get_cpu_time(),get_script_prefix_name()) 
+end

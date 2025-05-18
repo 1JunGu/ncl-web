@@ -1,0 +1,564 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/write_nc4_1dUnlimited.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 16:16:08 GMT -->
+<head>
+<meta name="description" content="NCL file IO example page. Demonstrates
+how to write netCDF4 data with one unlimited dimension with chunking and compression.">
+<TITLE>NCL: File Handling, File IO EX: write netCDF with one unlimited dimension</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_io.html">File IO</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+>
+<a class=crumb href="write_netcdf.html">write netCDF</a><br>
+
+<h1>NCL: Write netCDF with one unlimited dimension, plus chunking and compression</h1>
+<br>
+
+<b><i>Support for NetCDF-4 files is in beta-testing in V6.1.1.</i><br>
+We encourage people to test it out and give us feedback on
+our <a href="../Support/email_lists.html">ncl-talk email list</a>.</b>
+<p>
+
+Below is a script which creates a variable with one unlimited dimension,
+and then expands it in the dimension, plus chunking and compression.
+<br>
+<br>
+
+Pre-define some properties before writing the file
+<pre>
+; This script writes a large variable to a file in NetCDF4
+; with chunking and compression.
+
+begin
+
+ theflnm = "./nc4_chunkingNcompression.nc"
+ setfileoption("nc","format","netcdf4")
+ setfileoption("nc","headerReserveSpace",64000)
+ setfileoption("nc","preFill",False)
+;setfileoption("nc","defineMode",True)
+
+;Remove the file if it already existed.
+ if (isfilepresent(theflnm)) then
+        system("rm " + theflnm)
+ end if
+</pre>
+<br>
+<hr>
+<br>
+
+Create the file:
+<pre>
+
+ f = addfile(theflnm,"c")
+
+</pre>
+<br>
+<hr>
+<br>
+
+Define dimensions:
+<p>
+(Note ONLY time dimension is unlimited, and its current value is 1.)
+<pre>
+ ctim = 1
+ ntim = 250 ;1000 will be little bit too much
+ nlat = 1800
+ nlon = 3600
+ dim_names = (/"time","lat","lon"/)
+;time dimension is unlimited, but currently set to 1.
+ dim_sizes = (/ctim,nlat,nlon/)
+ dim_unlimited = (/True,False,False/)
+
+ print("Defining dimension sizes to be " + dim_sizes)
+ filedimdef(f,dim_names,dim_sizes,dim_unlimited)
+</pre>
+<br>
+<hr>
+<br>
+
+Define the chunk sizes:
+<pre>
+ mtim = 1
+ mlat = nlat/10
+ mlon = nlon/10
+ chunk_sizes = (/mtim,mlat,mlon/)
+ filechunkdimdef(f,dim_names,chunk_sizes,dim_unlimited)
+</pre>
+<br>
+<hr>
+<br>
+
+Define some file properties:
+<pre>
+ atts = True
+ atts@description = "This file tests NCL's ability to create >2GB variables"
+ atts@timestamp = systemfunc("date")
+ print("Defining file attributes")
+ fileattdef(f,atts)
+</pre>
+<br>
+<hr>
+<br>
+
+Define file variables:
+<pre>
+ print("Defining file variables")
+ filevardef(f,"time","float","time")
+ filevardef(f,"lat","float","lat")
+ filevardef(f,"lon","float","lon")
+ filevardef(f,"wave","float",(/"time","lat","lon"/))
+</pre>
+<br>
+<hr>
+<br>
+
+Define file variables attributes:
+<pre>
+ print("Defining file variable attributes")
+ tatts = True
+ tatts@long_name = "elapsed time"
+ tatts@units = "hours since 01-01-2000"
+ filevarattdef(f,"time",tatts)
+
+ latatts = True
+ latatts@long_name = "latitude"
+ latatts@units = "degrees_north"
+ filevarattdef(f,"lat",latatts)
+
+ lonatts = True
+ lonatts@long_name = "longitude"
+ lonatts@units = "degrees_east"
+ filevarattdef(f,"lon",lonatts)
+
+ waveatts = 0.0
+ waveatts@long_name = "Sine Wave on the sphere"
+ waveatts@units = "None"
+ waveatts@_FillValue = 1e32
+ filevarattdef(f,"wave",waveatts)
+
+ filevarchunkdef(f, "wave", chunk_sizes)
+ filevarcompressleveldef(f, "wave", 2)
+</pre>
+<br>
+<hr>
+<br>
+
+Create coordinate arrays:
+<p>
+(Note lon and lat write out here, but time will write later.)
+<pre>
+ print("Creating coordinate arrays")
+ time = fspan(0,ntim-1,ntim)
+ lat = fspan(-90,90,nlat)
+ f->lat = (/lat/)
+ lon = fspan(-180,180,nlon)
+ f->lon = (/lon/)
+</pre>
+<br>
+<hr>
+<br>
+
+Generate a 2D array (and make it not too boring).
+<pre>
+ print("Generating " + nlat + " x " + nlon + " array")
+ base = new((/nlat, nlon/), "float", waveatts@_FillValue)
+ wave = new((/nlat, nlon/), "float", waveatts@_FillValue)
+
+ arc = 2.0 * 3.141693 / 180.0
+
+ lon = sin(arc * lon)
+ lat = cos(arc * lat)
+
+ do j = 0, nlat -1
+    base(j, :) = lat(j) * lon
+ end do
+</pre>
+<br>
+<hr>
+<br>
+
+Loop through time, and write out the data (like integrating a model).
+<pre>
+ print("Looping across time (" + ntim + ")")
+ do n = 0, ntim-1
+    tf = sin(0.01 * arc * (n + 1))
+   ;generate a 2d array
+    b1 = base(:, nlon - 1)
+    base(:, 1:nlon - 1) = base(:, 0:nlon - 2)
+    base(:, 0) = b1;
+
+    wave = tf * base;
+
+    f->time(n) = (/time(n)/)
+    f->wave(n,:,:) = (/wave/)
+    command = "date; ls -l " + theflnm
+    m = n + 1
+    print(systemfunc(command) + " : timestep " + m + "/" + ntim)
+ end do
+</pre>
+<br>
+<hr>
+<br>
+
+The end.
+<pre>
+ print("Done looping across time (" + ntim + ")")
+
+ delete(f)
+end
+</pre>
+<br>
+<hr>
+<br>
+
+<br>
+This script produced (use "ncl_filedump nc4_chunkingNcompression.nc"):
+<pre>
+Variable: f
+Type: file
+filename:       nc4_chunkingNcompression
+path:   nc4_chunkingNcompression.nc
+attributes:
+    timestamp   :       Fri Jan 25 11:33:34 MST 2013
+    description :       This file tests NCL's ability to create >2GB variables
+
+dimensions:
+    time        = 250 // unlimited
+    lat = 1800
+    lon = 3600
+
+chunk dimensions:
+    time        = 1 // unlimited
+    lat = 180
+    lon = 360
+
+variables:
+    time: <float>       [ 250 <time | unlimited> ]
+        Chunking Info:  [ 1 <time | unlimited> ]
+        attributes:
+            units       :       hours since 01-01-2000
+            long_name   :       elapsed time
+
+    lat: <float>        [ 1800 <lat> ]
+        Chunking Info:  [ 1 <lat> ]
+        attributes:
+            units       :       degrees_north
+            long_name   :       latitude
+
+    lon: <float>        [ 3600 <lon> ]
+        Chunking Info:  [ 1 <lon> ]
+        attributes:
+            units       :       degrees_east
+            long_name   :       longitude
+
+    wave: <float>       [ 250 <time | unlimited>, 1800 <lat>, 3600 <lon> ]
+        Chunking Info:  [ 1 <time | unlimited>, 180 <lat>, 360 <lon> ]
+        attributes:
+            _FillValue  :       100000003318135351409612647563264.000000
+            units       :       None
+            long_name   :       Sine Wave on the sphere
+</pre>
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</BODY>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/write_nc4_1dUnlimited.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 16:16:08 GMT -->
+</HTML>
+
+

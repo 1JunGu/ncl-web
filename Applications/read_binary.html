@@ -1,0 +1,536 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/read_binary.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:16:04 GMT -->
+<head>
+<meta name="description" content="NCL file IO example page. Demonstrates
+how to read binary data">
+<TITLE>NCL: Reading binary data</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_io.html">File IO</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL: Reading binary data</h1>
+
+<div class=text>
+
+A brief description about what functions are available to read in
+binary data is found below, along with a <a href="#Portability">note
+about portability issues</a>, <a href="#Examples">two example
+scripts</a>, and <a href="#FormatHints">hints on determining the
+format of a binary file</a>.
+<p>
+
+Each type of binary data has its own read function. You must know how
+your data was written. (See <a href="#FormatHints">note</a> below for
+hints on how to figure out what type of file you have.)
+
+<pre>
+    Direct Access:            data = <a href="../Document/Functions/Built-in/fbindirread.html"><strong>fbindirread</strong></a>(path,rec,dim,type)
+
+    Sequential Access:        data = <a href="../Document/Functions/Built-in/fbinrecread.html"><strong>fbinrecread</strong></a>(path,rec,dim,type)
+
+    Cray (C block IO write):  data = <a href="../Document/Functions/Built-in/cbinread.html"><strong>cbinread</strong></a>(path,dim,type)
+
+    Cray Sequential:          data = <a href="../Document/Functions/Built-in/craybinrecread.html"><strong>craybinrecread</strong></a>(path,rec,dim,type)
+</pre>
+
+<a name="Portability"></a>
+   <h3>Binary file portability</h3>
+   <p> <p>
+    Binary files created on one machine may not be directly
+    portable to another machine. Just as some human languages
+    are read left-to-right and others right-to-left, computers
+    have an analogous situation. The terms used to describe
+    the way numbers are stored are <b>big-endian</b> and
+    <b>little-endian</b>. A big-endian representation means the
+    most significant byte is on the left while a little-endian
+    representation means the most significant byte is on the right.
+    <p>
+    Typical big-endian operating systems include: AIX, IRIX, SOLARIS,
+    Java Virtual Machine, etc. Typical little-endian machines include PCs
+    running linux or windows. 
+    <p>
+    NCL allows users to read files created using, say, big-endian
+    machines on little-endian machines and vice versa via the
+    <a href="../Document/Functions/Built-in/setfileoption.html"><strong>setfileoption</strong></a>
+    procedure. This procedure also allows the data to be written
+    according to a specified byte order.<p>
+
+    <pre>
+     setfileoption("bin","ReadByteOrder","LittleEndian")
+     v = cbinread("data.littleEndian.bin",-1,"float")
+
+     setfileoption("bin","WriteByteOrder","BigEndian")
+     cbinwrite("data.bigEndian.bin",v)
+    </pre>
+</div>
+
+<div class=text>
+
+<a name="FormatHints"></a> <h3>Hints on determining the exact format
+of a binary file</h3>
+<p>
+
+<i>[Thanks to Dave Allured of NOAA for this write-up.]</i><p>
+
+One general method of file sleuthing is to add up the expected byte
+sizes of all of the arrays that are supposed to be in the binary file,
+and compare with the actual file size.  The exact difference value is
+an indicator of the file format.
+<p>
+
+<ul>
+<li>Difference 0 implies flat binary file.
+<li>Difference 8 implies Fortran sequential and single large record.
+<li>Difference 8 * (number of variables) implies Fortran sequential
+and each variable in a separate record.
+</ul>
+
+If the difference is other than one of these three, then there are
+other possibilities.  There may be more or fewer variables in the file
+than expected; some of the arrays may be packed or double precision;
+the dimensions may be other than expected; there may be header records
+in the file; the record structure is something other than the simple
+possibilities above.  You may be able to determine some of these other
+possibilities by manual inspection of the binary file.
+<p>
+
+Fortran sequential binary files contain additional hidden information
+about the length of each data record.  This hidden information can be
+used to determine the location and length of all of the records in the
+file, and will help to determine the contents of an undocumented file.
+<p>
+
+The full record structure of a Fortran sequential binary file is:
+<p>
+
+<blockquote>
+  [Length]  [Record 1 data]  [Length]<br>
+  [Length]  [Record 2 data]  [Length]<br>
+  [Length]  [Record 3 data]  [Length]<br>
+  ...<br>
+  [End of file]
+</blockquote>
+
+Each length indicator is usually a <a href="#caveat">single 4-byte
+integer</a><font color=red>**</font> that is the length in bytes of the
+data portion of the record.  The prefix and suffix lengths are the
+same for each record.  You can easily check the first record to
+confirm or disprove that the file is really Fortran sequential.
+<p>
+
+If sequential, then by manual inspection you can *always* jump exactly
+from the start to end of every record in the file, and thereby
+determine the exact file offset and size of every record.
+<p>
+
+If you then compare the individual detected record sizes to the sizes
+of the expected arrays, then you can start matching up variables to
+record positions in the file.  This will allow you to separate your 2D
+and 3D arrays, for example.
+<p>
+
+This depends on the educated guess that each data variable was written
+as a single Fortran sequential record.  This is an assumption and is
+not necessarily how they did it.
+<p>
+
+The Unix "od" command is helpful to inspect unknown files.  You may
+first need to convert a sample big endian file to little endian for
+study, because I don't think od has an option to reverse the byte
+order.
+<p>
+
+For example, this displays the start of the file as integers, allowing
+you to see the length prefix integer on the first record. If this
+integer matches the expected total size in bytes of one of your data
+arrays, then you are on the right track:
+<p>
+
+<pre>
+  od -Ad -i -N80 file.bin
+</pre>
+
+By adding the -j option, you can offset to get the first record suffix
+and the second record prefix.  Suppose len(1) = 200, then offset 4 for
+the first prefix plus 200 for the data:
+<p>
+
+<pre>
+  od -Ad -i -N80 -j204 file.bin
+</pre>
+
+Alternatively, you can use NCL to search for the length integers. The
+example below reads the entire file as a single 1D array of integers,
+then finds the start of each record by accumulating the offset.
+<p>
+
+The data size of each record and the prefix and suffix integers are printed:
+<p>
+
+<pre>
+  setfileoption ("bin", "ReadByteOrder", "BigEndian")
+  idat = fbindirread ("jma_file", 0, -1, "integer")
+  dims = dimsizes (idat)
+  offset = 0
+  recnum = 0
+
+  do while (offset .lt. dims(0))
+    prefix = idat(offset)
+    print ("array size " + recnum + " = " + prefix/4)
+    print ("prefix " + recnum + " = " + prefix)
+
+    offset = offset + 2 + prefix/4    ; start of next record
+    suffix = idat(offset-1)
+    print ("suffix " + recnum + " = " + suffix)
+    recnum = recnum + 1
+
+  end do
+</pre>
+
+This loop will crash with a subscript error if the file is not Fortran
+sequential, or certain other assumptions are wrong.
+<p>
+
+Once you have better information about the file format, you can move
+on to actually reading selected data arrays from the file.
+</pre>
+<p>
+
+<a name="caveat"></a><font color=red>** Note</font>: on some systems,
+the record indicator size might be 8 bytes.  This can happen if the
+compiler uses the size of "off_t" to determine the record indicator
+length. To force a 4-byte record indicator with the g77 or gfortran
+compilers, you can recompile your code with the option
+"-frecord-marker=4".
+
+</div>
+
+<div class=ex>
+<!--Read_bin_1-->
+<a name=ex1></a>
+<a href="Scripts/read_bin_1.html">read_bin_1.ncl</a>: This
+example shows how to read several records off an unformatted
+Fortran binary file. The assumption here is that the 
+binary file has the same "endianness" as the machine you
+are running this script on. Otherwise, you  need
+to use <a href="../Document/Functions/Built-in/setfileoption.html"><strong>setfileoption</strong></a> as described above
+to change the endianness.
+<p>
+
+Note that the meta data needs to be assigned since
+binary data does not contain meta data.
+</div>
+    
+<div class=ex>
+<!--Read_bin_2-->
+<a name=ex2></a>
+
+<a href="Scripts/read_bin_2.html">read_bin_2.ncl</a>: This
+script shows how to read data off record 0 of several Fortran binary
+files into a single array, and then write it to a NetCDF file.
+<p>
+
+As with the above example, you need to create and assign the meta data 
+yourself before writing the variable to a NetCDF file.
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</BODY>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/read_binary.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:16:04 GMT -->
+</HTML>
+

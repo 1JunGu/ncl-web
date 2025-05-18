@@ -1,0 +1,91 @@
+netcdf \3B40RT.2001012212 {
+dimensions:
+	time = UNLIMITED ; // (1 currently)
+	lat = 480 ;
+	lon = 1440 ;
+variables:
+	double time(time) ;
+		time:calendar = "standard" ;
+		time:units = "hours since 1997-01-01 00:00:0.0" ;
+	float lat(lat) ;
+		lat:units = "degrees_north" ;
+		lat:long_name = "latitude" ;
+	float lon(lon) ;
+		lon:units = "degrees_east" ;
+		lon:long_name = "longitude" ;
+	int date(time) ;
+		date:long_name = "Current date as YYYYMMDDHH" ;
+	short PRC(time, lat, lon) ;
+		PRC:missing_value = -31999s ;
+		PRC:add_offset = 0.f ;
+		PRC:scale_factor = 0.01f ;
+		PRC:long_name = "TRMM_3B40RT: Hourly Rain Rate" ;
+		PRC:units = "mm/hr" ;
+		PRC:_FillValue = -31999s ;
+	short RELERR(time, lat, lon) ;
+		RELERR:add_offset = 0.f ;
+		RELERR:scale_factor = 0.01f ;
+		RELERR:long_name = "TRMM_3B40RT: Error Hourly Rain Rate" ;
+		RELERR:units = "mm/hr" ;
+		RELERR:_FillValue = -31999s ;
+	byte PIX(time, lat, lon) ;
+		PIX:long_name = "TRMM_3B40RT: Pixels" ;
+		PIX:units = "....." ;
+	byte PIXA(time, lat, lon) ;
+		PIXA:long_name = "TRMM_3B40RT: Ambiguous Pixels" ;
+		PIXA:units = "....." ;
+	byte PIX_RAIN(time, lat, lon) ;
+		PIX_RAIN:long_name = "TRMM_3B40RT: Rain Pixels" ;
+		PIX_RAIN:units = "....." ;
+	byte SRC(time, lat, lon) ;
+		SRC:source = "0=no observation, 1=AMSU, 2=TMI, 3=AMSR, 4=SSMI, 5=SSMIS, 6=MHS, 30=AMSU&MHS avg, 31=conical avg, 50=IR, 1,2,3,4,5,6+100=Sparce Sample" ;
+		SRC:long_name = "Data Source" ;
+
+// global attributes:
+		:title = "TRMM_3B40RT" ;
+		:run_latency = "LAST" ;
+		:contact_email = "helpdesk@pps-mail.nascom.nasa.gov" ;
+		:contact_facsimile = "301-614-5575" ;
+		:contact_telephone = "301-614-5184" ;
+		:contact_address = "NASA/GSFC_Code_610.2_Greenbelt_MD_20771_USA" ;
+		:contact_name = "TSDIS_Helpdesk" ;
+		:flag_name = "insufficient_observations" ;
+		:flag_value = "-31999" ;
+		:byte_order = "big_endian" ;
+		:variable_type = "signed_integer2,signed_integer2,signed_integer1,signed_integer1,signed_integer1,signed_integer1" ;
+		:variable_scale = "100,100,1,1,1,1" ;
+		:variable_units = "mm/hr,mm/hr,counts,counts,counts,source_number" ;
+		:variable_name = "precipitation,precipitation_error,total_pixels,ambiguous_pixels,rain_pixels,source" ;
+		:number_of_variables = "6" ;
+		:last_box_center = "89.875S,359.875E" ;
+		:second_box_center = "89.875N,0.375E" ;
+		:first_box_center = "89.875N,0.125E" ;
+		:grid = "0.25x0.25_deg_lat/lon" ;
+		:number_of_longitude_bins = "1440" ;
+		:number_of_latitude_bins = "720" ;
+		:origin = "northwest" ;
+		:south_boundary = "90S" ;
+		:north_boundary = "90N" ;
+		:east_boundary = "360E" ;
+		:west_boundary = "0E" ;
+		:creation_date = "20121111" ;
+		:end_HHMMSS = "133000" ;
+		:end_YYYYMMDD = "20010122" ;
+		:begin_HHMMSS = "103000" ;
+		:begin_YYYYMMDD = "20010122" ;
+		:nominal_HHMMSS = "120000" ;
+		:nominal_YYYYMMDD = "20010122" ;
+		:file_byte_length = "(char2880)_header+(int2)x1440x720x2_data+(int1)x1440x720x4_data" ;
+		:header_byte_length = "2880" ;
+		:granule_ID = "3B40RT.2001012212.7R2.bin" ;
+		:algorithm_version = "07.00" ;
+		:algorithm_ID = "3B40RT" ;
+		:reference = "\n",
+			"George J. Huffman at al, 2007                                          \n",
+			"   The TRMM Multisatellite Precipitation Analysis (TMPA):              \n",
+			"   Quasi-Global, Multiyear, Combined-Sensor Precipitation Estimates at Fine Scales\n",
+			"   J. Hydrometeor, 8, 38–55 ,  doi: http://dx.doi.org/10.1175/JHM560.1\n",
+			"   \n",
+			"" ;
+		:netCDF_creation_date = "Mon Sep 29 07:21:58 MDT 2014" ;
+}

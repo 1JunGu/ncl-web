@@ -1,0 +1,525 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ind_resolve.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:41 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (array manipulators)">
+<meta name="keywords" content="ind_resolve">
+<title>ind_resolve</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../array_manip.html">Array manipulators</a>
+<br>
+<h1>ind_resolve</h1>
+
+<p>
+Resolves a single list of indices to their multi-dimensional
+representation.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function ind_resolve (
+		indices [*] : byte, short, integer or long,  
+		dsizes  [*] : byte, short, integer or long   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  integer or long
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>indices</em>
+<p class=indent>A list of indices into a one-dimensional array that was converted to a
+one-dimensional array from a multi-dimensional array.
+</p>
+<em>dsizes</em>
+<p class=indent>A list of dimension sizes of the multi-dimensioned array mentioned
+above.
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+<strong>ind_resolve</strong> takes a list of indices into a
+one-dimensional array (that was converted from a multi-dimensional
+array) and returns the list of indices that they represent in the
+multi-dimensional array.  The array returned will be dimensioned
+<em>N</em> x <em>M</em>, where <em>N</em> is the number of indices and
+<em>M</em> is the length of <em>dsizes</em> (the number of dimensions
+of the multi-dimensional array).<P>
+<p>
+
+As of version <a href="../../../prev_releases.html#6.0.0">6.0.0</a>, this
+function allows "long" input for the indices and/or dimension sizes,
+which potentially allows you to have values greater than or equal to 2
+gigabytes (GB) on a 64-bit system. This function will return longs if
+on a 64-bit system and any of the values are >= 2 GB.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="ind.html"><strong>ind</strong></a>,
+<a href="../Contributed/region_ind.html"><strong>region_ind</strong></a>,
+<a href="../Contributed/get1Dindex.html"><strong>get1Dindex</strong></a>,
+<a href="where.html"><strong>where</strong></a>,
+<a href="ndtooned.html"><strong>ndtooned</strong></a>,
+<a href="onedtond.html"><strong>onedtond</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><P>
+
+The following example demonstrates the usefulness of the
+<strong>ind_resolve</strong> function in conjunction with the
+<a href="ind.html"><strong>ind</strong></a> function. Note that this code can be simplified
+to two lines of code by the use of the <a href="where.html"><strong>where</strong></a>
+function, which will be demonstrated below.  <p>
+
+
+<pre>
+;
+; Create sample multi-dimensioned array.
+; The following creates a 3D array of size 2 x 2 x 4.
+;
+  a = (/(/(/1,2,3,4/), (/5,6,7,8/)/), (/(/9,10,9,8/),(/7,6,5,4/)/)/)
+;
+; Returns the index locations where "a" is greater than 5.
+; NCL's <a href="ndtooned.html"><strong>ndtooned</strong></a> is used to temporarily
+; reshape "a" as is required by the <a href="ind.html"><strong>ind</strong></a> function.
+;
+;
+  a1D      = <a href="ndtooned.html"><strong>ndtooned</strong></a>(a)
+  dsizes_a = <a href="dimsizes.html"><strong>dimsizes</strong></a>(a)
+  indices  = <strong>ind_resolve</strong>(<a href="ind.html"><strong>ind</strong></a>(a1D.gt.5),dsizes_a)
+  <a href="print.html"><strong>print</strong></a>(indices)
+
+; Set all elements of "a" which are greater than 5 to -999.
+
+  dim_ida  = <a href="dimsizes.html"><strong>dimsizes</strong></a>(indices)     
+  npts     = dim_ida(0)       ; number of elements > 5 (here 9)
+  ndim     = dim_ida(1)       ; rank of "a"  (here 3)
+  
+  a@_FillValue = -999
+  do n=0,npts-1
+     a(indices(n,0),indices(n,1),indices(n,2)) = a@_FillValue
+  end do
+  <a href="print.html"><strong>print</strong></a>(a)
+</pre>
+<p>
+
+There are nine index locations where <em>a</em> is greater than 5:
+(0,1,1), (0,1,2), (0,1,3), (1,0,0), (1,0,1), (1,0,2), (1,0,3),
+(1,1,0), and (1,1,1). The above script, then, will return an array
+dimensioned 9 x 3 with the following values:<p>
+
+<pre>
+Variable: indices
+Type: integer
+Total Size: 108 bytes
+            27 values
+Number of Dimensions: 2
+Dimensions and sizes:   [9] x [3]
+Coordinates: 
+Number Of Attributes: 1
+  _FillValue :  -999
+(0,0)   0
+(0,1)   1
+(0,2)   1
+(1,0)   0
+(1,1)   1
+(1,2)   2
+(2,0)   0
+(2,1)   1
+(2,2)   3
+(3,0)   1
+(3,1)   0
+(3,2)   0
+(4,0)   1
+(4,1)   0
+(4,2)   1
+(5,0)   1
+(5,1)   0
+(5,2)   2
+(6,0)   1
+(6,1)   0
+(6,2)   3
+(7,0)   1
+(7,1)   1
+(7,2)   0
+(8,0)   1
+(8,1)   1
+(8,2)   1
+</pre>
+<p>
+
+After the do loop, the array <em>a</em> contains the following:<p>
+
+<pre>
+Variable: a
+Type: integer
+Total Size: 64 bytes
+           16 values
+Number of Dimensions: 3
+Dimensions and sizes:   [2] x [2] x [4]
+Coordinates: 
+(0,0,0) 1
+(0,0,1) 2
+(0,0,2) 3
+(0,0,3) 4
+(0,1,0) 5
+(0,1,1) -999
+(0,1,2) -999
+(0,1,3) -999
+(1,0,0) -999
+(1,0,1) -999
+(1,0,2) -999
+(1,0,3) -999
+(1,1,0) -999
+(1,1,1) -999
+(1,1,2) 5
+(1,1,3) 4
+</pre>
+<p>
+
+The above code can be drastically simplified by the use of
+the <a href="where.html"><strong>where</strong></a> function:
+<p>
+
+<pre>
+  a@_FillValue = -999
+  a = <a href="where.html"><strong>where</strong></a>(a.gt.5,a,a@_FillValue)
+</pre>
+
+<b>Example 2</b><p>
+
+Determine all locations of a multi-dimensional array (<em>x</em>)
+where the elements match the minimum or maximum values. This is a more
+general approach than offered by the <a href="maxind.html"><strong>maxind</strong></a> and
+<a href="minind.html"><strong>minind</strong></a> functions:<p>
+
+<pre>
+  xMax = <a href="max.html"><strong>max</strong></a>(x)
+  xMin = <a href="min.html"><strong>min</strong></a>(x)
+ 
+  x1D = <a href="ndtooned.html"><strong>ndtooned</strong></a>(x)     ; only do this once
+  indMax = <strong>ind_resolve</strong>(<a href="ind.html"><strong>ind</strong></a>(x1D.eq.xMax),<a href="dimsizes.html"><strong>dimsizes</strong></a>(x))  ; locations of <a href="max.html"><strong>max</strong></a>
+  indMin = <strong>ind_resolve</strong>(<a href="ind.html"><strong>ind</strong></a>(x1D.eq.xMin),<a href="dimsizes.html"><strong>dimsizes</strong></a>(x))  ; locations of <a href="min.html"><strong>min</strong></a>
+  <a href="delete.html"><strong>delete</strong></a> (x1D)
+</pre>
+<p>
+
+<b>Example 3</b><p>
+
+Assume <em>x</em> is a three-dimensional array with coordinate
+variables (<em>time</em>,<em>lat</em>,<em>lon</em>).  Print the
+coordinates where -3 < <em>x</em> < 9. Before executing various
+statements, check to make sure that at least some values of <em>x</em>
+satisfy the criteria. Use the <a href="num.html"><strong>num</strong></a> function to test
+if there are values between -3 and 9, then print the times, latitudes,
+and longitudes:
+
+<pre>
+  if (<a href="num.html"><strong>num</strong></a>(x.gt.-3. .and. x.lt.9.) .gt. 0) then
+      x1D = <a href="ndtooned.html"><strong>ndtooned</strong></a>(x)   
+      i1D = <a href="ind.html"><strong>ind</strong></a>(x1D.gt.-3. .and. x1D.lt.9.) 
+      i   = <strong>ind_resolve</strong>(i1D, <a href="dimsizes.html"><strong>dimsizes</strong></a>(x) )     ; 2D  [npts,3]  (rank(x)=3)
+      <a href="print.html"><strong>print</strong></a>(time(i(:,0)) +"  "+ lat(i(:,1)) +"  "+lon(i(:,2)) )
+
+      <a href="delete.html"><strong>delete</strong></a>(x1d)     ; no longer needed
+      <a href="delete.html"><strong>delete</strong></a>(i1d)
+  end if
+</pre>
+<p>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ind_resolve.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:41 GMT -->
+</html>

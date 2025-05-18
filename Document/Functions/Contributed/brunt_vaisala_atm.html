@@ -1,0 +1,472 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/brunt_vaisala_atm.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:13 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (meteorology)">
+<meta name="keywords" content="brunt_vaisala_atm">
+<title>brunt_vaisala_atm</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../meteo.html">Meteorology</a>
+<br>
+<h1>brunt_vaisala_atm</h1>
+
+<p>
+Compute the Brunt-Vaisala frequency which is a measure of bouyancy in a continuously stratified atmosphere.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.4.0">version 6.4.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function brunt_vaisala_atm (
+		th      : numeric,  ; float, double, integer only
+		z       : numeric,  
+		opt [1] : integer,  
+		dim [1] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(<em>th</em>)] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>th</em>
+<p class=indent>Potential temperature (K).
+</p>
+<em>z</em>
+<p class=indent>Geometric height (m). Same dimensionality as <em>th</em>.
+</p>
+<em>opt</em>
+<p class=indent><ul>
+    <li>  opt=0, Return only the Brunt-Vaisala frequency as a regular variable.
+    <li>  opt=1, Return the Brunt-Vaisala frequency and d(theta)/dz
+</ul>
+</p>
+<em>dim</em>
+<p class=indent>The dimension number of <em>z</em> which corresponds to <em>th</em>.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+An array of the same size and shape as <em>th</em>. 
+The output will be double if <em>th</em> or <em>z</em> is of type double.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The <a href="http://glossary.ametsoc.org/wiki/Brunt-väisälä_frequency">
+<b>Brunt-Vaisala (BV)</b> frequency</a> (1/s) is a measure of bouyancy.  In a continuously 
+stratified fluid, it is the natural frequency of the vertical oscillation of fluid parcels.
+Hence, it should always be positive.  However, this function will return a <i>negative</i> value
+when the vertical gradient of <em>thv</em> is negative. This is done for informational
+purposes only.  The user can force only positive values via
+<pre>
+         BV = <a href="../Built-in/where.html"><strong>where</strong></a>(BV.lt.0, 0, BV)
+</pre>
+<p>
+For plotting, the returned values which have units (1/s) are often  multiplied by 86400 (s/day) to
+get units of (1/day).
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="coriolis_param.html"><strong>coriolis_param</strong></a>,
+<a href="pot_temp.html"><strong>pot_temp</strong></a>,
+<a href="static_stability.html"><strong>static_stability</strong></a>,
+<a href="eady_growth_rate.html"><strong>eady_growth_rate</strong></a>,
+<a href="rigrad_bruntv_atm.html"><strong>rigrad_bruntv_atm</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+<B>Example 1</B>: Read data from a WRF file and calculate assorted quantities.
+
+<pre>
+;----------------------------------------------------------
+;                     WRF DATA
+;----------------------------------------------------------
+
+   a  = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>("wrfout_d01_2013-05-17_12","r") ;[Time|1]x[bottom_top|40]x[south_north|324]x[west_east|414]
+                                               ;     0            1              2              3
+
+   th = <a href="../Built-in/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"theta",-1)      ; potential temperature (degK)
+   z  = <a href="../Built-in/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"z",-1)          ; model height
+
+   brunt = <strong>brunt_vaisala_atm</strong>(th, z, 0, 1)  ; opt=0, ndim=1
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(brunt)
+   <a href="../Built-in/printMinMax.html"><strong>printMinMax</strong></a>(brunt, 0)
+
+; variable dimensions
+
+   dimth = printMinMax<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(th)
+   ntim  = dimth(0)
+
+; print all vertical values at an arbitrarily chosen grid point
+
+   ix = 20        ; arbitrary
+   jy = 21
+
+   <a href="../Built-in/print.html"><strong>print</strong></a>( <a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%7.1f", z(ntim-1,:,jy,ix))     \
+        + sprintf("%15.5e",brunt(ntim-1,:,jy,ix)) )
+
+</pre>
+The (edited) output is:
+<pre>
+
+   Variable: brunt
+   Type: float
+   Total Size: 20925216 bytes
+               5231304 values
+   Number of Dimensions: 4
+   Dimensions and sizes:   [Time | 1] x [bottom_top | 39] x [south_north | 324] x [west_east | 414]
+   Coordinates: 
+   Number Of Attributes: 3
+     long_name :   Brunt–Vaisala (buoyancy) frequency: atm
+     units :       1/s
+     info :        http://glossary.ametsoc.org/wiki/Brunt-v%C3%A4is%C3%A4l%C3%A4_frequency
+
+   (0)     Brunt-Vaisala (buoyancy) frequency: atm: min=0   max=0.0743625
+   
+
+     --- Grid Point: (20,21) -------------------------------
+
+              Z         BRUNT   
+    (0)      29.2   -4.23441e-03     -> Negative d(theta)/dz
+    (1)      99.1   -3.29972e-03                 "
+    (2)     192.9   -1.99228e-03                 "
+    (3)     313.0   -1.59737e-03                 "
+    (4)     463.0    3.77258e-03
+    (5)     647.4    1.02118e-02
+    (6)     872.0    1.06960e-02
+    (7)    1142.9    1.34968e-02
+    (8)    1463.4    1.98726e-02
+    (9)	   1835.1    1.83999e-02
+    (10)   2258.8    1.26123e-02
+    (11)   2733.7    1.07150e-02
+    (12)   3259.3    9.99975e-03
+    (13)   3835.0    1.02520e-02
+    (14)   4442.5    1.24183e-02
+    (15)   5057.9    1.37012e-02
+    (16)   5674.7    1.16770e-02
+    (17)   6292.0    8.31896e-03
+    (18)   6907.9    9.73829e-03
+    (19)   7523.3    1.10047e-02
+    (20)   8139.1    1.07249e-02
+    (21)   8755.4    1.01392e-02
+    (22)   9372.1    9.75036e-03
+    (23)   9988.7    1.10250e-02
+    (24)  10606.4    1.13320e-02
+    (25)  11225.7    1.00888e-02
+    (26)  11845.9    7.97759e-03
+    (27)  12465.8    8.47375e-03
+    (28)  13085.9    1.04011e-02
+    (29)  13707.9    1.33597e-02
+    (30)  14335.0    1.68360e-02
+    (31)  14971.9    1.79719e-02
+    (32)  15621.2    2.00726e-02
+    (33)  16288.0    2.13622e-02
+    (34)  16976.2    2.06080e-02
+    (35)  17686.4    2.01936e-02
+    (36)  18420.1    2.23056e-02
+    (37)  19185.4    2.51125e-02
+    (38)  20094.5    2.53134e-02
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/brunt_vaisala_atm.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:13 GMT -->
+</html>

@@ -1,0 +1,673 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/mapoutlines.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:03:32 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes drawing your own outlines on a map">
+<meta name="keywords" content="NCL, graphics, visualization, resources,
+map outlines">
+<TITLE>NCL Graphics: map outlines</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_maps.html">Maps and map projections</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+
+<h1>NCL Graphics: map outlines</h1>
+
+<div class=mainimage>
+<img src="Images/mapoutlines_1_lg.png" align=left border=0></a>
+<p>
+</div>
+
+<div class=text>
+
+NCL has three resolutions of map outline databases available through
+the
+<a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> resource.
+<p>
+
+Note that the behavior of this resource has changed in NCL V6.4.0!
+<p>
+
+This resource can take one of four values; see the "dynamic" value for
+details about the change in V6.4.0:
+<p>
+
+<ol>
+<li><b>"LowRes"</b> - the default prior to <a href="../prev_releases.html#6.4.0">NCL V6.4.0</a>;
+ recommended for global maps and not for regional areas
+<p>
+
+<li><b>"MediumRes"</b> - recommended for regional maps; has more up-to-date
+political boundaries
+<p>
+
+Setting <a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> to
+"MediumRes" allows you to optionally set
+the <a href="../Document/Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a> resource to control
+how many outlines you get and at what resolution. See example <a href="#ex7">mapoutines_7.ncl</a>
+below.
+<p>
+
+<li><b>"HighRes"</b> - a high-resolution coastline database; cannot be used
+for global maps as it will not be drawn correctly.  Requires a "RANGS"
+database that you need to download and install.  Go to
+the <a href="../Document/Graphics/rangs.html">RANGS page</a> for more
+information.
+<p>
+
+<li><b>"Dynamic"</b> - new default behavior introduced with <a href="../prev_releases.html#6.4.0">NCL V6.4.0</a>; 
+the LowRes database is used unless either of <a href="../Document/Graphics/Resources/mp.html#mpFillBoundarySets"><em>mpFillBoundarySets</em></a>
+or <a href="../Document/Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a> is set to something other
+than "Geophysical", in which case the MediumRes database is used. (see <a href="#ex6">
+example 6</a> below).
+</ol>
+<p>
+
+To turn NCL map outlines on or off, set
+the <a href="../Document/Graphics/Resources/mp.html#mpOutlineOn"><em>mpOutlineOn</em></a> resource to True or
+False. You can also turn map fill on and off by setting
+<a href="../Document/Graphics/Resources/mp.html#mpFillOn"><em>mpFillOn</em></a> resource to True or False
+to turn on/off map fill.
+<p>
+
+There are many resources for customizing the look of your map outlines.
+You can see the <a href="../Document/Graphics/Resources/mp.html">full list
+of map resources here</a>.  Here's a sample:
+
+<table cellpadding=2>
+<tr>
+<td><a href="../Document/Graphics/Resources/mp.html#mpGeophysicalLineColor"><em>mpGeophysicalLineColor</em></a>
+<td><a href="../Document/Graphics/Resources/mp.html#mpGeophysicalLineThicknessF"><em>mpGeophysicalLineThicknessF</em></a>
+<td><a href="../Document/Graphics/Resources/mp.html#mpGeophysicalLineDashPattern"><em>mpGeophysicalLineDashPattern</em></a>
+
+<tr>
+<td><a href="../Document/Graphics/Resources/mp.html#mpNationalLineColor"><em>mpNationalLineColor</em></a>
+<td><a href="../Document/Graphics/Resources/mp.html#mpNationalLineThicknessF"><em>mpNationalLineThicknessF</em></a>
+<td><a href="../Document/Graphics/Resources/mp.html#mpNationalLineDashPattern"><em>mpNationalLineDashPattern</em></a>
+
+<tr>
+<td><a href="../Document/Graphics/Resources/mp.html#mpProvincialLineColor"><em>mpProvincialLineColor</em></a>
+<td><a href="../Document/Graphics/Resources/mp.html#mpProvincialLineThicknessF"><em>mpProvincialLineThicknessF</em></a>
+<td><a href="../Document/Graphics/Resources/mp.html#mpProvincialLineDashPattern"><em>mpProvincialLineDashPattern</em></a>
+
+<tr>
+<td><a href="../Document/Graphics/Resources/mp.html#mpUSStateLineColor"><em>mpUSStateLineColor</em></a>
+<td><a href="../Document/Graphics/Resources/mp.html#mpUSStateLineThicknessF"><em>mpUSStateLineThicknessF</em></a>
+<td><a href="../Document/Graphics/Resources/mp.html#mpUSStateLineDashPattern"><em>mpUSStateLineDashPattern</em></a>
+
+<tr>
+<td><a href="../Document/Graphics/Resources/mp.html#mpCountyLineColor"><em>mpCountyLineColor</em></a>
+<td><a href="../Document/Graphics/Resources/mp.html#mpCountyLineThicknessF"><em>mpCountyLineThicknessF</em></a>
+<td><a href="../Document/Graphics/Resources/mp.html#mpCountyLineDashPattern"><em>mpCountyLineDashPattern</em></a>
+
+</table>
+
+In some cases, NCL's map outlines may not give you the outlines
+or resolution you desire. We recommend that people use
+<a href="shapefiles.html">shapefiles</a>, which you can 
+find numerous, free examples of using a web browser search.
+The Global Administrative Database (GADM)
+(<a href="http://www.gadm.org/">http://www.gadm.org</a>) offers various
+levels of outlines for many countries in the shapefile format. See
+the <a href="shapefiles.html">shapefiles examples</a> page for more
+information.
+
+<p>
+
+This page shows you various comparisons of the three map databases, as well 
+as how to add your own map outlines via shapefiles or simple polyline draws
+via:
+<p>
+
+<ul>
+<li><a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>
+<li><a href="../Document/Graphics/Interfaces/gsn_polyline.html"><strong>gsn_polyline</strong></a>
+<li><a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polylines.html"><strong>gsn_add_shapefile_polylines</strong></a>
+</ul>
+<p>
+
+</div>
+
+<div class=ex>
+<!--Mapoutlines_1-->
+<a name=ex1></a>
+<a href="Images/mapoutlines_1_lg.png">
+<img src="Images/mapoutlines_1_sm.png" align=left border=2></a>
+<a href="Scripts/mapoutlines_1.html">mapoutlines_1.ncl</a>: 
+Shows how to draw the Changjiang and Huanghe Rivers on 
+a zoomed in map of China, using 
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>.
+<p>
+
+The script was contributed by Dr. Xiao-Feng Li of the Institute of
+Atmospheric Physics (IAP), Chinese Acadmey of Sciences (CAS), modified
+from a GrADS code from Dr. Pinwen Guo (NUIST) and NCL code of Dr. Jun
+Cheng (NUIST).
+
+</div>
+
+<div class=ex>
+<!--Mapoutlines_2-->
+<a name=ex2></a>
+<a href="Images/mapoutlines_2_lg.png">
+<img src="Images/mapoutlines_2_sm.png" align=left border=2></a>
+<a href="Scripts/mapoutlines_2.html">mapoutlines_2.ncl</a>: 
+
+Shows how to draw outlines of Switzerland using shapefiles downloaded
+from <a href="http://www.gadm.org/country">http://www.gadm.org/country</a>.
+<p>
+
+This example draws a panel plot, comparing NCL outlines with shapefile
+outlines.
+<p>
+
+</div>
+
+<div class=ex>
+<!--Mapoutlines_3-->
+<a name=ex2></a>
+<a href="Images/mapoutlines_3_1_lg.png">
+<img src="Images/mapoutlines_3_1_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_3_2_lg.png">
+<img src="Images/mapoutlines_3_2_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_3_3_lg.png">
+<img src="Images/mapoutlines_3_3_sm.png" align=left border=2></a>
+<a href="Scripts/mapoutlines_3.html">mapoutlines_3.ncl</a>: 
+
+This script demonstrates the difference in resolution between the
+three available map databases in NCL, via a zoomed in map of Norway
+and Sweden.
+<p>
+
+<a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> is used to set the
+database that NCL uses to draw the basemap. By
+default, <a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> is set to
+"LowRes".
+<p>
+
+If you want to use the "HighRes" map database, you will have to <a
+href="../Document/Graphics/rangs.html">download the RANGS database</a>.
+
+</div>
+
+<div class=ex>
+<!--Mapoutlines_4-->
+<a name=ex4></a>
+<a href="Images/mapoutlines_4_lg.png">
+<img src="Images/mapoutlines_4_sm.png" align=left border=2></a>
+<a href="Scripts/mapoutlines_4.html">mapoutlines_4.ncl</a>: 
+
+This example draws the same contours as the previous example, but uses
+<a href="../Document/Graphics/Interfaces/gsn_add_shapefile_polylines.html"><strong>gsn_add_shapefile_polylines</strong></a>
+to attach outlines read in from Sweden and Norway shapefiles
+downloaded
+from <a href="http://www.gadm.org/country">http://www.gadm.org/country</a>.
+
+</div>
+
+<div class=ex>
+<!--Mapoutlines_5-->
+<a name=ex5></a>
+<a href="Images/mapoutlines_5_1_lg.png">
+<img src="Images/mapoutlines_5_1_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_5_2_lg.png">
+<img src="Images/mapoutlines_5_2_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_5_3_lg.png">
+<img src="Images/mapoutlines_5_3_sm.png" align=left border=2></a>
+<a href="Scripts/mapoutlines_5.html">mapoutlines_5.ncl</a>: 
+
+This script demonstrates the difference in resolution between the
+low resolution and medium resolution map databases of NCL,
+and a world shapefile downloaded from 
+<a href="http://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/">http://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/</a>.
+<p>
+
+You cannot use the
+"<a href="../Document/Graphics/rangs.html">HighRes</a>" database with a
+global map, so the shapefile outlines are your best bet if you need
+more resolution.
+
+</div>
+
+<div class=ex>
+<!--Mapoutlines_zoom_5-->
+<a name=ex5_zoom></a>
+<a href="Images/mapoutlines_zoom_5_1_lg.png">
+<img src="Images/mapoutlines_zoom_5_1_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_zoom_5_2_lg.png">
+<img src="Images/mapoutlines_zoom_5_2_sm.png" align=left border=2></a>
+<a href="Scripts/mapoutlines_5_zoom.html">mapoutlines_5_zoom.ncl</a>: 
+
+This script is similar to the mapoutlines_5.ncl one above, except it
+includes the "<a href="../Document/Graphics/rangs.html">HighRes</a>"
+database, if installed. It produces two panel plots, so you can
+compare the various map outlines.
+<p>
+
+</div>
+
+<div class=ex>
+<!--Mapoutlines_6-->
+<a name="ex6"></a>
+<a href="Images/mapoutlines_6_1_lg.png">
+<img src="Images/mapoutlines_6_1_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_6_2_lg.png">
+<img src="Images/mapoutlines_6_2_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_6_3_lg.png">
+<img src="Images/mapoutlines_6_3_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_6_4_lg.png">
+<img src="Images/mapoutlines_6_4_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_6_5_lg.png">
+<img src="Images/mapoutlines_6_5_sm.png" align=left border=2></a>
+<a href="Scripts/mapoutlines_6.html">mapoutlines_6.ncl</a>: 
+
+This script illustrates new default map database behavior introduced in <a href="../prev_releases.html#6.4.0">NCL V6.4.0</a>, 
+and shows how to override the defaults. As with prior versions of NCL, the default
+map database is LowRes, unless either of the boundary-set resources 
+<a href="../Document/Graphics/Resources/mp.html#mpFillBoundarySets"><em>mpFillBoundarySets</em></a> or <a href="../Document/Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a> are set
+to anything other than "Geophysical", in which case the MediumRes database is used. This
+represents a balance between performance and accuracy for common use-cases. The LowRes database
+is more than adequate for global scale maps depicting land/ocean boundaries, whereas the
+more detailed MediumRes database is preferred for its more up-to-date political boundaries.
+<p>
+The default behavior can be overridden by explicitly
+setting <a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> to the
+desired database name.
+<p>
+
+</div>
+
+
+<div class=ex>
+<!--shapefiles_15-->
+<a name=ex15></a>
+<a href="Images/shapefiles_15_lg.png">
+<img src="Images/shapefiles_15_sm.png" align=left border=2></a>
+<a href="Images/shapefiles_15_640_lg.png">
+<img src="Images/shapefiles_15_640_sm.png" align=left border=2></a>
+
+<a href="Scripts/shapefiles_15.html">shapefiles_15.ncl</a>: This
+example is another one showing the difference between map outlines in
+NCL and map outlines added from a shapefile.  The first plot in the
+panel shows the counties of Colorado as plotted from NCL, and the
+second plot shows the counties as plotted from the USA_adm2 shapefile
+downloaded from
+<a href="http://www.gadm.org/country">http://www.gadm.org/country</a>.
+<p>
+
+The left image is from running
+NCL <a href="../prev_releases.html#6.3.0">V6.3.0</a> on this
+script. The right image is from running
+NCL <a href="../prev_releases.html#6.4.0">V6.4.0</a>.
+<p>
+
+In NCL versions 6.3.0 and earlier, the NCL outlines will not show the
+county of Broomfield or the updated counties around Denver. In NCL
+version 6.4.0, the NCL map databases were updated to reflect the
+current Colorado counties.
+<p>
+
+</div>
+
+<div class=ex>
+<!--Mapoutlines_7-->
+<a name="ex7"></a>
+<a href="Images/mapoutlines_7_1_lg.png">
+<img src="Images/mapoutlines_7_1_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_7_2_lg.png">
+<img src="Images/mapoutlines_7_2_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_7_3_lg.png">
+<img src="Images/mapoutlines_7_3_sm.png" align=left border=2></a>
+<a href="Images/mapoutlines_7_4_lg.png">
+<img src="Images/mapoutlines_7_4_sm.png" align=left border=2></a>
+<a href="Scripts/mapoutlines_7.html">mapoutlines_7.ncl</a>: 
+
+This script compares the four possible settings for
+the <a href="../Document/Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a> resource, which
+gives you more map outlines and better resolution, depending on the
+area of the map you are focused on.
+<p>
+
+In order to use this resource,
+<a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a> must be set to
+"MediumRes" (which is the default in NCL V6.4.0 if you zoom in on a
+map). Also, in order to see all the possible boundaries, you must set
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a> to "AllBoundaries", otherwise
+you will only get geophysical outlines.
+<p>
+
+<a href="../Document/Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a> has four possible
+values:
+<p>
+
+<ul>
+
+<li>"Earth..1" - This is an older dataset that contains geophysical and
+political boundaries including the states of the United States.
+<p>
+
+<li>"Earth..2" - This is the default value. It is similar to
+"Earth..1" except that it contains the country Eritrea, and several
+countries resulting from the breakup of the USSR that were not
+included in "Earth..1". It also contains the provinces of Canada, the
+states of Mexico, and all the counties in the United States.
+<p>
+
+<li>"Earth..3" - Similar to "Earth..2" except that the United States
+counties are replaced with climate divisions within each state.
+<p>
+
+<li>"Earth..4" - Similar to "Earth..2", but has about 10 times as much
+detail and is much more accurate.
+<p>
+</ul>
+
+For more details, see the documentation for <a href="../Document/Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a>.
+<p>
+
+The four panel plots show the effect that these four values have on
+the outlines when you zoom in on different parts of the world.  Note
+that the maps for "Earth..2" and "Earth..3" look identical for all
+maps except the United States.
+</div>
+					</div>
+
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/mapoutlines.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:03:41 GMT -->
+</html>
+
+

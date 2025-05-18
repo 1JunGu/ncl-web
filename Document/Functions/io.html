@@ -1,0 +1,950 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/io.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:26 GMT -->
+<head>
+<title>NCL Function Documentation: File I/O</title>
+</head>
+<body>
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="index.html" class="subitem">Category Listing</a></li>
+						<li><a href="list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+
+			      <div id="general_main">
+
+<h1>File I/O</h1>
+
+<table cellspacing=4 cellpadding=10 width=100% border=1>
+
+<!--addfile-->
+<tr>
+<td valign=top>
+<a href="Built-in/addfile.html">
+addfile</a></td>
+<td>
+Opens a data file that is (or is to be) written in a <a href="../Manuals/Ref_Manual/NclFormatSupport.html">supported file format</a>.
+</td>
+</tr>
+<!--addfiles-->
+<tr>
+<td valign=top>
+<a href="Built-in/addfiles.html">
+addfiles</a></td>
+<td>
+Creates a reference that spans multiple data files.
+</td>
+</tr>
+<!--addfiles_GetVar-->
+<tr>
+<td valign=top>
+<a href="Contributed/addfiles_GetVar.html">
+addfiles_GetVar</a></td>
+<td>
+Creates a reference that spans multiple data files and returns metadata. <font color="red">(deprecated: </font> see <a href="Built-in/addfiles.html"><strong>addfiles</strong></a>)
+</td>
+</tr>
+<!--asciiread-->
+<tr>
+<td valign=top>
+<a href="Built-in/asciiread.html">
+asciiread</a></td>
+<td>
+Reads a file that contains ASCII representations of basic data types.
+</td>
+</tr>
+<!--asciiwrite-->
+<tr>
+<td valign=top>
+<a href="Built-in/asciiwrite.html">
+asciiwrite</a></td>
+<td>
+Creates an ascii text file of numeric or string data type.
+</td>
+</tr>
+<!--cbinread-->
+<tr>
+<td valign=top>
+<a href="Built-in/cbinread.html">
+cbinread</a></td>
+<td>
+Reads binary files created using the C block I/O function write.
+</td>
+</tr>
+<!--cbinwrite-->
+<tr>
+<td valign=top>
+<a href="Built-in/cbinwrite.html">
+cbinwrite</a></td>
+<td>
+Creates a binary file in raw C block I/O format for a numeric data type.
+</td>
+</tr>
+<!--craybinnumrec-->
+<tr>
+<td valign=top>
+<a href="Built-in/craybinnumrec.html">
+craybinnumrec</a></td>
+<td>
+Returns the number of unformatted sequential access Fortran records in a Cray COS blocked binary file.
+</td>
+</tr>
+<!--craybinrecread-->
+<tr>
+<td valign=top>
+<a href="Built-in/craybinrecread.html">
+craybinrecread</a></td>
+<td>
+Reads COS blocked unformatted sequential access Fortran binary files.
+</td>
+</tr>
+<!--fbindirread-->
+<tr>
+<td valign=top>
+<a href="Built-in/fbindirread.html">
+fbindirread</a></td>
+<td>
+Reads binary records written by a Fortran direct access write or C write.
+</td>
+</tr>
+<!--fbindirSwap-->
+<tr>
+<td valign=top>
+<a href="Contributed/fbindirSwap.html">
+fbindirSwap</a></td>
+<td>
+Reads byte-reversed data and writes output file that can be read by <a href="Built-in/fbindirread.html"><strong>fbindirread</strong></a> or <a href="Built-in/cbinread.html"><strong>cbinread</strong></a> <font color=red>(deprecated)</font>.
+</td>
+</tr>
+<!--fbindirwrite-->
+<tr>
+<td valign=top>
+<a href="Built-in/fbindirwrite.html">
+fbindirwrite</a></td>
+<td>
+Writes binary records to a file in manner analogous to fortran's "access=direct".
+</td>
+</tr>
+<!--fbinnumrec-->
+<tr>
+<td valign=top>
+<a href="Built-in/fbinnumrec.html">
+fbinnumrec</a></td>
+<td>
+Returns the number of unformatted sequential Fortran records in a binary file.
+</td>
+</tr>
+<!--fbinread-->
+<tr>
+<td valign=top>
+<a href="Built-in/fbinread.html">
+fbinread</a></td>
+<td>
+Reads one binary record that has been written using an UNFORMATTED FORTRAN write.
+</td>
+</tr>
+<!--fbinrecread-->
+<tr>
+<td valign=top>
+<a href="Built-in/fbinrecread.html">
+fbinrecread</a></td>
+<td>
+Reads unformatted sequential access Fortran binary files.
+</td>
+</tr>
+<!--fbinrecwrite-->
+<tr>
+<td valign=top>
+<a href="Built-in/fbinrecwrite.html">
+fbinrecwrite</a></td>
+<td>
+Writes a single unformatted sequential access Fortran record to a file.
+</td>
+</tr>
+<!--fbinseqSwap1-->
+<tr>
+<td valign=top>
+<a href="Contributed/fbinseqSwap1.html">
+fbinseqSwap1</a></td>
+<td>
+Byte swaps Fortran sequential files <font color=red>(deprecated)</font>.
+</td>
+</tr>
+<!--fbinseqSwap2-->
+<tr>
+<td valign=top>
+<a href="Contributed/fbinseqSwap2.html">
+fbinseqSwap2</a></td>
+<td>
+Byte swaps Fortran sequential files (more memory friendly) <font color=red>(deprecated)</font>.
+</td>
+</tr>
+<!--fbinwrite-->
+<tr>
+<td valign=top>
+<a href="Built-in/fbinwrite.html">
+fbinwrite</a></td>
+<td>
+Writes a single  binary record to a file in manner analogous to Fortran's "form=unformatted, access=sequential".
+</td>
+</tr>
+<!--fileattdef-->
+<tr>
+<td valign=top>
+<a href="Built-in/fileattdef.html">
+fileattdef</a></td>
+<td>
+Defines global (file) attributes associated with a  <a href="../Manuals/Ref_Manual/NclFormatSupport.html">supported file</a>.
+</td>
+</tr>
+<!--filechunkdimdef-->
+<tr>
+<td valign=top>
+<a href="Built-in/filechunkdimdef.html">
+filechunkdimdef</a></td>
+<td>
+Defines chunking dimension names, dimension sizes, unlimited dimensions on a  <a href="../Manuals/Ref_Manual/NclFormatSupport.html">supported file</a>.
+</td>
+</tr>
+<!--filedimdef-->
+<tr>
+<td valign=top>
+<a href="Built-in/filedimdef.html">
+filedimdef</a></td>
+<td>
+Defines dimension names, dimension sizes, unlimited dimensions on a  <a href="../Manuals/Ref_Manual/NclFormatSupport.html">supported file</a>.
+</td>
+</tr>
+<!--fileexists-->
+<tr>
+<td valign=top>
+<a href="Built-in/fileexists.html">
+fileexists</a></td>
+<td>
+Checks for existence of any UNIX file.
+</td>
+</tr>
+<!--filegrpdef-->
+<tr>
+<td valign=top>
+<a href="Built-in/filegrpdef.html">
+filegrpdef</a></td>
+<td>
+Defines a list of group (names), for a <a href="../Manuals/Ref_Manual/NclFormatSupport.html">supported file</a>, or group.
+</td>
+</tr>
+<!--filevarattdef-->
+<tr>
+<td valign=top>
+<a href="Built-in/filevarattdef.html">
+filevarattdef</a></td>
+<td>
+Copies attributes from an input variable to one or more variables on a  <a href="../Manuals/Ref_Manual/NclFormatSupport.html">supported file</a>.
+</td>
+</tr>
+<!--filevarchunkdef-->
+<tr>
+<td valign=top>
+<a href="Built-in/filevarchunkdef.html">
+filevarchunkdef</a></td>
+<td>
+Defines a list of variable names, variable var_types, and variable dimension names for a <a href="../Manuals/Ref_Manual/NclFormatSupport.html">supported file</a>.
+</td>
+</tr>
+<!--filevarcompressleveldef-->
+<tr>
+<td valign=top>
+<a href="Built-in/filevarcompressleveldef.html">
+filevarcompressleveldef</a></td>
+<td>
+Defines a list of variable names, variable var_types, and variable dimension names for a <a href="../Manuals/Ref_Manual/NclFormatSupport.html">supported file</a>.
+</td>
+</tr>
+<!--filevardef-->
+<tr>
+<td valign=top>
+<a href="Built-in/filevardef.html">
+filevardef</a></td>
+<td>
+Defines a list of variable names, variable types, and variable dimension names for a <a href="../Manuals/Ref_Manual/NclFormatSupport.html">supported file</a>.
+</td>
+</tr>
+<!--filevardimsizes-->
+<tr>
+<td valign=top>
+<a href="Built-in/filevardimsizes.html">
+filevardimsizes</a></td>
+<td>
+Returns the dimension sizes of a variable on the given file (<font color=red>deprecated</font>; use <a href="Built-in/getfilevardimsizes.html"><strong>getfilevardimsizes</strong></a>).
+</td>
+</tr>
+<!--getfileatts-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfileatts.html">
+getfileatts</a></td>
+<td>
+Returns a list of attribute names on the given file.
+</td>
+</tr>
+<!--getfiledimnames-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfiledimnames.html">
+getfiledimnames</a></td>
+<td>
+Returns a list of <a href="../Manuals/Ref_Manual/NclVariables.html#Dimensions">dimension names</a> for the given file.
+</td>
+</tr>
+<!--getfiledims-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfiledims.html">
+getfiledims</a></td>
+<td>
+Returns a list of <a href="../Manuals/Ref_Manual/NclVariables.html#Dimensions">dimension names</a> for the given file.
+</td>
+</tr>
+<!--getfiledimsizes-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfiledimsizes.html">
+getfiledimsizes</a></td>
+<td>
+Returns an array of dimension sizes on the given file.
+</td>
+</tr>
+<!--getfilegrpnames-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfilegrpnames.html">
+getfilegrpnames</a></td>
+<td>
+Returns an array of file group names on the given file.
+</td>
+</tr>
+<!--getfilepath-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfilepath.html">
+getfilepath</a></td>
+<td>
+Returns a string of the opened file's path.
+</td>
+</tr>
+<!--getfilevaratts-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfilevaratts.html">
+getfilevaratts</a></td>
+<td>
+Returns all attribute names associated with a variable on the given file.
+</td>
+</tr>
+<!--getfilevarchunkdimsizes-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfilevarchunkdimsizes.html">
+getfilevarchunkdimsizes</a></td>
+<td>
+Returns the chunk dimension sizes of variable on a given file which has chunk dimensions.
+</td>
+</tr>
+<!--getfilevardimnames-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfilevardimnames.html">
+getfilevardimnames</a></td>
+<td>
+Returns all dimension names associated with a variable on the given file.
+</td>
+</tr>
+<!--getfilevardims-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfilevardims.html">
+getfilevardims</a></td>
+<td>
+Returns all dimension names associated with a variable on the given file.
+</td>
+</tr>
+<!--getfilevardimsizes-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfilevardimsizes.html">
+getfilevardimsizes</a></td>
+<td>
+Returns the dimension sizes of a variable on a given file.
+</td>
+</tr>
+<!--getfilevarnames-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfilevarnames.html">
+getfilevarnames</a></td>
+<td>
+Returns an array of file variable names on the given file.
+</td>
+</tr>
+<!--getfilevartypes-->
+<tr>
+<td valign=top>
+<a href="Built-in/getfilevartypes.html">
+getfilevartypes</a></td>
+<td>
+Returns the types of the named variables stored in the given file.
+</td>
+</tr>
+<!--isfile-->
+<tr>
+<td valign=top>
+<a href="Built-in/isfile.html">
+isfile</a></td>
+<td>
+Returns True if input is of type <a href="../Manuals/Ref_Manual/NclDataTypes.html">file</a>.
+</td>
+</tr>
+<!--isfilepresent-->
+<tr>
+<td valign=top>
+<a href="Built-in/isfilepresent.html">
+isfilepresent</a></td>
+<td>
+Checks if a <a href="../glossary.html#SupportedDataFormat">supported</a> file exists.
+</td>
+</tr>
+<!--isfilevar-->
+<tr>
+<td valign=top>
+<a href="Built-in/isfilevar.html">
+isfilevar</a></td>
+<td>
+Checks if specified <a href="../Manuals/Ref_Manual/NclVariables.html#Files">file variables</a> are defined in a file.
+</td>
+</tr>
+<!--isfilevaratt-->
+<tr>
+<td valign=top>
+<a href="Built-in/isfilevaratt.html">
+isfilevaratt</a></td>
+<td>
+Checks if specified  <a href="../Manuals/Ref_Manual/NclVariables.html#Files">file variable attributes</a> are defined for a file variable.
+</td>
+</tr>
+<!--isfilevarcoord-->
+<tr>
+<td valign=top>
+<a href="Built-in/isfilevarcoord.html">
+isfilevarcoord</a></td>
+<td>
+Checks if a <a href="../Manuals/Ref_Manual/NclVariables.html#Coordinates">coordinate variable</a> is defined in a file.
+</td>
+</tr>
+<!--isfilevardim-->
+<tr>
+<td valign=top>
+<a href="Built-in/isfilevardim.html">
+isfilevardim</a></td>
+<td>
+Checks if <a href="../Manuals/Ref_Manual/NclVariables.html#Files">file variable dimensions</a> are defined for a file variable.
+</td>
+</tr>
+<!--keyword_values-->
+<tr>
+<td valign=top>
+<a href="Contributed/keyword_values.html">
+keyword_values</a></td>
+<td>
+Read a text file that contains keywords and one-or-more values (similar to fortran NAMELIST).
+</td>
+</tr>
+<!--list_files-->
+<tr>
+<td valign=top>
+<a href="Built-in/list_files.html">
+list_files</a></td>
+<td>
+Lists all of the variables that reference files.
+</td>
+</tr>
+<!--list_filevars-->
+<tr>
+<td valign=top>
+<a href="Built-in/list_filevars.html">
+list_filevars</a></td>
+<td>
+Lists all of the variables associated with a specific file.
+</td>
+</tr>
+<!--numAsciiCol-->
+<tr>
+<td valign=top>
+<a href="Contributed/numAsciiCol.html">
+numAsciiCol</a></td>
+<td>
+Returns the number of columns in an ASCII file.
+</td>
+</tr>
+<!--numAsciiRow-->
+<tr>
+<td valign=top>
+<a href="Contributed/numAsciiRow.html">
+numAsciiRow</a></td>
+<td>
+Returns the number of rows in an ASCII file.
+</td>
+</tr>
+<!--readAsciiHead-->
+<tr>
+<td valign=top>
+<a href="Contributed/readAsciiHead.html">
+readAsciiHead</a></td>
+<td>
+Reads an ASCII file and returns just the header.
+</td>
+</tr>
+<!--readAsciiTable-->
+<tr>
+<td valign=top>
+<a href="Contributed/readAsciiTable.html">
+readAsciiTable</a></td>
+<td>
+Reads an ASCII file given the number of lines at the beginning and end of the file to ignore.
+</td>
+</tr>
+<!--setfileoption-->
+<tr>
+<td valign=top>
+<a href="Built-in/setfileoption.html">
+setfileoption</a></td>
+<td>
+Sets a number of file-format-specific options.
+</td>
+</tr>
+<!--v5d_close-->
+<tr>
+<td valign=top>
+<a href="Built-in/v5d_close.html">
+v5d_close</a></td>
+<td>
+Closes a Vis5D+ format file.
+</td>
+</tr>
+<!--v5d_create-->
+<tr>
+<td valign=top>
+<a href="Built-in/v5d_create.html">
+v5d_create</a></td>
+<td>
+Creates a Vis5D+ format file.
+</td>
+</tr>
+<!--v5d_setLowLev-->
+<tr>
+<td valign=top>
+<a href="Built-in/v5d_setLowLev.html">
+v5d_setLowLev</a></td>
+<td>
+Sets the lowest vertical offset, in grid level, for each 3-dimensional gridded variable in a Vis5D+ format file.
+</td>
+</tr>
+<!--v5d_setUnits-->
+<tr>
+<td valign=top>
+<a href="Built-in/v5d_setUnits.html">
+v5d_setUnits</a></td>
+<td>
+Sets a name for physical units for a variable in a Vis5D+ format file.
+</td>
+</tr>
+<!--v5d_write-->
+<tr>
+<td valign=top>
+<a href="Built-in/v5d_write.html">
+v5d_write</a></td>
+<td>
+Writes compressed data to a Vis5D+ format file.
+</td>
+</tr>
+<!--v5d_write_var-->
+<tr>
+<td valign=top>
+<a href="Built-in/v5d_write_var.html">
+v5d_write_var</a></td>
+<td>
+Writes a single 3-dimensional gridded variable to a Vis5D+ format file.
+</td>
+</tr>
+<!--wrf_user_getvar-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_getvar.html">
+wrf_user_getvar</a></td>
+<td>
+Extracts data from ARW WRF model output, and does basic diagnostics calculations.
+</td>
+</tr>
+<!--wrf_user_list_times-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_list_times.html">
+wrf_user_list_times</a></td>
+<td>
+Extracts the list of available times in the ARW WRF model output.
+</td>
+</tr>
+<!--wrf_wps_close_int-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_wps_close_int.html">
+wrf_wps_close_int</a></td>
+<td>
+Closes a currently open WPS intermediate file.
+</td>
+</tr>
+<!--wrf_wps_open_int-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_wps_open_int.html">
+wrf_wps_open_int</a></td>
+<td>
+Opens a WPS intermediate file and returns a status.
+</td>
+</tr>
+<!--wrf_wps_rddata_int-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_wps_rddata_int.html">
+wrf_wps_rddata_int</a></td>
+<td>
+Reads a 2D field from an open WPS intermediate file.
+</td>
+</tr>
+<!--wrf_wps_rdhead_int-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_wps_rdhead_int.html">
+wrf_wps_rdhead_int</a></td>
+<td>
+Reads header information for the current field of an open WPS intermediate file.
+</td>
+</tr>
+<!--wrf_wps_read_int-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_wps_read_int.html">
+wrf_wps_read_int</a></td>
+<td>
+Reads data from a WPS intermediate file.
+</td>
+</tr>
+<!--wrf_wps_write_int-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_wps_write_int.html">
+wrf_wps_write_int</a></td>
+<td>
+Writes data to a WPS intermediate file.
+</td>
+</tr>
+<!--write_matrix-->
+<tr>
+<td valign=top>
+<a href="Built-in/write_matrix.html">
+write_matrix</a></td>
+<td>
+Writes nicely-formatted integer, float, or double precision two-dimensional (2D) arrays to standard out or to a file.
+</td>
+</tr>
+<!--write_table-->
+<tr>
+<td valign=top>
+<a href="Built-in/write_table.html">
+write_table</a></td>
+<td>
+Writes formatted elements from a list to an ASCII file.
+</td>
+</tr>
+
+</table><p>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/io.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:26 GMT -->
+</html>

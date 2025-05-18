@@ -1,0 +1,652 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/reg_multlin.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:08 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (general applied math)">
+<meta name="keywords" content="reg_multlin">
+<title>reg_multlin</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>reg_multlin</h1>
+
+<p>
+Performs basic multiple linear regression analysis.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function reg_multlin (
+		y    [*] : numeric,  
+		x [*][*] : numeric,  
+		option   : logical   
+	)
+
+	<a href="../return_val.html">return_val</a> [*] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>y</em>
+<p class=indent>A one-dimensional array of length <i>N</i> containing the dependent variable
+[<em>y</em>(<i>N</i>)].
+</p>
+<em>x</em>
+<p class=indent>A two-dimensional array of size [<em>x</em>(<i>M+1</i>,<i>N</i>)] 
+where <i>M</i> is the number of independent variables.
+</p>
+<em>option</em>
+<p class=indent>A logical variable. Currently not used.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The one-dimensional array, say <em>b</em>, returned is the same length
+as the leftmost dimension of <em>x</em>. This will contain the partial
+regression coefficients. The return values will be of type double if
+<em>x</em> or <em>y</em> is double, and float otherwise.
+<P>
+
+Beginning with version a033, the standardized partial regression
+coefficients, say <em>B</em>, will be returned as attributes of the
+returned variable. These represent the partial regression
+coefficients.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<strong>reg_multlin</strong> performs a basic multiple linear
+regression.  A one dimensional array (call it <em>b</em>(<i>M+1</i>),
+containing the partial regression coefficients is returned. These
+partial regression coefficients are sometimes called "b" or "beta"
+coefficients. They represent the rate of change in the dependent
+variable for a unit change in the independent variable, under the
+constraint that all other independent variables are held constant.<p>
+
+Basically, the following system of equations is solved (here, three
+independent variables):
+<PRE>
+                   X0  X1  X2  X3            Y
+                  _              _  _  _    _  _
+               X0 |              |  |b0|    |  |
+               X1 |              |  |b1| =  |  |
+               X2 |              |  |b2|    |  |
+               X3 |              |  |b3|    |  |
+                  -              -  -  -    -  -
+</PRE>
+where the X0 is a dummy variable equal to one (1.0) for every observation.
+<P>
+The partial regression coefficients, <em>b</em>, can be used to
+calculate standardized regression coefficients, say <em>B</em>.
+The <em>B</em> represent the partial regression coefficients
+in units of standard deviation. The following illustrates
+the simple calculation needed to make the transformation:
+
+<PRE>
+    <em>B</em> = <em>b</em>*standard_deviation(X)/standard_deviation(Y)
+</PRE>
+
+Since the <em>B</em> are expressed in units of standard deviation
+they may be directly compared with each other to determine
+the most effective variables (see example 4).
+<P>
+
+The user may wish to take into account the uncertainty associated
+with each estimated parameter. This is done by an analysis
+of variance [ANOVA] procedure. This can be done via NCL but 
+is not a standard function. 
+
+<P>
+
+While missing values are allowed, it is recommended that users not
+input any missing independent values. It just confuses the results.
+Missing values should be indicated by the <a href="../../Language/fillval.html">_FillValue</a> attribute.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Contributed/reg_multlin_stats.html"><strong>reg_multlin_stats</strong></a>,
+<a href="regline.html"><strong>regline</strong></a>,
+<a href="../Contributed/regline_stats.html"><strong>regline_stats</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+Examples 1 and 2 use data from:
+<pre>
+   Introductory Statistics for Business and Economics
+   T.H. Wonnacott and R.J. Wonnacott
+   John Wiley and Sons, 4th Ed, 1990
+</pre>
+
+
+<B>Example 1</B><p>
+
+<PRE>
+; pp 401-403:    Y  = 28 + 0.038*x1 + 0.83*x2
+
+       y  = (/40,50,50,70,65,65,80/)
+       N  = <a href="dimsizes.html"><strong>dimsizes</strong></a>(y)
+     
+       M  = 2
+       x1 = (/100,200,300,400,500,600,700/)
+       x2 = (/ 10, 20, 10, 30, 20, 20, 30/)
+                                              ; create independent array
+       X  = <a href="new.html"><strong>new</strong></a> ( (/M+1,N/), "float" )  
+       X(0,:) = 1.0                           ; constant term on rhs
+       X(1,:) = x1
+       X(2,:) = x2
+                                              ; partial regression coef
+       beta = <strong>reg_multlin</strong> (y,X,False)
+       <a href="print.html"><strong>print</strong></a>(beta)
+</pre>
+The partial regression coefficients are:
+<pre>
+       Variable: beta
+       Type: float
+       Total Size: 12 bytes
+                   3 values
+       Number of Dimensions: 1
+       Dimensions and sizes:   [3]
+       (0)     28.09524                     
+       (1)     0.03809524
+       (2)     0.8333333
+</PRE>
+<p>
+
+<B>Example 2</B><p>
+
+This is another very simple example that illustrates how to read in
+tabular data via <a href="asciiread.html"><strong>asciiread</strong></a>.  The asciifile
+"WONNACOTT.p436.TXT" contains:
+
+<pre>
+    85  30  0
+    95  40  1
+    90  40  1
+    75  20  0
+   100  60  1
+    90  40  0
+    90  50  0
+    90  30  1
+   100  60  1
+    85  30  1
+</pre>
+
+
+<PRE>
+; pp 436:    Y  = 69.5 + 0.442*x1 + 4.65*x2
+ 
+       nRow = <a href="../Contributed/numAsciiRow.html"><strong>numAsciiRow</strong></a>("./WONNACOTT.p436.TXT") 
+       data = <a href="asciiread.html"><strong>asciiread</strong></a>("./WONNACOTT.p436.TXT", (/nRow,3/), "float")
+       y  = data(:,0)
+       N  = <a href="dimsizes.html"><strong>dimsizes</strong></a>(y)                   ; same as nRow here
+     
+       M  = 2
+       X  = <a href="new.html"><strong>new</strong></a> ( (/M+1,N/), <a href="typeof.html"><strong>typeof</strong></a>(data) )
+       X(0,:) = 1.0
+       X(1,:) = data(:,1)
+       X(2,:) = data(:,2)
+                                          ; partial regression coef
+       b = <strong>reg_multlin</strong> (y,X,False)
+       <a href="print.html"><strong>print</strong></a>(b)
+</PRE>
+The partial regression coefficients are:
+<PRE>
+       Variable: b
+       Type: float
+       Total Size: 12 bytes
+                   3 values
+       Number of Dimensions: 1
+       Dimensions and sizes:   [3]
+
+       (0)     69.53488
+       (1)     0.4418605
+       (2)     4.651163
+</PRE>
+<p>
+
+<B>Example 3</B><p>
+
+This illustrates the use of <a href="../Contributed/readAsciiTable.html"><strong>readAsciiTable</strong></a> to read an ascii file with
+"header" information. The "header" portion of the file contains:
+
+<pre>
+Source:
+Statistics and Data Analysis in Geology
+John C Davis
+John Wiley and Sons: 2002:   3rd Edition: 
+Results: p 467 [typo b' in book 0.226 should be 0.0226]
+b' = [-2.244  0.005  0.0226  -0.233   -0.063  -0.002  -0.117]
+
+Y        X1      X2     X3       X4     X5      X6      
+</pre>
+<P>
+
+This example also illustrates the use of
+<a href="write_matrix.html"><strong>write_matrix</strong></a> to print the input data array.
+
+<PRE>
+<P>
+       load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+       
+       diri    = "./"
+       fili    = "KENTUCKY.TXT"
+       
+       ncol    = 7
+       data    = <a href="../Contributed/readAsciiTable.html"><strong>readAsciiTable</strong></a>( diri+fili, ncol, "float" , "Y")
+       
+       dimd    = <a href="dimsizes.html"><strong>dimsizes</strong></a>(data)
+       N       = dimd(0)              ; number of rows        [50]
+       M       = ncol-1               ; number of variables   [ 7]  Y and six "X"
+       
+       <a href="write_matrix.html"><strong>write_matrix</strong></a>(data, "7f10.0", False)
+       
+       Y       = data(:,0)
+       X       = <a href="new.html"><strong>new</strong></a> ( (/M+1,N/) , <a href="typeof.html"><strong>typeof</strong></a>(data))
+       X(0,:)  = 1.0
+       X(1,:)  = data(:,1)
+       X(2,:)  = data(:,2)
+       X(3,:)  = data(:,3)
+       X(4,:)  = data(:,4)
+       X(5,:)  = data(:,5)
+       X(6,:)  = data(:,6)
+       
+       b       = <strong>reg_multlin</strong>(Y,X,False)
+       <a href="print.html"><strong>print</strong></a> (b)
+</PRE>
+The partial regression coefficients are:
+<PRE>
+       Variable: b
+       Type: float
+       Total Size: 28 bytes
+                   7 values
+       Number of Dimensions: 1
+       Dimensions and sizes:   [7]
+
+       (0)     -2.24446
+       (1)      0.005091291
+       (2)      0.0225729
+       (3)     -0.2328043
+       (4)      0.0626111
+       (5)     -0.002037694
+       (6)     -0.1165836
+</PRE>
+The <a href="write_matrix.html"><strong>write_matrix</strong></a>(data, "7f10.0", False) output is:
+<pre>
+       14.      720.      570.        7.      154.     2200.       61.
+        6.      670.      610.        3.       80.     2667.       62.
+        5.      860.      550.       11.       84.      763.       62.
+        7.      870.      610.       11.      122.     1110.       63.
+       11.      730.      570.       14.      185.     1321.       52.
+       14.      690.      590.       12.      200.     1667.       50.
+       12.      880.      640.       11.      170.     1545.       41.
+       18.      760.      690.       28.      340.     1215.       57.
+        6.      820.      600.        5.      100.     2000.       41.
+        5.      720.      480.        3.       80.     2667.       60.
+       17.      670.      670.       19.      290.     1526.       51.
+        5.      660.      600.        5.       90.     1800.       53.
+       22.      830.      660.       18.      260.     1444.       57.
+        7.      780.      620.       17.      111.      652.       57.
+       15.      750.      740.       15.      184.     1227.       67.
+       17.      770.      630.       21.      227.     1080.       59.
+        5.      750.      570.        4.       60.     1500.       55.
+       18.      750.      580.       20.      259.     1295.       39.
+       14.      740.      760.        9.       62.      689.       64.
+       21.      750.      740.        6.       95.     1583.       53.
+       22.      750.      760.       11.      105.      954.       64.
+       23.      740.      770.       32.      350.     1094.       55.
+       28.      940.      510.       21.      232.     1105.       52.
+       42.      700.      600.       23.      266.     1156.       34.
+       22.      810.      580.       44.      390.      886.       29.
+       10.      920.      500.       13.      142.     1092.       65.
+       11.      920.      490.       12.      145.     1208.       72.
+       12.      790.      605.       33.      253.      766.       59.
+       13.      860.      550.       23.      241.     1048.       76.
+       31.      860.      630.       87.      702.      807.       55.
+       18.      880.      520.       37.      288.      778.       51.
+       13.      780.      460.       17.      162.      953.       40.
+        4.      720.      440.        8.       67.      838.       60.
+        5.      780.      300.        3.       52.     1733.       57.
+        9.      700.      460.       10.      121.     1210.       50.
+       13.      680.      520.       26.      220.      846.       41.
+       10.      820.      520.        8.      123.     1537.       51.
+       13.      710.      520.       24.      238.      992.       41.
+       13.      800.      440.       19.      231.     1216.       51.
+       11.      700.      510.       16.      178.     1113.       76.
+       12.      675.      570.       18.      168.      933.       42.
+        4.      740.      510.        8.       65.      812.       49.
+       17.      740.      520.       31.      334.     1078.       67.
+        9.      770.      600.       21.      184.      876.       47.
+        8.      820.      520.       11.      136.     1237.       56.
+       13.      850.      490.       22.      233.     1059.       74.
+       22.      820.      629.       34.      410.     1206.       39.
+       10.      820.      510.       11.      149.     1354.       60.
+       19.      680.      640.       46.      348.      757.       55.
+       27.      660.      789.       55.      382.      695.       38.
+</pre>
+
+<B>Example 4</B><p>
+
+This illustrates how to calculate the standard regression coefficients
+for example 3.
+
+<PRE>
+       Ystd      = <a href="stddev.html"><strong>stddev</strong></a>(Y)   
+       Xstd      = <a href="dim_stddev.html"><strong>dim_stddev</strong></a>(X)  
+       XstdYstd  = Xstd/Ystd    ; array operation
+       B         = b*XstdYstd   : standard regression coefficients 
+       B(0)      = 0.0          ; this corresponds to the constant term
+
+       <a href="print.html"><strong>print</strong></a>(B)
+</PRE>
+The standard regression coefficients are:
+<PRE>
+       Variable: B
+       Type: float
+       Total Size: 28 bytes
+                   7 values
+       Number of Dimensions: 1
+       Dimensions and sizes:   [7]
+       
+       (0)     0
+       (1)     0.0485438
+       (2)     0.2841468
+       (3)    -0.4579774
+       (4)     0.9748371
+       (5)    -0.1198416
+       (6)    -0.1625881
+</PRE>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/reg_multlin.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:08 GMT -->
+</html>

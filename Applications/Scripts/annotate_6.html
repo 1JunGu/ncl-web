@@ -1,0 +1,94 @@
+;********************************************************
+; annotate_6.ncl
+;
+; Concepts illustrated:
+;   - Attaching two XY plots to the outside of a map
+;   - Maximizing plots after they've been created
+;   - Resizing a plot
+;   - Zooming in on Australia on a cylindrical equidistant map
+;
+;*************************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;---Generate some dummy XY data
+  NPTS  = 500
+  PI100 = 0.031415926535898
+  EXP   = 2.7182818
+  theta = PI100*ispan(0,NPTS-1,1)
+  y1    = sin(theta)
+  y2    = sin(theta * theta)
+
+;---Start the graphics
+  wks = gsn_open_wks("png","annotate") ; send graphics to PNG file
+
+;---Resources for map plot
+  mpres             = True
+  mpres@gsnDraw     = False
+  mpres@gsnFrame    = False
+
+  mpres@vpXF          = 0.45  ; Move plot to the right to leave room for XY plots.
+  mpres@vpWidthF      = 0.5   ; Increase size of plot to 
+  mpres@vpHeightF     = 0.5   ; fill white space on right of image.
+
+  mpres@mpDataBaseVersion = "Mediumres"  ; Medium resolution
+  mpres@mpDataSetName     = "Earth..4"   ; Contains divisions for
+                                       ; other countries.
+  mpres@mpOutlineBoundarySets = "AllBoundaries"
+
+  mpres@mpMinLatF             = -45
+  mpres@mpMaxLatF             =  -6
+  mpres@mpMinLonF             = 110
+  mpres@mpMaxLonF             = 155
+
+  mpres@pmTickMarkDisplayMode = "Always" ; beautify tick marks on base plot
+
+  mpres@tiMainString          = "Medium resolution map of Australia"
+
+;---Create map plot
+  base_map = gsn_csm_map(wks,mpres)
+
+;---Resources for XY plot
+  xyres               = True
+  xyres@gsnDraw       = False
+  xyres@gsnFrame      = False
+
+  xyres@vpWidthF      = 0.25   ; Set size of XY plots to create
+  xyres@vpHeightF     = 0.25   ; aesthetically pleasing annotation plot
+
+  xyres@xyLineColor   = "Brown"
+  xyres@tiMainString  = "xy1 plot"
+
+;---Create first XY plot
+  xy1 = gsn_csm_y(wks,y1,xyres)
+
+  xyres@xyLineColor   = "Orange"
+  xyres@tiMainString  = "xy2 plot"
+
+;---Create second XY plot
+  xy2 = gsn_csm_y(wks,y2,xyres)
+
+;---Resources for adding xy1/xy2 to base_map.
+  amres                   = True
+  amres@amJust            = "CenterLeft"
+
+  amres@amParallelPosF    = -1.15  ; Left side
+  amres@amOrthogonalPosF  = -0.4   ; Almost halfway up
+
+;---Attach first XY plot
+  amid1 = gsn_add_annotation(base_map,xy1,amres)
+
+  amres@amOrthogonalPosF  =  0.4   ; Almost halfway down
+
+;---Attach second XY plot
+  amid2 = gsn_add_annotation(base_map,xy2,amres)
+
+;---This will draw everything, avoiding maximizing to keep aspect ratios.
+   draw(base_map)
+   frame(wks)
+
+end
+

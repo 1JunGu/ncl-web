@@ -1,0 +1,748 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/regrid.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:09:57 GMT -->
+<head>
+<meta name="description" content="NCL data analysis example page. 
+Demonstrates how to regrid data on rectilinear grids.">
+<TITLE>NCL: Regridding</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+<h1>NCL: Regridding</h1>
+
+<div class=text>
+
+Regridding is the process of interpolating from a source grid (SRC), to a
+destination grid (DST). For 
+<a href="../Document/glossary.html#RectilinearGrid">rectilinear</a>,
+     
+grids this may be represented as
+<pre>
+
+                 SRC(ys,xs) ==> DST(yd,xd)
+where
+                 ys,xs rectilinear
+</pre>
+There are numerous
+<a href="../Document/Functions/regrid.html">regridding functions</a>
+available in NCL.  In NCL version <a href="../prev_releases.html#6.1.0">6.1.0</a>, 
+<a href="ESMF.html">new regridding capabilities</a> available via the use
+of software from the 
+<a href="http://www.earthsystemmodeling.org/">Earth System Modeling Framework</a> 
+(ESMF) provided high-quality regridding on 
+<a href="../Document/glossary.html#RectilinearGrid">rectilinear</a>,
+<a href="../Document/glossary.html#CurvilinearGrid">curvilinear</a>, and
+<a href="../Document/glossary.html#UnstructuredGrid">unstructured</a>
+grids, using bilinear, patch, or conservative interpolation.
+<p>
+
+Of the older regridding routines, some are unique (eg: use of
+spherical harmonics); conservative remapping
+(eg, <a href="../Document/Functions/Built-in/area_conserve_remap.html"><strong>area_conserve_remap</strong></a> and
+<a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a>). 
+Conventional bilinear interpolation is available (eg: <a href="../Document/Functions/Built-in/linint2.html"><strong>linint2</strong></a> and  
+<a href="../Document/Functions/Contributed/linint2_Wrap.html"><strong>linint2_Wrap</strong></a>). Some allow 
+regridding from rectilinear grids to curvilinear grids, 
+(eg: <a href="../Document/Functions/Built-in/rgrid2rcm.html"><strong>rgrid2rcm</strong></a> and 
+<a href="../Document/Functions/Contributed/rgrid2rcm_Wrap.html"><strong>rgrid2rcm_Wrap</strong></a>), and 
+curvilinear grids to rectilinear grids (eg: <a href="../Document/Functions/Built-in/rcm2rgrid.html"><strong>rcm2rgrid</strong></a> and
+<a href="../Document/Functions/Contributed/rcm2rgrid_Wrap.html"><strong>rcm2rgrid_Wrap</strong></a>).
+<p>
+Other functions exist to "fill" existing grids via extrapolation or a Poisson
+based algorithm. The 
+<a href="grid_fill.html"><b>Grid_Fill</b></a>
+and <a href="vert_interp.html"><b>Vertical Interpolation</b></a> Application pages provide examples.
+</div>
+
+<div class=ex>
+<!--regrid_1-->
+<a name=ex1></a>
+<a href="Images/regrid_1_lg.png">
+<img src="Images/regrid_1_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_1.html">regrid_1.ncl</a>: An example of using
+<a href="../Document/Functions/Contributed/linint2_Wrap.html"><strong>linint2_Wrap</strong></a>, which interpolates from one grid to
+another using bilinear interpolation, and also retains metadata.
+
+</div>
+
+<div class=ex>
+<!--regrid_2-->
+<a name=ex2></a>
+<a href="Images/regrid_2_lg.png">
+<img src="Images/regrid_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_2.html">regrid_2.ncl</a>: An example of using
+<a href="../Document/Functions/Built-in/g2gsh.html"><strong>g2gsh</strong></a>, which interpolates from one gaussian grid to another using 
+spherical harmonics.  
+<p>
+
+Example: the actual interpolation is conducted using 
+<a href="../Document/Functions/Contributed/g2gsh_Wrap.html"><strong>g2gsh_Wrap</strong></a>,
+a wrapper function that will assign all the appropriate meta data, 
+including the gaussian latitudes, to resulting output. 
+</div>
+
+<div class=ex>
+<!--regrid_3-->
+<a name=ex3></a>
+<a href="Images/regrid_3_lg.png">
+<img src="Images/regrid_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_3.html">regrid_3.ncl</a>: An example of using
+<a href="../Document/Functions/Contributed/g2fsh_Wrap.html"><strong>g2fsh_Wrap</strong></a>, which interpolates from one gaussian grid to
+a fixed grid using spherical harmonics.
+
+</div>
+
+<div class=ex>
+<!--regrid_4-->
+<a name=ex4></a>
+<a href="Images/regrid_4_lg.png">
+<img src="Images/regrid_4_sm.png" align=left border=2></a>
+<a href="Scripts/regrid_4.html">regrid_4.ncl</a>: An example of using
+<a href="../Document/Functions/Contributed/f2fsh_Wrap.html"><strong>f2fsh_Wrap</strong></a>, which interpolates from one fixed grid to another
+using spherical harmonics.      
+
+</div>
+
+<div class=ex>
+<!--regrid_5-->
+<a name=ex5></a>
+<a href="Images/regrid_5_lg.png">
+<img src="Images/regrid_5_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_5.html">regrid_5.ncl</a>: An example of using
+<a href="../Document/Functions/Built-in/f2gsh.html"><strong>f2gsh</strong></a>, which interpolates from a fixed grid to a
+gaussian grid using spherical harmonics.
+<p>
+
+Even though this example uses
+<a href="../Document/Functions/Contributed/f2gsh_Wrap.html"><strong>f2gsh_Wrap</strong></a> the coordinate
+variables could be created manually.  See example one for the creation
+of the longitude array. The resulting gaussian latitude array can be
+created using
+<a href="../Document/Functions/Contributed/latGau.html"><strong>latGau</strong></a>. 
+</div>
+
+<div class=ex>
+<!--regrid_6-->
+<a name=ex6></a>
+<a href="Images/regrid_6_lg.png">
+<img src="Images/regrid_6_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_6.html">regrid_6.ncl</a>: An example of using
+<a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a>, 
+to perform an interpolation from a high resolution fixed (regular) grid to
+a lower resolution fixed grid. The interpolation is globally conservative.
+This function also retains metadata.
+<p>
+</div>
+
+<div class=ex>
+<!--regrid_7-->
+<a name=ex7></a>
+<a href="Images/regrid_7_lg.png">
+<img src="Images/regrid_7_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_7.html">regrid_7.ncl</a>: An example of using
+<a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a>, 
+to perform an interpolation from a high resolution fixed (regular) grid to
+a lower resolution Gaussian grid. The interpolation is globally conservative.
+This function also retains metadata.
+<p>
+</div>
+
+<div class=ex>
+<!--regrid_8-->
+<a name=ex8></a>
+<a href="Images/regrid_8_lg.png">
+<img src="Images/regrid_8_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_8.html">regrid_8.ncl</a>: An example of using
+<a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a>, 
+to perform an interpolation from a high resolution Gaussian grid to
+a lower resolution Gaussian grid. The interpolation is globally conservative.
+This function also retains metadata.
+<p>
+</div>
+
+<div class=ex>
+<!--regrid_9-->
+<a name=ex9></a>
+<a href="Images/regrid_9_lg.png">
+<img src="Images/regrid_9_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_9.html">regrid_9.ncl</a>: An example of using
+<a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a>, 
+to perform an interpolation from a high resolution Gaussian grid to
+a lower resolution fixed grid. The interpolation is globally conservative.
+This function also retains metadata.
+<p>
+</div>
+
+<div class=ex>
+<!--regrid_10-->
+<a name=ex10></a>
+<a href="Images/regrid_10_lg.png">
+<img src="Images/regrid_10_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_10.html">regrid_10.ncl</a>: An example of using
+<a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a>, 
+to perform an interpolation from a high resolution fixed (regular) grid 
+with limited latitudinal extent to
+a lower resolution fixed grid with approximately the same
+latitudinal extent. The interpolation is globally conservative.
+This function also retains metadata.
+<p>
+</div>
+
+<div class=ex>
+<!--regrid_11-->
+<a name=ex11></a>
+<a href="Images/regrid_11_lg.png">
+<img src="Images/regrid_11_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_11.html">regrid_11.ncl</a>: An example of using
+<a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a>, 
+to perform an interpolation from a high resolution fixed (regular) grid 
+with limited latitudinal extent to
+a lower resolution gaussian grid with approximately the same
+latitudinal extent. The interpolation is <b>not</b> conservative.
+This function also retains metadata.
+<p>
+</div>
+
+<div class=ex>
+<!--regrid_12-->
+<a name=ex12></a>
+<a href="Images/regrid_12_1_lg.png">
+<img src="Images/regrid_12_1_sm.png" align=left border=2></a>
+<a href="Images/regrid_12_2_lg.png">
+<img src="Images/regrid_12_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_12.html">regrid_12.ncl</a>: Another simple 
+example of using
+<a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a> 
+to perform an interpolation from a high resolution regular grid 
+to a lower resolution grid. The variable being regridded is 
+surface topography [elevation]. 
+This function also retains metadata.
+<p>
+</div>
+
+<div class=ex>
+<!--regrid_13-->
+<a name=ex13></a>
+<a href="Images/regrid_13_1_lg.png">
+<img src="Images/regrid_13_1_sm.png" align=left border=2></a>
+<a href="Images/regrid_13_2_lg.png">
+<img src="Images/regrid_13_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_13.html">regrid_13.ncl</a>: Another 
+example of using
+<a href="../Document/Functions/Contributed/area_conserve_remap_Wrap.html"><strong>area_conserve_remap_Wrap</strong></a> 
+to perform an interpolation from a high resolution regular grid 
+to a lower resolution grid. The variable being regridded is 
+surface topography [elevation]. It is demonstrated how one 
+might create a set of lat/lon values that outline Tibet. 
+The user specified variable "zcrit" can be changed as needed.
+The value "zcrit=1500" corresponds to approximately 850 hPa.
+"zcrit" values of 2500, 3500 and 4500 would correspond to approxiamtely
+750, 650 and 575 hPa, respectively.
+This function also retains metadata.
+<p>
+</div>
+
+<div class=ex>
+<!--regrid_14-->
+<a name=ex14></a>
+<a href="Images/regrid_14_1_lg.png">
+<img src="Images/regrid_14_1_sm.png" align=left border=2></a>
+<a href="Images/regrid_14_2_lg.png">
+<img src="Images/regrid_14_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/regrid_14.html">regrid_14.ncl</a>: Another 
+example of using <a href="../Document/Functions/Contributed/linint2_Wrap.html"><strong>linint2_Wrap</strong></a> 
+to perform a bilinear interpolation from a (180,360) regular grid to a 
+slightly different resolution (192,288) grid. The variable being regridded 
+is daily precipitation which (generally) has a highly fractal structure. 
+From point-to-point, the data are not smoothly varying. In fact, they 
+may well be discontinuous at adjacent grid points. Consider a worst case 
+scenario of rain rate (mm/day) at 4 adjacent grid points in the source grid (+)
+<pre>
+
+          100           0
+           +            +
+
+                 *
+
+           +            +
+           0            0
+</pre>
+The interpolated value (*) of the target grid (192,288) would (if it was right in the middle) be
+<pre>
+
+          * (25)  = (100+0+0+0)/4   ; average the source [ + ] gridpoints
+</pre>
+This type of thing would occur at all target grid locations. 
+The only exception would be an instance where the source and target grid locations are identical. 
+Hence, <b>in general, source grid  maxima & minima  are 'lost.'</b>
+<p>
+Now interpolate the target (*) values, which are all weighted averages, back to the original gridded locations (+). In a sense, you are averaging the averages. This reduces the values even more.
+<p>
+<b>**Punch line: interpolation is not reversible.**</b>
+<p>
+Having a smoothly varying variable (eg, temperature, sea-level pressure, ...) minimizes the 
+effect of interpolation but the issue is still there.
+<p>
+Using ESMF conservative interpolation would preserve the global mean prc in both the original interpolation (MVR grid) and the reinterpolated grid ***BUT*** the price would be a smearing out of the local values. The local differences may be even larger.
+<p>
+The <a href="../Document/Functions/Contributed/linint2_Wrap.html"><strong>linint2_Wrap</strong></a> function also retains metadata.
+</div>
+
+<div class=ex>
+<!--regrid_15-->
+<a name=ex15></a>
+<a href="Images/regrid_15_1_lg.png">
+<img src="Images/regrid_15_1_sm.png" align=left border=2></a>
+<a href="Images/regrid_15_2_lg.png">
+<img src="Images/regrid_15_2_sm.png" align=left border=2></a>
+<a href="Images/regrid_15_3_lg.png">
+<img src="Images/regrid_15_3_sm.png" align=left border=2></a>
+<p>
+<a href="Scripts/regrid_15.html">regrid_15.ncl</a>:
+Five GRIB2 files are opened via <a href="../Document/Functions/Built-in/addfiles.html"><strong>addfiles</strong></a>. The GRIB2 variable containing vertical velocity 
+("VVEL_P0_L100_GLL0") at 46 pressure levels is imported. 
+A local library [<a href="Scripts/grid2geocircle.html"><b>grid2geocircle.ncl</b></a>]
+contains the <b>rgrid2geolocation</b> interpolation function. The source 'omega' variable is dimensioned: 
+<pre>
+
+   <b>[forecast_time0 | 5] x [lv_ISBL0 | 46] x [lat_0 | 721] x [lon_0 | 881]</b>
+</pre>
+The returned variable is dimensioned:
+<pre>
+
+  <b>[forecast_time0 | 5] x [center | 1] x [lv_ISBL0 | 46] x [radius | 17] x [circle | 180]</b>
+</pre>
+The radially (azimuthally)  averaged variable is dimensioned:
+<pre>
+
+  <b>[forecast_time0 | 5] x [center | 1] x [lv_ISBL0 | 46] x [radius | 17]</b>
+</pre>
+The data for this example are on a rectilinear grid. Hence, use of the <b>rgrid2geolocation</b> was appropriate. The library also contains a function appropriate for use with curvilinear grid: <b>rcm2geolocation</b>. 
+<p>
+The regrid_15 also illustrates how a netCDF file may be created.
+<p>
+The three figures are: 
+<pre>
+    <b>(a)</b> original variable at user specified level
+    <b>(b)</b> 'radial' interpolated values at locations defined by 'plat' and 'plon'
+    <b>(c)</b> 'radial' averaged values at locations each radius
+</pre>
+
+</div>
+
+<div class=ex>
+<!--regrid_15_regcm-->
+<a name=ex15></a>
+<a href="Images/regrid_regcm_15_1_lg.png">
+<img src="Images/regrid_regcm_15_1_sm.png" align=left border=2></a>
+<a href="Images/regrid_regcm_15_2_lg.png">
+<img src="Images/regrid_regcm_15_2_sm.png" align=left border=2></a>
+<a href="Images/regrid_regcm_15_3_lg.png">
+<img src="Images/regrid_regcm_15_3_sm.png" align=left border=2></a>
+<p>
+<a href="Scripts/regrid_15_regcm.html">regrid_15_regcm.ncl</a>:
+<p>
+A high resolution RegCM netCDF file is used. The variables are on a rectilinear grid.
+A local library [<a href="Scripts/grid2geocircle.html"><b>grid2geocircle.ncl</b></a>]
+contains the <b>rgrid2geolocation</b> interpolation function. The source 'ua' and 'va' 
+variables are used to derive total wind speed. It is dimensioned:
+<pre>
+
+   <b>[time | 1] x [plev | 4] x [lat | 84] x [lon | 228]</b>
+</pre>
+The returned variable is dimensioned:
+<pre>
+
+  <b>[time | 1] x [center | 1] x [plev | 4] x [radius | 25] x [circle | 180]</b>
+</pre>
+The radially (azimuthally)  averaged variable is dimensioned:
+<pre>
+
+  <b>[time | 1] x [center | 1] x [plev | 4] x [radius | 25]</b>
+</pre>
+The data for this example are on a rectilinear grid. Hence, use of the <b>rgrid2geolocation</b> was appropriate. The library also contains a function appropriate for use with curvilinear grid: <b>rcm2geolocation</b>. 
+<p>
+The regrid_15_regcm also illustrates how a netCDF file may be created.
+<p>
+The three figures are: 
+<pre>
+    <b>(a)</b> original variable at user specified level
+    <b>(b)</b> 'radial' interpolated values at locations defined by 'plat' and 'plon'
+    <b>(c)</b> 'radial' averaged values at locations each radius
+</pre>
+
+</div>
+
+
+<div class=ex>
+<!--regrid_16-->
+<a name=ex16></a>
+<a href="Images/regrid_16_1_lg.png">
+<img src="Images/regrid_16_1_sm.png" align=left border=2></a>
+<a href="Images/regrid_16_2_lg.png">
+<img src="Images/regrid_16_2_sm.png" align=left border=2></a>
+<a href="Images/regrid_16_3_lg.png">
+<img src="Images/regrid_16_3_sm.png" align=left border=2></a>
+<p>
+<a href="Scripts/regrid_16.html">regrid_16.ncl</a>:
+(a) Read a TRMM netCDF; (b) Specify two locations; (c) Specify distance [km] from the two locations; 
+(d) use <a href="../Document/Functions/Built-in/css2c.html"><strong>css2c</strong></a> to translate latitude(s) and longitude(s) in the region of the two
+locations to Cartesian coordinates; center the results about the two locations; (e) plot. 
+The three figures are:
+<pre>
+    <b>(a)</b> original variable at user specified region and the two locations are marked
+    <b>(b)</b> Centered cartesian plot about the first location
+    <b>(c)</b> Centered cartesian plot about the second location
+</pre>
+
+</div>
+<div class=ex>
+<!--regrid_17-->
+<a name=ex17></a>
+<a href="Images/regrid_17_1_lg.png">
+<img src="Images/regrid_17_1_sm.png" align=left border=2></a>
+<a href="Images/regrid_17_2_lg.png">
+<img src="Images/regrid_17_2_sm.png" align=left border=2></a>
+<p>
+<a href="Scripts/regrid_17.html">regrid_17.ncl</a>:
+Similar to <b>regrid_16</b>: 
+(a) Read a TRMM netCDF; (b) Specify two locations; (c) Specify distance [km] from the two locations; 
+(d) Translate the distance in km to degrees; (e) Interpolate the TRMM latitudes and longitudes 
+to 'geocircles' (aximuthal) locations via a local library 
+[<a href="Scripts/grid2geocircle.html"><b>grid2geocircle.ncl</b></a>] which
+contains the <b>rgrid2geolocation</b> interpolation function. 
+(f) use <a href="../Document/Functions/Built-in/css2c.html"><strong>css2c</strong></a> to translate the geocircle  latitude(s) and longitude(s) 
+to Cartesian coordinates; (g) center the results about the two locations; (h) plot. 
+The two figures are:
+<pre>
+    <b>(a)</b> Centered cartesian plot for the first location
+    <b>(b)</b> Centered cartesian plot for the second location
+</pre>
+
+</div>
+		</div>
+					<p>&nbsp;</p>
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+		</div>
+					<p>&nbsp;</p>
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/regrid.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:10:14 GMT -->
+</html>
+
+

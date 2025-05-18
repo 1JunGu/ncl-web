@@ -1,0 +1,681 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/NCL_to_Python/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:59:47 GMT -->
+<head>
+<meta name="description" content="NCL-to-Python Transition Guide examples">
+<meta name="keywords" content="NCL, Python, transition  guide, graphics, visualization, file I/O">
+<title>NCL and Python Transition Guide Examples</title>
+</head>
+
+<body>
+
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../list_models.html" class="subitem">Models</a></li>
+						<li><a href="../list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+
+			      <div id="general_main">
+
+   <h1>NCL and Python Transition Guide Examples</h1>
+<div class=mainimage>
+<img width=500 height=500 src="NCL_Images/TRANS_panel_lg.png">
+</div>
+
+<div class=text>
+
+The main purpose of this page is to help ease the transition from NCL to
+Python by providing both NCL and Python versions of scripts that
+read/write ASCII and NetCDF files and/or produce graphics.
+<p>
+
+The Python scripts use
+<a href="http://www.pyngl.ucar.edu/">PyNGL</a> to create the graphics
+and a mix of <a href="http://xarray.pydata.org/en/stable/">xarray</a> and
+<a href="http://www.pyngl.ucar.edu/Nio.shtml">PyNIO</a> to read the data.
+<p>
+
+These NCL and Python scripts are companion examples to the excellent
+<a href="../../Document/Manuals/NCL_to_Python/Transition_Guide_NCL_PyNGL.pdf">NCL
+to Python Transition Guide</a>, written by Karin Meier-Fleischer
+of <a href="https://www.dkrz.de/">DKRZ</a> (Deutsches Klimarechenzentrum).
+<p>
+
+In order to run these examples, we recommend that you use Python
+version 3.x. The easiest way to install Python and the required
+packages is to first
+install <a href="https://conda.io/en/latest/miniconda.html">conda</a>,
+and then use conda to install these packages to conda environment:
+<p>
+
+<pre>
+conda create -n ncl_to_python -c conda-forge xarray netcdf4 scipy pyngl pynio ncl
+</pre>
+<p>
+
+To activate the "ncl_to_python" conda environment, type:
+<pre>
+source activate ncl_to_python
+</pre>
+<p>
+
+Once you are in the "ncl_to_python" conda environment, you can run the examples with:
+<pre>
+ncl TRANS_panel.ncl
+python TRANS_panel.py
+</pre>
+<p>
+
+The data files for these examples can be downloaded from:
+<p>
+
+<pre>
+<a href="../../Document/Manuals/NCL_User_Guide/Data/index.html">http://www.ncl.ucar.edu/Document/Manuals/NCL_User_Guide/Data/</a>
+</pre>
+<p>
+Note that the NCL and Python images may not be identical. This is mostly due to
+different defaults being used by each package for things like font sizes and labelbar
+widths and heights.
+<p>
+
+DKRZ has an extensive suite of graphical examples using
+<a href="https://www.dkrz.de/up/services/analysis/visualization/sw/ncl/ncl-examples">NCL</a>,
+<a href="https://www.dkrz.de/up/services/analysis/visualization/sw/pyngl-pynio">PyNGL</a>, and 
+<a href="https://www.dkrz.de/up/services/analysis/visualization/sw/matplotlib">matplotlib</a>.
+
+</div>
+
+<div class=ex>
+<!--basics-->
+<a name=basics></a>
+<a href="NCL_Scripts/basics.html">basics.ncl</a> / 
+<a href="Python_Scripts/basics.py">basics.py</a> :<p>
+Compares basic language features of NCL and Python.<p>
+
+This example does not produce any graphics.
+
+</div>
+
+<div class=ex>
+<!--TRANS_read_netCDF-->
+<a name=TRANS_read_netCDF></a>
+<a href="NCL_Scripts/TRANS_read_netCDF.html">TRANS_read_netCDF.ncl</a> / 
+<a href="Python_Scripts/TRANS_read_netCDF.py">TRANS_read_netCDF.py</a> :<p>
+Shows how to open a netCDF file, read a variable, and do some basic queries of dimensions, variable names, and variable types.<p>
+
+This example does not produce any graphics.
+
+</div>
+
+<div class=ex>
+<!--TRANS_read_multiple_netCDF-->
+<a name=TRANS_read_multiple_netCDF></a>
+<a href="NCL_Scripts/TRANS_read_multiple_netCDF.html">TRANS_read_multiple_netCDF.ncl</a> / 
+<a href="Python_Scripts/TRANS_read_multiple_netCDF.py">TRANS_read_multiple_netCDF.py</a> :<p>
+Shows how to read multiple netCDF files.<p>
+
+This example does not produce any graphics.
+
+</div>
+
+<div class=ex>
+<!--TRANS_read_ASCII-->
+<a name=TRANS_read_ASCII></a>
+<a href="NCL_Scripts/TRANS_read_ASCII.html">TRANS_read_ASCII.ncl</a> / 
+<a href="Python_Scripts/TRANS_read_ASCII.py">TRANS_read_ASCII.py</a> :<p>
+Shows how to read a simple ASCII file.<p>
+
+This example does not produce any graphics.
+
+</div>
+
+<div class=ex>
+<!--TRANS_read_ASCII_way2-->
+<a name=TRANS_read_ASCII_way2></a>
+<a href="NCL_Scripts/TRANS_read_ASCII_way2.html">TRANS_read_ASCII_way2.ncl</a> / 
+<a href="Python_Scripts/TRANS_read_ASCII_way2.py">TRANS_read_ASCII_way2.py</a> :<p>
+Shows how to read an ASCII file with delimiters.<p>
+
+This example does not produce any graphics.
+
+</div>
+
+<div class=ex>
+<!--TRANS_read_ASCII_lat_lon_value-->
+<a name=TRANS_read_ASCII_lat_lon_value></a>
+<a href="NCL_Scripts/TRANS_read_ASCII_lat_lon_value.html">TRANS_read_ASCII_lat_lon_value.ncl</a> / 
+<a href="Python_Scripts/TRANS_read_ASCII_lat_lon_value.py">TRANS_read_ASCII_lat_lon_value.py</a> :<p>
+Shows how to read a more complicated ASCII file and parse out the different columns of data.<p>
+
+This example does not produce any graphics.
+
+</div>
+
+<div class=ex>
+<!--TRANS_read_ASCII_lat_lon_value_way2-->
+<a name=TRANS_read_ASCII_lat_lon_value_way2></a>
+<a href="NCL_Images/TRANS_read_ASCII_lat_lon_value_way2_lg.png"><img src="NCL_Images/TRANS_read_ASCII_lat_lon_value_way2_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_read_ASCII_lat_lon_value_way2_lg.png"><img src="Python_Images/TRANS_read_ASCII_lat_lon_value_way2_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_read_ASCII_lat_lon_value_way2.html">TRANS_read_ASCII_lat_lon_value_way2.ncl</a> / 
+<a href="Python_Scripts/TRANS_read_ASCII_lat_lon_value_way2.py">TRANS_read_ASCII_lat_lon_value_way2.py</a> :<p>
+Shows how to read an ASCII file and create a contour fill plot on a map.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_write_netCDF_short-->
+<a name=TRANS_write_netCDF_short></a>
+<a href="NCL_Scripts/TRANS_write_netCDF_short.html">TRANS_write_netCDF_short.ncl</a> / 
+<a href="Python_Scripts/TRANS_write_netCDF_short.py">TRANS_write_netCDF_short.py</a> :<p>
+Shows how to write a netCDF file using the easy, but inefficient, method.<p>
+
+This example does not produce any graphics.
+
+</div>
+
+<div class=ex>
+<!--TRANS_write_netCDF-->
+<a name=TRANS_write_netCDF></a>
+<a href="NCL_Scripts/TRANS_write_netCDF.html">TRANS_write_netCDF.ncl</a> / 
+<a href="Python_Scripts/TRANS_write_netCDF.py">TRANS_write_netCDF.py</a> :<p>
+Shows how to write a netCDF file using the more complicated, but efficient method.<p>
+
+This example does not produce any graphics.
+
+</div>
+
+<div class=ex>
+<!--TRANS_write_ASCII-->
+<a name=TRANS_write_ASCII></a>
+<a href="NCL_Scripts/TRANS_write_ASCII.html">TRANS_write_ASCII.ncl</a> / 
+<a href="Python_Scripts/TRANS_write_ASCII.py">TRANS_write_ASCII.py</a> :<p>
+Shows how to write an ASCII file.<p>
+
+This example does not produce any graphics.
+
+</div>
+
+<div class=ex>
+<!--TRANS_maps-->
+<a name=TRANS_maps></a>
+<a href="NCL_Images/TRANS_maps_1_lg.png"><img src="NCL_Images/TRANS_maps_1_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_maps_1_lg.png"><img src="Python_Images/TRANS_maps_1_sm.png" align=left border=2></a>
+<a href="NCL_Images/TRANS_maps_2_lg.png"><img src="NCL_Images/TRANS_maps_2_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_maps_2_lg.png"><img src="Python_Images/TRANS_maps_2_sm.png" align=left border=2></a>
+<a href="NCL_Images/TRANS_maps_3_lg.png"><img src="NCL_Images/TRANS_maps_3_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_maps_3_lg.png"><img src="Python_Images/TRANS_maps_3_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_maps.html">TRANS_maps.ncl</a> / 
+<a href="Python_Scripts/TRANS_maps.py">TRANS_maps.py</a> :<p>
+Shows how to create different map projections.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_xy_0-->
+<a name=TRANS_xy_0></a>
+<a href="NCL_Images/TRANS_xy_0_lg.png"><img src="NCL_Images/TRANS_xy_0_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_xy_0_lg.png"><img src="Python_Images/TRANS_xy_0_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_xy_0.html">TRANS_xy_0.ncl</a> / 
+<a href="Python_Scripts/TRANS_xy_0.py">TRANS_xy_0.py</a> :<p>
+Shows how to create a single-curve XY plot. To make the line thicker, set xyLineThicknessF to a value larger than 1.0.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_xy_1-->
+<a name=TRANS_xy_1></a>
+<a href="NCL_Images/TRANS_xy_1_lg.png"><img src="NCL_Images/TRANS_xy_1_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_xy_1_lg.png"><img src="Python_Images/TRANS_xy_1_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_xy_1.html">TRANS_xy_1.ncl</a> / 
+<a href="Python_Scripts/TRANS_xy_1.py">TRANS_xy_1.py</a> :<p>
+Shows how to create a multiple-curve XY plot with a legend.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_bar_chart-->
+<a name=TRANS_bar_chart></a>
+<a href="NCL_Images/TRANS_bar_chart_lg.png"><img src="NCL_Images/TRANS_bar_chart_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_bar_chart_lg.png"><img src="Python_Images/TRANS_bar_chart_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_bar_chart.html">TRANS_bar_chart.ncl</a> / 
+<a href="Python_Scripts/TRANS_bar_chart.py">TRANS_bar_chart.py</a> :<p>
+Shows how to create a bar plot, which is simply XY plot that uses bars instead of curves.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_contour_lines-->
+<a name=TRANS_contour_lines></a>
+<a href="NCL_Images/TRANS_contour_lines_lg.png"><img src="NCL_Images/TRANS_contour_lines_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_contour_lines_lg.png"><img src="Python_Images/TRANS_contour_lines_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_contour_lines.html">TRANS_contour_lines.ncl</a> / 
+<a href="Python_Scripts/TRANS_contour_lines.py">TRANS_contour_lines.py</a> :<p>
+Shows how to create a simple contour line plot.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_contour_fill-->
+<a name=TRANS_contour_fill></a>
+<a href="NCL_Images/TRANS_contour_fill_lg.png"><img src="NCL_Images/TRANS_contour_fill_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_contour_fill_lg.png"><img src="Python_Images/TRANS_contour_fill_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_contour_fill.html">TRANS_contour_fill.ncl</a> / 
+<a href="Python_Scripts/TRANS_contour_fill.py">TRANS_contour_fill.py</a> :<p>
+Shows how to create a simple contour fill plot.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_contour_lines_on_map-->
+<a name=TRANS_contour_lines_on_map></a>
+<a href="NCL_Images/TRANS_contour_lines_on_map_lg.png"><img src="NCL_Images/TRANS_contour_lines_on_map_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_contour_lines_on_map_lg.png"><img src="Python_Images/TRANS_contour_lines_on_map_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_contour_lines_on_map.html">TRANS_contour_lines_on_map.ncl</a> / 
+<a href="Python_Scripts/TRANS_contour_lines_on_map.py">TRANS_contour_lines_on_map.py</a> :<p>
+Shows how to create a contour line plot on a map.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_contour_fill_on_map-->
+<a name=TRANS_contour_fill_on_map></a>
+<a href="NCL_Images/TRANS_contour_fill_on_map_lg.png"><img src="NCL_Images/TRANS_contour_fill_on_map_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_contour_fill_on_map_lg.png"><img src="Python_Images/TRANS_contour_fill_on_map_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_contour_fill_on_map.html">TRANS_contour_fill_on_map.ncl</a> / 
+<a href="Python_Scripts/TRANS_contour_fill_on_map.py">TRANS_contour_fill_on_map.py</a> :<p>
+Shows how to create a contour fill plot on a map.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_vectors-->
+<a name=TRANS_vectors></a>
+<a href="NCL_Images/TRANS_vectors_lg.png"><img src="NCL_Images/TRANS_vectors_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_vectors_lg.png"><img src="Python_Images/TRANS_vectors_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_vectors.html">TRANS_vectors.ncl</a> / 
+<a href="Python_Scripts/TRANS_vectors.py">TRANS_vectors.py</a> :<p>
+Shows how to create a vector plot.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_streamline-->
+<a name=TRANS_streamline></a>
+<a href="NCL_Images/TRANS_streamline_lg.png"><img src="NCL_Images/TRANS_streamline_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_streamline_lg.png"><img src="Python_Images/TRANS_streamline_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_streamline.html">TRANS_streamline.ncl</a> / 
+<a href="Python_Scripts/TRANS_streamline.py">TRANS_streamline.py</a> :<p>
+Shows how to create a streamline plot, which is very similar to vector plots.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_slice-->
+<a name=TRANS_slice></a>
+<a href="NCL_Images/TRANS_slice_lg.png"><img src="NCL_Images/TRANS_slice_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_slice_lg.png"><img src="Python_Images/TRANS_slice_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_slice.html">TRANS_slice.ncl</a> / 
+<a href="Python_Scripts/TRANS_slice.py">TRANS_slice.py</a> :<p>
+Shows how to create a slice plot at latitude=40.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_scatter-->
+<a name=TRANS_scatter></a>
+<a href="NCL_Images/TRANS_scatter_lg.png"><img src="NCL_Images/TRANS_scatter_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_scatter_lg.png"><img src="Python_Images/TRANS_scatter_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_scatter.html">TRANS_scatter.ncl</a> / 
+<a href="Python_Scripts/TRANS_scatter.py">TRANS_scatter.py</a> :<p>
+Shows how to create a scatter plot, which is an XY plot drawn with markers instead of lines.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_overlay-->
+<a name=TRANS_overlay></a>
+<a href="NCL_Images/TRANS_overlay_lg.png"><img src="NCL_Images/TRANS_overlay_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_overlay_lg.png"><img src="Python_Images/TRANS_overlay_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_overlay.html">TRANS_overlay.ncl</a> / 
+<a href="Python_Scripts/TRANS_overlay.py">TRANS_overlay.py</a> :<p>
+Shows how to overlay a contour fill plot and a contour line plot over a map.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_panel-->
+<a name=TRANS_panel></a>
+<a href="NCL_Images/TRANS_panel_lg.png"><img src="NCL_Images/TRANS_panel_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_panel_lg.png"><img src="Python_Images/TRANS_panel_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_panel.html">TRANS_panel.ncl</a> / 
+<a href="Python_Scripts/TRANS_panel.py">TRANS_panel.py</a> :<p>
+Shows how to create mutiple plots on one page (called a "panel" plot).<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_annotations_0-->
+<a name=TRANS_annotations_0></a>
+<a href="NCL_Images/TRANS_annotations_0_lg.png"><img src="NCL_Images/TRANS_annotations_0_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_annotations_0_lg.png"><img src="Python_Images/TRANS_annotations_0_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_annotations_0.html">TRANS_annotations_0.ncl</a> / 
+<a href="Python_Scripts/TRANS_annotations_0.py">TRANS_annotations_0.py</a> :<p>
+Shows how to change the labels on the X and Y axes.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_polyline_polygon_polymarker-->
+<a name=TRANS_polyline_polygon_polymarker></a>
+<a href="NCL_Images/TRANS_polyline_polygon_polymarker_lg.png"><img src="NCL_Images/TRANS_polyline_polygon_polymarker_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_polyline_polygon_polymarker_lg.png"><img src="Python_Images/TRANS_polyline_polygon_polymarker_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_polyline_polygon_polymarker.html">TRANS_polyline_polygon_polymarker.ncl</a> / 
+<a href="Python_Scripts/TRANS_polyline_polygon_polymarker.py">TRANS_polyline_polygon_polymarker.py</a> :<p>
+Shows how to add polylines, polygons and polymarkers to a map.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_masking-->
+<a name=TRANS_masking></a>
+<a href="NCL_Images/TRANS_masking_lg.png"><img src="NCL_Images/TRANS_masking_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_masking_lg.png"><img src="Python_Images/TRANS_masking_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_masking.html">TRANS_masking.ncl</a> / 
+<a href="Python_Scripts/TRANS_masking.py">TRANS_masking.py</a> :<p>
+Shows how to mask data over particular countries using map resources.<p>
+
+</div>
+
+<div class=ex>
+<!--TRANS_shapefile-->
+<a name=TRANS_shapefile></a>
+<a href="NCL_Images/TRANS_shapefile_lg.png"><img src="NCL_Images/TRANS_shapefile_sm.png" align=left border=2></a>
+<a href="Python_Images/TRANS_shapefile_lg.png"><img src="Python_Images/TRANS_shapefile_sm.png" align=left border=2></a>
+<a href="NCL_Scripts/TRANS_shapefile.html">TRANS_shapefile.ncl</a> / 
+<a href="Python_Scripts/TRANS_shapefile.py">TRANS_shapefile.py</a> :<p>
+Shows how to draw shapefile outlines on a map.<p>
+
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/NCL_to_Python/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:00:27 GMT -->
+</html>
+

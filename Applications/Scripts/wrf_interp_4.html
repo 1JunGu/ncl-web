@@ -1,0 +1,120 @@
+;----------------------------------------------------------------------
+; wrf_interp_4.ncl
+;----------------------------------------------------------------------
+; Concepts illustrated:
+;   - Interpolating a horizontal slice from a 3D WRF-ARW field.
+;----------------------------------------------------------------------
+; wrf_user_vert_cross and wrf_user_interp_level replace the 
+; deprecated wrf_user_intrp3d function. 
+;
+; NCL V6.6.0 or higher is required to run this example.
+;----------------------------------------------------------------------
+
+begin
+;
+; The WRF ARW input file.  
+  filename = "wrfout_d01_2005-12-14_13:00:00.GWATC_FCST.nc"
+  dir      = "$NCARGTEST/nclscripts/cdf_files/"
+  a        = addfile(dir + filename,"r")
+  times    = wrf_user_list_times(a)  ; get times in the file
+  ntimes   = dimsizes(times)         ; number of times in the file
+
+  wks = gsn_open_wks("png","wrf_interp")
+
+; The specific pressure levels that we want the data interpolated to.
+  pressure_levels = (/ 850., 700., 500., 300./)   ; pressure levels to plot
+  nlevels         = dimsizes(pressure_levels)     ; number of pressure levels
+  hgt_spacing     = (/  20.,  30.,  60.,  60./)   ; contour spacing for geop. heigh plots
+
+;---Set plotting options for temperature contour line plot
+  line_res1                                = True
+  line_res1@cnLineColor                    = "Red"
+  line_res1@ContourParameters              = (/ 5.0 /)    ; contour level spacing
+  line_res1@cnInfoLabelOrthogonalPosF      = 0.07         ; offset second label information
+  line_res1@gsnContourLineThicknessesScale = 2.0
+
+;---Set plotting options for relative humidity contour fill plot
+  fill_res                   = True                          
+  fill_res@cnFillOn          = True  
+  fill_res@ContourParameters = (/ 10., 90., 10./)     ; min level, max level, spacing
+  fill_res@cnFillColors      = (/"White","White","White", \
+                                 "White","Chartreuse","Green",\
+                                 "Green3","Green4", \
+                                 "ForestGreen","PaleGreen4"/)
+
+;---Set plotting options for temperature contour line plot
+  line_res2                                = True
+  line_res2@cnLineColor                    = "MediumSeaGreen"
+  line_res2@ContourParameters              = (/ 10. /)      ; contour level spacing
+  line_res2@cnInfoLabelOrthogonalPosF      = 0.07           ; offset second label information
+  line_res2@gsnContourLineThicknessesScale = 3.0
+
+;---Set plotting options for wind vectors
+   vec_res            = True          
+   vec_res@FieldTitle = "Wind"   ; overwrite Field Title
+   vec_res@NumVectors = 47       ; wind barb density
+
+;---Set plotting options for geopotential height line contour plot
+   line_res3                                = True
+   line_res3@cnLineColor                    = "NavyBlue"
+   line_res3@gsnContourLineThicknessesScale = 3.0
+
+;---Loop over time
+  do it = 0,ntimes-1
+    print("Working on time: " + times(it) )
+    line_res1@TimeLabel = times(it)   ; Set Valid time to use on plots
+    line_res2@TimeLabel = times(it)
+    fill_res@TimeLabel  = times(it)
+
+;---Get the variables we want at particular time step
+    tc        = wrf_user_getvar(a,"tc",it)        ; T in C
+    u         = wrf_user_getvar(a,"ua",it)        ; u averaged to mass points
+    v         = wrf_user_getvar(a,"va",it)        ; v averaged to mass points
+    p         = wrf_user_getvar(a, "pressure",it) ; pressure is our vertical coordinate
+    z         = wrf_user_getvar(a, "z",it)        ; grid point height
+    rh        = wrf_user_getvar(a,"rh",it)        ; relative humidity
+    wspd_wdir = wrf_user_getvar(a,"wspd_wdir",it)        ; relative humidity
+
+;---Loop over levels
+    do nl = 0,nlevels-1                 
+      pressure = pressure_levels(nl)
+
+;---Interpolate various fields at the given pressure level
+      tc_plane   = wrf_user_interp_level(tc,p,pressure,False)
+      z_plane    = wrf_user_interp_level( z,p,pressure,False)
+      rh_plane   = wrf_user_interp_level(rh,p,pressure,False)
+      u_plane    = wrf_user_interp_level( u,p,pressure,False)
+      v_plane    = wrf_user_interp_level( v,p,pressure,False)
+      wspd_plane = wrf_user_interp_level(wspd_wdir(0,:,:,:),p,pressure,False)
+      wdir_plane = wrf_user_interp_level(wspd_wdir(1,:,:,:),p,pressure,False)
+
+      wspd_plane             = (u_plane*u_plane + v_plane*v_plane)^(0.5)    ; m/sec
+      u_plane                = u_plane*1.94386     ; kts
+      v_plane                = v_plane*1.94386     ; kts
+      wspd_plane@description = "Wind Speed"
+      wspd_plane@units       = "m/s"
+      u_plane@units          = "kts"
+      v_plane@units          = "kts"
+
+      line_res3@ContourParameters = hgt_spacing(nl)
+
+;---Create the various plots
+      contour_tc     = wrf_contour(a,wks,tc_plane,line_res1)
+      contour_rh     = wrf_contour(a,wks,rh_plane,fill_res)
+      contour_wspd   = wrf_contour(a,wks,wspd_plane,line_res2)
+      vector         = wrf_vector(a,wks,u_plane,v_plane,vec_res)
+      contour_height = wrf_contour(a,wks,z_plane,line_res3)
+
+;---Overlay plots as desired
+      if ( pressure .eq. 850 ) then        ; plot temp, rh, height, wind barbs
+        ov = wrf_map_overlays(a,wks,(/contour_rh,contour_tc,contour_height,vector/),True,True)
+      elseif ( pressure .eq. 700 ) then    ; plot temp, height, wind barbs
+        ov = wrf_map_overlays(a,wks,(/contour_tc,contour_height,vector/),True,True)
+      elseif ( pressure .eq. 500 ) then    ; plot temp, height, wind barbs
+        ov = wrf_map_overlays(a,wks,(/contour_tc,contour_height,vector/),True,True)
+      elseif ( pressure .eq. 300 ) then    ; plot windspeed, height, wind barbs
+        ov = wrf_map_overlays(a,wks,(/contour_wspd,contour_height,vector/),True,True)
+      end if
+    end do      ; end of level loop
+  end do        ; end of time loop
+end

@@ -1,0 +1,944 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/XyPlot.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:32 GMT -->
+<head>
+<title>XyPlot class</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index.html">HLUs ></a>
+<a class=crumb href="index-2.html">Classes </a>
+
+<br>
+<h1>XyPlot class</h1>
+
+The <strong>XyPlot</strong> object draws curves made up of X/Y coordinate
+pairs with tick marks, titles, and a legend.
+<hr>
+<h2>Synopsis</h2>
+<pre>
+Header file:		ncarg/hlu/XyPlot.h
+Class name:		xyPlotClass
+Class pointer:		NhlxyPlotClass
+Fortran class function:	NHLFXYPLOTCLASS
+Superclass:		<a href="DataComm.html">DataComm</a>
+Composite classes:	<a href="PlotManager.html">PlotManager</a>,<a href="LogLinTransformation.html">LogLinTransformation</a>,<a href="IrregularTransformation.html">IrregularTransformation</a>
+
+<strong>Data specific class</strong>
+Class name:		xyDataSpecClass
+Class pointer:		&lt;<em>Not referenceable</em>&gt;
+Fortran class function:	&lt;<em>Not referenceable</em>&gt;
+Superclass:		<a href="DataSpec.html">DataSpec</a>
+</pre>
+<p>
+<h3>Class-defined types</h3><p>
+<pre>
+Type name:		<a name="NhlTAlternatePlace">NhlTAlternatePlace</a>
+Definition:
+typedef enum _NhlAlternatePlace{
+	NhlNONE		= 0,	/* "None"	*/
+	NhlLEFTAXIS	= 1,	/* "LeftAxis"	*/
+	NhlRIGHTAXIS	= 2,	/* "RightAxis"	*/
+	NhlTOPAXIS	= 3,	/* "TopAxis"	*/
+	NhlBOTTOMAXIS	= 4	/* "BottomAxis"	*/
+} NhlAlternatePlace;
+
+Type name:		<a name="NhlTLineLabelMode">NhlTLineLabelMode</a>
+Definition:
+typedef enum _NhlLineLabelMode{
+	NhlNOLABELS	= 0,	/* "NoLabels"	*/
+	NhlLETTERED	= 1,	/* "Lettered"	*/
+	NhlCUSTOM	= 2	/* "Custom"	*/
+} NhlLineLabelMode;
+</pre>
+<hr>
+<h2>Resources</h2>
+<p>
+<h3>Local resources</h3><p>
+
+<pre>
++---------------------------------------------------------------+
+|			<A name="XyPlot.res">XyPlot resource set</a>			|
+|---------------------------------------------------------------|
+| NAME				TYPE			ACCESS	|
+|	CLASS				DEFAULT			|
+|===============================================================|
+| <a href="../../Graphics/Resources/xy.html#xyCoordData"><em>xyCoordData</em></a>			<A href="Base.html#NhlTObjIdGenArray">NhlTObjIdGenArray</a>	CSG	|
+|	XyCoordData			NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyCoordDataSpec"><em>xyCoordDataSpec</em></a>		<A href="Base.html#NhlTObjIdGenArray">NhlTObjIdGenArray</a>	G	|
+|	XyCoordDataSpec			NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyCurveDrawOrder"><em>xyCurveDrawOrder</em></a>              <A href="View.html#NhlTDrawOrder">NhlTDrawOrder</a>           RCSG    |
+|       XyCurveDrawOrder                "Draw"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyXStyle"><em>xyXStyle</em></a>			<A href="TickMark.html#NhlTTickMarkStyle">NhlTTickMarkStyle</a>	RCSG	|
+|	XyXStyle			NhlLINEAR		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyYStyle"><em>xyYStyle</em></a>			<A href="TickMark.html#NhlTTickMarkStyle">NhlTTickMarkStyle</a>	RCSG	|
+|	XyYStyle			NhlLINEAR		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyXIrregularPoints"><em>xyXIrregularPoints</em></a>		<A href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>	RCSG	|
+|	XyXIrregularPoints		NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyYIrregularPoints"><em>xyYIrregularPoints</em></a>		<A href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>	RCSG	|
+|	XyYIrregularPoints		NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyXIrrTensionF"><em>xyXIrrTensionF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	XyXIrrTensionF			2.0			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyYIrrTensionF"><em>xyYIrrTensionF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	XyYIrrTensionF			2.0			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyComputeXMin"><em>xyComputeXMin</em></a>			<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RCSG	|
+|	XyComputeExtent			&lt;dynamic&gt;		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyComputeXMax"><em>xyComputeXMax</em></a>			<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RCSG	|
+|	XyComputeExtent			&lt;dynamic&gt;		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyComputeYMin"><em>xyComputeYMin</em></a>			<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RCSG	|
+|	XyComputeExtent			&lt;dynamic&gt;		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyComputeYMax"><em>xyComputeYMax</em></a>			<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RCSG	|
+|	XyComputeExtent			&lt;dynamic&gt;		|
++---------------------------------------------------------------+
+</pre>
+<p>
+<h3><a name="XyData.exp">Data-specific resources</a></h3><p>
+
+<p>
+The following resources are not set directly to the
+<strong>XyPlot</strong> object.  These resources are used to set
+the graphical attributes that correspond directly with an individual
+piece of data that is added to the plot. So the attributes of each
+individual curve or marker are set this way.
+</p>
+<p>
+When a <a href="DataItem.html"><strong>DataItem</strong></a> object is added to the
+<em>xyCoordData</em> resource, either using
+<a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a> or using
+<a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a>, an
+<a href="XyPlot.html"><strong>XyDataSpec</strong></a> object is automatically created as
+a child of the <strong>XyPlot</strong> to hold
+the resources that describe these graphical attributes.  The
+<a href="XyPlot.html"><strong>XyDataSpec</strong></a> object is given the same name as the
+<a href="DataItem.html"><strong>DataItem</strong></a> object that was added.
+</p>
+<p>
+To set these resources in a resource file, you would use resource
+lines similar to this:</p>
+<ul>
+<pre>
+*xyplotname.dataspecname.xyDashPattern:	solidline
+</pre>
+<dl>
+<dt><em>xyplotname</em>
+<dd>the name you give the <strong>XyPlot</strong> when you create it.
+<dt><em>dataspecname</em>
+<dd>the name of the <a href="XyPlot.html"><strong>XyDataSpec</strong></a> object, which will be the
+same as the name of the <a href="DataItem.html"><strong>DataItem</strong></a> object that was added
+to the <em>xyCoordData</em> resource.
+</dl>
+</ul>
+<p>
+To set these resources programmatically, you need to retrieve the 
+<a href="XyPlot.html"><strong>XyDataSpec</strong></a> object id, and call
+<a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> on that object.
+<ol>
+<p>
+There are two ways to retrieve the ids for the <a href="XyPlot.html"><strong>XyDataSpec</strong></a>
+objects that hold the resources that describe the graphical attributes
+for a particular <a href="DataItem.html"><strong>DataItem</strong></a>:
+</p>
+<li>If you used <a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a> to
+add the <a href="DataItem.html"><strong>DataItem</strong></a> to the <em>xyCoordData</em> resource,
+then the return value from that function is the id of the
+<a href="XyPlot.html"><strong>XyDataSpec</strong></a> object that describes the graphical attributes
+for the added <a href="DataItem.html"><strong>DataItem</strong></a>.
+<li>You can retrieve the value of the
+<a href="../../Graphics/Resources/xy.html#xyCoordDataSpec"><em>xyCoordDataSpec</em></a> resource of the
+<strong>XyPlot</strong> after all the data have been added to the
+<strong>XyPlot</strong>.  It is an array containing the ids of all the
+<a href="XyPlot.html"><strong>XyDataSpec</strong></a> objects that are currently describing how
+all the <a href="DataItem.html"><strong>DataItem</strong></a> objects in the <em>xyCoordData</em>
+resource are to be visualized.
+</ol>
+<p>
+The <a href="XyPlot.html"><strong>XyDataSpec</strong></a> class also inherits all the
+<a href="DataSpec.html"><strong>DataSpec</strong></a> <A href="DataSpec.html">resources</a>.
+<pre>
++---------------------------------------------------------------+
+|			<A name="XyData.res">XyDataSpec resource set</a>			|
+|---------------------------------------------------------------|
+| NAME				TYPE			ACCESS	|
+|	CLASS				DEFAULT			|
+|===============================================================|
+| <a href="../../Graphics/Resources/xy.html#xyDashPattern"><em>xyDashPattern</em></a>			<A href="Workstation.html#NhlTDashIndex">NhlTDashIndex</a>		RSG	|
+|	LineDashPattern			NhlSOLIDLINE		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyDashPatterns"><em>xyDashPatterns</em></a>		<A href="Workstation.html#NhlTDashIndexGenArray">NhlTDashIndexGenArray</a>	RSG	|
+|	XyDashPatterns			NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMonoDashPattern"><em>xyMonoDashPattern</em></a>		<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RSG	|
+|	XyMonoDashPattern		False			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMarkLineMode"><em>xyMarkLineMode</em></a>		<A href="Workstation.html#NhlTMarkLineMode">NhlTMarkLineMode</a>	RSG	|
+|	XyMarkLineMode			NhlLINES		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMarkLineModes"><em>xyMarkLineModes</em></a>		<A href="Workstation.html#NhlTMarkLineModeGenArray">NhlTMarkLineModeGenArray</a>RSG	|
+|	XyMarkLineModes			NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMonoMarkLineMode"><em>xyMonoMarkLineMode</em></a>		<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RSG	|
+|	XyMonoMarkLineMode		False			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyExplicitLegendLabels"><em>xyExplicitLegendLabels</em></a>	<A href="Base.html#NhlTStringGenArray">NhlTStringGenArray</a>	RSG	|
+|	XyExplicitLegendLabels		NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineColor"><em>xyLineColor</em></a>			<A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>		RSG	|
+|	LineColor			NhlFOREGROUND		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineColors"><em>xyLineColors</em></a>			<A href="Workstation.html#NhlTColorIndexGenArray">NhlTColorIndexGenArray</a>	RSG	|
+|	XyLineColors			NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMonoLineColor"><em>xyMonoLineColor</em></a>		<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RSG	|
+|	XyMonoLineColor			False			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineDashSegLenF"><em>xyLineDashSegLenF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	LineDashSegLenF			&lt;Dynamic&gt;		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineLabelFontHeightF"><em>xyLineLabelFontHeightF</em></a>	<A href="Base.html#NhlTFloat">NhlTFloat</a>		RCSG	|
+|	FontHeightF			&lt;Dynamic&gt;		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineLabelFontColor"><em>xyLineLabelFontColor</em></a>		<A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>		RSG	|
+|	FontColor			NhlFOREGROUND		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineLabelFontColors"><em>xyLineLabelFontColors</em></a>		<A href="Workstation.html#NhlTColorIndexGenArray">NhlTColorIndexGenArray</a>	RSG	|
+|	XyLineLabelFontColors		NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMonoLineLabelFontColor"><em>xyMonoLineLabelFontColor</em></a>	<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RSG	|
+|	XyMonoLineLabelFontColor	False			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLabelMode"><em>xyLabelMode</em></a>			<A href="XyPlot.html#NhlTLineLabelMode">NhlTLineLabelMode</a>	RSG	|
+|	XyLabelMode			NhlNOLABELS		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyExplicitLabels"><em>xyExplicitLabels</em></a>		<A href="Base.html#NhlTStringGenArray">NhlTStringGenArray</a>	RSG	|
+|	XyExplicitLabels		NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineThicknessF"><em>xyLineThicknessF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>		RSG	|
+|	LineThicknessF			1.0			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineThicknesses"><em>xyLineThicknesses</em></a>		<A href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>	RSG	|
+|	XyLineThicknesses		NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMonoLineThickness"><em>xyMonoLineThickness</em></a>		<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RSG	|
+|	XyMonoLineThickness		False			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMarker"><em>xyMarker</em></a>			<A href="Workstation.html#NhlTMarkerIndex">NhlTMarkerIndex</a>		RSG	|
+|	MarkerIndex			"default"		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMarkers"><em>xyMarkers</em></a>			<A href="Workstation.html#NhlTMarkerIndexGenArray">NhlTMarkerIndexGenArray</a>	RSG	|
+|	XyMarkers			NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMonoMarker"><em>xyMonoMarker</em></a>			<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RSG	|
+|	XyMonoMarker			False			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMarkerColor"><em>xyMarkerColor</em></a>			<A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>		RSG	|
+|	MarkerColor			NhlFOREGROUND		|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMarkerColors"><em>xyMarkerColors</em></a>		<A href="Workstation.html#NhlTColorIndexGenArray">NhlTColorIndexGenArray</a>	RSG	|
+|	XyMarkerColors			NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMonoMarkerColor"><em>xyMonoMarkerColor</em></a>		<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RSG	|
+|	XyMonoMarkerColor		False			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMarkerSizeF"><em>xyMarkerSizeF</em></a>			<A href="Base.html#NhlTFloat">NhlTFloat</a>		RSG	|
+|	MarkerSizeF			0.01			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMarkerSizes"><em>xyMarkerSizes</em></a>			<A href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>	RSG	|
+|	XyMarkerSizes			NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMonoMarkerSize"><em>xyMonoMarkerSize</em></a>		<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RSG	|
+|	XyMonoMarkerSize		False			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMarkerThicknessF"><em>xyMarkerThicknessF</em></a>		<A href="Base.html#NhlTFloat">NhlTFloat</a>		RSG	|
+|	MarkerThicknessF		1.0			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMarkerThicknesses"><em>xyMarkerThicknesses</em></a>		<A href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>	RSG	|
+|	XyMarkerThicknesses		NULL			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyMonoMarkerThickness"><em>xyMonoMarkerThickness</em></a>		<A href="Base.html#NhlTBoolean">NhlTBoolean</a>		RSG	|
+|	XyMonoMarkerThickness		False			|
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineLabelFont"><em>xyLineLabelFont</em></a>               <A href="Base.html#NhlTFont">NhlTFont</a>                RCSG    |
+|       Font                            "pwritx"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineLabelFontAspectF"><em>xyLineLabelFontAspectF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontAspectF                     1.3125                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineLabelFontThicknessF"><em>xyLineLabelFontThicknessF</em></a>     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineLabelFontQuality"><em>xyLineLabelFontQuality</em></a>	<A href="TextItem.html#NhlTFontQuality">NhlTFontQuality</a>		RCSG	|
+|       FontQuality                     "High"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineLabelConstantSpacingF"><em>xyLineLabelConstantSpacingF</em></a>   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextConstantSpacingF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/xy.html#xyLineLabelFuncCode"><em>xyLineLabelFuncCode</em></a>           <A href="Base.html#NhlTCharacter">NhlTCharacter</a>           RCSG    |
+|       TextFuncCode                    ':'                     |
++---------------------------------------------------------------+
+</pre>
+<p>
+ 
+<h3>Composite resources</h3><p>
+
+<A name="Transformation.res"></a>
+<h4><A href="Transformation.html#Transformation.res">Transformation
+resources</a></h4>
+
+<a href="Transformation.html"><strong>Transformation</strong></a> class resources specify the extent and
+direction of the data coordinate system. <strong>XyPlot</strong> 
+allows read-only access to the following resource:
+
+<ul>
+<li><a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a>
+</ul>
+
+<p> <strong>XyPlot</strong> modifies access to other
+<a href="Transformation.html"><strong>Transformation</strong></a> class resources, as follows:
+
+<ul>
+<dl>
+<dt>
+<a href="../../Graphics/Resources/tr.html#trXMinF"><em>trXMinF</em></a>
+<dd>
+If this resource is not explicitly set, it is determined based on the value
+of the <em>xyComputeXMin</em> resource and the data extents within the
+<em>xyCoordData</em> resource.
+<dt>
+<a href="../../Graphics/Resources/tr.html#trXMaxF"><em>trXMaxF</em></a>
+<dd>
+If this resource is not explicitly set, it is determined based on the value
+of the <em>xyComputeXMax</em> resource and the data extents within the
+<em>xyCoordData</em> resource.
+<dt>
+<a href="../../Graphics/Resources/tr.html#trYMinF"><em>trYMinF</em></a>
+<dd>
+If this resource is not explicitly set, it is determined based on the value
+of the <em>xyComputeYMin</em> resource and the data extents within the
+<em>xyCoordData</em> resource.
+<dt>
+<a href="../../Graphics/Resources/tr.html#trYMaxF"><em>trYMaxF</em></a>
+<dd>
+If this resource is not explicitly set, it is determined based on the value
+of the <em>xyComputeYMax</em> resource and the data extents within the
+<em>xyCoordData</em> resource.
+</dl>
+</ul>
+
+<A name="LogLinTransformation.res"></a>
+<h4><A href="LogLinTransformation.html#LogLinTransformation.res">LogLinTransformation
+resources</a></h4>
+
+If the <strong>XyPlot</strong> <em>xyXStyle</em> and <em>xyYStyle</em>
+resources indicate the use of a logarithmic or linear coordinate system,
+it uses a <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> object to manage the
+transformation to and from data space. 
+
+<p>
+<strong>XyPlot</strong> disables access to all
+resources specific to the <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a>.
+
+<A name="IrregularTransformation.res"></a>
+<h4><A href="IrregularTransformation.html#IrregularTransformation.res">IrregularTransformation
+resources</a></h4>
+
+If the <strong>XyPlot</strong> <em>xyXStyle</em> and <em>xyYStyle</em>
+resources indicate the use of an irregular coordinate system,
+it uses an <a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> object to manage the
+transformation to and from data space. 
+
+<p>
+<strong>XyPlot</strong> disables
+access to all resources specific to the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> except for:
+
+<ul>
+<li><a href="../../Graphics/Resources/tr.html#trXTensionF"><em>trXTensionF</em></a>
+<li><a href="../../Graphics/Resources/tr.html#trYTensionF"><em>trYTensionF</em></a>
+</ul>
+
+<A name="PlotManager.res"></a>
+<h4><A href="PlotManager.html#PlotManager.res">PlotManager resources</a></h4>
+If <em>tfPlotManagerOn</em> is True when an XyPlot object is created, all
+<a href="PlotManager.html"><strong>PlotManager</strong></a> resources are available. However,
+<strong>XyPlot</strong> does modify some of the <a href="PlotManager.html"><strong>PlotManager</strong></a>
+resources as follows:
+<ul>
+<dl>
+<dt>
+<em><a href="../../Graphics/Resources/pm.html#pmTitleDisplayMode"><em>pmTitleDisplayMode</em></a></em>
+<dd>
+The default value of <em>pmTitleDisplayMode</em> is set to
+<code>Conditional</code>.
+<dt>
+<em><a href="../../Graphics/Resources/pm.html#pmTickMarkDisplayMode"><em>pmTickMarkDisplayMode</em></a></em>
+<dd>
+The default value of <em>pmTickMarkDisplayMode</em> is set to 
+<code>Conditional</code>.
+<dt>
+<em><a href="../../Graphics/Resources/pm.html#pmLegendDisplayMode"><em>pmLegendDisplayMode</em></a></em>
+<dd>
+The default value of <em>pmLegendDisplayMode</em> is set to 
+<code>Never</code>.
+<dt>
+<em><a href="../../Graphics/Resources/pm.html#pmLabelBarDisplayMode"><em>pmLabelBarDisplayMode</em></a></em>
+<dd>
+The <em>pmLabelBarDisplayMode</em> resource is hard-coded to its default
+value of <code>NoCreate</code> in the <strong>XyPlot</strong>.
+</dl>
+</ul>
+The resources for the <a href="PlotManager.html"><strong>PlotManager</strong></a>'s <em>Composite</em> parts
+are available as follows:
+<dl>
+<dl>
+<dt>
+<strong><A name="Title.res">Title resources</a></strong>
+<dd>
+All the <A href="PlotManager.html#Title.res">Title resources</a> are available
+as they are modified by <a href="PlotManager.html"><strong>PlotManager</strong></a>.
+<dt>
+<strong><A name="TickMark.res">TickMark resources</a></strong>
+<dd>
+All the <A href="PlotManager.html#TickMark.res">TickMark resources</a> are
+available as modified by <a href="PlotManager.html"><strong>PlotManager</strong></a>.
+<dt>
+<strong><A name="LabelBar.res">LabelBar resources</a></strong>
+<dd>
+All LabelBar resources are disabled by <strong>XyPlot</strong>.
+<dt>
+<strong><A name="Legend.res">Legend resources</a></strong>
+<dd>
+The <A href="PlotManager.html#Legend.res">Legend resources</a> are available as
+modified by <a href="PlotManager.html"><strong>PlotManager</strong></a> with the exception of some resources
+that have been disabled since they are set automatically based on the
+current values of relevant <strong>XyPlot</strong> and
+<a href="XyPlot.html"><strong>XyDataSpec</strong></a> resources. These resources include:
+<ul>
+<li><a href="../../Graphics/Resources/lg.html#lgItemCount"><em>lgItemCount</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLabelStrings"><em>lgLabelStrings</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoItemType"><em>lgMonoItemType</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgItemType"><em>lgItemType</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgItemTypes"><em>lgItemTypes</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoDashIndex"><em>lgMonoDashIndex</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgDashIndex"><em>lgDashIndex</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgDashIndexes"><em>lgDashIndexes</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoLineColor"><em>lgMonoLineColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineColor"><em>lgLineColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineColors"><em>lgLineColors</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoLineThickness"><em>lgMonoLineThickness</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineThicknessF"><em>lgLineThicknessF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineThicknesses"><em>lgLineThicknesses</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoLineDashSegLen"><em>lgMonoLineDashSegLen</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineDashSegLenF"><em>lgLineDashSegLenF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineDashSegLens"><em>lgLineDashSegLens</em></a>
+
+<li><a href="../../Graphics/Resources/lg.html#lgMonoMarkerIndex"><em>lgMonoMarkerIndex</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerIndex"><em>lgMarkerIndex</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerIndexes"><em>lgMarkerIndexes</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoMarkerColor"><em>lgMonoMarkerColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerColor"><em>lgMarkerColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerColors"><em>lgMarkerColors</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoMarkerThickness"><em>lgMonoMarkerThickness</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerThicknessF"><em>lgMarkerThicknessF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerThicknesses"><em>lgMarkerThicknesses</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoMarkerSize"><em>lgMonoMarkerSize</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerSizeF"><em>lgMarkerSizeF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMarkerSizes"><em>lgMarkerSizes</em></a>
+
+<li><a href="../../Graphics/Resources/lg.html#lgMonoLineLabelFontHeight"><em>lgMonoLineLabelFontHeight</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontHeightF"><em>lgLineLabelFontHeightF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontHeights"><em>lgLineLabelFontHeights</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgMonoLineLabelFontColor"><em>lgMonoLineLabelFontColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontColor"><em>lgLineLabelFontColor</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontColors"><em>lgLineLabelFontColors</em></a>
+
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelStrings"><em>lgLineLabelStrings</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontAspectF"><em>lgLineLabelFontAspectF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontThicknessF"><em>lgLineLabelFontThicknessF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFontQuality"><em>lgLineLabelFontQuality</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelConstantSpacingF"><em>lgLineLabelConstantSpacingF</em></a>
+<li><a href="../../Graphics/Resources/lg.html#lgLineLabelFuncCode"><em>lgLineLabelFuncCode</em></a>
+</ul>
+</dl>
+</dl>
+<p>
+<h3>Superclass resources</h3><p>
+
+All of the <a href="DataComm.html"><strong>DataComm</strong></a>
+<A href="DataComm.html#DataComm.res">resources</a> can be set for the
+<strong>XyPlot</strong> object.
+<hr>
+<h2>Description</h2>
+<strong>XyPlot</strong> is a composite object. It combines the
+functionality of the <a href="PlotManager.html"><strong>PlotManager</strong></a> object,
+<a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a>, and <a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a>
+to create a fully functional <strong>XyPlot</strong> object.
+<p>
+Since the <strong>XyPlot</strong> is a composite object, the resources
+for the <em>Composite</em> classes are also available to the
+<strong>XyPlot</strong> object through the standard resource-setting mechanisms.
+<p>
+<strong>XyPlot</strong> is derived from the <a href="DataComm.html"><strong>DataComm</strong></a>
+class, which is derived from the <a href="Transform.html"><strong>Transform</strong></a> class. This
+means that the functions <a href="../API/NhlDataToNDC.html"><strong>NhlDataToNDC</strong></a> and
+<a href="../API/NhlNDCToData.html"><strong>NhlNDCToData</strong></a> can be used to obtain
+transformations of points to and from data coordinates and NDC coordinates.
+See the <A href="Transform.html">Transform class</a> for more information on
+these functions.
+<p>
+In general, <strong>XyPlot</strong> accepts one or more vectors of X and Y
+coordinates and displays them by drawing a line through the {X,Y} coordinate
+pairs, or drawing markers at each point within the coordinate pairs, or
+both.
+<p>
+<strong>XyPlot</strong> provides the user with the capability of configuring
+the line thickness, dash pattern indexes, colors of the lines, line labels,
+and line label colors for curves. <strong>XyPlot</strong> allows the
+user to configure Marker indexes, colors, sizes, and thicknesses for
+displaying markers.
+<strong>XyPlot</strong> also provides all the same transformation styles
+that are provided by the <a href="TickMark.html"><strong>TickMark</strong></a> object: LOG, LINEAR,
+and IRREGULAR.
+<p>
+<strong>XyPlot</strong> accepts <a href="DataItem.html"><strong>DataItem</strong></a>
+objects rather than arrays of values. The <em>xyCoordData</em>
+resource is used to associate <a href="DataItem.html"><strong>DataItem</strong></a> objects
+with the <strong>XyPlot</strong> object. The <em>xyCoordData</em>
+resource is used to specify a list of <a href="DataItem.html"><strong>DataItem</strong></a>
+objects, and the <a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a>
+function appends <a href="DataItem.html"><strong>DataItem</strong></a> to the list.
+<p>
+There are basically two steps to visualizing a set of data in the XyPlot
+object. First, the programmer has to fully describe the data to the
+HLU environment. This is done by creating a
+<A href="DataItem.html">DataItem</a> object that describes the data's shape.
+Second, the programmer has to associate the <a href="DataItem.html"><strong>DataItem</strong></a>
+with the <em>xyCoordData</em> resource of the <strong>XyPlot</strong>.
+<p>
+You can associate data with <strong>XyPlot</strong> by creating a
+<a href="DataItem.html"><strong>DataItem</strong></a> to describe the data. Then use the
+<a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a> function to add that
+<a href="DataItem.html"><strong>DataItem</strong></a> to the list of data referenced by the
+<em>xyCoordData</em> resource. If the <strong>XyPlot</strong>
+object understands data in the format provided (i.e. the
+<a href="DataItem.html"><strong>DataItem</strong></a> class used), the <a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a> function will return with a
+value of <strong>NhlNOERROR</strong>.
+<p>
+Additionally, the programmer can just set the <em>xyCoordData</em>
+resource directly using the <a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> function.  The
+<em>xyCoordData</em> resource is set with an array of object ids.  The
+difference between setting the resource directly and calling the
+<a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a> function is that the
+<a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a> function appends the
+given data to the current list of data, while setting the
+<em>xyCoordData</em> resource using <a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> replaces the current value of
+that resource.
+<p>
+If programmers want to control the <a href="XyPlot.html"><strong>XyDataSpec</strong></a> resources
+programmatically, they will need to add the <a href="DataItem.html"><strong>DataItem</strong></a>s
+to the <strong>XyPlot</strong>'s <em>xyCoordData</em> resource first. Then
+they can retrieve the value of the <em>xyCoordDataSpec</em> resource.
+The <em>xyCoordDataSpec</em> resource is an array of <a href="XyPlot.html"><strong>XyDataSpec</strong></a>
+ids. The elements of this array correspond to the <a href="DataItem.html"><strong>DataItem</strong></a>
+ids in the <em>xyCoordData</em> array resource. To configure exactly how
+each coordinate pair array of one of the <a href="DataItem.html"><strong>DataItem</strong></a>s is
+going to be displayed, the programmer can set the <a href="XyPlot.html"><strong>XyDataSpec</strong></a>
+resources to the corresponding <a href="XyPlot.html"><strong>XyDataSpec</strong></a> id.
+<p>
+The <a href="XyPlot.html"><strong>XyDataSpec</strong></a> object is created on behalf of the
+programmer for each <a href="DataItem.html"><strong>DataItem</strong></a> object that is added to the
+<em>xyCoordData</em> resource. The <a href="XyPlot.html"><strong>XyDataSpec</strong></a> object is
+created with the same name as the <a href="DataItem.html"><strong>DataItem</strong></a> and as a child
+of the <strong>XyPlot</strong>.
+Therefore, the data-specific resources (i.e. the resources of the
+<a href="XyPlot.html"><strong>XyDataSpec</strong></a> object) can be set in the resource file by simply
+specifying the name of the <a href="DataItem.html"><strong>DataItem</strong></a> as a child of the
+<strong>XyPlot</strong> with the <a href="XyPlot.html"><strong>XyDataSpec</strong></a> resources in
+the resource file.
+<p>
+
+The <a href="XyPlot.html"><strong>XyDataSpec</strong></a> resources allow the user to set dash
+patterns, line colors, line thicknesses, line labels, and line label
+font colors and heights for each element of the <em>xyCoordData</em>
+resource. The user can also set the other standard text attributes for
+line labels. However, these attributes are only available as scalar
+resources, and therefore the <a href="XyPlot.html"><strong>XyDataSpec</strong></a> object
+referenced by the first element of the <em>xyCoordDataSpec</em> array
+supplies the values of these resources for all data elements.
+
+<p>
+The <em>xyLabelMode</em> and <em>xyExplicitLabels</em> resources control
+how each curve is labeled. The curve line labels can be any string. However,
+line labels longer than six or seven characters can cause problems, and
+spaces are not drawn.
+<p>
+<strong>XyPlot</strong> also allows markers to be plotted. The
+<em>xyMarkLineMode</em>, <em>xyMarkLineModes</em>, and
+<em>xyMonoMarkLineMode</em> resources are used to indicate if markers
+should be plotted in place of curves, or in addition to them.  There
+are also a number of other resources in the
+<a href="XyPlot.html"><strong>XyDataSpec</strong></a> object to configure exactly how the
+markers should be displayed.
+<p>
+The next step in configuring an <strong>XyPlot</strong> is to
+select and specify the data transformation of the
+<strong>XyPlot</strong> object. As is the case with the
+<a href="TickMark.html"><strong>TickMark</strong></a> object, there are currently three styles
+of data transformations, <code>Log</code>, <code>Linear</code>, and
+<code>Irregular</code>. There are two style resources for setting the
+X-Axis and Y-Axis data transformations.  This differs from the
+<a href="TickMark.html"><strong>TickMark</strong></a> object, where each side of each axis has
+its own resource for specifying style.  <strong>XyPlot</strong>
+forces both sides of an axis to have the same style, so there is no
+need for two separate style resources that set the style for each side
+of an axis. This has been done to eliminate the possibility that the
+tick marks don't accurately represent the data transformation.  If
+different styles were allowed for both sides of the X Axis, then the
+possibility arises that one of the transformations is wrong. The two
+resources for selecting the transformation style are <em>xyXStyle</em>
+and <em>xyYStyle</em>. By default, these are both set to
+<code>Linear</code>.
+<p>
+Once the style is selected, the resources <em>trXMinF</em>,
+<em>trXMaxF</em>, <em>trYMinF</em>, and <em>trYMaxF</em>
+are used to set the data extents. If these resources are not
+set, then the <strong>XyPlot</strong> object examines the data and determines
+for itself what the data extents are. The actual data extents
+could change if additional data are added to the <em>xyCoordData</em>
+resource or if one of the current <a href="DataItem.html"><strong>DataItem</strong></a>s is modified.
+The <em>tr</em> data-extent resources will be automatically recomputed
+if the <em>xyComputeXMin</em>, <em>xyComputeXMax</em>,
+<em>xyComputeYMin</em>, and <em>xyComputeYMax</em> resources allow it.
+<p>
+<code>Irregular</code> style transformations require some additional
+information.  The resources <em>xyXIrregularPoints</em> and
+<em>xyYIrregularPoints</em> must be used when <code>Irregular</code>
+style has been selected. These resources apply to both sides of their
+respective axes. For a more complete discussion of <code>Irregular</code>
+style transformations, see the description of the
+<A href="TickMark.html">TickMark</a> object.
+<hr>
+<h2>Support functions</h2>
+The <strong>XyPlot</strong> object doesn't define any support functions, but
+it does inherit all the support functions from its superclass.
+<hr>
+<h2>Status</h2>
+
+<hr>
+<h2>See also</h2>
+<ul>
+<li><a href="../API/NhlCreate.html"><strong>NhlCreate</strong></a> function
+<li><a href="../API/NhlDestroy.html"><strong>NhlDestroy</strong></a> function
+<li><a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> function
+<li><a href="../API/NhlGetValues.html"><strong>NhlGetValues</strong></a> function
+<li><a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a> function
+<li><a href="DataComm.html"><strong>DataComm</strong></a> object
+<li><a href="Title.html"><strong>Title</strong></a> object
+<li><a href="TickMark.html"><strong>TickMark</strong></a> object
+</ul>
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/XyPlot.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:32 GMT -->
+</html>
+

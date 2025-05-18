@@ -1,0 +1,66 @@
+;----------------------------------------------------------------------
+; fanal_5.ncl
+;
+; Concepts illustrated:
+;   - Performing 'Fourier' analysis and synthesis 
+;---------------------------------------------------------
+;---Read 'T2M' on a gaussian grid
+  diri = "./"
+  fili = "T2m.nc"      ; This file is distributed with NCL
+  f    = addfile (diri+fili, "r")
+  t    = f->T          ; Read in 2-METER TEMPERATURES ON A GAUSSIAN GRID
+  printVarSummary(t)   ; [time | 1] x [lat | 94] x [lon | 192]
+  print("============")
+  dimt = dimsizes(t)
+  ntim = dimt(0)
+  nlat = dimt(1)
+  mlon = dimt(2)
+
+;---Spherical Harmonic analysis and synthesis
+  ab   = shagC (t)       ; analysis
+  printVarSummary(ab)    ; [2] x [1] x [94] x [94]
+  ab(:,:,:,3:) = 0.0     ; set coef to 0.0
+  T    = shsgC (ab,mlon) ; synthesis
+  printVarSummary(T)
+  copy_VarCoords(t,T)    ; for plotting
+  printVarSummary(T)
+
+;---Fourier analysis and synthesis     
+  x    = t
+  x    = 0.0
+  do nt=0,ntim-1
+    do nl=0,nlat-1
+       rc  = ezfftf(t(nt,nl,:))           ; analysis: (2,96)
+       rc(:,2:) = 0.0                     ; set selected coefficients to 0.0
+       x(nt,nl,:) = ezfftb(rc, rc@xbar)   ; synthesis  
+    end do
+  end do
+     
+;************************************************
+; create plot
+;************************************************
+  nt = 0
+  plot= new(3,"graphic")
+  wks = gsn_open_wks("png","fanal")             ; send graphics to PNG file
+  res = True                                    ; plot mods desired
+  res@gsnMaximize = True
+  res@gsnDraw     = False
+  res@gsnFrame    = False
+
+  res@cnLevelSelectionMode = "ManualLevels"     ; set manual contour levels
+  res@cnMinLevelValF       =  228.0             ; set min contour level
+  res@cnMaxLevelValF       =  300.0             ; set max contour level
+  res@cnLevelSpacingF      =   4.               ; set contour spacing
+  res@cnInfoLabelOrthogonalPosF = -0.07         ; move contour label up
+
+  res@gsnCenterString = "Original"
+  plot(0) = gsn_csm_contour_map(wks,t(nt,:,:), res)  ; create plot
+  res@gsnCenterString = "Reconstructed Spherical Harmonics"
+  plot(1) = gsn_csm_contour_map(wks,T(nt,:,:), res)  ; create plot
+  res@gsnCenterString = "Reconstructed EZFFT[F/B]"
+  plot(2) = gsn_csm_contour_map(wks,x(nt,:,:), res)  ; create plot
+
+;************************************************
+; create panel
+;************************************************
+  gsn_panel(wks,plot,(/3,1/),False)             ; now draw as one plot

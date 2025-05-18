@@ -1,0 +1,152 @@
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+; timeLon.ncl
+; Carl Schreck (carl@atmos.albany.edu)
+; January 2010
+;------------------------------------------------------------------------------
+; Description: Draw a time-lon (Hovmoller) plot of unfiltered CLAUS overlaid 
+; with wave-filtered contours
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;
+; New version: wkSpaceTime_5.ncl
+; Basically does the same thing, but fixes some errors
+; Also, deprecated code has been replaced with the modern version
+; Modified by Lily Kailyn
+;
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+;
+; These files still have to be loaded manually
+load "$NCARG_ROOT/lib/ncarg/nclscripts/contrib/kf_filter.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/contrib/time_axis_labels.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/contrib/cd_string.ncl"
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+; Main
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+begin
+
+  mis = -999
+  mis@_FillValue = -999
+
+  ; set the wave parameters
+  tMin = 2.5
+  tMax = 20
+  kMin = 1
+  kMax = 14
+  hMin = 8
+  hMax = 90
+  waveName = "Kelvin"  
+
+  ; number of timesteps in data for each day
+  obsPerDay = 8
+
+  ; number of days to filter on each side of the period we're interested in
+  bufferDays = 90
+  
+  ; open the file
+  inDir      = "./"
+  inFileName = "claus.1997.nc"
+  inFile     = addfile( inDir+inFileName, "r" )
+
+  ; get the time units and set the first and last times that we want
+  timeUnits = inFile->time@units
+  startDate = ut_inv_calendar( 1997, 07, 01, 00, 0, 0, timeUnits, 0 )
+  endDate   = ut_inv_calendar( 1997, 08, 31, 00, 0, 0, timeUnits, 0 )
+
+  ; calculate our number of weights
+  if( isStrSubset( timeUnits, "days" ) ) then
+    buffer = bufferDays * 1
+  else
+    if( isStrSubset( timeUnits, "hours" ) ) then
+      buffer = bufferDays * 24
+    else
+      print( "DANGER! DANGER! Unexpected time units" )
+      return
+    end if
+  end if
+
+  filtStart = startDate - buffer
+  filtStart@units = timeUnits
+  filtEnd   = endDate + buffer
+  filtEnd@units = timeUnits
+
+;---Read the data and filter it
+  print( "Reading..." )
+  inData   = inFile->brtmp({filtStart:filtEnd},{2.5:15},:)
+  origData = dim_avg_n_Wrap( inData, 1 )
+
+  print( "Filtering..." )
+  filtData = kf_filter( origData(time|:,lon|:), obsPerDay \
+                      , tMin, tMax, kMin, kMax, hMin, hMax, waveName )
+
+  printVarSummary( filtData )
+  print( min(filtData) + " " + max(filtData) )
+
+;---Open workstation, and read and combine color map data
+
+  wks = gsn_open_wks("png", "wkSpaceTime") ; send graphics to PNG file
+
+  cmap1 = read_colormap_file("posneg_2")   ; read first color map
+  cmap2 = read_colormap_file("default")    ; read second color map
+  cmap  = array_append_record(cmap1, cmap2, 0) ; combine color map data
+
+;---Set plotting resources
+  res = True
+
+  res@cnFillOn            = True
+  res@cnFillPalette       = cmap(11:19:-1,:)   ; Read a subset of the color map, reverse it, and set as plot color map
+  res@cnFillMode          = "RasterFill"
+  res@cnRasterSmoothingOn = True
+  res@cnMonoFillColor     = False
+  res@cnLineLabelsOn      = False
+  res@cnInfoLabelOn       = False
+  res@cnLinesOn           = False
+
+  res@cnLevelSelectionMode= "ExplicitLevels"
+  res@cnLevels            = (/ 240, 250, 260, 270, 280 /)
+  res@cnMissingValFillColor = "gray"
+
+;  res@gsnLeftString = ""
+;  res@gsnRightString = ""
+  res@gsnDraw = False
+  res@gsnFrame = False
+
+  res@trYReverse = True
+
+;---Set time-format axis resources
+  res@tmYLMode = "Explicit"
+  res@tmYLValues = origData&time(::40)
+  res@tmYLLabels = cd_string(origData&time(::40),"%d %c") 
+
+;---Draw Hovmoller plot
+  plot = gsn_csm_hov( wks, origData({startDate:endDate},{120:320}), res )
+
+;---Set contour map resources
+  cnRes = True
+  cnRes@cnLineThicknessF = 2
+  cnRes@cnLineLabelsOn   = False
+  cnRes@cnLineColor      = "black"
+  cnRes@gsnLeftString    = ""
+  cnRes@gsnRightString   = ""
+  cnRes@gsnDraw          = False
+  cnRes@gsnFrame         = False
+  cnRes@cnLevelSelectionMode = "ExplicitLevels"
+  cnRes@cnLevels         = (/ -15, -5 /)
+
+;---Draw contour map and overlay on Hovmoller plot
+  cont = gsn_csm_contour( wks, filtData, cnRes )
+  overlay( plot, cont )
+
+;---Draw plots
+  draw( plot )
+  frame( wks )
+
+  print( "Thank you, come again." + systemfunc("date") )
+
+end

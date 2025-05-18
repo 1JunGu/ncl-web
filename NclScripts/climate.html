@@ -1,0 +1,68 @@
+;
+; This NCL script first draws all of the climate divisions in mainland
+; USA, and then it draws all of the climate divisions in the state of
+; Colorado.
+;
+; You must have access to the new map database in order to run this script.
+;
+
+load "$NCARG_ROOT/lib/ncarg/nclex/gsun/gsn_code.ncl"
+
+begin
+  cmap = (/"White","Black","Orange","DarkGreen", \
+           "Beige","Yellow","IndianRed", "Gray","BlueViolet"/)
+
+
+  wks = gsn_open_wks("x11","climate")      ; Open X11 workstation.
+
+  gsn_define_colormap(wks,cmap)    ; Define a new colormap.
+
+  gsres = True
+  gsres@txFontHeightF = 0.03
+  gsn_text_ndc(wks,":F22:Climate divisions in the US",.5,.7,gsres)
+
+  mpres = True
+  mpres@vpWidthF              = 0.90 ; Make map larger in view port.
+  mpres@vpHeightF             = 0.90
+  mpres@vpXF                  = 0.05
+  mpres@vpYF                  = 0.95
+
+  mpres@mpDataBaseVersion     = "Ncarg4_1"  ; Change to new map database,
+  mpres@mpDataSetName         = "Earth..3"  ; the one with climate divs.
+
+  mpres@mpOutlineSpecifiers   =(/"01","02","03","04","05","06","07","08"/)
+  mpres@mpGridAndLimbOn       = False        ; Don't draw lat/lon lines.
+
+  mpres@mpLimitMode           = "LatLon"    ; Limit view of map to
+  mpres@mpMinLatF             =   25.       ; USA.
+  mpres@mpMaxLatF             =   50.
+  mpres@mpMinLonF             = -130.
+  mpres@mpMaxLonF             =  -60. 
+
+  map = gsn_map(wks,"CylindricalEquidistant",mpres) ; Draw map.
+
+  gsn_text_ndc(wks,":F22:Climate divisions in Colorado",.5,.8,gsres)
+
+  mpres@mpLimitMode           = "LatLon"    ; Limit view of map to
+  mpres@mpMinLatF             =   35.       ; state of Colorado.
+  mpres@mpMaxLatF             =   42.
+  mpres@mpMinLonF             = -110.
+  mpres@mpMaxLonF             = -100. 
+
+  mpres@vpXF                  = 0.1
+;
+; List of Colorado's climate divisions.
+;
+  climate_divs = (/"01","02","03","04","05"/)
+;
+; By putting the string "Colorado . " in front of the climate number,
+; only those climate divisions in Colorado will get drawn. Otherwise,
+; all climate divisions with these numbers would get drawn.
+;
+  co_climate_divs = "colorado . " + climate_divs
+  delete(mpres@mpOutlineSpecifiers)
+  mpres@mpOutlineSpecifiers  = co_climate_divs
+
+  map = gsn_map(wks,"CylindricalEquidistant",mpres) ; Draw map.
+
+end

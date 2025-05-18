@@ -1,0 +1,203 @@
+/;  ----------------> BLOCK Comment: 6.4.0 <--------------------------
+  panel_43.ncl
+ 
+  Concepts illustrated:
+    - Paneling with extra space between figure columns
+    - Adding identifying letters A, B, C, D                        
+    - Scaling the input data array to a specified range
+    - Adding text around the middle figur at angles
+  ---------------------------------------------------------------------
+  How to remove what space at top and bottom? Use Image Magick "convert"
+  convert -trim pan.png panel_trim.png
+  ---------------------------------------------------------------------
+             ALL BOGUS DATA
+  ---------------------------------------------------------------------
+;/ 
+undef("scale_values") 
+function scale_values(x:numeric, lowNew[1]:numeric, hiNew[1]:numeric)
+local minOld, maxOld, xNew
+begin
+  minOld = min(x)
+  maxOld = max(x)
+  xNew   = lowNew + (hiNew-lowNew)*((x-minOld)/(maxOld-minOld))
+  copy_VarCoords(x,xNew)
+  return(xNew)       
+end
+;************************************************
+;                    MAIN
+;              Generate Bogus arrays 
+;************************************************
+
+  a  = addfile("%24NCARG_ROOT/lib/ncarg/data/cdf/uv300.html","r")
+  tw = a->U(0,:,:)                                ; read January (W/w)inter values
+  ts = a->U(1,:,:)                                ; read July (S/s)ummer 
+
+  loNew = -2
+  hiNew =  2
+  tw    = scale_values(tw, loNew, hiNew)
+  ts    = scale_values(ts, loNew, hiNew)
+
+  TW    = tw           ; simplicity for the example
+  TS    = ts
+  tval  = generate_2d_array(2,2, loNew,hiNew,0,(/4,4/))   ; bogus t-values
+
+;************************************************
+; create plots
+;************************************************
+; Part 1 .... contour over maps
+;************************************************
+
+  plot = new(4,graphic)          ; create a plot array
+
+  wks_type = "png"               ; "png" or "pdf"
+  wks = gsn_open_wks(wks_type,"panel")   
+  
+  res          = True           ; individual plots
+  res@gsnDraw  = False          ; don't draw
+  res@gsnFrame = False          ; don't advance frame
+
+  res@tmYLLabelsOn   = False    ; turn off lat labels
+  res@tmXBLabelsOn   = False    ; turn off lon labels
+ ;res@gsnTickMarksOn = False    ; turn off tickmarks
+
+  res@cnFillOn       = True    
+  res@cnLinesOn      = False    ; turn off contour lines
+  res@cnLineLabelsOn = False    ; turn off contour line labels
+  res@cnFillPalette  = "NCV_jaisnd"   ; if desired: specify a color map
+
+                                ; for this test example
+  res@cnLevelSelectionMode = "ManualLevels"    ; set manual contour levels
+  res@cnMinLevelValF       = loNew            ; set min contour level
+  res@cnMaxLevelValF       = hiNew            ; set max contour level
+  res@cnLevelSpacingF      =  0.2              ; set contour spacing
+
+  res@gsnLeftString        = ""                ; force no long name
+  res@gsnRightString       = ""                ; force no units
+
+  res@lbLabelBarOn         = False             ; turn off individual label bars
+
+ ;res@mpProjection         = "Robinson"
+ ;res@mpPerimOn            = False             ; default is True      
+
+ ;res@mpPerimOn            = True              ; default is True 
+  res@mpPerimDrawOrder     = "PostDraw"
+  res@mpPerimLineColor     = "Foreground"
+
+  res@gsnCenterString      = "LPJ GUESS"  
+  res@tiYAxisString        = "Negative NBP"
+  plot(0) = gsn_csm_contour_map(wks,tw,res)    ; top left 
+
+  res@tiYAxisString        = ""
+  res@gsnCenterString      = "TRENDY"  
+  plot(1) = gsn_csm_contour_map(wks,ts,res)    ; top right
+
+  res@gsnCenterString      = ""  
+  res@tiYAxisString        = "Positive NBP"
+  plot(2) = gsn_csm_contour_map(wks,TW,res)    ; bottom left
+
+  res@tiYAxisString        = ""
+  plot(3) = gsn_csm_contour_map(wks,TS,res)    ; bottom right
+
+;*********************************************************
+; Part 2 .... panel with 'space' in the middle for Part 4
+;*********************************************************
+
+  resP = True
+  resP@gsnDraw  = True
+  resP@gsnFrame = False
+ ;resP@gsnMaximize = True
+  resP@gsnPanelLabelBar = True
+
+  resP@gsnPanelFigureStrings = (/"A","B","C","D"/)
+  resP@amJust   = "TopLeft"
+
+  resP@gsnPaperOrientation = "landscape"
+ ;resP@gsnPanelMainString = "A common title"   ; set main title
+
+  resP@gsnPanelXWhiteSpacePercent = 25         ; SPACE BETWEEN LEFT & RIGHT
+                                               ; arbitrary: whatever works
+  gsn_panel(wks,plot,(/2,2/),resP) 
+
+;************************************************
+; Part 3 .... contour statistic [t-values]
+;************************************************
+
+  resTval = True
+ ;resTval@gsnDraw  = True                      ; default is True
+  resTval@gsnFrame = False
+ ;resTval@gsnTickMarksOn = False               ; turn off tickmarks
+
+  resTval@cnFillOn = True
+  resTval@cnFillPalette  = res@cnFillPalette   ; use same color palette
+ ;resTval@cnFillPalette  = "cmocean_curl"      ; if desired: specify a color map
+ ;resTval@cnFillPalette  = "GMT_seis"          ; if desired: specify a color map
+  resTval@cnInfoLabelOn  = False               ; turn off cn info label
+  resTval@cnLinesOn      = False               ; turn off contour lines
+  resTval@cnLineLabelsOn = False               ; turn off contour line labels
+
+  resTval@lbLabelBarOn     = False  ; turn off label bar
+  resTval@pmLabelBarWidthF = 0.100  ; label bar width
+
+  resTval@cnLevelSelectionMode = "ManualLevels"; manual contour levels
+  resTval@cnMinLevelValF       = loNew         ; set min contour level
+  resTval@cnMaxLevelValF       = hiNew         ; set max contour level
+  resTval@cnLevelSpacingF      =  0.2          ; set contour spacing
+
+  resTval@vpHeightF            = 0.125      ; Set height and width
+  resTval@vpWidthF             = 0.125
+  resTval@vpXF                 = 0.45
+  resTval@vpYF                 = 0.55
+
+  resTval@tiXAxisString        = "T z-score"
+  resTval@tiYAxisString        = "P z-score"
+  resTval@tiXAxisFontHeightF   = 0.0075 
+  resTval@tiYAxisFontHeightF   = resTval@tiXAxisFontHeightF
+
+  resTval@tmGridDrawOrder      = "PostDraw"
+  resTval@tmXMajorGrid         =  True 
+  resTval@tmXMajorGridLineColor= "black"   
+  resTval@tmXMajorGridLineDashPattern = 1
+  resTval@tmXMajorGridThicknessF      = 0.5 
+
+  resTval@tmYMajorGrid         =  True 
+  resTval@tmYMajorGridLineColor= "black"   
+  resTval@tmYMajorGridLineDashPattern = 1
+  resTval@tmYMajorGridThicknessF      = 0.5 
+
+  plotTval = gsn_csm_contour(wks, tval, resTval) 
+ 
+;************************************************
+; Part 5 .... text stuff surrounding Part 4
+;************************************************
+
+  resTxt               = True                      ; text mods desired
+  resTxt@txFontHeightF = 0.0075                    ; text font height
+  resTxt@txJust        = "CenterCenter"            ; Default is "CenterCenter"
+
+  xLeft = 0.445
+  xRight= 0.575
+
+  yLo   = 0.400
+  yHi   = 0.56 
+
+  txtUpLeftLabel         = "UpperLeft"
+  resTxt@txAngleF        = 45
+  resTxt@txFontColor     = "black"                  
+  gsn_text_ndc(wks,txtUpLeftLabel,xLeft,yHi,resTxt)
+
+  txtUpRightLabel        = "UpperRight"
+  resTxt@txAngleF        = -45
+  resTxt@txFontColor     = "blue"                  
+  gsn_text_ndc(wks,txtUpRightLabel,xRight,yHi,resTxt)
+
+  txtLoLeftLabel         = "LowerLeft"
+  resTxt@txAngleF        = -45
+  resTxt@txFontColor     = "red"                  
+  gsn_text_ndc(wks,txtLoLeftLabel,xLeft,yLo,resTxt)
+
+  txtLoRightLabel        = "LowerRight"
+  resTxt@txAngleF        =  45     
+  resTxt@txFontColor     = "Green"                  
+  gsn_text_ndc(wks,txtLoRightLabel,xRight,yLo,resTxt)
+
+  frame(wks)

@@ -1,0 +1,88 @@
+;*******************************************
+; trimesh_5.ncl
+;
+; Concepts illustrated:
+;   - Contouring one-dimensional X, Y, Z data
+;   - Drawing the edges of a triangular mesh using gsn_coordinates
+;   - Drawing a map using the high resolution map outlines
+;   - Explicitly setting contour levels
+;*******************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;
+;  This North Carolina data is from the Naval Research Laboratory at
+;  the Stennis Space Center. For more information about this grid,
+;  see the article "Application of a Shelf-Scale Model to Wave-Induced
+;  Circulation: Rip Currents" (Mark Cobb and Cheryl Ann Blain,
+;  Ocean Dynamics and Prediction Branch).
+;
+  f = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/ctnccl.nc","r")
+
+  data = f->dat
+  lat  = f->lat
+  lon  = f->lon
+
+  wks = gsn_open_wks("png","trimesh")
+
+  res                     = True
+  res@gsnMaximize         = True
+
+  res@sfXArray            = lon
+  res@sfYArray            = lat
+  res@sfElementNodes      = f->ele
+  res@sfFirstNodeIndex    = 1
+
+  res@mpLimitMode           = "LatLon"
+  res@mpMinLonF             = min(lon)-0.2
+  res@mpMaxLonF             = max(lon)+0.2
+  res@mpMinLatF             = min(lat)-0.2
+  res@mpMaxLatF             = max(lat)+0.2
+  res@mpPerimOn             = False
+
+  res@cnFillOn            = True
+  res@cnLinesOn           = False
+  res@cnLineLabelsOn      = False
+  res@cnFillMode          = "RasterFill"
+
+  res@tiMainString          = "Non-smoothed contours on a triangular mesh"
+
+  res@cnLevelSelectionMode = "ExplicitLevels"
+  res@cnLevels = (/10,20,30,40,50,75,100,150,200,300,400,500,1000,1500,2000,2500,3000,3500,4000,4500,5000/)
+
+; res@cnRasterSmoothingOn = True     ; Not setting this allows you to see structure of mesh.
+
+  res@pmTickMarkDisplayMode = "Always"        ; nicer map tickmarks
+
+;
+; Note: in order to use the high-resolution coastal database
+; (mpDataBaseVersion = "HighRes"), you must download and install RANGS
+; (Regionally Accessible Nested Global Shorelines), the multi-resolution
+; coastline database, developed by Rainer Feistel from Wessel and
+; Smith's GSHHS (Global Self-consistent Hierarchical High-resolution
+; Shoreline) database. For more information, visit:
+;
+;    http://www.ncl.ucar.edu/Document/Graphics/rangs.shtml
+;
+; If you don't have this database, or don't want to install it, 
+; change this resource value to "MediumRes".
+;
+  res@mpDataBaseVersion     = "HighRes"     ; "MediumRes" will run faster.
+
+  plot = gsn_csm_contour_map(wks,data,res)
+
+;---Draw the triangular mesh
+  lnres = True
+  lnres@gsnCoordsMeshVerticesOnCell     = f->ele
+  lnres@gsnCoordsMeshLatVertices        = lat 
+  lnres@gsnCoordsMeshLonVertices        = lon
+  lnres@gsnCoordsMeshVerticesStartIndex = 1
+
+  lnres@gsLineColor                     = "White"
+
+  gsn_coordinates(wks,plot,data,lnres)
+
+end

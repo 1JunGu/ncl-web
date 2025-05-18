@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/rigrad_bruntv_atm.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:09 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (meteorology)">
+<meta name="keywords" content="rigrad_bruntv_atm">
+<title>rigrad_bruntv_atm</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../meteo.html">Meteorology</a>
+<br>
+<h1>rigrad_bruntv_atm</h1>
+
+<p>
+Compute the atmospheric gradient Richardson number and, optionally, the Brunt-Vaisala, buoyancy and shear.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.4.0">version 6.4.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function rigrad_bruntv_atm (
+		thv     : numeric,  ; float, double, integer only
+		u       : numeric,  
+		v       : numeric,  
+		z       : numeric,  
+		opt [1] : integer,  
+		dim [1] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(<em>z</em>)] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>thv</em>
+<p class=indent>Virtual potential temperature (K): thv = theta*(1+0.61w) where <em>w</em> is the dimensionless mixing ratio. 
+Potential temperature could also be used if the mixing ratio (kg/kg) is not available.
+</p>
+<em>u</em>
+<p class=indent>Zonal wind (m/s). Same dimensionality as <em>thv</em>.
+</p>
+<em>u</em>
+<p class=indent>Meridional wind (m/s). Same dimensionality as <em>thv</em>.
+</p>
+<em>z</em>
+<p class=indent>Geometric height (m). Same dimensionality as <em>thv</em>.
+</p>
+<em>opt</em>
+<p class=indent><ul>
+    <li>  opt=0, Return only the gradient Richardson number as a regular variable. 
+    <li>  opt=1, Return only the Brunt-Vaisala frequency as a regular variable.
+    <li>  opt=2, Return the gradient Richardson number and the Brunt-Vaisala frequency as elements of a list variable
+    <li>  opt=3, Return the gradient Richardson number, the Brunt-Vaisala frequency, the buoyancy (1/s) and
+          the wind sheared squared as elements of a list variable
+</ul>
+</p>
+<em>dim</em>
+<p class=indent>The dimension of <em>thv</em> which corresponds to <em>z</em>.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A multi-dimensional array of the same size and shape as <em>thv</em>. The output will be double 
+if <em>thv</em> is of type double.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The gradient richardson number (Ri) is a dimensionless ratio. It is related to the buoyant 
+production or consumption of turbulence divided by the shear production of turbulence.
+It is a criterion for assessing the stability of stratified shear flow. The atmospheric 
+condition is favorable for the occurrence of turbulence when Ri < the critical Richardson number (=0.25). 
+Ri is 'useful' within or near the boundary layer. 
+<p>
+<pre>
+
+ AMS Glossary:
+ <b>BruntV</b>: http://glossary.ametsoc.org/wiki/Brunt-v%C3%A4is%C3%A4l%C3%A4_frequency
+ <b>Ri_Num</b>: http://glossary.ametsoc.org/wiki/Gradient_richardson_number
+         The latter uses Tv and not THETAv in denominator. This is an approximation
+         used by boundary layer people where Tv ~ theta,
+
+         http://en.wikipedia.org/wiki/Richardson_number
+
+         P.W. CHan: http://dx.doi.org/10.1088/1755-1307/1/1/012043
+
+ <b>Gradient Richardson Number: RI  = buoyancy/shear_flow</b>
+      A dimensionless ratio, Ri, related to the buoyant production or
+      consumption of turbulence divided by the shear production of turbulence.
+      It is used to indicate dynamic stability and the formation of turbulence.
+      The critical Richardson number, Ric, is about 0.25 (although reported values have
+      ranged from roughly 0.2 to 1.0), and flow is dynamically unstable and turbulent
+      when Ri < Ric. Such turbulence happens either when the wind shear is great enough
+      to overpower any stabilizing buoyant forces (numerator is positive), or when there
+      is static instability (numerator is negative).
+
+      If the Richardson number is much less than unity, buoyancy is unimportant in the flow.
+      If it is much greater than unity, buoyancy is dominant (in the sense that there is
+      insufficient kinetic energy to homogenize the fluids).
+
+      Large values of Ri indicate very stable conditions while low values *may*
+      indicate dynamic stability (subcritical region).
+
+<b>Brunt-Vaisala:</b>
+      The Brunt-Vaisala (BV) frequency at which a displaced air parcel will oscillate when 
+      displaced vertically within a <b>statically stable</b> environment. Hence, it should 
+      always be positive.  However, this function will return a <i>negative</i> value 
+      when the vertical gradient of <em>thv</em> is negative. This is done for informational
+      purposes only.  The user can force only positive values via
+               
+         BV = <a href="../Built-in/where.html"><strong>where</strong></a>(BV.lt.0, 0, BV)
+  
+</pre>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="brunt_vaisala_atm.html"><strong>brunt_vaisala_atm</strong></a>,
+<a href="eady_growth%20rate.html"><strong>eady_growth rate</strong></a>,
+<a href="static_stability.html"><strong>static_stability</strong></a>,
+<a href="pot_temp.html"><strong>pot_temp</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B>: Read data from a WRF file and calculate assorted quantities.
+
+<pre>
+;----------------------------------------------------------
+;                     WRF DATA
+;----------------------------------------------------------
+
+   a  = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>("wrfout_d01_2013-05-17_12","r")  ;[Time|1]x[bottom_top|40]x[south_north|324]x[west_east|414]
+                                                ;    0            1              2              3
+
+   q  = a->QVAPOR                          ; mixing ratio (kg/kg)
+   q  = <a href="../Built-in/where.html"><strong>where</strong></a>(q.lt.0, 0, q)              ; ensure no negative mixing ratios
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(q)                    ; (Time, bottom_top, south_north, west_east)  
+   <a href="../Built-in/printMinMax.html"><strong>printMinMax</strong></a>(q,0)
+
+   th = <a href="../Built-in/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"theta",-1)    ; potential temperature (degK)
+   th = th*(1.0 + 0.61*q)                                   ; virtual potential temperature
+   th@long_name = "virtual potential temperature"
+
+   z  = <a href="../Built-in/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"z",-1)          ; model height
+   ua = <a href="../Built-in/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"ua"   ,-1)      ; u at mass grid points
+   va = <a href="../Built-in/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"va"   ,-1)      ; v at mass grid points
+
+ ;;Ri   = <strong>rigrad_bruntv_atm</strong>(th, ua, va, z, <b>0</b>, 1 ) 
+ ;;BV   = <strong>rigrad_bruntv_atm</strong>(th, ua, va, z, <b>1</b>, 1 ) 
+ ;;RiBV = <strong>rigrad_bruntv_atm</strong>(th, ua, va, z, <b>2</b>, 1 ) 
+   All  = <strong>rigrad_bruntv_atm</strong>(th, ua, va, z, <b>3</b>, 1 ) 
+
+   Ri   = All[0]     ; explicitly extract from list variable  for convenience
+   BV   = All[1]     ; must use 'list' syntax  [...]
+   BUOY = All[2]
+   SHR2 = All[3]
+   <a href="../Built-in/delete.html"><strong>delete</strong></a>(All)       ; no longer needed
+
+   printVarSummary(Ri)
+   printMinMax(Ri,0)
+   <a href="../Built-in/print.html"><strong>print</strong></a>("-----------------------------------------")
+
+; print for arbitrarily chosen grid point
+
+   pr = <a href="wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a, "pressure", -1)   ; for printing purposes only
+   ix = 20        ; arbitrary
+   jy = 21
+   nt = 0
+
+
+   p  = <a href="../Built-in/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a, "pressure", -1)   ; for printing purposes only
+
+   print( <a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%7.1f" ,    p(nt,:,jy,ix)) \
+        + sprintf("%9.1f" ,    z(nt,:,jy,ix)) \
+        + sprintf("%7.1f" ,   th(nt,:,jy,ix)) \
+        + sprintf("%15.5e",   Ri(nt,:,jy,ix)) \
+        + sprintf("%15.5e", BUOY(nt,:,jy,ix)) \
+        + sprintf("%15.5e", SHR2(nt,:,jy,ix)) )
+
+</pre>
+All input variables are 4D with dimensions:
+<pre> 
+
+    [Time | 1] x [bottom_top | 39] x [south_north | 324] x [west_east | 414]
+
+</pre>
+The (edited) output is:
+<pre>
+
+Variable: Ri
+Type: float
+Total Size: 20925216 bytes
+            5231304 values
+Number of Dimensions: 4
+Dimensions and sizes:	[Time | 1] x [bottom_top | 39] x [south_north | 324] x [west_east | 414]
+Coordinates: 
+Number Of Attributes: 2
+  long_name :	Gradient Richardson Number
+  info :	http://glossary.ametsoc.org/wiki/Gradient_richardson_number
+(0)	Gradient Richardson Number: min=-1.50836e+06   max=2.02878e+08
+(0)	-----------------------------------------
+
+
+            P        Z     TH          Ri           BOUY           SHEAR^2
+    (0)	 1009.1     29.2  298.6   -6.69352e+00   -2.94778e-05    4.40393e-06
+    (1)	 1001.0     99.1  298.5   -1.17482e+01   -1.80076e-05    1.53279e-06
+    (2)	  990.3    192.9  298.5   -2.16875e+01   -6.57265e-06    3.03061e-07
+    (3)	  976.8    313.0  298.5   -4.05527e+01   -3.60803e-06    8.89713e-08
+    (4)	  960.0    463.0  298.4    3.98499e-01    3.52946e-06    8.85689e-06
+    (5)	  939.6    647.4  298.5    8.39926e-01    8.87363e-05    1.05648e-04
+    (6)	  915.3    872.0  299.6    1.36544e+00    1.03845e-04    7.60522e-05
+    (7)	  886.7   1142.9  300.1    1.07235e+01    1.52601e-04    1.42305e-05
+    (8)	  853.8   1463.4  302.3    5.26213e+00    3.32361e-04    6.31609e-05
+    (9)	  817.2   1835.1  307.2    5.66880e+00    3.04740e-04    5.37573e-05
+    (10)  777.3   2258.8  309.9    3.01461e+01    1.63086e-04    5.40983e-06
+    (11)  734.6   2733.7  311.8    3.26361e+02    1.23117e-04    3.77242e-07
+    (12)  689.6   3259.3  313.8    1.61876e+01    1.02580e-04    6.33695e-06
+    (13)  642.9   3835.0  315.4    7.42874e+00    9.19175e-05    1.23732e-05
+    (14)  596.3   4442.5  317.3    3.48297e+01    1.33469e-04    3.83205e-06
+    (15)  552.0   5057.9  320.7    2.06476e+01    1.73400e-04    8.39810e-06
+    (16)  510.4   5674.7  324.3    9.08787e+00    1.32518e-04    1.45819e-05
+    (17)  471.4   6292.0  326.1    4.43753e+00    7.01856e-05    1.58163e-05
+    (18)  434.8   6907.9  327.2    1.49438e+00    9.36120e-05    6.26427e-05
+    (19)  400.5   7523.3  329.9    4.89927e+00    1.20263e-04    2.45471e-05
+    (20)  368.4   8139.1  332.2    1.30783e+02    1.15606e-04    8.83954e-07
+    (21)  338.4   8755.4  334.8    2.43873e+02    1.02505e-04    4.20320e-07
+    (22)  310.3   9372.1  336.5    1.01988e+01    9.44002e-05    9.25605e-06
+    (23)  284.1   9988.7  338.8    2.42214e+00    1.21041e-04    4.99728e-05
+    (24)  259.7  10606.4  341.6    7.70021e-01    1.28499e-04    1.66878e-04
+    (25)  236.9  11225.7  344.3    5.75845e-01    1.01843e-04    1.76858e-04
+    (26)  215.7  11845.9  346.1    1.02962e+00    6.36113e-05    6.17812e-05
+    (27)  195.9  12465.8  347.1    5.01158e+00    7.17109e-05    1.43090e-05
+    (28)  177.6  13085.9  349.2    6.29919e+00    1.08032e-04    1.71502e-05
+    (29)  160.6  13707.9  351.9    1.21583e+00    1.78363e-04    1.46700e-04
+    (30)  144.8  14335.0  357.2    3.27406e+00    2.83387e-04    8.65553e-05
+    (31)  130.2  14971.9  364.9    4.61698e+00    3.22974e-04    6.99536e-05
+    (32)  116.7  15621.2  372.7    2.48082e+00    4.02882e-04    1.62399e-04
+    (33)  104.3  16288.0  385.1    4.04567e+00    4.56323e-04    1.12793e-04
+    (34)   92.8  16976.2  397.0    8.26755e+00    4.24677e-04    5.13667e-05
+    (35)   82.2  17686.4  409.1    9.70255e+00    4.07777e-04    4.20278e-05
+    (36)   72.6  18420.1  421.5    1.88097e+01    4.97539e-04    2.64511e-05
+    (37)   63.7  19185.4  441.2    2.31706e+01    6.30633e-04    2.72170e-05
+    (38)   54.7  20094.5  469.0    1.73304e+01    6.40759e-04    3.69732e-05
+
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/rigrad_bruntv_atm.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:10 GMT -->
+</html>

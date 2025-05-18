@@ -1,0 +1,150 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+  dfile = "/fs/scd/home1/dbrown/src/data/ocnt.b20.001.03590101.nc"
+  oc = addfile(dfile,"r")
+;
+; Create a z bounds dimension.
+; oc->z_w contains (contrary to what the metadata says) the distance
+; to the top of each layer. oc->dz contains the thickness of each layer.
+; The bottom z boundary value is the last z_w element + the last thickness
+; element. 
+;  
+  zw = new(dimsizes(oc->z_w)+1,typeof(oc->z_w))
+  zw(0:dimsizes(oc->z_w)-1) = oc->z_w
+  zw(dimsizes(zw)-1) = oc->z_w(dimsizes(oc->z_w)-1) + \
+                       oc->dz(dimsizes(oc->dz)-1)
+;
+; This fixes some wierd floating point behavior (on linux anyway)
+; and also takes care of the zw coordinate variable
+;
+  zw(29:40)     = zw(29:40)+0.05
+  zw&z_w(40)    = zw(40)
+  zw&z_w(29:39) = zw&z_w(29:39) + 0.05
+
+;
+; add a cyclic point in the longitudinal direction to ULONG and ULAT
+; 
+  dims    = dimsizes(oc->ULONG)
+  dims(1) = dims(1) + 1
+
+  ulon                = new(dims,typeof(oc->ULONG))
+  ulat                = new(dims,typeof(oc->ULAT))
+  ulon(:,1:dims(1)-1) = oc->ULONG
+  ulat(:,1:dims(1)-1) = oc->ULAT
+  ulon(:,0)           = oc->ULONG(:,dims(1)-2)
+  ulat(:,0)           = oc->ULAT(:,dims(1)-2)
+  delete(dims)
+
+  wks = gsn_open_wks("x11","pop")
+  gsn_define_colormap(wks,"detail")
+
+;
+; Note that the 0'th element of the latitudinal direction of 
+; oc->SALT is eliminated -- it is all set to the fill value.
+; This mean that ulon and ulat have one more element along both
+; dimensions than the data array. This will automatically cause 
+; the discrete raster fill to treat the X and Y coordinate arrays
+; as 'cell bounds'  
+
+  res = True
+  res@gsnMaximize          = True
+  res@sfXArray             = ulon
+  res@sfYArray             = ulat
+  res@sfMissingValueV      = oc->SALT@_FillValue
+  res@cnFillMode           = "RasterFill"
+  res@cnLevelSelectionMode = "ManualLevels"
+  res@cnMinLevelValF       = 0.02
+  res@cnMaxLevelValF       = 0.04
+  res@cnLevelSpacingF      = 0.0001
+  res@cnLinesOn            = False
+  res@cnLineLabelsOn       = False
+  res@cnOutOfRangePerimOn  = True
+
+  contour = gsn_contour(wks,oc->SALT(0,0,1:383,:),res)
+
+  res@mpProjection         = "Orthographic"
+  res@mpCenterLatF         =  50
+  res@mpCenterLonF         = -60
+  map = gsn_contour_map(wks,oc->SALT(0,0,1:383,:),res)
+
+;
+; Zoom in; this plot enlarges the 'out of grid' area at the grid pole,
+; which is centered over Greenland. Unfortunately, out of range areas
+; such as this take longer to compute, because the transformation algorithm 
+; loses its sense of location, which ordinarily speeds up the calculation. 
+ 
+  print("Zooming in, slow because of out-of-range area computation")
+  setvalues map
+    "mpLimitMode"             : "latlon"
+    "mpMinLatF"               :  60
+    "mpMaxLatF"               :  80
+    "mpMinLonF"               : -60
+    "mpMaxLonF"               : -10
+    "pmTickMarkDisplayMode"   : "Always"
+    "tmXBLabelFontHeightF"    : 0.01
+    "tmXBMajorLengthF"        : 0.01
+  end setvalues
+
+  draw(map)
+  frame(wks)
+
+;
+; A plot that is similar in extent but does not include out-of-range 
+; areas completes noticeably faster.
+;
+  print("Zooming in, but should be faster becase no out-of-range area")
+
+  setvalues map
+    "mpCenterLonF" : -160
+    "mpMinLatF"    :   60
+    "mpMaxLatF"    :   80
+    "mpMinLonF"    : -200
+    "mpMaxLonF"    : -150
+  end setvalues
+  draw(map)
+  frame(wks)
+
+;
+; Do a longitudinal cross-section using the depth bounds field.
+; Illustrates the cell-bounds facility with 1-D coordinates
+
+  delete(res@mpProjection)
+  delete(res@mpCenterLatF)
+  delete(res@mpCenterLonF)
+  delete(res@sfXArray)
+  delete(res@sfYArray)
+
+  print("Using 1-D coordinates.")
+  res@sfYArray                 = zw
+  res@cnLevelSelectionMode     = "AutomaticLevels"
+  res@cnMaxLevelCount          = 250
+  res@gsnYAxisIrregular2Linear = True
+  res@gsnXAxisIrregular2Linear = True
+  res@trXMinF                  = 0
+  res@trXMaxF                  = 319
+  res@trYMinF                  = 0.0
+  res@trYMaxF                  = 550000
+  res@trYReverse               = True
+  res@pmTickMarkDisplayMode    = "Always"
+  contour = gsn_contour(wks,oc->SALT(0,:,179,:),res)
+
+  print("Changing min and max.")
+
+  setvalues contour
+    "trYMinF" : 11500
+    "trYMaxF" : 20000
+  end setvalues
+
+  draw(contour)
+  frame(wks)
+
+  print("Changing max.")
+  setvalues contour
+    "trYMaxF" : 15000
+  end setvalues
+
+  draw(contour)
+  frame(wks)
+end

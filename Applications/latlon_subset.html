@@ -1,0 +1,643 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/latlon_subset.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:08:52 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to subset geolocated data based on its lat/lon information">
+<meta name="keywords" content="NCL, graphics, visualization, resources,
+grid, subsettgin">
+<TITLE>NCL Graphics: Subsetting / extracting data based on lat/lon values</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_misc.html">Miscellaneous</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: Subsetting / extracting data based on lat/lon values</h1>
+
+<div class=mainimage>
+<img src="Images/latlon_subset_1_3_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+Subsetting or extracting your data based on a latitude/longitude region can be done
+in different ways:
+<p>
+
+<ul>
+
+<li>Data on a <a href="../Document/glossary.html#RectilinearGrid">rectilinear grid</a> - 
+use <a href="../Document/Language/subscript_coord.html">coordinate
+subscripting</a>
+
+<li>Data on a <a href="../Document/glossary.html#CurvilinearGrid">curvilinear</a>
+grid - use the <a href="../Document/Functions/Contributed/getind_latlon2d.html"><strong>getind_latlon2d</strong></a> or 
+<a href="../Document/Functions/Contributed/region_ind.html"><strong>region_ind</strong></a> functions.
+
+<li>Data within an irregularly shaped geographical area - use <a href="../Document/Functions/Built-in/gc_inout.html"><strong>gc_inout</strong></a>.  
+
+<li>Data within a circular shaped geographical area - use <a href="../Document/Functions/Built-in/nggcog.html"><strong>nggcog</strong></a> 
+with <a href="../Document/Functions/Built-in/gc_inout.html"><strong>gc_inout</strong></a>  
+
+<li>WRF-ARW data - use
+the <a href="../Document/Functions/WRF_arw/wrf_user_ll_to_xy.html"><strong>wrf_user_ll_to_xy</strong></a> function
+(use <a href="../Document/Functions/WRF_arw/wrf_user_ll_to_ij.html"><strong>wrf_user_ll_to_ij</strong></a> in NCL
+V6.5.0 and earlier)
+
+<li>Random data - use the <a href="../Document/Functions/Built-in/where.html"><strong>where</strong></a> function (this
+function can also be used for rectilinear and curvilinear grids)
+
+</ul>
+
+</div>
+
+<div class=ex>
+<!--Latlon_Subset_1-->
+<a name=ex1></a>
+<a href="Images/latlon_subset_1_1_lg.png">
+<img src="Images/latlon_subset_1_1_sm.png" align=left border=2></a>
+<a href="Images/latlon_subset_1_2_lg.png">
+<img src="Images/latlon_subset_1_2_sm.png" align=left border=2></a>
+<a href="Images/latlon_subset_1_3_lg.png">
+<img src="Images/latlon_subset_1_3_sm.png" align=left border=2></a>
+<a href="Images/latlon_subset_1_4_lg.png">
+<img src="Images/latlon_subset_1_4_sm.png" align=left border=2></a>
+<a href="Scripts/latlon_subset_1.html">latlon_subset_1.ncl</a>: 
+
+Data on a <a href="../Document/glossary.html#RectilinearGrid">rectilinear grid</a>
+is the easiest to subset, as you can
+use <a href="../Document/Language/subscript_coord.html">coordinate
+subscripting</a> to extract the region of interest.
+<p>
+
+To find out if your data is on a rectilinear lat/lon grid,
+use <a href="../Document/Functions/Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>. The output will look
+something like this:
+
+<pre>
+    Variable: ts
+    Type: float
+    Total Size: 221184 bytes
+                55296 values
+    Number of Dimensions: 2
+    Dimensions and sizes:[lat | 192] x [lon | 288]
+    <b>Coordinates: 
+                lat: [ -90..  90]
+                lon: [   0..358.75]</b>
+    Number Of Attributes: 13
+    . . .
+    long_name : Surface Temperature
+    units : degK
+    . . .
+</pre>
+<p>
+
+Note the "<b>Coordinates</b>" section, which has <b>lat</b>
+and <b>lon</b> arrays listed under it, along with their ranges. These
+arrays are known as coordinate arrays. By definition, then, <b>ts</b>
+is on a rectilinear grid.
+<p>
+
+To extract a lat/lon region that goes from 30 to 60 latitude
+and 0 to 50 longitude, use the special "<b>{</b>" and "<b>}</b>"
+syntax:
+<p>
+
+<pre>
+  ts_extract = ts(<b>{</b>30:60<b>}</b>,<b>{</b>0:50<b>}</b>)  
+</pre>
+<p>
+
+Note that the longitudes go from 0 to 358.75. If you want to
+extract a longitude region using negative longitudes, for example,
+-130 to -60, then you must first "flip" the longitudes using
+the <a href="../Document/Functions/Contributed/lonFlip.html"><strong>lonFlip</strong></a> function:
+<p>
+
+<pre>
+  ts = <a href="../Document/Functions/Contributed/lonFlip.html"><strong>lonFlip</strong></a>(ts)
+</pre>
+
+A printVarSummary of ts will now yield:
+<p>
+
+<pre>
+    Variable: ts
+    . . .
+    Dimensions and sizes:[lat | 192] x [lon | 288]
+    Coordinates: 
+                lat: [ -90..  90]
+                <b>lon: [-180..178.75]</b>
+    Number Of Attributes: 13
+    . . .
+</pre>
+<p>
+
+and you can now subscript with negative longitudes:
+
+<pre>
+  ts_extract = ts(<b>{</b>30:60<b>}</b>,<b>{</b>-130:-60<b>}</b>)  
+</pre>
+<p>
+
+The first frame of this example shows the full global plot of the
+data. The second frame extracts a region in Asia using coordinate
+subscripting. The third frame zooms in on this region and adds a
+lat/lon grid and markers to further show the region of
+interest. The <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a>
+procedure is used to add the lat/lon grid lines. The fourth
+frame shows how to subscript the data using negative longitudes,
+after flipping it.
+
+</div>
+
+<div class=ex>
+<!--Latlon_Subset_2-->
+<a name=ex2></a>
+<a href="Images/latlon_subset_2_1_lg.png">
+<img src="Images/latlon_subset_2_1_sm.png" align=left border=2></a>
+<a href="Images/latlon_subset_2_2_lg.png">
+<img src="Images/latlon_subset_2_2_sm.png" align=left border=2></a>
+<a href="Images/latlon_subset_2_3_lg.png">
+<img src="Images/latlon_subset_2_3_sm.png" align=left border=2></a>
+<a href="Scripts/latlon_subset_2.html">latlon_subset_2.ncl</a>: 
+<p>
+Data on a <glossary term="CurvilinearGrid">curvilinear
+grid</glossary>, which is data represented by 2D lat/lon arrays,
+cannot be extracted using "coordinate scripting" mentioned in the
+first example on this page.
+<p>
+
+To find out if your data is on a curvilinear lat/lon grid, first try
+using <a href="../Document/Functions/Built-in/printVarSummary.html"><strong>printVarSummary</strong></a> to print information about
+the variable. Check if there is an attribute called "<b>coordinates</b>" (not
+to be confused with the "Coordinates:" section):
+<p>
+
+<pre>
+Variable: temp
+Type: float
+Total Size: 15120 bytes
+            3780 values
+Number of Dimensions: 3
+Dimensions and sizes:[lv_SPDY3 | 6] x [gridx_236 | 30] x [gridy_236 | 21]
+Coordinates:
+Number Of Attributes: 13
+. . .
+long_name : Temperature
+units : degK
+_FillValue : 1e+20
+<b>coordinates : gridlat_236 gridlon_236</b>
+</pre>
+<p>
+
+"<b>temp</b>" doesn't have any information in the "Coordinates:"
+section, so this tells you right away this data is NOT on a
+rectilinear grid. However, it does have an attribute called
+"<b>coordinates</b>", which tells you that this variable is
+represented by latitude and longitude arrays called
+"<b>gridlat_236</b>" and "<b>gridlon_236</b>".  You can look on the
+same file that you read "temp" from, to see if these two variables are
+on the file.
+<p>
+
+To extract a lat/lon region from curvilinear data, use
+the <a href="../Document/Functions/Contributed/getind_latlon2d.html"><strong>getind_latlon2d</strong></a> function.
+Assuming you have a 2D array "temp" with 2D lat/lon arrays
+that you've read off the file and named "lat2d", "lon2d":
+<p>
+<pre>
+  lat_pts  = (/30,60/)
+  lon_pts  = (/ 0,50/)
+  ij       = <a href="../Document/Functions/Contributed/getind_latlon2d.html"><strong>getind_latlon2d</strong></a>(lat2d,lon2d,lat_pts,lon_pts)
+  temp_sub = temp(ij(0,0):ij(1,0),ij(0,1):ij(1,1))
+</pre>
+
+The first frame of this example shows the plot of the whole data
+array, which is regional data that covers the United States.  The
+second frame extracts a region over New Mexico and Colorado 
+using <a href="../Document/Functions/Contributed/getind_latlon2d.html"><strong>getind_latlon2d</strong></a>.
+The third frame zooms in on this region and adds a lat/lon grid and
+markers to further show the region of
+interest. The <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a>
+procedure is used to add the lat/lon grid lines.
+<p>
+See latlon_subset_3.ncl for an example of using <a href="../Document/Functions/Contributed/region_ind.html"><strong>region_ind</strong></a>.
+See latlon_subset_compare_3.ncl for a comparison of both methods.
+</div>
+
+<div class=ex>
+<!--Latlon_Subset_3-->
+<a name=ex2></a>
+<a href="Images/latlon_subset_3_1_lg.png">
+<img src="Images/latlon_subset_3_1_sm.png" align=left border=2></a>
+<a href="Images/latlon_subset_3_2_lg.png">
+<img src="Images/latlon_subset_3_2_sm.png" align=left border=2></a>
+<a href="Images/latlon_subset_3_3_lg.png">
+<img src="Images/latlon_subset_3_3_sm.png" align=left border=2></a>
+<a href="Scripts/latlon_subset_3.html">latlon_subset_3.ncl</a>: 
+<p>
+This example is exactly the same as <b>latlon_subset_2</b> except the 
+<a href="../Document/Functions/Contributed/region_ind.html"><strong>region_ind</strong></a> function is used.
+<p>
+What is the difference between the two functions?  
+The <a href="../Document/Functions/Contributed/getind_latlon2d.html"><strong>getind_latlon2d</strong></a> uses
+arguments which specify two opposite corners of the region while 
+<a href="../Document/Functions/Contributed/region_ind.html"><strong>region_ind</strong></a>'s
+arguments specify the southern- (<em>latS</em>), northern- (<em>latN</em>), 
+western- (<em>latW</em>) and eastern- (<em>latE</em>) most locations.
+<p>
+Clearly, when applied to the data of this example, the grid area difference is small. 
+Different curvilinear grids may result in larger areal differences. 
+<p>
+See latlon_subset_2.ncl for an example of using <a href="../Document/Functions/Contributed/getind_latlon2d.html"><strong>getind_latlon2d</strong></a>.
+See latlon_subset_compare_3.ncl for a comparison of both methods.
+</div>
+
+<div class=ex>
+<!--Latlon_Subset_Compare_3-->
+<a name=excomp3></a>
+<a href="Images/latlon_subset_compare_3_lg.png">
+<img src="Images/latlon_subset_compare_3_sm.png" align=left border=2></a>
+<a href="Scripts/latlon_subset_compare_3.html">latlon_subset_compare_3.ncl</a>:
+<p>
+This example is a panel plot of the third images from the previous two examples, 
+allowing you to more easily compare the difference between the 
+<a href="../Document/Functions/Contributed/getind_latlon2d.html"><strong>getind_latlon2d</strong></a> and <a href="../Document/Functions/Contributed/region_ind.html"><strong>region_ind</strong></a> functions.
+<p>
+Note that the lat/lon area created by using the <a href="../Document/Functions/Contributed/region_ind.html"><strong>region_ind</strong></a> function is slightly larger
+than the area created by the <a href="../Document/Functions/Contributed/getind_latlon2d.html"><strong>getind_latlon2d</strong></a> function.
+</div>
+
+<div class=ex>
+<!--mask_9-->
+<a name=ex9></a>
+<a href="Images/mask_9_1_lg.png">
+<img src="Images/mask_9_1_sm.png" align=left border=3></a>
+<a href="Images/mask_9_2_lg.png">
+<img src="Images/mask_9_2_sm.png" align=left border=3></a>
+<a href="Images/mask_9_3_lg.png">
+<img src="Images/mask_9_3_sm.png" align=left border=3></a>
+<a href="Scripts/mask_9.html">mask_9.ncl</a>: Demonstrates
+using <a href="../Document/Functions/Built-in/gc_inout.html"><strong>gc_inout</strong></a> to mask an area in your
+data array using a geographical outline.
+<p>
+
+This particular example reads
+a <a href="shapefiles.html">shapefile</a> to get an outline of the
+Mississippi River Basin. You then have the option of masking out all
+areas inside or outside this outline.
+
+</div>
+
+
+<div class=ex>
+<a name=Katrina_circle></a>
+<a href="Images/Katrina_circle_lg.png">
+<img src="Images/Katrina_circle_sm.png" align=left border=2></a>
+<a href="Scripts/Katrina_circle.html">Katrina_circle.ncl</a>:
+This script plots the 5-day running average of precipitation for an
+entire year (2005). It shows a unique way of displaying filled
+contours in a circle, by using <a href="../Document/Functions/Built-in/nggcog.html"><strong>nggcog</strong></a> in conjunction
+with <a href="../Document/Functions/Built-in/gc_inout.html"><strong>gc_inout</strong></a> to mask data inside a great circle.
+<p>
+
+See the <a href="unique.html#Katrina_circle">Unique examples page</a>
+for another version of this script that generates a histogram of the values,
+and for an animation of both scripts.
+<p>
+
+This code was contributed by Jake Huff, a Masters student in the
+Climate Extremes Modeling Group at Stony Brook University.
+
+</div>
+
+
+<div class=ex>
+<!--wrf_gsn_10-->
+<a name=ex10></a>
+<a href="Images/wrf_gsn_10_lg.png">
+<img src="Images/wrf_gsn_10_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_10.html">wrf_gsn_10.ncl</a>
+
+This example shows three ways to subset a WRF lat/lon grid by
+providing two corners of a lat/lon box. Using each method,
+a spatial average is taken of the data in this box.
+<p>
+
+The three methods are
+1) <a href="../Document/Functions/Built-in/where.html"><strong>where</strong></a>,
+2) <a href="../Document/Functions/WRF_arw/wrf_user_ll_to_xy.html"><strong>wrf_user_ll_to_xy</strong></a>,
+3) <a href="../Document/Functions/Contributed/getind_latlon2d.html"><strong>getind_latlon2d</strong></a>.
+<p>
+
+Markers are drawn in the plots to show the area where the data was
+subsetted, so you can see there is quite a difference in the two
+methods.
+<p>
+
+<a href="../Document/Functions/WRF_arw/wrf_user_ll_to_xy.html"><strong>wrf_user_ll_to_xy</strong></a> should only
+be used on WRF-ARW data. The other methods will work on curvilinear
+grids.
+<p>
+
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/latlon_subset.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:09:00 GMT -->
+</html>
+
+

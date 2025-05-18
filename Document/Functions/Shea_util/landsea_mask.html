@@ -1,0 +1,570 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Shea_util/landsea_mask.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:44 GMT -->
+<head>
+<meta name="description" content="NCL shea_util.ncl functions (lat/lon functions)">
+<meta name="keywords" content="landsea_mask">
+<title>landsea_mask</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../latlon_funcs.html">Lat/Lon functions</a>
+<br>
+<h1>landsea_mask</h1>
+
+<p>
+Returns a grid that contains a land/sea mask given any latitude and
+longitude array.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"      ; These four libraries are <b>automatically</b>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"       ; <b>loaded</b> from NCL V6.4.0 onward.
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"   ; No need for user to explicitly load.
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"
+
+	function landsea_mask (
+		basemap [*][*] : byte,     
+		lat            : numeric,  
+		lon            : numeric   
+	)
+
+	<a href="../return_val.html">return_val</a> [*][*] :  integer
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>basemap</em>
+<p class=indent>A two-dimensional array of type byte that contains a 1 x 1 degree grid
+of baseline land/sea mask. The user can modify this file if they so
+choose prior to its use. Note: A variable of type byte may readily
+be compared to values of type integer (see below).
+</p>
+<em>lat</em>
+<p class=indent>A one- or two-dimensional array of latitudes.
+</p>
+<em>lon</em>
+<p class=indent>A one- or two-dimensional array of longitudes.  Acceptable values range
+from -180 to 359.99.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A two-dimensional array of type byte is returned. It contains five 
+possible values: <b>0=ocean, 1=land, 2=lake, 3=small island, 4=ice shelf</b>. 
+The size will be the size of <em>lat</em> and <em>lon</em>. If the user
+inputs a scalar value for <em>lat</em> and <em>lon</em>, then
+the return value will be a single value.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function returns a <b>grid</b> that contains a land/sea mask given any
+(e.g. gaussian, fixed offset, curvilinear) latitude and longitude
+array.  The return value can then be applied to any array on the same
+grid using <a href="../Built-in/mask.html"><strong>mask</strong></a>.<p>
+
+The 1x1 degree <em><a href="../../../Applications/Data/cdf/landsea.nc">basemap</a></em>
+is distributed with NCL and may be accessed via the path:
+<pre>
+       <b>$NCARG_ROOT/lib/ncarg/data/cdf/landsea.nc</b>
+</pre>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Built-in/mask.html"><strong>mask</strong></a>,
+<a href="../Built-in/where.html"><strong>where</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+In the examples below, it is assumed that array@<a href="../../Language/fillval.html">_FillValue</a> is set for
+use in <a href="../Built-in/mask.html"><strong>mask</strong></a>.<p>
+
+<b>Example 1</b><p>
+
+<a href="../../../Applications/Scripts/mask_5.html">mask_5.ncl</a>
+   
+(<a href="../../../Applications/Images/mask_5_lg.png">view
+example</a>)
+
+<p>
+
+<b>Example 2</b><p>
+
+Values at land and small island points will be set to _FillValue in
+the array data after creating a new land/sea mask from one-dimensional
+lat/lon variables:
+
+<pre>  
+   a    = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>("$NCARG_ROOT/lib/ncarg/data/cdf/landsea.nc","r")
+   lsdata = a->LSMASK
+   lsm  = <strong>landsea_mask</strong>(lsdata,data&lat,data&lon)
+   data = <a href="../Built-in/mask.html"><strong>mask</strong></a>(data,lsm.eq.1,False)
+   data = <a href="../Built-in/mask.html"><strong>mask</strong></a>(data,lsm.eq.3,False)
+</pre> 
+
+<b>Example 3</b><p>
+
+All values, expect for ocean points, will be set to _FillValue in the
+array data after creating a new land/sea mask from one-dimensional
+lat/lon variables:
+
+<pre>
+; assume data is 3D (time,lat,lon)
+  a    = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>("$NCARG_ROOT/lib/ncarg/data/cdf/landsea.nc","r")
+  lsdata = a->LSMASK
+  lsm = <strong>landsea_mask</strong>(lsdata,data&lat,data&lon)
+
+; lsm is a 2D array, in order to use it in mask, we must conform it
+; to the size of the 3D array "data". 
+  data = <a href="../Built-in/mask.html"><strong>mask</strong></a>(data,<a href="../Built-in/conform.html"><strong>conform</strong></a>(data,lsm,(/1,2/)).ge.1,False)
+</pre>
+
+<b>Example 4</b><p>
+
+All values, expect for ocean points, will be set to _FillValue in the
+array data after creating a new land/sea mask from two-dimensional
+lat/lon variables:
+
+<pre>
+; data is 2D w/ 2D lat/lon coordinate variables (TLAT,TLON).
+  a = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>("$NCARG_ROOT/lib/ncarg/data/cdf/landsea.nc","r")
+  lsdata = a->LSMASK
+  lsm = <strong>landsea_mask</strong>(lsdata,TLAT,TLON)
+
+; lsm is a 2D array that can be used directly in mask
+  data = <a href="../Built-in/mask.html"><strong>mask</strong></a>(data,lsm.ge.1,False)    
+</pre>
+
+<b>Example 5</b><p>
+
+A sample script which will:
+
+<ol>
+<li>generate a user specified global mask
+<li>generate a netCDF file
+<li>plot the generated mask.
+</ol>
+
+<p>
+Keep in mind that the NCL provided mask is 1x1 so higher resolution
+make not be well accomodated.
+
+
+
+<pre>
+;==========================================================
+; User Specifications
+;==========================================================
+nlat = 128
+mlon = 256
+typeMask = "integer"     ; "byte" [default] or "integer"
+
+grdType = 0              ; 0=gaussian , 1=regular , 2=regular offset
+lonStrt = 0              ; 0 [GM] or -180 [Dateline]
+
+diro = "./"
+filo = "SampleLandSeaMask.nc"
+
+PLOT = True              ; create a plot [ps]
+;==========================================================
+; End Required User Specifications
+; Note: User may edit the mask below
+;==========================================================
+
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"
+
+function localByte2Int ( x:byte )
+local dimx, X
+begin
+  <a href="../Built-in/delete.html"><strong>delete</strong></a>(x@_FillValue)
+
+  dimx = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(x)
+  X    = <a href="../Built-in/new.html"><strong>new</strong></a> ( dimx, "integer", "No_FillValue")
+  X    = x
+  return(X)
+end
+
+begin
+
+  if (grdType.eq.0) then      ; Gaussian [ S->N, GM eastward]
+      lat  = <a href="../Contributed/latGau.html"><strong>latGau</strong></a>(nlat, "lat", "latitude", "degrees_north")
+      lon  = <a href="../Contributed/lonGlobeF.html"><strong>lonGlobeF</strong></a>(mlon, "lon", "longitude", "degrees_east")
+      gw   = <a href="../Contributed/latGauWgt.html"><strong>latGauWgt</strong></a>(nlat, "lat", "gaussian weights", "")
+  end if
+
+  if (grdType.eq.1) then      ; Regular  [ 90S->90N, GM eastward]
+      lat  = <a href="../Contributed/latGlobeF.html"><strong>latGlobeF</strong></a>(nlat, "lat", "latitude", "degrees_north")
+      lon  = <a href="../Contributed/lonGlobeF.html"><strong>lonGlobeF</strong></a>(mlon, "lon", "longitude", "degrees_east")
+  end if
+
+  if (grdType.eq.2) then      ; Regular offset from pole and GM
+      lat  = <a href="../Contributed/latGlobeFo.html"><strong>latGlobeFo</strong></a>(nlat, "lat", "latitude", "degrees_north")
+      lon  = <a href="../Contributed/lonGlobeFo.html"><strong>lonGlobeFo</strong></a>(mlon, "lon", "longitude", "degrees_east")
+  end if
+
+  if (lonStrt.lt.0) then
+      lon = (/ lon - 180. /)  ; subtract 180 from all values
+      lon&lon = lon           ; update coordinates
+  end if
+
+                              ; read in land/sea mask basemap file
+  b    = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>("$NCARG_ROOT/lib/ncarg/data/cdf/landsea.nc","r")
+
+; lsm: five possible values: 0=ocean, 1=land, 2=lake, 3=small island, 4=ice shelf
+
+  if (<a href="../Built-in/isvar.html"><strong>isvar</strong></a>("typeMask") .and. typeMask.eq."integer") then
+      lsm  = localByte2Int( landsea_mask(b->LSMASK,lat,lon) ) ; type is "integer"
+  else
+      lsm  = <strong>landsea_mask</strong>(b->LSMASK,lat,lon)                  ; type is "byte"
+  end if
+  lsm@long_name = "Land-Sea Mask"
+  lsm@units     = "0=ocean, 1=land, 2=lake, 3=small island, 4=ice shelf"
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(lsm)
+
+;=================== OPTIONAL =============================
+; Manually edit lsm [type byte] to create a custom land mask. [range 0-7 if byte]
+;==========================================================
+ ;lsm  = <a href="../Built-in/where.html"><strong>where</strong></a> (lsm.eq.2, 0, lsm) ; make lakes "ocean"
+ ;lsm  = <a href="../Built-in/where.html"><strong>where</strong></a> (lsm.eq.2, 1, lsm) ; make lakes "land"
+ ;lsm  = <a href="../Built-in/where.html"><strong>where</strong></a> (lsm.eq.3, 1, lsm) ; make island "land"
+ ;lsm  = <a href="../Built-in/where.html"><strong>where</strong></a> (lsm.eq.4, 1, lsm) ; make ice "land"
+ ;lsm@units     = "change as required"
+
+;==========================================================
+; Create netCDF
+;==========================================================
+   <a href="../Built-in/system.html"><strong>system</strong></a>("/bin/rm -f "+diro+filo)
+   ncdf = <a href="../Built-in/addfile.html"><strong>addfile</strong></a> (diro+filo , "c")
+
+   ncdf@title = "Land-Sea Mask"
+   ncdf@creation_date = <a href="../Built-in/systemfunc.html"><strong>systemfunc</strong></a>("date")
+   ncdf->LSMASK = lsm
+
+;==========================================================
+; Create netCDF
+;==========================================================
+if (PLOT) then
+
+   wks = <a href="../../Graphics/Interfaces/gsn_open_wks.html"><strong>gsn_open_wks</strong></a>("ps","lsmask")
+   <a href="../../Graphics/Interfaces/gsn_define_colormap.html"><strong>gsn_define_colormap</strong></a>(wks,"wh-bl-gr-ye-re")
+
+   res = True
+   res@<a href="../../Graphics/Resources/mp.html#mpFillOn"><em>mpFillOn</em></a>         = False                ; do not color-fill the map
+   res@<a href="../../Graphics/Resources/gsn.html#gsnTickMarksOn"><em>gsnTickMarksOn</em></a>   = False                ; turn off all tick marks
+   res@<a href="../../Graphics/Resources/mp.html#mpPerimOn"><em>mpPerimOn</em></a>        = True                 ; turn the map perimeter on
+   res@<a href="../../Graphics/Resources/mp.html#mpPerimDrawOrder"><em>mpPerimDrawOrder</em></a> = "PostDraw"           ; draw the map perimeter last
+   res@<a href="../../Graphics/Resources/cn.html#cnLinesOn"><em>cnLinesOn</em></a>        = False                ; turn off the contour lines
+   res@<a href="../../Graphics/Resources/cn.html#cnLineLabelsOn"><em>cnLineLabelsOn</em></a>   = False                ; turn off the contour line labels
+   res@<a href="../../Graphics/Resources/cn.html#cnLevelSelectionMode"><em>cnLevelSelectionMode</em></a> = "ExplicitLevels" ; explicitly set the levels via cnLevels
+   res@<a href="../../Graphics/Resources/cn.html#cnLevels"><em>cnLevels</em></a>         = (/1.,2.,3.,4./)      ; set the levels
+   res@<a href="../../Graphics/Resources/cn.html#cnFillOn"><em>cnFillOn</em></a>         = True                 ; turn on color fill
+   res@<a href="../../Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a>       = "RasterFill"         ; use raster fill
+   res@<a href="../../Graphics/Resources/cn.html#cnFillColors"><em>cnFillColors</em></a>     = (/60,100,20,140,5/)  ; set the colors that will be used to color fill
+   res@<a href="../../Graphics/Resources/lb.html#lbLabelStrings"><em>lbLabelStrings</em></a>   = ispan(0,4,1)         ; labels for the labelbar boxes
+   res@<a href="../../Graphics/Resources/lb.html#lbLabelAlignment"><em>lbLabelAlignment</em></a> = "BoxCenters"         ; put the labels in the center of the label bar boxes
+   res@<a href="../../Graphics/Resources/lb.html#lbTitleString"><em>lbTitleString</em></a>    = "0=ocean, 1=land, 2=lake, 3=small island, 4=ice shelf"  ; labelbar title
+   res@<a href="../../Graphics/Resources/lb.html#lbTitleFontHeightF"><em>lbTitleFontHeightF</em></a> = 0.0125             ; labelbar title font height
+
+   plot = <a href="../../Graphics/Interfaces/gsn_csm_contour_map_ce.html"><strong>gsn_csm_contour_map_ce</strong></a>(wks,lsm,res)
+end if
+end
+
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Shea_util/landsea_mask.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:44 GMT -->
+</html>

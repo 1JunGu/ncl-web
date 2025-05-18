@@ -1,0 +1,53 @@
+
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+
+begin
+;
+; Generate some dummy data.
+;
+  x = new((/3,100/),float)
+  x(0,:) = random_uniform(105.,195.,100)
+  x(1,:) = random_uniform(105.,195.,100)
+  x(2,:) = random_uniform(105.,195.,100)
+;
+; Open an X11 window and change the foreground/background colors
+;
+  wks = gsn_open_wks ("ncgm", "markers" )
+  setvalues wks
+    "wkBackgroundColor" : (/1.,1.,1./)
+    "wkForegroundColor" : (/0.,0.,0./)
+  end setvalues  
+;
+; Get ready to add a filled square, a filled triangle, and a filled
+; star to the marker table.  First, you need to find out what font tables
+; and which characters represent these three markers.  You can also
+; optionally set the offsets, sizes, ratios, and angles for each marker.
+; 
+; In this case, we are changing the Y offset for the filled triangle only,
+; since its default center is more towards the tip of the triangle, and
+; we want it to be the center. Also, we are increasing the sizes of the
+; triangle and the filled star to make them more in line with the default
+; size of the square.  Everything else (ratios and angles) we are 
+; leaving as the default.
+;
+  mstrings = (/"u","z","y"/)     ; triangle, star, sqaure
+  fontnums = (/34,35,35/)
+  yoffsets = (/0.4, 0.0, 0.0/)
+  sizes    = (/2.0, 1.5, 1.0/)
+  ratio    = 1.
+  angle    = 0.
+  xoffset  = 0.
+  new_indices = NhlNewMarker(wks, mstrings, fontnums, xoffset, yoffsets, \
+                             ratio, sizes, angle)
+  
+  res                     = True
+  res@gsnMaximize         = True           ; Maximize plot in frame.
+  res@xyMarkLineMode      = "Markers"      ; Default is to draw lines.
+  res@xyMonoMarkLineMode  = True           ; 
+  res@xyMarkers           = new_indices    ; Set new markers
+  res@xyMarkerColors      = (/"red","green","blue"/)
+  res@tiMainString        = ":F21:Scatter plot with user-defined markers"
+  
+  plot  = gsn_y (wks,x,res)
+
+end

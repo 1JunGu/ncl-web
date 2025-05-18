@@ -1,0 +1,224 @@
+;***************************************************************
+; cloudsat_2_poly.ncl
+;
+; Concepts illustrated:
+;   - Read CLOUDSAT 'cloud_scenario' from a HDF-EOS2 file 
+;   - Set up a framework for doing a TEST on a data subset
+;     Plotting LARGE numbers of polymarkers can be slow. Test on data subset
+;   - Explore heght variable (min, max); eliminate negative (bogus)  values
+;   - Use 'dim_gbits' to extract information
+;   - Plot the vertical profile at each time step 
+;   - Use polynarkers
+;===============================================================
+; Open the file: ncl_filedump showed it is HDF-EOS with .hdf extension
+; %> ncl_filedump 2010153190053_21792_CS_2B-CLDCLASS_GRANULE_P_R04_E03.hdf | less
+; Then, add '.he2' on the command line:
+; %> ncl_filedump 2010153190053_21792_CS_2B-CLDCLASS_GRANULE_P_R04_E03.hdf.he2 | less
+;
+;  dimensions:
+;     nray_2B_CLDCLASS = 37082
+;     scalar_2B_CLDCLASS = 1
+;     nbin_2B_CLDCLASS = 125
+;  [SNIP]
+; short cloud_scenario_2B_CLDCLASS ( nray_2B_CLDCLASS, nbin_2B_CLDCLASS )
+;        hdfeos_name :  cloud_scenario
+;        valid_range :  ( 0, 32767 )  <=== should be ( 0, 8 )  
+;        units :        none
+;        long_name :    Cloud scenario
+;  [SNIP]
+;  1-4    Cloud scenario [type]    ; See Table 5 in PDF below
+;  0000 = No cloud    (0)
+;  0001 = cirrus      (1)
+;  0010 = Altostratus (2)
+;  0011 = Altocumulus (3)
+;  0100 = St          (4)
+;  0101 = Sc          (5)
+;  0110 = Cumulus     (6)          ; Cu: including cumulus congestus
+;  0111 = Ns          (7)          ; Nimbostratus
+;  1000 = Deep Convection (8)      ; Deep convective (cumulonimbus) 
+;                                  ; or high (cirrus and cirrostratus)
+;===============================================================
+; http://www.cloudsat.cira.colostate.edu/sites/default/files/products/files/2B-CLDCLASS_PDICD.P_R04.20070724.pdf
+; See Tables 1 and 2 and 5
+;===============================================================
+
+  diri    = "./"                   		; path to file
+  fili	  = "2010153190053_21792_CS_2B-CLDCLASS_GRANULE_P_R04_E03.html"
+  varname = "cloud_scenario_2B_CLDCLASS"
+
+  f       = addfile (diri+fili+".he2", "r")     ; open file as hdf-eos2
+
+  TEST    = False  
+  if (.not.TEST) then
+      cs      = f->$varname$                                 ; (nray_2B_CLDCLASS,nbin_2B_CLDCLASS )
+      lat     = f->Latitude_2B_CLDCLASS                      ; (nray_2B_CLDCLASS) => (nray)
+      lon     = f->Longitude_2B_CLDCLASS                     ; (nray_2B_CLDCLASS) => (nray)
+      time    = f->Profile_time_2B_CLDCLASS                  ; (nray_2B_CLDCLASS) => (nray)
+      hgt     = f->Height_2B_CLDCLASS                        ; (nray_2B_CLDCLASS,nbin_2B_CLDCLASS )
+  else
+      rayStrt = 0                                            ; ray ---> time
+      rayLast = 499   
+      raySkip = 1                                            ; NCL default is 1
+      cs      = f->$varname$(rayStrt:rayLast:raySkip,:)      ; (nray_2B_CLDCLASS,nbin_2B_CLDCLASS )
+      lat     = f->Latitude_2B_CLDCLASS(rayStrt:rayLast:raySkip)     ; (nray_2B_CLDCLASS) => (nray)
+      lon     = f->Longitude_2B_CLDCLASS(rayStrt:rayLast:raySkip)    ; (nray_2B_CLDCLASS) => (nray)
+      time    = f->Profile_time_2B_CLDCLASS(rayStrt:rayLast:raySkip) ; (nray_2B_CLDCLASS) => (nray)
+      hgt     = f->Height_2B_CLDCLASS(rayStrt:rayLast,:)     ; (nray_2B_CLDCLASS,nbin_2B_CLDCLASS )
+  end if
+
+;---Explore data
+
+  printVarSummary(cs)                   ; (nray_2B_CLDCLASS,nbin_2B_CLDCLASS)
+  print("-----")
+
+  printVarSummary(time)
+  print("time: min="+min(time)+"  max="+max(time)) 
+  printVarSummary(lat)
+  print("lat: min="+min(lat)+"  max="+max(lat)) 
+  printVarSummary(lon)
+  print("lon: min="+min(lon)+"  max="+max(lon)) 
+  printVarSummary(hgt)
+  print("hgt: min="+min(hgt)+"  max="+max(hgt))  
+
+;---Dimension size info
+
+  dimcs   = dimsizes(cs)                
+  nray    = dimcs(0)                    ; nray_2B_CLDCLASS
+  nbin    = dimcs(1)                    ; nbin_2B_CLDCLASS: 125
+  N       = nray*nbin                   ; array size
+
+;=============================================================================
+; Unpack Cloud Scenario 
+;=============================================================================
+
+  cstyp   = dim_gbits(cs,11,4,12,nbin)  ; 1-4    Cloud scenario [type]
+  cstyp@long_name = "Cloud Type"
+  copy_VarCoords(cs,cstyp)
+
+  printVarSummary(cstyp)
+  printMinMax(cstyp,0)
+  print("-----")
+
+;=====================================================================
+;---Graphics
+;=====================================================================
+; hgt: Eliminate negative values and very high values
+; Not necessary: this just provides more plot are for the regions of focus
+;=====================================================================
+
+  hgtMax = 20000  ; arbitrary
+  hgt    = where(hgt.lt.0 .or. hgt.gt.hgtMax, hgt@_FillValue, hgt)         
+  print("hgt: min="+min(hgt)+"  max="+max(hgt))       
+
+  cstyp@_FillValue = toshort(-1)                         ; create an appropriate _FillValue
+  cstyp = where(ismissing(hgt), cstyp@_FillValue, cstyp) ; eliminate cstyp associated 
+                                                         ; with  negative hgt values
+;=====================================================================
+; Graphics
+;=====================================================================
+   pltDir  = "./"
+   pltName = "cloudsat_poly"
+if (TEST) then
+   pltName = pltName+"_TEST"
+end if
+   pltType = "png"
+   pltPath = pltDir+pltName
+
+;=====================================================================
+;---Colors and labels for each cloud scenario type: cstyp 
+;---          noCld, cirrus , A-st, A-cu   ,  St
+;---          Sc   , Cumulus , Ns    , DeepC
+;=====================================================================
+
+;;colors = (/"snow"      ,"purple","red","yellow","green" \
+  colors = (/"background","purple","red","yellow","green" \
+            ,"blue","skyblue","brown","black"/)
+  ntyp   = dimsizes(colors)
+
+  labels = (/"Clear","Cirrus","Alto-Strat","Alto-Cu","Stratus" \
+            ,"StratoCu", "Cum", "Ns", "DeepCon"/) 
+
+  maxYlev   = 18
+  mnmxYint = nice_mnmxintvl( min(hgt), max(hgt), maxYlev, False)
+  maxXlev   = 10
+  mnmxXint = nice_mnmxintvl( min(time), max(time), maxXlev, False)
+
+  wks  = gsn_open_wks(pltType,pltPath) 
+
+  resxy = True
+  resxy@gsnMaximize    = True            ; make "ps", "eps", "pdf" large
+  resxy@gsnDraw        = False
+  resxy@gsnFrame       = False
+
+  resxy@tiXAxisString  = "elapsed time"
+  resxy@tiYAxisString  = "Height (m)"
+  resxy@tiMainString   = "Cloud Scenario: "  \
+                       + str_get_cols(fili,0,6)  + ": " \
+                       + str_get_field(fili,3,"_")+str_get_field(fili,4,"_")
+
+  resxy@trXMinF        = mnmxXint(0)
+  resxy@trXMaxF        = mnmxXint(1)
+  resxy@trYMinF        = mnmxYint(0)
+  resxy@trYMaxF        = mnmxYint(1)
+
+;---Set polymarker resources
+
+  polyres  = True                            
+  polyres@gsMarkerIndex = 16             
+  polyres@gsMarkerSizeF = 0.00125        
+
+;---gsn_csm_xy requires (Y:bin,X:time) order: Use dimension reordering
+;---Ue NCL's overwrite syntax [ := ]
+
+  cstyp   :=  cstyp(nbin_2B_CLDCLASS|:,nray_2B_CLDCLASS|:)
+  hgt     :=    hgt(nbin_2B_CLDCLASS|:,nray_2B_CLDCLASS|:) 
+
+  printVarSummary(cstyp)                          ; examine reshaped variables
+  printMinMax(cstyp,0)
+  print("---")
+  printVarSummary(hgt)
+  printMinMax(hgt,0)
+  print("---")
+
+;---Create a blank background: will get warning message [Ignore]
+
+  CSTYP    = cstyp                  
+  CSTYP    = cstyp@_FillValue                  ; all _FillValue
+  time_2d  = conform(CSTYP , time, 1)
+  SCAT     = gsn_csm_xy(wks,time,CSTYP,resxy)    ; background cartesian
+
+;---Create simple legend
+
+  gres = True
+  gres@YPosPercent = 95. 
+  gres@XPosPercent = 10.    ; expressed as %, 0->100, sets position of left border of legend(Default = 5.)
+
+  lineres = True
+  lineres@lgLineColors      = colors
+  lineres@lgLineThicknesses = 9.0                        ; line thicknesses
+  lineres@lgLineDashSegLenF = 0.025 
+  lineres@LineLengthPercent = 0.10
+
+  textres = True
+  textres@lgLabels = labels
+  textres@lgLabelFontHeights = 0.0125                   ; default is 0.05
+  SCAT = simple_legend(wks,SCAT,gres,lineres,textres)
+
+;---Need 0ne-dimensional (1d) arrays for use with NCL's "ind" functio
+
+  cstyp_1d = ndtooned(cstyp)
+  hgt_1d   = ndtooned( hgt )
+  time_1d  = ndtooned( conform_dims((/nbin,nray/), time, 1) )  ; trick
+
+;---For each cloud type, plot a colored polymarker
+
+  do ct=1,ntyp-1                            ; ignore 'Clear'
+     polyres@gsMarkerColor = colors(ct)     ; set polymarker color
+     it := ind(cstyp_1d.eq.ct)              ; number will change 
+     if (.not.ismissing(it(0))) then
+         gsn_polymarker(wks,SCAT,time_1d(it),hgt_1d(it),polyres) ; draw polymarkers
+     end if
+  end do    ; ct
+
+  draw(SCAT)        
+  frame(wks)

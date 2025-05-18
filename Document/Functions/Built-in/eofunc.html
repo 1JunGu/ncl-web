@@ -1,0 +1,719 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/eofunc.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:27 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (empirical orthogonal functions)">
+<meta name="keywords" content="eofunc">
+<title>eofunc</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../eofs.html">Empirical orthogonal functions</a>
+<br>
+<h1>eofunc</h1>
+
+<p>
+Computes empirical orthogonal functions (EOFs, aka: Principal Component
+Analysis).
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function eofunc (
+		data    : numeric,  
+		neval   : integer,  
+		optEOF  : logical   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  numeric
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>data</em>
+<p class=indent>A multi-dimensional array in which the rightmost dimension is the
+number of observations. Generally, this is the time dimension.
+</p>
+<p class=indent>
+
+If your rightmost dimension is not time, then see
+<a href="eofunc_n.html"><strong>eofunc_n</strong></a>.
+</p>
+<p class=indent>
+
+Commonly, the <em>data</em> array
+contains anomalies from some base climatology, however, this
+is <b>not</b> required.
+</p>
+<em>neval</em>
+<p class=indent>A scalar integer that specifies the number of eigenvalues and
+eigenvectors to be returned. This is usually less than or equal to the
+minimum number of observations or number of variables.
+</p>
+<em>optEOF</em>
+<p class=indent>A logical variable to which various optional arguments may be assigned
+as <a href="../../Language/attributes.html">attributes</a>.  These
+optional arguments alter the default behavior of the function. <em>optEOF</em> must be set to True, 
+and then you can attach the following attributes:
+
+<ul>
+<li>
+<em>optEOF</em>@jopt - an integer that indicates whether to use the covariance matrix (<em>optEOF</em>@jopt=0)
+or the correlation matrix (<em>optEOF</em>@jopt=1) to compute EOFs.
+The default is to use a covariance matrix (<em>optEOF</em>@jopt = 0).
+</li>
+</p>
+<p class=indent>
+<li>
+<em>optEOF</em>@pcrit - a float value between 0 and 100 that indicates the percentage 
+of non-missing points that must exist at any single point in order to be calculated. The default is 50%. 
+Points that contain all missing values will automatically be set to missing.
+</li>
+</ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A multi-dimensional array containing <b>normalized</b> EOFs. 
+The returned array will be of the same size as <em>data</em> with the
+rightmost dimension removed and an additional leftmost dimension of
+the same size as <em>neval</em> added. Double if <em>data</em> is
+double, float otherwise. 
+<p>
+
+The return variable will have associated with it the following <a href="../../Language/attributes.html">attributes</a>:
+
+<ul>
+
+<li><em>eval</em>: a one-dimensional array of size <em>neval</em> that
+contains the eigenvalues.</li>
+
+<li><em>pcvar</em>: a one-dimensional float array of size
+<em>neval</em> equal to the percent variance associated 
+with each eigenvalue.</li>
+
+<li><em>pcrit</em>: The same value and type of <em>optEOF@pcrit</em>
+if the user changed the default.</li>
+
+<li><em>matrix</em>: A string indicating the type of matrix used,
+"correlation" or "covariance".</li>
+
+<li><em>method</em>: A string indicating if the input array, 
+<em>data</em>, was/was-not transposed for the purpose
+of computing the eigenvalues and eigenvectors. The
+string can have two values:  "transpose" or "no transpose"</li>
+
+<li><em>eval_transpose</em>: This attribute is returned only if
+<em>method</em>="transpose". <em>eval_transpose</em> will contain the
+eigenvalues of the transposed covariance matrix.  These eigenvalues are
+then scaled such that they are consistent with the original input
+<em>data</em>.
+ 
+</ul>
+These <a href="../../Language/attributes.html">
+attributes</a> can be accessed using the @ operator:
+<p>
+
+<pre>
+<a href="print.html"><strong>print</strong></a>(<em>return_val</em>@pcvar)
+<a href="print.html"><strong>print</strong></a>(<em>return_val</em>@pcrit)
+</pre>
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function computes Empirical Orthogonal Functions (EOFs) via a
+covariance matrix or, optionally, via a correlation matrix. This is
+also known as Principal Component Analysis or Eigen Analysis. The EOFs
+are calculated
+using <a href="http://www.netlib.org/lapack/lug/lapack_lug.html">LAPACK</a>'s
+"dspevx"
+routine.  <a href="../../Language/fillval.html">Missing
+values</a> are ignored when computing the covariance or
+correlation matrix.  The returned values are <b>normalized</b> such
+that the sum of squares for each EOF pattern equals
+one. To <b>denormalize</b> the returned EOFs multiply by the square
+root of the associated eigenvalue (<i>aka</i>, the singular value).
+<p>
+
+If <em>data</em> does NOT have time as the rightmost dimension, then
+use <a href="eofunc_n.html"><strong>eofunc_n</strong></a> to avoid having to reorder the data.
+<p>
+
+Use the <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a> function if metadata retention is desired.
+The interface is identical.
+<p>
+<b>Most commonly, the input <em>data</em> consists of anomalies.</b>
+<p>
+This function differs from the deprecated <a href="eofcov.html"><strong>eofcov</strong></a> and 
+<a href="eofcor.html"><strong>eofcor</strong></a> functions in that it <i>may</i> transpose the
+input <em>data</em> array prior to computing the EOFs. 
+If <em>data</em> is transposed, a linear transformation 
+is applied to the EOFs of the transposed array prior to returning.
+The reason for using this approach is computational efficiency. 
+
+<p>
+<b>Comments on weighting observations</b>
+<p>
+Generally, when performing and EOF analysis on observations over the globe or a 
+portion of the globe, the values are weighted prior to calculating. This is usually
+required to account for the convergence of the meridions (area weighting) which 
+lessens the impact of high-latitude grid points that represent a small area of the 
+globe. Most frequently, the square root of the cosine of the latitude is used
+to compute the area weight. The square root is used to create a covariance matrix that
+reflects the area of each matrix element.  If weighted in this manner, the resulting 
+covariance values will include quantities calculated via: 
+<pre>
+[x*<a href="sqrt.html"><strong>sqrt</strong></a>(<a href="cos.html"><strong>cos</strong></a>(lat(x)))]*[y*<a href="sqrt.html"><strong>sqrt</strong></a>(<a href="cos.html"><strong>cos</strong></a>(lat(y)))] = x*y*<a href="sqrt.html"><strong>sqrt</strong></a>(<a href="cos.html"><strong>cos</strong></a>(lat(x)))*<a href="sqrt.html"><strong>sqrt</strong></a>(<a href="cos.html"><strong>cos</strong></a>(lat(y)))
+</pre>
+    
+Note that the covariance of a grid point with itself yields standard cosine weighting:
+<p>
+o
+<pre>
+[x*<a href="sqrt.html"><strong>sqrt</strong></a>(<a href="cos.html"><strong>cos</strong></a>(lat(x)))]*[x*<a href="sqrt.html"><strong>sqrt</strong></a>(<a href="cos.html"><strong>cos</strong></a>(lat(x)))] = x^2 * <a href="cos.html"><strong>cos</strong></a>(lat(x)).
+</pre>
+
+<B>Note on standard EOF analysis</B> 
+<p>Conventional EOF analysis yields patterns and time series which are both 
+orthogonal. The derived patterns are a function of the domain. 
+However, <b>the EOF procedure is strictly mathematical (not statistical) and 
+is not based upon physics</b>.  The results may
+produce patterns that are similar to physical modes within the the system. 
+However, physical meaning is dependent on your interpretation of the 
+mathematical result.
+<p>
+<B>Note on signs of EOF analysis</B> (conributed by Andrew Dawson, UEA) 
+<p>
+EOFs are eigenvectors of the covariance matrix formed from the input data. Since an eigenvector can be multiplied by any scalar and still remain an eigenvector, the sign is arbitrary. In a mathematical sense the sign of an eigenvector is rather unimportant. This is why the EOF analysis may yield different signed EOFs for slightly different inputs. Sign only becomes an issue when you wish to interpret the physical meaning (if any) of an eigenvector.
+<p>
+You should approach the interpretation of EOFs by looking at both the EOF pattern and the associated time series together. For example, consider an EOF of sea surface temperature. If your EOF has a positive centre and the associated time series is increasing, then you will interpret this centre as a warming signal. If your EOF had come out the other sign (ie. a negative centre), then the associated time series would also be the opposite sign and you would still interpret the centre as a warming signal.
+<p>
+In essence, the sign flip does not change the physical interpretation of the result. Hence, it is up to you to choose which sign to associate with your EOF patterns for visualisation (remembering that any sign change to an EOF must be applied to the associated time series also). Usually you would simply adjust the sign so that all your EOF patterns with the same physical interpretation also look the same.
+<p>
+If desired, EOF spatial patterns may be tested for orthogonality
+by using the dot product:
+
+<pre>
+  d01 = <a href="sum.html"><strong>sum</strong></a>(eof(0,:,:)*eof(1,:,:))
+  d12 = <a href="sum.html"><strong>sum</strong></a>(eof(1,:,:)*eof(2,:,:))
+  d02 = <a href="sum.html"><strong>sum</strong></a>(eof(0,:,:)*eof(2,:,:))
+  <a href="print.html"><strong>print</strong></a>("d01="+d01+"  d12="+d12+"  d02="+d02)  ; may be +/- 1e-8
+
+</pre>
+<p>
+<B>References:</B>
+<pre>
+<a href="http://dx.doi.org/10.1175/JCLI3500.1">
+Quadrelli, Roberta, Christopher S. Bretherton, John M. Wallace, 2005: 
+On Sampling Errors in Empirical Orthogonal Functions. 
+J. Climate, 18, 3704-3710 </a>
+     
+North, G. R., T. L. Bell, R. F. Cahalan, and F. J. Moeng, Sampling
+errors in the estimation of empirical orthogonal functions, Mon.
+Wea. Rev., 110, 699-706, 1982.
+   
+Dawson, A.: <a href="http://ajdawson.github.io/eof2/eofs.html">EOF Analysis</a>
+</pre>
+<p>
+<b>Acknowledgement:</b> The code used is a modified version of
+<a href="http://meteora.ucsd.edu/~pierce/eof/eofs.html">David Pierce's fortran code</b></a>.
+<p>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a>,
+<a href="../Contributed/eofunc_north.html"><strong>eofunc_north</strong></a>,
+<a href="eofunc_n.html"><strong>eofunc_n</strong></a>,
+<a href="../Contributed/eofunc_n_Wrap.html"><strong>eofunc_n_Wrap</strong></a>,
+<a href="eofunc_ts.html"><strong>eofunc_ts</strong></a>,
+<a href="eofunc_ts_n.html"><strong>eofunc_ts_n</strong></a>,
+<a href="../Contributed/eofunc_ts_Wrap.html"><strong>eofunc_ts_Wrap</strong></a>,
+<a href="../Contributed/eofunc_ts_n_Wrap.html"><strong>eofunc_ts_n_Wrap</strong></a>,
+<a href="eofunc_varimax.html"><strong>eofunc_varimax</strong></a>,
+<a href="eof2data.html"><strong>eof2data</strong></a>, <a href="eof2data_n.html"><strong>eof2data_n</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+In the following, the attribute pcvar can be output via:
+<pre>
+  <a href="print.html"><strong>print</strong></a>(ev@pcvar)             ; 1D vector of length "neval"
+</pre>
+<p>
+This attribute could also be used in graphics. For example, it could be used in a title.
+<PRE>
+  title = "%=" + ev@pcvar(1)
+</PRE>
+<p>
+<a href="sprintf.html"><strong>sprintf</strong></a> can be used to format the title more precisely:
+<PRE>
+  title = "%=" + <a href="sprintf.html"><strong>sprintf</strong></a>("%5.2f", ev@pcvar(1) )
+</PRE>
+
+<B>Example 1</B>
+<p>
+Let x be two-dimensional with dimensions "variables" (size = nvar) and "time".
+Commonly, 'x' contains anomalies.
+
+<PRE>
+  neval  = 3                       ; calculate 3 EOFs out of 7 
+  ev     = <strong>eofunc</strong>(x,neval,False)   ; ev(neval,nvar)
+
+  ; Use <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a> if metadata retention is desired
+  ; ev     = <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a>(x,neval,False)   ; ev(neval,nvar)
+
+                                     ; print the percent-variance explained
+  <a href="print.html"><strong>print</strong></a>("% var="+ ev@pcvar)
+  
+  option      = True
+  option@jopt = 1                  ; use correlation matrix
+  ev_cor = <strong>eofunc</strong>(x,neval,option)  ; ev_cor(neval,nvar)
+
+  ; Use <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a> if metadata retention is desired
+  ; ev_cor = <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a>(x,neval,option)  ; ev_cor(neval,nvar)
+
+                                     ; print the percent-variance explained
+  <a href="print.html"><strong>print</strong></a>("% var="+ ev_cor@pcvar)
+</PRE>
+
+<B>Example 2</B>
+<p>
+Let x be three-dimensional with dimensions of time, lat, lon. 
+<p>
+
+With NCL versions 6.3.0 and earlier, you need to
+<a href="../../Language/reorder.html">reorder</a> x so that time
+is the rightmost dimension. With NCL versions 6.4.0 and later, use
+<a href="eofunc_n.html"><strong>eofunc_n</strong></a> to avoid having to reorder.
+<p>
+
+<PRE>
+  y!0    = "time"                  ; name dimensions if not already done 
+  y!1    = "lat"                   ; must be named to reorder
+  y!2    = "lon"                   
+
+  neval  = nvar                                  ; calculate all EOFs 
+  ev     = <strong>eofunc</strong>(y(lat|:,lon|:,time|:),neval,False)
+
+  ; Use <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a> if metadata retention is desired
+  ; ev     = <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a>(y(lat|:,lon|:,time|:),neval,False)
+   
+;;ev     = <a href="eofunc_n.html"><strong>eofunc_n</strong></a>(y,neval,False,0)      ; NCL V6.4.0 and later
+  ; ev(neval,nlat,nlon)
+
+  ; Use <a href="../Contributed/eofunc_n_Wrap.html"><strong>eofunc_n_Wrap</strong></a> if metadata retention is desired
+  ; ev     = <a href="../Contributed/eofunc_n_Wrap.html"><strong>eofunc_n_Wrap</strong></a>(y,neval,False,0)
+
+                                   ; denormalize the EOFs [units same as <em>data</em>]
+  do ne=0,neval-1
+     ev(ne,:,:) = ev(ne,:,:)*sqrt( ev@eval(ne) )
+  end do
+</PRE>
+<p>
+
+<B>Example 3</B>
+<p>
+Let z be four-dimensional with dimensions time, lev, lat, and lon:
+
+<PRE>
+  neval  = 3                       ; calculate 3 EOFs out of klev*nlat*mlon 
+  ev     = <strong>eofunc</strong>(z(lat|:,lon|:,time|:),neval,False) 
+
+  ; Use <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a> if metadata retention is desired
+  ; ev     = <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a>(z(lat|:,lon|:,time|:),neval,False)
+     
+;;ev     = <a href="eofunc_n.html"><strong>eofunc_n</strong></a>(z,neval,False,0)   ; NCL V6.4.0 and later
+; ev will be dimensioned neval, level, lat, lon
+
+  ; Use <a href="../Contributed/eofunc_n_Wrap.html"><strong>eofunc_n_Wrap</strong></a> if metadata retention is desired
+  ; ev     = <a href="../Contributed/eofunc_n_Wrap.html"><strong>eofunc_n_Wrap</strong></a>(z,neval,False,0)
+</PRE>
+
+<B>Example 4</B>
+<p> Calculate the EOFs at every other lat/lon point. Use of a temporary 
+array is NOT necessary but it avoids having to reorder the array twice in
+this example:
+
+<PRE>
+  neval  = 5                          ; calculate 5 EOFs out of nlat*mlon 
+  zTemp  = z(lat|::2,lon|::2,time|:)  ; reorder and use temporary array
+  ev     = <strong>eofunc</strong>(zTemp,neval,False)   ; ev(neval,nlat/2,mlon/2)
+
+  ; Use <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a> if metadata retention is desired
+  ; ev     = <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a>(zTemp,neval,False)   ; ev(neval,nlat/2,mlon/2)
+
+
+;;ev     = <a href="eofunc_n.html"><strong>eofunc_n</strong></a>(z(:,::2,::2),neval,False,0) ; NCL V6.4.0 and later, no reordering
+
+  ; Use <a href="../Contributed/eofunc_n_Wrap.html"><strong>eofunc_n_Wrap</strong></a> if metadata retention is desired
+  ; ev     = <a href="../Contributed/eofunc_n_Wrap.html"><strong>eofunc_n_Wrap</strong></a>(z(:,::2,::2),neval,False,0)
+</PRE>
+
+<B>Example 5</B>
+<p>
+Let z be four-dimensional with dimensions level, lat, lon, time. Calculate the
+EOFs at one specified level:
+
+<PRE>
+  kl     = 3                               ; specify level
+  neval  = 8                               ; calculate 8 EOFs out of nlat*mlon 
+  ev     = <strong>eofunc</strong>(z(kl,:,:,:),neval,False)  
+; ev will be dimensioned neval, lat, lon 
+
+  ; Use <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a> if metadata retention is desired
+  ; ev     = <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a>(z(kl,:,:,:),neval,False)
+</PRE>
+
+<B>Example 6</B>
+<p>
+
+Let z be four-dimensional with dimensions time, lev, lat,
+lon. <a href="../../Language/reorder.html">Reorder</a>
+x so that time is the rightmost dimension and calculate on one
+specified level:
+
+<PRE>
+  kl     = 3                             ; specify level
+  neval  = 8                             ; calculate 8 EOFs out of nlat*mlon 
+  zTemp  = z(lev|kl,lat|:,lon|:,time|:)   
+  ev     = <strong>eofunc</strong>(zTemp,neval,False)      
+
+  ; Use <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a> if metadata retention is desired 
+  ; ev     = <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a>(zTemp,neval,False)
+
+;;ev     = <a href="eofunc_n.html"><strong>eofunc_n</strong></a>(z,neval,False,0)    ; no reordering needed
+; ev will be dimensioned neval, lat, lon
+
+  ; Use <a href="../Contributed/eofunc_n_Wrap.html"><strong>eofunc_n_Wrap</strong></a> if metadata retention is desired
+  ; ev     = <a href="../Contributed/eofunc_n_Wrap.html"><strong>eofunc_n_Wrap</strong></a>(z,neval,False,0)    ; no reordering needed
+</PRE>
+
+<B>Example 7</B>
+<p>
+Area-weight the data prior to calculation. Let p be three-dimensional with 
+dimensions time, lat, lon. The array "lat" contains the latitudes.
+See example 7 in the <a href="eofunc_n.html"><strong>eofunc_n</strong></a> documentation for
+how to do this without reordering.
+<p>
+
+<PRE>
+; calculate the weights using the square root of the cosine of the latitude and
+; also convert degrees to radians
+  wgt = <a href="sqrt.html"><strong>sqrt</strong></a>(<a href="cos.html"><strong>cos</strong></a>(lat*0.01745329)) 
+  
+; <a href="../../Language/reorder.html">reorder</a> data so time is fastest varying
+  pt  = p(lat|:,lon|:,time|:)         ; (lat,lon,time)
+  ptw = pt                            ; create an array with metadata
+
+; weight each point prior to calculation. 
+; <a href="conform.html"><strong>conform</strong></a> is used to make wgt the same size as pt
+
+  ptw = pt*<a href="conform.html"><strong>conform</strong></a>(pt, wgt, 0)        
+
+  optEOF       = True
+  optEOF@pcrit = 80  
+  evec= <strong>eofunc</strong>(ptw,neval,optEOF)   
+
+  ; Use <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a> if metadata retention is desired 
+  ; evec= <a href="../Contributed/eofunc_Wrap.html"><strong>eofunc_Wrap</strong></a>(ptw,neval,optEOF)
+
+                                   ; denormalize the EOFs
+                                   ; print the % variance explained
+  do ne=0,neval-1
+     evec(ne,:,:) = evec(ne,:,:)*sqrt( evec@eval(ne) )  ; units same as <em>data</em>
+
+     <a href="print.html"><strong>print</strong></a>("% var="+ evec@pcvar(ne) )
+  end do
+</PRE>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/eofunc.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:27 GMT -->
+</html>

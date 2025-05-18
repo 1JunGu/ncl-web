@@ -1,0 +1,217 @@
+;----------------------------------------------------------------------
+; shear_stretch_deform_1.ncl
+;
+; Concepts illustrated:
+;   - Reading and reordering variables
+;   - Using spherical harmonic (SPH)  and centered finite difference (CFD) procedures 
+;     to calculate the desired quantities over the globe.
+;   - Using centered finite difference (CFD) procedure
+;     to calculate the desired quantities over a specifed region.
+;   - Print each variable's information
+;   - Plotting with symmetric contour bounds
+;   - Plot SPH and CFD quantities on the same plots for visual comparison 
+;===========================================================
+;                  MAIN: requires NCL 6.6.0 onward
+;                  No libraries need be loaded
+;===========================================================
+;
+  diri   = "/Users/shea/Data/CDC/"
+  fu     = addfile(diri+"uwnd.2008.nc","r")
+  fv     = addfile(diri+"vwnd.2008.nc","r")
+
+  ntStrt = 0              ; start 'time' index (subscript)
+  ntLast = 6              ; last  'time' index
+
+;---Data are global and ordered North-to-South
+;---Syntax [::-1] reverses latitude to  South-to-North
+
+  u      = fu->uwnd(ntStrt:ntLast,:,::-1,:)  ;  (time,level,lat,lon) ; (7,17,73,144) 
+  v      = fv->vwnd(ntStrt:ntLast,:,::-1,:)  ;          "
+  ymdh   = cd_calendar(u&time, -3)           ; ymdh(time)
+
+  printVarSummary(u)
+  printMinMax(u,0)
+  print("---")
+  printVarSummary(v)
+  printMinMax(v,0)
+  print("---")
+
+;---
+
+  grdTyp =  1                ; =1 fixed [here 2.5 degree grid]
+
+;---Global: Use spherical harmonic functions to calculate the terms
+
+  opt_ssd = 0
+  ssdList = shear_stretch_deform(u,v, u&lat, grdTyp, opt_ssd)
+
+                             ; extract variables from the returned 'list' variable
+  stretch_sph = ssdList[0]
+  shear_sph   = ssdList[1]
+  deform_sph  = ssdList[2]
+
+  printVarSummary(stretch_sph)
+  printMinMax(stretch_sph,0)
+  print("===")
+  printVarSummary(shear_sph)
+  printMinMax(shear_sph,0)
+  print("===")
+  printVarSummary(deform_sph)
+  printMinMax(deform_sph,0)
+  print("===")
+
+;---Global: Use centered finite difference functions to calculate the terms
+
+  opt_ssd = 1
+  cyclic  = True               
+  ssdList = shear_stretch_deform_cfd(u,v, u&lat, u&lon, cyclic, opt_ssd)
+
+                             ; extract variables from the returned 'list' variable
+  stretch_cfd = ssdList[0]
+  shear_cfd   = ssdList[1]
+  deform_cfd  = ssdList[2]
+
+  if (opt_ssd.eq.1) then     ; extract additional variables
+      dudx_cfd= ssdList[3]
+      dudy_cfd= ssdList[4]
+      dvdx_cfd= ssdList[5]
+      dvdy_cfd= ssdList[6]
+  end if
+  delete(ssdList)
+
+  printVarSummary(stretch_cfd)
+  printMinMax(stretch_cfd,0)
+  print("===")
+  printVarSummary(shear_cfd)
+  printMinMax(shear_cfd,0)
+  print("===")
+  printVarSummary(deform_cfd)
+  printMinMax(deform_cfd,0)
+  print("===")
+
+  if (opt_ssd.eq.1) then
+      printVarSummary(dudx_cfd)
+      printMinMax(dudx_cfd,0)
+      print("===")
+      printVarSummary(dudy_cfd)
+      printMinMax(dudy_cfd,0)
+      print("===")
+      printVarSummary(dvdx_cfd)
+      printMinMax(dvdx_cfd,0)
+      print("===")
+      printVarSummary(dvdy_cfd)
+      printMinMax(dvdy_cfd,0)
+      print("===")
+  end if
+
+;---Region [boundaries): specify a region: extract regional data
+
+  latS   =  25.          ; region USA   
+  latN   =  50.
+  lonL   = 230.
+  lonR   = 300.
+
+  U  =  u(:,:,{latS:latN},{lonL:lonR}) 
+  V  =  v(:,:,{latS:latN},{lonL:lonR}) 
+
+  cyclic  = False       ; region
+  ssdList = shear_stretch_deform_cfd(U,V, U&lat, U&lon, cyclic, opt_ssd)
+  stretch_region = ssdList[0]
+  shear_region   = ssdList[1]
+  deform_region  = ssdList[2]
+  delete(ssdList)
+
+  printVarSummary(stretch_region)
+  printMinMax(stretch_region,0)
+  print("===")
+  printVarSummary(shear_region)
+  printMinMax(shear_region,0)
+  print("===")
+  printVarSummary(deform_region)
+  printMinMax(deform_region,0)
+  print("===")
+
+;************************************************
+; create plot
+;************************************************
+  nt     = 0             ; specify a time index to plot
+  lev    = 500           ; specify a level
+  plot   = new(4,"graphic")
+
+  wks_type = "png"
+ ;wks_type@wkWidth  = 1500
+ ;wks_type@wkHeight = 1500
+  wks  = gsn_open_wks(wks_type ,"shear_stretch_deform")   ; send graphics to PNG file
+
+  res                  = True     ; plot mods desired
+  res@gsnDraw          = False
+  res@gsnFrame         = False
+  res@cnFillOn         = True     ; turn on color fill
+  res@cnLinesOn        = False    ; turn of contour lines
+  res@cnLineLabelsOn   = False    ; turn of contour line labels
+
+  res@mpFillOn         = False                   ; turn off
+ ;res@cnFillPalette    = "BlAqGrYeOrReVi200"     ; yellow-orange in the middle
+  res@cnFillPalette    = "ViBlGrWhYeOrRe"        ; white-in-middle
+ ;res@lbOrientation    = "Vertical"
+  res@lbLabelBarOn     = False                   ; turn off individual cb's
+
+  resP                 = True                    ; modify the panel plot
+  resP@gsnMaximize     = True
+  resP@gsnPanelLabelBar= True                    ; add common colorbar
+ ;resP@lbOrientation   = "Vertical"
+  resP@gsnPanelMainString = ymdh(nt)+": "+lev+"hPa"  
+
+  symMinMaxPlt (stretch_cfd,20,False,res)        ; symmetric labels  
+  res@cnLevelSpacingF  = 0.5*res@cnLevelSpacingF ; alter for finer spacing
+
+  res@gsnCenterString = stretch_sph@NCL_tag
+  plot(0) = gsn_csm_contour_map(wks,stretch_sph(nt,{lev},:,:), res)
+  res@gsnCenterString = stretch_cfd@NCL_tag
+  plot(1) = gsn_csm_contour_map(wks,stretch_cfd(nt,{lev},:,:), res)
+  gsn_panel(wks,plot(0:1),(/2,1/),resP)               ; now draw as one plot
+
+  res@gsnCenterString = shear_sph@NCL_tag
+  plot(0) = gsn_csm_contour_map(wks,shear_sph(nt,{lev},:,:), res)
+  res@gsnCenterString = shear_cfd@NCL_tag
+  plot(1) = gsn_csm_contour_map(wks,shear_cfd(nt,{lev},:,:), res)
+  gsn_panel(wks,plot(0:1),(/2,1/),resP)               ; now draw as one plot
+
+  res@gsnCenterString = deform_sph@NCL_tag
+  plot(0) = gsn_csm_contour_map(wks,deform_sph(nt,{lev},:,:), res)
+  res@gsnCenterString = deform_cfd@NCL_tag
+  plot(1) = gsn_csm_contour_map(wks,deform_cfd(nt,{lev},:,:), res)
+  gsn_panel(wks,plot(0:1),(/2,1/),resP)               ; now draw as one plot
+
+;--- Specify a region to be plotted
+
+  res@mpMinLatF    = latS
+  res@mpMaxLatF    = latN
+  res@mpMinLonF    = lonL
+  res@mpMaxLonF    = lonR
+  res@mpCenterLonF = (lonL+lonR)*0.5   ; avoid 'nuisance' warning message
+  res@gsnAddCyclic = False             ; regional grid
+
+  res@gsnCenterString = stretch_sph@NCL_tag
+  plot(0) = gsn_csm_contour_map(wks,stretch_sph(nt,{lev},{latS:latN},{lonL:lonR}), res)
+  res@gsnCenterString = stretch_cfd@NCL_tag
+  plot(1) = gsn_csm_contour_map(wks,stretch_cfd(nt,{lev},{latS:latN},{lonL:lonR}), res)
+  res@gsnCenterString = stretch_region@NCL_tag
+  plot(2) = gsn_csm_contour_map(wks,stretch_region(nt,{lev},:,:), res)
+  gsn_panel(wks,plot(0:2),(/3,1/),resP)               ; now draw as one plot
+
+  res@gsnCenterString = shear_sph@NCL_tag
+  plot(0) = gsn_csm_contour_map(wks,shear_sph(nt,{lev},{latS:latN},{lonL:lonR}), res)
+  res@gsnCenterString = shear_cfd@NCL_tag
+  plot(1) = gsn_csm_contour_map(wks,shear_cfd(nt,{lev},{latS:latN},{lonL:lonR}), res)
+  res@gsnCenterString = shear_region@NCL_tag
+  plot(2) = gsn_csm_contour_map(wks,shear_region(nt,{lev},:,:), res)
+  gsn_panel(wks,plot(0:2),(/3,1/),resP)               ; now draw as one plot
+
+  res@gsnCenterString = deform_sph@NCL_tag
+  plot(0) = gsn_csm_contour_map(wks,deform_sph(nt,{lev},{latS:latN},{lonL:lonR}), res)
+  res@gsnCenterString = deform_cfd@NCL_tag
+  plot(1) = gsn_csm_contour_map(wks,deform_cfd(nt,{lev},{latS:latN},{lonL:lonR}), res)
+  res@gsnCenterString = deform_region@NCL_tag
+  plot(2) = gsn_csm_contour_map(wks,deform_region(nt,{lev},:,:), res)
+  gsn_panel(wks,plot(0:2),(/3,1/),resP)               ; now draw as one plot

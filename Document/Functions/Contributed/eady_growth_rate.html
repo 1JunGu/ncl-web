@@ -1,0 +1,576 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/eady_growth_rate.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:25 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (meteorology)">
+<meta name="keywords" content="eady_growth_rate">
+<title>eady_growth_rate</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../meteo.html">Meteorology</a>
+<br>
+<h1>eady_growth_rate</h1>
+
+<p>
+Compute the maximum Eady growth rate.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.4.0">version 6.4.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function eady_growth_rate (
+		th      : numeric,  ; float, double, integer only
+		u       : numeric,  
+		z       : numeric,  
+		lat     : numeric,  
+		opt [1] : integer,  
+		dim [1] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(<em>z</em>)] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>th</em>
+<p class=indent>Potential temperature (K).
+</p>
+<em>u</em>
+<p class=indent>Zonal wind (m/s). Same dimensionality as <em>th</em>.
+</p>
+<em>z</em>
+<p class=indent>Geometric height (m). Same dimensionality as <em>th</em> or one-dimensional: say <em>z</em>(lev). See the description 
+of <em>dim</em>.
+</p>
+<em>lat</em>
+<p class=indent>Latitudes (degrees). Same dimensionality as <em>th</em>.
+<b>NOTE:</b> This may require the user to use <a href="../Built-in/_b_conform_/b_.html"><strong><b>conform</b></strong></a> or <a href="../Built-in/_b_conform_dims_/b_.html"><strong><b>conform_dims</b></strong></a> prior to using the function.
+</p>
+<em>opt</em>
+<p class=indent><ul>
+    <li>  opt=0, Return the Eady growth rate
+    <li>  opt=1, Return the Eady growth rate and the vertical gradient of the zonal wind (du/dz)
+    <li>  opt=2, Return the Eady growth rate and the vertical gradient of the zonal wind (du/dz) and the Brunt-Vaisala frequency
+</ul>
+</p>
+<em>dim</em>
+<p class=indent>If the dimensionality of variable <em>z</em> conforms to the dimensionality of <em>th</em>, this argument is ignored. 
+However, if <em>z</em> is one-dimensional: <em>z</em>(<b>lev</b>), this is the dimension number of <em>th</em> to 
+which <em>z</em> matches.
+<pre>
+
+       th(<b>lev</b>)        ..... <em>dim</em>=0
+       th(<b>lev</b>,:)      ..... <em>dim</em>=0
+       th(<b>lev</b>,:,:)    ..... <em>dim</em>=0
+       th(:,<b>lev</b>,:,:)  ..... <em>dim</em>=1
+</pre>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A multi-dimensional array of the same size and shape as <em>th</em>. 
+The output will be double if <em>th</em> is of type double.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The maximum Eady growth rate (EGR) is a measure of baroclinic instability.
+<pre>
+  eady_growth_rate = 0.3098*g*<a href="../Built-in/abs.html"><strong>abs</strong></a>(f)*<a href="../Built-in/abs.html"><strong>abs</strong></a>(du/dz)/<a href="brunt_vaisala_atm.html"><strong>brunt_vaisala_atm</strong></a>   
+</pre>
+where <em>f</em> is the Coriolis parameter (1/s) and <em>g</em> is gravity (m/s).
+<p>
+The <a href="https://en.wikipedia.org/wiki/Eady_Model"><b>Eady Model</b></a>  is based on many assumptions. 
+The scale analysis that allowed the simplification of the equations was based on a mid-latitude assumption. 
+Hence, calculated values "near" the equator may/may-not be useful. 
+As they say: Beauty, is in the eyes of the beholder. [See the discussion below.] 
+<p>
+Typically, this function is applied to (say) 00Z, 03Z, ... or daily mean variables. 
+<b>EGR is a non-linear quantity</b>. 
+Hence, eady_growth_rate should not be directly applied to (say) monthly means variables. 
+ If a monthly climatology of EGR is desired, the EGR values at the high frequency temporal time steps should be calculated; 
+then, use <a href="_b_calculate_monthly_values_/b_.html"><strong><b>calculate_monthly_values</b></strong></a>. 
+Other, time averages could also be calculated: eg: daily means or (say) pentad averages could be calculated via:  
+<a href="_b_calculate_daily_values_/b_.html"><strong><b>calculate_daily_values</b></strong></a> or 
+<a href="_b_calculate_segment_values_/b_.html"><strong><b>calculate_segment_values</b></strong></a>.
+<pre>
+<b>References:</b> 
+   E. Eady (1949):
+   Long waves and cyclone waves
+   Tellus, 1, 33-52
+     <a href="http://dx.doi.org/10.1111/j.2153-3490.1949.tb01265.x"><b>http://dx.doi.org/10.1111/j.2153-3490.1949.tb01265.x</b></a>
+
+   R. S. Lindzen and Brian Farrell, 1980: 
+   A Simple Approximate Result for the Maximum Growth Rate of Baroclinic Instabilities. 
+   J. Atmos. Sci., 37, 1648-1654. 
+    <a href="http://dx.doi.org/10.1175/1520-0469(1980)037<1648:ASARFT>2.0.CO;2"><b>http://dx.doi.org/10.1175/1520-0469(1980)037<1648:ASARFT>2.0.CO;2</b></a>
+
+   Simmonds, I., and E.-P. Lim (2009): 
+   Biases in the calculation of Southern Hemisphere mean baroclinic eady growth rate 
+   Geophys. Res. Lett., 36, L01707 
+     <a href="http://dx.doi.org/10.1029/2008GL036320"><b>http://dx.doi.org/10.1029/2008GL036320</b></a>
+
+<b>An application to the ocean:</b>
+
+   Sloyan, B. M., and T. J. O'Kane, 2015
+   Drivers of decadal variability in the Tasman Sea 
+   J. Geophys. Res. Oceans, 120, 3193-3210 
+     <a href="http://dx.doi.org/10.1002/2014JC010550"><b>http://dx.doi.org/10.1002/2014JC010550</b></a>
+
+</pre>
+<b>---------------------------------------------------------------------</b>
+<p>
+Several posts to ncl-talk@ucar.edu (Feb 2018) were made about the subject of Eady growth rate. The following posts have been slightly edited: 
+<p>
+<ol>
+<li> Initial post (University student): I want to compare the baroclinity of two tropical cyclone environments. What is the best way to do this using NCL?
+<p>
+<li> Second  post (NOAA person): Okay this is tangential to the topic but VERY INTERESTING in its own right. 
+<b>(a)</b> How well do the observed growth rates or (presumably large scale because small length scale damps) compare with the theoretical Eady growth rates and (something I should know but don't) <b>(b)</b> do Eady growth rates incorporate the effect of moisture on stratification?
+</ol>
+<p>
+A response:
+<p>
+[1] I don't think the Eady model is intended to tell you something about tropical cyclone environments.  It's really intended to describe the growth of mid-latitude eddies.  Since it's formulated on an f-plane, I don't think it's really appropriate for use in tropical environments.  That being said, the eady growth rate really is just a measure of baroclinicity so it might be fine to determine what the baroclinicity is in their tropical cyclone environments. 
+<p>
+For [2b] "No"  I think you'd have to include a diabatic heating term in the thermodynamic equation that's being solved to account for the release of heat associated with the convergence of moisture and precipitation that accompanies the growing wave.  With my expert googling skils, I came across this...     
+<pre>
+
+    <b>https://iri.columbia.edu/~tippett/pubs/moist.pdf</b>
+
+</pre>
+For [2a] I don't really know the answer.  But I'm also not sure how you would measure the real world growth rates.  The eady model is intended to describe the growth of the normal modes and I think you could compare the predictions with a normal mode calculation using the real world basic state but I'm not sure how you would actually measure the growth rates of the real world.  I also think it might give you a dimensionless growth rate which tells you what scales dominate by growing fastest, but I'm not sure to what extent it is something that can be compared with the real world.  In short, I don't really know. 
+<p>
+Slightly edited followups by the original posters to the above response:
+<p>
+<ol>
+<li> NOAA person: Where the concept is relevant  (with an enormous number of caveats, yes) is to answer the fundamental question, will TC interaction with baroclinicity, induce transition to a growing or stable baroclinic system (often observed) or will the TC perturbation just damp out (also often observed) with a theoretically expected but hard to actually point out, increase in baroclinic available potential energy for some future perturbation to extract.  I think it is a tractable forecast and theoretical modeling problem, again with the caveats mentioned.
+<p>
+Casually plugging this into a program without understanding the concepts is worrisome, also agreed.  Thanks everyone for the response!
+<p>
+<li> University student: Thank you. As mentioned, casually using the function without completely understanding what it was intended for and whether it is applicable, would mislead interpretations. That is exactly what I wanted to avoid. The above emails have certainly pointed me in a direction where I can learn more about the topic and its applicability to the problem I am trying to address. 
+</ol>
+<p>
+Additional references:
+<pre>
+The very last part of the following discusses the "shortcomings" of simple baroclinic models.
+
+    <b>http://www.atmosp.physics.utoronto.ca/~isla/8_baroclinic.pdf</b>
+    <b>http://kestrel.nmt.edu/~raymond/classes/ph589/notes/baroclinic/baroclinic.pdf</b>
+</pre>
+<p>
+<b>NOTE:</b> About 5 years prior to the release of this function, 
+Carl Schreck [ North Carolina Institute for Climate Studies ] developed an NCL script that calculates the Eady growth rate.
+It is <a href="https://k3.cicsnc.org/carl/carl-ncl-tools/blob/master/ncep/eady.ncl"><b>here</b></a>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="coriolis_param.html"><strong>coriolis_param</strong></a>,
+<a href="brunt_vaisala_atm.html"><strong>brunt_vaisala_atm</strong></a>,
+<a href="pot_temp.html"><strong>pot_temp</strong></a>,
+<a href="rigrad_bruntv_atm.html"><strong>rigrad_bruntv_atm</strong></a>,
+<a href="static_stability.html"><strong>static_stability</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+<B>Example 1</B>: Read data from a WRF file and calculate assorted quantities.
+
+<pre>
+;----------------------------------------------------------
+;                     WRF DATA
+;----------------------------------------------------------
+
+   a  = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>("wrfout_d01_2013-05-17_12","r") ;[Time|1]x[bottom_top|40]x[south_north|324]x[west_east|414]
+                                               ;     0            1              2              3
+
+   th = <a href="../Built-in/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"theta",-1)      ; potential temperature (degK)
+   z  = <a href="../Built-in/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"z",-1)          ; model height
+   ua = <a href="../Built-in/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"ua"   ,-1)      ; u at mass grid points
+
+;--- Read latitudes 
+;    The 'eady_growth_rate' function requires that 'lat' and 'th' agree
+;    Use 'conform' the propogate the lat values
+
+   xlat = a->XLAT                          ; [Time|1]x[south_north|324]x[west_east|414] 
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(xlat)
+
+   XLAT = <a href="../Built-in/conform.html"><strong>conform</strong></a>(th, xlat, (/0,2,3/))     ; (1,40,324,414)
+
+   egr = <strong>eady_growth_rate</strong>(th, ua, z, XLAT, 0,  1)
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(egr)
+   <a href="../Built-in/printMinMax.html"><strong>printMinMax</strong></a>(egr, 0)
+
+; print all vertical values at an arbitrarily chosen grid point
+
+   nt =  0        ; print 1st time step
+   ix = 20        ; arbitrary
+   jy = 21
+
+   pr = <a href="../Built-in/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"pressure"   ,-1)      ; for printing 
+
+   <a href="../Built-in/print.html"><strong>print</strong></a>( <a href="../Built-in/sprint.html"><strong>sprint</strong></a>("%7.1f" ,   pr(nt,:,jy,ix)) \
+        + sprintf("%7.1f" ,    z(nt,:,jy,ix)) \
+        + sprintf("%15.5e",  egr(nt,:,jy,ix)) \
+        + sprintf("%7.2f",  egr(nt,:,jy,ix)*86400) )
+
+</pre>
+The (edited) output is:
+<pre>
+
+   Variable: egr
+   Type: float
+   Total Size: 20925216 bytes
+               5231304 values
+   Number of Dimensions: 4
+   Dimensions and sizes:   [Time | 1] x [bottom_top | 39] x [south_north | 324] x [west_east | 414]
+   Coordinates: 
+   Number Of Attributes: 3
+     _FillValue :  1e+20
+     long_name :   maximum eady growth rate
+     units :       
+   (0)     maximum eady growth rate: min=6.5775e-13   max=0.00406928
+
+ 
+            P       Z       EGR (1/s)    EGR (1/day)
+    (0)	 1009.1    29.2   -6.51605e-06  -0.56
+    (1)	 1001.0    99.1   -4.83609e-06  -0.42
+    (2)	  990.3   192.9   -2.27035e-06  -0.20
+    (3)	  976.8   313.0   -9.32204e-07  -0.08
+    (4)	  960.0   463.0    3.49967e-06   0.30
+    (5)	  939.6   647.4    1.24992e-05   1.08
+    (6)	  915.3   872.0    1.05712e-05   0.91
+    (7)	  886.7  1142.9    2.63051e-06   0.23
+    (8)	  853.8  1463.4    3.39886e-06   0.29
+    (9)	  817.2  1835.1    4.34887e-06   0.38
+    (10)  777.3  2258.8    2.34866e-06   0.20
+    (11)  734.6  2733.7    5.76828e-07   0.05
+    (12)  689.6  3259.3    3.18521e-06   0.28
+    (13)  642.9  3835.0    4.51157e-06   0.39
+    (14)  596.3  4442.5    2.02051e-06   0.17
+    (15)  552.0  5057.9    9.44995e-07   0.08
+    (16)  510.4  5674.7    1.08149e-06   0.09
+    (17)  471.4  6292.0    5.79138e-06   0.50
+    (18)  434.8  6907.9    1.05950e-05   0.92
+    (19)  400.5  7523.3    5.64395e-06   0.49
+    (20)  368.4  8139.1    3.27011e-07   0.03
+    (21)  338.4  8755.4    8.26907e-07   0.07
+    (22)  310.3  9372.1    3.56708e-06   0.31
+    (23)  284.1  9988.7    7.66039e-06   0.66
+    (24)  259.7 10606.4    1.39343e-05   1.20
+    (25)  236.9 11225.7    1.61388e-05   1.39
+    (26)  215.7 11845.9    1.17152e-05   1.01
+    (27)  195.9 12465.8    4.51332e-06   0.39
+    (28)  177.6 13085.9    5.23316e-06   0.45
+    (29)  160.6 13707.9    1.15163e-05   1.00
+    (30)  144.8 14335.0    7.09510e-06   0.61
+    (31)  130.2 14971.9    5.89672e-06   0.51
+    (32)  116.7 15621.2    6.78411e-06   0.59
+    (33)  104.3 16288.0    4.65560e-06   0.40
+    (34)   92.8 16976.2    4.16494e-06   0.36
+    (35)   82.2 17686.4    4.20652e-06   0.36
+    (36)   72.6 18420.1    2.95023e-06   0.25
+    (37)   63.7 19185.4    2.68033e-06   0.23
+    (38)   54.7 20094.5    3.04996e-06   0.26
+
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/eady_growth_rate.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:27 GMT -->
+</html>

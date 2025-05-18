@@ -1,0 +1,462 @@
+<html>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Bootstrap/bootstrap_correl.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:12 GMT -->
+<head>
+<meta name="description" content="Bootstrap functions (bootstrap)">
+<meta name="keywords" content="bootstrap_correl">
+<title>bootstrap_correl</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../statistics.html">Statistics</a>,
+<a class=crumb href="../bootstrap.html">Bootstrap</a>
+<br>
+<h1>bootstrap_correl</h1>
+
+<p>
+Bootstrap estimates of sample cross correlations (<i>ie</i>, Pearson's correlation coefficient) 
+between two variables.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.4.0">version 6.4.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function bootstrap_correl (
+		x         : numeric,  
+		y         : numeric,  
+		nBoot [1] : integer,  
+		nDim  [*] : integer,  
+		opt   [1] : logical   
+	)
+
+	return_val [ variable of type 'list' containing multiple estimates] 
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>A numeric array of up to four dimensions: x(N), x(N,:), x(N,:,:), x(N,:,:,:)
+where 'N' represents the original sample size.
+</p>
+<em>y</em>
+<p class=indent>A numeric array of up to four dimensions: y(N), y(N,:), y(N,:,:), y(N,:,:,:)
+where 'N' represents the original sample size.
+</p>
+<em>nBoot</em>
+<p class=indent>An integer specifying the number of bootstrap data samples to be generated.
+</p>
+<em>nDim</em>
+<p class=indent>The dimension(s) of <em>x</em> and  <em>y</em> on which to calculate the statistic. 
+Most commonly, this is set to <b>(/0,0/)</b> or, if they are both the same, simply, <b>0</b>.
+</p>
+<em>opt</em>
+<p class=indent>A logical scalar to which optional attributes may be attached. If <em>opt</em>=False, 
+default values are used. If <em>opt</em>=True and no optional attributes are present, 
+default values will be used. If <em>opt</em>=True then:
+</p>
+<p class=indent>
+<ul>
+<li> <em>opt</em>@sample_size: specifies the size of the resampled array to be used for the bootstrapped statistics.  
+<li> <em>opt</em>@sample_size=N is the default. 
+<li> <em>opt</em>@sample_size=n where (n.le.N). When this option is used, 
+n=<a href="../Built-in/toint.html"><strong>toint</strong></a>(f*N) where 'f' represents (say) 0.10 to 0.20.
+</ul>
+</p>
+<p class=indent>
+<ul>
+<li> <em>opt</em>@rseed1=rseed1: allows user to set the first random seed integer value. 
+Default is to use the system initial random seed. (See: <a href="../Built-in/_b_random_setallseed_/b_.html"><strong><b>random_setallseed</b></strong></a>)
+<li> <em>opt</em>@rseed2=rseed2: allows user to set the second random seed integer value. 
+Default is to use the system initial random seed. (See: <a href="../Built-in/_b_random_setallseed_/b_.html"><strong><b>random_setallseed</b></strong></a>)
+<li> <em>opt</em>rseed3="clock": tells NCL to use the 'date' clock to set the two random seeds. 
+(See: <a href="../Built-in/_b_random_setallseed_/b_.html"><strong><b>random_setallseed</b></strong></a>)
+</ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A variable of type 'list'. Members of a list can be accessed directly. However, it is clearer if
+the members are explicity extracted and given meaningful names.
+<pre>
+                                    ; <a href="../Built-in/_b_typeof_/b_.html"><strong><b>typeof</b></strong></a>(Bootstrap) is 'list'
+   BootStrap  = <strong>bootstrap_correl</strong>(x, stat, nBoot, 0, opt)
+   rBoot      = BootStrap[0]        ; All the bootstrapped values
+   rBootAvg   = BootStrap[1]        ; Average cross correlation of the bootstrapped samples
+   rBootStd   = BootStrap[2]        ; Average cross correlation of the bootstrapped samples
+   <a href="../Built-in/delete.html"><strong>delete</strong></a>(BootStrap)                ; no longer needed
+
+</pre> 
+<b>All appropriate meta data are returned.</b> Please use <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(...) 
+to examine the returned variable.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)"><b>Bootstrapping</b></a> 
+is a statistical method that uses data resampling with replacement 
+(see: <a href="../Contributed/_b_generate_sample_indices_/b_.html"><strong><b>generate_sample_indices</b></strong></a>) 
+to estimate the properties of nearly any statistic.  It is particularly useful 
+when dealing with small sample sizes.  A key feature is that bootstrapping makes 
+no apriori assumption about the distribution of the sample data.
+<p>
+The default version resamples using <em>x</em> and <em>y</em> pairs.
+<p>
+Some side points to remember about cross correlations (<a href="https://en.wikipedia.org/wiki/Correlation_and_dependence"><b>Wikipedia</b></a>):
+<ul>
+<li> The cross correlation coefficient detects only linear dependencies between two variables.
+<li> For the case of a linear model with a single independent variable (<em>x</em>), the 
+<a href="https://en.wikipedia.org/wiki/Coefficient_of_determination"><b>coefficient of determination</b></a> 
+is the square of r (r^2), Pearson's product-moment coefficient.
+</ul>
+The returned 'rBootAvg' and 'rBootStd' (see Example 1) are derived via: (i) using the 
+Fischer z-transform on each bootstrapped cross correlation; (ii) computing the means and 
+standard deviations in 'z-spece'; (iii) then performing the inverse z-transform.
+<p>
+<b>References:</b>
+<pre>
+Computer Intensive Methods in Statistics 
+   P. Diaconis and B. Efron 
+   Scientific American (1983), 248:116-130  
+   doi:10.1038/scientificamerican0583-116
+   <a href="http://www.nature.com/scientificamerican/journal/v248/n5/pdf/scientificamerican0583-116.pdf"><b>http://www.nature.com/scientificamerican/journal/v248/n5/pdf/scientificamerican0583-116.pdf</b></a>
+   
+An Introduction to the Bootstrap 
+   B. Efron and R.J. Tibshirani, Chapman and Hall (1993) 
+   
+Bootstrap Methods and Permutation Tests: Companion Chapter 18 to the Practice of Business Statistics
+   Hesterberg, T. et al (2003)
+   <a href="http://statweb.stanford.edu/~tibs/stat315a/Supplements/bootstrap.pdf"><b>http://statweb.stanford.edu/~tibs/stat315a/Supplements/bootstrap.pdf</b></a>
+
+Climate Time Series Analysis: Classical Statistical and Bootstrap Methods
+   M. Mudelsee (2014) Second edition. Springer, Cham Heidelberg New York Dordrecht London
+   ISBN: 978-3-319-04449-1, e-ISBN: 978-3-319-04450-7
+   doi: 10.1007/978-3-319-04450-7
+   xxxii + 454 pp; Atmospheric and Oceanographic Sciences Library, Vol. 51
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="bootstrap_stat.html"><strong>bootstrap_stat</strong></a>,
+<a href="bootstrap_diff.html"><strong>bootstrap_diff</strong></a>,
+<a href="bootstrap_estimate.html"><strong>bootstrap_estimate</strong></a>,
+<a href="bootstrap_regcoef.html"><strong>bootstrap_regcoef</strong></a>,
+<a href="../Contributed/generate_sample_indices.html"><strong>generate_sample_indices</strong></a>,
+<a href="../Built-in/ListIndexFromName.html"><strong>ListIndexFromName</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<P>
+Please see the <a href="http://test.www.ncl.ucar.edu/Applications/bootstrap.shtml"><b>
+Bootstrap and Resampling</b></a> application page.
+<p>
+<b>Example 1:</b> Let x(N); y(N),  N=100: 
+<PRE>
+   nBoot       = 1000         ; user set
+   nDim        = 0            ; or (/0,0/); dimension numbers corresponding to 'N'
+   opt         = False        ; use all default options
+
+   BootStrap   = <strong>bootstrap_correl</strong>(x, y, nBoot, nDim, opt)
+   rBoot       = BootStrap<b>[</b>0<b>]</b> ; bootstrapped cross-correlations in <b>ascending</b> order
+   rBootAvg    = BootStrap<b>[</b>1<b>]</b> ; Average of the z-transformed bootstrapped cross correlations
+   rBootStd    = BootStrap<b>[</b>2<b>]</b> ; Std. deviation(s) of the z-transformed bootstrapped cross correlations
+   <a href="../Built-in/delete.html"><strong>delete</strong></a>(BootStrap)          ; no longer needed
+
+   rBootLow    = <a href="bootstrap_estimate.html"><strong>bootstrap_estimate</strong></a>(rBoot, 0.025, False)   ;  2.5% lower confidence bound 
+   rBootMed    = <a href="bootstrap_estimate.html"><strong>bootstrap_estimate</strong></a>(rBoot, 0.500, False)   ; 50.0% median of bootstrapped estimates
+
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(rBoot)   ; information only
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(rBootMed)  
+
+</PRE>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Bootstrap/bootstrap_correl.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:13 GMT -->
+</html>

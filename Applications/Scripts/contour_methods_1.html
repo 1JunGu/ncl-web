@@ -1,0 +1,93 @@
+; These files are loaded by default in NCL V6.2.0 and newer
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"   
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"   
+
+begin
+;---Create some dummy data.
+  nx   = 8
+  ny   = 10
+  xmin = -60
+  xmax =  60
+  ymin = -2.25
+  ymax =  2.25
+
+  data = generate_2d_array(10, 10, -8, 8, 0, (/ny,nx/))
+  x    = fspan(xmin,xmax,nx)
+  y    = fspan(ymin,ymax,ny)
+  dx   = (x(1)-x(0))/2.
+  dy   = (y(1)-y(0))/2.
+  xc   = fspan(xmin-dx,xmax+dx,nx+1)
+  yc   = fspan(ymin-dy,ymax+dy,ny+1)
+
+  data!0 = "y"
+  data!1 = "x"
+  data&y = y
+  data&x = x
+
+;---Open png for graphics.
+  wks  = gsn_open_wks("png","contour_methods")
+
+  res                      = True
+  res@gsnMaximize          = True          ; Maximize plot in frame.
+  res@gsnDraw              = False         ; Turn off so we can add markers and text
+  res@gsnFrame             = False         ; Ditto
+
+  res@cnFillOn             = True          ; Turn on contour fill
+  res@cnLinesOn            = False         ; Turn off contour lines
+  res@cnFillPalette        = "NCV_bright"
+
+  res@cnLevelSelectionMode = "ManualLevels"
+  res@cnMinLevelValF       = -7
+  res@cnMaxLevelValF       =  7
+  res@cnLevelSpacingF      =  1
+  res@lbOrientation        = "vertical"
+
+
+  res@tmXBMajorLengthF     = 0.0
+  res@tmYLMajorLengthF     = 0.0
+  res@tmXBMinorOn          = False
+  res@tmYLMinorOn          = False
+
+  nplots = 4
+  plots = new(nplots,graphic)
+
+  res@tiMainString         = "AreaFill"
+  plots(0) = gsn_csm_contour(wks,data,res)
+
+  res@cnFillMode           = "CellFill"
+  res@tiMainString         = "CellFill"
+  plots(1) = gsn_csm_contour(wks,data,res)
+
+  res@cnFillMode           = "RasterFill"
+  res@tiMainString         = "RasterFill"
+  plots(2) = gsn_csm_contour(wks,data,res)
+
+  delete(data&x)
+  delete(data&y)
+  res@cnFillMode           = "RasterFill"
+  res@tiMainString         = "RasterFill with corners"
+  res@sfXArray             = xc
+  res@sfYArray             = yc
+  plots(3) = gsn_csm_contour(wks,data,res)
+
+;---Draw text and markers at data locations
+  txres               = True
+  mkres               = True
+  txres@txFontHeightF = 0.01
+  txres@txJust        = "TopCenter"  ; text will be drawn under the marker
+  mkres@gsMarkerIndex = 16 ; filled circle
+
+  x1d = ndtooned(conform_dims((/ny,nx/),x,1))
+  y1d = ndtooned(conform_dims((/ny,nx/),y,0))
+  do n=0,nplots-1
+    plots@$unique_string("marker")$ = gsn_add_polymarker(wks,plots(n),x1d,y1d,mkres)
+    plots@$unique_string("text")$ = gsn_add_text(wks,plots(n),"  ~C~"+ndtooned(data),x1d,y1d,txres)
+;    draw(plots(n))
+;    frame(wks)
+  end do
+ 
+  pres = True
+  pres@gsnPanelMainString = "Comparison of contouring methods"
+  pres@gsnMaximize = True
+  gsn_panel(wks,plots,(/2,2/),pres)
+end

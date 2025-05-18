@@ -1,0 +1,128 @@
+;----------------------------------------------------------------------
+; native_6.ncl
+;
+; Concepts illustrated:
+;   - Drawing filled contours over a stereographic map
+;   - Setting the map parameters needed for a native projection
+;   - Comparing data plotted natively to data plotted non-natively
+;   - Using opacity to emphasize or subdue overlain features
+;   - Drawing a lat/lon grid using gsn_coordinates
+;----------------------------------------------------------------------
+; This script is similar to native_1.ncl, except it compares plotting
+; the data using both native and non-native settings. 
+;
+; Plotting data in its native projection means that you MUST set the
+; exact parameters of the native map projection, or the plot will not be
+; correct. This is where you set res@tfDoNDOverlay to True
+; ("NDCViewport") and then all the necessary map parameters.
+;
+; We didn't know what the correct relative center longitude value was
+; for the native projection, but we had a rough idea. So, we created a
+; do loop to try different guesses, and drew every other grid line of 
+; the data each time to see if the lines were straight. If they were,
+; hen this is usually a good sign that you have the correct native 
+; settings. 
+;
+; We then compared this plot with a plot where the lat/lon arrays were 
+; provided. This gives you another way to check that the native plot 
+; you have is correct. This is where you set res@tfDoNDOverlay to 
+; False ("DataTransform") (the default). It doesn't matter which map
+; projection you use in this case, but we used the same map as the
+; native plot so we could directly compare them.
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;----------------------------------------------------------------------
+begin
+;----------------------------------------------------------------------
+;    Input topo data from MC2 model
+;----------------------------------------------------------------------
+setfileoption("bin","ReadByteOrder","BigEndian")
+f1   = "topo.bin"
+nlat = 293
+nlon = 343
+topo = fbindirread(f1,0,(/nlat,nlon/),"float")
+
+topo@units     = "m"
+topo@long_name = "topography"
+;----------------------------------------------------------------------
+;    Input lat lon data. Not used in
+;    this example, but see end of script.
+;----------------------------------------------------------------------
+f2  = "latlon.bin"
+lat = fbindirread(f2,0,(/nlat,nlon/),"float")
+lon = fbindirread(f2,1,(/nlat,nlon/),"float")
+
+ wks  = gsn_open_wks ("png", "native")                  ; send graphics to PNG file
+
+ res                             = True                 ; plot mods desired
+ res@gsnMaximize                 = True                 ; maximize size of plot
+ res@gsnDraw                     = False                ; will add data lat/lon lines later
+ res@gsnFrame                    = False                ; will advance frame later
+
+ res@cnFillOn                    = True                 ; turn on color
+ res@cnLinesOn                   = False                ; no contour lines
+ res@cnFillPalette               = "WhViBlGrYeOrReWh"   ; set color map
+ res@cnFillOpacityF              = 0.3                  ; Make filled contours more transparent so we can
+                                                        ; see lat/lon grid lines that we'll add later.
+ res@cnLevelSelectionMode        = "ManualLevels"       ; manual levels
+ res@cnMinLevelValF              = 0.
+ res@cnMaxLevelValF              = 3000.
+ res@cnLevelSpacingF             = 300.
+
+ res@pmTickMarkDisplayMode       = "Always"             ; turn on tick marks
+
+ res@gsnAddCyclic                = False                ; regional data
+
+ res@mpDataBaseVersion           = "MediumRes"          ; better map outlines
+
+; The following resources are Required to plot this projection correctly
+
+ res@mpProjection                = "Stereographic"     ; projection
+ res@mpLimitMode                 = "Corners"           ; method to zoom
+ res@mpLeftCornerLatF            = lat(0,0)
+ res@mpLeftCornerLonF            = lon(0,0)
+ res@mpRightCornerLatF           = lat(nlat-1,nlon-1)
+ res@mpRightCornerLonF           = lon(nlat-1,nlon-1)
+
+ res@mpRelativeCenterLon         = True                 ; will set a center lon
+ res@mpRelativeCenterLat         = True		        ; will set a center lat
+ res@mpCenterLatF                = 90.                  ; center lat (center lon will be set later)
+ res@tfDoNDCOverlay              = True                 ; do not transform data
+
+;---Set some resources for drawing the lat/lon grid lines of the data
+ lnres                  = True
+ lnres@gsnCoordsAsLines = True
+ lnres@gsnCoordsLat     = lat(::2,::2)     ; only plot every other grid line
+ lnres@gsnCoordsLon     = lon(::2,::2)     ; for less dense plot.
+
+;
+; This is the loop where we tried different values for the center longitude.
+; lon=10 seemed to produce the plot with the straightest lat/lon lines.
+;
+; lon_try = (/9.94,9.96,9.98,10,10.02/)
+; do n=0,dimsizes(lon_try)-1
+;   res@mpCenterLonF = lon_try(n)
+;   res@tiMainString = "Data plotted natively: lon = " + lon_try(n)
+;   plot_try = gsn_csm_contour_map (wks,topo,res)
+;   gsn_coordinates (wks,plot_try,topo,lnres)
+; end do
+
+;---Plot the data natively, using the center lon that we determined was the best fit
+ res@mpCenterLonF = 10.     ; This was the winner!
+ res@tiMainString = "Data plotted natively: lon = " + res@mpCenterLonF
+ plot_native = gsn_csm_contour_map (wks,topo,res)
+
+;---Plot the data using lat/lon arrays. Use this plot to compare against the previous plot.
+ topo@lat2d = lat
+ topo@lon2d = lon
+ res@tfDoNDCOverlay = False        ; tells NCL to transform data
+ res@tiMainString   = "Data plotted with lat2d/lon2d attached"
+ plot_nonnative = gsn_csm_contour_map (wks,topo,res)
+
+;---Add the data's lat/lon grid to both plots
+ gsn_coordinates (wks,plot_native,topo,lnres)
+ gsn_coordinates (wks,plot_nonnative,topo,lnres)
+
+end 

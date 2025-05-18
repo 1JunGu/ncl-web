@@ -1,0 +1,558 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/bw_bandpass_filter.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:13 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (general applied math)">
+<meta name="keywords" content="bw_bandpass_filter">
+<title>bw_bandpass_filter</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>bw_bandpass_filter</h1>
+
+<p>
+Applies a Butterworth bandpass filter optimized for narrow bandwidths to time series.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.3.0">version 6.3.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function bw_bandpass_filter (
+		x        : numeric,  
+		fca  [1] : numeric,  
+		fcb  [1] : numeric,  
+		opt  [1] : logical,  
+		dims [*] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double, see return value description below
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>An array of time series to be filtered. Missing values are not allowed.
+</p>
+<em>fca</em>
+<p class=indent>A scalar indicating the cut-off frequency of the ideal band pass filter: (0.0 < fca < 0.5).
+</p>
+<em>fcb</em>
+<p class=indent>A scalar indicating the cut-off frequency of the ideal band pass filter: (0.0 < fcb < 0.5) and (fcb > fca).
+</p>
+<em>opt</em>
+<p class=indent>If <em>opt</em> = True, five attributes are available:
+
+<ul>
+<li><em>opt@m</em> - order of filter; 
+4 <= m <= 6 should be adequate for most applications. Currently, the maximum value allowed is 10. 
+Default is 6.</p>
+<p class=indent>
+
+<li><em>opt@dt</em> - a scalar specifying the sampling interval.
+Default is 1.0.</p>
+<p class=indent>
+
+<li><em>opt@remove_mean</em> - a logical scalar whether to remove the
+mean.  Default is True.</p>
+<p class=indent>
+
+<li><em>opt@return_filtered</em> - a logical scalar whether to return
+the filtered time series values. Default is True.</p>
+<p class=indent>
+
+<li><em>opt@return_envelope</em> - a logical scalar whether to return
+the envelope time series values. Default is False.</p>
+<p class=indent>
+
+</ul>
+</p>
+<em>dims</em>
+<p class=indent>The dimension(s) of <em>x</em> on which to apply the filter.
+Must be consecutive and monotonically increasing.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+If both <em>opt@return_filtered</em> and
+<em>opt@return_envelope</em> are True, the returned array will be of
+size (2,<a href="dimsizes.html"><strong>dimsizes</strong></a>(x)).
+<p>
+
+Otherwise, if only one of <em>opt@return_filtered</em> or
+<em>opt@return_envelope</em> are True, the returned array will be of the
+same size and shape as <em>x</em>.
+<p>
+
+The return type will be double if <em>x</em> is double, and float
+otherwise.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The following is an edited description extracted from the underlying code.
+<p>
+The <strong>bw_bandpass_filter</strong> executes a fast, stable zero phase Butterworth
+bandpass filter of order (m), which is optimized for narrow band.
+Stability of the method is achieved by reducing the bandpass 
+filter calculations to simple cascaded first order filters,
+which are forward and reverse filtered for zero phase.  The method
+also does a linear shift of a Butterworth lowpass filter 
+to an equivalent bandpass, without going through a standard
+non-linear translation to bandpass. An option is included to remove the 
+signal mean initially to compensate for large DC offsets.
+<p>
+
+An advantage of the Butterworth bandpass filter is that there is no
+loss of data at the beginning and end.
+<p>
+
+<pre>
+Reference:
+
+    Electronic Supplement to Development of a Time-Domain, Variable-Period 
+    Surface Wave Magnitude Procedure for Application at Regional and 
+    Teleseismic Distances, Part I: Theory; David R. Russell
+    Bulletin of the Seismological Society of America
+
+    <a href="http://www.seismosoc.org/publications/BSSA_html/bssa_96-2/05055-esupp/">http://www.seismosoc.org/publications/BSSA_html/bssa_96-2/05055-esupp/</a>
+
+</pre>
+
+<PRE>
+                  i              band pass
+             1.0  i           |------------|      
+                  i           |            | 
+                  i           |            |   
+                  i           |            |     
+                  i           |            |           
+             0.0  i___________|____________|_______________
+                 0.0          |            |           0.5
+                             fca          fcb                       
+</PRE>      
+<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="filwgts_lanczos.html"><strong>filwgts_lanczos</strong></a>,
+<a href="filwgts_normal.html"><strong>filwgts_normal</strong></a>,
+<a href="wgt_runave_n.html"><strong>wgt_runave_n</strong></a>,
+<a href="wgt_runave.html"><strong>wgt_runave</strong></a>,
+<a href="../Contributed/wgt_runave_n_Wrap.html"><strong>wgt_runave_n_Wrap</strong></a>,
+<a href="../Contributed/wgt_runave_Wrap.html"><strong>wgt_runave_Wrap</strong></a>,
+<a href="../../../Applications/filter.html"><b>filter applications</b></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+
+See <a
+href="../../../Applications/filter.html"><b>Butterworth
+filter examples</b></a>.
+<p>
+
+<B>Example 1:</B> Perform optimized Butterworth band pass (40-50 day) filter on daily data
+at a specific location.
+
+<PRE>
+
+    LAT    = 0          ; arbitrary
+    LON    = 120
+
+    diri  = "./"
+    fili  = "uwnd.day.850.anomalies.1980-2005.nc"
+    fi    = <a href="addfile.html"><strong>addfile</strong></a>(diri+fili, "r")
+    ua    = f->U_anom(:,{LAT},{LON})            ; <b>ua(time)</b>    ; read from one grid point
+
+    ca    = 50.0        ; band start (longer period)
+    cb    = 40.0        ; band end
+
+    fca   = 1.0/ca      ; 'left'  frequency
+    fcb   = 1.0/cb      ; 'right' frequency
+
+    dims  = 0           ; 'time' dimension  
+
+    opt   = True        ; options to set
+    opt@return_envelope = True ; time series of filtered and envelope values
+
+    ua_bf = <strong>bw_bandpass_filter</strong> (ua,fca,fcb,opt,dims)       ; (ua,fca,fcb,opt,dims)
+    <a href="../Contributed/copy_VarMeta.html"><strong>copy_VarMeta</strong></a>(ua, ua_bf)
+    ua_bf@long_name = "Band Pass: "+cb+"-"+ca+" day"
+
+    <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(ua_bf)
+
+</PRE>
+The (edited) <em>ua_bf</em> output looks like:
+<pre>
+
+Variable: ua_bf 
+Type: float
+Number of Dimensions: 2
+Dimensions and sizes:   <b>[2] x [time | 9497] </b>
+Coordinates: 
+            time: [17347584..17575488]
+Number Of Attributes: 5
+  units :       m/s
+  long_name :   Band Pass: 40-50 day
+  _FillValue_original : 32766
+  lat :  0
+  lon : 120
+
+</pre>
+Time series plots depicting the bandpass and associated envelope series 
+for two different pass bands follow:  
+<b>TOP:</b> the original time series; <b>BOTTOM:</b> the bandpass
+(blue) and the envelope series (red). 
+<p>
+<ul>
+<li> <a href="../Images/dim_bfband_40-50.ex01.png"><b>40-50</b></a> day
+<li> <a href="../Images/dim_bfband_20-100.ex01.png"><b>20-100</b></a> day 
+</ul>
+<p>
+<p>
+<B>Example 2:</B> Perform optimized Butterworth band pass filter to a narrow band
+of daily data at multiple locations (grid points). 
+
+<PRE>
+   latS   = -20.0
+   latN   =  20.0
+
+    diri  = "./"
+    fili  = "uwnd.day.850.anomalies.1980-2005.nc"
+    fi    = <a href="addfile.html"><strong>addfile</strong></a>(diri+fili, "r")
+    ua    = f->U_anom(:,{latS:latN},:)   ; <b>(time,lat,lon)</b> dim number => (0,1,2)
+
+    ca    = 50.0        ; band start (longer period)
+    cb    = 40.0        ; band end
+
+    fca   = 1.0/ca      ; 'left'  frequency
+    fcb   = 1.0/cb      ; 'right' frequency
+
+    opt   = False       ; use default options (time series of filtered
+                        ; values will be returned)
+
+    ua_bf = <strong>bw_bandpass_filter</strong> (ua,fca,fcb,opt,0)   ; (ua,fca,fcb,)
+    <a href="../Contributed/copy_VarMeta.html"><strong>copy_VarMeta</strong></a>(ua, ua_bf)
+    ua_bf@long_name = "BW Bandpass: "+cb+"-"+ca+" day"
+
+    <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(ua_bf)
+    
+</PRE>
+The (edited) <em>ua_bf</em> output looks like:
+<pre>
+
+Variable: ua_bf
+Type: float
+Number of Dimensions: 3
+Dimensions and sizes:	[time | 9497] x [lat | 17] x [lon | 144]
+Coordinates: 
+            time: [17347584..17575488]
+            lat: [20..-20]
+            lon: [ 0..357.5]
+Number Of Attributes: 4
+  long_name :	BW Bandpass: 40-50 day
+  units :	m/s
+  _FillValue_original :	32766
+  _FillValue :	32766
+
+</pre>
+Plots depicting the spatial distribution of 40-50 day bandpass values 
+at 5-day intervals spanning January 15, 1997 to February 19, 1997:
+ <a href="../Images/dim_bfband_40-50.ex02.png">Spatial distribution <b>40-50</b></a> day values.
+The Madden-Julian Oscillation (MJO) is clearly present.
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/bw_bandpass_filter.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:14 GMT -->
+</html>

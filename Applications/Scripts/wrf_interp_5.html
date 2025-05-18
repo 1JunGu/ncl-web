@@ -1,0 +1,128 @@
+;----------------------------------------------------------------------
+; wrf_interp_1.ncl
+;----------------------------------------------------------------------
+; Concepts illustrated:
+;   - Interpolating a 2D WRF-ARW field along a start/end lat/lon line
+;   - Adding map plot as annotation of XY plot
+;   - Drawing a legend inside an XY plot
+;   - Reversing the order of legend items
+;----------------------------------------------------------------------
+; Extract t2 along a horizontal line from 5 WRF output files and plot 
+; against time on an xy-plot. This script uses wrf_user_interp_line to 
+; calculate the cross section.
+; 
+; wrf_user_interp_line replaces the deprecated wrf_user_intrp2d 
+; function. 
+;
+; NCL V6.6.0 or higher is required to run this example.
+;----------------------------------------------------------------------
+
+begin
+  dir      = "wrf_files/"
+  filenames = systemfunc("ls " + dir + "/wrfout_d01_2008-09*")
+
+;---Open first 5 files.
+  a = addfiles(filenames(0:4),"r")
+
+  wks = gsn_open_wks("png","wrf_interp")
+
+;---Get time information and strip out the day and hour
+  times_in_file  = wrf_user_list_times(a)
+  times          = str_get_cols(times_in_file,8,15)
+
+;---Get t2 for all times
+  t2   = wrf_user_getvar(a, "T2",-1)
+  t2   = 1.8*(t2-273.16)+32.
+  t2@description = t2@description + " (degF)"
+
+  xlat = wrf_user_getvar(a, "XLAT",0)
+  xlon = wrf_user_getvar(a, "XLONG",0)
+
+;---Set start/end lat/lon line for interpolation
+  start_lon = 115
+  end_lon   = 130
+  start_lat =  52
+  end_lat   =  42
+
+;---Options for cross section
+  opt             = True
+  opt@latlon      = True
+  opt@file_handle = a[0]
+  opt@linecoords  = True   ; returns lat/lon values on line as attributes of return value
+
+;---Do the interpolation
+  lat_plane = wrf_user_interp_line(xlat,(/start_lon,start_lat,end_lon,end_lat/),opt)
+  lon_plane = wrf_user_interp_line(xlon,(/start_lon,start_lat,end_lon,end_lat/),opt)
+  t_plane   = wrf_user_interp_line(t2,(/start_lon,start_lat,end_lon,end_lat/),opt)
+
+;---Set XY plot resources
+  xyres                        = True
+  xyres@gsnMaximize            = True
+  xyres@gsnDraw                = False
+  xyres@gsnFrame               = False
+  xyres@vpWidthF               = 0.8
+  xyres@vpHeightF              = 0.5
+  xyres@xyMonoDashPattern      = True
+  xyres@xyLineThicknessF       = 3.0
+  xyres@xyLineColors           = (/ 2, 60, 145, 170, 200 /)   ; index values into ncl_default colormap
+
+;---Put lat/lon labels on X axis
+  ll_step = 5
+  xyres@tmXBMode               = "Explicit"
+  xyres@tmXBValues             = ispan(0,dimsizes(t_plane@lons)-1,ll_step)
+  xyres@tmXBLabels             = sprintf("%6.2f",t_plane@lats(::ll_step)) + "~S~o~N~N~C~" + \
+                                 sprintf("%6.2f",t_plane@lons(::ll_step)) + "~S~o~N~E"
+  xyres@tmXBLabelFontHeightF   = 0.008
+  xyres@tmYLLabelFontHeightF   = 0.008
+  xyres@tmXBMinorOn            = False
+
+;---Titles
+  xyres@tiMainString           = "Surface temperature along lat/lon cross section"
+  xyres@tiMainFontHeightF      = 0.02
+  xyres@tiYAxisFontHeightF     = 0.02
+
+;---Legend
+  xyres@xyExplicitLegendLabels = times
+  xyres@pmLegendDisplayMode    = "Always" 
+  xyres@lgItemOrder            = (/ 4, 3, 2, 1, 0 /)    ; reverses order
+  xyres@lgPerimOn              = False   
+  xyres@pmLegendSide           = "Bottom"
+  xyres@pmLegendParallelPosF   = 0.85      
+  xyres@pmLegendOrthogonalPosF = -0.5
+  xyres@pmLegendWidthF         = 0.15  
+  xyres@pmLegendHeightF        = 0.15 
+
+  xyres@trYMaxF                = max(t_plane) + 3      ; adds a little white space at top of plot
+
+;---Draw XY plot
+  xy_plot = gsn_csm_y(wks,t_plane,xyres)
+
+;---Set map plot resources
+  mpres  = True
+  mpres@vpWidthF          = 0.2     ; make map much snaller
+  mpres@vpHeightF         = 0.2
+  mpres@gsnDraw           = False
+  mpres@gsnFrame          = False
+
+  mpres = wrf_map_resources(a[0],mpres)     ; Use WRF map projection
+  mpres@pmTickMarkDisplayMode = "Never"     ; turns off map tickmarks and labels
+  mpres@mpPerimLineColor      = "Black"     ; wrf_map_resources sets this to gray
+  map_plot = gsn_csm_map(wks,mpres)
+
+;---Add lat/lon interpolated line to plot
+  mkres                  = True
+  mkres@gsLineColor      = "NavyBlue"
+  mkres@gsLineThicknessF = 3.0
+  id = gsn_add_polyline(wks,map_plot,t_plane@lons,t_plane@lats,mkres)
+
+;---Set up a resource list to add map plot as annotation of XY plot
+  amres                  = True
+  amres@amJust           = "TopLeft"    ; Corner of plot for positioning
+  amres@amOrthogonalPosF = -0.49        ; -0.5 is the top edge of the plot.
+  amres@amParallelPosF   = -0.49        ; -0.5 is the left edge of the plot.
+  anno = gsn_add_annotation(xy_plot, map_plot, amres)
+
+;---This will draw map and the attached markers
+  draw(xy_plot)
+  frame(wks)
+end

@@ -1,0 +1,55 @@
+;----------------------------------------------------------------------
+; This is a basic NCL template for creating a plot and attaching
+; polymarkers to it. The plot can be any type (map, contour, vector, 
+; streamline, XY).
+;
+; In this example, we just use a map plot.
+;
+; The important thing is that the coordinates of the polymarkers are
+; in the same data space as the X/Y axes of the plot in question.
+;----------------------------------------------------------------------
+
+; Note: as of NCL V6.2.0, you don't need these load commands
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;---Open workstation
+  wks = gsn_open_wks("x11","adding_polymarkers")   ; "ps", "pdf", "png"
+
+;---Set some resources
+  res                   = True
+
+  res@gsnMaximize       = True     ; maximize plot in frame
+  res@gsnDraw           = False    ; don't draw map
+  res@gsnFrame          = False    ; don't advance frame 
+;
+; Zoom in on map if desired. There are other ways to zoom in on
+; map if you have a different projection, like lambert conformal.
+;
+  res@mpMinLatF         =  -90    ; These are the defaults
+  res@mpMaxLatF         =   90
+  res@mpMinLonF         = -180
+  res@mpMaxLonF         =  180
+  res@mpCenterLonF      = (res@mpMinLonF + res@mpMaxLonF) / 2.
+
+  plot = gsn_csm_map(wks,res)
+
+;---Set up resource list for attaching polymarkers
+  mkres                   = True
+  mkres@gsMarkerIndex     = 16         ; 16=filled dot
+  mkres@gsMarkerSizeF     = 0.007
+  mkres@gsMarkerColor       = "blue"
+;
+; If you call gsn_add_polymarker multiple times, use
+; a unique variable each time on the left side of
+; the "=" sign. Or, use an array for "dum".
+;
+  lat = (/...../)     ; 1D array of latitude values
+  lon = (/...../)     ; 1D array of longitude values
+
+  dum = gsn_add_polymarker(wks,plot,lon,lat,mkres)
+
+  draw(plot)      ; Drawing the plot will also draw the attached markers
+  frame(wks)
+end

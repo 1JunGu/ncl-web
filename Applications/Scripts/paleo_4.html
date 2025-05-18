@@ -1,0 +1,42 @@
+;************************************
+; CSM_Graphics: paleo_4.ncl
+;************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;************************************
+begin
+;************************************
+ in = addfile("surf1.0000-0009.nc","r")
+ T=in->TS(0,:,:)                     ; read in data
+ lat = in->lat                       ; read in lat and lon
+ lon = in->lon
+;************************************
+; test new boundary function
+;************************************
+  oro=in->ORO(0,:,:)
+  paleo_outline(oro,lat,lon,1.,"cretaceous")
+;***********************************
+ wks  = gsn_open_wks("png","paleo")               ; send graphics to PNG file
+ cmap = read_colormap_file("BlAqGrYeOrReVi200")   ; read color data
+
+ res                             = True     ; plot mods desired
+ res@cnFillOn                    = True     ; turn on color
+ res@cnFillPalette               = cmap(8:190,:) ; create new subsetted color map
+ res@cnLinesOn                   = False    ; no contour lines
+ res@cnLevelSpacingF             = 4        ; contour spacing
+
+ res@mpFillOn                    = False    ; turn off map fill
+ res@mpGeophysicalLineThicknessF = 2.0      ; make outlines thicker
+
+ res@gsnZonalMean                = True     ; turn on zonal average side plot
+
+ res@mpDataBaseVersion           = "MediumRes"    ; choose new outline database
+ res@mpDataSetName               = "./cretaceous" ; data base we just created
+
+ plot = gsn_csm_contour_map(wks,T,res)     ; create plot
+end
+
+
+

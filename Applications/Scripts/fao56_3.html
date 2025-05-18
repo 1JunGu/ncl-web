@@ -1,0 +1,186 @@
+;***************************************************************
+; fao56_3.ncl      
+;
+; Concepts illustrated:
+;   - Read modeled ('observed') sunshine duration
+;   - Calculate the theoretical maximum sunshine duration
+;   - Compute the ratio (modeled/maximum)
+;   - Create contour plots
+;   - Illustrate creating 'triangle' and 'fixed' label bars
+;***************************************************************
+; These files are automatically loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"   
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+;***************************************************************
+; The 'crop.ncl' library is automatically loaded from 6.4.0 onward
+;***************************************************************
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/crop.ncl"
+;***************************************************************
+
+;---read and look at variables
+
+  diri = "./"
+  fili = "sund_CNRM-CM5-CLM1971.nc"
+  pthi = diri+fili
+  f    = addfile(pthi,"r")
+  lat2d= f->lat                         ; grid points 
+  lon2d= f->lon 
+
+  printVarSummary(lat2d)
+  printMinMax(lat2d, 0)
+  print("=========")
+  printVarSummary(lon2d)
+  printMinMax(lon2d, 0)
+  print("=========")
+                                        ; read sunshine duration
+  sund = f->sund                        ; sund(time, rlat, rlon) 
+  sund = sund/60                        ; seconds => minutes; just for 'fun'
+  sund@units = "minutes"
+
+  printVarSummary(sund)
+  printMinMax(sund, 0)
+  print("=========")
+
+;---Need day-of-current-year (ddd) for daylight_fao56
+
+  delete(sund&time@calendar)            ; NCL 6.4.0 does not support proleptic calendar
+
+  ymd     = cd_calendar(sund&time, -2)
+  yyyyddd = yyyymmdd_to_yyyyddd(ymd)
+  yyyy    = yyyyddd/1000
+  ddd     = yyyyddd-yyyy*1000
+
+;---Compute 'theoretical' maximum daylight (sunshine) for the current date and latitude
+
+  daylight_max = daylight_fao56(ddd, lat2d)
+  printVarSummary(daylight_max)
+  printMinMax(daylight_max,0)
+  print("=========")
+
+;---Change units to match model units
+
+  daylight_max = daylight_max*60        ; hours => minutes; just for 'fun'
+  daylight_max@units = "minutes"
+  printVarSummary(daylight_max)
+  printMinMax(daylight_max,0)
+
+  delete( [/ lat2d&rlat, lat2d&rlon /] ); 6.5.0 
+ ;delete( lat2d&rlat)                   ; use for plot<=SEGFAULT [6.4.0]
+ ;delete( lat2d&rlon)                   ;  "       "       "        "
+
+;---Compute ratio
+
+  daylight_max@_FillValue = totype(-999, typeof(daylight_max))
+  daylight_max = where(daylight_max.le.0, daylight_max@_FillValue, daylight_max)
+
+  ratio = (sund/daylight_max)
+  copy_VarCoords(daylight_max, ratio)
+  ratio@long_name = "RATIO: (sund/daylight_max)"
+  ratio@units     = "fraction of max"
+
+;---Required to plot 2D lat/lon
+
+  sund@lat2d  = lat2d       
+  sund@lon2d  = lon2d
+  ratio@lat2d = lat2d       
+  ratio@lon2d = lon2d
+  daylight_max@lat2d = lat2d
+  daylight_max@lon2d = lon2d
+
+;---Plot
+
+  pltDir  = "./"
+  pltName = "fao56"
+  pltType = "png"
+  pltPath = pltDir + pltName
+
+  plot    = new (3, "graphic")
+
+  wks    = gsn_open_wks(pltType, pltPath)
+
+  res                     = True
+  res@gsnDraw             = False
+  res@gsnFrame            = False
+  res@gsnMaximize         = True
+  res@gsnAddCyclic        = False
+
+  res@mpMinLatF           = min(lat2d)
+  res@mpMaxLatF           = max(lat2d)
+  res@mpMinLonF           = min(lon2d)
+  res@mpMaxLonF           = max(lon2d)
+  res@mpFillOn            = False
+
+  res@cnFillPalette       = "amwg256"
+  res@cnFillOn            =  True
+  res@cnLinesOn           =  False            ; Turn off contour lines
+  res@cnLineLabelsOn      =  False            ; Turn off contour lines
+  res@cnFillMode          = "RasterFill"
+  res@cnLevelSelectionMode= "ManualLevels"    ; set manual contour levels
+  res@cnMinLevelValF      =  40.0             ; set min contour level
+  res@cnMaxLevelValF      = 560.0             ; set max contour level
+  res@cnLevelSpacingF     =  40.              ; set contour spacing
+
+  res@lbLabelBarOn        = False            ; turn off individual label bars
+
+  nt = 0                                     ; arbitrary time index
+  res@gsnCenterString     = ymd(nt)
+  plot(0) = gsn_csm_contour_map(wks,sund(nt,:,:),res)
+  plot(1) = gsn_csm_contour_map(wks,daylight_max(nt,:,:),res)
+
+ ;res@cnMinLevelValF      = 0.10              ; set min contour level
+ ;res@cnMaxLevelValF      = 0.90              ; set max contour level
+  res@cnMinLevelValF      = 0.00              ; set min contour level
+  res@cnMaxLevelValF      = 1.00              ; set max contour level
+  res@cnLevelSpacingF     = 0.10              ; set contour spacing
+ ;res@cnFillPalette       = "precip2_17lev"
+  res@cnFillPalette       = "WhiteBlueGreenYellowRed"
+  plot(2) = gsn_csm_contour_map(wks,ratio(nt,:,:),res)
+
+;---Panel
+
+;***************************************
+; panel first two plots
+;***************************************
+  pres1                     = True
+  pres1@gsnFrame            = False      ; don't advance frame yet
+  pres1@gsnPanelLabelBar    = True       ; common label bar
+  pres1@lbOrientation       = "vertical" ; vertical label bar
+  pres1@pmLabelBarWidthF    = 0.075      ; default is shorter
+  pres1@pmLabelBarHeightF   = 0.4        ; default is taller
+  pres1@lbLabelFontHeightF  = 0.01       ; make labels smaller ( default=0.02 )
+  pres1@lbBoxEndCapStyle    = "TriangleBothEnds"
+
+; Use PanelBottom to tell the plot to only draw in the top part of the page.
+; since there are two plots here, and we have limited the plot to the upper
+; 0.6 of the page, each plot will have a size 0.3.
+
+  pres1@gsnPanelBottom      = 0.4        ; move bottom up from 0.0 to 0.4
+  gsn_panel(wks,plot(0:1),(/2,1/),pres1)
+
+;***************************************
+; create panel of just third plot to keep aspect ratio
+; the same as the panel above
+; Note: the docs on pmLabelBarDisplayMode (which gsn_panel() uses under the hood) 
+; indicate that the labelbar is drawn according to lbXXX resources, 
+; implying that cnLabelBarXXX resources are not appropriate.
+;***************************************
+  pres2                     = True
+  pres2@gsnFrame            = False      ; don't advance frame yet
+  pres2@gsnPanelTop         = 0.4        ; draw up to the bdry of upper plot
+  pres2@gsnPanelBottom      = 0.1        ; move bottom up so size is 0.3
+  pres2@gsnPanelLabelBar    = True       ; common label bar
+  pres2@lbOrientation       = "vertical" ; vertical label bar
+  pres2@pmLabelBarWidthF    = pres1@pmLabelBarWidthF
+  pres2@pmLabelBarHeightF   = 0.6*pres1@pmLabelBarHeightF
+  pres2@lbLabelFontHeightF  = pres1@lbLabelFontHeightF
+
+  pres2@lbBoxCount = 10
+  pres2@lbLabelAlignment    = "ExternalEdges"
+  pres2@lbBoxEndCapStyle    = "RectangleEnds"         ; "RectangleEnds" is the default
+  pres2@cnLabelBarEndStyle  = "ExcludeOuterBoxes"     ; "IncludeOuterBoxes" is the default
+  pres2@cnLabelBarEndStyle  = "IncludeMinMaxLabels"   ; force a label at the end of both boxes
+
+  gsn_panel(wks,plot(2),(/1,1/),pres2)
+; now advance frame for all plots
+  frame(wks)

@@ -1,0 +1,609 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/vector.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:57:36 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+vector template and its modification.">
+<meta name="keywords" content="NCL, graphics, visualization, vectors">
+<TITLE>NCL Graphics: Vectors</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_gsn_csm.html">gsn_csm graphical interfaces</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL Graphics: Vectors (high-level graphical interfaces)</h1>
+<div class=mainimage>
+<img src="Images/vector_4_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+<h3>Vector Plot Templates</h3>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_vector.html"><strong>gsn_csm_vector</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_vector_map.html"><strong>gsn_csm_vector_map</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_vector_scalar_map.html"><strong>gsn_csm_vector_scalar_map</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_vector_map_polar.html"><strong>gsn_csm_vector_map_polar</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_vector_scalar_map_polar.html"><strong>gsn_csm_vector_scalar_map_polar</strong></a>
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_pres_hgt_vector.html"><strong>gsn_csm_pres_hgt_vector</strong></a>
+<p>
+
+Additional Examples:<br>
+<ul>
+<li>
+<a href="popvec.html">vectors on the pop grid</a> 
+</li>
+<li>
+<a href="wind.html">divergent and rotational wind vectors</a>
+</li>
+<li>
+<a href="polar.html#ex7">vectors on a polar stereographic projection
+</a>
+</li>
+<li>
+<a href="veceff.html">vector effects
+</a>
+</li>
+<p>
+</ul>
+Important resources for controlling the length, density, direction, and style of vectors:
+<p>
+<ul>
+
+<li><a href="../Document/Graphics/Resources/vc.html#vcGlyphStyle"><em>vcGlyphStyle</em></a> - "LineArrow"
+(default), "FillArrow", "WindBarb", "CurlyVector"<p>
+
+<li><a href="../Document/Graphics/Resources/vc.html#vcMapDirection"><em>vcMapDirection</em></a> - set to False
+if you have a situation where the two coordinate axes have different
+units with very different numerical spacing between the coordinate
+values. Usually, you want this resource to be set to True for 
+vectors drawn over a map, but if the lat/lon values have very different spacings,
+then you may want to set this to False.<p>
+
+<li><a href="../Document/Graphics/Resources/vc.html#vcMinDistanceF"><em>vcMinDistanceF</em></a> - set to small
+value to thin the vectors.<p>
+
+<li>Use these four resources to control the length of vectors:
+<ul>
+<li><a href="../Document/Graphics/Resources/vc.html#vcRefLengthF"><em>vcRefLengthF</em></a>
+<li><a href="../Document/Graphics/Resources/vc.html#vcRefMagnitudeF"><em>vcRefMagnitudeF</em></a>
+<li><a href="../Document/Graphics/Resources/vc.html#vcMinFracLengthF"><em>vcMinFracLengthF</em></a>
+<li><a href="../Document/Graphics/Resources/vc.html#vcMinMagnitudeF"><em>vcMinMagnitudeF</em></a>
+</ul>
+<li>
+Use the <a href="../Document/Graphics/Resources/vc.html#vcLineArrowThicknessF"><em>vcLineArrowThicknessF</em></a> to
+make the vectors thicker.
+</ul>
+<p>
+You can find more information about vector plots on the
+<a href="veceff.html">vector effects page</a>.
+</div>
+
+ <div class=ex>
+<!--Vector_1-->
+<a name=ex1></a>
+<a href="Images/vector_1_lg.png">
+<img src="Images/vector_1_sm.png" align=left border=2></a>
+
+<a href="Scripts/vector_1.html">vector_1.ncl</a>: Creates a vector plot
+over SST contours. <a href="../Document/Graphics/Resources/gsn.html#gsnScalarContour"><em>gsnScalarContour</em></a> = True,
+means that a scalar contour plot will also be drawn.  The default is
+False, which colors the vectors by the scalar map (see example 4).
+<p>
+<a href="../Document/Graphics/Resources/vc.html#vcRefMagnitudeF"><em>vcRefMagnitudeF</em></a> = 5.0, Defines the
+reference vector magnitude. Use this to adjust the size of the
+vectors.
+<p>
+<a href="../Document/Graphics/Resources/vc.html#vcRefLengthF"><em>vcRefLengthF</em></a> = 0.045, Defines the
+length of the reference vector.
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_vector_scalar_map.html"><strong>gsn_csm_vector_scalar_map</strong></a> is the
+plot interface that draws a vector plot over a scalar contour plot.
+<p>
+<a href="../Document/Graphics/Resources/cn.html#cnLinesOn"><em>cnLinesOn</em></a> = False, Turns off the
+contour lines.
+<p>
+<a href="../Document/Graphics/Resources/cn.html#cnLineLabelsOn"><em>cnLineLabelsOn</em></a> = False, Turns off
+the contour line labels.
+<p>
+<a href="../Document/Graphics/Resources/vc.html#vcGlyphStyle"><em>vcGlyphStyle</em></a> = "CurlyVector",
+Turns on the curly vectors.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Vectors/NCL_vector_1.html#sphx-glr-gallery-vectors-ncl-vector-1-py">here</a>.
+ </div>
+
+ <div class=ex>
+<!--Vector_2-->
+<a name=ex2></a>
+<a href="Images/vector_2_lg.png">
+<img src="Images/vector_2_sm.png" align=left border=2></a>
+<a href="Scripts/vector_2.html">vector_2.ncl</a>: Add an overlay
+of wind magnitude contours. 
+</div>
+
+ <div class=ex>
+<!--Vector_3-->
+<a name=ex3></a>
+<a href="Images/vector_3_lg.png">
+<img src="Images/vector_3_sm.png" align=left border=2></a>
+<a href="Scripts/vector_3.html">vector_3.ncl</a>: Draw vectors on a
+global map with a time stamp at the bottom.
+<p>
+<a href="../Document/Graphics/Interfaces/gsn_csm_vector_map.html"><strong>gsn_csm_vector_map</strong></a> is the plot interface that draws
+vectors over a map.
+<p>
+<a href="../Document/Graphics/Resources/vc.html#vcMinDistanceF"><em>vcMinDistanceF</em></a> = 0.017, Thins the
+vectors.
+<br>
+<a href="../Document/Graphics/Resources/vc.html#vcRefAnnoOrthogonalPosF"><em>vcRefAnnoOrthogonalPosF</em></a> = -1.0,
+Moves the reference vector up.
+
+<p>
+<a href="../Document/Functions/Shea_util/infoTimeStamp.html"><strong>infoTimeStamp</strong></a> is a
+utility for creating a time stamp at the bottom of the figure. The
+arguments are the workstation, the size of the text, and the right
+string. The left string is automatically generated and includes the
+time and date of the plots' creation.
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Vectors/NCL_vector_3.html#sphx-glr-gallery-vectors-ncl-vector-3-py">here</a>.
+</div>
+
+ <div class=ex>
+<!--Vector_4-->
+<a name=ex4></a>
+<a href="Images/vector_4_lg.png">
+<img src="Images/vector_4_sm.png" align=left border=2></a>
+<a href="Scripts/vector_4.html">vector_4.ncl</a>: Color vectors by
+a scalar field. 
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Vectors/NCL_vector_4.html#sphx-glr-gallery-vectors-ncl-vector-4-py">here</a>.
+</div>
+
+<div class=ex>
+<!--Vector_5-->
+<a name=ex5></a>
+<a href="Images/vector_5_lg.png">
+<img src="Images/vector_5_sm.png" align=left border=2></a>
+<a href="Scripts/vector_5.html">vector_5.ncl</a>: A vector pressure/height
+plot.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_pres_hgt_vector.html"><strong>gsn_csm_pres_hgt_vector</strong></a> is the plot
+template that draws vectors over a pressure height plot. Note
+that <a href="../Document/Graphics/Resources/vc.html#vcMapDirection"><em>vcMapDirection</em></a> must be set to
+False in order for the vectors to be pointing in the right direction.
+In V6.2.0, this resource will be set to False by default for the
+<a href="../Document/Graphics/Interfaces/gsn_csm_pres_hgt_vector.html"><strong>gsn_csm_pres_hgt_vector</strong></a> function.
+<p>
+
+There is another example of this template: <a
+href="height_lat.html#ex7">example 7</a> in the <a
+href="height_lat.html">pressure/height vs latitude</a> applications
+page.
+</div>
+
+<div class=ex>
+<!--Vector_6-->
+<a name=ex6></a>
+<a href="Images/vector_6_1_lg.png">
+<img src="Images/vector_6_1_sm.png" align=left border=2></a>
+<a href="Images/vector_6_2_lg.png">
+<img src="Images/vector_6_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/vector_6.html">vector_6.ncl</a>: Draws vectors with
+with automatic default clipping, and then with clipping turned off.
+<p>
+
+To turn off vector clipping, set the resource <a href="../Document/Graphics/Resources/vp.html#vpClipOn"><em>vpClipOn</em></a> to False.
+<p>
+
+This example also shows how to change the thickness of the vectors.
+This is done by setting the <a href="../Document/Graphics/Resources/vc.html#vcLineArrowThicknessF"><em>vcLineArrowThicknessF</em></a>
+resource to the desired multiple of default thickness.  For example, setting
+it to 2.5 makes the vectors two-and-a-half times as thick.
+
+</div>
+
+<div class=ex>
+<!--Vector_7-->
+<a name=ex7></a>
+<a href="Images/vector_7_1_lg.png">
+<img src="Images/vector_7_1_sm.png" align=left border=2></a>
+<a href="Images/vector_7_2_lg.png">
+<img src="Images/vector_7_2_sm.png" align=left border=2></a>
+<a href="Images/vector_7_3_lg.png">
+<img src="Images/vector_7_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/vector_7.html">vector_7.ncl</a>: This example shows
+how to position the vector arrows differently using the
+resource <a href="../Document/Graphics/Resources/vc.html#vcPositionMode"><em>vcPositionMode</em></a>. The
+default is "ArrowCenter". You can also use "ArrowHead" or 
+"ArrowTail".
+<p>
+
+Polymarkers are added to each plot
+using <a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a><br> so you
+can see locations of the vector coordinates.
+<p>
+
+Like <a href="Scripts/vector_6.html">vector_6.ncl</a>, this example shows 
+how to adjust the vector thickness.
+
+</div>
+
+<div class=ex>
+<!--overlay_11-->
+<a href="Images/overlay_11_lg.png">
+<img src="Images/overlay_11_sm.png" align=left border=2></a>
+<a href="Scripts/overlay_11.html">overlay_11.ncl</a>: 
+
+This example shows how to overlay vectors on top of a filled contour plot,
+where the contours are masked by a geographical area and the vectors
+are not.  The masking is accomplished by setting:
+<p>
+
+<pre>
+  mpres@<a href="../Document/Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a>   = "MediumRes"
+  mpres@<a href="../Document/Graphics/Resources/mp.html#mpMaskAreaSpecifiers"><em>mpMaskAreaSpecifiers</em></a> = (/"China:states","Taiwan"/)
+</pre>
+<p>
+
+The mask area specifier names are part of the
+<a href="../Document/HLUs/Classes/MapPlot.html#Pre-Defined-String-Constants-Ncarg4_1">predefined group
+names</a> available in the "MediumRes" map database.
+<p>
+
+This script was written by Yang Zhao (CAMS) (Chinese Academy of
+Meteorological Sciences).
+
+</div>
+
+<div class=ex>
+<!--polyg_23-->
+<a name=ex23></a>
+<a href="Images/polyg_23_1_lg.png">
+<img src="Images/polyg_23_1_sm.png" align=left border=2></a>
+<a href="Images/polyg_23_2_lg.png">
+<img src="Images/polyg_23_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/polyg_23.html">polyg_23.ncl</a>: This script shows how
+to add single vectors (arrows) to a plot, using an "arrow" function
+contributed by Arindam Chakraborty.
+<p>
+
+This function uses
+<a href="../Document/Graphics/Interfaces/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a> under the hood,
+which means you can
+use <a href="../Document/Graphics/Resources/gs.html">gsLine<i>XXXX</i></a>
+resources to customize the arrows.
+
+</div>
+
+<div class=ex>
+<!--Vector_8-->
+<a name=ex8></a>
+<a href="Images/vector_8_lg.png">
+<img src="Images/vector_8_sm.png" align=left border=2></a>
+
+<a href="Scripts/vector_8.html">vector_8.ncl</a>: This example 
+shows how to draw three types of vectors: line vectors, curly vectors,
+and wind barb vectors, and how to color the vectors based on magnitude. 
+Use the <a href="../Document/Graphics/Resources/vc.html#vcGlyphStyle"><em>vcGlyphStyle</em></a> resource to 
+change the type of the vectors being drawn. To color the vectors 
+based on magnitude, set <a href="../Document/Graphics/Resources/vc.html#vcMonoLineArrowColor"><em>vcMonoLineArrowColor</em></a> to False.
+</div>
+
+<div class=ex>
+<!--Vector_9-->
+<a name=ex9></a>
+<a href="Images/vector_9_lg.png">
+<img src="Images/vector_9_sm.png" align=left border=2></a>
+
+<a href="Scripts/vector_9.html">vector_9.ncl</a>: This example 
+shows how setting <a href="../Document/Graphics/Resources/vc.html#vcMinMagnitudeF"><em>vcMinMagnitudeF</em></a> has no 
+effect on curly vectors; one way you can reduce the magnitude is by using the 
+<a href="../Document/Functions/Built-in/where.html"><strong>where</strong></a> function.
+
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/vector.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:57:42 GMT -->
+</html>
+

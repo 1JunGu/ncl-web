@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/calipso.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:00:37 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to plot CALIPSO data">
+<meta name="keywords" content="NCL, graphics, visualization, CALIPSO">
+<TITLE>NCL: CALIPSO</TITLE>
+</head>
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_data.html">Data sets</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+    <h1>NCL: CALIPSO: Cloud Vertical Structure and Aerosols </h1>
+
+    <div class=mainimage>
+    <img src="Images/calipso_1_lg.png" align=left border=0></a>
+    </div>
+
+<div class=text>
+<a href="http://www-calipso.larc.nasa.gov/about/atrain.php">CALIPSO</a> 
+(Cloud-Aerosol Lidar and Infrared Pathfinder Satellite Observations ) was launched on April 28, 2006 to study the impact of clouds and aerosols on the Earth's radiation budget and climate. It flies in formation with five other satellites in the international "A-Train" constellation for coincident Earth observations. The CALIPSO satellite comprises three instruments, the Cloud-Aerosol LIdar with Orthogonal Polarization (CALIOP), the Imaging Infrared Radiometer (IIR), and the Wide Field Camera (WFC). CALIPSO is a joint satellite mission between NASA and the French Agency, CNES
+<p>
+<p>CALIPSO data are available as 
+<a href="https://climatedataguide.ucar.edu/guidance/nasa-satellite-product-levels">Level-2</a> and as part of the 
+<a href="http://climserv.ipsl.polytechnique.fr/cfmip-obs/">CFMIP-OBS</a> (Cloud Feedback Model Intercomparison 
+Program) a protocol to evaluate clouds in climate and 
+weather prediction models based on satellite observations has been designed. 
+</div>
+<p>
+<div class=text>
+<h3>HDF Group Comprehensive Examples</h3>
+The HDF-Group has created a suite of
+<a href="http://hdfeos.org/zoo/"><b>NCL</b>, Matlab, IDL and Python examples</a>
+which includes both scripts and the created graphical images.
+They also provide <a href="http://hdfeos.net/software/ncl.php">NCL specific comments</a>.
+<p>
+This site has a Calipso example. However, the site is updated so additional Calipso examples 
+may be added.
+</div>
+<p>
+
+
+    <div class=ex>
+    <!--CALIPSO_1-->
+    <a name=ex1></a>
+    <a href="Images/calipso_1_lg.png">
+    <img src="Images/calipso_1_sm.png" align=left border=2></a>
+    <a href="Scripts/calipso_1.html">calipso_1.ncl</a>: 
+CALIPSO cloud fractions (low, middle, high, total and clear) for June 6, 2006.
+    <p>
+The file used in this example was obtained from:
+ftp://ftp.climserv.ipsl.polytechnique.fr/cfmip/GOCCP/3D_CloudFraction/grid_2x2xL40/
+    </div>
+
+    <div class=ex>
+    <!--CALIPSO_2-->
+    <a name=ex2></a>
+    <a href="Images/calipso_2_1_lg.png">
+    <img src="Images/calipso_2_1_sm.png" align=left border=2></a>
+    <a href="Images/calipso_2_2_lg.png">
+    <img src="Images/calipso_2_2_sm.png" align=left border=2></a>
+    <a href="Scripts/calipso_2.html">calipso_2.ncl</a>: 
+Monthly mean vertical profiles and cross-sections for CALIPSO cloud fractions for Dec 2010.
+    <p>
+The file used in this example was obtained from:
+ftp://ftp.climserv.ipsl.polytechnique.fr/cfmip/goccp/3D_CloudFraction/CMOR/grid_2x2xL40/3D_2_2_40_avg_clc/obs4cmip5/observations/atmos/clcalipso/mon/grid/IPSL/CALIPSO/CALIOP/v20110323/
+    </div>
+
+    <div class=ex>
+    <!--CALIPSO_3-->
+    <a name=ex3></a>
+    <a href="Images/calipso_3_1_lg.png">
+    <img src="Images/calipso_3_1_sm.png" align=left border=2></a>
+    <a href="Images/calipso_3_2_lg.png">
+    <img src="Images/calipso_3_2_sm.png" align=left border=2></a>
+    <a href="Scripts/calipso_3.html">calipso_3.ncl</a>: 
+This figure shows high clouds, starting around 65.46 N Latitude, and 
+a small smoke plume from 66.20 to 65.71 N latitude in the lower altitudes.
+The <a href="Scripts/lidar_altitudes.txt">lidar_altitudes.txt</a> file
+is used for altitude informatiion.  The altitudes are based from a paper
+here:  http://www-calipso.larc.nasa.gov/products/
+<p>
+The <a href="https://subset.larc.nasa.gov/calipso/login.php">CALIPSO subsetter tool</a> was used to find CALIPSO files.  Any
+CALIPSO file should do. The subsetter tool saves the trouble of isolating
+specific latitude and longitude regions.  
+
+<p>
+This script was donated by James "Mike" Madden (U. Alaska, Fairbanks) who edited
+the original script developed by Cory Wolff (NCAR). 
+<p>
+<b>Note:</b> As of v6.1.2, NCL does not read HDF 'vdata'. The lidar altitudes
+may be obtained via:
+<pre>
+   <b>  hdp dumpvd</b> CAL_LID_L2_05kmAPro-Prov-V3-01.2009-07-10T14-32-05ZD.hdf_Subset.hdf &gt vdata 
+
+</pre>
+<pre>
+
+ Then edit this Vdata file to get something like:
+
+ Product_ID = "L2_LIDAR"
+ Date_Time_at_Granule_Start = "2009-07-10T14:50:43.766000Z"
+ Date_Time_at_Granule_End = "2009-07-10T14:59:00.668400Z"
+ Initial_Subsatellite_Latitude = 0.039497
+ Initial_Subsatellite_Longitude = -15.592452
+ Final_Subsatellite_Latitude = 30.027323
+ Final_Subsatellite_Longitude = -22.398491
+ Lidar_Data_Altitudes = (/29.796324, 29.616693, 29.437065, 29.257437, 29.077806, \
+                          28.898178, 28.718550, 28.538919, 28.359291, 28.179663, \
+                          28.000032, 27.820404, 27.640776, 27.461147, 27.281517, \
+                          27.101889, 26.922260, 26.742630, 26.563002, 26.383373, \
+                          26.203743, 26.024115, 25.844486, 25.664856, 25.485228, \
+                          25.305599, 25.125969, 24.946341, 24.766712, 24.587084, \
+                          24.407454, 24.227825, 24.048197, 23.868567, 23.688938, \
+                          23.509310, 23.329679, 23.150051, 22.970423, 22.790792, \
+                          22.611164, 22.431536, 22.251907, 22.072277, 21.892649, \
+                          21.713020, 21.533390, 21.353762, 21.174133, 20.994503, \
+                          20.814875, 20.635246, 20.455616, 20.275988, 20.156235, \
+                          20.096359, 20.036482, 19.976606, 19.916729, 19.856853, \
+                          19.796978, 19.737101, 19.677225, 19.617348, 19.557472, \
+[SNIP]
+                          4.827897, 4.768021, 4.708144, 4.648268, 4.588391, \
+                          4.528515, 4.468639, 4.408763, 4.348886, 4.289010, \
+                          4.229134, 4.169257, 4.109381, 4.049504, 3.989628, \
+                          3.929752, 3.869876, 3.809999, 3.750123, 3.690247, \
+                          3.630370, 3.570494, 3.510618, 3.450742, 3.390865, \
+                          3.330989, 3.271112, 3.211236, 3.151360, 3.091484, \
+                          3.031607, 2.971731, 2.911855, 2.851978, 2.792102, \
+                          2.732226, 2.672349, 2.612473, 2.552597, 2.492720, \
+                          2.432844, 2.372968, 2.313091, 2.253215, 2.193339, \
+                          2.133462, 2.073586, 2.013710, 1.953833, 1.893957, \
+                          1.834081, 1.774204, 1.714328, 1.654452, 1.594576, \
+                          1.534699, 1.474823, 1.414947, 1.355070, 1.295194, \
+                          1.235318, 1.175441, 1.115565, 1.055689, 0.995812, \
+                          0.935936, 0.876060, 0.816183, 0.756307, 0.696431, \
+                          0.636554, 0.576678, 0.516802, 0.456925, 0.397049, \
+                          0.337173, 0.277296, 0.217420, 0.157544, 0.097667, \
+                          0.037791, -0.022085, -0.081961, -0.141838, -0.201714, \
+                         -0.261590, -0.321467, -0.381343, -0.441219/)
+
+And you have to work on these for every hdd file.
+
+</pre>
+    </div>
+
+    <div class=ex>
+    <!--CALIPSO_4-->
+    <a name=ex4></a>
+    <a href="Images/CAL.2006-06-13T01-37-01ZN_4_lg.png">
+    <img src="Images/CAL.2006-06-13T01-37-01ZN_4_sm.png" align=left border=2></a>
+    <a href="Scripts/calipso_4.html">calipso_4.ncl</a>: 
+Vertical cross-section for CALIPSO "Total_Backscatter_Coefficient_532". Minor variations from calipso_3.ncl
+    <p>
+    </div>
+
+					<p>&nbsp;</p>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/calipso.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:00:41 GMT -->
+</html>
+

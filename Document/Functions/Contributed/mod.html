@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/mod.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:49 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (general applied math)">
+<meta name="keywords" content="mod">
+<title>mod</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>mod</h1>
+
+<p>
+Remainder function which emulates the Fortran "mod" intrinsic function.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#4.3.0">version 4.3.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function mod (
+		n  : numeric,  ; integer, float, double
+		m  : numeric   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  same type and shape as <em>n</em>
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>n</em>
+<p class=indent>Scalar or array variable of type integer, float, double.
+</p>
+<em>m</em>
+<p class=indent>Scalar or array variable. If an array it must be the same shape as <em>n</em>.
+Although not required, it is best if it is the same type as <em>n</em>.
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+NCL has a 
+<a href="../../Manuals/Ref_Manual/NclExpressions.html">
+modulus algebraic operator</a>, <b>%</b> , which requires that
+the arguments be integers. The <b>mod</b> function is more general.
+The results are the same as those of the GNU
+"gfortran" compiler. While the function allows mixed
+types, it is best to always use <em>n</em> and <em>m</em>
+of the same type.
+
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+<b>Example 1:</b> Sample usage: numeric results and return types. Note that the returned
+value is the same numeric type and sign as argument <em>n</em>.
+<pre>
+        17 <b>%</b> 3     = 2     NCL modulus syntax (integers only)
+
+        <strong>mod</strong>(17,3)         = 2     type= integer
+        mod(17.5,5.5)     = 1     type= float
+        mod(17.5d0,5.5)   = 1     type= double
+        mod(17.5d0,5.5d0) = 1     type= double
+        mod(17.5,5.5d0)   = 1     type= float
+             
+        mod(17.5, 5 )     = 2.5   type= float
+        mod(17  ,5.5)     = 2     type= integer
+                
+        mod(-17,3)        = -2    type= integer
+        mod(-17.5,5.5)    = -1    type= float
+        mod(-17.5d0,5.5)  = -1    type= double
+        mod(-17.5d0,5.5d0)= -1    type= double
+        mod(-17.5,5.5d0)  = -1    type= float
+                
+        mod(-17.5, 5 )    = -2.5  type= float
+        mod(-17  ,5.5)    = -2    type= integer
+                
+        mod(17,-3)        = 2     type= integer
+        mod(17.5,-5.5)    = 1     type= float
+        mod(17.5d0,-5.5)  = 1     type= double
+        mod(17.5d0,-5.5d0)= 1     type= double
+        mod(17.5,-5.5d0)  = 1     type= float
+                
+        mod(17.5, -5 )    = 2.5   type= float
+        mod(17  ,-5.5)    = 2     type= integer
+</pre>
+<p>
+<b>Example 2:</b> 
+This example is based on a response by David Allured (NOAA-CIRES) to an ncl-talk@ucar.edu query.
+<p>
+Consider a set of values which are cyclic. Two common examples would be angular coordinates for a circle and longitudes on the entire globe. Let's say data are to be uniquely partitioned into four quadrants: (i) 0-90; (ii) 90-180; (c) 180-270; (d) 270-onward. How can the appropriate indices be determined that account for the cyclic condition?
+<pre>
+ 
+    dlon   = 10
+    nlon   = 360/dlon            
+    lon    = <a href="../Built-in/fspan.html"><strong>fspan</strong></a>(0, 350,nlon)                                 ; 0,10,20,....,330,340,350         
+    theta  =  2*dlon
+    lon_offset = <strong>mod</strong> (lon + 360 - theta, 360)
+    <a href="../Built-in/print.html"><strong>print</strong></a>(lon_offset)                                           ;  340,350, 0, 10,..., 320,330
+
+    iq1 = <a href="../Built-in/ind.html"><strong>ind</strong></a> (lon_offset .lt. 90)                              ; [9]: 2,3,...,8,9,10
+    iq2 = <a href="../Built-in/ind.html"><strong>ind</strong></a> (lon_offset .ge. 90   .and. lon_offset .lt. 180)  ; [9]: 11,12,...,18,19
+    iq3 = <a href="../Built-in/ind.html"><strong>ind</strong></a> (lon_offset .ge. 180 .and. lon_offset .lt. 270)   ; [9]: 20,21,...,27,28
+    iq4 = <a href="../Built-in/ind.html"><strong>ind</strong></a> (lon_offset .ge. 270)                             ; [9]: 0, 1,29,30,...,34,35
+
+</pre>
+The above method effectively converts the NCL <strong>mod</strong> function to a true mathematical modulo function for cyclic applications.  Understand the difference here:
+<pre>
+
+    <a href="https://en.wikipedia.org/wiki/Modulo_operation"><b>https://en.wikipedia.org/wiki/Modulo_operation</b></a>
+
+</pre>
+Note: If an application requires overlapping index points in some cases change .lt. to .le. in the iq1/iq2/iq3 statements.
+         
+<p>
+<b>Example 3:</b> The following function returns the unique indices for a user specified number 
+of angular segments:
+<pre> 
+<a href="../Built-in/undef.html"><strong>undef</strong></a>("mod_cyclic_ind")
+<b>function</b> mod_cyclic_ind(x[*]:numeric, nsec[1]:integer)
+;
+; Return unique index values for cyclic sequence.
+;
+; Nomenclature:
+;   x    - angles or longitides
+;   nsec - number of sections. EG: nsec=4 means quadrants,
+;
+; https://www.ncl.ucar.edu/Document/Functions/Contributed/mod.shtml
+; Examples 2 and 3
+;
+<a href="../../Manuals/Ref_Manual/NclStatements.html#Scoping"><b>local</b></a> nx, dx, ang, theta, xcyc, nind, icyc
+<b>begin</b>
+   nx = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(x)
+   if (nx.lt.3) then
+       <a href="../Built-in/print.html"><strong>print</strong></a>("mod_cyclic_ind: more than 3 values needed: nx="+nx)
+       exit
+   end if
+
+   dx = x(1)-x(0)
+   if (.not.<a href="../Built-in/all.html"><strong>all</strong></a>(x(1:)-x(0:nx-2)).eq.dx) then
+       <a href="../Built-in/print.html"><strong>print</strong></a>("mod_cyclic_ind: values not equally spaced")
+       exit
+   end if
+
+   ang   = 360/nsec 
+   theta = 2*dx 
+   xcyc  = <strong>mod</strong> (x+360-theta, 360) ; extra 360 degrees prevents negative index values 
+                                  ; for initial (first) section.
+   nind  = nx/nsec 
+   icyc  = <a href="../Built-in/new.html"><strong>new</strong></a>( (/nsec,nind/), integer, "No_FillValue")
+
+   icyc(0,:)    = <a href="../Built-in/ind.html"><strong>ind</strong></a> (xcyc .lt. ang) 
+   do n=1,nsec-2
+      icyc(n,:) = <a href="../Built-in/ind.html"><strong>ind</strong></a>(xcyc.ge.(n*ang) .and. xcyc.lt.((n+1)*ang)) 
+   end do
+   icyc(nsec-1,:) =  <a href="../Built-in/ind.html"><strong>ind</strong></a>(xcyc .ge. ang*(nsec-1)) 
+
+   icyc@long_name = "cyclic indices"    ; meta data for completeness
+   icyc!0 = "section"
+   icyc!1 = "index"
+   <b>return</b>(icyc)
+<b>end</b>
+
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;             MAIN
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    dlon   = 10
+    nlon   = 360/dlon            
+    lon    = <a href="../Built-in/fspan.html"><strong>fspan</strong></a>(0, 350,nlon)       ; 0,10,20,....,330,340,350         
+
+;---test function with nsec=4 :---> Example 2 (quadrants)
+
+    IQ     =  <b>mod_cyclic_ind</b>(lon, 4)
+    <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(IQ)
+    print("")
+    <a href="../Built-in/print.html"><strong>print</strong></a>(IQ(0,:)+"  "+IQ(1,:)+"  "+IQ(2,:)+"  "+IQ(3,:))
+    print("---")
+
+;---test function with nsec=12
+    IQ    <b>:=</b>  <b>mod_cyclic_ind</b>(lon,12)       ;  <b>:=</b> is reassignment operator
+    <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(IQ)
+    print("")
+    <a href="../Built-in/print.html"><strong>print</strong></a>(IQ(0,:)+"  "+IQ(1,:)+"  "+IQ( 2,:)+"  "+IQ( 3,:)+"  "+ \
+          IQ(4,:)+"  "+IQ(5,:)+"  "+IQ( 6,:)+"  "+IQ( 7,:)+"  "+ \
+          IQ(8,:)+"  "+IQ(9,:)+"  "+IQ(10,:)+"  "+IQ(11,:))
+    
+</pre>
+The output for the above code is:
+<pre>
+
+    Variable: IQ
+    Type: integer
+    Total Size: 144 bytes
+                36 values
+    Number of Dimensions: 2
+    Dimensions and sizes:	<b>[section | 4] x [index | 9]</b>
+    Coordinates: 
+    Number Of Attributes: 1
+      long_name :	cyclic indices
+    
+    (0)	2  11  20  0
+    (1)	3  12  21  1
+    (2)	4  13  22  29
+    (3)	5  14  23  30
+    (4)	6  15  24  31
+    (5)	7  16  25  32
+    (6)	8  17  26  33
+    (7)	9  18  27  34
+    (8)	10 19  28  35
+    
+    (0)	---
+    
+    Variable: IQ
+    Type: integer
+    Total Size: 144 bytes
+                36 values
+    Number of Dimensions: 2
+    Dimensions and sizes:	<b>[section | 12] x [index | 3]</b>
+    Coordinates: 
+    Number Of Attributes: 1
+      long_name :	cyclic indices
+    
+    (0)	2  5  8  11  14  17  20  23  26  29  32  0
+    (1)	3  6  9  12  15  18  21  24  27  30  33  1
+    (2)	4  7  10 13  16  19  22  25  28  31  34  35
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/mod.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:49 GMT -->
+</html>

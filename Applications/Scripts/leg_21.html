@@ -1,0 +1,44 @@
+;*********************************************
+; leg_21.ncl
+;
+; Concepts illustrated:
+;   - Manually creating a legend using simple_legend_ndc
+;*********************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+;*********************************************
+
+  wks = gsn_open_wks("png","leg")
+
+  res = True
+  res@gsnFrame = False
+  plot = gsn_csm_xy(wks,ispan(1,10,1),fspan(1,5,10),res)
+
+  gres = True
+  gres@YPosPercent = 2.5               ; expressed as %, 0->100, sets position of bottom border of legend
+                                      ;  when gres@Position="Bottom" (Default = 95.)
+  gres@XPosPercent = 0.               ; expressed as %, 0->100, sets position of left border of legend
+                                      ;  (Default = 5.)
+  gres@Position = "Bottom"            ; YPosPercent setting reflects the "Top" or "Bottom" of legend
+                                      ;  (Default="Top")
+  gres@ItemSpacePercent = 5.          ; expressed as %, 0->100, space between legend items (Default = 5.)
+  gres@LineLabelWhiteSpacePercent = 2 ; expressed as %, 0->100, space between line and label (Default = 3.)
+
+  lineres = True
+  lineres@lgLineColors = (/"brown","blue","dodgerblue"/) ; line colors
+  lineres@lgLineOpacity = (/1.0,0.5,0.5/)              ; line opacities
+  lineres@lgLineThicknesses = (/3.0,4.0,12.0/)         ; line thicknesses
+  lineres@lgDashIndexes = (/0,1,14/)                   ; line types
+  lineres@LineLengthPercent = 5                        ; expressed as %, 0->100, length of line 
+
+  textres = True
+  textres@lgLabels = (/"CCSM4 Control","b.e11.B1850C5CN.f09_g16.005","Ensemble Member #15"/) ; labels (req)
+  textres@lgLabelFontHeights = (/0.015,0.018,0.025/)                           ; label font heights
+  textres@lgLabelColors = (/"forestgreen","black","orange"/)                   ; label font colors
+  textres@lgLabelOpacity = (/0.8,0.5,1.0/)                                     ; 0->1, label opacities
+
+  simple_legend_ndc(wks,gres,lineres,textres)
+  frame(wks)

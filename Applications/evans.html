@@ -1,0 +1,541 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/evans.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:15:32 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+the use of the Evans plot.">
+<meta name="keywords" content="NCL, graphics, visualization, Evans,
+color wheel">
+<TITLE>NCL Graphics: Evans Plot</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_special.html">Special plots</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: A Hue/Saturation (intensity) plot (or Evans plot for short)</h1>
+
+<div class=mainimage>
+<img src="Images/evans_3_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+A Hue/Saturation(intensity) plot (or Evans plot for short) is a way to
+visualize spatially, two variables of interest, one of which provides
+some measure of "importance". It is also able to visualize, in a
+natural way, a cyclic variable (such as time of day, time of year,
+etc). It does this by assigning the hue of a color to one variable
+(which may be cyclic) and the saturation of color to the other
+variable. The variable associated with saturation indicates
+"importance" since low values of this variable fade into grey
+regardless of the value of the variable associated with the hue.
+<p>
+
+The template and examples for this series of plots were written by
+Dr. Jason Evans, an ARC Australian Research Fellow at the Climate
+Change Research Center, University of New South Wales, Sydney,
+Australia.  
+<p>
+
+Jason has created a template that makes plotting Evans plots easy.
+In order to use the template you need to download and load
+the <a href="Scripts/evans_plot.html">evans_plot.ncl</a> script, and
+the <a href="Data/cdf/gcm_co2_pre.nc">gcm_co2_pre.nc</a>, <a href="Data/cdf/ndvi_time.nc">ndvi_time.nc</a>
+and/or <a href="Data/cdf/pr_mme_change_sresa2.nc">pr_mme_change_sresa2.nc</a>
+files.<p>
+
+The Evans plot function is called using:
+<p>
+
+<pre>
+evans_plot_map(
+               wks:graphic,              ; pre-created workstation object
+               hue_data[*][*]:numeric,   ; 2D color data
+               sat_data[*][*]:numeric,   ; 2D saturation data
+               resources:logical)        ; optional resources
+</pre>
+<p>
+
+Two other functions can be called to plot a label bar or color wheel
+on their own. This is useful when paneling evans plots. <p>
+
+<pre>
+add_ep_label_bar_ndc(
+                     wks:graphic,        ; pre-created workstation object
+                     resources:logical   ; optional resources
+                    ) 
+
+add_ep_color_wheel_bar_ndc(
+                           wks:graphic,       ; pre-created workstation object
+                           resources:logical  ; optional resources
+                         )
+</pre>
+
+There are several resources to modify an Evans plot, all of which are
+passed to the evans_plot function as attributes of the resources
+logical variable (resources which only apply to Evans plots begin with
+ep). Below, the type of the attribute is given in { } while the
+default value is given in [ ]:
+<p>
+
+<ul>
+<li>epCyclic {logical} ; is the hue variable cyclic? [True]
+
+<li>epHueLabel {string} ; to label the hues [hue_data@units]
+
+<li>epSatLabel {string} ; to label the saturations [sat_data@units]
+
+<li>epExplicitSatLevels {float[*]} ; user set saturation levels
+
+<li>epMaxSatLevel {float} ; max saturation level
+
+<li>epMinSatLevel {float} ; min saturation level
+
+<li>epSatLevelSpacing {float} ; saturation level spacing
+
+<li>epExplicitHueLevels {float[*]} ; user set hue levels
+
+<li>epMaxHueLevel {float} ; max hue level
+
+<li>epMinHueLevel {float} ; min hue level
+
+<li>epHueLevelSpacing {float} ; hue level spacing
+
+<li>epMinIntensity {float} ; minimum intensity to use (0-1) [0.8]
+
+<li>epColorWheelScale {float} ; change the size of the color wheel by
+multiplying by this scale factor [1.]
+
+<li>epColorWheelCenterX {float} ; center X of color wheel in ndc [0.85]
+
+<li>epMinSat {float} : minimum saturation to use (0-1) [0.]
+
+<li>epNumMaxSat {integer} : number of saturation levels to be fully
+saturated and distinguished by changes in intensity [1 if <6 sat
+levels, 4 otherwise]
+
+<li>epReverseSatColors {logical} : reverse the order of the
+saturations [False] causes grey to be the largest values
+
+<li>epColorBarOn {logical} ; Display the color bar? [true]
+
+<li>epColorWheelScale {float} ; change the size of the color wheel by
+multiplying by this scale factor [1.]
+
+<li>epColorWheelCenterX {float} ; center X of color wheel in ndc
+[0.85]
+
+<li>epColorWheelCenterY {float} ; center Y of color wheel in ndc [0.85]
+
+<li>epColorWheelPerimOn {logical} ; draw a box around the color wheel? [False]
+
+<li>epHueOffset {float} ; make the first hue this many degrees around
+the color wheel from red (0-360) [0.]
+
+<li>epHueFontSize {float} : Font size for the hue numbers. Is also
+scaled by epColorWheelScale [0.018]
+
+<li>epSatFontSize {float} : Font size for the sat numbers. Is also
+scaled by epColorWheelScale [0.015]
+
+</ul>
+
+</div>
+
+<div class=ex>
+<!--Evans_1-->
+<a name=ex1></a>
+<a href="Images/evans_1_lg.png">
+<img src="Images/evans_1_sm.png" align=left border=2></a>
+
+<a href="Scripts/evans_1.html">evans_1.ncl</a>: Demonstrates a default
+Evans plot of the maximum ndvi (hue) and timing (sat).
+<p>
+
+The hue tells us what month the maximum NDVI (a satellite-based
+measure of vegetation greeness) occurs and the saturation tells us
+just how green the vegetation gets (i.e. grey areas indicate arid
+(desert) regions).
+<p>
+
+This default case picks "nice" hues and saturations for you.  In this
+case it plots the data two months at a time; i.e red is jan/feb,
+yellow is mar/apr, etc.
+
+</div>
+
+<div class=ex>
+<!--Evans_2--> <a name=ex2></a> <a href="Images/evans_2_lg.png">
+<img src="Images/evans_2_sm.png" align=left border=2></a>
+<a href="Scripts/evans_2.html">evans_2.ncl</a>: Demonstrates an Evans
+plot of the change in precipitation by amount (hue) and percent of
+present day (sat). The special resource "epCyclic" is set to False to
+indicate the hue variable is not cyclic.
+<p>
+
+The data are taken from the predictions of 34 realizations
+(by 16 GCMs) of the future precipitation under the SRESA2 scenario
+of the IPCC report.
+
+</div>
+
+<div class=ex>
+<!--Evans_3-->
+<a name=ex3></a>
+<a href="Images/evans_3_lg.png">
+<img src="Images/evans_3_sm.png" align=left border=3></a>
+<a href="Scripts/evans_3.html">evans_3.ncl</a>: Demonstrates
+an Evans plot of the maximum ndvi (hue) and timing (sat).
+<p>
+
+The color wheel is rotated, scaled, and moved using the special
+"epColorWheelXXX" resources.
+
+</div>
+ 
+<div class=ex>
+<!--Evans_4-->
+<a name=ex4></a>
+<a href="Images/evans_4_1_lg.png">
+<img src="Images/evans_4_1_sm.png" align=left border=2></a>
+<a href="Images/evans_4_2_lg.png">
+<img src="Images/evans_4_2_sm.png" align=left border=2></a>
+<a href="Images/evans_4_3_lg.png">
+<img src="Images/evans_4_3_sm.png" align=left border=2></a>
+<a href="Scripts/evans_4.html">evans_4.ncl</a>:  Demonstrates
+an Evans plot of the change in precipitation by amount (hue)
+and significance (sat).
+<p>
+
+The probability (significance) of the change is calculated as a t-test
+between the precipitation now and the precipitation simulated in mid
+21st century.
+<p>
+
+The second plot overlays the 0.9, 0.95 and 0.99 significance levels.
+<p>
+
+The third plot is a standard plot for change in precip showing
+signficance levels. Note that your eye is drawn to the white and red
+"hotspots", all of which fall outside the significant zone.  The Evans
+plot draws your eye to the significant zones which do not correspond
+to these "hotspots".
+
+</div>
+
+<div class=ex>
+<!--Evans_5-->
+<a name=ex5></a>
+<a href="Images/evans_5_lg.png">
+<img src="Images/evans_5_sm.png" align=left border=2></a>
+<a href="Scripts/evans_5.html">evans_5.ncl</a>:
+
+Demonstrates a panel plot of Evans plots of the change in
+precipitation by amount (hue) and percent (sat).<p>
+
+The probability (significance) of the change is calculated as a t-test
+between the precipitation now and the precipitation simulated in mid
+21st century. The 0.9,0.95 and 0.99 significance levels are overlayed.
+
+</div>
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/evans.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:15:35 GMT -->
+</html>
+
+

@@ -1,0 +1,589 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ttest.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:13 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (statistics)">
+<meta name="keywords" content="ttest">
+<title>ttest</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+<a class=crumb href="../statistics.html">Statistics</a>
+<br>
+<h1>ttest</h1>
+
+<p>
+Returns an estimate of the statistical significance and, optionally,
+the t-values.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function ttest (
+		ave1         : numeric,  
+		var1         : numeric,  
+		s1           : numeric,  
+		ave2         : numeric,  
+		var2         : numeric,  
+		s2           : numeric,  
+		iflag    [1] : logical,  
+		tval_opt [1] : logical   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>ave1</em>
+<br>
+<em>ave2</em>
+<p class=indent>Scalars or arrays of any dimension (they must be the same
+dimensionality as each other). They represent the means (averages)
+calculated from two samples (i.e. sample means).
+</p>
+<em>var1</em>
+<br>
+<em>var2</em>
+<p class=indent>Scalars or arrays of the same dimensionality as <em>ave1</em> and
+<em>ave2</em>. They represent the variances calculated from two
+samples (i.e. sample variances).
+</p>
+<em>s1</em>
+<br>
+<em>s2</em>
+<p class=indent>Must be the same dimensionality as <em>ave1</em>, or else
+scalars. These contain the number of statistically independent
+observations. If the data within the two samples are significantly
+autocorrelated, then <em>s1</em> and <em>s2</em> should contain the
+equivalent sample sizes. If <em>ave1</em>, <em>ave2</em>,
+<em>var1</em>, and <em>var2</em> are arrays and <em>s1</em> and
+<em>s2</em> are scalars then these numbers will be used by all
+dimensions.
+</p>
+<em>iflag</em>
+<p class=indent>Set to False if the two original samples are assumed to have the
+same population variance. Set to True if the two original samples are
+assumed to have different population variances. The latter 
+applies the Welsh degree-of-freedom modification (Welsh's t-test).
+</p>
+<em>tval_opt</em>
+<p class=indent>Set to True if the Student t-values are to be returned in addition to
+the statistical probabilities. Set to False if only the probabilities
+are desired.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+If <em>tval_opt</em> is False, then the return array will be the same
+dimensionality as <em>ave1</em>. Otherwise, the return array will be
+dimensioned 2 x <a href="dimsizes.html"><strong>dimsizes</strong></a>(<em>ave1</em>). The return
+type will be double if any of <em>ave1</em>, <em>var1</em>,
+<em>ave2</em>, or <em>var2</em> are type double, and float otherwise.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function uses the Student's t-test to test the null hypothesis
+that the sample means are from the same population (i.e. H0:
+<em>ave1</em>=<em>ave2</em>). Rejection of the null hypothesis
+(i.e. acceptance of the alternative hypothesis) indicates that the
+sample means are from two different populations.<p>
+
+An option is provided to allow for testing when the population
+variances are assumed to be equal or different.  The value(s) returned
+by <strong>ttest</strong> represent estimates of the statistical
+significance.  Commonly, values of 0.10 or less are used as critical
+levels of significance.  As with any test, caution is advised when
+interpreting results when there are few samples.  Note: the user
+should specify the critical significance level prior to the
+calculation.<P>
+
+The results are independent of array order. However, all the arrays
+must be conformant (i.e. have the same order).<P>
+
+<b>The returned probability is two-tailed.</b> 
+The <strong>ttest</strong> uses the incomplete beta function 
+(<a href="betainc.html"><strong>betainc</strong></a>) to calculate the probability.
+Example 2 at <a href="betainc.html"><strong>betainc</strong></a> illustrates how to get 
+the one-tailed probability.  There is also a link where you can 
+get one and two-tailed probabilities via the WWW.
+<p>
+The returned information (t-values) can be used to create <a href="http://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"> <b>confidence bounds</b></a>.
+<pre>
+
+        Yhi = Yavg + tval*Ystd/sqrt(N)   ; Yavg & Ystd are the sample mean and std. dev. 
+        Ylo = Yavg - tval*Ystd/sqrt(N) 
+</pre> 
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="ftest.html"><strong>ftest</strong></a>, <a href="rtest.html"><strong>rtest</strong></a>, <a href="betainc.html"><strong>betainc</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><p>
+
+Assume <em>X</em> and <em>Y</em> are one-dimensional arrays (they need
+not be the same size). Assume each of the values within <em>X</em> and
+<em>Y</em> are independent and that <em>X</em> and <em>Y</em> have the
+same population variance. The following is from:
+<b>http://www.di.fc.ul.pt/~jpn/r/bootstrap/resamplings.html#bootstrap-to-find-pearson-correlation-of-two-samples</b>
+
+<PRE> 
+  X = (/27,20,21,26,27,31,24,21,20,19,23,24,28,19,24,29,18,20,17,31,20,25,28,21,27/)  ; treated
+  Y = (/21,22,15,12,21,16,19,15,22,24,19,23,13,22,20,24,18,20/)                       ; control
+
+  siglvl  = 0.05
+  aveX    = <a href="avg.html"><strong>avg</strong></a> (X)             ; 23.6    ; <a href="dim_avg_n.html"><strong>dim_avg_n</strong></a> (X,0)
+  aveY    = <a href="avg.html"><strong>avg</strong></a> (Y)             ; 19.222
+  varX    = <a href="variance.html"><strong>variance</strong></a> (X)        ; 17.083  ; <a href="dim_variance_n.html"><strong>dim_variance_n</strong></a> (X,0)
+  varY    = <a href="variance.html"><strong>variance</strong></a> (Y)        ; 13.477
+  sX      = <a href="dimsizes.html"><strong>dimsizes</strong></a> (X)        ; 25
+  sY      = <a href="dimsizes.html"><strong>dimsizes</strong></a> (Y)        ; 18
+                                                   ; Following not used; FYI only
+  diffXY  = aveX - aveY                            ; 4.378
+
+  iflag   = True                                   ; population variance similar
+  tval_opt= False                                  ; p-value only
+  prob = <strong>ttest</strong>(aveX,varX,sX, aveY,varY,sY, iflag, True) 
+
+  if (prob.lt.siglvl) then
+   . . .   ; difference is significant
+  end if
+  <a href="print.html"><strong>print</strong></a>(prob)
+</PRE> 
+<p>
+<em>prob</em> will be a scalar containing the significance. It will
+range between zero and one. If <em>prob</em> &lt; <em>siglvl</em>,
+then the null hypothesis (means are from the same population) is
+rejected and the alternative hypothesis is accepted. <P>
+
+If <em>tval_opt</em> is set to True:
+
+<PRE>
+  probt = <strong>ttest</strong>(aveX,varX,sX, aveY,varY,sY, iflag, True) 
+  <a href="print.html"><strong>print</strong></a>(probt)
+</PRE>
+<p>
+
+then <em>probt</em> will be a 1D array of length two where
+<em>probt(0)</em> will contain the probability and <em>probt(1)</em>
+will contain the t-value.<P>
+<pre>
+  Variable: prob
+  Type: float
+  Total Size: 8 bytes
+            2 values
+  Number of Dimensions: 2
+  Dimensions and sizes:	[2] x [1]
+  Coordinates: 
+  (0,0)	0.0007473998        ;  <b>p-value</b>
+  (1,0)	3.658246            ;  <b>t-value</b>
+
+</pre>
+
+<B>Example 2</B><p>
+
+Assume <em>aveX</em>, <em>varX</em>, <em>sX</em>, <em>aveY</em>,
+<em>varY</em>, <em>sY</em> are dimensioned <em>nlat</em> x
+<em>mlon</em>.  Then:
+
+<PRE>
+  alpha = 100.*(1. - <strong>ttest</strong>(aveX,varX,sX, aveY,varY,sY, iflag, False)) 
+</PRE>
+<p>
+
+will yield <em>alpha</em> dimensioned <em>nlat</em> x <em>mlon</em>. A
+significance of 0.05 returned by <strong>ttest</strong> would yield
+95% for <em>alpha</em>. This is often done for plotting.<P>
+
+If <em>tval_opt</em> is set to True:
+
+<PRE>
+  alphat = 100.*(1. - <strong>ttest</strong>(aveX,varX,sX, aveY,varY,sY, iflag, True)) 
+</PRE>
+<p>
+
+then <em>alphat</em> will be 2 x <em>nlat</em> x <em>mlon</em> where
+the probabilities will be at (0,<em>nlat</em>,<em>mlon</em>) and the
+t-values will be at (1,<em>nlat</em>,<em>mlon</em>).<P>
+
+<B>Example 3</B><P>
+
+Assume <em>aveX</em>, <em>stdX</em>, <em>aveY</em>, <em>stdY</em> are
+dimensioned 12 x <em>nlat</em> x <em>mlon</em> and represent
+climatologies and interannual variabilities (represented here as
+standard deviations) for each month. Further assume <em>sX</em> and
+<em>sY</em> contain the number of statistically independent
+values. (Generally, there is no significant year-to-year
+autocorrelation of monthly data [e.g. successive Januaries].) So here,
+<em>xX</em> and <em>sY</em> are scalars indicating the number of years
+used.
+
+<PRE>
+  prob   = <strong>ttest</strong>(aveX, stdX^2, sX, aveY, stdY^2, sY, iflag, False)
+</PRE>
+<p>
+
+will yield <em>prob</em> dimensioned 12 x <em>nlat</em> x
+<em>mlon</em>. Note that the standard deviations were squared to
+produce variances as required by the <strong>ttest</strong>
+function.
+
+<PRE>
+  probt  = <strong>ttest</strong>(aveX, stdX^2, sX, aveY, stdY^2, sY, iflag, True)
+</PRE>
+
+<em>probt</em> will dimensioned 2 x 12 x <em>nlat</em> x <em>mlon</em>
+where the probabilities will be at (0,12,<em>nlat</em>,<em>mlon</em>)
+and the t-values will be at (1,12,<em>nlat</em>,<em>mlon</em>).<P>
+
+<B>Example 4</B><p>
+
+Assume <em>x</em> and <em>y</em> are dimensioned <em>time</em> x
+<em>lat</em> x <em>lon</em> where "time", "lat", "lon" are <a href="../../Manuals/Ref_Manual/NclVariables.html#Dimensions">dimension
+names</a>.<P>
+
+<OL>
+
+<LI>Use NCL's named dimensions to reorder in time.
+
+<LI>Calculate the temporal means and variances using the
+<a href="dim_avg.html"><strong>dim_avg</strong></a> and <a href="dim_variance.html"><strong>dim_variance</strong></a>
+functions.
+
+<LI>Specify a critical significance level to test the lag-one
+auto-correlation coefficient and determine the (temporal) number of
+equivalent sample sizes in each grid point using
+<a href="equiv_sample_size.html"><strong>equiv_sample_size</strong></a>.
+
+<LI>Estimate a single global mean equivalent sample size using
+<a href="wgt_areaave.html"><strong>wgt_areaave</strong></a> (optional).
+
+<LI>Specify a critical significance level for the
+<strong>ttest</strong> and test if the means are different at each
+grid point.
+
+</OL>
+
+<PRE>
+  dimXY = <a href="dimsizes.html"><strong>dimsizes</strong></a>(x)
+  ntim  = dimXY(0)
+  nlat  = dimXY(1)
+  mlon  = dimXY(2)
+                                  (1)
+  xtmp = x(lat|:,lon|:,time|:)       ; reorder but do it only once [temporary]
+  ttmp = y(lat|:,lon|:,time|:)
+    
+                                  (2)
+  xAve = <a href="dim_avg.html"><strong>dim_avg</strong></a> (xtmp)              ; calculate means at each grid point 
+  yAve = <a href="dim_avg.html"><strong>dim_avg</strong></a> (ytmp)
+  xVar = <a href="dim_variance.html"><strong>dim_variance</strong></a> (xtmp)         ; calculate variances
+  yVar = <a href="dim_variance.html"><strong>dim_variance</strong></a> (ytmp)
+                                    (3)
+  sigr = 0.05                        ; critical sig lvl for r
+  xEqv = <a href="equiv_sample_size.html"><strong>equiv_sample_size</strong></a> (xtmp, sigr,0)
+  yEqv = <a href="equiv_sample_size.html"><strong>equiv_sample_size</strong></a> (ytmp, sigr,0)
+                                  (4)
+  xN   = <a href="wgt_areaave.html"><strong>wgt_areaave</strong></a> (xEqv, wgty, 1., 0)    ; wgty could be gaussian weights 
+  yN   = <a href="wgt_areaave.html"><strong>wgt_areaave</strong></a> (yEqv, wgty, 1., 0) 
+                                  (5)
+  iflag= False                        ; population variance similar
+  prob = <strong>ttest</strong>(xAve,xVar,xN, yAve,yVar,yN, iflag, False) 
+</PRE>
+<p>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ttest.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:13 GMT -->
+</html>

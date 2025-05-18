@@ -1,0 +1,575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/static_stability.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:14 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (meteorology)">
+<meta name="keywords" content="static_stability">
+<title>static_stability</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../meteo.html">Meteorology</a>
+<br>
+<h1>static_stability</h1>
+
+<p>
+Compute static stability.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.3.0">version 6.3.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function static_stability (
+		p        : numeric,  ; float, double, integer only
+		t        : numeric,  
+		dim  [1] : integer,  
+		sopt [1] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(<em>t</em>)] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>p</em>
+<p class=indent>Array containing pressure levels (Pa).
+</p>
+<em>t</em>
+<p class=indent>Array containing temperatures (K).
+</p>
+<em>dim</em>
+<p class=indent>The dimension of <em>t</em> which corresponds to <em>p</em>.
+</p>
+<em>sopt</em>
+<p class=indent><ul>
+    <li>  sopt=0, Return static stability only
+    <li>  sopt=1, Return static stability, theta, dthdp as type list
+<ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A multi-dimensional array of the same size and shape as <em>t</em>. The output will be double 
+if <em>t</em> is of type double.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+Young (2003): "Static stability measures the gravitational resistance of
+an atmosphere to vertical displacements. It results from fundamental buoyant 
+adjustments, and so it is determined by the vertical stratification of density or
+potential temperature. It influences the dynamics of many kinds of atmospheric 
+motions, which in turn are responsible for determining its variations."
+<p>
+The formulation used to derive the static stability is from 
+Bluestein (1992): pg 197, eqn 4.3.8. Specifically:
+<pre>
+             <b>s = -T*d[<a href="../Built-in/log.html"><strong>log</strong></a>(theta)]/dp = -(T/theta)*d(theta)/dp</b>
+</pre>
+<b>References:</b>
+<pre>
+
+  Bluestein, H.B. (1992): Synoptic-Dynamic Meteorology in Midlatitudes
+                          Volume 1: Principles of Kinematics and Dynamics
+
+  Young, J.A. (2003): <a href="http://curry.eas.gatech.edu/Courses/6140/ency/Chapter7/Ency_Atmos/Static_Stability.pdf"><b>Static Stability</b></a>
+</pre>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="pot_temp.html"><strong>pot_temp</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B>: Return static stability only.
+<pre>
+
+; PRESSURE
+     p1  =(/ 1008.,1000.,950.,900.,850.,800.,750.,700.,650.,600., \
+               550.,500.,450.,400.,350.,300.,250.,200., \
+               175.,150.,125.,100., 80., 70., 60., 50., \
+                40., 30., 25., 20. /)*100
+     p1@units = "Pa"
+
+; TEMPERATURE (C)
+     t1   =(/  29.3,28.1,23.5,20.9,18.4,15.9,13.1,10.1, 6.7, 3.1,   \
+               -0.5,-4.5,-9.0,-14.8,-21.5,-29.7,-40.0,-52.4,   \
+              -59.2,-66.5,-74.1,-78.5,-76.0,-71.6,-66.7,-61.3, \
+              -56.3,-51.7,-50.7,-47.5 /)
+
+     t1   = t1 + 273.15                   ; change to Kelvin
+     t1@units = "K"
+
+     s1   = <strong>static_stability</strong> (p1, t1, 0, 0)  ; dim=0, opt=0
+
+     <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(s1)
+     <a href="../Built-in/print.html"><strong>print</strong></a>(p1+"  "+t1+"  "+s1)
+
+</pre>
+would yield
+<pre>
+
+     Variable: s1
+     Type: float
+     Total Size: 120 bytes
+                 30 values
+     Number of Dimensions: 1
+     Dimensions and sizes:   [30]
+     Coordinates: 
+     Number Of Attributes: 2
+       long_name :   <b>static stability</b>
+       units :       <b>K/Pa</b>
+     
+        <b> p(Pa)   t(K)    s(K/Pa) </b>
+(0)     100800  302.45  -0.00064084
+(1)     100000  301.25  -0.000125448
+(2)      95000  296.65  0.000176932
+(3)      90000  294.05  0.00042571
+(4)      85000  291.55  0.000482328
+(5)      80000  289.05  0.000504421
+(6)      75000  286.25  0.000513097
+(7)      70000  283.25  0.000518761
+(8)      65000  279.85  0.000533717
+(9)      60000  276.25  0.000600369
+(10)     55000  272.65  0.00066135
+(11)     50000  268.65  0.00069125
+(12)     45000  264.15  0.000652553
+(13)     40000  258.35  0.000604632
+(14)     35000  251.65  0.000575345
+(15)     30000  243.45  0.00048334
+(16)     25000  233.15  0.000421649
+(17)     20000  220.75  0.000472445
+(18)     17500  213.95  0.000697178
+(19)     15000  206.65  0.000996432
+(20)     12500  199.05  0.00226535
+(21)     10000  194.65  0.00519965
+(22)      8000  197.15  0.00892678
+(23)      7000  201.55  0.0129963
+(24)      6000  206.45  0.0151663
+(25)      5000  211.85  0.0175898
+(26)      4000  216.85  0.0208443
+(27)      3000  221.45  0.0230898
+(28)      2500  222.45  0.0303216
+(29)      2000  225.65  0.0339061
+
+
+</pre>
+<p>
+<B>Example 2</B><br>
+Same as Example 1 but <em>opt</em>=1 so three variables are returned: static stability,
+potential temperature and <b>d</b>(theta)<b>d</b>p.
+<pre>
+
+     opt = 1       ; return 3 varaibles as part of a list
+     dim = 0
+     S1  = <strong>static_stability</strong> (p1, t1, opt, dim)
+
+     <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(S1)
+
+     S1_s     = S1<b>[0]</b>   ; explicitly extract each variable from the list
+     S1_pt    = S1<b>[1]</b>   ; not necessary but clearer
+     S1_dthdp = S1<b>[2]</b>
+
+     <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(S1_s)
+     <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(S1_pt)
+     <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(S1_dthdp)
+
+</pre>
+would yield
+<pre>
+
+     Variable: <b>S1</b>
+     <b>Type: list <fifo></b>
+     <b>Total items: 3</b>
+     
+     
+     Variable: S1_s
+     Type: float
+     Total Size: 120 bytes
+                 30 values
+     Number of Dimensions: 1
+     Dimensions and sizes:   [30]
+     Coordinates: 
+     Number Of Attributes: 2
+       long_name :   static stability
+       units :       K/Pa
+     
+     Variable: S1_pt
+     Type: float
+     Total Size: 120 bytes
+                 30 values
+     Number of Dimensions: 1
+     Dimensions and sizes:   [30]
+     Coordinates: 
+     Number Of Attributes: 2
+       units :       K
+       long_name :   potential temperature
+     
+     Variable: S1_dthdp
+     Type: float
+     Total Size: 120 bytes
+                 30 values
+     Number of Dimensions: 1
+     Dimensions and sizes:   [30]
+     Coordinates: 
+     Number Of Attributes: 2
+       long_name :   vertical derivative of theta with pressure
+       units :       K/Pa
+
+        <b> p(Pa)   t(K)    s(K/Pa)     Pot(K)    <b>d</b>(theta)<b>d</b>p </b>
+(0)	100800  302.45  -0.00064084  301.762   0.000639381
+(1)	100000  301.25  -0.00012544  301.25    0.000125448
+(2)      95000  296.65  0.000176932  301.034  -0.000179547
+(3)      90000  294.05  0.00042571   303.045  -0.000438733
+(4)      85000  291.55  0.000482328  305.421  -0.000505276
+(5)      80000  289.05  0.000504421  308.098  -0.000537662
+(6)      75000  286.25  0.000513097  310.798  -0.000557098
+(7)      70000  283.25  0.000518761  313.669  -0.000574472
+(8)      65000  279.85  0.000533717  316.543  -0.000603696
+(9)      60000  276.25  0.000600369  319.706  -0.000694812
+(10)     55000  272.65  0.00066135   323.491  -0.000784671
+(11)     50000  268.65  0.00069125   327.553  -0.00084281
+(12)     45000  264.15  0.000652553  331.919  -0.000819968
+(13)     40000  258.35  0.000604632  335.753  -0.000785782
+(14)     35000  251.65  0.000575345  339.777  -0.000776828
+(15)     30000  243.45  0.00048334   343.521  -0.000682019
+(16)     25000  233.15  0.000421649  346.597  -0.000626816
+(17)     20000  220.75  0.000472445  349.789  -0.000748612
+(18)     17500  213.95  0.000697178  352.211  -0.00114772
+(19)     15000  206.65  0.000996432  355.528  -0.00171429
+(20)     12500  199.05  0.00226535   360.783  -0.00410601
+(21)     10000  194.65  0.00519965   376.058  -0.0100456
+(22)      8000  197.15  0.00892678   405.988  -0.0183828
+(23)      7000  201.55  0.0129963    431.206  -0.0278049
+(24)      6000  206.45  0.0151663    461.598  -0.0339099
+(25)      5000  211.85  0.0175898    499.026  -0.0414339
+(26)      4000  216.85  0.0208443    544.465  -0.0523356
+(27)      3000  221.45  0.0230898    603.697  -0.0629453
+(28)      2500  222.45  0.0303216    638.883  -0.0870846
+(29)      2000  225.65  0.0339061    690.782  -0.103797
+
+</pre>
+<p>
+<B>Example 3</B>: Calculate the static stability for the following.
+<p>
+<pre>
+Let <em>p1</em> be a one-dimensional array containing isobaric levels: p1(klev); 
+Let <em>p2</em> be a two-dimensional array containing isobaric levels: p2(klev,ncol); 
+Let <em>p3</em> be a three-dimensional array containing pressure levels: p3(klev,nlat,mlon);
+Let <em>p4</em> be a four-dimensional  array containing pressure levels: p4(ntim,klev,nlat,mlon); 
+Let <em>p5</em> be a five-dimensional  array containing pressure levels: p5(nens,ntim,klev,nlat,mlon); 
+
+Let <em>t1</em> be a one-dimensional array containing temperature: t1(klev);        (<b>0</b>) 
+Let <em>t2</em> be a two-dimensional array containing temperature: t2(klev,ncol);   (<b>0</b>,1)
+let <em>t3</em> be a three-dimensional (klev,nlat,mlon);                            (<b>0</b>,1,2)
+let <em>t4</em> be a four-dimensional  (ntim,klev,nlat,mlon);                       (0,<b>1</b>,2,3)
+let <em>t5</em> be a five-dimensional  (nens,ntim,klev,nlat,mlon)                   (0,1,<b>2</b>,3,4)
+
+     s1  = <strong>static_stability</strong>(p1,t1, 0, sopt)
+     s3  = <strong>static_stability</strong>(p1,t2, 0, sopt)
+     s3  = <strong>static_stability</strong>(p1,t3, 0, sopt)
+     s4  = <strong>static_stability</strong>(p1,t4, 1, sopt)
+     s5  = <strong>static_stability</strong>(p1,t5, 2, sopt)
+
+     s33 = <strong>static_stability</strong>(p3,t3, 0, sopt)
+     s44 = <strong>static_stability</strong>(p4,t4, 1, sopt)
+
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/static_stability.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:14 GMT -->
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Download/windows_linux_subsystem.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 16:13:03 GMT -->
+<head>
+<meta name="description" content="How to install and run the NCAR Command Language on Windows 10 Linux Bash shell">
+<meta name="keywords" content="NCL installation">
+<TITLE>Installing and running NCL on Windows 10 Linux Bash shell</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL ></a>
+<a class=crumb href="index.html">Download ></a>
+<a class=crumb href="windows.html">Windows notes</a>
+
+<h1>Installing and running NCL on Windows 10 Linux Bash shell</h1>
+
+This document contains notes on installing and running NCL under the
+Windows 10 subsystem, also known as the Linux Bash shell. 
+<p>
+
+Please read these instructions all the way through before starting the
+installation.
+<p>
+
+<UL>
+<LI><A HREF="#InstallWindows10">Install or update to Windows 10</A>
+<LI><A HREF="#EnableRunLinuxBashShell">Enable and run the Linux Bash shell</A>
+<LI><A HREF="#InstallAdditionalPackages">Install additional packages</A>
+<LI><A HREF="#InstallRunXming">Install and run Xming</A>
+<LI><A HREF="#DownloadNCL">Download NCL</A>
+<LI><A HREF="#InstallNCL">Install NCL</A>
+<LI><A HREF="#SetNcargRoot">Set your environment to run NCL</A>
+<LI><A HREF="#SetDisplay">Set DISPLAY environment variable</A>
+<LI><A HREF="#TestNCL">Test NCL</A>
+<LI><A HREF="#Troubleshooting">Troubleshooting problems</A>
+</UL>
+<p>
+
+<A NAME="InstallWindows10"></A>
+<HR>
+<H2>Install or updated to Windows 10</H2>
+  
+In order to use the Linux Bash Shell, you must upgrade to Windows 10, and 
+you must have a 64-bit system. See the next section for more details.
+<p>
+
+<A NAME="EnableRunLinuxBashShell"></A>
+<HR>
+<h2>Enable and run the Linux Bash shell</h2>
+
+Once you have Windows 10 installed, you need to enable the Linux Bash
+shell and then run it. 
+<p>
+
+We
+found <a href="https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/">this
+useful article</a> on howtogeek.com. Be sure to read through the
+section on how to run the bash.exe file, as you will need to do this
+before reading the next section.
+<p>
+
+
+<A NAME="InstallAdditionalPackages"></A>
+<HR>
+<H2>Install additional packages</H2>
+
+Before you can run NCL, you need to install some additional packages
+that NCL depends on.  Using Linux makes this easy, because you can use
+the "apt-get" command to install the required packages.
+<p>
+
+From the Linux bash window that you opened earlier, type the following commands
+to install the required packages. You can put multiple packages on one line:
+<p>
+
+<pre>
+  sudo apt-get install csh libfontconfig gfortran libgfortran3
+  sudo apt-get install libxrender-dev libx11-dev libxrender1
+  sudo apt-get install libssh2-1 libgomp1
+  sudo apt-get install firefox imagemagick
+</pre>
+<p>
+
+Note that the firefox and imagemagick packages are not required, but
+useful.  Imagemagick gives you the powerful "convert" command for
+converting and post-processing graphical images.
+<p>
+
+The above installations can take awhile, so make sure to do this when
+you're not in a hurry.
+
+<A NAME="InstallRunXming"></A>
+<HR>
+<h2>Install and run Xming</h2>
+
+If you need to use the X11 window option in NCL Graphics, then you
+will need to install and run an X server. If you are not sure, then
+we recommend following these instructions anyway.
+<p>
+
+We
+found <a href="http://www.pcworld.com/article/3055403/windows/windows-10s-bash-shell-can-run-graphical-linux-applications-with-this-trick.html">an
+article</a> in PC World that recommends using
+the <a href="https://sourceforge.net/projects/xming/">Xming</a>
+package as an X server. Be sure to read the instructions about setting
+the DISPLAY environment variable before reading the next section.
+
+<A NAME="DownloadNCL"></A>
+<HR>
+<h2>Download NCL</h2>
+
+Now you are ready to download NCL:
+<p>
+
+<ul>
+<li>Open a browser window from the Linux shell (using the above instructions from PC World).
+<p>
+
+<li>Go to the <a href="http://www.earthsystemgrid.org/">Climate Data Gateway</a> web site.<p>
+
+<li>Navigate your way to the NCL Version
+6.6.0 <a href="https://www.earthsystemgrid.org/dataset/ncl.662.dap/file.html">OPeNDAP
+enabled</a>
+or 
+<a href="https://www.earthsystemgrid.org/dataset/ncl.662.nodap/file.html">non OPeNDAP enabled</a>
+page.
+<p>
+
+<li>Download the binary for the 64-bit version of NCL compiled under Debian 7.11:
+<p>
+
+<pre>
+<a href="https://www.earthsystemgrid.org/download/fileDownload.html?logicalFileId=246ab3ec-fa02-11e6-a976-00c0f03d5b7c">ncl_ncarg-6.6.2-Debian7.11_64bit_gnu472.tar.gz</a>
+</pre>
+
+or
+<p>
+
+<pre>
+<a href="https://www.earthsystemgrid.org/download/fileDownload.html?logicalFileId=80699365-fa02-11e6-a976-00c0f03d5b7c">ncl_ncarg-6.6.2-Debian7.11_64bit_nodap_gnu472.tar.gz</a>
+</ul>
+<p>
+
+<A NAME="InstallNCL"></A>
+<HR>
+<h2>Install NCL</h2>
+
+Once you have the *.tar.gz file, decide where you want to install NCL.
+If you are new to UNIX and don't know where you want to put it, then
+we recommend installing NCL in the directory like
+"/usr/local/ncl-6.6.2". We'll use this path in the example below, and 
+will assume that you saved the file to the directory
+"~/Downloads".
+<p>
+
+From the Linux bash shell window that you started earlier, type the
+following commands:
+
+<PRE>
+    mkdir /usr/local/ncl-6.6.2
+    tar -zxf ~/Downloads/ncl_ncarg-6.6.2-Debian7.11_64bit_gnu472.tar.gz -C /usr/local/ncl-6.6.2
+</PRE>
+<p>
+
+You can remove the ncl_ncarg-6.6.2-Debian7.11_64bit_gnu472.tar.gz file once the above 
+commands are done.
+<p>
+
+
+<A NAME="SetNcargRoot"></A>
+<HR>
+<h2>Set your environment to run NCL</h2>
+
+Every user of NCL needs to set their environment before they can use
+NCL. You can do this by opening the file "~/.profile" or
+"~/.bashrc" with a UNIX editor (vim, nedit, emacs, etc) and
+adding the lines:
+<p>
+
+<PRE>
+    export NCARG_ROOT=/usr/local/ncl-6.6.2
+    export PATH=$NCARG_ROOT/bin:$PATH
+</PRE>
+
+Please note that you must use a UNIX editor to change this file.  If
+you are unfamiliar with UNIX editors, we recommend that you
+use <a href="http://www.nedit.org/">nedit</a>, which you can
+install via "sudo apt-get install nedit".
+<p>
+
+<A NAME="SetDisplay"></A>
+<HR>
+<h2>Set DISPLAY environment variable</h2>
+
+In order to run any X applications, including running NCL to display
+graphics to your screen, you may need to set the DISPLAY enviroment
+variable, as described in the <A HREF="#InstallRunXming">earlier
+Xming instructions</A>. You can set this variable in the
+same ~/.profile or ~/.bashrce that you used for setting
+NCARG_ROOT.
+<p>
+
+<PRE>
+    export DISPLAY=:0
+</PRE>
+
+You should now be ready to test NCL.<P>
+
+<A NAME="TestNCL"></A>
+<HR>
+<h2>Test NCL</h2>
+
+To test your installation of NCL, type the following:<P>
+
+<PRE>
+    ncl -V
+</PRE>
+
+This should echo the version of NCL, like "6.6.2".
+<p>
+
+For a graphical test, type:
+<p>
+
+<PRE>
+    cp $NCARG_ROOT/lib/ncarg/nclex/xyplot/xy04n.ncl .
+    ncl xy04n.ncl
+</PRE>
+<p>
+
+A window with an XY plot should pop up. If you click anywhere in the
+window with your left mouse button, the window will go away.<P>
+
+If you have problems, then please review the troubleshooting section
+that follows.
+
+<A NAME="Troubleshooting"></A>
+<HR>
+<h2>Troubleshooting problems</h2>
+
+If you are having problems running the test in the above section,
+then here are some troubleshooting tips:
+<p>
+
+<UL>
+
+<LI>If you get an error about "ncl" not being able to find a missing
+"lib<i>xxxx</i>.so" library, then try using the "apt-get" command to
+install that library or package.
+<p>
+
+<LI>If you get the error:
+<p>
+
+<PRE>
+ warning:GKS:GOPWK: --X driver error: error opening display
+</PRE>
+
+then this probably means that your DISPLAY environment variable
+is not set, or it is set incorrectly. Please type:
+<p>
+
+<PRE>
+printenv DISPLAY
+</PRE>
+
+and make sure that it is set to what is discussed in the 
+"<A HREF="#SetDisplay">Set DISPLAY environment variable</A>" section
+above.
+<p>
+
+</UL>
+<p>
+
+If you still have problems, then send email to <A
+HREF="mailto:ncl-install@ucar.edu">ncl-install@ucar.edu</A>.  You need to <a
+href="http://mailman.ucar.edu/mailman/listinfo/ncl-install">be a
+member</a> in order to post.
+<p>
+
+</UL>
+<HR>
+    
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Download/windows_linux_subsystem.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 16:13:03 GMT -->
+</html>

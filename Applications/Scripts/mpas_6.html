@@ -1,0 +1,94 @@
+;----------------------------------------------------------------------
+; mpas_6.ncl
+;
+; Concepts illustrated:
+;   - Plotting MPAS data using raster fill
+;   - Using cnFillPalette to assign a color palette to contours
+;   - Explicitly setting contour levels
+;   - Subsetting a color map
+;   - Using get_cpu_time to calculate timings for various parts of the script
+;----------------------------------------------------------------------
+; This script shows how to create a filled raster contour plot of the
+; "ter" variable on an MPAS initialization file (init.nc). This 
+; particular MPAS file is mixed-resolution mesh of 15 km and 3 km
+; cells, where the 3 km region is over the United States. There are 
+; 6.4 million cells in this file which takes about 18 seconds to plot.
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+;----------------------------------------------------------------------
+; Prints elapsed time given a start and end time, and a title.
+;----------------------------------------------------------------------
+procedure print_elapsed_time(start_time,end_time,title)
+begin
+  print("----------------------------------------------------------------------")
+  print("Elapsed time : " + title + " : " + (end_time-start_time) + " CPU seconds.")
+  print("----------------------------------------------------------------------")
+end
+
+;----------------------------------------------------------------------
+; Main code
+;----------------------------------------------------------------------
+begin
+    start_code = get_cpu_time()   
+
+;---Open the MPAS initialization file containing mixed resolution mesh, and read some data
+    dir            = "../Data/2017082400_hwt/"
+    mpas_init_file = "init.nc"
+    fi      = addfile(dir+mpas_init_file,"r")
+    ter     = fi->ter
+    latCell = fi->latCell
+    lonCell = fi->lonCell
+
+;---Convert to degrees from radians
+    RAD2DEG = get_r2d(typeof(lonCell))      ; Radian to Degree
+    lonCell = lonCell*RAD2DEG
+    latCell = latCell*RAD2DEG
+    ncells  = dimsizes(latCell)
+
+;---Look at your data!
+    print("==================================================")
+    print(mpas_init_file + " has " + ncells + " cells")
+
+    print_elapsed_time(start_code,get_cpu_time(),"getting data")
+
+    printMinMax(ter,0)
+    printMinMax(latCell,0)
+    printMinMax(lonCell,0)
+
+;---Start the graphics
+    start_graphics = get_cpu_time()   
+
+    wks = gsn_open_wks("png","mpas")
+
+    res                      = True              ; Plot mods desired.
+
+    res@gsnMaximize          = True              ; Maximize plot
+
+    res@sfXArray             = lonCell           ; The 1D lat/lon arrays will cause NCL
+    res@sfYArray             = latCell           ; to use triangular mesh under the hood.
+
+    res@cnFillOn             = True              ; color plot desired
+    res@cnFillMode           = "RasterFill"      ; turn raster on      
+    res@cnLinesOn            = False             ; turn off contour lines
+    res@mpFillOn             = False             ; Turn off map fill
+    res@lbBoxLinesOn         = False             ; turn off labelbar box lines
+
+    res@tiMainString         = mpas_init_file + " (ter, " + ncells + " cells)"
+
+;---Set the contour levels using unequally-spaced values.
+    res@cnLevelSelectionMode = "ExplicitLevels"
+    res@cnLevels             = (/10,50,100,250,500,750,1000,1250,1500,1750,\
+                                 2000,2250,2500,2750,3000,3250,3500,3750,4000,\
+                                 4250,4500,4750,5000,5250,5500,5750,6000,6250/)
+
+    cmap = read_colormap_file("MPL_terrain")
+    res@cnFillPalette        = cmap(17:,:)     ; Subset the color map to remove some of the low blues
+
+    plot = gsn_csm_contour_map(wks,ter,res)  
+
+    print_elapsed_time(start_graphics,get_cpu_time(),"plotting data")
+    print_elapsed_time(start_code,get_cpu_time(),get_script_prefix_name()) 
+end

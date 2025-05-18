@@ -1,0 +1,88 @@
+;======================================================================
+; geo_4.ncl
+;
+; Concepts illustrated:
+;   - Plotting data on a high-res geodesic mesh
+;   - Setting the cell bounds for an unstructured mesh
+;   - Using opacity to emphasize or subdue overlain features
+;======================================================================
+; This script requires NCL V6.6.0 or later to run, since it uses
+; an updated version of gsn_coordinates.
+;======================================================================
+
+begin
+  f = addfile("hswm.nc","r")
+  ke = f->kinetic_energy
+
+  r2d = get_r2d("float")
+  cx = f->grid_corner_lon * r2d
+  cy = f->grid_corner_lat * r2d
+
+;---Another way of defining the cell centers
+  ke@lon1d = f->grid_center_lon * r2d
+  ke@lat1d = f->grid_center_lat * r2d
+
+  wks = gsn_open_wks("png","geo")
+
+  res                      = True
+  res@gsnMaximize          = True
+
+  res@sfXCellBounds        = cx
+  res@sfYCellBounds        = cy
+
+  res@mpProjection         = "Orthographic"     ; choose projection
+  res@mpCenterLatF         =   30
+  res@mpCenterLonF         = -100
+  res@mpPerimOn            = False
+  res@mpFillOn             = False
+  res@mpOutlineDrawOrder   = "PostDraw"
+  res@mpGeophysicalLineColor = "white"
+  res@mpGeophysicalLineThicknessF = 3.0
+
+  res@cnFillOn             = True
+  res@cnFillMode           = "RasterFill"
+  res@cnLinesOn            = False
+  res@cnLineLabelsOn       = False
+  res@cnFillPalette        = "BlAqGrYeOrReVi200"
+  res@cnLevelSelectionMode = "ManualLevels"
+  res@cnLevelSpacingF      = 4.0
+;  res@cnMinLevelValF       = 0.0
+;  res@cnMaxLevelValF       = 850
+  res@cnMaxLevelCount      = 255
+
+  res@gsnRightString       = ""
+  res@gsnLeftString        = ""
+
+  res@lbOrientation        = "vertical"
+  res@lbBoxLinesOn         = False
+
+  res@tiMainString         = "Contours of data on high-res geodesic mesh (" +\
+                              dimsizes(ke) + " cells)"
+  res@tiMainFontHeightF    = 0.02
+  res@tiMainFont           = "helvetica"
+  plot = gsn_csm_contour_map(wks,ke,res)
+
+  res@gsnDraw         = False
+  res@gsnFrame        = False
+  res@cnFillOpacityF  = 0.5
+  res@tiMainString    =  "High-res geodesic mesh drawn w/gsn_coordinates"
+  plot = gsn_csm_contour_map(wks,ke,res)
+
+;
+; gsn_coordinates was updated in NCL V6.6.0 to 
+; draw mesh vertices. You will need NCL V6.6.0 or
+; later for the code below to work.
+;
+  gsres                            = True
+  gsres@gsnCoordsMeshLatBounds     = cy
+  gsres@gsnCoordsMeshLonBounds     = cx
+  gsres@gsnCoordsMeshClosePolygons = True      ; necessary to get fully closed polygons
+  gsres@gsMarkerColor              = "Black"   ; color to use for cell centers
+  gsres@gsLineColor                = "Black"   ; color to use for cell edges
+  gsres@gsMarkerSizeF              = 3.0
+  gsres@gsLineThicknessF           = 3.0
+
+;---Draws plot with lines only
+  gsn_coordinates(wks,plot,(/ke/),gsres)
+
+end

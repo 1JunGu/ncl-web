@@ -1,0 +1,620 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/polar.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:58:59 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+polar stereographic template and its modification.">
+<meta name="keywords" content="NCL, graphics, visualization, 
+polar stereographic, polar plot">
+<TITLE>NCL Graphics: Polar Stereographic Projections</TITLE>
+</head>
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_gsn_csm.html">gsn_csm graphical interfaces</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+
+    <h1>NCL Graphics: Polar Stereographic Projections (high-level plot interface)</h1>
+    <div class=mainimage>
+    <img src="Images/polar_8_lg.png" align=left border=0></a>
+    </div>
+
+    <div class=text>
+    <h3>Polar Projection Plot Templates</h3>
+    <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map_polar.html"><strong>gsn_csm_contour_map_polar</strong></a>
+    <p>
+    <a href="../Document/Graphics/Interfaces/gsn_csm_vector_map_polar.html"><strong>gsn_csm_vector_map_polar</strong></a>
+    <p>
+    <a href="../Document/Graphics/Interfaces/gsn_csm_vector_scalar_map_polar.html"><strong>gsn_csm_vector_scalar_map_polar</strong></a>
+    <p>
+    <a href="../Document/Graphics/Interfaces/gsn_csm_streamline_map_polar.html"><strong>gsn_csm_streamline_map_polar</strong></a>
+    </div>
+
+    <div class=ex>
+    <!--Polar_1-->
+    <a name=ex1></a>
+    <a href="Images/polar_1_lg.png">
+    <img src="Images/polar_1_sm.png" align=left border=2></a>
+    <a href="Scripts/polar_1.html">polar_1.ncl</a>: 
+    The simplest. Reads in data and then creates a default plot.
+    <p>
+    <a href="../Document/Graphics/Resources/gsn.html#gsnPolar"><em>gsnPolar</em></a> = "NH" <p>
+    <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map_polar.html"><strong>gsn_csm_contour_map_polar</strong></a>
+    is the plot interface that draws a contour plot over a polar stereographic
+    map.
+    <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Contours/NCL_polar_1_lg.html#sphx-glr-gallery-contours-ncl-polar-1-lg-py">here</a>.
+
+    </div>
+
+    <div class=ex>
+    <!--Polar_2-->
+    <a name=ex2></a>
+    <a href="Images/polar_2_lg.png">
+    <img src="Images/polar_2_sm.png" align=left border=2 ></a>
+    <a href="Scripts/polar_2.html">polar_2.ncl</a>: 
+    Adds some intrinsic labels, manually sets the contour values, and 
+    creates a panel plot. 
+    <p>
+     <a href="../Document/Graphics/Resources/cn.html#cnLevelSelectionMode"><em>cnLevelSelectionMode</em></a> = "ManualLevels"<br>     
+     <a href="../Document/Graphics/Resources/cn.html#cnMinLevelValF"><em>cnMinLevelValF</em></a> = -10.<br>               
+     <a href="../Document/Graphics/Resources/cn.html#cnMaxLevelValF"><em>cnMaxLevelValF</em></a> =  35.<br>               
+     <a href="../Document/Graphics/Resources/cn.html#cnLevelSpacingF"><em>cnLevelSpacingF</em></a> =   5. <br>
+     Manually sets the contour levels. <br>
+     <p>
+     <a href="../Document/Graphics/Resources/ti.html#tiMainString"><em>tiMainString</em></a> = "CCM2 T42 July" <br>   
+     <a href="../Document/Graphics/Resources/gsn.html#gsnCenterString"><em>gsnCenterString</em></a>= "300 mb" <br> 
+     Creates a title and center string label 
+     <p>
+     <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> 
+     is the plot interface that creates panel plots. 
+     <p>
+     <a href="../Document/Graphics/Resources/gsn.html#gsnPanelYWhiteSpacePercent"><em>gsnPanelYWhiteSpacePercent</em></a> = 5,  Can be
+     used to add more white space around the individual plots in a panel.
+     Note that this resources is applied to 
+     <a href="../Document/Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a> 
+     </div>
+
+     <div class=ex>
+     <!--Polar_3-->
+     <a name=ex3></a>
+     <a href="Images/polar_3_lg.png">
+     <img src="Images/polar_3_sm.png" align=left border=2></a>
+     <a href="Scripts/polar_3.html">polar_3.ncl</a>: 
+     Changes the neg contour lines to dash and the zero line to double 
+     thickness. 
+     <p>
+     You must first turn off the draw and frame: <br>
+     <a href="../Document/Graphics/Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a>  = False <br>
+     <a href="../Document/Graphics/Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a> = False 
+     <p>
+     Draw the plot as usual, setting the resource
+     <a href="../Document/Graphics/Resources/gsn.html#gsnContourNegLineDashPattern"><em>gsnContourNegLineDashPattern</em></a>. 
+     </div>
+
+     <div class=ex>
+     <!--Polar_4-->
+     <a name=ex4></a>
+     <a href="Images/polar_4_lg.png">
+     <img src="Images/polar_4_sm.png" align=left border=2></a>
+     <a href="Scripts/polar_4.html">polar_4.ncl</a>:Adds 
+     shading and changes the lat/lon spacing. 
+     <p>
+     <a href="../Document/Functions/Shea_util/ShadeLtGtContour.html">
+     ShadeLtGtContour</a>
+     creates the contour map and then shades it. Note: 
+     <a href="../Document/Functions/Shea_util/ShadeLtGtContour.html">
+     ShadeLtGtContour</a> has been superceded by the more versatile 
+     <a href="../Document/Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>. 
+     We recommend you use this instead.
+     <p>
+     <a href="../Document/Graphics/Resources/mp.html#mpGridLatSpacingF"><em>mpGridLatSpacingF</em></a> = 45. <br>
+     <a href="../Document/Graphics/Resources/mp.html#mpGridLonSpacingF"><em>mpGridLonSpacingF</em></a>    = 90. <br>
+     changes the lat/lon spacing.
+     </div>
+
+     <div class=ex>
+     <!--Polar_5-->
+     <a name=ex5></a>
+     <a href="Images/polar_5_lg.png">
+     <img src="Images/polar_5_sm.png" align=left border=2></a>
+     <a href="Scripts/polar_5.html">polar_5.ncl</a>: Demonstrates how to
+     block out part of the plot by creating a polygon and filling it.  This
+     technique only works in plot coordinates, so we can not mask out the
+     lat/lon labels around the edge, or the edge itself when white is used
+     as the polyfill.
+     <p>
+     <a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a> is the plot
+     interface that draws polygons as part of a plot. This means the
+     plots can be paneled.
+     <p>
+     <a href="../Document/Graphics/Resources/gs.html#gsFillColor"><em>gsFillColor</em></a>="white",
+     Changes the color of the polygon fill.
+     <p>
+     Note that <a href="../Document/Graphics/Resources/mp.html#mpMinLatF"><em>mpMinLatF</em></a> is used to set the 
+     minimum latitude shown on the plot. For Southern Hemisphere plots, 
+     <a href="../Document/Graphics/Resources/mp.html#mpMaxLatF"><em>mpMaxLatF</em></a> can be used to set the maximum 
+     latitude shown.
+     </div>
+
+     <div class=ex>
+     <!--Polar_6-->
+     <a name=ex6></a>
+     <a href="Images/polar_6_lg.png">
+     <img src="Images/polar_6_sm.png" align=left border=2></a>
+     <a href="Scripts/polar_6.html">polar_6.ncl</a>: Same concept as example
+     5, but in this case, we wanted to mask out the polar plot in a 
+     semi-circle. This is more complicated b/c we don't know a priori what
+     the values are along the straight line. This technique draws a line 
+     in NDC coordinates and then converts them to lat/lon coordinates.
+     </div>
+
+     <div class=ex>
+     <!--Polar_7-->
+     <a name=ex7></a>
+     <a href="Images/polar_7_lg.png">
+     <img src="Images/polar_7_sm.png" align=left border=2></a>
+     <a href="Scripts/polar_7.html">polar_7.ncl</a>: Example of a polar
+     vector plot. 
+     <p>
+     <a href="../Document/Graphics/Interfaces/gsn_csm_vector_map_polar.html"><strong>gsn_csm_vector_map_polar</strong></a> is the
+     plot template that creates basic polar vector plots.
+     <p>
+     <a href="../Document/Graphics/Resources/vc.html#vcMonoLineArrowColor"><em>vcMonoLineArrowColor</em></a>  = False,  Turns on color 
+     vectors.
+     <p>
+     <a href="../Document/Graphics/Resources/vc.html#vcMinDistanceF"><em>vcMinDistanceF</em></a> = 0.02, Sets a
+     minimum distance between the vectors. This is useful near the
+     poles where the number of vectors increases.  The value is in NDC
+     coordinates.
+     </div>
+
+     <div class=ex>
+     <!--Polar_8-->
+     <a name=ex8></a>
+     <a href="Images/polar_8_lg.png">
+     <img src="Images/polar_8_sm.png" align=left border=2></a>
+     <a href="Scripts/polar_8.html">polar_8.ncl</a>: Example of a polar
+     vector plot. 
+     <p>
+     <a href="../Document/Graphics/Interfaces/gsn_csm_vector_scalar_map_polar.html"><strong>gsn_csm_vector_scalar_map_polar</strong></a>
+     is the plot template that draws a polar vector plot over a
+     contour plot.
+     <p>
+     <a href="../Document/Graphics/Resources/vc.html#vcLineArrowColor"><em>vcLineArrowColor</em></a> = "white", Changes the color of the 
+     vectors.
+     <p>
+     <a href="../Document/Graphics/Resources/vc.html#vcGlyphStyle"><em>vcGlyphStyle</em></a> = "CurlyVector", turns on curly vectors. 
+     <p>
+     <a href="../Document/Graphics/Resources/gsn.html#gsnScalarContour"><em>gsnScalarContour</em></a> = True, Draws the
+     contour plot under the vectors rather than have the vectors be
+     colored by the contour plot.
+     </div>
+
+     <div class=ex>
+     <!--Polar_9-->
+     <a name=ex9></a>
+     <a href="Images/polar_9_lg.png">
+     <img src="Images/polar_9_sm.png" align=left border=3></a>
+     <a href="Scripts/polar_9.html">polar_9.ncl</a>: Example of a polar
+     streamline plot. 
+     <p>
+     <a href="../Document/Graphics/Interfaces/gsn_csm_streamline_map_polar.html"><strong>gsn_csm_streamline_map_polar</strong></a> is
+     the plot template that draws a polar streamline plot.
+
+     <a href="../Document/Graphics/Resources/st.html#stArrowLengthF"><em>stArrowLengthF</em></a> = 0.008,
+     controls the length of the directional arrows. The default is
+     dynamic.<br>
+
+     <a href="../Document/Graphics/Resources/st.html#stLengthCheckCount"><em>stLengthCheckCount</em></a> = 15,
+     controls how frequently a new streamline is started. The value is
+     in terms of an internal NCL loop that calculates new starts. The
+     default is 35.<br>
+
+     <a href="../Document/Graphics/Resources/st.html#stArrowStride"><em>stArrowStride</em></a> = 1,
+     Controls in which grid cells an arrow head is draw. The default
+     is every other grid cell.<br>
+
+     <a href="../Document/Graphics/Resources/st.html#stLineStartStride"><em>stLineStartStride</em></a> = 1,
+     Controls which grid points are allowed to start new
+     streamlines. The default is 2, which is every other grid
+     cell.<br>
+
+     <a href="../Document/Graphics/Resources/st.html#stMinArrowSpacingF"><em>stMinArrowSpacingF</em></a> =
+     0.035, controls the distance between drawn arrows. The default is
+     0.0, which could draw arrows right on top of each other.<br>
+
+     <a href="../Document/Graphics/Resources/st.html#stStepSizeF"><em>stStepSizeF</em></a>= 0.001,
+     Controls the basic step size used to create the streamline. The
+     default is dynamic.
+     <p>
+
+     The following two resources on the ones that you will really have to
+     tweak depending upon the field you are plotting.
+     <p>
+
+     <a href="../Document/Graphics/Resources/st.html#stMinDistanceF"><em>stMinDistanceF</em></a> = 0.03<br>
+     <a href="../Document/Graphics/Resources/st.html#stMinLineSpacingF"><em>stMinLineSpacingF</em></a> =
+     0.007,Controls the minimum distance between drawn
+     streamlines. The default is dynamic.
+
+     </div>
+
+     <div class=ex>
+     <!--Polar_10-->
+     <a name=ex10></a>
+     <a href="Images/polar_10_lg.png">
+     <img src="Images/polar_10_sm.png" align=left border=2></a>
+     <a href="Scripts/polar_10.html">polar_10.ncl</a>: Demonstrates how to
+     blow up the lat/lon labels. Unlike other plot templates, the lat/long
+     labels on a polar plot are not part of a tickmark object, but instead
+     they are text features that have been manually added to the plot.<br>
+     Note, that at present you need to load gsn*test for this feature to
+     work.
+     <p>
+
+     <a href="../Document/Graphics/Resources/gsn.html#gsnPolarLabelFontHeightF"><em>gsnPolarLabelFontHeightF</em></a>= .025, will
+     change the font height of the lat/long labels w/o changing the
+     gsn* string text.
+
+     <p>
+
+     <a href="../Document/Graphics/Resources/gsn.html#gsnPolarLabelDistance"><em>gsnPolarLabelDistance</em></a> = 1.08,
+     Controls how far away from the circle the polar labels will be
+     drawn. These labels are not a tick mark object.  They are are
+     text that has been manually added.  A determination was made as
+     to how far away from the edge to place this text.  When the
+     ability to blow the text up was added, it ran the 0 and 180 text
+     into the circle. Note that this resource moves all the text out,
+     and not just the 0 and 180.
+
+     </div>
+     
+     <div class=ex>
+     <!--Polar_11-->
+     <a name=ex11></a>
+     <a href="Images/polar_11_lg.png">
+     <img src="Images/polar_11_sm.png" align=left border=2></a>
+     <a href="Scripts/polar_11.html">polar_11.ncl</a>: 
+     The simplest. Reads in data and then creates a default plot.
+     <p>
+
+     <a href="../Document/Graphics/Resources/gsn.html#gsnPolarLabelSpacing"><em>gsnPolarLabelSpacing</em></a> = 90, controls
+     how frequently to label the lat,lon lines. This is different from
+     a tick mark resource b/c polar tickmark labels are actually added
+     text.
+     </div>
+     
+     <div class=ex>
+     <!--Polar_12-->
+     <a name=ex12></a>
+     <a href="Images/polar_12_lg.png">
+     <img src="Images/polar_12_sm.png" align=left border=3></a>
+     <a href="Scripts/polar_12.html">polar_12.ncl</a>: 
+     Shows how to rotate a polar plot so that 0.0 is not facing
+     south.
+     <p>
+     <a href="../Document/Graphics/Resources/mp.html#mpCenterLonF"><em>mpCenterLonF</em></a> controls what
+     longitude is at the center of the plot.  This resource can be
+     used adjust what longitude is facing south.
+     </div>
+    <div class=ex>
+    <!--Scatter_6-->
+    <a name=ex6></a>
+    <a href="Images/scatter_6_lg.png">
+    <img src="Images/scatter_6_sm.png" align=left border=2></a>
+
+    <a href="Scripts/scatter_6.html">scatter_6.ncl</a>: Demonstrates 
+    how to draw outlined, filled markers over a polar map plot.
+    <p>
+
+    The <a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a> function
+    is called twice for each range of values: once to draw a filled
+    dot (<a href="../Document/Graphics/Resources/gs.html#gsMarkerIndex"><em>gsMarkerIndex</em></a>=16) and
+    one to draw an outlined dot
+    (<a href="../Document/Graphics/Resources/gs.html#gsMarkerIndex"><em>gsMarkerIndex</em></a>=4). This
+    gives the appearance of outlined markers.  The marker sizes
+    (<a href="../Document/Graphics/Resources/gs.html#gsMarkerSizeF"><em>gsMarkerSizeF</em></a>) range in 
+    value from 0.025 to 0.075.
+    <p>
+    The <a href="../Document/Functions/Built-in/random_uniform.html"><strong>random_uniform</strong></a> function is used to generate
+    random data.
+    </div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/polar.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:59:08 GMT -->
+</html>
+

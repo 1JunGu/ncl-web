@@ -1,0 +1,769 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/wrfgsn.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:20:20 GMT -->
+<head>
+<meta name="keywords" content="NCL, graphics, visualization, WRF, gsn_cs">
+<TITLE>NCL Graphics: Using gsn_csm scripts to plot WRF-ARW data</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_models.html">Models</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL Graphics: Using gsn_csm scripts to plot WRF-ARW data</h1>
+<div class=mainimage>
+<img src="Images/wrf_gsn_4_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+The main purpose of this page is to show how to plot WRF-ARW data using
+gsn_csm functions like <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>.
+<p>
+
+For comparison purposes, some examples will also show how to plot the
+same data using WRF-NCL functions
+like <a href="../Document/Functions/WRF_arw/wrf_contour.html"><strong>wrf_contour</strong></a>,
+<a href="../Document/Functions/WRF_arw/wrf_vector.html"><strong>wrf_vector</strong></a>, and
+<a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a>.
+<p>
+
+Here are some reasons you might want use gsn_csm_xxxx scripts over
+wrf_xxxx scripts:
+
+<ul>
+<li>You want to have more control over customizing the plot.
+<li>You want to use a different map projection than what is provided on the WRF-ARW
+file.
+<li>You don't want all the extra titles that the wrf_xxxx functions give you.
+</ul>
+<p>
+
+Here are some reasons you might want use wrf_xxxx 
+scripts over gsn_csm_xxxx scripts:
+<p>
+<ul>
+<li>You will get some very nice titles.
+<li>You get a labelbar title for color contour plots.
+<li>The default vector plots created by 
+<a href="../Document/Functions/WRF_arw/wrf_vector.html"><strong>wrf_vector</strong></a> can 
+look nicer than those created by 
+<a href="../Document/Graphics/Interfaces/gsn_csm_vector.html"><strong>gsn_csm_vector</strong></a>.
+</ul>
+<p>
+
+To plot WRF-ARW data with the gsn_csm scripts in the native map
+projection defined on the file, you must do three things:
+<p>
+
+<ol>
+<li>Call <a href="../Document/Functions/WRF_arw/wrf_map_resources.html"><strong>wrf_map_resources</strong></a>
+<p>
+
+This sets the necessary NCL resources to define the native map
+projection.
+<p>
+
+<li>Set <a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> = True
+<p>
+
+By default, when data are placed onto a map, NCL performs a
+transformation to the specified projection. This transformation is not
+needed if you have defined the native grid that your data is on. Setting
+<a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> = True turns off
+this transformation, and also results in faster graphic generation.
+<p>
+
+<li>Set <a href="../Document/Graphics/Resources/gsn.html#gsnAddCyclic"><em>gsnAddCyclic</em></a> = False
+The gsm_csm_*map* suite of interfaces expect global data, and hence
+tries to add a longitude cyclic point. If plotting
+regional data, it is necessary to set <a href="../Document/Graphics/Resources/gsn.html#gsnAddCyclic"><em>gsnAddCyclic</em></a> = False to prevent the 
+longitude cyclic point from being added.
+</ol>
+<p>
+
+For a whole suite of examples using NCL to plot WRF-ARW data, we
+recommend that you visit the <a
+href="http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Graphics/NCL/">WRF-ARW
+Online Tutorial</a>.
+</div>
+
+<div class=ex>
+<!--wrf_gsn_1-->
+<a name=ex1></a>
+<a href="Images/wrf_gsn_1_lg.png">
+<img src="Images/wrf_gsn_1_sm.png" align=left border=2></a>
+<a href="Images/wrf_nogsn_1_lg.png">
+<img src="Images/wrf_nogsn_1_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_1.html">wrf_gsn_1.ncl</a> /
+<a href="Scripts/wrf_nogsn_1.html">wrf_nogsn_1.ncl</a>:
+
+The first frame is an example of plotting WRF-ARW data using
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>
+(<a href="Scripts/wrf_gsn_1.html">wrf_gsn_1.ncl</a>).
+<p>
+
+The second frame uses <a href="../Document/Functions/WRF_arw/wrf_contour.html"><strong>wrf_contour</strong></a> and
+<a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a>
+(<a href="Scripts/wrf_nogsn_1.html">wrf_nogsn_1.ncl</a>).
+<p>
+
+The "HGT" variable is plotted here. This is a good variable to use for
+testing purposes, because it's easy see if the plot looks correct. 
+
+</div>
+
+<div class=ex>
+<!--wrf_gsn_2-->
+<a name=ex2></a>
+<a href="Images/wrf_gsn_2_lg.png">
+<img src="Images/wrf_gsn_2_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_2.html">wrf_gsn_2.ncl</a>:
+
+This example is similar to the previous one, except it shows how to
+set some more plot resources to get a slightly nicer plot.
+<p>
+ 
+Just for informational purposes, this script calls 
+<a href="../Document/Functions/WRF_arw/wrf_map_resources.html"><strong>wrf_map_resources</strong></a> and prints
+out the resultant resource list, so you can see what map resources
+would normally be set by 
+<a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a>. Here's an example
+of some of those resources:
+<p>
+
+<pre>
+  pmTickMarkDisplayMode   : "Always"
+  mpOutlineBoundarySets   : "GeophysicalAndUSStates"
+  mpUSStateLineThicknessF : 0.5
+  mpUSStateLineColor      : "Gray"
+  mpLimbLineThicknessF    : 0.5
+  mpGridSpacingF          : 5
+  mpGridLineThicknessF    : 0.5
+  tmYLLabelFontHeightF    : 0.01
+</div>
+
+<div class=ex>
+<!--wrf_gsn_3-->
+<a name=ex3></a>
+<a href="Images/wrf_gsn_3_1_lg.png">
+<img src="Images/wrf_gsn_3_1_sm.png" align=left border=2></a>
+<a href="Images/wrf_gsn_3_2_lg.png">
+<img src="Images/wrf_gsn_3_2_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_3.html">wrf_gsn_3.ncl</a>:
+
+This example is similar to the previous one, except the map is further
+zoomed in on using <a href="../Document/Graphics/Resources/mp.html#mpMinLatF"><em>mpMinLatF</em></a>
+/ <a href="../Document/Graphics/Resources/mp.html#mpMaxLatF"><em>mpMaxLatF</em></a>
+and <a href="../Document/Graphics/Resources/mp.html#mpMinLonF"><em>mpMinLonF</em></a>
+/ <a href="../Document/Graphics/Resources/mp.html#mpMaxLonF"><em>mpMaxLonF</em></a>, and the WRF grid is
+drawn first as purple markers, and then as brown lines,
+using <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a>. This is
+mainly for debug purposes.
+<p>
+
+</div>
+
+<div class=ex>
+<!--wrf_gsn_4-->
+<a name=ex4></a>
+<a href="Images/wrf_gsn_4_lg.png">
+<img src="Images/wrf_gsn_4_sm.png" align=left border=2></a>
+<a href="Images/wrf_nogsn_4_lg.png">
+<img src="Images/wrf_nogsn_4_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_4.html">wrf_gsn_4.ncl</a> /
+<a href="Scripts/wrf_nogsn_4.html">wrf_nogsn_4.ncl</a>:
+
+This example shows how to plot WRF-ARW data using
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>, but using the
+native map projection provided on the WRF output
+file. The <a href="../Document/Functions/WRF_arw/wrf_map_resources.html"><strong>wrf_map_resources</strong></a>
+function is used to set the correct map projection resources. This
+can be useful if you want to use the native WRF map projection but you
+need more control over plot elements, like the titles or labelbar.
+<p>
+
+The second image is of the same variable, but plotted with
+<a href="../Document/Functions/WRF_arw/wrf_contour.html"><strong>wrf_contour</strong></a>
+and <a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a>.
+The contour levels are slightly different because
+<a href="../Document/Functions/WRF_arw/wrf_contour.html"><strong>wrf_contour</strong></a> internally
+increases the number of contour levels from the default
+NCL uses.
+
+</div>
+
+<div class=ex>
+<!--wrf_gsn_5-->
+<a name=ex5></a>
+<a href="Images/wrf_gsn_5_lg.png">
+<img src="Images/wrf_gsn_5_sm.png" align=left border=2></a>
+<a href="Images/wrf_nogsn_5_lg.png">
+<img src="Images/wrf_nogsn_5_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_5.html">wrf_gsn_5.ncl</a> /
+<a href="Scripts/wrf_nogsn_5.html">wrf_nogsn_5.ncl</a>:
+
+This example shows how to overlay line contours, vectors, and filled
+contours on a map. The data and map projection are all read off a WRF
+output file.
+<p>
+
+The first frame shows how to do this using gsn_csm_xxx
+scripts, and the second frame shows how to do this using wrf_xxxx
+scripts.
+<p>
+
+Note that using the gsn_csm_xxxx method requires that you set
+many more resources to customize the plot. This is because
+the wrf_xxxx scripts set many of these resources for you.
+The reason for using gsn_csm_xxxx scripts is to give
+you more flexibility over setting plot options, and to use
+a different map projection if desired.
+
+
+</div>
+
+<div class=ex>
+<!--wrf_gsn_5-->
+<a name=ex5></a>
+<a href="Images/wrf_nogsn_poly_5_lg.png">
+<img src="Images/wrf_nogsn_poly_5_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_nogsn_poly_5.html">wrf_nogsn_poly_5.ncl</a>:
+
+This example is similar to wrf_nogsn_5.ncl above, except it shows how
+to add text and markers to an existing plot that was drawn
+with <a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a>.
+<p>
+
+The key is to set "pltres@PanelPlot = True", telling this function
+that you plan to do something with the plot later. This
+causes <a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a> to not
+draw the plot and to not remove all the overlain features, allowing
+you to put more annotations on the plot before drawing it yourself.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a> and
+<a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a> are used to add the
+dots and text strings to the WRF plot.
+
+</div>
+
+<div class=ex>
+<!--wrf_gsn_6-->
+<a name=ex6></a>
+<a href="Images/wrf_gsn_6_lg.png">
+<img src="Images/wrf_gsn_6_sm.png" align=left border=2></a>
+<a href="Images/wrf_nogsn_6_lg.png">
+<img src="Images/wrf_nogsn_6_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_6.html">wrf_gsn_6.ncl</a> /
+<a href="Scripts/wrf_nogsn_6.html">wrf_nogsn_6.ncl</a>:
+
+This example is similar to the previous "wrf_gsn_5.ncl" one, except
+it doesn't draw sea level pressure contours.
+<p>
+
+The point of this example is to show another way of drawing WRF
+plots. This one uses <a href="../Document/Graphics/Resources/gsn.html#gsnLeftString"><em>gsnLeftString</em></a> and
+<a href="../Document/Graphics/Resources/gsn.html#gsnRightString"><em>gsnRightString</em></a> to title the plot,
+and it changes more features of the WRF map to make the map outlines
+more thick and prominent.
+<p>
+
+The second frame is plotting the same data, except using
+<a href="../Document/Functions/WRF_arw/wrf_contour.html"><strong>wrf_contour</strong></a>,
+<a href="../Document/Functions/WRF_arw/wrf_vector.html"><strong>wrf_vector</strong></a>,
+and <a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a>.
+Notice that with this plot, you get some very nice titling
+without much effort.
+<p>
+
+The "HighRes"  map database is used to get better coastal outlines.
+If you want to use the "HighRes" map database, you will have to <a
+href="../Document/Graphics/rangs.html">download the RANGS database</a>.
+
+</div>
+
+<div class=ex>
+<!--wrf_gsn_7-->
+<a name=ex7></a>
+<a href="Images/wrf_gsn_7_1_lg.png">
+<img src="Images/wrf_gsn_7_1_sm.png" align=left border=2></a>
+<a href="Images/wrf_gsn_7_2_lg.png">
+<img src="Images/wrf_gsn_7_2_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_7.html">wrf_gsn_7.ncl</a>
+
+This example regrids WRF output data to both a 0.25 and
+0.125 degree grid, and compares them in a panel plot.
+<P>
+
+For the second image,
+the <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> procedure was
+used to draw the lat/lon grid on all three plots.
+
+</div>
+
+<div class=ex>
+<!--wrf_gsn_8-->
+<a name=ex8></a>
+<a href="Images/wrf_gsn_8_1_lg.png">
+<img src="Images/wrf_gsn_8_1_sm.png" align=left border=2></a>
+<a href="Images/wrf_gsn_8_2_lg.png">
+<img src="Images/wrf_gsn_8_2_sm.png" align=left border=2></a>
+<a href="Images/wrf_gsn_8_3_lg.png">
+<img src="Images/wrf_gsn_8_3_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_8.html">wrf_gsn_8.ncl</a>
+
+This example shows how to generate streamlines of U10/V10, colored by
+wind speed. It uses the
+<a href="../Document/Graphics/Interfaces/gsn_csm_streamline_scalar_map.html"><strong>gsn_csm_streamline_scalar_map</strong></a>
+function, which was added in NCL Version 6.3.0.
+<p>
+
+The first plot shows the streamlines drawn in a basic lat/lon
+projection, by reading the XLAT/XLONG data off the WRF output file and
+attaching them as special "lat2d" and "lon2d" attributes to the data
+being plotted.
+<p>
+
+The second plot shows the same streamlines drawn in the native WRF
+map projection. It uses
+<a href="../Document/Functions/WRF_arw/wrf_map_resources.html"><strong>wrf_map_resources</strong></a> to set the
+correct map resources. Note that the special
+resource <a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> needs to be
+set to True to tell NCL that the data is being plotted in a native
+projection.
+<p>
+
+In the second plot, it's hard to see the map outlines. The
+third plot shows how to set map resources to thicken the
+map outlines and to make the streamlines less vivid.
+
+</div>
+
+<div class=ex>
+<!--animate_4-->
+<a name=ex4></a>
+<a href="Images/animate_4_lg.png">
+<img src="Images/animate_4_sm.png" align=left border=2></a>
+<a href="Scripts/animate_4_1.html">animate_4_1.ncl</a> / <br>
+<a href="Scripts/animate_4_2.html">animate_4_2.ncl</a>:
+<p>
+
+This example shows two ways to create a 97-frame 4-panel animation
+in NCL, with tips on how to speed things up.
+<p>
+
+The animation is filled contours of WRF reflectivity (across time and
+four selected level indexes) overlaid on a WRF terrain plot. The
+terrain plot is the same for each iteration, while the reflectivity
+plots change for each time and level.
+<p>
+
+<a href="Scripts/animate_4_1.html">animate_4_1.ncl</a> - this script
+shows the traditional and "easy" way to do this, but also potentially
+slower, by calling
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour.html"><strong>gsn_csm_contour</strong></a>, 
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>,
+and <a href="../Document/Functions/Built-in/overlay.html"><strong>overlay</strong></a> each time in the loop.
+<p>
+
+<a href="Scripts/animate_4_2.html">animate_4_2.ncl</a> - this script
+shows how to speed this up a little by using "setvalues" on existing
+reflectivity plots to simply change the data.<p>
+
+The timings on a Mac system were as follows:<br>
+<blockquote>
+"animate_4_1.ncl" - 163.0 seconds<br>
+"animate_4_2.ncl" - 129.8 seconds<br>
+</blockquote>
+<p>
+
+<font size=-1><i>Click on thumbnail image for an animation</i></font><br>
+<a href="Images/animate_4.gif"><img src="Images/animate_4_sm.png" align=left border=2></a><p>
+
+The animation was created by generating a series of PNG images, and then
+calling:
+<pre>
+convert animate*.00*png animate_4.gif</a>
+
+</div>
+
+<div class=ex>
+<!--wrf_gsn_9-->
+<a name=ex9></a>
+<a href="Images/wrf_gsn_9_lg.png">
+<img src="Images/wrf_gsn_9_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_9.html">wrf_gsn_9.ncl</a>
+
+This example plots WRF data over the France/Spain region, and
+compares map resolutions from:
+<p>
+
+<ul>
+<li>NCL's "MediumRes" map outlines
+<li>RANGS database high-res coastal outlines
+<li>shapefile outlines
+</ul>
+<p>
+
+Instructions for getting the RANGS database can be found at:
+<a href="../Document/Graphics/rangs.html">http://www.ncl.ucar.edu/Document/Graphics/rangs.shtml</a>
+<p>
+
+The shapefile outlines for France and Spain were downloaded
+from <a href="http://www.gadm.org/country">http://www.gadm.org/country</a>
+
+</div>
+
+<div class=ex>
+<!--WRF_pcp_2-->
+<a href="Images/WRF_pcp_2_lg.png">
+<img src="Images/WRF_pcp_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/WRF_pcp_2.html">WRF_pcp_2.ncl</a>: This example shows
+how to overlay precipitation contours on a grayscale terrain map, using
+transparency to control the colors for precipitation.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a> is
+used to create the base terrain plot, and <a href="../Document/Graphics/Interfaces/gsn_csm_contour.html"><strong>gsn_csm_contour</strong></a> 
+is used for the precipitation plot. <a href="../Document/Functions/WRF_arw/wrf_map_resources.html"><strong>wrf_map_resources</strong></a>
+is used to get the correct map projection parameters as defined on the WRF file.
+<p>
+
+This script was contributed by Xiao-Ming Hu (xhu@ou.edu) at the
+Center for Analysis and Prediction of Storms, University of Oklahoma.
+
+</div>
+
+<div class=ex>
+<!--wrf_gsn_10-->
+<a name=ex10></a>
+<a href="Images/wrf_gsn_10_lg.png">
+<img src="Images/wrf_gsn_10_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_gsn_10.html">wrf_gsn_10.ncl</a>
+
+This example shows three ways to subset a WRF lat/lon grid by
+providing two corners of a lat/lon box. Using each method,
+a spatial average is taken of the data in this box.
+<p>
+
+The three methods are
+1) <a href="../Document/Functions/Built-in/where.html"><strong>where</strong></a>,
+2) <a href="../Document/Functions/WRF_arw/wrf_user_ll_to_xy.html"><strong>wrf_user_ll_to_xy</strong></a>,
+3) <a href="../Document/Functions/Contributed/getind_latlon2d.html"><strong>getind_latlon2d</strong></a>.
+<p>
+
+Markers are drawn in the plots to show the area where the data was
+subsetted, so you can see there is quite a difference in the two
+methods.
+<p>
+
+<a href="../Document/Functions/WRF_arw/wrf_user_ll_to_xy.html"><strong>wrf_user_ll_to_xy</strong></a> should only
+be used on WRF-ARW data. The other methods will work on curvilinear
+grids.
+<p>
+
+This example was based
+on <a href="wrfdebug.html#ex4">wrf_debug_4.ncl</a>.
+
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/wrfgsn.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:20:39 GMT -->
+</html>
+
+

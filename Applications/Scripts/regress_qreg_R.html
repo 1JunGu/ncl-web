@@ -1,0 +1,269 @@
+/;
+=========================> Block Comment: 6.4.0 <=================================
+ regress_qreg_R.ncl
+
+ Concepts illustrated:
+   - Invoking an R-function from within an NCL script
+     The R-function performs quantile regression.
+     The function is from the quantreg R package
+
+ Specifics:
+   - Read global grid containing maximum temperatures
+   - Extract a user specified region using coordinate subscripting 
+   - Computing a time series of regional averages
+   - Create a csv (text) file containing the time series 
+   - Use NCL's system procedure to invoke an R-batch script ( QuantReg.R  )
+     that performs the quantile regression and creates two new csv files
+   - Read the two csv files created by the R script
+   - Use a local function to get percentile values 
+   - Plot quantile regression results (black points + gray shading)
+     and compare to OLS results (red lines)
+          
+ Author: 
+   - L. Terray 15/08/2018 CERFACS
+
+                      ======== R ========
+ If the R-package "quantreg" is not available, it must be installed.  Start R:
+     %> R
+      > install.packages("quantreg")
+      > q()
+========================= End Block Comment =====================================
+;/
+
+;--------------------------------------------------------------------------------
+; --- Local function percent_to_value used to get percentile values
+; --- is used for graphical purposes only
+;--------------------------------------------------------------------------------
+
+undef ( "percent_to_value" )
+function percent_to_value( \
+  i_data           : numeric, \
+  i_percentiles[*] : numeric  \
+)
+local retVal, data1d, notMissing, p, floatInd, floorInd, ceilInd
+begin
+
+  retVal = new( dimsizes(i_percentiles), float )
+
+  data1d = ndtooned( i_data )
+  notMissing = data1d( ind(.not.ismissing(data1d) ) )
+
+  qsort(notMissing)
+
+  do p = 0, dimsizes(i_percentiles)-1
+    floatInd = i_percentiles(p) * .01 * dimsizes(notMissing) - 0.5
+    floorInd = toint( floor(floatInd) )
+    floorInd = where( floorInd.lt.0, 0, floorInd )
+    ceilInd  = toint( ceil(floatInd) )
+    ceilInd  = where( ceilInd.ge.dimsizes(notMissing), \
+                      dimsizes(notMissing)-1, ceilInd )
+    if( ceilInd.eq.floorInd ) then
+      retVal(p) = notMissing(floorInd)
+    else
+      retVal(p) = notMissing(floorInd) * ( ceilInd - floatInd ) \
+          + notMissing(ceilInd) * ( floatInd - floorInd )
+    end if
+  end do
+
+  return(retVal)
+  end ; percent_to_value
+  
+;--------------------------------------------------------------------------------------  
+;---                                 MAIN
+;--- Read daily NCEP tasmax data and get regional average for land Europe 
+;-------------------------------------------------------------------------------------  
+
+; Specify Europe Region
+
+  lats = 35
+  latn = 70
+  lonw = -15
+  lone = 35
+
+;--- Mask file
+
+  mask_file = "/project/cas/terray/obs/NCEP/landsea_mask_NCEP.nc"
+  fmask     = addfile (mask_file, "r")
+  msk       = fmask->lsm(0,::-1,:)    ;--- put latitudes S -> N
+ ;printVarSummary(msk)                ; [lat | 94] x [lon | 192]; lon: [ 0..358.125]
+  msk       = lonFlip(msk)         
+  printVarSummary(msk)                ; [lat | 94] x [lon | 192]; lon: [-180..178.125]
+
+;--- Data file
+
+  dir   = "/project/cas/terray/obs/NCEP/"
+  fil   = "tasmax_1d_19480101_20171231_NCEP.nc"
+  pth   = dir + fil
+  f     = addfile(pth,"r")
+  fld   = f->tasmax(:,::-1,:)            ;--- put latitudes S -> N
+  printVarSummary(fld)                   ; [time | 25568] x [lat | 94] x [lon | 192]
+  fld = lonFlip(fld)         
+  printVarSummary(fld)                   ; lon: [-180..178.125]
+
+;--- Eliminate all but Europe Region
+;    Use NCL's overwrite syntax [ := ]
+  
+  msk  := msk({lats:latn},{lonw:lone})   ; [lat | 19] x [lon | 27]
+  fld  := fld(:,{lats:latn},{lonw:lone}) ; [time | 25568] x [lat | 19] x [lon | 27]
+  printVarSummary(msk)   
+  printVarSummary(fld)          
+
+  msk_x = conform_dims(dimsizes(fld),msk,(/1,2/) )
+  printVarSummary(msk_x)                 ; [25568] x [19] x [27]
+  fld   = where(msk_x .eq. 1, fld, fld@_FillValue)
+  delete(msk_x)                          ; not necessary
+
+;--- Details
+        
+  dimfld= dimsizes(fld)
+  ntim  = dimfld(0)
+  nlat  = dimfld(1)
+  mlon  = dimfld(2)
+
+  time  = f->time                ; convenience only
+  lat   = f->lat({lats:latn})  
+
+  rad   = get_d2r(lat)           ;--- 6.4.0 (same type as lat)             
+  clat  = cos(lat*rad)
+  copy_VarCoords(lat, clat)
+  printVarSummary(clat)
+
+  day   = ispan(1, ntim, 1)      ;--- day time counter
+
+  tmax_eu = fld    
+  tmax_1d = wgt_areaave_Wrap(tmax_eu, clat, 1.0, 0)   ; [time | 25568]
+
+  printVarSummary(tmax_1d)
+  printMinMax(tmax_1d, True)
+  ntim = dimsizes(tmax_1d)
+     
+;--- Write a csv file to be read by the R-script
+
+  fnames    = (/ "time", "tmx" /)
+  header    = [/str_join(fnames,",") /]
+
+  csv_fname = "qreg_test.csv"     ; name of file to be read by the R script
+  system("rm -rf " + csv_fname)
+  write_table(csv_fname, "w", header, "%s")
+
+  alist     = [/day,tmax_1d/]
+  format    = "%li,%f"
+  write_table(csv_fname, "a", alist, format)
+
+  fout      = "rqfit_test.csv"    ; returned csv files from R
+  fols      = "rgols_test.csv"
+
+;--- Execute R-script: it produces files rqfit.csv & rgols.csv
+
+  cmd = "./QuantReg.R "+csv_fname+" "+fout+" "+fols
+  system(cmd)
+
+;--- Read csv files returned from R's quantile regression
+
+  ncols   = numAsciiCol(fout)
+  dat_buf = readAsciiTable(fout,ncols,"float",0)
+  data    = dat_buf(1::2,:)   ;--- read 1 line out of 2 (odd lines are the intercept)   
+  data    = (/ data * ntim /) ;--- slope unit in K/full period(days)
+  printMinMax(data, True)
+
+;--- Read results from ordinary least-square (ols):
+
+  nols    = numAsciiCol(fols)
+  ols_buf = readAsciiTable(fols,nols,"float",0)
+  ols     = ols_buf(1,:1)      ;--- read only slope coeff and standard error
+  ols     = (/ ols * ntim /)   ;--- slope unit in K/full period(days)
+
+;--- Graphics pre-processing
+;--- Get specific percentile values for graphic purposes
+
+  p10p  = percent_to_value(tmax_1d,10)
+  p20p  = percent_to_value(tmax_1d,20)
+  p30p  = percent_to_value(tmax_1d,30)
+  p40p  = percent_to_value(tmax_1d,40)
+  p50p  = percent_to_value(tmax_1d,50)
+  p60p  = percent_to_value(tmax_1d,60)
+  p70p  = percent_to_value(tmax_1d,70)
+  p80p  = percent_to_value(tmax_1d,80)
+  p90p  = percent_to_value(tmax_1d,90)
+
+  xtval = (/ min(tmax_1d), p10p, p20p, p30p, p40p, p50p, p60p, p70p, p80p, p90p, max(tmax_1d)/)
+  xtlab = decimalPlaces(xtval, 1, True)
+  xtlab:= sprintf("%3.1f", xtlab)
+
+;--- Define quantile set as in scr_test.R
+
+  qq = int2flt(ispan(25, 975, 25))/1000.
+  nq = dimsizes(qq)
+
+;************************************************ 
+; plotting
+;************************************************
+  varp     = "regress_qreg_R"
+  wks_type = "png"
+ ;wks_type@wkWidth  = 1500
+ ;wks_type@wkHeight = 1500
+  wks = gsn_open_wks(wks_type,varp)
+
+  res                 = True 
+  res@gsnDraw         = False
+  res@gsnFrame        = False
+  res@trYMaxF         = 2.5
+  res@trYMinF         = -0.5
+
+;--- Left Y axis
+  res@tmYLLabelsOn    = True
+  res@tmYLOn          = True
+  res@tmYLMode        = "Explicit"
+  res@tmYLValues      = (/-.2,-.1, 0.,.1,.2,.3,.4,.5,.6,.7,.8,.9,1./) * 2.5
+  res@tmYLLabels      = (/"-.5","-.25","0",".25",".5",".75","1","1.25","1.5","1.75","2","2.25","2.5"/)
+
+;--- Top X axis
+  res@tmXUseBottom    = False
+  res@tmXTLabelsOn    = True
+  res@tmXTOn          = True
+  res@tmXTMode        = "Explicit"
+  res@tmXTLabelAngleF = 60
+  res@tmXTValues      = (/0.,.1,.2,.3,.4,.5,.6,.7,.8,.9,1./)
+  res@tmXTLabels      = xtlab
+
+;--- Bottom axis now
+  res@tmXBLabelsOn    = True 
+  res@tmXBOn          = True 
+  res@tmXBMode        = "Explicit"
+  res@tmXBValues      = (/0.,.1,.2,.3,.4,.5,.6,.7,.8,.9,1./)
+  res@tmXBLabels      = (/"0",".1",".2",".3",".4",".5",".6",".7",".8",".9","1"/)
+  res@xyMarkLineMode  = "Markers"
+  res@xyMarker        = 16
+  res@xyMarkerSizeF   = 0.01          
+  res@xyMarkerColor   = "black"
+
+  res@tiMainString    = "Quantile regression plot"
+  res@tiYAxisString   = "TMAX Trend (K/69 years)"
+  plot  = gsn_csm_xy (wks,qq,data(:,0),res)
+
+  gsres                 = True
+  gsres@tfPolyDrawOrder = "Predraw"
+  gsres@gsFillColor     = "grey60"
+  xp    = new( 2*nq, float )
+  yp    = new( 2*nq, float )
+  do k=0,dimsizes(qq)-1
+    yp(k)          = data(k,2)
+    xp(k)          = qq(k)
+    xp(2*nq-1-k) = qq(k)
+    yp(2*nq-1-k) = data(k,1)
+  end do
+  dummy = gsn_add_polygon (wks,plot,xp,yp,gsres)
+
+  resp = True
+  resp@gsLineDashPattern = 0
+  resp@gsLineColor      = "red"
+  resp@gsLineThicknessF = 5.
+  dum0=gsn_add_polyline(wks,plot,(/0,1/),(/ols(0),ols(0)/),resp)
+  resp@gsLineDashPattern = 1        ;--- ols(0) is the slope and ols(1) the std.err
+  upbnd = ols(0)+(1.96*ols(1))      ;--- X 1.96 to get the 95% CI
+  lobnd = ols(0)-(1.96*ols(1))
+  dum1=gsn_add_polyline(wks,plot,(/0,1/),(/upbnd,upbnd/),resp)
+  dum2=gsn_add_polyline(wks,plot,(/0,1/),(/lobnd,lobnd/),resp)
+
+  draw(plot)
+  frame(wks)

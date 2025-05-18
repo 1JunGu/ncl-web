@@ -1,0 +1,31 @@
+dimensions:
+        time = UNLIMITED ; // (1 currently)
+        z_t = 25 ;
+        lat_t = 116 ;
+        lon_t = 102 ;
+variables:
+        float T(time, z_t, lat_t, lon_t) ;
+                T:long_name = "Potential Temperature" ;
+                T:units = "Celsius" ;
+                T:_FillValue = 9.999999e+29f ;
+        float lat_t(lat_t) ;
+                lat_t:long_name = "Latitude (T grid)" ;
+                lat_t:units = "degrees_north" ;
+        float lon_t(lon_t) ;
+                lon_t:long_name = "Longitude (T grid)" ;
+                lon_t:units = "degrees_east" ;
+        double time(time) ;
+                time:long_name = "time" ;
+                time:units = "days since 0000-01-01 00:00:00 GMT" ;
+        float z_t(z_t) ;
+                z_t:long_name = "Depth (T grid)" ;
+                z_t:units = "centimeters" ;
+                z_t:positive = "down" ;
+
+// global attributes:
+                :conventions = "CSM NetCDF Conventions Version 0.0" ;
+                :source = " NCAR CSM Ocean (NCOM) version 1.4 ... June 1998" ;
+
+ data:
+      z_t = 30, 40, 89, 78, 45, 234, 98, 23, 456, 294, 12, 17, 40, 56, 17, 
+      32, 85, 93, 72, 20, 46, 24, 90, 89, 25 ;

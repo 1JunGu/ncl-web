@@ -1,0 +1,477 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/write_ascii.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:16:01 GMT -->
+<head>
+<meta name="description" content="NCL file IO example page. Demonstrates
+how to write ASCII data">
+<TITLE>NCL: Writing ASCII files</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_io.html">File IO</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+
+<h1>NCL: Writing ASCII data</h1>    
+
+<div class=text>
+NCL has five main functions for writing data to an ASCII file: 
+<p>
+
+<ol>
+
+<li><a href="../Document/Functions/Built-in/write_table.html"><strong>write_table</strong></a> - writes formatted, mixed-type
+data with a single format statement.
+<p>
+
+<li><a href="../Document/Functions/Built-in/write_matrix.html"><strong>write_matrix</strong></a> - writes nicely-formatted 2D
+arrays of integer, float, or double precision data.
+<p>
+
+<li><a href="../Document/Functions/Built-in/asciiwrite.html"><strong>asciiwrite</strong></a> - an older and rather limited function 
+that writes one value per line. This is useful for outputting a
+one-dimensional time series.
+<p>
+
+<li><a href="../Document/Functions/Built-in/sprinti.html"><strong>sprinti</strong></a>  / <a href="../Document/Functions/Built-in/sprinti.html"><strong>sprinti</strong></a>
+- allows you to format integer and float data before writing
+with <a href="../Document/Functions/Built-in/write_table.html"><strong>write_table</strong></a> or <a href="../Document/Functions/Built-in/asciiwrite.html"><strong>asciiwrite</strong></a>.
+<p>
+
+
+</ol>
+
+For examples of reading or writing other types of ASCII files, see:
+
+<ul>
+<li><a href="write_csv.html">Writing CSV files</a>
+<li><a href="read_csv.html">Reading CSV files</a>
+<li><a href="read_ascii.html">Reading ASCII data</a>
+</ul>
+
+</div>
+
+<div class=ex>
+<!--Write_asc_1-->
+<a name=ex1></a>
+<a href="Scripts/write_asc_1.html">write_asc_1.ncl</a>: This 
+very basic 2-line example:
+<p>
+
+<pre>
+  data = <a href="../Document/Functions/Built-in/random_uniform.html"><strong>random_uniform</strong></a>(-5,5,(/2,3,4/))   ; Generate a dummy 2 x 3 x 4 array
+  <a href="../Document/Functions/Built-in/asciiwrite.html"><strong>asciiwrite</strong></a>("file1.txt",data)            ; Write it to a file
+</pre>
+<p>
+
+shows how <a href="../Document/Functions/Built-in/asciiwrite.html"><strong>asciiwrite</strong></a>
+works if you give it an array of data to write to a file.
+<p>
+
+Each value is written on a line by itself, which is not
+very useful! The first few lines of "file1.txt" will look like this:
+<p>
+<pre>
+-1.762895
+-1.75608
+-0.06612359
+-2.112701
+</pre>
+</div>
+
+<div class=ex>
+<!--Write_asc_2-->
+<a name=ex2></a>
+<a href="Scripts/write_asc_2.html">write_asc_2.ncl</a>: This example
+shows how to write a mix of data (string, float, and integer)
+using <a href="../Document/Functions/Built-in/write_table.html"><strong>write_table</strong></a>.
+<p>
+
+Here's a sample of the first few lines of the "file2.txt" ASCII file:
+<p>
+
+<pre>
+string_031   -0.11   1   269.1    string_040
+string_074    5.17   2   798.3    string_018
+string_015    8.73   3   408.6    string_082
+string_037    2.14   4   546.1    string_054
+</pre>
+</div>
+
+<div class=ex>
+<!--Write_asc_3-->
+<a name=ex3></a>
+<a href="Scripts/write_asc_3.html">write_asc_3.ncl</a>: This example
+writes the same ASCII file as the previous example, except it
+uses a combination of <a href="../Document/Functions/Built-in/sprintf.html"><strong>sprintf</strong></a> and <a href="../Document/Functions/Built-in/sprinti.html"><strong>sprinti</strong></a>
+to format the data, and then <a href="../Document/Functions/Built-in/asciiwrite.html"><strong>asciiwrite</strong></a> to write the
+strings to a file.
+<p>
+
+This method can be *very* slow if you have a lot of data to format.
+
+</div>
+
+<div class=ex>
+<!--Write_asc_4-->
+<a name=ex4></a>
+<a href="Scripts/write_asc_4.html">write_asc_4.ncl</a>: This example
+shows how to write a 3D array to a file, by writing 2D blocks of
+data at a time. In general, we do not recommend writing large
+arrays to an ASCII file as this is very inefficient.
+<p>
+
+We have to use <a href="../Document/Functions/Built-in/write_table.html"><strong>write_table</strong></a> because it is the only NCL
+function that allows you to append data to an existing ASCII
+file. This function requires the data be in a 
+<a href="../Document/Manuals/Ref_Manual/NclVariables.html#ListVariables">list</a> object, so we push each column of
+a 2D subsection of data to the list object, and then write out that 2D
+list of data to the file using the "append" option.
+<p>
+
+This method gets a little kludgy because you have to use a unique
+variable for every "push" onto the list object. We do this by
+using <a href="../Document/Functions/Built-in/unique_string.html"><strong>unique_string</strong></a> to generate a unique string,
+and attributes.<p>
+
+Here's a sample of the first few lines of the "file4.txt" ASCII file:
+
+<pre>
+This ASCII file contains 200 blocks of 100 x 10 arrays
+Block 1 of 200
+Row   1    -1.763   -1.756   -0.066   -2.113   -1.470   -3.460    0.662    3.207   -1.745   -1.599
+Row   2     3.952   -1.634   -2.150    0.034    2.735   -4.788   -4.630   -2.094   -4.139    2.476
+Row   3    -1.406   -2.919   -4.202   -3.521    2.082   -1.046    2.644    1.459   -0.269    3.595
+. . .
+Row  98    -4.095    2.166   -4.932   -0.383   -0.702    4.747    1.909    0.623   -4.141    0.379
+Row  99    -2.845    2.130   -3.881    0.845    1.950   -1.425    1.977   -1.088   -1.459   -3.042
+Row 100     0.865   -1.304   -0.517   -4.102    2.249    0.197   -2.007   -1.078    3.763   -0.978
+Block 2 of 200
+Row   1     0.695    2.282    3.158   -4.170   -2.409    2.100   -3.492   -2.287   -1.743    3.135
+Row   2     2.355    2.495   -1.418   -1.763   -3.143   -0.626    3.708    4.102   -2.925   -4.333
+Row   3     2.375   -3.973    3.779    3.636   -3.529    4.529    2.923    3.823   -3.138    2.652
+. . .
+</pre>
+</div>
+
+<div class=ex>
+<!--Write_asc_5-->
+<a name=ex5></a>
+<a href="Scripts/write_asc_5.html">write_asc_5.ncl</a>: This example
+shows how to write nicely-formatted two-dimensional arrays of numeric
+data to an ASCII file using <a href="../Document/Functions/Built-in/write_matrix.html"><strong>write_matrix</strong></a>. This
+script creates three ASCII files, one with float data, one with
+integer data, and one with double data.
+<p>
+
+The float data contains two missing values. Here's
+what the "file5.f.txt" output ASCII file looks like:
+<p>
+
+<pre>
+ floating point data with two missing values
+   4.35   4.36   9.73   4.91   1.77  -0.63  -4.29
+   4.39*******  -5.84   4.59   3.68 -14.12   0.07
+   0.27   3.77   0.89  -3.09   5.08  -2.51   5.85
+  -3.35  -1.66   8.46*******   0.14   1.76   0.87
+  -6.90   4.06  10.39   4.56  -5.63  -1.43   8.65
+</pre>
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</BODY>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/write_ascii.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:16:01 GMT -->
+</HTML>
+

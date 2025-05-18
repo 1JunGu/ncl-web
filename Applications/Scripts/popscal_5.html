@@ -1,0 +1,68 @@
+; =================================================;
+; popscal_5.ncl
+; =================================================;
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"   
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"   
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+;
+; This file still has to be loaded manually   
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"   
+; =================================================;
+begin
+  f = addfile("b20.007.pop.h.1000-01.nc","r")
+
+  ssh           = f->SSH
+  shf           = f->SHF
+  lat2d         = f->TLAT
+  lon2d         = f->TLONG
+
+  ssh@lon2d     = lon2d    ; For plotting purposes
+  ssh@lat2d     = lat2d
+
+  shf@lon2d     = lon2d
+  shf@lat2d     = lat2d
+;=================================================;
+; Create plot
+;=================================================;
+  wks  = gsn_open_wks("png","popscal")            ; send graphics to PNG file
+
+  res                      = True                 ; plot mods desired
+  res@cnFillOn             = True                 ; turn on color fill
+  res@cnFillOpacityF       = 0.8                  ; make colors slightly transparent
+  res@cnLinesOn            = False                ; turn off contour lines
+  res@cnLineLabelsOn       = False                ; turn off contour labels
+  res@cnFillPalette        = "BlAqGrYeOrRe"       ; set color map
+  res@cnLineThicknessF     = 3.0
+  res@gsnDraw              = False                ; don't draw yet
+  res@gsnFrame             = False                ; don't advance frame yet
+  res@gsnAddCyclic         = True                 ; add cyclic point
+  res@gsnLeftString        = ""
+  res@gsnRightString       = ""
+  res@tiMainString         = "Total Surface Heat Flux, Including SW"
+  res@lbLabelFontHeightF   = 0.0111
+  res@mpOutlineOn          = False
+
+  pltBase = gsn_csm_contour_map(wks,ssh(0,:,:),res)
+;=================================================;
+; Create second plot
+;=================================================; 
+  cnres          = True
+  cnres@gsnDraw  = False                          ; don't draw yet
+  cnres@gsnFrame = False                          ; don't advance frame yet
+  cnres@cnInfoLabelOn = False                     ; turn off info label
+  cnres@cnLineLabelsOn       = False                ; turn off contour labels
+  cnres@gsnAddCyclic  = True
+  cnres@gsnLeftString = ""
+  cnres@gsnRightString = ""
+
+  plot = gsn_csm_contour(wks,shf(0,:,:),cnres)
+; =================================================;
+; now overlay vector plot on top of scalar plot
+; =================================================;
+  overlay(pltBase,plot)
+  draw(pltBase)
+  frame(wks)
+  end
+

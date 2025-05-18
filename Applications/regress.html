@@ -1,0 +1,784 @@
+e!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/regress.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:09:45 GMT -->
+<head>
+<meta name="description" content="NCL data analysis example page. 
+Demonstrates how to calculate: (a) a regression line; 
+(b) regression coefficients at grid points; 
+(c) multiple linear regression.">
+<TITLE>Regression & Trend</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+    <h1>NCL: Regression & Trend</h1>
+<p>
+    <div class=mainimage>
+    <img src="Images/regress_6_lg.png" align=left border=0></a>
+    </div>
+
+    <div class=text>
+    <b>Regression:</b>There are four primary regression functions:  
+<ul>
+ <li>(a) <a href="../Document/Functions/Built-in/regline.html"><strong>regline</strong></a> which performs simple linear regression; y(:)~r*x(:)+y0;
+ <li>(b) <a href="../Document/Functions/Contributed/regline_stats.html"><strong>regline_stats</strong></a> which performs linear regression 
+         and, additionally,  returns confidence estimates and an ANOVA table. 
+ <li>(c) <a href="../Document/Functions/Built-in/regCoef-1.html"><strong>regCoef</strong></a> which performs simple linear regression on multi-dimensional arrays
+ <li>(d) <a href="../Document/Functions/Contributed/reg_multlin_stats.html"><strong>reg_multlin_stats</strong></a> which performs 
+        multiple linear regression (<font color=red><b>v6.2.0</b></font>) and , additionally, 
+        returns confidence estimates and an ANOVA table.
+</ul>
+    <p>
+    There are two other regression functions (<a href="../Document/Functions/Built-in/regcoef.html"><strong>regcoef</strong></a>, 
+    <a href="../Document/Functions/Built-in/reg_multlin.html"><strong>reg_multlin</strong></a>) but these are used less frequently. They
+    are maintained for backward compatibility only.
+    <p>
+Linear and multiple linear regression models make a number of 
+<a href="http://en.wikipedia.org/wiki/Linear_regression#Assumptions"><b>assumptions</b></a> 
+about the independent predictor variable(s) and the dependent response variable (predictand).
+<b>A primary assumption is that the response variable is a linear combination 
+of the regression coefficients and the predictor variables.</b> Further, the 
+predictor variable(s) are assumed to be uncorrelated.
+    <p>
+    </div>
+    <div class=text>
+    <b>Trend:</b> In addition to regression, other methods can be used to assess trend.
+ The well known <a href="http://vsp.pnnl.gov/help/Vsample/Design_Trend_Mann_Kendall.htm"><b>Mann-Kendall</b></a> non-parametric trend test statistically assesses if there is a monotonic upward or downward trend
+over some time period. A monotonic upward (downward) trend means that the variable consistently increases (decreases) through time, but the trend may or may not be linear. The MK test can be used in place of a parametric linear regression analysis, which can be used to test if the slope of the estimated linear regression line is different from zero. The regression analysis requires that the residuals from the fitted regression line be normally distributed; an assumption not required by the MK test, that is, the MK test is a non-parametric (distribution-free) test.
+<p>
+The Theil-Sen trend estimation method "is insensitive to outliers; it can be significantly more accurate than simple linear regression for skewed and heteroskedastic data, and competes well against non-robust least squares even for normally distributed data in terms of statistical power. It has been called 'the most popular nonparametric technique for estimating a linear trend'."
+<p>
+The <a href="../Document/Functions/Built-in/trend_manken.html"><strong>trend_manken</strong></a> function performs both the Mann-Kendall test and Theil-Sen trend estimation. 
+The USA's Environmental Agency provides a basic description of use and interpretation:
+<a href="https://www.epa.gov/sites/production/files/2016-05/documents/tech_notes_6_dec2013_trend.pdf"><b>Statistical Analysis for Monotonic Trends</b></a>.
+<p>
+
+    </div>
+<p>
+    <div class=ex>
+
+    <!--Regress_1-->
+    <a name=ex1></a>
+    <a href="Images/regress_1_lg.png">
+    <img src="Images/regress_1_sm.png" align=left border=2></a>
+
+
+    <a href="Scripts/regress_1.html">regress_1.ncl</a>: 
+    Tabular data ( <a href="Data/asc/regress_1.txt"><b>regress_1.txt</b></a> )
+    contained within an ascii file are read. The
+    <a href="../Document/Functions/Built-in/regline.html"><strong>regline</strong></a> function is used to calculate
+    the least squared regression line for a one dimensional array. 
+    Here, the regression coefficient is synonymous with the slope or trend. 
+    <pre>
+
+     Variable: rc
+
+     Number Of Attributes: 7
+       yintercept :	<b>275.3205350166454</b>
+       yave :	269.5734479950696
+       xave :	7618.59756097561
+       nptxy :	82
+       <b>rstd</b> :	<b>0.000234703</b>
+       <b>tval</b> :	<b>-3.21405918</b>
+
+     (0)	<b>-0.000754349</b>
+
+    </pre>
+
+    <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Regression/NCL_regress_1.html#sphx-glr-gallery-regression-ncl-regress-1-py">here</a>.
+    </div>
+
+    <div class=ex>
+    <!--Regress_1a-->
+    <a name=ex1a></a>
+    <a href="Images/regress_1a_1_lg.png">
+    <img src="Images/regress_1a_1_sm.png" align=left border=2></a>
+    <a href="Images/regress_1a_2_lg.png">
+    <img src="Images/regress_1a_2_sm.png" align=left border=2></a>
+
+    <a href="Scripts/regress_1a.html">regress_1a.ncl</a>: 
+
+See <a href="../Document/Functions/Contributed/regline_stats.html"><strong>regline_stats</strong></a> Example 1. This uses the information
+provided in the <b>NCL 6.4.0</b> release to plot 95% mean response (blue), prediction limits (red) and 
+lines derived using the 95% limits if the slope and y-intercept (green). 
+
+    <pre>
+
+       Variable: rc
+        Type: float
+        Total Size: 4 bytes
+                    1 values
+        Number of Dimensions: 1
+        Dimensions and sizes:   [1]
+        Coordinates: 
+        Number Of Attributes: 38
+          _FillValue :  9.96921e+36
+
+          long_name :   simple linear regression
+          model :       Yest = b(0) + b(1)*X
+
+          N :   18                              ; # of observations
+          NP :  1                               ; # of predictor variables
+          M :   2                               ; # of returned coefficients
+          bstd :        (  0, 0.9947125 )       ; standardized regression coefficient
+                                                ; [ignore 1st element]
+
+                                                ; <B>ANOVA</B> information: SS=>Sum of Squares
+          SST : 4823324                         ; Total SS:      sum((Y-Yavg)^2) 
+          SSE : 50871.91                        ; Residual SS:   sum((Yest-Y)^2)
+          SSR : 4772452                         ; sum((Yest-Yavg)^2)
+
+          MST : 283724.9
+          MSE : 3179.494
+          MSE_dof :     16
+          MSR : 4772452
+
+          RSE : 56.387                          ; residual standard error; sqrt(MSE)
+          RSE_dof :     15
+
+          F :   1501.01                         ; MSR/MSE
+          F_dof :       ( 1, 16 )
+          F_pval :      1.51066e-17
+
+          r2 :  0.989453            ; square of the Pearson correlation coefficient 
+          r :   0.9947125           ; multiple (overall) correlation: sqrt(r2)
+          r2a : 0.9887938           ; adjusted r2... better for small N
+
+          fuv : 0.01054698          ; (1-r2): fraction of variance of the regressand
+                                    ; (dependent variable) Y which cannot be explained
+                                    ;  i.e., which is not correctly predicted, by the 
+                                    ; explanatory variables X.
+
+          Yest :        [ARRAY of 18 elements]  ; Yest = b(0) + b(1)*x 
+          Yavg :        2125.278                ; <a href="../Document/Functions/Built-in/avg.html"><strong>avg</strong></a>(y)
+          Ystd :        532.6583                ; <a href="../Document/Functions/Built-in/stddev.html"><strong>stddev</strong></a>(y)
+          Xavg :        2165                    ; <a href="../Document/Functions/Built-in/avg.html"><strong>avg</strong></a>(x)
+          Xstd :        543.6721                ; <a href="../Document/Functions/Built-in/stddev.html"><strong>stddev</strong></a>(x)
+
+          stderr :      ( 56.05802, 0.02515461 )     ; std. error of each <b>b</b>
+          tval :        ( 0.2738642, 38.74285 )      ; t-value
+          pval :        ( 0.7874895, 5.017699e-18 )  ; p-value
+
+                                                ; following <b><font color=magenta>added in version 6.4.0</font></b>
+          <b><font color=magenta>b95</font></b>  :        ( 0.9212361, 1.027887 ) ;  2.5% and 97.5% regression coef. confidence intervals
+          <b><font color=magenta>y95</font></b>  :        ( -459.9983, 490.703 )  ;  2.5% and 97.5% y-intercept confidence intervals
+          <b><font color=magenta>YMR025</font></b> :      [ARRAY of 18 elements]  ;  2.5% mean response
+          <b><font color=magenta>YMR975</font></b> :      [ARRAY of 18 elements]  ; 97.5% mean response
+          <b><font color=magenta>YPI025</font></b> :      [ARRAY of 18 elements]  ;  2.5% prediction interval
+          <b><font color=magenta>YPI975</font></b> :      [ARRAY of 18 elements]  ; 97.5% prediction interval
+
+                                                ; <b><font color=red>Original <a href="../Document/Functions/Built-in/regline.html"><strong>regline</strong></a> attributes</font></b> 
+                                                ; provided for backward cmpatibility
+          <b><font color=red>nptxy</font></b> : 18
+          <b><font color=red>xave</font></b> :  2165
+          <b><font color=red>yave</font></b> :  2125.278
+          <b><font color=red>rstd</font></b> :  56.387
+          <b><font color=red>yintercept</font></b> :    15.35228
+
+          b :   ( 15.35228, 0.9745615 )         ; b(0) + b(1)*x
+
+        (0)     0.9745615                       ; regression coefficient 
+
+    </pre>
+    </div>
+
+    <div class=ex>
+    <!--Regress_1b-->
+    <a name=ex1b></a>
+    <a href="Images/regress_1b_1_lg.png">
+    <img src="Images/regress_1b_1_sm.png" align=left border=2></a>
+    <a href="Images/regress_1b_2_lg.png">
+    <img src="Images/regress_1b_2_sm.png" align=left border=2></a>
+
+    <a href="Scripts/regress_1b.html">regress_1b.ncl</a>: 
+
+See <a href="../Document/Functions/Contributed/regline_stats.html"><strong>regline_stats</strong></a> Example 2. 
+This is a commonly used WWW example taken from:
+<a href="http://www.stat.ucla.edu/~hqxu/stat105/pdf/ch11.pdf"><b>http://www.stat.ucla.edu/~hqxu/stat105/pdf/ch11.pdf</b></a>.
+This uses the information provided in the 6.4.0 release to plot 95% mean response and prediction estimates.
+
+    </div>
+
+    <div class=ex>
+    <!--Regress_1c-->
+    <a name=ex1c></a>
+    <a href="Images/regress_1c_1_lg.png">
+    <img src="Images/regress_1c_1_sm.png" align=left border=2></a>
+    <a href="Images/regress_1c_2_lg.png">
+    <img src="Images/regress_1c_2_sm.png" align=left border=2></a>
+    <a href="Images/regress_1c_3_lg.png">
+    <img src="Images/regress_1c_3_sm.png" align=left border=2></a>
+
+    <a href="Scripts/regress_1c.html">regress_1c.ncl</a>: 
+The reciprocal approach is mentioned at the end of 
+<a href="http://www.stat.ucla.edu/~hqxu/stat105/pdf/ch11.pdf"><b>http://www.stat.ucla.edu/~hqxu/stat105/pdf/ch11.pdf</b></a>.
+R code for processing this is at
+<a href="http://people.stat.sc.edu/Tebbs/stat509/Rcode_CH11.htm"><b>http://people.stat.sc.edu/Tebbs/stat509/Rcode_CH11.htm</b></a>.
+<p>
+The point of this example is that one should examine the residuals from the fitted regression line.
+An obvious feature is that the values at the extremes are lower than the fitted line while
+the bulk of the middle values are above the fitted line.
+<p>
+It is suggested the the reciprocal (x' = 1/x) be used as the independent variable. The yields
+<pre>
+               y' = 2.9789 - 6.9345x'
+</pre>
+The scatter about the fiited line is reasonably distributed suggesting that the reciprocal transformation
+is a better fit than the original model.
+
+    </div>
+
+
+    <div class=ex>
+    <!--Regress_2-->
+    <a name=ex2></a>
+    <a href="Images/regress_2_lg.png">
+    <img src="Images/regress_2_sm.png" align=left border=2></a>
+
+    <a href="Scripts/regress_2.html">regress_2.ncl</a>: 
+    Read sea level pressures (time,lat,lon) over the globe and use 
+    <a href="../Document/Functions/Built-in/regCoef-1.html"><strong>regCoef</strong></a> to calculate the regression coefficients 
+    (aka: slopes, trends). The time units attribute is
+    "days since 1850-01-01 00:00:00". Hence, the trend units are Pa/day.
+    These are changed to Pa/year for nicer plot.
+    </div>
+
+    <div class=ex>
+    <!--Regress_3-->
+    <a name=ex3></a>
+    <a href="Images/regress_3_1_lg.png">
+    <img src="Images/regress_3_1_sm.png" align=left border=2></a>
+    <a href="Images/regress_3_2_lg.png">
+    <img src="Images/regress_3_2_sm.png" align=left border=2></a>
+    <a href="Scripts/regress_3.html">regress_3.ncl</a>: 
+Read northern hemisphere near-surface temperatures spanning 1901-2012 
+from the 20th Century Reanalysis. Calculate the areal weighted annual mean temperature
+for each year. Use <a href="../Document/Functions/Contributed/reg_multlin_stats.html"><strong>reg_multlin_stats</strong></a>
+to calculate the trend and other statistics.  Note: <a href="../Document/Functions/Built-in/regline.html"><strong>regline</strong></a>
+could also have been used for the regression coefficient. 
+    </div>
+
+    <div class=ex>
+    <!--Regress_4-->
+    <a name=ex4></a>
+    <a href="Images/regress_4_lg.png">
+    <img src="Images/regress_4_sm.png" align=left border=2></a>
+
+    <a href="Scripts/regress_4.html">regress_4.ncl</a>: 
+Read northern hemisphere near-surface temperatures spanning 1951-2010 
+from the 20th Century Reanalysis. Calculate the areal weighted annual mean temperature
+for each year. Use <a href="../Document/Functions/Built-in/regCoef-1.html"><strong>regCoef</strong></a> to calculate the trends. 
+    </div>
+
+    <div class=ex>
+    <!--Regress_5-->
+    <a name=ex5></a>
+    <a href="Images/regress_5_lg.png">
+    <img src="Images/regress_5_sm.png" align=left border=2></a>
+
+    <a href="Scripts/regress_5.html">regress_5.ncl</a>: 
+Read data from a table and perform a multiple linear regression using
+<a href="../Document/Functions/Contributed/reg_multlin_stats.html"><strong>reg_multlin_stats</strong></a>.
+There is one dependent variable [y] and 6 predictor variables [x].
+Details of the "KENTUCKY.txt" data can be found at:
+<pre>
+<b>Davis, J.C. (2002): Statistics and Data Analysis in Geology 
+Wiley (3rd Edition)</b>, pgs: 462-482
+</pre>
+<p>
+The output includes:
+<pre>
+
+[snip]
+
+(0)     ------- ANOVA information-------- 
+(0)      
+(0)     SST=2934.82  SSR=1800.7  SSE=1134.12
+(0)     MST=59.8943  MSR=300.117  MSE=26.3748 RSE=5.13564
+(0)     F-statistic=11.3789 dof=(6,43)
+(0)               -------                 
+<snip>
+  r2 :  0.613565               ; explains 61% of variance
+  r :   0.783304
+  r2a : 0.559644
+  fuv : 0.386435 
+[snip]
+
+  stderr :  ( 11.27078, 0.0109590, 0.008168, 0.175949, 0.020587, 0.0021864, 0.072610 )
+  tval :    ( -0.19914, 0.4645738, 2.763535,-1.323133, 3.041301,-0.9319575,-1.605605 )
+  pval :    (  0.84307, 0.6445273, <b>0.008318</b>, 0.192626, <b>0.003961</b>, 0.3564441, 0.115515 )
+
+(0)     -2.24446               ; y-intercept
+(1)      0.0050913             ; partial regression coefficients
+(2)      0.0225729
+(3)     -0.2328043
+(4)      0.0626111
+(5)     -0.0020377
+(6)     -0.1165836
+
+</pre>
+    </div>
+
+    <div class=ex>
+    <!--Regress_6-->
+    <a name=ex6></a>
+    <a href="Images/regress_6_lg.png">
+    <img src="Images/regress_6_sm.png" align=left border=2></a>
+
+    <a href="Scripts/regress_6.html">regress_6.ncl</a>: This is based upon a script created by Aixhu Hu (NCAR).
+<pre> 
+     (a) Read two text files via <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>; 
+     (b) Perform a linear regression using <a href="../Document/Functions/Built-in/regline.html"><strong>regline</strong></a>; 
+     (c) Create a 3rd degree polynomial via <a href="../Document/Functions/Built-in/lspoly_n.html"><strong>lspoly_n</strong></a> ;
+     (d) Plot markers and the polynomial and regression lines.
+
+</pre>
+Data files: <a href="Data/ipoind_8yrTrend.html"><b>ipoind_8yrTrend.asc</b></a>
+and  <a href="Data/tsind_8yrTrend.html"><b>tsind_8yrTrend.asc</b></a>
+<p>
+The output includes:
+<pre>
+    Variable: coef
+    Type: float
+    Total Size: 16 bytes
+                4 values
+    Number of Dimensions: 1
+    Dimensions and sizes:   <b>[4]</b>
+    Coordinates: 
+    Number Of Attributes: 1
+      _FillValue :  9.96921e+36
+    
+<b>    (0)     -0.743525
+    (1)     180.7366
+    (2)     125.8308
+    (3)     2630.312  </b>
+    (0)     ======
+    
+    
+    Variable: rc
+    Type: float
+    Total Size: 4 bytes
+                1 values
+    Number of Dimensions: 1
+    Dimensions and sizes:   [1]
+    Coordinates: 
+    Number Of Attributes: 7
+      _FillValue :  9.96921e+36
+      <b>yintercept :  -0.08270691</b>
+      yave :        -0.14029
+      xave :        -0.0002547655
+      nptxy :       1175
+      rstd :        11.93106
+      tval :        18.94417
+    <b>(0)     226.024</b>
+    (0)     ======
+</pre>
+    </div>
+
+    <div class=ex>
+    <!--Regress_7-->
+    <a name=ex7></a>
+    <a href="Images/regress_7_lg.png">
+    <img src="Images/regress_7_sm.png" align=left border=2></a>
+
+    <a href="Scripts/regress_7.html">regress_7.ncl</a>:
+The "Law School Data Sets" (82 school sample and 15-school sample) are used 
+by several tools (<i>eg.</i>, Matlab and R) for assorted examples. 
+They are shown here for background purposes because they are used for
+some NCL examples also. The data sets are here:
+<a href="Data/asc/law_school_15.txt"><b>law_school_15.txt</b></a>
+and  <a href="Data/asc/law_school_82.txt"><b>law_school_82.txt</b></a>
+<p>
+<pre>
+<b>Reference:</b> An Introduction to the Bootstrap
+           B. Efron and R.J. Tibshirani, Chapman and Hall (1993) 
+</pre>
+    </div>
+
+    <div class=ex>
+    <!--Regress_8-->
+    <a name=ex8></a>
+    <a href="Images/regress_8_1_lg.png">
+    <img src="Images/regress_8_1_sm.png" align=left border=2></a>
+    <a href="Images/regress_8_2_lg.png">
+    <img src="Images/regress_8_2_sm.png" align=left border=2></a>
+    <a href="Scripts/regress_8.html">regress_8.ncl</a>:
+The <a href="Data/asc/index.html"><b>Old Faithful Geyser Data</b></a> is used by <b>R</b> and other tools.
+It contains <b>two variables</b>: (a) the waiting time between eruptions, and 
+(b) the durations of the eruptions for the 
+<a href="https://en.wikipedia.org/wiki/Old_Faithful"><b>Old Faithful Geyser</b></a>.
+Here, a bivariate linear regression is performed using <a href="../Document/Functions/Built-in/regline.html"><strong>regline</strong></a></b>
+and  <a href="../Document/Functions/Contributed/regline_stats.html"><strong>regline_stats</strong></a>. A comparison to 
+the output from <b>R</b> is shown in the examples associated with these functions.
+    </div>
+
+    <div class=ex>
+    <!--Regress_qreg_R-->
+    <a name=ex_qreg_R></a>
+    <a href="Images/regress_qreg_R_1_lg.png">
+    <img src="Images/regress_qreg_R_1_sm.png" align=left border=2></a>
+    <a href="Scripts/regress_qreg_R.html">regress_qreg_R.ncl</a>:
+This example, contributed by Laurent Terray [CERFACS; 15 Aug 2018], 
+illustrates how to invoke an R-function that performs <b>Quantile
+Regression</b> and <b>Ordinary Least Squares</b> from within an NCL script.  
+Because it is not possible to <b>directly</b> pass variables to/from NCL and R,
+the script uses files as the method of communication. The files could be any format 
+that NCL and R can handle (eg: text, binary, netCDF, ...).  This example uses 
+text (csv) files.  Specifically, the NCL driver script:
+<p>
+<ul>
+<li> (a) reads a netCDF file; 
+<li> (b) extracts a user specified region of interest using 
+<a href="../Document/Language/subscript_coord.html"><b>coordinate subscripting syntax</b></a>: {...};
+<li> (c) calculates time series of  areal means using <a href="../Document/Functions/Contributed/_b_wgt_areaave_Wrap_/b_.html"><strong><b>wgt_areaave_Wrap</b></strong></a>></a>; 
+<li> (d) creates a csv text file containing the time series of areal means; 
+<li> (e) uses <a href="../Document/Functions/Built-in/system.html"><strong>system</strong></a> to invoke the R driver script:
+<a href="Scripts/QuantReg.html"><b>QuantReg.R</b></a>; 
+<li> (e1) R function: <a href="https://cran.r-project.org/web/packages/quantreg/quantreg.pdf"><b>rq</b></a> does the quantile regression;
+<li> (e2) R function: <a href="https://www.rdocumentation.org/packages/rms/versions/5.1-2/topics/ols"><b>ols</b></a> performs the ordinary least squares fit;
+<li> (f) reads the csv files created by the R driver script; 
+<li> (g) use NCL graphics to plot the returned information.
+</ul>
+<p>
+If the R-package "<b>quantreg</b>" is not locally available, it must be installed.  Start <b>R</b>:
+<pre>
+      > install.packages("quantreg")
+      > q()
+</pre>
+    </div>
+
+    <div class=ex>
+    <!--Mann_Kendall_1-->
+    <a name=ex1></a>
+    <a href="Images/manken_1_lg.png">
+    <img src="Images/manken_1_sm.png" align=left border=2></a>
+
+    <a href="Scripts/manken_1.html">manken_1.ncl</a>: Read an ascii file 
+(<a href="Data/asc/TA_Globe.1850-2014.txt">TA_Globe.1850-2014.txt</a>; source 
+(<a href="http://hadobs.metoffice.com/hadcrut3/diagnostics/global/nh+sh/">Met Office Hadley Centre</a>) 
+and extract pertinent columns.  Compute the simple linear regression (<a href="../Document/Functions/Contributed/regline_stats.html"><strong>regline_stats</strong></a>; red)
+and Mann-Kendall/Theil-Sen (<a href="../Document/Functions/Built-in/trend_manken.html"><strong>trend_manken</strong></a>; blue) 
+trend estimates over three periods. Here, there is virtually no difference between the derived values. Both 'lines' are plotted but only the values from the Mann-Kendall/Theil-Sen are shown. If there are outliers or skewed data, the Theil-Sen is likely to give the better linear trend estimate.
+    </div>
+
+    <div class=ex>
+    <!--Mann_Kendall_2-->
+    <a name=ex2></a>
+    <a href="Images/manken_2_lg.png">
+    <img src="Images/manken_2_sm.png" align=left border=2></a>
+
+    <a href="Scripts/manken_2.html">manken_2.ncl</a>: Read an ascii file 
+(<a href="Data/asc/rutgers.snow_cover_extent.time_series.txt">rutgers.snow_cover_extent.time_series.txt</a>; source
+(<a href="http://climate.rutgers.edu/snowcover/table_area.php?ui_set=1&amp;ui_sort=0"> Rutgers Univ Global Snow Lab</a>)
+and extract pertinent columns.
+Compute the linear regression and Theil-Sen trend estimates for winter (Nov-Dec-Jan-Feb-Mar) and summer (May-Jun-Jul-Aug-Sep) 
+over the satellite era (1979-2014). 
+Both simple linear regression (<a href="../Document/Functions/Contributed/regline_stats.html"><strong>regline_stats</strong></a>; red) and Mann-Kendall/Theil-Sen 
+(<a href="../Document/Functions/Built-in/trend_manken.html"><strong>trend_manken</strong></a>; blue) estimates are shown. The summer trend lines illustrate a small difference
+between the trend estimates. It is likely that the distribution of residuals about the linear regression line is slightly skewed.
+Hence, the Theil-Sen is likely better.
+    </div>
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</body>    
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/regress.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:09:57 GMT -->
+</html>
+
+

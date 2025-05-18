@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/time.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:10:33 GMT -->
+<head>
+<meta name="description" content="NCL data analysis example page. 
+Dealing with time coordinates.">
+<TITLE>Time coordinates</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+    <h1>Time coordinates</h1>
+
+<div class=text>
+
+This page shows some examples of dealing with "time" coordinates.
+All "date" functions are documented <a href="../Document/Functions/date.html"><b>here</b></a>.
+<p>
+See the <a href="time_labels.html">time axis labels</a>
+page for examples of creating nice time labels on the X or Y axis.
+
+</div>
+
+<div class=text>
+<font color="red"><b>CAUTION</b>:</font> 
+The yyyy-mm <font color="red"><i>within a CESM file name</i></font> and the <b>time</b> variable
+ contained <font color="red"><i>within the file</i></font> may not necessarily agree with one another. This can
+be confusing and lead to erroneous temporal assignment(s). Consider a file named
+"CESM.sample.h.0280-01.nc". The file 'yyyy-mm' is 280-01 (January, 280). 
+<p>
+<pre>
+ f = <a href="../Document/Functions/Built-in/addfile.html"><strong>addfile</strong></a>("CESM.sample.h.0280-01.nc","r")
+ time = f->time
+ <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>(time)
+
+     Variable: time
+     Type: double
+              <i>[snip] </i>
+     Dimensions and sizes:	[time | 1]
+     Coordinates: 
+              <b>time: [102231..102231]</b>
+     Number Of Attributes: 4
+       long_name :	time
+     <b>units :	days since 0000-01-01 00:00:00</b>
+     <b>bounds :	time_bound</b>
+     <b>calendar :	noleap</b>
+     
+     <b>(0)     102231</b>
+
+ date = <a href="../Document/Functions/Built-in/cd_calendar.html"><strong>cd_calendar</strong></a>(time, 0)                  
+ <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>(date)
+     
+     Variable: date
+     Dimensions and sizes:   [1] x [6]     <== yyyy,mm,dd,hh,mn,sec
+     Coordinates: 
+     Number Of Attributes: 1
+     <b>calendar :    noleap</b>
+    <b>(0,0)   280</b>         
+    <b>(0,1)    2 </b>
+              <i>[snip] </i>
+
+</pre>
+The variable '<b>time</b>' indicates <i><b>280-02 or February, 280</i></b> 
+which is not consistent with the file name of <i><b>280-01 or January, 280</i></b>.
+How to deal with this? One approach is to use the '<b>time_bound</b>' variable.
+<pre>
+
+ time_bound = f->time_bound  
+ print(time_bound)
+
+     Variable: time_bound
+     Type: double
+     Total Size: 16 bytes
+                 2 values
+     Number of Dimensions: 2
+     Dimensions and sizes:   [time | 1] x [d2 | 2]
+     Coordinates: 
+                 time: [102231..102231]
+     Number Of Attributes: 2
+       long_name :   boundaries for time-averaging interval
+       units :       days since 0000-01-01 00:00:00
+
+  <b>(0,0)   102200</b>    <b><i> <==== beginning of the averaging time</b></i>
+  <b>(0,1)   102231</b>    <b><i> <==== this is the same as 'time'</b></i>
+
+ time = (/ time_bound(:,0) /)          ; override values with lower bound  
+ print(time)                           ; <=== 102200
+ date = cd_calendar(time, 0) 
+ print(date)                           
+
+     Variable: date
+     Type: float
+     Total Size: 24 bytes
+                 6 values
+     Number of Dimensions: 2
+     Dimensions and sizes:   [1] x [6]
+     Coordinates: 
+     Number Of Attributes: 1
+       calendar :    noleap
+  <b>(0,0)   280</b>
+  <b>(0,1)    1 </B>
+
+<b>------------------------------------------------------------------------------></b>
+<b>------------------------------------------------------------------------------></b>
+Another (better ?) approach is to average the <b>time_bnd</b> variable to get the
+'center-of-mass' of the observations. 
+
+ time       = f->time
+ time_bound = f->time_bound  
+ time       = (/ (time_bound(:,0)+time_bound(:,1))*0.5 /)  ; replace values with average
+
+For NCL applications, one could reassign the 'time' coordinate variable
+associated with a variable:
+
+ temp       = f->TEMP
+ temp&time  = (/ time  /)     ; reasign with 'center-of-mass' time values              
+
+</pre>
+</div>
+
+<div class=ex>
+<!--Time_1-->
+<a name=ex1></a>
+<a href="Scripts/time_1.html">time_1.ncl</a>: (a) Create an integer time 
+coordinate variable of the type <em>199801</em>,<em>199802</em> etc 
+for multiple years. (b) Convert to type string via <a href="../Document/Functions/Built-in/tostring.html"><strong>tostring</strong></a>
+and <a href="../Document/Functions/Built-in/sprinti.html"><strong>sprinti</strong></a>. (c) Convert integer yyyymm to year and fraction 
+of year for graphics via <a href="../Document/Functions/Contributed/yyyymm_to_yyyyfrac.html"><strong>yyyymm_to_yyyyfrac</strong></a>.
+(d) Create a time variable with the units "hours since ...".
+
+<pre>
+                <b>yyyymm    _s1     _s2     time    yrfrac</b>
+
+          (0)	199801  199801  199801   859032   1998
+          (1)	199802  199802  199802   859776   1998.08
+          (2)	199803  199803  199803   860448   1998.17
+          (3)	199804  199804  199804   861192   1998.25
+          (4)	199805  199805  199805   861912   1998.33
+          (5)	199806  199806  199806   862656   1998.42
+          (6)	199807  199807  199807   863376   1998.5
+          (7)	199808  199808  199808   864120   1998.58
+          (8)	199809  199809  199809   864864   1998.67
+          (9)	199810  199810  199810   865584   1998.75
+          (10)	199811  199811  199811   866328   1998.83
+          (11)	199812  199812  199812   867048   1998.92
+          (12)	199901  199901  199901   867792   1999
+
+          [SNIP]
+
+          (35)	200012  200012  200012   884592   2000.92
+          (36)	200101  200101  200101   885336   2001
+          (37)	200102  200102  200102   886080   2001.08
+          (38)	200103  200103  200103   886752   2001.17
+          (39)	200104  200104  200104   887496   2001.25
+          (40)	200105  200105  200105   888216   2001.33
+          (41)	200106  200106  200106   888960   2001.42
+          (42)	200107  200107  200107   889680   2001.5
+          (43)	200108  200108  200108   890424   2001.58
+          (44)	200109  200109  200109   891168   2001.67
+          (45)	200110  200110  200110   891888   2001.75
+          (46)	200111  200111  200111   892632   2001.83
+          (47)	200112  200112  200112   893352   2001.92
+</pre>
+</div>
+    
+<div class=ex>
+<!--Time_2-->
+<a name=ex2></a>
+<a href="Scripts/time_2.html">time_2.ncl</a>: Demonstrates using 
+<a href="../Document/Functions/Built-in/cd_calendar.html"><strong>cd_calendar</strong></a> to convert a mixed Julian/Gregorian
+date to a UT-referenced date, and then demonstrates using
+<a href="../Document/Functions/Built-in/cd_inv_calendar.html"><strong>cd_inv_calendar</strong></a> to go from
+a UT-referenced date to a mixed Julian/Gregorian date with a different
+reference time and units. The <a href="../Document/Functions/Built-in/sprintf.html"><strong>sprintf</strong></a> is used to
+ensure consistent formatting of the yrfrac variable. 
+<p><p>
+<pre>
+          Variable: <b>time</b>                            ; original 'time'
+          Type: double
+          Total Size: 6560 bytes
+                      820 values
+          Number of Dimensions: 1
+          Dimensions and sizes:   [time | 820]
+          Coordinates: 
+                      time: [1297320..1895592]             ; range of values
+          Number Of Attributes: 7
+            long_name :   Time
+            delta_t :     0000-01-00 00:00:00
+            prev_avg_period :     0000-00-01 00:00:00
+            standard_name :       time
+            axis :        T
+            units :       hours since 1800-01-01 00:00:0.0 ; reference time
+            actual_range :        ( 1297320, 1895592 )
+
+          <b>-----</b>  
+
+          Variable: time2
+          Type: double
+          Total Size: 6560 bytes
+                      820 values
+          Number of Dimensions: 1
+          Dimensions and sizes:   [time2 | 820]
+          Coordinates: 
+                      time2: [53690..78618]                 ; new reference range
+          Number Of Attributes: 2
+            calendar :    standard
+            units :       days since 1801-1-1 00:00:0.0     ; new reference units
+
+OUTPUT:
+          
+                   <b>time    yyyymm  yyyymmdd  yyyymmddhh  yyyy.frac  time2</b>
+          (0)     1297320  194801  19480101  1948010100  1948.0000  53690
+          (1)     1298064  194802  19480201  1948020100  1948.0847  53721
+          (2)     1298760  194803  19480301  1948030100  1948.1639  53750
+          (3)     1299504  194804  19480401  1948040100  1948.2486  53781
+          (4)     1300224  194805  19480501  1948050100  1948.3306  53811
+          (5)     1300968  194806  19480601  1948060100  1948.4153  53842
+          (6)     1301688  194807  19480701  1948070100  1948.4973  53872
+
+          [SNIP]
+
+          (812)   1890480  201509  20150901  2015090100  2015.6658  78405
+          (813)   1891200  201510  20151001  2015100100  2015.7479  78435
+          (814)   1891944  201511  20151101  2015110100  2015.8329  78466
+          (815)   1892664  201512  20151201  2015120100  2015.9151  78496
+          (816)   1893408  201601  20160101  2016010100  2016.0000  78527
+          (817)   1894152  201602  20160201  2016020100  2016.0847  78558
+          (818)   1894848  201603  20160301  2016030100  2016.1639  78587
+          (819)   1895592  201604  20160401  2016040100  2016.2486  78618
+</div>
+    
+<div class=ex>
+<!--Time_3-->
+<a name=ex3></a>
+<a href="Images/time_3_1_lg.png">
+<img src="Images/time_3_1_sm.png" align=left border=2></a>
+<a href="Images/time_3_2_lg.png">
+<img src="Images/time_3_2_sm.png" align=left border=2></a>
+<a href="Images/time_3_3_lg.png">
+<img src="Images/time_3_3_sm.png" align=left border=2></a>
+<a href="Scripts/time_3.html">time_3.ncl</a>: Demonstrates what 
+happens if you try to plot a time series plot with YYYYMM values on the
+X axis. NCL has no way of knowing this is a time axis, so it treats
+the YYYYMM values as being on a linear axis, and includes values YYYY13,
+YYYY14, through YYYY99, causing irregular gaps in the data.
+<p>
+
+To fix this, you can use the function
+<a href="../Document/Functions/Contributed/yyyymm_to_yyyyfrac.html"><strong>yyyymm_to_yyyyfrac</strong></a> to convert
+YYYYMM to yearly fractional values. The second plot illustrates the
+use of this function.
+<p>
+
+The third plot simply shows how to label the X axis with more meaningful
+time labels.
+</div>
+
+<div class=ex>
+<!--Time_4-->
+<a name=ex4></a>
+<a href="Images/time_4_lg.png">
+<img src="Images/time_4_sm.png" align=left border=2></a>
+<a href="Scripts/time_4.html">time_4.ncl</a>: Demonstrates how to use the 
+contributed.ncl function 
+<a href="../Document/Functions/Contributed/yyyymm_to_yyyyfrac.html"><strong>yyyymm_to_yyyyfrac</strong></a> to set up
+a monthly time array useful for plotting purposes. The top panel
+shows a random-generated timeseries plotted along an X-axis set up
+using <a href="../Document/Functions/Contributed/yyyymm_to_yyyyfrac.html"><strong>yyyymm_to_yyyyfrac</strong></a>. The
+middle plot shows the result of
+using <a href="../Document/Graphics/Resources/tm.html#tmXBFormat"><em>tmXBFormat</em></a> to remove unnecessary
+trailing zeros from the X axis labels.
+The bottom panel shows how to include carriage
+returns in tick mark labels so that the year label appears under the month label.
+<p>
+
+Carriage returns are created in text strings by utilizing a
+<a href="../Document/Graphics/function_code.html">text function code</a> surrounding a C. (ex. ~C~)
+
+</div>
+    
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/time.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:10:35 GMT -->
+</html>
+
+

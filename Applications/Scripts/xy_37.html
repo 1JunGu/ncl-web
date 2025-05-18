@@ -1,0 +1,79 @@
+;----------------------------------------------------------------------
+; xy_37.ncl
+;
+; Concepts illustrated:
+;   - Drawing XY plot curves with both lines and markers
+;   - Drawing grid lines on an XY plot
+;   - Filling the plot area in light gray
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;----------------------------------------------------------------------
+
+;----------------------------------------------------------------------
+; This procedure takes an existing plot, retrieves the viewport 
+; coordinates, and fills that area in the desired color. This
+; procedure can be used on *any* plot object.
+;----------------------------------------------------------------------
+undef("fill_xy_plot_area")
+procedure fill_xy_plot_area(wks,plot)
+begin
+  getvalues plot
+    "trXMinF"   : xmin
+    "trYMinF"   : ymin
+    "trXMaxF"   : xmax
+    "trYMaxF"   : ymax
+  end getvalues
+
+  xbox = (/xmin,xmax,xmax,xmin,xmin/)
+  ybox = (/ymin,ymin,ymax,ymax,ymin/)
+
+  gnres = True
+  gnres@gsFillColor     = "Gray70"
+  gnres@tfPolyDrawOrder = "PreDraw"
+  plot@$unique_string("box")$ = gsn_add_polygon(wks,plot,xbox,ybox,gnres)
+end
+
+;----------------------------------------------------------------------
+; Main code
+;----------------------------------------------------------------------
+begin
+
+;---Read in data
+ f     = addfile ("$NCARG_ROOT/lib/ncarg/data/cdf/uv300.nc","r")
+ u     = f->U                                    ; read data
+ data2 = new((/3,dimsizes(u&lat)/),float)
+
+ data2(0,:) = u(0,:,{82})
+ data2(1,:) = u(0,:,{0})
+ data2(2,:) = u(0,:,{-69})
+
+ wks   = gsn_open_wks ("png","xy")                  ; send graphics to PNG file
+
+;---Set plotting parameters
+ res                     = True
+ res@gsnDraw             = False                     ; Turn off so we can add a filled
+ res@gsnFrame            = False                     ;     polygon later.
+ res@xyDashPattern       = 0                         ; Make curves all solid
+ res@xyLineThicknessF    = 2.0                       ; Make XY lines thicker
+
+ res@xyMarkLineMode      = "MarkLines"               ; Markers *and* lines
+ res@xyMarkers           = (/6,11,16/)               ; Three different markers
+ res@xyMarkerColors      = (/"blue","red","green"/)  ; Three different colors
+ res@xyMarkerThicknesses = (/2.,1.,1./)              ; Increase thickness of first marker
+
+ res@tiMainString   = "Plot area filled in gray"
+
+ res@tmXMajorGrid          = True               ; Add white grid lines
+ res@tmXMajorGridLineColor = "white"
+ res@tmYMajorGrid          = True
+ res@tmYMajorGridLineColor = "white"
+
+ plot  = gsn_csm_xy (wks,u&lat,data2,res) ; create plot
+
+;---Fill the plot area in gray
+ fill_xy_plot_area(wks,plot)
+ draw(plot)
+ frame(wks)
+end

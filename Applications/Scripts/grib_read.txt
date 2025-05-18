@@ -1,0 +1,59 @@
+NCL can be run in either a script mode or interactive mode. Either
+mode can be used to explore the contents of a grib file:
+
+INTERACTIVE MODE:
+
+% ncl <return>
+  ncl > g = addfile ("/cgd/cas/murphys/Data/ERS40/ers40_u01276.grb", "r") 
+  ncl > print (g)                ; print overview of file's contents
+  ncl > z = g->Z_GDS0_ISBL_123   ; read a selected variable to memory 
+  ncl > printVarSummary(z)       ; print overview of the variable
+  ncl > print (z)                ; print values
+  ncl > quit
+
+
+
+SCRIPT MODE:
+
+begin
+;************************************************
+; create pointer to file and read in data
+;************************************************
+  g = addfile("/cgd/cas/murphys/Data/ERS40/ers40_u01276.grb","r")
+  print(g)
+  [other statements]
+end
+
+Output of print(g):
+
+filename:       ers40_u01276                                                 
+    path:   ers40_u01276.grb                                                  
+       file global attributes:                                               
+       dimensions:                                                           
+          initial_time0 = 16                                                 
+          lv_ISBL1 = 23                                                      
+          g0_lat_2 = 73                                                      
+          g0_lon_3 = 144                                                     
+      variables:                                                             
+      float PV_GDS0_ISBL_123 ( initial_time0, lv_ISBL1, g0_lat_2, g0_lon_3 )
+         center :       European Center for Medium-Range Weather Forecasts - 
+	 Reading                                                             
+         long_name :    Potential vorticity                                  
+         units :        K m**2 kg**-1 s**-1                                 
+         _FillValue :   -999                                                 
+         level_indicator :      100 
+         grid_number :  255
+         parameter_number :     60
+         forecast_time :        0
+
+      float Z_GDS0_ISBL_123 ( initial_time0, lv_ISBL1, g0_lat_2, g0_lon_3 )
+         center :       European Center for Medium-Range Weather Forecasts - Reading
+         long_name :    Geopotential
+         units :        m**2 s**-2
+         _FillValue :   -999
+         level_indicator :      100
+         grid_number :  255
+         parameter_number :     129
+         forecast_time :        0
+
+     [SNIP other variables]

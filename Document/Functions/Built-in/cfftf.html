@@ -1,0 +1,765 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/cfftf.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:14 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (general applied math)">
+<meta name="keywords" content="cfftf">
+<title>cfftf</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>cfftf</h1>
+
+<p>
+Performs a forward complex discrete fourier transform of a real periodic sequence.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function cfftf (
+		xr   : numeric,  
+		xi   : numeric,  
+		opt  : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :   <a href="typeof.html"><strong>typeof</strong></a>(<em>x</em>)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>xr</em>
+<p class=indent>A variable containing one or more periodic sequences to be transformed.  
+Since NCL does not support a complex numeric type, this will be the
+real part of a complex periodic sequence.  
+</p>
+<p class=indent>
+For a multi-dimensioned array the <i>rightmost</i> dimension
+will be transformed. The size of the rightmost dimension 
+need not be a power of 2. However, it is recommended that the length
+be an even number.
+</p>
+<em>xi</em>
+<p class=indent>A variable containing one or more periodic sequences to be transformed.  
+Since NCL does not support a complex numeric type, this will be the
+imaginary part of a complex periodic sequence. This must be the same
+shape and size as <em>xr</em>.  <b>Exception:</b> This
+argument may be set to a scalar (say, xi_scalar). 
+If so, the underlying computational code will construct the 
+required complex array: <i> carr=cmplx(xr, xi_scalar)</i>. 
+Most commonly, this feature is used when performing a complex forward
+transform on observational data. In this case, <bi>xi_scalar=0.0</bi> 
+</p>
+<p class=indent>
+</p>
+<em>opt</em>
+<p class=indent>Currently, not used. Set to zero.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A double array is returned if either <em>xr</em> or <em>xi</em> is
+double, otherwise a float array is returned. 
+In addition, two attributes are returned: 
+<ol>
+<li> <em>npts</em>, containing the length of the input series.
+<li> <em>frq</em>, containing the frequencies associated    
+     with the returned components. 
+</ol>
+<P>
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+Given the components of a complex periodic sequence, 
+<em>xr</em> and <em>xi</em>, <strong>cfftf</strong> 
+performs a forward complex Fourier transform. This is often called Fourier Analysis.
+The transform is <b>not</b> normalized. To obtain a normalized transform
+the output must be divided by "N", the size of the rightmost dimension.  
+<P>
+The <strong>cfftf</strong> function returns the
+same information as the forward real discrete fourier transform, <a href="ezfftf.html"><strong>ezfftf</strong></a>. 
+The returned information is in a different form, in particular,
+the representation of frequency. The real forward transform pertains to the
+positive frequency portion of the spectrum while the complex 
+forward transform includes positive and negative frequencies. 
+The following is a slightly edited excerpt from the Smith reference.
+<blockquote>
+    The real Fourier transform only deals with <i>positive</i>
+    frequencies. That is, the frequency domain index, <i>k</i>,
+    only runs from 0 to N/2. In comparison, the complex Fourier
+    transform includes both <i>positive</i> and <i>negative</i> 
+    frequencies. This means <i>k</i> runs from 0 to (N-1). The
+    frequencies between 0 and N/2 are positive, while the frequencies
+    between N/2 and N-1 are negative. Remember, the frequency
+    spectrum of a discrete signal is periodic, making the
+    negative frequencies between N/2 and (N-1) the same as
+    -N/2 and 0. The samples at 0 and N/2 straddle the line
+    between positive an negative. 
+</blockquote>
+Paul Swarztrauber offers the following comment (slightly edited):
+<blockquote>
+Historically, the continuous complex transform is defined on the interval -pi to pi with
+wave numbers -infinity to infinity. In its' discrete form it is defined on the points
+x sub j = j2pi/N where
+<pre>
+if N is  odd then j = -(N-1)/2,...,(N-1)/2
+
+if N is even then j = N/2,...,N/2-1
+</pre>
+These integer values also correspond to wave numbers k.
+<p>
+The confusion arises because the description of the transform is often defined
+with indices j=0,..,N-1 which is true but corresponds to an aliased transform
+and chosen simply because one does not have to separate the description
+into parts corresponding to even and odd integers. That is, it is chosen to
+simplify math presentation. Unfortunately, this can be very confusing
+to individuals that actually have to use the transform.
+</blockquote>
+
+Having positive and negative frequencies greatly facilitates application to
+(say) waves that may travel eastward or westward.
+<P>
+For most applications, the data should be preprocessed. Commonly,
+the mean, the linear trend  [ <a href="dtrend.html"><strong>dtrend</strong></a> ]
+and known periodic components are removed: 
+eg, a climatological  mean and/or the first several harmonics of the annual cycle. 
+Further, since the <strong>cfftf</strong> assumes the data are
+periodic, the user may wish to <a href="taper.html"><strong>taper</strong></a> prior to 
+performing the analysis.  Consult a book on Fourier Analysis for details. 
+<P>
+The transformed value at <b>frq</b>=0.0 is the mean of the data being transformed.
+For graphical purposes, some prefer to set any residual mean to 0.0 or _FillValue.
+<P>
+If any missing values [_FillValue] are encountered in one of the input arrays, then
+no calculations will be performed on that array, and the corresponding
+output array will be filled with missing values. Hence, the user should preprocess
+the data to fill in any missing values. Just any old value will not do! The
+user must consider how the filled values will affect the spectrum.
+<P>
+A old but nice reference is:
+<pre>
+        Peter Bloomfield
+        Fourier analysis of time series : An introduction
+        New York : John Wiley and Sons  , 1976
+</pre>
+A <b>very</b> readable text on the complex fourier transform is: 
+<pre>
+        Steve Smith
+        The Scientist and Engineer's Guide to Digital Signal Processing
+</pre>
+It is availble at:
+<pre>
+        http://www.dspguide.com/pdfbook.htm
+</pre>
+In particular, see Chapter 31.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="cfftf_frq_reorder.html"><strong>cfftf_frq_reorder</strong></a>,
+<a href="cfftb.html"><strong>cfftb</strong></a>, <a href="ezfftf.html"><strong>ezfftf</strong></a>,
+<a href="ezfftb.html"><strong>ezfftb</strong></a>, 
+<a href="fft2df.html"><strong>fft2df</strong></a>, 
+<a href="fft2db.html"><strong>fft2db</strong></a>, 
+<a href="taper.html"><strong>taper</strong></a>, <a href="dtrend.html"><strong>dtrend</strong></a>,
+<a href="specx_anal.html"><strong>specx_anal</strong></a>, <a href="specxy_anal.html"><strong>specxy_anal</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+<B>Example 1</B><P>
+Perform a forward complex fft on a <a href="sin.html"><strong>sin</strong></a> or <a href="cos.html"><strong>cos</strong></a>.
+Compare with <a href="ezfftf.html"><strong>ezfftf</strong></a>. To save space, users should copy and execute
+the following script.
+<pre>
+   N  = 24
+   pi = 4.0*<a href="atan.html"><strong>atan</strong></a>(1.0)
+   AMP= 10.
+  ;x  = AMP*<a href="cos.html"><strong>cos</strong></a>(2.*pi*<a href="fspan.html"><strong>fspan</strong></a>(0,N-1,N)/N)
+   x  = AMP*<a href="sin.html"><strong>sin</strong></a>(2.*pi*<a href="fspan.html"><strong>fspan</strong></a>(0,N-1,N)/N)
+  ;<a href="print.html"><strong>print</strong></a>(x)
+  ;<a href="print.html"><strong>print</strong></a> ("N="+N+"   <a href="avg.html"><strong>avg</strong></a>(x)="+<a href="avg.html"><strong>avg</strong></a>(x))   ; N=24, <a href="avg.html"><strong>avg</strong></a>(x) = 0.0
+   
+; <strong>cfftf</strong>
+   
+   cf = <strong>cfftf</strong> (x, 0.0, 0)    ; imaginary part set to 0.0
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(cf)      ; [2] x [24]
+
+   cf  = cf*<b>(1.0/N)</b>                            ; normalization for 2-sided fft
+   cf  = <a href="where.html"><strong>where</strong></a>(<a href="abs.html"><strong>abs</strong></a>(cf).lt.1e-6, 0.0, cf)      ; eliminate for nice print
+   <a href="print.html"><strong>print</strong></a>(<a href="sprintf.html"><strong>sprintf</strong></a>("%9.5f", cf@frq) +"    "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", cf(0,:))+"    "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", cf(1,:)) )
+   
+; <a href="ezfftf.html"><strong>ezfftf</strong></a>
+   
+   cfez = <a href="ezfftf.html"><strong>ezfftf</strong></a> (x)         ; [2] x [12]
+   cfez = <a href="where.html"><strong>where</strong></a>(<a href="abs.html"><strong>abs</strong></a>(cfez).lt.1e-6, 0.0, cfez)       ; eliminate for nice print
+   <a href="print.html"><strong>print</strong></a>(<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", cfez(0,:))+"    "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", cfez(1,:)) )
+   
+; amplitude
+   
+   cfa = <a href="sqrt.html"><strong>sqrt</strong></a>(cf(0,1:)^2 + cf(1,1:)^2)
+   <a href="print.html"><strong>print</strong></a>(cfa)    ; (/ 5,0,0, ....  ,0,0,5 /)
+   
+   eza = <a href="sqrt.html"><strong>sqrt</strong></a>(cfez(0,:)^2 + cfez(1,:)^2)
+   <a href="print.html"><strong>print</strong></a>(eza)    ; (/10,0,0...,0/)
+</pre>
+The (edited) output:
+   
+<pre>
+Variable: cf
+Type: float
+Total Size: 192 bytes
+            48 values
+Number of Dimensions: 2
+Dimensions and sizes:	[2] x [24]
+Coordinates: 
+Number Of Attributes: 2
+  npts :	24
+  frq :	<ARRAY of 24 elements>
+(0)	  0.00000        0.000        0.000
+(1)	  0.04167        0.000    <b>-5.000      <=== </b>
+(2)	  0.08333        0.000        0.000
+[SNIP]
+i(10)	  0.41667        0.000        0.000
+(11)	  0.45833        0.000        0.000
+(12)	  0.50000        0.000        0.000
+(13)	 -0.45833        0.000        0.000
+[SNIP]
+(21)     -0.12500        0.000        0.000
+(22)     -0.08333        0.000        0.000
+(23)     -0.04167        0.000    <b> 5.000      <=== </b>
+</pre>
+<p>
+<B>Example 2</B><P>
+Perform a complex forward transform (fourier analysis) 
+of a one dimensional periodic sequence of length 24 (<b>even</b>).  
+<PRE>
+    x  = (/ 1002, 1017, 1018, 1020, 1018, 1027, \ 
+            1028, 1030, 1012, 1012,  982, 1012, \
+            1001,  996,  995, 1011, 1027, 1025, \ 
+            1030, 1016,  996, 1006, 1002,  982  /)
+    N  = <a href="dimsizes.html"><strong>dimsizes</strong></a>(x)
+    df = 1.0/N
+    xAvg =  <a href="avg.html"><strong>avg</strong></a>(x)
+
+    <a href="print.html"><strong>print</strong></a> ("N="+N+"     df="+df+"   <a href="avg.html"><strong>avg</strong></a>(x)="+xAvg)
+    
+    cf = <strong>cfftf</strong> (x, 0.0, 0)   ; imaginary part set to 0.0
+    <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(cf)
+   
+    <a href="print.html"><strong>print</strong></a>(<a href="sprintf.html"><strong>sprintf</strong></a>("%9.5f", <b>cf@frq</b>) +"    "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", <b>cf(0,:)</b>)+"    "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", <b>cf(1,:)</b>) )
+</PRE>
+<P>
+The real and imaginary coefficients are accessed via
+the leftmost dimension. The <i>0-th</i> and <i>1-th</i>
+components refer to the real and imaginary components,
+respectively.  The associated frequencies are returned
+as an attribute ( <b>frq</b> ).
+<p>
+<b>Note:</b>  
+<ol>
+<li> The results are <b>not</b> normalized. To get normalized results divide
+      by the length of <i>x</i> (N=24). For example, the series mean
+      is 1011.04. Dividing the cf(0,0) value (=24265) by 24 yields 1011.04.
+<li> If the mean had been removed prior to performing the transform
+     [ <b>x = x-xAvg </b> ], the values at frq=0.0 would be cf(0,0)=cf(1,0)=0.0
+<li> Since the input is a real periodic sequence,  
+     the real part is symmetric about the mid-point while the imaginary part 
+     is asymmetric.
+</ol>
+
+<PRE>
+(0)         N=24     df=0.0416667   <a href="avg.html"><strong>avg</strong></a>(x)=1011.04
+
+-------------------------------------------------------------------
+
+Variable: <b>cf</b>
+Type: float
+Total Size: 192 bytes
+            48 values
+Number of Dimensions: 2
+Dimensions and sizes:  <b> [2] x [24] </b>
+Coordinates:
+Number Of Attributes: 2
+  <b>npts</b> :        24
+  <b>frq</b> : [ARRAY of 24 elements]
+
+-------------------------------------------------------------------
+
+            <b>frq</b>          <b>real</b>         <b>imag</b>          
+(0)       0.00000    24265.000        0.000                <== 24265/24=1011.04
+
+(1)       0.04167       16.061      -44.823
+(2)       0.08333     -161.808      -82.658
+(3)       0.12500       26.000      -40.355
+(4)       0.16667       39.500       -4.330
+(5)       0.20833      -64.781      -36.235
+(6)       0.25000        1.000      -12.000
+(7)       0.29167      -32.697      -49.359
+(8)       0.33333       32.500      -18.187
+(9)       0.37500       26.000      -30.355
+(10)      0.41667       -4.192       31.658
+(11)      0.45833       35.417      -33.699
+
+(12)      0.50000      -43.000        0.000
+
+(13)     -0.45833       35.417       33.699
+(14)     -0.41667       -4.192      -31.658
+(15)     -0.37500       26.000       30.355
+(16)     -0.33333       32.500       18.187
+(17)     -0.29167      -32.697       49.359
+(18)     -0.25000        1.000       12.000
+(19)     -0.20833      -64.781       36.235
+(20)     -0.16667       39.500        4.330
+(21)     -0.12500       26.000       40.355
+(22)     -0.08333     -161.808       82.658
+(23)     -0.04167       16.061       44.823
+</PRE>
+<p>
+<p>
+<B>Example 3</B><P>
+<b>Note: </b> For efficiency, it is recommended that the
+length of the series to be transformed be even. 
+However, for a more complete
+illustration of results, Example 2 is repeated
+but with an <b>odd</b> number of data points.
+<PRE>
+    x  = (/ 1002, 1017, 1018, 1020, 1018, 1027, \ 
+            1028, 1030, 1012, 1012,  982, 1012, \
+            1001,  996,  995, 1011, 1027, 1025, \ 
+            1030, 1016,  996, 1006, 1002        /)
+</PRE>
+The output is as follows. 
+<PRE>
+(0)         N=23     df=0.0434783   <a href="avg.html"><strong>avg</strong></a>(x)=1012.3
+
+
+            <b>frq</b>          <b>real</b>         <b>imag</b>          
+(0)       0.00000   23283.000        0.000                <== 23283/23=1012.3
+
+(1)       0.04348       44.863      -39.946
+(2)       0.08696     -149.203      -30.207
+(3)       0.13043       14.661      -42.318
+(4)       0.17391       59.548      -26.019
+(5)       0.21739      -42.718       11.815
+(6)       0.26087       12.999        1.109
+(7)       0.30435      -45.826       15.366
+(8)       0.34783       -1.615      -14.204
+(9)       0.39130      -25.634      -34.552
+(10)      0.43478       31.800       16.827
+(11)      0.47826      -17.375      -45.505
+
+(12)     -0.47826      -17.375       45.505
+(13)     -0.43478       31.800      -16.827
+(14)     -0.39130      -25.634       34.552
+(15)     -0.34783       -1.615       14.204
+(16)     -0.30435      -45.826      -15.366
+(17)     -0.26087       12.999       -1.109
+(18)     -0.21739      -42.718      -11.815
+(19)     -0.17391       59.548       26.019
+(20)     -0.13043       14.661       42.318
+(21)     -0.08696     -149.203       30.207
+(22)     -0.04348       44.863       39.946
+</PRE>
+<p>
+<B>Example 4</B><P>
+Plot the complex frequency spectrum of Example 2. The issue is that
+the returned  <b>frq</b> attribute is not monotonically increasing.  
+<ol>
+<li>The simplest approach would be to replace the returned frequency
+    attribute with values in the range 0 to 1 or create a new array 
+    containing the new values. Either is readily accomplished via
+<pre>
+             cf@<b>frq</b> = (<a href="ispan.html"><strong>ispan</strong></a>(0,N-1,1)*1.0)/N
+                    ; ============= or ========================
+                  <b>f</b> = (<a href="ispan.html"><strong>ispan</strong></a>(0,N-1,1)*1.0)/N
+</pre> 
+    The cf@<b>frq</b> or <b>f</b> could be used for the plot abscissa.
+<p>
+<li> 
+The convention is to use a frequency scale that spans -0.5 to 0.5. 
+To accomplish this the returned values must be reordered.  
+<pre>
+             xf = <a href="cfftf_frq_reorder.html"><strong>cfftf_frq_reorder</strong></a>( cf )
+             <a href="print.html"><strong>print</strong></a>(<a href="sprintf.html"><strong>sprintf</strong></a>("%9.5f", <b>xf@frq</b>) +"    "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", <b>xf(0,:)</b>)+"    "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", <b>xf(1,:)</b>) )
+</pre> 
+<pre>
+           
+            <b>frq</b>          <b>real</b>         <b>imag</b>          
+(0)      -0.50000      -43.000        0.000
+(1)      -0.45833       35.417       33.699
+(2)      -0.41667       -4.192      -31.658
+(3)      -0.37500       26.000       30.355
+(4)      -0.33333       32.500       18.187
+(5)      -0.29167      -32.697       49.359
+(6)      -0.25000        1.000       12.000
+(7)      -0.20833      -64.781       36.235
+(8)      -0.16667       39.500        4.330
+(9)      -0.12500       26.000       40.355
+(10)     -0.08333     -161.808       82.658
+(11)     -0.04167       16.061       44.823
+
+(12)      0.00000    24265.000        0.000      <=== had the mean been removed both would be 0.0
+
+(13)      0.04167       16.061      -44.823
+(14)      0.08333     -161.808      -82.658
+(15)      0.12500       26.000      -40.355
+(16)      0.16667       39.500       -4.330
+(17)      0.20833      -64.781      -36.235
+(18)      0.25000        1.000      -12.000
+(19)      0.29167      -32.697      -49.359
+(20)      0.33333       32.500      -18.187
+(21)      0.37500       26.000      -30.355
+(22)      0.41667       -4.192       31.658
+(23)      0.45833       35.417      -33.699
+</pre> 
+<p>
+<B>Example 5</B><P>
+Compare the variances calculated via <a href="variance.html"><strong>variance</strong></a>, <a href="ezfftf.html"><strong>ezfftf</strong></a> and <strong>cfftf</strong>. There are different normalizations for the FFT functions.
+<pre>
+
+; http://www.wavemetrics.com/products/igorpro/dataanalysis/signalprocessing/powerspectra.htm
+
+     x    = (/ 1002, 1017, 1018, 1020, 1018, 1027, \
+               1028, 1030, 1012, 1012, 982, 1012, \
+               1001, 996, 995, 1011, 1027, 1025, \
+               1030, 1016, 996, 1006, 1002, 982 /)*1.0       ; even
+             ;;1030, 1016, 996, 1006, 1002, 982, 999 /)*1.0  ; odd
+
+     N    = <a href="dimsizes.html"><strong>dimsizes</strong></a>(x)
+     xVar = <a href="variance.html"><strong>variance</strong></a>(x)*(N-1.)/N    ; biased estimate
+
+;******************************************
+; <strong>cfftf</strong>
+;******************************************
+     cf   = <strong>cfftf</strong> (x, 0.0, 0) ; imaginary part set to 0.0
+   ;;<a href="printVarSummary.html"><strong>printVarSummary</strong></a>(cf)
+   ;;<a href="print.html"><strong>print</strong></a>("---")
+
+     cf  = cf*(1.0/N)                  ; normalization for 2-sided fft
+   ;;<a href="print.html"><strong>print</strong></a>("<strong>cfftf</strong>: "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.5f",cf@frq)+" "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", cf(0,:))+" "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", cf(1,:)) )
+
+                                       ; cf(0,0) = mean  , cf(1,0)=0.0
+     cf2   = cf(0,<b>1:</b>)^2 + cf(1,<b>1:</b>)^2   ; sum after normalization
+     cf2sum= <a href="sum.html"><strong>sum</strong></a>(cf2)
+
+;******************************************
+; <a href="ezfftf.html"><strong>ezfftf</strong></a>
+;******************************************
+
+     cfez = <a href="ezfftf.html"><strong>ezfftf</strong></a> (x)
+   ;;<a href="printVarSummary.html"><strong>printVarSummary</strong></a>(cfez)
+   ;;<a href="print.html"><strong>print</strong></a>("<a href="ezfftf.html"><strong>ezfftf</strong></a>: "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", cfez(0,:))+" "+<a href="sprintf.html"><strong>sprintf</strong></a>("%9.3f", cfez(1,:)) )
+   ;;print("---")
+
+     cfez2   = cfez(0,:)^2 + cfez(1,:)^2
+     cfez2sum= <a href="sum.html"><strong>sum</strong></a>(cfez2)
+
+     if (N%2 .eq. 0) then
+         N2 = N/2
+         cfez_var = 0.5*<a href="sum.html"><strong>sum</strong></a>(cfez2(0:N2-2)) + cfez2(N2-1)
+     else
+         cfez_var = 0.5*<a href="sum.html"><strong>sum</strong></a>(cfez2)
+     end if
+
+     <a href="print.html"><strong>print</strong></a>("---")
+     <a href="print.html"><strong>print</strong></a>("       variance="+xVar)     ; biased estimate
+     <a href="print.html"><strong>print</strong></a>("<strong>cfftf</strong>: variance="+cf2sum  )
+     <a href="print.html"><strong>print</strong></a>("<a href="ezfftf.html"><strong>ezfftf</strong></a>: variance="+cfez_var)
+
+</pre>
+All results were 193.207
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/cfftf.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:14 GMT -->
+</html>

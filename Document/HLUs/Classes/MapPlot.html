@@ -1,0 +1,1687 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/MapPlot.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:32 GMT -->
+<head>
+<title>MapPlot class</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index.html">HLUs ></a>
+<a class=crumb href="index-2.html">Classes </a>
+
+<br>
+
+<h1>MapPlot class</h1>
+The <strong>MapPlot</strong> class draws outlined and/or filled maps
+of arbitrary regions of the globe and may be used to 
+map overlay plots into a number of standard projections.
+<hr>
+<h2>Synopsis</h2>
+
+
+<pre>
+Header file:		ncarg/hlu/MapPlot.h
+Class name:		mapPlotClass
+Class pointer:		NhlmapPlotClass
+Fortran class function:	NHLFMAPPLOTCLASS
+Superclass:		<a href="Transform.html">Transform</a>
+Composite classes:	<a href="MapTransformation.html">MapTransformation,</a><a href="PlotManager.html">PlotManager</a>
+</pre>
+<p>
+<h3>Class-defined types</h3><p>
+<pre>
+Type name:		<a name="NhlTMapDataBaseVersion">NhlTMapDataBaseVersion</a>
+Definition:
+typedef enum _NhlMapDataBaseVersion {
+	NhlNCARG4_0      = 0, /* "Ncarg4_0", "LowRes" */
+        NhlNCARG4_1      = 1, /* "Ncarg4_1", "MediumRes" */
+	NhlRANGS_GSHHS   = 2  /* "RANGS_GSHHS", "RANGS", "HighRes" */
+} NhlMapDataBaseVersion;
+
+Type name:		<a name="NhlTMapDataResolution">NhlTMapDataResolution</a>
+Definition:
+typedef enum _NhlMapDataResolution {
+        NhlUNSPECIFIEDRESOLUTION = -1, /* "Unspecified", "UnspecifiedResolution" */
+        NhlFINESTRESOLUTION	 =  0, /* "Finest", "FinestResolution" */
+        NhlFINERESOLUTION	 =  1, /* "Fine", "FineResolution" */
+        NhlMEDIUMRESOLUTION	 =  2, /* "Medium", "MediumResolution" */
+        NhlCOARSERESOLUTION	 =  3, /* "Coarse", "CoarseResolution" */
+        NhlCOARSESTRESOLUTION	 =  4  /* "Coarsest", "CoarsestResolution" */
+} NhlMapDataResolution;
+
+Type name:		<a name="NhlTMapBoundarySets">NhlTMapBoundarySets</a>
+Definition:
+typedef enum _NhlMapBoundarySets {
+	NhlNOBOUNDARIES	    	    = 0, /* "NoBoundaries"	     */
+        NhlGEOPHYSICAL		    = 1, /* "Geophysical"  	     */
+	NhlNATIONAL		    = 2, /* "National"		     */
+        NhlUSSTATES		    = 3, /* "USStates"		     */
+	NhlGEOPHYSICALANDUSSTATES   = 4, /* "GeophysicalAndUSStates" */
+        NhlALLBOUNDARIES	    = 5  /* "AllBoundaries"          */
+} NhlMapBoundarySets;
+
+
+Type name:		<a name="NhlTSpecifiedFillPriority">NhlTSpecifiedFillPriority</a>
+Definition:
+typedef enum _NhlSpecifiedFillPriority {
+	NhlGEOPHYSICALPRIORITY      = 0, /* "GeophysicalPriority" */
+        NhlPOLITICALPRIORITY        = 1  /* "PoliticalPriority"   */
+} NhlSpecifiedFillPriority;
+
+Type name:		<a name="NhlTMapGridMaskMode">NhlTMapGridMaskMode</a>
+Definition:
+typedef enum _NhlMapGridMaskMode {
+	NhlMASKNONE		    = 0, /* "MaskNone"     */
+        NhlMASKOCEAN		    = 1, /* "MaskOcean"    */
+	NhlMASKNOTOCEAN		    = 2, /* "MaskNotOcean" */
+	NhlMASKLAND		    = 3, /* "MaskLand"     */
+	NhlMASKNOTLAND		    = 4, /* "MaskNotLand"  */
+	NhlMASKFILLAREA		    = 5, /* "MaskFillArea" */
+	NhlMASKMASKAREA		    = 6  /* "MaskMaskArea" */
+} NhlMapGridMaskMode;
+
+Type name:		<a name="NhlTMapShapeMode">NhlTMapShapeMode</a>
+Definition:
+typedef enum _NhlMapShapeMode {
+	NhlFREEASPECT 		    = 0, /* "FreeAspect" 	 */
+	NhlFIXEDASPECTFITBB	    = 1, /* "FixedAspectFitBB"   */
+	NhlFIXEDASPECTNOFITBB 	    = 2  /* "FixedAspectNoFitBB" */
+} NhlMapShapeMode;
+
+</pre>
+
+<hr>
+<h2>Resources</h2>
+<p>
+<h3>Local resources</h3><p>
+<pre>
++---------------------------------------------------------------+
+|			<A name="MapPlot.res">MapPlot Resource Set</a>			|
+|---------------------------------------------------------------|
+| NAME				TYPE			ACCESS	|
+|	CLASS				DEFAULT			|
+|===============================================================|
+| <a href="../../Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a>             <A href="MapPlot.html#NhlTMapDataBaseVersion">NhlTMapDataBaseVersion</a>  RCSG    |
+|       MpDataBaseVersion               "Ncarg4_0"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a>                 <A href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       MpDataSetName	                "Earth..2"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpDataResolution"><em>mpDataResolution</em></a>              <A href="MapPlot.html#NhlTMapDataResolution">NhlTMapDataResolution</a>   RCSG    |
+|       MpDataResolution               "Unspecified"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpShapeMode"><em>mpShapeMode</em></a>                   <A href="MapPlot.html#NhlTMapShapeMode">NhlTMapShapeMode</a>        RCSG    |
+|       MpShapeMode                     "FixedAspectFitBB"      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpAreaNames"><em>mpAreaNames</em></a>                   <A href="Base.html#NhlTStringGenArray">NhlTStringGenArray</a>      RCSG    |
+|       MpAreaNames              <A href="MapPlotData4_0.html">&lt;array&gt;</a> (1) <A href="MapPlotData4_1.html">&lt;array&gt;</a> (2)        |
+|                               (Ncarg4_0)  (Ncarg4_1)          |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpAreaTypes"><em>mpAreaTypes</em></a>                   <A href="Base.html#NhlTIntegerGenArray">NhlTIntegerGenArray</a>     G       |
+|       MpAreaTypes              <A href="MapPlotData4_0.html">&lt;array&gt;</a> (1) <A href="MapPlotData4_1.html">&lt;array&gt;</a> (2)        |
+|                               (Ncarg4_0)  (Ncarg4_1)          |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFixedAreaGroups"><em>mpFixedAreaGroups</em></a>             <A href="Base.html#NhlTIntegerGenArray">NhlTIntegerGenArray</a>     G       |
+|       MpFixedAreaGroups        <A href="MapPlotData4_0.html">&lt;array&gt;</a> (1) <A href="MapPlotData4_1.html">&lt;array&gt;</a> (2)        |
+|                               (Ncarg4_0)  (Ncarg4_1)          |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpDynamicAreaGroups"><em>mpDynamicAreaGroups</em></a>           <A href="Base.html#NhlTIntegerGenArray">NhlTIntegerGenArray</a>     RCSG    |
+|       MpDynamicAreaGroups      <A href="MapPlotData4_0.html">&lt;array&gt;</a> (1) <A href="MapPlotData4_1.html">&lt;array&gt;</a> (2)        |
+|                               (Ncarg4_0)  (Ncarg4_1)          |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpAreaGroupCount"><em>mpAreaGroupCount</em></a>              <A href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       MpAreaGroupCount                10                      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpOutlineOn"><em>mpOutlineOn</em></a>                   <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpOutlineOn                     True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpOutlineDrawOrder"><em>mpOutlineDrawOrder</em></a>            <A href="View.html#NhlTDrawOrder">NhlTDrawOrder</a>           RCSG    |
+|       MpOutlineDrawOrder              "PostDraw"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a>         <A href="MapPlot.html#NhlTMapBoundarySets">NhlTMapBoundarySets</a>     RCSG    |
+|       MpOutlineBoundarySets           "Geophysical"           |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a>           <A href="Base.html#NhlTStringGenArray">NhlTStringGenArray</a>      RCSG    |
+|       MpOutlineSpecifiers             NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpOutlineMaskingOn"><em>mpOutlineMaskingOn</em></a>            <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpOutlineMaskingOn              False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpMaskOutlineSpecifiers"><em>mpMaskOutlineSpecifiers</em></a>       <A href="Base.html#NhlTStringGenArray">NhlTStringGenArray</a>      RCSG    |
+|       MpMaskOutlineSpecifiers         NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpAreaMaskingOn"><em>mpAreaMaskingOn</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpAreaMaskingOn                 False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpMaskAreaSpecifiers"><em>mpMaskAreaSpecifiers</em></a>          <A href="Base.html#NhlTStringGenArray">NhlTStringGenArray</a>      RCSG    |
+|       MpMaskAreaSpecifiers            NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillOn"><em>mpFillOn</em></a>                      <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpFillOn                        False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillDrawOrder"><em>mpFillDrawOrder</em></a>               <A href="View.html#NhlTDrawOrder">NhlTDrawOrder</a>           RCSG    |
+|       MpFillDrawOrder                 "Draw"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillBoundarySets"><em>mpFillBoundarySets</em></a>            <A href="MapPlot.html#NhlTMapBoundarySets">NhlTMapBoundarySets</a>     RCSG    |
+|       MpFillBoundarySets              "Geophysical"           |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillPatternBackground"><em>mpFillPatternBackground</em></a>       <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillBackgroundColor             "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpMonoFillColor"><em>mpMonoFillColor</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpMonoFillColor                 False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillColor"><em>mpFillColor</em></a>                   <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillColors"><em>mpFillColors</em></a>                  <A href="Workstation.html#NhlTColorIndexGenArray">NhlTColorIndexGenArray</a>  RCSG    |
+|       MpFillColors                    &lt;array&gt;                 |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpMonoFillPattern"><em>mpMonoFillPattern</em></a>             <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpMonoFillPattern               True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillPattern"><em>mpFillPattern</em></a>                 <A href="Workstation.html#NhlTFillIndex">NhlTFillIndex</a>           RCSG    |
+|       FillPattern                     "SolidFill"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillPatterns"><em>mpFillPatterns</em></a>                <A href="Workstation.html#NhlTFillIndexGenArray">NhlTFillIndexGenArray</a>   RCSG    |
+|       MpFillPatterns                  &lt;array&gt;                 |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillDotSizeF"><em>mpFillDotSizeF</em></a>                <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       DotSizeF                        0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpMonoFillScale"><em>mpMonoFillScale</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpMonoFillScale                 True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillScaleF"><em>mpFillScaleF</em></a>                  <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FillScaleF                      1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillScales"><em>mpFillScales</em></a>                  <A href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>       RCSG    |
+|       MpFillScales                    &lt;array&gt;                 |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>          <A href="Base.html#NhlTStringGenArray">NhlTStringGenArray</a>      RCSG    |
+|       MpFillAreaSpecifiers            NULL                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillDirectIndexing"><em>mpSpecifiedFillDirectIndexing</em></a> <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpSpecifiedFillDirectIndexing   False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillPriority"><em>mpSpecifiedFillPriority</em></a>       <A href="MapPlot.html#NhlTSpecifiedFillPriority">NhlTSpecifiedFillPriority</a> RCSG  |
+|       MpSpecifiedFillPriority         "GeophysicalPriority"   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillColors"><em>mpSpecifiedFillColors</em></a>         <A href="Workstation.html#NhlTColorIndexGenArray">NhlTColorIndexGenArray</a>  RCSG    |
+|       MpSpecifiedFillColors           &lt;dynamic array&gt;         |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillPatterns"><em>mpSpecifiedFillPatterns</em></a>       <A href="Workstation.html#NhlTFillIndexGenArray">NhlTFillIndexGenArray</a>   RCSG    |
+|       MpSpecifiedFillPatterns         &lt;dynamic array&gt;         |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillScales"><em>mpSpecifiedFillScales</em></a>         <A href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>       RCSG    |
+|       MpSpecifiedFillScales           &lt;dynamic array&gt;         |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpDefaultFillColor"><em>mpDefaultFillColor</em></a>            <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillColor		        16                      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpDefaultFillPattern"><em>mpDefaultFillPattern</em></a>          <A href="Workstation.html#NhlTFillIndex">NhlTFillIndex</a>           RCSG    |
+|       FillPattern                     "SolidFill"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpDefaultFillScaleF"><em>mpDefaultFillScaleF</em></a>           <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FillScaleF                      1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpOceanFillColor"><em>mpOceanFillColor</em></a>              <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillColor                       10                      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpOceanFillPattern"><em>mpOceanFillPattern</em></a>            <A href="Workstation.html#NhlTFillIndex">NhlTFillIndex</a>           RCSG    |
+|       FillPattern                     "SolidFill"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpOceanFillScaleF"><em>mpOceanFillScaleF</em></a>             <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FillScaleF                      1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLandFillColor"><em>mpLandFillColor</em></a>               <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillColor                       8                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLandFillPattern"><em>mpLandFillPattern</em></a>             <A href="Workstation.html#NhlTFillIndex">NhlTFillIndex</a>           RCSG    |
+|       FillPattern                     "SolidFill"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLandFillScaleF"><em>mpLandFillScaleF</em></a>              <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FillScaleF                      1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpInlandWaterFillColor"><em>mpInlandWaterFillColor</em></a>        <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillColor                       10                      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpInlandWaterFillPattern"><em>mpInlandWaterFillPattern</em></a>      <A href="Workstation.html#NhlTFillIndex">NhlTFillIndex</a>           RCSG    |
+|       FillPattern                     "SolidFill"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpInlandWaterFillScaleF"><em>mpInlandWaterFillScaleF</em></a>       <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FillScaleF                      1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGeophysicalLineColor"><em>mpGeophysicalLineColor</em></a>        <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       LineColor                       "Foreground             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGeophysicalLineDashPattern"><em>mpGeophysicalLineDashPattern</em></a>  <A href="Workstation.html#NhlTDashIndex">NhlTDashIndex</a>           RCSG    |
+|       LineDashPattern                 "SolidLine"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGeophysicalLineDashSegLenF"><em>mpGeophysicalLineDashSegLenF</em></a>  <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineDashSegLenF                 &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGeophysicalLineThicknessF"><em>mpGeophysicalLineThicknessF</em></a>   <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpUSStateLineColor"><em>mpUSStateLineColor</em></a>            <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       LineColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpUSStateLineDashPattern"><em>mpUSStateLineDashPattern</em></a>      <A href="Workstation.html#NhlTDashIndex">NhlTDashIndex</a>           RCSG    |
+|       LineDashPattern                 "SolidLine"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpUSStateLineDashSegLenF"><em>mpUSStateLineDashSegLenF</em></a>      <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineDashSegLenF                 &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpUSStateLineThicknessF"><em>mpUSStateLineThicknessF</em></a>       <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpNationalLineColor"><em>mpNationalLineColor</em></a>           <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       LineColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpNationalLineDashPattern"><em>mpNationalLineDashPattern</em></a>     <A href="Workstation.html#NhlTDashIndex">NhlTDashIndex</a>           RCSG    |
+|       LineDashPattern                 "SolidLine"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpNationalLineDashSegLenF"><em>mpNationalLineDashSegLenF</em></a>     <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineDashSegLenF                 &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpNationalLineThicknessF"><em>mpNationalLineThicknessF</em></a>      <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridAndLimbOn"><em>mpGridAndLimbOn</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       MpGridAndLimbOn                 True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridAndLimbDrawOrder"><em>mpGridAndLimbDrawOrder</em></a>        <A href="View.html#NhlTDrawOrder">NhlTDrawOrder</a>           RCSG    |
+|       MpGridAndLimbDrawOrder          "PostDraw"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridMaskMode"><em>mpGridMaskMode</em></a>                <A href="MapPlot.html#NhlTMapGridMaskMode">NhlTMapGridMaskMode</a>     RCSG    |
+|       MpGridMaskMode                  "MaskNone"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridSpacingF"><em>mpGridSpacingF</em></a>                <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpGridSpacingF                  15.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridLatSpacingF"><em>mpGridLatSpacingF</em></a>             <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpGridLatSpacingF               15.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridLonSpacingF"><em>mpGridLonSpacingF</em></a>             <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpGridLonSpacingF               15.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridMaxLatF"><em>mpGridMaxLatF</em></a>                 <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpGridMaxLatF                   15.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridPolarLonSpacingF"><em>mpGridPolarLonSpacingF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MpGridPolarLonSpacingF          15.0                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridLineColor"><em>mpGridLineColor</em></a>               <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       LineColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridLineDashPattern"><em>mpGridLineDashPattern</em></a>         <A href="Workstation.html#NhlTDashIndex">NhlTDashIndex</a>           RCSG    |
+|       LineDashPattern                 "SolidLine"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridLineDashSegLenF"><em>mpGridLineDashSegLenF</em></a>         <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       DashSegLenF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpGridLineThicknessF"><em>mpGridLineThicknessF</em></a>          <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLimbLineColor"><em>mpLimbLineColor</em></a>               <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       LineColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLimbLineDashPattern"><em>mpLimbLineDashPattern</em></a>         <A href="Workstation.html#NhlTDashIndex">NhlTDashIndex</a>           RCSG    |
+|       LineDashPattern                 "SolidLine"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLimbLineDashSegLenF"><em>mpLimbLineDashSegLenF</em></a>         <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineDashSegLenF                 &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLimbLineThicknessF"><em>mpLimbLineThicknessF</em></a>          <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpPerimOn"><em>mpPerimOn</em></a>                     <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       EdgesOn                         False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpPerimDrawOrder"><em>mpPerimDrawOrder</em></a>              <A href="View.html#NhlTDrawOrder">NhlTDrawOrder</a>           RCSG    |
+|       MpPerimDrawOrder                "Draw"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpPerimLineColor"><em>mpPerimLineColor</em></a>              <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       LineColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpPerimLineDashPattern"><em>mpPerimLineDashPattern</em></a>        <A href="Workstation.html#NhlTDashIndex">NhlTDashIndex</a>           RCSG    |
+|       LineDashPattern                 "SolidLine"             |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpPerimLineDashSegLenF"><em>mpPerimLineDashSegLenF</em></a>        <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineDashSegLenF                 &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpPerimLineThicknessF"><em>mpPerimLineThicknessF</em></a>         <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLabelsOn"><em>mpLabelsOn</em></a>                    <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       PlotLabelsOn                    False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLabelDrawOrder"><em>mpLabelDrawOrder</em></a>              <A href="View.html#NhlTDrawOrder">NhlTDrawOrder</a>           RCSG    |
+|       MpLabelDrawOrder                "PostDraw"              |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLabelFontHeightF"><em>mpLabelFontHeightF</em></a>            <A href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontHeightF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/mp.html#mpLabelFontColor"><em>mpLabelFontColor</em></a>              <A href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FontColor                       True                    |
++---------------------------------------------------------------+
+</pre>
+<p>
+<h3>Composite resources</h3><p>
+
+
+<A name="MapTransformation.res"></a>
+<h4><A href="MapTransformation.html#MapTransformation.res">MapTransformation resources</a></h4>
+
+You can access all <a href="MapTransformation.html"><strong>MapTransformation</strong></a> resources.
+The <a href="MapTransformation.html"><strong>MapTransformation</strong></a> resources define the projection and
+the portion of the world map visible within the NDC viewport.
+
+<A name="PlotManager.res"></a>
+<h4><A href="PlotManager.html#PlotManager.res">PlotManager resources</a></h4>
+
+If <a href="../../Graphics/Resources/tf.html#tfPlotManagerOn"><em>tfPlotManagerOn</em></a>
+is True when a <strong>MapPlot</strong> object is created, you can
+access all <a href="PlotManager.html"><strong>PlotManager</strong></a> resources. However, note that
+<strong>MapPlot</strong> intercepts certain
+<a href="PlotManager.html"><strong>PlotManager</strong></a> resources, as follows:
+
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/pm.html#pmTickMarkDisplayMode"><em>pmTickMarkDisplayMode</em></a>
+
+<dd>The default value of <em>pmTickMarkDisplayMode</em> is set to
+<code>Never</code>.
+
+</dl>
+
+</ul>
+
+
+You can also access resources for any of composite classes of the
+<a href="PlotManager.html"><strong>PlotManager</strong></a> class. However, the
+<a href="PlotManager.html"><strong>PlotManager</strong></a> class modifies the access and behavior of
+some of the resources belonging to these classes, as follows: 
+
+<ul>
+
+<li><A href="PlotManager.html#TickMark.res">TickMark resources as modified by
+PlotManager</a>
+
+<li><A href="PlotManager.html#LabelBar.res">LabelBar resources
+as modified by PlotManager</a>
+
+<li><A href="PlotManager.html#Legend.res">Legend resources as
+modified by PlotManager</a>
+
+
+<li><A href="PlotManager.html#Title.res">Title resources as
+modified by PlotManager</a>
+
+</ul>
+
+The <strong>MapPlot</strong> class itself also modifies the access and
+behavior of a number of <a href="TickMark.html"><strong>TickMark</strong></a> resources.
+
+<A name="TickMark.res"></a>
+<h5>Additional modifications to <a href="TickMark.html"><strong>TickMark</strong></a> resources</h5>
+
+The <strong>MapPlot</strong> class disables a number of
+<a href="TickMark.html"><strong>TickMark</strong></a> resources, since it sets them automatically
+in order to create suitable geographical ticks and labels based on the
+current map projection and limits.  The disabled resources include:
+
+<ul>
+<li><a href="../../Graphics/Resources/tm.html#tmEqualizeXYSizes"><em>tmEqualizeXYSizes</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXBMode"><em>tmXBMode</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXBValues"><em>tmXBValues</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXBLabels"><em>tmXBLabels</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXBLabelFuncCode"><em>tmXBLabelFuncCode</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXBMajorOutwardLengthF"><em>tmXBMajorOutwardLengthF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTMode"><em>tmXTMode</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTValues"><em>tmXTValues</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTLabels"><em>tmXTLabels</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTLabelFuncCode"><em>tmXTLabelFuncCode</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTMajorOutwardLengthF"><em>tmXTMajorOutwardLengthF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLMode"><em>tmYLMode</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLValues"><em>tmYLValues</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLLabels"><em>tmYLLabels</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLLabelFuncCode"><em>tmYLLabelFuncCode</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLMajorOutwardLengthF"><em>tmYLMajorOutwardLengthF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRMode"><em>tmYRMode</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRValues"><em>tmYRValues</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRLabels"><em>tmYRLabels</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRLabelFuncCode"><em>tmYRLabelFuncCode</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRMajorOutwardLengthF"><em>tmYRMajorOutwardLengthF</em></a>
+</ul>
+
+In addition, the <strong>MapPlot</strong> class intercepts certain
+<a href="TickMark.html"><strong>TickMark</strong></a> resources, including:
+
+
+<p>Resources that specify label and axis visibility:
+<ul>
+<li><a href="../../Graphics/Resources/tm.html#tmXBOn"><em>tmXBOn</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXBLabelsOn"><em>tmXBLabelsOn</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTOn"><em>tmXTOn</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTLabelsOn"><em>tmXTLabelsOn</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLOn"><em>tmYLOn</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLLabelsOn"><em>tmYLLabelsOn</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYROn"><em>tmYROn</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRLabelsOn"><em>tmYRLabelsOn</em></a>
+</ul>
+
+By default, <strong>MapPlot</strong> decides which
+<a href="TickMark.html"><strong>TickMark</strong></a> axes and labels to turn on. The axis and
+labels are always turned off if the viewport edge associated with the
+axis does not intersect the map projection space anywhere along its length.
+Otherwise the bottom X-Axis and left Y-Axis are turned on by default. The
+top X-Axis and right Y-Axis are by default turned on only if the labels
+differ in some way from those along the opposite axis. By explicitly
+setting these resources, however, any of the axes and labels can be 
+turned on or off unconditionally, provided only that the viewport 
+intersection test is met. 
+
+
+<p>Resources that control label font height and major axis length:
+<ul>
+<li><a href="../../Graphics/Resources/tm.html#tmXBLabelFontHeightF"><em>tmXBLabelFontHeightF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTLabelFontHeightF"><em>tmXTLabelFontHeightF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRLabelFontHeightF"><em>tmYRLabelFontHeightF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRLabelFontHeightF"><em>tmYRLabelFontHeightF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXBMajorLengthF"><em>tmXBMajorLengthF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmXTMajorLengthF"><em>tmXTMajorLengthF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYLMajorLengthF"><em>tmYLMajorLengthF</em></a>
+<li><a href="../../Graphics/Resources/tm.html#tmYRMajorLengthF"><em>tmYRMajorLengthF</em></a>
+</ul>
+
+<strong>MapPlot</strong> sets the resource <a href="../../Graphics/Resources/tm.html#tmEqualizeXYSizes"><em>tmEqualizeXYSizes</em></a> True,
+forcing <a href="TickMark.html"><strong>TickMark</strong></a> length and label fonts to the same
+size for all axes. It sets an initial size of 0.014 before viewport
+size scaling for the <em>tm..MajorLengthF</em> and
+<em>tm..LabelFontHeightF</em> resources. Additionally, it sets all the
+<em>tm..MajorOutwardLengthF</em> resources to the same value as the
+major length, causing all <a href="TickMark.html"><strong>TickMark</strong></a> ticks to appear
+outside the <strong>MapPlot</strong> viewport. You may, however, set
+any one of the <em>tm..LabelFontHeightF</em> resources to set a
+uniform font height for the labels on all axes or any one of the
+<em>tm..MajorLengthF</em> resources to set a uniform tick length for
+all axes.
+
+<p>The label overlap prevention resource:
+<ul>
+<li><a href="../../Graphics/Resources/tm.html#tmLabelAutoStride"><em>tmLabelAutoStride</em></a>
+</ul>
+
+By default, <strong>MapPlot</strong> sets the
+<em>tmLabelAutoStride</em> resource True in order to ensure that the
+<a href="TickMark.html"><strong>TickMark</strong></a> labels will never overlap.
+
+<p>
+<h3>Superclass resources</h3><p>
+
+You can access all resources defined by the superclasses of the
+<strong>MapPlot</strong> object class, including:
+
+<ul>
+
+<li><A href="Transform.html#Transform.res"><strong>Transform</strong>
+resources</a>
+<li><A href="View.html#View.res"><strong>View</strong>
+resources</a>
+</ul>
+
+<hr>
+<h2>Description</h2>
+
+The <strong>MapPlot</strong> object renders maps of the world in
+any of 10 different projections. It allows you to limit the projected
+view to a portion of the globe, as well as to limit the rendering to
+entities individually selected by name from either of the
+<strong>MapPlot</strong> databases.  You can outline areas, you
+can fill areas, or you can <em>mask</em> areas, allowing previously
+rendered plot elements to remain visible.
+
+<p><strong>MapPlot</strong> allows access to three different
+databases.  containing points defining geophysical and (in two cases)
+political features of the globe.  The original database, designated
+<code>Ncarg4_0</code>, is low resolution and is out out of date with
+respect to national borders. However, because of its lower resolution,
+rendering is fast for maps that span a major portion of the
+globe. Therefore this database remains the default. The second
+database, designated <code>Ncarg4_1</code> defines twice as many named
+areas, has much higher resolution, and the political boundaries are up
+to date as of mid-year 1999. Because of the density of its data, it is
+best suited for plots of limited areas of the globe where the greater
+detail can be appreciated. The third database, designated
+<code>RANGS</code> contains coastline data only and has
+multi-resolution capabilities. Its highest resolution is much higher
+than even the <code>Ncarg4_1</code> database.
+
+<p>You can use <strong>MapPlot</strong> as a <a href="../../glossary.html#BasePlot">base plot</a> on
+which one or more <a href="../../glossary.html#PlotObject">plot objects</a>, such as a
+<a href="ContourPlot.html"><strong>ContourPlot</strong></a> object, are overlaid, thereby
+transforming its elements into the current map projection. You can
+also control the order of drawing of <strong>MapPlot</strong> elements
+relative to each other and to the elements of any overlaid plot
+objects. Used in conjunction with area masking, these facilities allow
+you to limit overlay plots to the geographical boundaries for which
+their data have meaning. For instance, you can confine a contour plot
+of ocean temperatures to areas representing only the ocean. Note that
+unlike most plot objects, you cannot add the <strong>MapPlot</strong>
+as an <a href="../../glossary.html#Overlay">overlay</a> of another base plot. It can,
+however, be used as an <a href="../../glossary.html#AnnotationPlot">annotation plot</a>.
+
+<p><strong>MapPlot</strong> supports grids representing latitude and
+longitude. You can mask the grids independently of area masking.  Also
+supported are labels for some key features of the world map, including
+the poles, the equator, the Greenwich Meridian and the International
+Dateline. In addition, you can draw a perimeter, either rectangular or
+elliptical, around the projected map area. Finally <strong>MapPlot</strong>
+now supports built-in geographical style tick marks.
+<p>
+
+<h3>MapPlot elements</h3><p>
+
+There are seven basic elements provided by <strong>MapPlot</strong>:
+<dl>
+<dt>Outlines
+
+<dd>Map boundary outlines are turned on by default. Turn them off by
+setting <a href="../../Graphics/Resources/mp.html#mpOutlineOn"><em>mpOutlineOn</em></a> to False. The
+drawing order is specified using <a href="../../Graphics/Resources/mp.html#mpOutlineDrawOrder"><em>mpOutlineDrawOrder</em></a>.
+
+<dt>Fill
+
+<dd>Map area fill is turned off by default. Turn it on by setting
+<a href="../../Graphics/Resources/mp.html#mpFillOn"><em>mpFillOn</em></a> True. The drawing order is
+specified using <a href="../../Graphics/Resources/mp.html#mpFillDrawOrder"><em>mpFillDrawOrder</em></a>.
+
+<dt>Masking
+
+<dd>Masking is turned off by default. Turn it on by setting <a href="../../Graphics/Resources/mp.html#mpAreaMaskingOn"><em>mpAreaMaskingOn</em></a>. When masking is turned on,
+areas specified by name in the <a href="../../Graphics/Resources/mp.html#mpMaskAreaSpecifiers"><em>mpMaskAreaSpecifiers</em></a> array resource remain
+empty when fill drawing occurs.
+
+<dt>Grid and limb lines 
+
+<dd>Grid and limb lines are turned on by default. Turn them off by
+setting <a href="../../Graphics/Resources/mp.html#mpGridAndLimbOn"><em>mpGridAndLimbOn</em></a> to
+False. The drawing order is specified using <a href="../../Graphics/Resources/mp.html#mpGridAndLimbDrawOrder"><em>mpGridAndLimbDrawOrder</em></a>.
+
+<dt>Perimeter line 
+
+<dd>The perimeter line is turned off by default. Turn it on by setting
+<a href="../../Graphics/Resources/mp.html#mpPerimOn"><em>mpPerimOn</em></a> to True. The drawing order
+is specified using <a href="../../Graphics/Resources/mp.html#mpPerimDrawOrder"><em>mpPerimDrawOrder</em></a>.
+
+<dt>Labels 
+
+<dd>Labels are turned off by default. Turn them on by setting <a href="../../Graphics/Resources/mp.html#mpLabelsOn"><em>mpLabelsOn</em></a> to True. The drawing order is
+specified using <a href="../../Graphics/Resources/mp.html#mpLabelDrawOrder"><em>mpLabelDrawOrder</em></a>.
+
+<dt>Tick marks
+
+<dd>TickMarks are turned off by default. Turn them on by
+setting <a href="../../Graphics/Resources/pm.html#pmTickMarkDisplayMode"><em>pmTickMarkDisplayMode</em></a> to <code>Always</code> or <code>Conditional</code>. Tick
+marks are always drawn during the <code>PostDraw</code> phase.
+
+</dl>
+<p>
+<h3>Controlling the MapPlot transformation</h3><p>
+
+The <strong>MapPlot</strong> object itself contains the resources that
+control the rendering of plot features such as area outlines and fill,
+but you control the projection, its center, and how much of the globe
+is to appear using resources belonging to the
+<strong>MapPlot</strong>'s composite <a
+href="MapTransformation.html">MapTransformation</a> object. Note that
+it is possible to overlay another plot object on a
+<strong>MapPlot</strong> object using one of the projections provided
+by the <a href="MapTransformation.html"><strong>MapTransformation</strong></a>, and have <em>no</em>
+<strong>MapPlot</strong> elements appear in the plot. You would simply
+turn off each <strong>MapPlot</strong> element that is drawn by
+default. That is, you would set the resources <a href="../../Graphics/Resources/mp.html#mpOutlineOn"><em>mpOutlineOn</em></a>, and <a href="../../Graphics/Resources/mp.html#mpGridAndLimbOn"><em>mpGridAndLimbOn</em></a> False.
+
+<p>The map projections provided by the
+<a href="MapTransformation.html"><strong>MapTransformation</strong></a> must retain their intrinsic shape
+in order to be considered "correct" projections. However, in some
+situations you may not care whether this shape is preserved. The
+<strong>MapPlot</strong> object provides a resource, <a href="../../Graphics/Resources/mp.html#mpShapeMode"><em>mpShapeMode</em></a>, that allows you to decide
+whether or not to preserve the shape intrinsic to the
+projection. Moreover, if shape is to be preserved, you can decide
+whether you want to shrink the <strong>MapPlot</strong> viewport to
+fit around the projected area, which is centered in the originally
+specified viewport; or whether you want the viewport to remain as
+originally specified, even if the projected area cannot completely
+fill the space. In this case, you can get the values of the
+<a href="MapTransformation.html"><strong>MapTransformation</strong></a> resources <a href="../../Graphics/Resources/mp.html#mpLeftMapPosF"><em>mpLeftMapPosF</em></a>, <a href="../../Graphics/Resources/mp.html#mpRightMapPosF"><em>mpRightMapPosF</em></a>, <a href="../../Graphics/Resources/mp.html#mpBottomMapPosF"><em>mpBottomMapPosF</em></a>, and <a href="../../Graphics/Resources/mp.html#mpTopMapPosF"><em>mpTopMapPosF</em></a> in order to find the
+actual boundaries of the projected area.
+<p>
+<h3>The MapPlot databases and datasets</h3><p>
+
+<strong>MapPlot</strong> currently contains three database
+versions, which are selected using the resource <a href="../../Graphics/Resources/mp.html#mpDataBaseVersion"><em>mpDataBaseVersion</em></a>. Roughly the three
+databases may be categorized by the level of detail at which the
+geographical outlines are drawn. However, the databases also differ in
+the number of individual areas that are accessible; moveover, they
+differ fundamentally in the way the geographical entities are
+organized.
+
+<p>The original <strong>MapPlot</strong> <a
+href="MapPlotData4_0.html"><code>Ncarg4_0</code> database</a>
+contains 583 areas uniquely identified by name. It is the lowest
+resolution database, and, because it can be rendered more quickly at
+global scales, it is also the <strong>MapPlot</strong> default.
+
+<p>The <code>Ncarg4_1</code>
+database version has a higher resolution than the original
+database, and uses a hierarchical model that is much more extensible.
+It is unique in that there are currently three different datasets with
+various different boundaries available with this database. You choose
+the dataset using the resource <a href="../../Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a>. Depending on the dataset there
+are from 1085 to 6853 named areas.
+The datasets available are:
+
+<ul>
+
+<li><a href="MapPlotData4_1_earth_1.html">Earth..1
+(includes national and US state boundaries)
+
+</a>
+<li><a href="MapPlotData4_1_earth_2.html">Earth..2
+(includes national, Canadian provincial, US and Mexican state, and US
+county boundaries)
+
+</a>
+
+<li><a href="MapPlotData4_1_earth_3.html">Earth..3
+(includes national, Canadian provincial, US and Mexican state, and US
+climate division boundaries)
+</a>
+
+<li>
+
+(<font color="red"><i>Available in <a href="../../../prev_releases.html#5.1.0
+">version 5.1.0
+</a> and later.</i></font>)
+
+<a href="MapPlotData4_1_earth_4.html">Earth..4
+(includes US, Canadian, Mexican, Chinese, Indian, Brazilian, and Australian
+state/provincial boundaries and US county boundaries.)
+
+</a>
+
+
+</ul>
+
+<p>The <code>RANGS</code> database has coastline data only and
+contains no named areas, either geophysical or political. However, it
+is a multi-resolution database that is capable of much higher
+resolution than the other databases. The default resolution changes
+dynamically based on the range of map limits currently in
+effect. But you can also set the resolution explicitly using the
+resource <a href="../../Graphics/Resources/mp.html#mpDataResolution"><em>mpDataResolution</em></a>.
+
+<p>
+<h3>Area names</h3><p>
+
+You can retrieve a list of all the area names in the
+<strong>MapPlot</strong> database being used by getting the value
+of the resource <a href="../../Graphics/Resources/mp.html#mpAreaNames"><em>mpAreaNames</em></a>. The list
+is stored in a fixed order. By setting the <a href="../../Graphics/Resources/mp.html#mpAreaNames"><em>mpAreaNames</em></a> resource you <em>can</em> change
+an area's name at runtime, but the boundary it describes remains fixed
+and always has the same element number within the <a href="../../Graphics/Resources/mp.html#mpAreaNames"><em>mpAreaNames</em></a> array. In addition to a name,
+each area has a type. Each area also belongs to two area groups that
+are used to determine its fill attributes.
+
+<p>There are no area names associated with the <code>RANGS</code> database.
+
+<p>
+<h3>Area types</h3><p>
+
+You can retrieve an area's type using the read-only integer array
+resource <a href="../../Graphics/Resources/mp.html#mpAreaTypes"><em>mpAreaTypes</em></a>. The
+number and meaning of the area type categories vary depending on the
+<strong>MapPlot</strong> database in use. The <code>Ncarg4_0</code>
+database has eight categories while the <code>Ncarg4_1</code> database
+currently has four.
+
+<p>
+<dl>
+<dt>When using the <code>Ncarg4_0</code> database:
+
+<dd> The elements of the <a href="../../Graphics/Resources/mp.html#mpAreaTypes"><em>mpAreaTypes</em></a>
+array have the same ordering as the <a href="../../Graphics/Resources/mp.html#mpAreaNames"><em>mpAreaNames</em></a> array. There are 8 types,
+numbered from 0, as follows:
+
+<ul>
+<li>(0) mpOcean
+<li>(1) mpContinent
+<li>(2) mpLargeIsland
+<li>(3) mpSmallIsland
+<li>(4) mpInlandWater
+<li>(5) mpNational
+<li>(6) mpUSStateLand
+<li>(7) mpUSStateWater
+</ul>
+
+The division between large islands and small islands is arbitrary; its
+purpose is to make it easy to create small scale maps with a less
+cluttered appearance and some savings of processing time. Each area
+has only one type, and its geophysical properties are considered
+first. In other words, areas are classified as
+<em>mpNational</em> only if they form a proper subset of a geophysical
+entity. For instance, Bolivia is of type <em>mpNational</em> because
+it is part, but not the whole, of the geophysical area
+North-and-South-America. On the other hand, Australia is both a
+geophysical entity (a continent) and a country, therefore its type is
+<em>mpContinent</em>. You do not use the area types directly to
+control the operation of <strong>MapPlot</strong>; however knowledge
+of an area's type is useful for understanding the
+<strong>MapPlot</strong> object's operation.
+
+<p>
+<dt>When using the <code>Ncarg4_1</code> database:
+
+<dd>The elements of the <a href="../../Graphics/Resources/mp.html#mpAreaTypes"><em>mpAreaTypes</em></a>
+array have the same ordering as the <a href="../../Graphics/Resources/mp.html#mpAreaNames"><em>mpAreaNames</em></a> array. There are 4 or 5 types,
+depending on the choice of <a href="../../Graphics/Resources/mp.html#dataset"><em>dataset</em></a>,
+numbered from 1, as follows:
+
+<ul>
+<li>(1) land or water
+<li>(2) continental boundary
+<li>(3) national boundary
+<li>(4) state or provincial boundary
+<li>(5) county boundary or climate division
+</ul>
+
+<dt>When using the <code>RANGS</code> database:
+
+<dd>Area types are not distinguished.
+
+</dl>
+<p>
+
+<h3><A name="Pre-Defined-String-Constants">Pre-defined string
+constants</a></h3><p>
+
+Somewhat related to the area types are the pre-defined string
+constants that specify areas by category. You can use these strings as
+elements of any of the area specifier resources (<a href="../../Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>, <a href="../../Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a>, <a href="../../Graphics/Resources/mp.html#mpMaskAreaSpecifiers"><em>mpMaskAreaSpecifiers</em></a>, and <a href="../../Graphics/Resources/mp.html#mpMaskOutlineSpecifiers"><em>mpMaskOutlineSpecifiers</em></a>). <strong>MapPlot</strong>
+handles all string constants in case-insensitive manner:
+
+
+<p>
+<dl>
+<dt>When using the <code>Ncarg4_0</code> database:
+
+<dd>
+
+The following string constants are recognized: 
+
+<ul>
+<li>"NullArea"
+<li>"Land"
+<li>"Water"
+<li>"InlandWater"
+<li>"Oceans"
+<li>"Continents"
+<li>"Islands"
+<li>"LargeIslands"
+<li>"SmallIslands"
+<li>"AllUSStates"
+<li>"USStatesLand"
+<li>"USStatesWater"
+<li>"AllNational"
+<li>"AllGeophysical"
+</ul>
+
+Unlike area types, the area categories described by these string
+constants can overlap. The category "Islands," for instance, includes
+all the members of "LargeIslands" and "SmallIslands." On the other
+hand, note that all members of the set "LargeIslands" are of type
+<em>mpLargeIsland</em>, so knowing an area's type can help you figure
+out whether it is a member of a particular constant string category.
+
+<p><A name="NullArea-String-Constant">
+
+The string "NullArea" specifies no area at all; it is useful for
+eliminating an element of one of the area specifier arrays without
+resizing the array or rearranging the remaining elements.
+
+<A name="Pre-Defined-String-Constants-Ncarg4_1"></a>
+<dt>When using the <code>Ncarg4_1</code> database:
+
+<dd>
+
+<p>The string "NullArea" specifies no area at all; it is useful for
+eliminating an element of one of the area specifier arrays without
+resizing the array or rearranging the remaining elements.
+
+<p><font color="red"><i>Available in <a href="../../../prev_releases.html#4.2.0.a034">version 4.2.0.a034</a> and later.</i></font><br>
+
+The following string constants are recognized: 
+
+<ul>
+<li>"NullArea"
+<li>"States" 
+<li>"Provinces" 
+<li>"Counties"
+</ul>
+
+Except for "NullArea" each of these area categories must be appended
+following a colon (:) to a parent area. For instance, to specify the
+states of Mexico, you could write the string "Mexico&nbsp;:&nbsp;States"; the
+counties of Iowa, "Iowa&nbsp;:&nbsp;counties".  The strings "States" and
+"Provinces" are synonyms and can be used interchangeably. Of course,
+these categories are only applicable if you have selected a dataset
+(using <a href="../../Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a>) that contains 
+the referenced entities. If you choose the <code>earth..3</code> dataset,
+the climate divisions for a US state can be displayed using the "counties"
+category.
+
+
+<dt>When using the <code>RANGS</code> database:
+
+<dd>No string constants are defined.
+
+
+</dl>
+<p>
+
+<h3>Boundary sets and area specifiers</h3><p>
+
+The <strong>MapPlot</strong> object has two types of resources for
+specifying areas. The first type, supported for outlines and fill,
+uses resources of type <a href="#NhlTMapBoundarySets">NhlTMapBoundarySets</a> to specify very
+generally the area sets to be used. The second type, supported for
+outlines, fill and area masking, allows you to specify groups of areas
+by category and individual areas by name using string array type
+resources. For outlines and fill, it is often convenient to use both
+resource types to complete the specification of the areas desired.
+
+<p>
+
+The string array resources allow individual specification of areas and
+area categories. To the basic boundary specification (which might well
+be <code>NoBoundaries</code>), you add other areas you want to outline
+or fill and subtract areas you want to mask.  You do this using string
+array specifier resources, of which there are four: <a href="../../Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a>, <a href="../../Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>, <a href="../../Graphics/Resources/mp.html#mpMaskAreaSpecifiers"><em>mpMaskAreaSpecifiers</em></a>, and
+<a href="../../Graphics/Resources/mp.html#mpMaskOutlineSpecifiers"><em>mpMaskOutlineSpecifiers</em></a>.
+
+
+<p>
+<dl>
+<dt>When using the <code>Ncarg4_0</code> database:
+
+<dd>The specifier strings you use for these resources may be any of
+the <strong>MapPlot</strong> <a
+href="#Pre-Defined-String-Constants">pre-defined string constants</a>,
+explicit names from the <strong>MapPlot</strong> <a
+href="MapPlotData4_0.html"><code>Ncarg4_0</code> database</a>, or
+matching substrings.  All specifier strings are treated in a
+case-insensitive manner.
+
+<dt>When using the <code>Ncarg4_1</code> database:
+
+<dd>The specifier strings you use for these resources may be names
+from any of the datasets (selected using <a href="../../Graphics/Resources/mp.html#mpDataSetName"><em>mpDataSetName</em></a>contained in the
+<code>Ncarg4_1</code> database.
+The name may be a fully qualified name or contain any part of the basic
+name's parental hierarchy to the left of the basic name. If a non-unique name,
+such as "Long Island" (3 separate instances) is specified, all entities that
+match the name will be selected.
+The hierarchical parts should be separated using colon characters
+(':') and period characters ('.'), as shown in the tables for the respective
+datasets. The specifier strings are treated in a case-insensitive manner.
+
+
+<dt>When using the <code>Ncarg4_1</code> database:
+
+<dd>Neither the <a href="#NhlTMapBoundarySets">NhlTMapBoundarySets</a>
+type resources nor the specifier string resources are supported.
+
+</dl>
+
+<h4><A name="Substring-Matching">Substring matching</a></h4>
+
+<p>
+<dl>
+<dt>When using the <code>Ncarg4_0</code> database:
+
+
+<dd>You form a matching substring by placing the wildcard character '*'
+at either or both ends of the character group you want to match. For
+instance, the substring "canada*" matches all entries in the database
+beginning with the name "Canada," and "*lake*" would match all entries
+with the letters "lake" (any case) anywhere in the name.
+
+<p>
+<dt>When using the <code>Ncarg4_1</code> or the <code>RANGS</code> database:
+
+<dd>Substring matching is not supported.
+
+</dl>
+<p>
+<h3>Outlines</h3><p>
+
+By default <strong>MapPlot</strong> draws area outlines, but you
+can turn them off by setting <a href="../../Graphics/Resources/mp.html#mpOutlineOn"><em>mpOutlineOn</em></a> to False. You establish the basic
+set of outlines to use by choosing a value for the <a href="#NhlTMapBoundarySets</typref> type resource <a href="../../Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a>.  If you wish, you can
+then add to the basic outline set by specifying other areas using the
+resource <a href="../../Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a>. 
+
+ Unlike fill, the
+current version of <classref>MapPlot">NhlTMapBoundarySets</typref> type resource <a href="../../Graphics/Resources/mp.html#mpOutlineBoundarySets"><em>mpOutlineBoundarySets</em></a>.  If you wish, you can
+then add to the basic outline set by specifying other areas using the
+resource <a href="../../Graphics/Resources/mp.html#mpOutlineSpecifiers"><em>mpOutlineSpecifiers</em></a>. 
+
+ Unlike fill, the
+current version of <classref>MapPlot</a> does not allow
+individual control of the lines defining the boundary of a particular
+area. However, you can set outline attributes for three general
+boundary categories, depending on which of the three basic datasets
+the line belongs to: geophysical, national, or
+U.S. States. <strong>MapPlot</strong> supports line color, line
+dash pattern, line dash segment length, and line thickness for each
+category.
+
+<p><font color="red"><i>Available in <a href="../../../prev_releases.html#4.2.0.a034">version 4.2.0.a034</a> and later.</i></font><br>
+
+You can also mask areas using <a href="../../Graphics/Resources/mp.html#mpMaskOutlineSpecifiers"><em>mpMaskOutlineSpecifiers</em></a>.
+
+<dl>
+<dt>When using the <code>RANGS</code> database:
+
+<dd>Only geophysical lines are available and the only line attribute supported
+is line color.
+</dl>
+<p>
+<h3>Area fill</h3><p>
+
+Since area fill is more compute intensive and may not be appropriate
+for many plotting tasks, <strong>MapPlot</strong> turns it off by
+default. Set <a href="../../Graphics/Resources/mp.html#mpFillOn"><em>mpFillOn</em></a> True to turn it
+on. <strong>MapPlot</strong> fill has more options than outlines,
+and thus is a bit more complicated to explain.  Like outlines, you
+establish a basic set of fill areas using the <a href="#NhlTMapBoundarySets">NhlTMapBoundarySets</a> type resource <a href="../../Graphics/Resources/mp.html#mpFillBoundarySets"><em>mpFillBoundarySets</em></a>. To this set you can add
+other fill areas using the string array resource, <a href="../../Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>.
+
+<p>Normally <strong>MapPlot</strong> determines the fill attributes
+for each area based on its group memberships within the fixed and
+dynamic area group arrays. However, for areas specified explicitly in
+the <a href="../../Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>
+array, you can override the usual fill attribute choices and pick the
+fill attributes explicitly. This will be explained further below.
+
+<h4><A name="Area-Groups">Area groups</a></h4> 
+
+<strong>MapPlot</strong> defines a set of area groups that it uses
+to determine the "normal" fill attributes assigned to each filled
+area. By default there are 10 area groups, arranged as follows:
+
+<p>
+
+<dl>
+<dt>Group 0: <em>Default group</em>
+
+<dd>Determines the fill attributes for areas that fall within the map
+projection boundaries, but otherwise are neither specified as fill
+areas nor as mask areas. 
+
+<dt>Group 1: <em>Ocean group</em>
+
+<dd>Determines the fill attributes for the world oceans.
+
+<dt>Group 2: <em>Land group</em>
+
+<dd>Determines the fill attributes for continents and islands.
+
+<dt>Group 3: <em>Inland water group</em>
+
+<dd>Determines the fill attributes for lakes, inland seas, and all other
+bodies of water except the oceans.
+
+<dt>
+Groups 4 through 9 (default) through 255 (maximum): <em>Dynamic groups</em>
+
+<dd>By default, <strong>MapPlot</strong> assigns areas to the dynamic
+groups in such as way as to ensure that adjoining land areas never belong
+to the same group, and therefore have distinct fill
+attributes. However, the user may add more dynamic groups and reassign
+memberships in order to achieve any desired distribution of fill
+attributes.
+
+</dl>
+
+
+<p>
+
+<strong>MapPlot</strong> maintains two arrays of these area groups,
+accessible through the integer array resources <a href="../../Graphics/Resources/mp.html#mpFixedAreaGroups"><em>mpFixedAreaGroups</em></a> and <a href="../../Graphics/Resources/mp.html#mpDynamicAreaGroups"><em>mpDynamicAreaGroups</em></a>. Both arrays are keyed to
+the <a href="../../Graphics/Resources/mp.html#mpAreaNames"><em>mpAreaNames</em></a> array, and
+within each array, the value of each element represents the area group
+assigned to an area. Most areas are assigned to different groups in
+the two area group areas, but in a number of cases (all areas
+representing water bodies, for instance), <strong>MapPlot</strong>
+assigns an area to the same group in both arrays.
+
+<p>The <a href="../../Graphics/Resources/mp.html#mpFixedAreaGroups"><em>mpFixedAreaGroups</em></a> array is
+sometimes known as the <em>geophysical</em> group array, because it
+provides the indexes that allow you to distinguish land areas from
+water areas. As its name implies, you cannot modify the <a href="../../Graphics/Resources/mp.html#mpFixedAreaGroups"><em>mpFixedAreaGroups</em></a> resource. Within this
+array, based on area type, <strong>MapPlot</strong> assigns each
+area in the database either to the Ocean group, to the Land group, or
+to the InlandWater group (i.e. to groups 1, 2, or 3).
+
+<p>The <a href="../../Graphics/Resources/mp.html#mpDynamicAreaGroups"><em>mpDynamicAreaGroups</em></a> array is
+sometimes called the <em>political</em> group array, since the default
+assignment of dynamic area group numbers guarantees that adjoining
+politically distinct areas belong to different area groups. However,
+you are free to assign area groups within the dynamic area group array
+in any way you please. You may use all the available area groups from
+1 through the current value of <a href="../../Graphics/Resources/mp.html#mpAreaGroupCount"><em>mpAreaGroupCount</em></a>.
+
+<h4>Setting fill attributes based on area groups</h4>
+
+<p> The elements of the array resources used to set fill color, fill
+pattern, and fill scale are indexed through the area group numbers. In
+other words, the first element of each of these arrays defines a fill
+attribute for group 0, the second an attribute for group 1, and so
+forth. For convenience, you can also access the fill attribute
+resources of groups 0 through 4 using a set of resources with names
+corresponding to the area group name.  These resources have names with
+the following prefixes: <em>mpDefault...</em>, <em>mpOcean...</em>,
+<em>mpLand...</em>, and <em>mpInlandWater...</em>. You can think of
+these resources as aliases for the corresponding array resource
+element. When an array resource and a named alias resource accessing
+one of its elements are set in the same <a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> call, the named alias
+resource overrides.
+
+<p>Each of the three basic fill attributes supported by
+<strong>MapPlot</strong>, fill color, fill pattern, and fill pattern
+scale factor, provides both a scalar resource that you can use if you
+want to set all area groups to the same value, and an array resource
+that you use if you want to set each area group individually. The
+scalar fill attribute resources are <a href="../../Graphics/Resources/mp.html#mpFillColor"><em>mpFillColor</em></a>, <a href="../../Graphics/Resources/mp.html#mpFillPattern"><em>mpFillPattern</em></a>, and <a href="../../Graphics/Resources/mp.html#mpFillScaleF"><em>mpFillScaleF</em></a>. The array resources names,
+formed by pluralizing the scalar resource names (after removing the
+'F' suffix, if present) are <a href="../../Graphics/Resources/mp.html#mpFillColors"><em>mpFillColors</em></a>, <a href="../../Graphics/Resources/mp.html#mpFillPatterns"><em>mpFillPatterns</em></a>, and <a href="../../Graphics/Resources/mp.html#mpFillScales"><em>mpFillScales</em></a>. The boolean resources, <a href="../../Graphics/Resources/mp.html#mpMonoFillColor"><em>mpMonoFillColor</em></a>, <a href="../../Graphics/Resources/mp.html#mpMonoFillPattern"><em>mpMonoFillPattern</em></a>, and <a href="../../Graphics/Resources/mp.html#mpMonoFillScale"><em>mpMonoFillScale</em></a>, specify use of the
+scalar resources when set True, and the array resources when set
+False. Note that if a <em>Mono</em> resource is set True, the named
+alias resources applying to that attribute are ignored, since they
+are, after all, only aliases for particular elements of the array
+resource.
+
+<p><A name="Use-of-dynamic-arrays"></a> For each attribute that has
+the <em>Mono</em> resource set False, <strong>MapPlot</strong>
+finds a group number for each area either from the fixed area group
+array or the dynamic area group array and uses that number as an index
+into the appropriate array resource. How does
+<strong>MapPlot</strong> decide when to index based on the fixed
+area group number and when to index based on the dynamic area group
+number?  For fill areas specified using only the <a href="../../Graphics/Resources/mp.html#mpFillBoundarySets"><em>mpFillBoundarySets</em></a> resource,
+<strong>MapPlot</strong> chooses between the area group arrays as
+follows:
+
+<dl> 
+<dt><code>NoBoundaries</code> 
+
+<dd>Neither area group array is used. Each area is assigned fill attributes
+using the <em>default</em> group number (0) as an index.
+
+<dt><code>Geophysical</code>
+
+<dd>Each area is assigned fill attributes using its <a href="../../Graphics/Resources/mp.html#mpFixedAreaGroups"><em>mpFixedAreaGroups</em></a> group numbers as an index.
+
+<dt><code>National</code>
+
+<dd>Each area is assigned fill attributes using its <a href="../../Graphics/Resources/mp.html#mpDynamicAreaGroups"><em>mpDynamicAreaGroups</em></a> group number as an index.
+
+<dt><code>USStates</code>
+
+<dd>If the area belongs within the USStates dataset, it is assigned
+fill attributes using its <a href="../../Graphics/Resources/mp.html#mpDynamicAreaGroups"><em>mpDynamicAreaGroups</em></a>
+group number as an index. Otherwise it is assigned fill attributes
+using the <em>default</em> group number (0) as an index.
+
+<dt><code>GeophysicalAndUSStates</code>
+
+<dd>If the area belongs within the USStates dataset it is assigned
+fill attributes using its <a href="../../Graphics/Resources/mp.html#mpDynamicAreaGroups"><em>mpDynamicAreaGroups</em></a> group number as
+an index. Otherwise it is assigned fill attributes using its <a href="../../Graphics/Resources/mp.html#mpFixedAreaGroups"><em>mpFixedAreaGroups</em></a> group number as an
+index.
+
+<dt><code>AllBoundaries</code> <dd>Each area is assigned fill
+attributes using its <a href="../../Graphics/Resources/mp.html#mpDynamicAreaGroups"><em>mpDynamicAreaGroups</em></a> group number as
+an index.
+
+</dl>
+
+For areas specified in the <a href="../../Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>
+array, you may explicitly set the fill attributes individually as
+explained in the next section. However, whenever a fill attribute is
+not explicitly set, <strong>MapPlot</strong> uses a group number either
+from the fixed or the dynamic area group arrays as an index into the
+fill attribute array resources.
+
+<p>
+<dl>
+<dt>When using the <code>Ncarg4_0</code> database:
+
+<dd>
+ In this case, the choice is based on the setting of the <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillPriority"><em>mpSpecifiedFillPriority</em></a> resource.
+If <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillPriority"><em>mpSpecifiedFillPriority</em></a>
+has the value <code>GeophysicalPriority</code>,
+<strong>MapPlot</strong> picks an index from the <a href="../../Graphics/Resources/mp.html#mpFixedAreaGroups"><em>mpFixedAreaGroups</em></a> array to determine
+fill attributes. Otherwise, it picks an index from the <a href="../../Graphics/Resources/mp.html#mpDynamicAreaGroups"><em>mpDynamicAreaGroups</em></a> array. You may
+reverse the fill priority for individual areas within the <a href="../../Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a> array by
+prepending the exclamation mark character ('!') to the area's
+specifier string. For instance, if <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillPriority"><em>mpSpecifiedFillPriority</em></a> is set to
+<code>PoliticalPriority</code> but you want Australia to be displayed
+using its geophysical color, you would set the appropriate <a href="../../Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a> element to the
+value "!australia".
+
+
+<dt>When using the <code>Ncarg4_1</code> database:
+
+<dd><strong>MapPlot</strong> picks an index from the <a href="../../Graphics/Resources/mp.html#mpFixedAreaGroups"><em>mpFixedAreaGroups</em></a> if the area's type is 1
+(mpGeophysical) or if its type is 2 (mpContinental) and its parent is
+Water. Otherwise it picks an index from the <a href="../../Graphics/Resources/mp.html#mpDynamicAreaGroups"><em>mpDynamicAreaGroups</em></a>.
+
+<dt>When using the <code>RANGS</code> database:
+
+<dd>Only the Ocean, Land, and InlandWater groups are recognized and
+the only supported fill attribute is color.  Neither the <a href="../../Graphics/Resources/mp.html#mpFixedAreaGroups"><em>mpFixedAreaGroups</em></a> or <a href="../../Graphics/Resources/mp.html#mpDynamicAreaGroups"><em>mpDynamicAreaGroups</em></a> arrays are used. However,
+you can set the fill color of the three recognized groups using the
+"alias" resources: <a href="../../Graphics/Resources/mp.html#mpOceanFillColor"><em>mpOceanFillColor</em></a>,
+<a href="../../Graphics/Resources/mp.html#mpLandFillColor"><em>mpLandFillColor</em></a>, and <a href="../../Graphics/Resources/mp.html#mpInlandWaterFillColor"><em>mpInlandWaterFillColor</em></a>.
+
+</dl>
+  
+<h4>Explicitly setting fill attributes</h4>
+
+You can explicitly set the fill attributes of areas specified in the
+<a href="../../Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a> array using the
+array resources <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillColors"><em>mpSpecifiedFillColors</em></a>, <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillPatterns"><em>mpSpecifiedFillPatterns</em></a>, and <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillScales"><em>mpSpecifiedFillScales</em></a>.  Each element
+of the specified fill attribute arrays provide an attribute value for
+the corresponding element of the <a href="../../Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a> array. Explicit
+specification of fill attributes overrides fill attribute selection
+based on area group memberships. Explicit specification also overrides
+the <em>Mono</em> flag. Therefore, you can easily highlight an
+individual area by explicitly setting, for example, the appropriate
+element of <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillPatterns"><em>mpSpecifiedFillPatterns</em></a> to a unique
+pattern while the remaining areas are all set perhaps to
+<code>SolidFill</code>, as determined by the value of the <a href="../../Graphics/Resources/mp.html#mpFillPattern"><em>mpFillPattern</em></a> resource.
+
+<p>If you want to explicitly specify the attributes of only certain of
+the areas specified in the <a href="../../Graphics/Resources/mp.html#mpFillAreaSpecifiers"><em>mpFillAreaSpecifiers</em></a>, while others base their
+fill attributes on area group memberships as discussed in the previous
+section, there are special values you can assign to indicate an
+"unset" value. For <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillColors"><em>mpSpecifiedFillColors</em></a> use the special color
+index <code>UnspecifiedColor</code> (-2); for <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillPatterns"><em>mpSpecifiedFillPatterns</em></a> the special fill
+pattern index <code>UnspecifiedFill</code> (-2); and for <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillScales"><em>mpSpecifiedFillScales</em></a> use the otherwise
+invalid value, 0.0.
+
+<p>By default, the specified fill attribute arrays directly set the
+attribute. In other words, the value of an element of <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillColors"><em>mpSpecifiedFillColors</em></a> represents an HLU color
+index, the value of an element of <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillPatterns"><em>mpSpecifiedFillPatterns</em></a> represents an HLU
+pattern index, and the value of an element of <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillScales"><em>mpSpecifiedFillScales</em></a> is a floating point
+number representing a fill scaling factor. However, if you set the
+resource <a href="../../Graphics/Resources/mp.html#mpSpecifiedFillDirectIndexing"><em>mpSpecifiedFillDirectIndexing</em></a> False, the
+values of these array elements are converted to integers and treated
+as group numbers. This facility allows you to use the specified fill
+attribute arrays to specify the fill attributes of an area indirectly
+by temporarily changing its group membership.
+
+<dl>
+<dt>When using the <code>RANGS</code> database:
+<dd>This feature is not supported.
+</dl>
+<p>
+<h3>Area masking</h3><p>
+
+<strong>MapPlot</strong> allows you to specify areas or groups of
+areas that are to remain unfilled or <em>masked</em>. You enable and
+disable area masking using the resource, <a href="../../Graphics/Resources/mp.html#mpAreaMaskingOn"><em>mpAreaMaskingOn</em></a>. You specify individual areas
+or area categories that you want to mask using the string array
+resource, <a href="../../Graphics/Resources/mp.html#mpMaskAreaSpecifiers"><em>mpMaskAreaSpecifiers</em></a>.
+
+<p>Alternatively, you can mask areas by setting their fill color to 
+<code>Transparent</code> (-1).
+
+<dl> 
+
+<dt>When using the <code>RANGS</code> database: 
+
+<dd>Area masking
+is possible for the Ocean, Land, or InlandWater groups by setting
+<a href="../../Graphics/Resources/mp.html#mpOceanFillColor"><em>mpOceanFillColor</em></a>, <a href="../../Graphics/Resources/mp.html#mpLandFillColor"><em>mpLandFillColor</em></a>, or <a href="../../Graphics/Resources/mp.html#mpInlandWaterFillColor"><em>mpInlandWaterFillColor</em></a> respectively to
+<code>Transparent</code> (-1).
+
+</dl>
+
+<h4>Masking and fill precedence</h4>
+
+Since there is a potential for fill and masking specifications to
+conflict with each other, <strong>MapPlot</strong> has established
+an order of precedence for these specifiers. Explicitly named areas
+take precedence over area groups specified using <a href="../../Graphics/Resources/mp.html#mpFillBoundarySets"><em>mpFillBoundarySets</em></a> or any of the pre-defined
+constants. Small areas take precedence over enclosing larger
+areas. Otherwise masking takes precedence over filling.
+
+Note that if the <a href="../../Graphics/Resources/mp.html#mpFillBoundarySets"><em>mpFillBoundarySets</em></a>
+resource is set to the value <code>Noboundaries</code>, it is possible
+that areas within the map projection may remain unspecified either as
+filled or masked.  <strong>MapPlot</strong> <em>fills</em> these
+areas using the <em>default</em> fill attributes.
+<p>
+
+<h3>Grid and limb line</h3><p>
+
+By default <strong>MapPlot</strong> turns on the map grid and,
+where appropriate, the limb line; you can turn it off by setting the
+resource <a href="../../Graphics/Resources/mp.html#mpGridAndLimbOn"><em>mpGridAndLimbOn</em></a> False. Set
+the resource <a href="../../Graphics/Resources/mp.html#mpGridSpacingF"><em>mpGridSpacingF</em></a> to
+specify a uniform distance in degrees between grid lines both for
+longitude and for latitude. If you want different grid spacings for
+the latitude and the longitude, set the <a href="../../Graphics/Resources/mp.html#mpGridLonSpacingF"><em>mpGridLonSpacingF</em></a> and <a href="../../Graphics/Resources/mp.html#mpGridLatSpacingF"><em>mpGridLatSpacingF</em></a> resources instead.  You can
+also exercise detailed control over the appearance of the grid in the
+polar regions using the <a href="../../Graphics/Resources/mp.html#mpGridMaxLatF"><em>mpGridMaxLatF</em></a>
+and <a href="../../Graphics/Resources/mp.html#mpGridPolarLonSpacingF"><em>mpGridPolarLonSpacingF</em></a> resources.
+
+<p>You can turn on grid masking and choose how to select the areas
+where grid lines do not appear with the <a href="#NhlTMapGridMaskMode">NhlTMapGridMaskMode</a> resource <a href="../../Graphics/Resources/mp.html#mpGridMaskMode"><em>mpGridMaskMode</em></a>. Note that grid masking
+operates independently of area masking, although it is possible to
+mask the grid over masked areas if you set <a href="../../Graphics/Resources/mp.html#mpGridMaskMode"><em>mpGridMaskMode</em></a> to <code>MaskMaskArea</code>.
+
+<p>You can set the line attributes for the grid and limb lines
+independently.  Grid attributes are controlled using the resources
+<a href="../../Graphics/Resources/mp.html#mpGridLineColor"><em>mpGridLineColor</em></a>, <a href="../../Graphics/Resources/mp.html#mpGridLineDashPattern"><em>mpGridLineDashPattern</em></a>, <a href="../../Graphics/Resources/mp.html#mpGridLineDashSegLenF"><em>mpGridLineDashSegLenF</em></a>, and <a href="../../Graphics/Resources/mp.html#mpGridLineThicknessF"><em>mpGridLineThicknessF</em></a>. You set limb line
+attributes using <a href="../../Graphics/Resources/mp.html#mpLimbLineColor"><em>mpLimbLineColor</em></a>,
+<a href="../../Graphics/Resources/mp.html#mpLimbLineDashPattern"><em>mpLimbLineDashPattern</em></a>, <a href="../../Graphics/Resources/mp.html#mpLimbLineDashSegLenF"><em>mpLimbLineDashSegLenF</em></a>, and <a href="../../Graphics/Resources/mp.html#mpLimbLineThicknessF"><em>mpLimbLineThicknessF</em></a>.
+<p>
+<h3>Labels</h3><p>
+
+<strong>MapPlot</strong> draws labels by default, but you can turn them
+off by setting the <a href="../../Graphics/Resources/mp.html#mpLabelsOn"><em>mpLabelsOn</em></a> resource 
+False. When labels are turned on, the text strings "NP", "SP", "EQ", "GM",
+and "ID" are written at the positions of the North Pole, the South Pole,
+the Equator, the Greenwich Meridian, and the International Dateline. You
+can control the size of labels using the resources <a href="../../Graphics/Resources/mp.html#mpLabelFontHeightF"><em>mpLabelFontHeightF</em></a>
+and their color using <a href="../../Graphics/Resources/mp.html#mpLabelFontColor"><em>mpLabelFontColor</em></a>.
+Currently, no other resources are available for labels.
+<p>
+<h3>Perimeter</h3><p>
+
+By default <strong>MapPlot</strong> draws a rectangular perimeter
+around the projected map area, but you can turn it off by setting the
+boolean resource <a href="../../Graphics/Resources/mp.html#mpPerimOn"><em>mpPerimOn</em></a> False. If you set
+the <a href="MapTransformation.html"><strong>MapTransformation</strong></a> resource <a href="../../Graphics/Resources/mp.html#mpEllipticalBoundary"><em>mpEllipticalBoundary</em></a> True,
+the perimeter will be elliptical instead of rectangular. You can set
+line attributes for the perimeter using the resources <a href="../../Graphics/Resources/mp.html#mpPerimLineColor"><em>mpPerimLineColor</em></a>, <a href="../../Graphics/Resources/mp.html#mpPerimLineDashPattern"><em>mpPerimLineDashPattern</em></a>,
+<a href="../../Graphics/Resources/mp.html#mpPerimLineDashSegLenF"><em>mpPerimLineDashSegLenF</em></a>,
+and <a href="../../Graphics/Resources/mp.html#mpPerimLineThicknessF"><em>mpPerimLineThicknessF</em></a>.
+<p>
+<a name="TickMarks"></a>
+<h3>TickMarks</h3><p>
+
+<strong>MapPlot</strong> implements geographically-labelled tick marks
+using the <a href="PlotManager.html"><strong>PlotManager</strong></a> composite
+<a href="TickMark.html"><strong>TickMark</strong></a> object. Turn tick marks on by setting the
+resource <a href="../../Graphics/Resources/pm.html#pmTickMarkDisplayMode"><em>pmTickMarkDisplayMode</em></a>
+to <code>Always</code> or <code>Conditional</code>. Tick marks are
+available for all map projections along any axis where the viewport
+edge intersects the map projection plane for some measurable distance.
+If the intersection test is met, by default the bottom and left axes
+are always turned on. The top and right axes are turned on only if the
+labels or locations would be different in some way from the opposite axes.
+However, you may explicitly control the state of any particular tick axis or
+its labels by setting the appropriate <em>tm..On</em> or <em>tm..LabelOn</em>
+resource.
+
+<p><strong>MapPlot</strong> determines whether a particular axis
+shows divisions of latitude or longitude depending on which of theses
+dimensions varies most along the axis length. Currently this is a
+fixed behavior that cannot be overridden. <strong>MapPlot</strong>
+fixes font size and tick length to a uniform value for all axes and
+also decides the tick spacing in all cases. If tick labels are missing
+due to the effect of the <a href="TickMark.html"><strong>TickMark</strong></a> resource
+<a href="../../Graphics/Resources/tm.html#tmLabelAutoStride"><em>tmLabelAutoStride</em></a>, you may restore
+them by setting <a href="../../Graphics/Resources/tm.html#tmXBLabelFontHeightF"><em>tmXBLabelFontHeightF</em></a>
+to a suitably smaller value.
+
+<hr>
+<h2>Support functions</h2>
+
+The <strong>MapPlot</strong> object does not define any support
+functions, but inherits all the support functions available to its
+<a href="Transform.html"><strong>Transform</strong></a> superclass.
+
+<hr>
+
+<h2>Status</h2>
+
+<p><A name="Status.2">2.</a> <strong>MapPlot</strong> does not
+support substring matching when using the new <code>Ncarg4_1</code> map
+database. Due to the hierarchical nature of the new database, this
+capability is not as necessary as with the old database. Expect that if
+and when new matching facilities are developed, they will not work the
+same way as they do for the old database.
+  
+<p><A name="Status.3">3.</a> Eventually you should be able to add 
+groups of points that define your own areas, give them arbitrary names
+and add these areas to the area names array.
+
+<p>
+<hr>
+<h2>See also</h2>
+<ul>
+<li><a href="../API/NhlCreate.html"><strong>NhlCreate</strong></a> function
+<li><a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> function
+<li><a href="../API/NhlGetValues.html"><strong>NhlGetValues</strong></a> function
+<li><a href="MapTransformation.html"><strong>MapTransformation</strong></a> object
+<li><a href="PlotManager.html"><strong>PlotManager</strong></a> object
+<li><a href="Title.html"><strong>Title</strong></a> object
+<li><a href="LabelBar.html"><strong>LabelBar</strong></a> object
+<li><a href="Legend.html"><strong>Legend</strong></a> object
+<li><a href="Transform.html"><strong>Transform</strong></a> object
+<li><a href="View.html"><strong>View</strong></a> object
+</ul>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/MapPlot.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:33 GMT -->
+</html>
+

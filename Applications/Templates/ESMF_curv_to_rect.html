@@ -1,0 +1,139 @@
+;----------------------------------------------------------------------
+; ESMF_curv_to_rect.ncl
+;
+; This is an NCL/ESMF template file for regridding from a 
+; curvilinear grid to a rectilinear grid. It uses ESMF_regrid
+; to do the regridding.
+;
+; Both the curvilinear and rectilinear lat/lon arrays are assumed 
+; to be on separate NetCDF files.
+;
+; 
+; Search for lines with ";;---Change. These are the lines you will 
+; likely or maybe have to change, depending on variable names on 
+; the file, etc.
+;
+; Of course, you'll probably want to change other aspects of this
+; code, like the options for plotting (titles, colors, etc).
+;
+; For more information on ESMF_regrid, see: 
+;
+;    http://www.ncl.ucar.edu/Document/Functions/ESMF/ESMF_regrid.shtml
+;----------------------------------------------------------------------
+; This example uses the ESMF application "ESMF_RegridWeightGen" to 
+; generate the weights.
+;
+; For more information about ESMF:
+;
+;        http://www.earthsystemmodeling.org/
+;
+;----------------------------------------------------------------------
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/esmf/ESMF_regridding.ncl"
+
+begin
+;---Data file containing source (curvilinear) grid
+    src_file = "XXXXX.nc"              ;;---Change
+    sfile    = addfile(src_file,"r")
+
+;---Data file containing destination (rectilinear) grid
+    dst_file = "XXXXX.nc"              ;;---Change
+    dfile    = addfile(dst_file,"r")
+
+;---Get variable to regrid
+    varname = "T"                      ;;---Change
+    var     = sfile->$varname$
+    src_lat = sfile->lat               ;;---Change
+    src_lon = sfile->lon               ;;---Change
+
+;---Get destination lat/lon to regrid to
+    dst_lat = dfile->lat               ;;---Change
+    dst_lon = dfile->lon               ;;---Change
+
+;---Set up regridding options
+    Opt                   = True
+
+;---"bilinear" is the default. "patch" and "conserve" are other options.
+    Opt@InterpMethod      = "bilinear"        ;;---Change
+
+    Opt@WgtFileName       = "curv_to_rect.nc"
+
+    Opt@SrcGridLat        = src_lat           ; source grid
+    Opt@SrcGridLon        = src_lon
+    Opt@SrcRegional       = False             ;;--Change
+    Opt@SrcInputFileName  = src_file          ; optional, but good idea
+    Opt@SrcMask2D         = where(.not.ismissing(var),1,0) ; Necessary if has
+                                                           ; missing values.
+
+    Opt@DstGridLat        = dst_lat           ; destinationsource grid
+    Opt@DstGridLon        = dst_lon
+    Opt@DstRegional       = False             ;;--Change
+
+    Opt@ForceOverwrite    = True
+    Opt@PrintTimings      = True
+    Opt@Debug             = True
+
+    var_regrid = ESMF_regrid(var,Opt)     ; Do the regridding
+
+    printVarSummary(var_regrid)
+
+;----------------------------------------------------------------------
+; Plotting section
+;
+; This section creates filled contour plots of both the original
+; data and the regridded data, and panels them.
+;----------------------------------------------------------------------
+    var@lat2d = src_lat     ; Needed for plotting.
+    var@lon2d = src_lon
+
+    wks = gsn_open_wks("png","curv_to_rect")
+
+    res                       = True
+
+    res@gsnMaximize           = True
+
+    res@gsnDraw               = False
+    res@gsnFrame              = False
+
+    res@cnFillOn              = True
+    res@cnLinesOn             = False
+    res@cnLineLabelsOn        = False
+    res@cnFillMode            = "RasterFill"
+
+    res@lbLabelBarOn          = False    ; Turn on later in panel
+
+    res@mpMinLatF             = min(src_lat)
+    res@mpMaxLatF             = max(src_lat)
+    res@mpMinLonF             = min(src_lon)
+    res@mpMaxLonF             = max(src_lon)
+
+;;--Change (maybe)
+    mnmxint = nice_mnmxintvl( min(var), max(var), 18, False)
+    res@cnLevelSelectionMode = "ManualLevels"
+    res@cnMinLevelValF       = mnmxint(0)
+    res@cnMaxLevelValF       = mnmxint(1)
+    res@cnLevelSpacingF      = mnmxint(2)
+
+;---Resources for plotting regridded data
+    res@gsnAddCyclic  = False            ;;---Change (maybe)
+    res@tiMainString  = "rectilinear grid (" + Opt@InterpMethod + ")"
+
+    plot_regrid = gsn_csm_contour_map(wks,var_regrid,res)
+
+;---Resources for plotting original data
+    dims = tostring(dimsizes(var))
+    res@gsnAddCyclic = False            ;;---Change (maybe)
+    res@tiMainString = "Original curvilinear grid (" +  \
+                        str_join(dims," x ") + ")"
+
+    plot_orig = gsn_csm_contour_map(wks,var,res)  
+
+;---Compare the plots in a panel
+    pres                   = True
+    pres@gsnMaximize       = True
+    pres@gsnPanelLabelBar  = True
+
+    gsn_panel(wks,(/plot_orig,plot_regrid/),(/2,1/),pres)
+end

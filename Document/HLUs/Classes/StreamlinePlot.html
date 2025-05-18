@@ -1,0 +1,1312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/StreamlinePlot.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:32 GMT -->
+<head>
+<title>StreamlinePlot class</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index.html">HLUs ></a>
+<a class=crumb href="index-2.html">Classes </a>
+
+<br>
+
+<h1>StreamlinePlot class</h1>
+The <strong>StreamlinePlot</strong> class represents a vector field by drawing
+streamlines.
+
+
+<hr>
+<h2>Synopsis</h2>
+
+<pre>
+Header file:		ncarg/hlu/StreamlinePlot.h
+Class name:		streamlinePlotClass
+Class pointer:		NhlstreamlinePlotClass
+Fortran class function:	NHLFSTREAMLINEPLOTCLASS
+Superclass:		<a href="DataComm.html">DataComm</a>
+Composite classes:	<a href="LogLinTransformation.html">LogLinTransformation</a>,
+			<a href="IrregularTransformation.html">IrregularTransformation</a>,
+			<a href="CurvilinearTransformation.html">CurvilinearTransformation</a>,
+			<a href="SphericalTransformation.html">SphericalTransformation</a>,
+			<a href="PlotManager.html">PlotManager</a>
+
+Data specific class
+Class name:		streamlinePlotDataDepClass
+Class pointer:		NhlstreamlinePlotDataDepClass
+Fortran class function:	NHLFSTREAMLINEPLOTDATADEPCLASS
+Superclass:		<a href="DataComm.html">DataSpec</a>
+</pre>
+<p>
+<h3>Class-defined types</h3><p>
+
+<hr>
+<h2>Resources</h2>
+<p>
+<h3>Local resources</h3><p>
+<pre>
++---------------------------------------------------------------+
+|		<A name="StreamlinePlot.res">StreamlinePlot Resource Set</a>			|
+|---------------------------------------------------------------|
+| NAME				TYPE			ACCESS	|
+|	CLASS				DEFAULT			|
+|===============================================================|
+| <a href="../../Graphics/Resources/st.html#stVectorFieldData"><em>stVectorFieldData</em></a>             <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       StVectorFieldData               &lt;none&gt;                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stScalarFieldData"><em>stScalarFieldData</em></a>             <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       StScalarFieldData               &lt;none&gt;                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stStreamlineDrawOrder"><em>stStreamlineDrawOrder</em></a>         <a href="View.html#NhlTDrawOrder">NhlTDrawOrder</a>           RCSG    |
+|       StStreamlineDrawOrder           "Draw"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stMapDirection"><em>stMapDirection</em></a>                <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       StMapDirection                  True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLineStartStride"><em>stLineStartStride</em></a>             <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       StLineStartStride               2                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stMinDistanceF"><em>stMinDistanceF</em></a>                <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       StMinDistanceF                  0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stStepSizeF"><em>stStepSizeF</em></a>                   <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       StStepSizeF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stMinLineSpacingF"><em>stMinLineSpacingF</em></a>             <a href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>       RCSG    |
+|       StMinLineSpacingF               &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stMinStepFactorF"><em>stMinStepFactorF</em></a>              <a href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>       RCSG    |
+|       StMinStepFactorF                2.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLengthCheckCount"><em>stLengthCheckCount</em></a>            <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       StLengthCheckCount              35                      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stCrossoverCheckCount"><em>stCrossoverCheckCount</em></a>         <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       StCrossoverCheckCount           -1                      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stArrowStride"><em>stArrowStride</em></a>                 <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       StArrowStride                   2                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stMinArrowSpacingF"><em>stMinArrowSpacingF</em></a>            <a href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>       RCSG    |
+|       StMinArrowSpacingF              0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stArrowLengthF"><em>stArrowLengthF</em></a>                <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       StArrowLengthF                  &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLevels"><em>stLevels</em></a>                      <a href="Base.html#NhlTFloatGenArray">NhlTFloatGenArray</a>       RCSG    |
+|       Levels                          &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLevelCount"><em>stLevelCount</em></a>                  <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       StLevelCount                    16                      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLevelSelectionMode"><em>stLevelSelectionMode</em></a>          <a href="DataComm.html#NhlTLevelSelectionMode">NhlTLevelSelectionMode</a>  RCSG    |
+|       LevelSelectionMode              "AutomaticLevels"       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stMaxLevelCount"><em>stMaxLevelCount</em></a>               <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       MaxLevelCount                   16                      |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLevelSpacingF"><em>stLevelSpacingF</em></a>               <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LevelSpacingF                   &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stMinLevelValF"><em>stMinLevelValF</em></a>                <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MinLevelValF                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stMaxLevelValF"><em>stMaxLevelValF</em></a>                <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       MaxLevelValF                    &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stSpanLevelPalette"><em>stSpanLevelPalette</em></a>               <A href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       StSpanLevelPalette                 True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLevelPalette"><em>stLevelPalette</em></a>                  <A href="Workstation.html#NhlTColorDefinitionGenArray">NhlTColorDefinitionGenArray</a>  RCSG    |
+|       StLevelPalette                    &lt;None&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLevelColors"><em>stLevelColors</em></a>                 <a href="Workstation.html#NhlTColorIndexGenArray">NhlTColorIndexGenArray</a>  RCSG    |
+|       StLevelColors                   &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stUseScalarArray"><em>stUseScalarArray</em></a>              <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       StUseScalarArray                False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stScalarMissingValColor"><em>stScalarMissingValColor</em></a>       <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       StScalarMissingValColor         "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stMonoLineColor"><em>stMonoLineColor</em></a>               <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       StMonoLineColor                 True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLineThicknessF"><em>stLineThicknessF</em></a>              <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       LineThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLineColor"><em>stLineColor</em></a>                   <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       LineColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stNoDataLabelOn"><em>stNoDataLabelOn</em></a>               <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       AnnotationLabelsOn              True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stNoDataLabelString"><em>stNoDataLabelString</em></a>           <a href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       StNoDataLabelString             &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelOn"><em>stZeroFLabelOn</em></a>                <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       AnnotationLabelsOn              True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelString"><em>stZeroFLabelString</em></a>            <a href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       StZeroFLabelString              &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelFontHeightF"><em>stZeroFLabelFontHeightF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontHeightF                     &lt;dynamic&gt;               |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelTextDirection"><em>stZeroFLabelTextDirection</em></a>     <a href="TextItem.html#NhlTTextDirection">NhlTTextDirection</a>       RCSG    |
+|       TextDirection                   "Across"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelFont"><em>stZeroFLabelFont</em></a>              <a href="Base.html#NhlTFont">NhlTFont</a>                RCSG    |
+|       Font                            "pwritx"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelFontColor"><em>stZeroFLabelFontColor</em></a>         <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FontColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelFontAspectF"><em>stZeroFLabelFontAspectF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontAspectF                     1.3125                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelFontThicknessF"><em>stZeroFLabelFontThicknessF</em></a>    <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       FontThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelFontQuality"><em>stZeroFLabelFontQuality</em></a>       <a href="TextItem.html#NhlTFontQuality">NhlTFontQuality</a>         RCSG    |
+|       FontQuality                     "High"                  |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelConstantSpacingF"><em>stZeroFLabelConstantSpacingF</em></a>  <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextConstantSpacingF            0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelAngleF"><em>stZeroFLabelAngleF</em></a>            <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       TextAngleF                      0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelFuncCode"><em>stZeroFLabelFuncCode</em></a>          <a href="Base.html#NhlTCharacter">NhlTCharacter</a>           RCSG    |
+|       TextFuncCode                    :                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelBackgroundColor"><em>stZeroFLabelBackgroundColor</em></a>   <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       FillBackgroundColor             "Background"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelPerimOn"><em>stZeroFLabelPerimOn</em></a>           <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       EdgesOn                         True                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelPerimSpaceF"><em>stZeroFLabelPerimSpaceF</em></a>       <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeBorderWidthF                0.33                    |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelPerimColor"><em>stZeroFLabelPerimColor</em></a>        <a href="Workstation.html#NhlTColorIndex">NhlTColorIndex</a>          RCSG    |
+|       EdgeColor                       "Foreground"            |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelPerimThicknessF"><em>stZeroFLabelPerimThicknessF</em></a>   <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       EdgeThicknessF                  1.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelZone"><em>stZeroFLabelZone</em></a>              <a href="Base.html#NhlTInteger">NhlTInteger</a>             RCSG    |
+|       StZeroFLabelZone                0                       |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelSide"><em>stZeroFLabelSide</em></a>              <a href="View.html#NhlTPosition">NhlTPosition</a>            RCSG    |
+|       StZeroFLabelSide                "Bottom"                |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelJust"><em>stZeroFLabelJust</em></a>              <a href="View.html#NhlTJustification">NhlTJustification</a>       RCSG    |
+|       StZeroFLabelJust                "CenterCenter"          |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelParallelPosF"><em>stZeroFLabelParallelPosF</em></a>      <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       StZeroFLabelParallelPosF        0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stZeroFLabelOrthogonalPosF"><em>stZeroFLabelOrthogonalPosF</em></a>    <a href="Base.html#NhlTFloat">NhlTFloat</a>               RCSG    |
+|       StZeroFLabelOrthogonalPosF      0.0                     |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stExplicitLabelBarLabelsOn"><em>stExplicitLabelBarLabelsOn</em></a>    <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       StExplicitLabelBarLabelsOn      False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLabelBarEndLabelsOn"><em>stLabelBarEndLabelsOn</em></a>         <a href="Base.html#NhlTBoolean">NhlTBoolean</a>             RCSG    |
+|       StLabelBarEndLabelsOn           False                   |
+|---------------------------------------------------------------|
+| <a href="../../Graphics/Resources/st.html#stLabelFormat"><em>stLabelFormat</em></a>                 <a href="Base.html#NhlTString">NhlTString</a>              RCSG    |
+|       NumberFormat                    "*+^sg"                 |
++---------------------------------------------------------------+
+</pre>
+<p>
+<h3>Data specific resources</h3><p>
+
+The <strong>StreamlinePlot</strong> class does not currently use any 
+data specific resources.
+<p> 
+<h3>Composite resources</h3><p>
+
+<A name="Transformation.res"></a>
+<h4><A href="Transformation.html#Transformation.res">Transformation
+resources</a></h4>
+
+<a href="Transformation.html"><strong>Transformation</strong></a> class resources specify the extent,
+direction and grid type of the data coordinate system. The
+<a href="Transformation.html"><strong>Transformation</strong></a> class is the superclass of all classes
+used to perform data transformations, and you can access all its
+resources. However, note that <strong>StreamlinePlot</strong> intercepts
+its resources, as follows:
+
+<ul>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXMinF"><em>trXMinF</em></a>
+
+<dd>By default <em>trXMinF</em> is set to the minimum data coordinate
+value along the X Axis, as determined from the contents of the
+<a href="VectorField.html"><strong>VectorField</strong></a> object.
+
+</dl>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXMaxF"><em>trXMaxF</em></a>
+
+<dd>By default <em>trXMaxF</em> is set to the maximum data coordinate
+value along the X Axis, as determined from the contents of the
+<a href="VectorField.html"><strong>VectorField</strong></a> object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXReverse"><em>trXReverse</em></a>
+
+<dd>By default <em>trXReverse</em> is set based on the direction of
+the X Axis implied by the contents of the <a href="VectorField.html"><strong>VectorField</strong></a>
+object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYMinF"><em>trYMinF</em></a>
+
+<dd>By default <em>trYMinF</em> is set to the minimum data coordinate
+value along the Y Axis, as determined from the contents of the
+<a href="VectorField.html"><strong>VectorField</strong></a> object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYMaxF"><em>trYMaxF</em></a>
+
+<dd>By default <em>trYMaxF</em> is set to the maximum data coordinate
+value along the Y Axis, as determined from the contents of the
+<a href="VectorField.html"><strong>VectorField</strong></a> object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYReverse"><em>trYReverse</em></a>
+
+<dd>By default <em>trYReverse</em> is set based on the direction of
+the Y Axis implied by the contents of the <a href="VectorField.html"><strong>VectorField</strong></a>
+object.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a>
+
+<dd><em>trGridType</em> is forced to <code>LogLin</code> if <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> have <code>NULL</code> values in
+the <a href="VectorField.html"><strong>VectorField</strong></a> object. It is forced to
+<code>Irregular</code> if <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and/or <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> contain 1D coordinate arrays.
+If <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> contain 2D coordinate arrays,
+<em>trGridType</em> defaults to <code>Spherical</code> but the user
+can choose to set it to <code>Curvilinear</code>.
+
+</dl>
+
+</ul>
+
+<A name="LogLinTransformation.res"></a>
+<h4><A href="LogLinTransformation.html#LogLinTransformation.res">LogLinTransformation
+resources</a></h4>
+
+The <strong>StreamlinePlot</strong> class uses the
+<a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> to handle its
+transformations as long as neither of the
+<a href="VectorField.html"><strong>VectorField</strong></a> array resources, <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> or <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a>, is
+set. <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> has resources for
+selecting between linear and logarithmic coordinates for each axis.
+
+<p>You can access all <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> resources. 
+However, note that <strong>StreamlinePlot</strong> intercepts
+<a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> resources, as follows:
+
+<ul>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXLog"><em>trXLog</em></a>
+
+<dd><strong>StreamlinePlot</strong> issues a warning if <em>trXLog</em>
+is set True when the set value of <em>trXMinF</em> is less than or
+equal to 0.0. In this case it resets <em>trXLog</em> to False.  If the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> resource <em>trXAxisType</em>
+is set, <strong>StreamlinePlot</strong> sets <em>trXLog</em> True if
+<em>trXAxisType</em> is set to <code>LogAxis</code>. If
+<em>trXAxisType</em> is set to any other value, it sets
+<em>trXLog</em> False.
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYLog"><em>trYLog</em></a>
+
+
+<dd><strong>StreamlinePlot</strong> issues a warning if <em>trYLog</em>
+is set True when the set value of <em>trYMinF</em> is less than or
+equal to 0.0. In this case it resets <em>trYLog</em> to False.  If the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> resource <em>trYAxisType</em>
+is set, <strong>StreamlinePlot</strong> sets <em>trYLog</em> True if
+<em>trYAxisType</em> is set to <code>LogAxis</code>. If
+<em>trYAxisType</em> is set to any other value, it sets
+<em>trYLog</em> False.
+
+</dl>
+</ul>
+
+
+<A name="IrregularTransformation.res"></a>
+<h4><A href="IrregularTransformation.html#IrregularTransformation.res">IrregularTransformation
+resources</a></h4>
+
+<strong>StreamlinePlot</strong> automatically uses the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> to handle its
+transformations if either of the <a href="VectorField.html"><strong>VectorField</strong></a>
+array resources <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and/or
+<a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> are set with
+one-dimensional arrays, implying that one or both of the coordinate
+axes is irregularly spaced.
+
+<p>All <a href="Transformation.html"><strong>Transformation</strong></a> superclass
+resources are accessible. However, <strong>StreamlinePlot</strong>
+blocks access to all resources specific to the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> except for:
+
+<ul>
+<li><a href="../../Graphics/Resources/tr.html#trXTensionF"><em>trXTensionF</em></a>
+<li><a href="../../Graphics/Resources/tr.html#trYTensionF"><em>trYTensionF</em></a>
+</ul>
+
+In addition, <strong>StreamlinePlot</strong> intercepts these 
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> resources:
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trXAxisType"><em>trXAxisType</em></a>
+
+<dd>If the <a href="VectorField.html"><strong>VectorField</strong></a> resource <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> is
+non-<code>NULL</code> and <em>trXAxisType</em> is set to any other
+value than <code>IrregularAxis</code>, <strong>StreamlinePlot</strong>
+switches to a coordinate extent bounded by 0 and the length of the
+X-Axis dimension minus one.  If <em>trXAxisType</em> is not set, but
+the <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> resource <em>trXLog</em> is
+set, <strong>StreamlinePlot</strong> sets <em>trXAxisType</em> to
+<code>LogAxis</code> if <em>trXLog</em> is True; if <em>trXLog</em> is
+False, it changes <em>trXAxisType</em> to <code>LinearAxis</code> if
+it had been set to <code>LogAxis</code> and leaves it unchanged
+otherwise. <em>trXAxisType</em> can be set to <code>LogAxis</code>
+without error only when the X-Axis coordinate extent as passed from
+the <a href="VectorField.html"><strong>VectorField</strong></a> is entirely positive. If this is not
+the case, <em>trXAxisType</em> will default to <code>LinearAxis</code>.
+
+<p><A href="StreamlinePlot.html#Status.1">V4.1 Status Note 1</a>
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/tr.html#trYAxisType"><em>trYAxisType</em></a>
+
+<dd>If the <a href="VectorField.html"><strong>VectorField</strong></a> resource <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> is non-<code>NULL</code> and
+<em>trYAxisType</em> is set to any other value than
+<code>IrregularAxis</code>, <strong>StreamlinePlot</strong>
+switches to a coordinate extent bounded by 0 and the length of the
+Y-Axis dimension minus one. If <em>trYAxisType</em> is not set, but
+the <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> resource <em>trYLog</em>
+is set, <strong>StreamlinePlot</strong> sets <em>trYAxisType</em>
+to <code>LogAxis</code> if <em>trYLog</em> is True; if <em>trYLog</em>
+is False, it changes <em>trYAxisType</em> to <code>LinearAxis</code>
+if it had been set to <code>LogAxis</code> and leaves it unchanged
+otherwise. <em>trYAxisType</em> can be set to <code>LogAxis</code>
+without error only when the Y-Axis coordinate extent as passed from
+the <a href="VectorField.html"><strong>VectorField</strong></a> is entirely positive.  If this is
+not the case, <em>trYAxisType</em> will default to
+<code>LinearAxis</code>.
+
+<p><A href="StreamlinePlot.html#Status.1">V4.1 Status Note 1</a>
+</dl>
+
+</ul>
+
+<A name="CurvilinearTransformation.res"></a>
+
+<h4><A href="CurvilinearTransformation.html#CurvilinearTransformation.res">CurvilinearTransformation resources</a></h4>
+
+<strong>StreamlinePlot</strong> uses the
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> to handle its
+transformations if the <a href="VectorField.html"><strong>VectorField</strong></a> array
+resources <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> are set with two-dimensional
+arrays and the Transformation class resource
+<a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is set to
+<code>Curvilinear</code>.  The
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> class has no
+user-accessible resources.
+
+
+<A name="SphericalTransformation.res"></a>
+<h4><A
+href="SphericalTransformation.html#SphericalTransformation.res">SphericalTransformation
+resources</a></h4>
+
+<strong>StreamlinePlot</strong> uses the
+<a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a> to handle its
+transformations if the <a href="VectorField.html"><strong>VectorField</strong></a> array
+resources <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> are set with two-dimensional
+arrays and the <a href="Transformation.html"><strong>Transformation</strong></a> class resource
+<a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is set to
+<code>Spherical</code>..  The
+<a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a> class has no
+user-accessible resources.
+
+<A name="PlotManager.res"></a>
+<A href="PlotManager.html#PlotManager.res"><h4>PlotManager resources</h4></a>
+
+If <em>tfPlotManagerOn</em> is True when a
+<strong>StreamlinePlot</strong> object is created, you can access
+all <a href="PlotManager.html"><strong>PlotManager</strong></a> resources.  However, note that
+<strong>StreamlinePlot</strong> intercepts certain
+<a href="PlotManager.html"><strong>PlotManager</strong></a> resources, as follows:
+
+<ul>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/pm.html#pmLabelBarDisplayMode"><em>pmLabelBarDisplayMode</em></a>
+
+<dd>The default value of <I>pmLabelBarDisplayMode</I> is set to
+<code>Never</code>.
+
+</dl>
+
+<li>
+<dl>
+
+<dt><a href="../../Graphics/Resources/pm.html#pmLegendDisplayMode"><em>pmLegendDisplayMode</em></a>
+
+<dd>
+The <em>pmLegendDisplayMode</em> resource is hard-coded to its default
+value of NhlNOCREATE in <strong>StreamlinePlot</strong>.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/pm.html#pmTickMarkDisplayMode"><em>pmTickMarkDisplayMode</em></a>
+
+<dd>The default value of <em>pmTickMarkDisplayMode</em> is set to
+<code>Conditional</code>.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/pm.html#pmTitleDisplayMode"><em>pmTitleDisplayMode</em></a>
+
+<dd>The default value of <em>pmTitleDisplayMode</em> is set to
+<code>Conditional</code>.
+
+
+</dl>
+</ul>
+
+Except for <a href="Legend.html"><strong>Legend</strong></a>, you
+can access resources for any of the composite classes of the
+<a href="PlotManager.html"><strong>PlotManager</strong></a> class. However, the
+<a href="PlotManager.html"><strong>PlotManager</strong></a> class modifies the access and behavior of
+some of the resources belonging to these classes, as follows:
+
+<ul>
+
+<li><A href="PlotManager.html#TickMark.res">TickMark resources as modified by
+PlotManager</a>
+
+<li><A href="PlotManager.html#Title.res">Title resources as modified by
+PlotManager</a>
+
+<li><A href="PlotManager.html#LabelBar.res">LabelBar resources as modified by
+PlotManager</a>
+</ul>
+
+The <B>StreamlinePlot</B> class itself modifies the access and
+behavior of a number of <B>LabelBar</B> resources.
+
+<A name="LabelBar.res"></a>
+<h5>Additional modifications to <B>LabelBar</B> resources</h5>
+
+The <B>StreamlinePlot</B> class disables a number of
+<B>LabelBar</B> resources, since it sets them automatically
+based on the current values of certain relevant <B>StreamlinePlot</B>
+resources. The disabled resources include:
+
+<ul>
+<li><a href="../../Graphics/Resources/lb.html#lbBoxCount"><em>lbBoxCount</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbMonoFillColor"><em>lbMonoFillColor</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillColor"><em>lbFillColor</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillColors"><em>lbFillColors</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbMonoFillPattern"><em>lbMonoFillPattern</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillPattern"><em>lbFillPattern</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillPatterns"><em>lbFillPatterns</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbMonoFillScale"><em>lbMonoFillScale</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillScaleF"><em>lbFillScaleF</em></a>
+<li><a href="../../Graphics/Resources/lb.html#lbFillScales"><em>lbFillScales</em></a>
+</ul>
+
+In addition, the <B>StreamlinePlot</B> class intercepts certain
+<B>LabelBar</B> resources, as follows:
+
+
+<ul>
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lb.html#lbLabelStrings"><em>lbLabelStrings</em></a>
+
+<dd>Any set value of this resource is ignored unless the
+<B>StreamlinePlot</B> resource <a href="../../Graphics/Resources/st.html#stExplicitLabelBarLabelsOn"><em>stExplicitLabelBarLabelsOn</em></a>
+is set True.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lb.html#lbLabelFuncCode"><em>lbLabelFuncCode</em></a>
+
+<dd>Any set value of this resource is ignored unless the
+<B>StreamlinePlot</B> resource <a href="../../Graphics/Resources/st.html#stExplicitLabelBarLabelsOn"><em>stExplicitLabelBarLabelsOn</em></a>
+is set True.
+
+</dl>
+
+<li>
+<dl>
+<dt><a href="../../Graphics/Resources/lb.html#lbLabelAlignment"><em>lbLabelAlignment</em></a>
+
+<dd>Any set value of this resource is ignored unless the
+<B>StreamlinePlot</B> resource <a href="../../Graphics/Resources/st.html#stExplicitLabelBarLabelsOn"><em>stExplicitLabelBarLabelsOn</em></a>
+is set True.
+
+</dl>
+
+</ul>
+<p>
+<h3>Superclass resources</h3><p>
+
+You can set all resources defined by the superclasses of the
+<strong>StreamlinePlot</strong> object class, including:
+
+<ul>
+<li><A href="DataComm.html#DataComm.res"><strong>DataComm</strong>
+resources</a>
+<li><A href="Transform.html#Transform.res"><strong>Transform</strong>
+resources</a>
+<li><A href="View.html#View.res"><strong>View</strong>
+resources</a>
+</ul>
+
+<hr> 
+<h2>Description</h2>
+
+A <strong>StreamlinePlot</strong> object, or
+<strong>streamlineplot</strong>, represents a vector field using
+streamlines, based on two-dimensional data provided by an instance of
+the <a href="VectorField.html"><strong>VectorField</strong></a>
+class. The streamlines may be progressively colored based upon the
+interpolated magnitude or other associated scalar value at each
+step-wise location of the streamline. It supports title, tick mark,
+and labelbar annotations that automatically adjust themselves to the
+state of the <strong>streamlineplot</strong>.
+
+<p>The <strong>StreamlinePlot</strong> class provides a number of
+resources that you can use to influence the way the streamlines are
+generated and displayed.
+<p>
+<h3>Data input</h3><p>
+
+The only resource you must set in order to generate a
+<a href="StreamlinePlot.html"><strong>streamlineplot</strong></a> is <a href="../../Graphics/Resources/st.html#stVectorFieldData"><em>stVectorFieldData</em></a>.  This resource
+specifies the id of an existing <a href="VectorField.html"><strong>VectorField</strong></a>
+object.  The <a href="VectorField.html"><strong>vectorfield</strong></a> accepts data in a
+variety of types and configurations, and allows you to specify how it
+is to be interpreted. As received by the
+<strong>streamlineplot</strong>, the data are accompanied by
+information specifying the extents of the data in the data coordinate
+system, the minimum and maximum data magnitudes, as well as the
+minimum and maximum values of each component of the vector. Also, if
+either or both of the data coordinate axes is irregularly spaced, the
+<strong>vectorfield</strong> communicates information defining this
+spacing.
+
+<p>If you want to color the streamlines based on data other than the
+vector magnitudes, you must set the boolean resource <I><a href="../../Graphics/Resources/st.html#stUseScalarArray"><em>stUseScalarArray</em></a></I> True and also
+supply the <B>streamlineplot</B> with a <B>ScalarField</B> object.
+You do this by setting the resource <a href="../../Graphics/Resources/st.html#stScalarFieldData"><em>stScalarFieldData</em></a> using the id of an
+existing <B>scalarfield</B>. Currently, <B>StreamlinePlot</B> requires
+that the <B>scalarfield</B> have the same number of elements along
+each dimension (after subsetting and striding is performed) as does
+each component of the <B>vectorfield</B>. It also assumes that the
+data coordinate extents of the <B>scalarfield</B> match those of the
+<B>vectorfield</B> and ignores any explicitly set <B>scalarfield</B>
+coordinate extent values.
+<p>
+<h3>Coordinate transformations</h3><p>
+
+<strong>StreamlinePlot</strong> intrinsically supports linear,
+logarithmic, and irregular rectangular gridded data coordinate spaces.
+It does <em>not yet</em>, on its own, support the transformation of an
+irregular data space into either a linear or a logarithmic
+space. However, such transformations are easily accomplished using the
+overlay mechanism.
+
+<p><strong>StreamlinePlot</strong> also supports topologically
+rectangular grids defined using 2D coordinate arrays.
+
+<p><strong>StreamlinePlot</strong> instantiates child objects to
+manage transformations between the data coordinate system and NDC
+space. The <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> manages linear
+and logarithmic transformations, and the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> manages the
+transformation if one or both axes are irregularly spaced.  If the
+grid is defined using 2D coordinate arrays,
+<strong>StreamlinePlot</strong> instantiates either the
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> or the
+<a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a> to handle the
+transformations.
+
+<p>By default the data coordinate extents are based on the extents of the
+supplied <a href="VectorField.html"><strong>VectorField</strong></a> object data, but you may adjust
+them using resources belonging to the transformation objects.
+
+<h4>Use of the <a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> object</h4>
+
+<strong>StreamlinePlot</strong> uses a
+<a href="LogLinTransformation.html"><strong>LogLinTransformation</strong></a> object as long as the
+<a href="VectorField.html"><strong>VectorField</strong></a> resources <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> are both
+<code>NULL</code>. The coordinate extents of a linear axis may
+arbitrarily intersect or encompass the data extent. If you set a
+logarithmic axis, then the coordinate extent of that axis must be
+entirely positive, but otherwise may intersect or extend beyond the
+data extent.
+
+<h4>Use of the <a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> object</h4>
+
+If either of the <a href="VectorField.html"><strong>VectorField</strong></a> coordinate array
+resources <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> are
+non-<code>NULL</code> and they are not set with 2D arrays, then
+<strong>StreamlinePlot</strong> uses an
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> object. Note that
+<strong>StreamlinePlot</strong> treats an axis with an associated
+coordinate array as irregular even if the coordinate array actually
+has evenly spaced values. <strong>StreamlinePlot</strong> represents
+an irregular axis not by stretching and compressing various regions of
+the plot, but by displaying it with irregularly spaced tick marks.
+
+<p>In addition to a small performance penalty, there are some
+restrictions associated with use of the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> object. Although you may
+limit the coordinate extent to a subspace of the data coordinate
+extent of the <a href="VectorField.html"><strong>VectorField</strong></a> object data, you are not
+allowed to define a coordinate range that extends outside the range of
+the data coordinates of an irregular axis. Using the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> resources <a href="../../Graphics/Resources/tr.html#trXAxisType"><em>trXAxisType</em></a> or
+<a href="../../Graphics/Resources/tr.html#trYAxisType"><em>trYAxisType</em></a>,
+it is possible to set an irregular axis to <code>LinearAxis</code> or
+even, under certain conditions, to <code>LogAxis</code>, but the
+results are probably not what you want. Since
+<strong>StreamlinePlot</strong> does not intrinsically support a
+linearization transformation for irregularly spaced data, it can only
+switch to a linear system by replacing the data coordinates with array
+index coordinates, which are, in fact, linearly spaced. To properly
+transform irregularly spaced data into a linear or logarithmic
+coordinate system, you must use the overlay mechanism (<A
+href="StreamlinePlot.html#Status.1">V4.1 Status Note 1</a>).
+
+<h4>Use of the <a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> object</h4>
+
+If both the <a href="VectorField.html"><strong>VectorField</strong></a> coordinate array resources
+<a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> are set using 2D
+coordinate arrays and the <a href="Transformation.html"><strong>Transformation</strong></a> class
+resource <a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a>
+is set to <code>Curvilinear</code> <strong>StreamlinePlot</strong>
+uses a <a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> object. As with the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> you cannot set the coordinate
+range outside, the range of the data. Also, since X and Y coordinate
+locations both vary along the grid edges, tickmarks are disabled. In
+order to place the the data in context, you need to overlay the
+<a href="StreamlinePlot.html"><strong>streamlineplot</strong></a> on another plot such as a
+<strong>mapplot</strong>.
+
+
+<h4>Use of the <a href="SphericalTransformation.html"><strong>SphericalTransformation</strong></a> object</h4>
+
+If both the <a href="VectorField.html"><strong>VectorField</strong></a> coordinate array
+resources <a href="../../Graphics/Resources/vf.html#vfXArray"><em>vfXArray</em></a> and <a href="../../Graphics/Resources/vf.html#vfYArray"><em>vfYArray</em></a> are set using 2D coordinate
+arrays and the <a href="Transformation.html"><strong>Transformation</strong></a> class resource
+<a href="../../Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> is set to
+<code>Spherical</code> <strong>StreamlinePlot</strong> uses a
+<a href="CurvilinearTransformation.html"><strong>CurvilinearTransformation</strong></a> object. As with the
+<a href="IrregularTransformation.html"><strong>IrregularTransformation</strong></a> you cannot set the
+coordinate range outside the range of the data.  Also, since X and Y
+coordinate locations both vary along the grid edges, tickmarks are
+disabled. In order to place the the data in context, you need to
+overlay the <strong>streamlineplot</strong> on another plot such as a
+<strong>mapplot</strong>.
+ 
+<h4>Overlays</h4>
+
+<p>In addition to the built-in transformation support, you can map a
+<strong>streamlineplot</strong> into a variety of other coordinate
+spaces by adding it as an <a href="../../glossary.html#Overlay">overlay</a> to a <a href="../../glossary.html#BasePlot">base plot</a>.
+You can overlay a <strong>streamlineplot</strong> on a <a
+href="MapPlot.html"><strong>mapplot</strong></a> to transform the
+data into any of 10 different map projections. You can transform
+irregularly gridded vector data into a linear or logarithmic space by
+overlaying the <strong>streamlineplot</strong> on a <strong><a
+href="LogLinPlot.html">loglinplot</a></strong>.  You can also make a
+<strong>streamlineplot</strong> into an overlay of any other plot
+object, including a <strong><a
+href="ContourPlot.html">contourplot</a></strong>, an <strong><a
+href="IrregularPlot.html">irregularplot</a></strong>, a <strong><a
+href="VectorPlot.html">vectorplot</a></strong>, or an <strong><a
+href="XyPlot.html">xyplot</a></strong>.  Use the <a href="../API/NhlAddOverlay.html"><strong>NhlAddOverlay</strong></a> function to perform an
+overlay.
+
+<h4>Mapping the vector direction</h4> 
+
+In certain situations, such as when the coordinate system is irregular
+or when the units along each coordinate axis are different, you may
+want to draw streamlines within a coordinate space but without
+transforming the directional components relative to the
+space. <strong>StreamlinePlot</strong> has a boolean resource called
+<em><a href="../../Graphics/Resources/st.html#stMapDirection"><em>stMapDirection</em></a></em>
+that allows you to specify whether the direction as well as the
+location is to be mapped into the coordinate space defined by the
+transformation currently in effect. When you set this resource to
+False, the direction is rendered in a uniform coordinate system. The U
+component of the vector data will be parallel to the X Axis, and the V
+component will be parallel to the Y Axis with units of equal size in each
+direction.
+<p>
+<h3>Draw order</h3><p>
+
+The <strong>StreamlinePlot</strong> class allows you specify when the
+streamlines are drawn in relation to other plot elements of an
+overlay. You control the drawing order using the <em><a href="../../Graphics/Resources/st.html#stStreamlineDrawOrder"><em>stStreamlineDrawOrder</em></a></em> resource.
+There are three drawing phases: the <em>predraw</em> phase, the
+<em>draw</em> phase, and the <em>postdraw</em> phase. By default, the
+<strong>StreamlinePlot</strong> object draws its streamlines during
+the draw phase. When a <strong>streamlineplot</strong> is drawn by
+itself, the drawing order is not important. However, when a
+<strong>streamlineplot</strong> is an overlay, you often need to
+adjust the drawing order to ensure that the features you want to see
+remain visible.
+<p>
+<h3>Annotations</h3><p>
+
+Like all plot objects, a <strong>streamlineplot</strong> is by default
+instantiated with a <strong><a
+href="PlotManager.html">plotmanager</a></strong> to manage overlays
+and <a href="../../glossary.html#Annotation">annotations</a> on its behalf.
+<strong>StreamlinePlot</strong> enables three
+<a href="PlotManager.html"><strong>PlotManager</strong></a> <a href="../../glossary.html#IntrinsicAnnotation">intrinsic
+annotations</a>, and also supplies a zero field message label of
+its own.  The enabled <a href="PlotManager.html"><strong>PlotManager</strong></a> annotations
+include <a href="TickMark.html"><strong>TickMark</strong></a>, <a href="Title.html"><strong>Title</strong></a>, and
+<a href="LabelBar.html"><strong>LabelBar</strong></a>.  <strong>StreamlinePlot</strong>
+displays tick marks by default. Titles will appear if you set the
+appropriate title string resource to a non-NULL string value. The
+<B>LabelBar</B>, which provides a key to the color scheme used for
+progressively colored streamlines, only appears if you set <a href="../../Graphics/Resources/pm.html#pmLabelBarDisplayMode"><em>pmLabelBarDisplayMode</em></a> appropriately.  As
+with any plot object, you can also add arbitrary user-defined <a href="../../glossary.html#ExternalAnnotation">external
+annotations</a> to a <strong>streamlineplot</strong>.
+<p>
+
+<h3>Streamline generation resources</h3> <p>
+
+<strong>StreamlinePlot</strong> supplies several resources that
+influence the way it generates streamlines. The most important of
+these are <em><a href="../../Graphics/Resources/st.html#stStepSizeF"><em>stStepSizeF</em></a></em>,
+<em><a href="../../Graphics/Resources/st.html#stLineStartStride"><em>stLineStartStride</em></a></em>,
+and <em><a href="../../Graphics/Resources/st.html#stMinDistanceF"><em>stMinDistanceF</em></a></em>,
+and <em><a href="../../Graphics/Resources/st.html#stMinLineSpacingF"><em>stMinLineSpacingF</em></a></em>.
+
+<p><em><a href="../../Graphics/Resources/st.html#stStepSizeF"><em>stStepSizeF</em></a></em>
+specifies the basic step size (in
+<a href="../../glossary.html#NDC">NDC</a> units) that
+<strong>StreamlinePlot</strong> uses to calculate the next point on
+the streamline. Although <strong>StreamlinePlot</strong> can usually
+be counted on to come up with a reasonable value for the step size
+based on the viewport and the size of the data grid, and although it
+performs some adaptive step sizing based on the field topology, you
+will find, in general, that setting a smaller step size will result in a
+more accurate plot. The drawback is that the streamlines will take a
+bit longer to generate.
+
+<p>The resources <em><a href="../../Graphics/Resources/st.html#stLineStartStride"><em>stLineStartStride</em></a></em>
+and <em><a href="../../Graphics/Resources/st.html#stMinDistanceF"><em>stMinDistanceF</em></a></em>
+offer alternate ways to limit the number of streamlines started in
+order to control streamline density. Streamlines always begin at the
+center of a 'grid box', that is, at a point in data space located
+equally distant from four points on the grid where vector data values
+are defined. As a streamline is generated the grid boxes through which
+it passes are marked as ineligible for starting a new streamline. The
+<em>stLineStartStride</em> resource sets a stride value that
+determines which grid boxes are initially eligible for starting a
+streamline.  For instance, when <em>stLineStartStride</em> is set to
+its default value of 2, only every other grid box (along each data
+dimension) will be initially eligible. 
+
+<p><em>stLineStartStride</em> works well for controlling density when
+the transformation from data space to NDC space is linear. However,
+when the transformation is non-linear, as with many map projections, a
+more uniform and legible plot may be achieved with the
+<em>stMinDistanceF</em> resource. This resource specifies a minimum
+distance in NDC space that must separate neighboring grid boxes for
+both to be initially eligible for starting a streamline. When this
+resource is set to a value greater than 0.0,
+<strong>StreamlinePlot</strong> calculates the NDC location of
+each grid point, and then based on the minimum distance value records
+the initially eligible grid boxes.
+
+<p><em><a href="../../Graphics/Resources/st.html#stMinLineSpacingF"><em>stMinLineSpacingF</em></a></em>
+specifies how close in NDC space streamlines are allowed to approach
+each other before being terminated. <strong>StreamlinePlot</strong>
+dynamically calculates a default value for this resource, again based
+on the viewport size and the number of elements in the data grid. As
+the value of this resource increases, the streamlines gradually
+disintegrate into a series of short disconnected lines. Smaller values
+result in a denser plot with fewer separate lines.
+<p>
+
+<h3>Directional arrow resources</h3><p>
+
+You can set the length of the lines used to draw each directional
+arrow using the resource <em><a href="../../Graphics/Resources/st.html#stArrowLengthF"><em>stArrowLengthF</em></a></em>. 
+
+<p>You can control the directional arrow spacing in two different
+ways.  The resource <em><a href="../../Graphics/Resources/st.html#stArrowStride"><em>stArrowStride</em></a></em> works
+in a similar manner to <em><a href="../../Graphics/Resources/st.html#stLineStartStride"><em>stLineStartStride</em></a></em>. It
+specifies which data grid boxes are eligible for a directional
+arrow. For example, when <em>stArrowStride</em> has its default value,
+2, every second grid box (along each dimension) is eligible for a
+directional arrow.
+
+<p>The <em>stArrowStride</em> resource works well unless a non-linear
+transformation is in effect. In such cases, as for instance in many
+map transformations, the arrows may be reasonably spaced in the lower
+latitudes, but become unacceptably crowded near the poles. The
+resource <em><a href="../../Graphics/Resources/st.html#stMinArrowSpacingF"><em>stMinArrowSpacingF</em></a></em>
+was designed to help solve this problem. It allows a directional arrow
+to be drawn only if at least the NDC distance specified by its value
+has been added to the streamline since the previous directional arrow.
+<p>
+
+<h3>Streamline color</h3><p>
+
+If <em><a href="../../Graphics/Resources/st.html#stMonoLineColor"><em>stMonoLineColor</em></a></em>
+is set <code>True</code>, you control the color used to render
+the streamlines by setting the resource <em><a href="../../Graphics/Resources/st.html#stLineColor"><em>stLineColor</em></a></em>.
+
+If you set <em>stMonoLineColor</em> <code>False</code>
+<strong>StreamlinePlot</strong> draws each streamline with multiple
+colors, based on the interpolated magnitude or other associated scalar
+value at each step-wise location of the streamline. The array resource <em><a href="../../Graphics/Resources/st.html#stLevelColors"><em>stLevelColors</em></a></em>
+specifies the color indexes to use for multi-colored rendering. 
+
+<h4>Selecting levels</h4>
+
+In order to support multi-colored streamlines, <B>StreamlinePlot</B>
+uses an array of level values to subdivide the range of scalars on
+which the coloring is based. By default, the levels apply to the range
+of vector magnitudes. However, if <I><a href="../../Graphics/Resources/st.html#stUseScalarArray"><em>stUseScalarArray</em></a></I>
+is set True and a <B>scalarfield</B> has been provided, the levels
+will apply to the range of the <B>scalarfield</B> data.  The level
+array resource <I><a href="../../Graphics/Resources/st.html#stLevels"><em>stLevels</em></a></I> is specified
+in the same way as the <B><a
+href="ContourPlot.html">ContourPlot</a></B> resource <I><a href="../../Graphics/Resources/cn.html#cnLevels"><em>cnLevels</em></a></I>.
+
+<p>By appropriately setting the <a href="../../Graphics/Resources/st.html#stLevelSelectionMode"><em>stLevelSelectionMode</em></a> resource, you can
+choose from four level selection modes to set up the <I><a href="../../Graphics/Resources/st.html#stLevels"><em>stLevels</em></a></I> array. The default mode,
+<code>AutomaticLevels</code>, is easy to use. It selects a "nice"
+spacing starting from the smallest relatively round number greater
+than the minimum data value, such that the number of levels is as
+close as possible to, but less than, the value of the resource <a href="../../Graphics/Resources/st.html#stMaxLevelCount"><em>stMaxLevelCount</em></a>.
+<code>EqualSpacedLevels</code> mode defines exactly <a href="../../Graphics/Resources/st.html#stMaxLevelCount"><em>stMaxLevelCount</em></a> levels spaced
+evenly from the data minimum value to the data maximum value. In
+<code>ManualLevels</code> mode, you set the maximum and minimum levels
+using the resources <a href="../../Graphics/Resources/st.html#stMinLevelValF"><em>stMinLevelValF</em></a> and <a href="../../Graphics/Resources/st.html#stMaxLevelValF"><em>stMaxLevelValF</em></a> with a spacing
+defined by the resource <a href="../../Graphics/Resources/st.html#stLevelSpacingF"><em>stLevelSpacingF</em></a>. Finally,
+<code>Explicit</code> mode allows you to define the level values
+yourself by setting the array resource <a href="../../Graphics/Resources/st.html#stLevels"><em>stLevels</em></a>. The
+<code>ManualLevels</code> and <code>ExplicitLevels</code> modes have
+the advantage that they are independent of the maximum and minimum
+values of the particular dataset you are plotting, and therefore can
+be used to enforce consistency in the plots of a series of related
+datasets. <code>ExplicitLevels</code> is the only mode that allows you
+to establish variably spaced levels.
+
+<p>Once you have established the levels, you can retrieve the
+number of levels actually used by getting the value of the read-only
+resource <a href="../../Graphics/Resources/st.html#stLevelCount"><em>stLevelCount</em></a>.
+<p>
+<h3>Streamline line width</h3><p>
+
+You can set the thickness of the streamlines using <a href="../../Graphics/Resources/st.html#stLineThicknessF"><em>stLineThicknessF</em></a>.  Setting the
+streamline thickness also affects the thickness of the lines used to
+draw the directional arrows.
+<p>
+<h3>Zero field annotation</h3><p>
+
+<strong>StreamlinePlot</strong> provides a zero field annotation that
+outputs a diagnostic message if you attempt to draw an instance using
+a <strong>vectorfield</strong> that contains only zero magnitude
+vectors or missing values. This annotation also outputs a message if
+you draw without setting the <a href="../../Graphics/Resources/st.html#stVectorFieldData"><em>stVectorFieldData</em></a> resource to the id
+of an existing <strong>vectorfield</strong>.  You can individually
+control the contents of each of these messages as well as whether they
+should appear at all. The applicable resources are:
+<ul>
+<li><a href="../../Graphics/Resources/st.html#stZeroFLabelOn"><em>stZeroFLabelOn</em></a>
+<li><a href="../../Graphics/Resources/st.html#stZeroFLabelString"><em>stZeroFLabelString</em></a>
+</ul>
+for controlling the zero field message, and 
+<ul>
+<li><a href="../../Graphics/Resources/st.html#stNoDataLabelOn"><em>stNoDataLabelOn</em></a>
+<li><a href="../../Graphics/Resources/st.html#stNoDataLabelString"><em>stNoDataLabelString</em></a>
+</ul>
+for the no data message.
+
+<p>All the remaining resources for the zero field annotation have the
+prefix <em>stZeroFLabel</em>. These include a complete set of text 
+attribute resources, as well as resources for controlling position
+according to the locational conventions of the <a
+href="PlotManager.html#PlotManager-Location-Control-Model">PlotManager
+Location Control Model</a>.
+
+<hr> 
+<h2>Status</h2>
+
+<p><A name="Status.1">1.</a> The support for irregular transformations
+is at a transitional stage. Eventually,
+<strong>StreamlinePlot</strong> will be able to perform
+transformations from irregular coordinates to linear and logarithmic
+coordinates without using the overlay mechanism. This will eliminate
+the need for a switch to the index coordinate system.
+
+<hr>
+<h2>See also</h2>
+<ul>
+<li><a href="../API/NhlCreate.html"><strong>NhlCreate</strong></a> function
+<li><a href="../API/NhlDestroy.html"><strong>NhlDestroy</strong></a> function
+<li><a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> function
+<li><a href="../API/NhlGetValues.html"><strong>NhlGetValues</strong></a> function
+<li><a href="../API/NhlAddData.html"><strong>NhlAddData</strong></a> function
+<li><a href="VectorField.html"><strong>VectorField</strong></a> object
+<li><a href="PlotManager.html"><strong>PlotManager</strong></a> object
+<li><a href="Title.html"><strong>Title</strong></a> object
+<li><a href="TickMark.html"><strong>TickMark</strong></a> object
+<li><a href="DataComm.html"><strong>DataComm</strong></a> object
+<li><a href="Transform.html"><strong>Transform</strong></a> object
+<li><a href="View.html"><strong>View</strong></a> object
+<li><a href="Base.html"><strong>Base</strong></a> object
+</ul>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/Classes/StreamlinePlot.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:32 GMT -->
+</html>
+

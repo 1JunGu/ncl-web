@@ -1,0 +1,66 @@
+;----------------------------------------------------------------------
+; wrf_nogsn_poly_5.ncl
+;----------------------------------------------------------------------
+; Concepts illustrated:
+;   - Using wrf_xxxx scripts to plot WRF-ARW data
+;   - Adding text and markers to a WRF plot.
+;----------------------------------------------------------------------
+; This script is similar to wrf_nogsn_5.ncl, except it shows how to
+; add markers and text to an existing WRF plot.
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/wrf/WRFUserARW.ncl"
+
+begin
+  filename = "wrfout_d01_2005-12-14_13:00:00"
+  a = addfile(filename,"r")
+
+;---Read temperature at first time step
+  tc  = wrf_user_getvar(a,"tc",0)    ; 3D temperature
+
+;---Get the lowest (bottommost) level
+  tc2 = tc(0,:,:)
+  tf2 = 1.8*tc2+32.                    ; Convert temperature to Fahrenheit
+
+;---Change the metadata
+  tf2@description = "Surface Temperature"
+  tf2@units       = "degF"
+
+  wks = gsn_open_wks("png","wrf_nogsn_poly")
+
+;---Temperature filled contour plot
+  res                   = True
+  res@cnFillOn          = True  
+  res@ContourParameters = (/ -20., 90., 5./)
+
+  contour = wrf_contour(a,wks,tf2,res)
+
+;---Overlay filled contours on map, but don't draw yet.
+  mapres = True
+  pltres = True
+  pltres@PanelPlot              = True     ; Tells wrf_map_overlays to not draw plot and
+                                           ; to not remove the contours afterwards.
+  mapres@mpGeophysicalLineColor = "black"
+  mapres@mpNationalLineColor    = "black"
+  mapres@mpUSStateLineColor     = "black"
+  plot = wrf_map_overlays(a,wks,contour,pltres,mapres)
+
+;---Add dots and text strings at location of four US cities.
+  lats  = (/   29.95,       33.75,      36.16,      41.88/)
+  lons  = (/  -90.07,      -84.39,     -86.78,     -87.63/)
+  tstrs = (/"New Orleans","Atlanta", "Nashville", "Chicago"/)
+  mkres = True
+  txres = True
+  mkres@gsMarkerIndex = 16 ; filled dot
+  txres@txFontHeightF = 0.015
+  txres@txJust        = "CenterLeft"
+  
+  mkid = gsn_add_polymarker(wks,plot,lons,lats,mkres)
+  txid = gsn_add_text(wks,plot,"   " + tstrs,lons,lats,txres)
+
+; Now draw everything, which includes attached markers and text.
+  draw(plot)   
+  frame(wks)
+
+end

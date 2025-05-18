@@ -1,0 +1,74 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+; Dimensions and sizes:   [lev | 34] x [lat | 160] x [lon | 180]
+; Coordinates: 
+;           lev: [996.. 3]
+;           lat: [16.78917..34.54238]
+;           lon: [-105.1526..-82.84741]
+
+begin
+  nt       = 0
+
+  fName    = "wrfout_d01_2003-07-13_12:00:00.nc"
+  LAT      = 20
+  LON      = -90
+
+  f        = addfile(fName, "r")
+
+  Time     = chartostring( f->Times(nt,:) )     
+  X        = f->T(nt,:,:,:)       
+  znu      = f->ZNU(0,:)         ; eta levels
+                                 ; extract 1d arrays of lat and lon
+  lat      = f->XLAT(0,:,0)      ; (south_north) =>  [16.78917..34.54238]
+  lon      = f->XLONG(0,0,:)     ; (west_east)   => [-105.1526..-82.84741]
+  lat@units= "degrees_north"  
+  lon@units= "degrees_east"
+  lat!0    = "lat"
+  lon!0    = "lon"
+  lat&lat  =  lat 
+  lon&lon  =  lon 
+                                 ; fake out gsn_csm_pres_hgt
+  lev      = znu*1000            ; [-105.1526..-82.84741]
+  lev@long_name = "eta*1000"
+  lev@units= "hPa"
+  lev!0    = "lev"
+  lev&lev  =  lev
+
+  X!0      = "lev"
+  X!1      = "lat"
+  X!2      = "lon"
+  X&lev    =  lev
+  X&lat    =  lat
+  X&lon    =  lon
+  printVarSummary(X)
+
+;************************************************
+; create plots  
+;************************************************
+  wks = gsn_open_wks("ps" ,"WRF_lc")  
+  gsn_define_colormap(wks,"BlAqGrYeOrReVi200") ; select color map
+
+  res                       = True             ; plot mods desired
+  res@gsnMaximize           = True             ; uncomment to maximize size
+  res@gsnSpreadColors       = True             ; use full range of colormap
+ 
+  res@cnFillOn              = True             ; color plot desired
+  res@cnLinesOn             = False            ; turn off contour lines
+  res@cnLineLabelsOn        = False            ; turn off contour labels
+  res@gsnAddCyclic          = False      
+  res@lbLabelAutoStride     = True             ; NCL will decide on spacing
+  res@tmYRMode              = "Automatic"      ; turn off special labels on right axis
+  
+  
+  res@tiMainString          = Time+"  lat="+sprintf("%5.2f" ,lat({LAT}))
+  res@gsnMajorLonSpacing    =  5              ; change maj lon tm spacing
+  plot = gsn_csm_pres_hgt(wks,X(:,{LAT},:),res)
+
+  res@tiMainString          = Time+"  lon="+sprintf("%6.2f" ,lon({LON}))
+  res@gsnMajorLatSpacing    =  5              ; change maj lat tm spacing
+  plot = gsn_csm_pres_hgt(wks,X(:,:,{LON}),res)
+  
+  
+end
+

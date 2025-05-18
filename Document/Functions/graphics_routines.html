@@ -1,0 +1,1958 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/graphics_routines.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:25 GMT -->
+<head>
+<title>NCL Function Documentation: Graphics routines</title>
+</head>
+<body>
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="index.html" class="subitem">Category Listing</a></li>
+						<li><a href="list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+
+			      <div id="general_main">
+
+<h1>Graphics routines</h1>
+
+<table cellspacing=4 cellpadding=10 width=100% border=1>
+
+<!--boxplot-->
+<tr>
+<td valign=top>
+<a href="Shea_util/boxplot.html">
+boxplot</a></td>
+<td>
+Creates a boxplot.
+</td>
+</tr>
+<!--ColorNegDashZeroPosContour-->
+<tr>
+<td valign=top>
+<a href="Shea_util/ColorNegDashZeroPosContour.html">
+ColorNegDashZeroPosContour</a></td>
+<td>
+Sets the negative contours to dashed, and colors the negative, positive, and zero contours to user-specified colors.
+</td>
+</tr>
+<!--ColorShadeLeGeContour-->
+<tr>
+<td valign=top>
+<a href="Shea_util/ColorShadeLeGeContour.html">
+ColorShadeLeGeContour</a></td>
+<td>
+Shades contour regions given low and high values and two colors.<br> (Deprecated. Use <a href="../Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>.)
+</td>
+</tr>
+<!--create_graphic-->
+<tr>
+<td valign=top>
+<a href="Built-in/create_graphic.html">
+create_graphic</a></td>
+<td>
+Creates a graphic object
+</td>
+</tr>
+<!--draw-->
+<tr>
+<td valign=top>
+<a href="Built-in/draw.html">
+draw</a></td>
+<td>
+Draws the given graphical objects.
+</td>
+</tr>
+<!--drawNDCGrid-->
+<tr>
+<td valign=top>
+<a href="Shea_util/drawNDCGrid.html">
+drawNDCGrid</a></td>
+<td>
+Draws NDC grid lines at 0.1 NDC coordinate intervals and labels them.
+</td>
+</tr>
+<!--geolocation_circle-->
+<tr>
+<td valign=top>
+<a href="Contributed/geolocation_circle.html">
+geolocation_circle</a></td>
+<td>
+Create latitudes and longitudes that define concentric circles at user specified distances from a central location.
+</td>
+</tr>
+<!--get_isolines-->
+<tr>
+<td valign=top>
+<a href="Built-in/get_isolines.html">
+get_isolines</a></td>
+<td>
+Retrieves the points that define a contour line.
+</td>
+</tr>
+<!--gsn_add_annotation-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_add_annotation.html">
+gsn_add_annotation</a></td>
+<td>
+Attaches the given annotation to the given plot.
+</td>
+</tr>
+<!--gsn_add_polygon-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_add_polygon.html">
+gsn_add_polygon</a></td>
+<td>
+Attaches a <a href="../Graphics/fill_patterns.html">filled</a> polygon to the given plot.
+</td>
+</tr>
+<!--gsn_add_polyline-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_add_polyline.html">
+gsn_add_polyline</a></td>
+<td>
+Attaches a polyline to the given plot.
+</td>
+</tr>
+<!--gsn_add_polymarker-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_add_polymarker.html">
+gsn_add_polymarker</a></td>
+<td>
+Attaches polymarkers to the given plot.
+</td>
+</tr>
+<!--gsn_add_shapefile_polygons-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_add_shapefile_polygons.html">
+gsn_add_shapefile_polygons</a></td>
+<td>
+Attaches shapefile polygon data to the given plot(s) using randomly-filled polygons.
+</td>
+</tr>
+<!--gsn_add_shapefile_polylines-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_add_shapefile_polylines.html">
+gsn_add_shapefile_polylines</a></td>
+<td>
+Attaches shapefile polyline or polygon data to the given plot(s) using polylines.
+</td>
+</tr>
+<!--gsn_add_shapefile_polymarkers-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_add_shapefile_polymarkers.html">
+gsn_add_shapefile_polymarkers</a></td>
+<td>
+Attaches shapefile point data to the given plot(s) using polymarkers.
+</td>
+</tr>
+<!--gsn_add_text-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_add_text.html">
+gsn_add_text</a></td>
+<td>
+Attaches text strings to the given plot.
+</td>
+</tr>
+<!--gsn_attach_plots-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_attach_plots.html">
+gsn_attach_plots</a></td>
+<td>
+Attaches a series of plots to a base plot.
+</td>
+</tr>
+<!--gsn_blank_plot-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_blank_plot.html">
+gsn_blank_plot</a></td>
+<td>
+Draws a blank plot with tickmarks pointing inward.
+</td>
+</tr>
+<!--gsn_contour-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_contour.html">
+gsn_contour</a></td>
+<td>
+Creates and draws a contour plot.
+</td>
+</tr>
+<!--gsn_contour_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_contour_map.html">
+gsn_contour_map</a></td>
+<td>
+Creates and draws a contour plot over a map.
+</td>
+</tr>
+<!--gsn_contour_shade-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_contour_shade.html">
+gsn_contour_shade</a></td>
+<td>
+Shades contour regions given low and/or high values using colors or patterns.
+</td>
+</tr>
+<!--gsn_coordinates-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_coordinates.html">
+gsn_coordinates</a></td>
+<td>
+Draws or attaches the data coordinate locations on the given plot as grid lines or markers.
+</td>
+</tr>
+<!--gsn_create_labelbar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_create_labelbar.html">
+gsn_create_labelbar</a></td>
+<td>
+Creates a labelbar.
+</td>
+</tr>
+<!--gsn_create_legend-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_create_legend.html">
+gsn_create_legend</a></td>
+<td>
+Creates a legend.
+</td>
+</tr>
+<!--gsn_create_text-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_create_text.html">
+gsn_create_text</a></td>
+<td>
+Creates text strings.
+</td>
+</tr>
+<!--gsn_csm_attach_zonal_means-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_attach_zonal_means.html">
+gsn_csm_attach_zonal_means</a></td>
+<td>
+Attaches a zonal means plot to a contour/map plot.
+</td>
+</tr>
+<!--gsn_csm_blank_plot-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_blank_plot.html">
+gsn_csm_blank_plot</a></td>
+<td>
+Draws a blank plot with tickmarks pointing outward.
+</td>
+</tr>
+<!--gsn_csm_contour-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_contour.html">
+gsn_csm_contour</a></td>
+<td>
+Creates and draws a contour plot.
+</td>
+</tr>
+<!--gsn_csm_contour_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_contour_map.html">
+gsn_csm_contour_map</a></td>
+<td>
+Creates and draws a contour plot over a map.
+</td>
+</tr>
+<!--gsn_csm_contour_map_ce-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_contour_map_ce.html">
+gsn_csm_contour_map_ce</a></td>
+<td>
+Creates and draws a contour plot over a cylindrical equidistant map.
+</td>
+</tr>
+<!--gsn_csm_contour_map_overlay-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_contour_map_overlay.html">
+gsn_csm_contour_map_overlay</a></td>
+<td>
+Creates and draws two contour plots over a map.
+</td>
+</tr>
+<!--gsn_csm_contour_map_polar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_contour_map_polar.html">
+gsn_csm_contour_map_polar</a></td>
+<td>
+Creates and draws a contour plot over a polar stereographic map.
+</td>
+</tr>
+<!--gsn_csm_hov-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_hov.html">
+gsn_csm_hov</a></td>
+<td>
+Creates and draws a Hovmueller (time vs. longitude) plot.
+</td>
+</tr>
+<!--gsn_csm_lat_time-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_lat_time.html">
+gsn_csm_lat_time</a></td>
+<td>
+Creates and draws a latitude versus time plot.
+</td>
+</tr>
+<!--gsn_csm_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_map.html">
+gsn_csm_map</a></td>
+<td>
+Creates and draws a map.
+</td>
+</tr>
+<!--gsn_csm_map_ce-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_map_ce.html">
+gsn_csm_map_ce</a></td>
+<td>
+Creates and draws a cylindrical equidistant map.
+</td>
+</tr>
+<!--gsn_csm_map_polar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_map_polar.html">
+gsn_csm_map_polar</a></td>
+<td>
+Creates and draws a polar stereographic map.
+</td>
+</tr>
+<!--gsn_csm_pres_hgt-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_pres_hgt.html">
+gsn_csm_pres_hgt</a></td>
+<td>
+Creates and draws a pressure/height plot.
+</td>
+</tr>
+<!--gsn_csm_pres_hgt_streamline-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_pres_hgt_streamline.html">
+gsn_csm_pres_hgt_streamline</a></td>
+<td>
+Creates and draws a pressure/height contour plot overlaid with streamlines.
+</td>
+</tr>
+<!--gsn_csm_pres_hgt_vector-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_pres_hgt_vector.html">
+gsn_csm_pres_hgt_vector</a></td>
+<td>
+Creates and draws a pressure/height contour plot overlaid with vectors.
+</td>
+</tr>
+<!--gsn_csm_streamline-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_streamline.html">
+gsn_csm_streamline</a></td>
+<td>
+Creates and draws a streamline plot.
+</td>
+</tr>
+<!--gsn_csm_streamline_contour_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_streamline_contour_map.html">
+gsn_csm_streamline_contour_map</a></td>
+<td>
+Creates and draws streamlines over a contour plot over a map.
+</td>
+</tr>
+<!--gsn_csm_streamline_contour_map_ce-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_streamline_contour_map_ce.html">
+gsn_csm_streamline_contour_map_ce</a></td>
+<td>
+Creates and draws streamlines over a contour plot over a cylindrical equidistant map.
+</td>
+</tr>
+<!--gsn_csm_streamline_contour_map_polar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_streamline_contour_map_polar.html">
+gsn_csm_streamline_contour_map_polar</a></td>
+<td>
+Creates and draws streamlines over a contour plot over a polar stereographic map.
+</td>
+</tr>
+<!--gsn_csm_streamline_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_streamline_map.html">
+gsn_csm_streamline_map</a></td>
+<td>
+Creates and draws a streamline plot over a map.
+</td>
+</tr>
+<!--gsn_csm_streamline_map_ce-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_streamline_map_ce.html">
+gsn_csm_streamline_map_ce</a></td>
+<td>
+Creates and draws a streamline plot over a cylindrical equidistant map.
+</td>
+</tr>
+<!--gsn_csm_streamline_map_polar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_streamline_map_polar.html">
+gsn_csm_streamline_map_polar</a></td>
+<td>
+Creates and draws a streamline plot over a polar stereographic map.
+</td>
+</tr>
+<!--gsn_csm_streamline_scalar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_streamline_scalar.html">
+gsn_csm_streamline_scalar</a></td>
+<td>
+Creates and draws a streamline plot, using a scalar field to color the streamlines.
+</td>
+</tr>
+<!--gsn_csm_streamline_scalar_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_streamline_scalar_map.html">
+gsn_csm_streamline_scalar_map</a></td>
+<td>
+Creates and draws a streamline plot over a map, using a scalar field to color the streamlines.
+</td>
+</tr>
+<!--gsn_csm_streamline_scalar_map_ce-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_streamline_scalar_map_ce.html">
+gsn_csm_streamline_scalar_map_ce</a></td>
+<td>
+Creates and draws a streamline plot over a cylindrical equidistant map, using a scalar field to color the streamlines.
+</td>
+</tr>
+<!--gsn_csm_streamline_scalar_map_polar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_streamline_scalar_map_polar.html">
+gsn_csm_streamline_scalar_map_polar</a></td>
+<td>
+Creates and draws a streamline plot over a polar stereographic map, using a scalar field to color the streamlines.
+</td>
+</tr>
+<!--gsn_csm_time_lat-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_time_lat.html">
+gsn_csm_time_lat</a></td>
+<td>
+Creates and draws a time versus latitude plot.
+</td>
+</tr>
+<!--gsn_csm_vector-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_vector.html">
+gsn_csm_vector</a></td>
+<td>
+Creates and draws a vector plot.
+</td>
+</tr>
+<!--gsn_csm_vector_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_vector_map.html">
+gsn_csm_vector_map</a></td>
+<td>
+Creates and draws a vector plot over a map.
+</td>
+</tr>
+<!--gsn_csm_vector_map_ce-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_vector_map_ce.html">
+gsn_csm_vector_map_ce</a></td>
+<td>
+Creates and draws a vector plot over a cylindrical equidistant map.
+</td>
+</tr>
+<!--gsn_csm_vector_map_polar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_vector_map_polar.html">
+gsn_csm_vector_map_polar</a></td>
+<td>
+Creates and draws a vector plot over a polar stereographic map.
+</td>
+</tr>
+<!--gsn_csm_vector_scalar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_vector_scalar.html">
+gsn_csm_vector_scalar</a></td>
+<td>
+Creates and draws a vector plot, and uses a scalar field to draw a separate contour plot or color the vectors.
+</td>
+</tr>
+<!--gsn_csm_vector_scalar_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_vector_scalar_map.html">
+gsn_csm_vector_scalar_map</a></td>
+<td>
+Creates and draws a vector plot over a map, and uses a scalar field to draw a separate contour plot or color the vectors.
+</td>
+</tr>
+<!--gsn_csm_vector_scalar_map_ce-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_vector_scalar_map_ce.html">
+gsn_csm_vector_scalar_map_ce</a></td>
+<td>
+Creates and draws a vector plot over a cylindrical equidistant map projection, and uses a scalar field to draw a separate contour plot or color the vectors.
+</td>
+</tr>
+<!--gsn_csm_vector_scalar_map_polar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_vector_scalar_map_polar.html">
+gsn_csm_vector_scalar_map_polar</a></td>
+<td>
+Creates and draws a vector plot over a polar stereographic map projection, and uses a scalar field to draw a separate contour plot or color the vectors.
+</td>
+</tr>
+<!--gsn_csm_x2y-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_x2y.html">
+gsn_csm_x2y</a></td>
+<td>
+Creates and draws an XY plot with two different X axes.
+</td>
+</tr>
+<!--gsn_csm_x2y2-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_x2y2.html">
+gsn_csm_x2y2</a></td>
+<td>
+Creates and draws an XY plot with two different XY axis pairs.
+</td>
+</tr>
+<!--gsn_csm_xy-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_xy.html">
+gsn_csm_xy</a></td>
+<td>
+Creates and draws an XY plot.
+</td>
+</tr>
+<!--gsn_csm_xy2-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_xy2.html">
+gsn_csm_xy2</a></td>
+<td>
+Creates and draws an XY plot with two different Y axes.
+</td>
+</tr>
+<!--gsn_csm_xy3-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_xy3.html">
+gsn_csm_xy3</a></td>
+<td>
+Creates and draws an XY plot with three different Y axes.
+</td>
+</tr>
+<!--gsn_csm_y-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_csm_y.html">
+gsn_csm_y</a></td>
+<td>
+Creates and draws an XY plot, using index values for the X axis.
+</td>
+</tr>
+<!--gsn_histogram-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_histogram.html">
+gsn_histogram</a></td>
+<td>
+Draws a histogram plot on the given workstation.
+</td>
+</tr>
+<!--gsn_labelbar_ndc-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_labelbar_ndc.html">
+gsn_labelbar_ndc</a></td>
+<td>
+Draws a labelbar on the given workstation.
+</td>
+</tr>
+<!--gsn_legend_ndc-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_legend_ndc.html">
+gsn_legend_ndc</a></td>
+<td>
+Draws a legend on the given workstation.
+</td>
+</tr>
+<!--gsn_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_map.html">
+gsn_map</a></td>
+<td>
+Creates and draws a map.
+</td>
+</tr>
+<!--gsn_open_wks-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_open_wks.html">
+gsn_open_wks</a></td>
+<td>
+Opens a workstation on which to draw graphics.
+</td>
+</tr>
+<!--gsn_panel-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_panel.html">
+gsn_panel</a></td>
+<td>
+Draws multiple plots of identical size on a single frame.
+</td>
+</tr>
+<!--gsn_polygon-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_polygon.html">
+gsn_polygon</a></td>
+<td>
+Draws a filled polygon on the given plot.
+</td>
+</tr>
+<!--gsn_polygon_ndc-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_polygon_ndc.html">
+gsn_polygon_ndc</a></td>
+<td>
+Draws a filled polygon on the given workstation.
+</td>
+</tr>
+<!--gsn_polyline-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_polyline.html">
+gsn_polyline</a></td>
+<td>
+Draws a polyline on the given plot.
+</td>
+</tr>
+<!--gsn_polyline_ndc-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_polyline_ndc.html">
+gsn_polyline_ndc</a></td>
+<td>
+Draws a polyline on the given workstation.
+</td>
+</tr>
+<!--gsn_polymarker-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_polymarker.html">
+gsn_polymarker</a></td>
+<td>
+Draws polymarkers on the given plot.
+</td>
+</tr>
+<!--gsn_polymarker_ndc-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_polymarker_ndc.html">
+gsn_polymarker_ndc</a></td>
+<td>
+Draws polymarkers on the given workstation.
+</td>
+</tr>
+<!--gsn_streamline-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_streamline.html">
+gsn_streamline</a></td>
+<td>
+Creates and draws a streamline plot.
+</td>
+</tr>
+<!--gsn_streamline_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_streamline_map.html">
+gsn_streamline_map</a></td>
+<td>
+Creates and draws a streamline plot over a map.
+</td>
+</tr>
+<!--gsn_streamline_scalar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_streamline_scalar.html">
+gsn_streamline_scalar</a></td>
+<td>
+Creates and draws a streamline plot colored by a given scalar field.
+</td>
+</tr>
+<!--gsn_streamline_scalar_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_streamline_scalar_map.html">
+gsn_streamline_scalar_map</a></td>
+<td>
+Creates and draws a streamline plot over a map, and colors the streamlines using the given scalar field.
+</td>
+</tr>
+<!--gsn_table-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_table.html">
+gsn_table</a></td>
+<td>
+Draws a table with text.
+</td>
+</tr>
+<!--gsn_text-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_text.html">
+gsn_text</a></td>
+<td>
+Draws text strings on the given plot.
+</td>
+</tr>
+<!--gsn_text_ndc-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_text_ndc.html">
+gsn_text_ndc</a></td>
+<td>
+Draws text strings on the given workstation.
+</td>
+</tr>
+<!--gsn_vector-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_vector.html">
+gsn_vector</a></td>
+<td>
+Creates and draws a vector plot.
+</td>
+</tr>
+<!--gsn_vector_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_vector_map.html">
+gsn_vector_map</a></td>
+<td>
+Creates and draws a vector plot over a map.
+</td>
+</tr>
+<!--gsn_vector_scalar-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_vector_scalar.html">
+gsn_vector_scalar</a></td>
+<td>
+Creates and draws a vector plot colored by a given scalar field.
+</td>
+</tr>
+<!--gsn_vector_scalar_map-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_vector_scalar_map.html">
+gsn_vector_scalar_map</a></td>
+<td>
+Creates and draws a vector plot over a map, and colors the vectors using the given scalar field.
+</td>
+</tr>
+<!--gsn_xy-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_xy.html">
+gsn_xy</a></td>
+<td>
+Creates and draws an XY plot.
+</td>
+</tr>
+<!--gsn_y-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/gsn_y.html">
+gsn_y</a></td>
+<td>
+Creates and draws an XY plot, using index values for the X axis.
+</td>
+</tr>
+<!--infoTimeStamp-->
+<tr>
+<td valign=top>
+<a href="Shea_util/infoTimeStamp.html">
+infoTimeStamp</a></td>
+<td>
+Draws two text strings at the bottom of the workstation to indicate the time the plot was created and other information.
+</td>
+</tr>
+<!--maximize_output-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/maximize_output.html">
+maximize_output</a></td>
+<td>
+Maximizes the sizes of a series of plots drawn in a single frame.
+</td>
+</tr>
+<!--msgValOutline-->
+<tr>
+<td valign=top>
+<a href="Shea_util/msgValOutline.html">
+msgValOutline</a></td>
+<td>
+Draws an outline around missing data in vector and streamline plots.
+</td>
+</tr>
+<!--ngezlogo-->
+<tr>
+<td valign=top>
+<a href="Built-in/ngezlogo.html">
+ngezlogo</a></td>
+<td>
+Draws the NCAR logo in the lower right corner of the given workstation.
+</td>
+</tr>
+<!--nggetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/nggetp.html">
+nggetp</a></td>
+<td>
+Retrieves values for various parameters for the NCAR <a href="Built-in/ngezlogo.html"><strong>ngezlogo</strong></a> procedure.
+</td>
+</tr>
+<!--nglogo-->
+<tr>
+<td valign=top>
+<a href="Built-in/nglogo.html">
+nglogo</a></td>
+<td>
+Draws various NCAR and UCAR logos on the given workstation.
+</td>
+</tr>
+<!--ngsetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/ngsetp.html">
+ngsetp</a></td>
+<td>
+Sets values for various parameters for the NCAR <a href="Built-in/ngezlogo.html"><strong>ngezlogo</strong></a> procedure.
+</td>
+</tr>
+<!--NhlAddAnnotation-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlAddAnnotation.html">
+NhlAddAnnotation</a></td>
+<td>
+Add annotations to a plot object as an external annotation.
+</td>
+</tr>
+<!--NhlAddOverlay-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlAddOverlay.html">
+NhlAddOverlay</a></td>
+<td>
+Overlays one plot object on another.
+</td>
+</tr>
+<!--NhlAddPrimitive-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlAddPrimitive.html">
+NhlAddPrimitive</a></td>
+<td>
+Adds a <a href="../HLUs/Classes/Primitive.html"><strong>Primitive</strong></a> object to an existing plot.
+</td>
+</tr>
+<!--NhlDataPolygon-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlDataPolygon.html">
+NhlDataPolygon</a></td>
+<td>
+Draws a polygon using data coordinates.
+</td>
+</tr>
+<!--NhlDataPolyline-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlDataPolyline.html">
+NhlDataPolyline</a></td>
+<td>
+Draws a polyline using data coordinates.
+</td>
+</tr>
+<!--NhlDataPolymarker-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlDataPolymarker.html">
+NhlDataPolymarker</a></td>
+<td>
+Draws polymarkers using data coordinates.
+</td>
+</tr>
+<!--NhlDraw-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlDraw.html">
+NhlDraw</a></td>
+<td>
+Draws the given graphical objects.
+</td>
+</tr>
+<!--NhlNDCPolygon-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlNDCPolygon.html">
+NhlNDCPolygon</a></td>
+<td>
+Draws a polygon using <a href="../Graphics/ndc.html">NDC</a> (Normalized Device Coordinate) units.
+</td>
+</tr>
+<!--NhlNDCPolyline-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlNDCPolyline.html">
+NhlNDCPolyline</a></td>
+<td>
+Draws a polyline using <a href="../Graphics/ndc.html">NDC</a> (Normalized Device Coordinate) units.
+</td>
+</tr>
+<!--NhlNDCPolymarker-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlNDCPolymarker.html">
+NhlNDCPolymarker</a></td>
+<td>
+Draws polymarkers using <a href="../Graphics/ndc.html">NDC</a> (Normalized Device Coordinate) units.
+</td>
+</tr>
+<!--NhlNewDashPattern-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlNewDashPattern.html">
+NhlNewDashPattern</a></td>
+<td>
+Adds new dash patterns to the existing <a href="../Graphics/dash_patterns.html">table of dash patterns</a>.
+</td>
+</tr>
+<!--NhlNewMarker-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlNewMarker.html">
+NhlNewMarker</a></td>
+<td>
+Adds new markers to the existing <a href="../Graphics/marker_styles.html">table of markers</a>.
+</td>
+</tr>
+<!--NhlRemoveAnnotation-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlRemoveAnnotation.html">
+NhlRemoveAnnotation</a></td>
+<td>
+Remove annotations from the plot they are registered in.
+</td>
+</tr>
+<!--NhlRemoveOverlay-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlRemoveOverlay.html">
+NhlRemoveOverlay</a></td>
+<td>
+Removes one or more plots from an overlay.
+</td>
+</tr>
+<!--NhlRemovePrimitive-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlRemovePrimitive.html">
+NhlRemovePrimitive</a></td>
+<td>
+Removes one or more primitives from the given <a href="../HLUs/Classes/Transform.html"><strong>Transform</strong></a> object.
+</td>
+</tr>
+<!--NhlSetDashPattern-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlSetDashPattern.html">
+NhlSetDashPattern</a></td>
+<td>
+Sets the dash patterns for a given list of dash pattern indexes and workstations.
+</td>
+</tr>
+<!--NhlSetMarker-->
+<tr>
+<td valign=top>
+<a href="Built-in/NhlSetMarker.html">
+NhlSetMarker</a></td>
+<td>
+Sets the markers for a given list of marker indexes and workstations.
+</td>
+</tr>
+<!--overlay-->
+<tr>
+<td valign=top>
+<a href="Built-in/overlay.html">
+overlay</a></td>
+<td>
+Overlays one plot object on another.
+</td>
+</tr>
+<!--paleo_outline-->
+<tr>
+<td valign=top>
+<a href="Built-in/paleo_outline.html">
+paleo_outline</a></td>
+<td>
+Creates continental outlines from model orography data.
+</td>
+</tr>
+<!--pie_chart-->
+<tr>
+<td valign=top>
+<a href="Shea_util/pie_chart.html">
+pie_chart</a></td>
+<td>
+Creates a basic pie chart.
+</td>
+</tr>
+<!--reset_device_coordinates-->
+<tr>
+<td valign=top>
+<a href="../Graphics/Interfaces/reset_device_coordinates.html">
+reset_device_coordinates</a></td>
+<td>
+Resets the PS/PDF device coordinates back to their default values.
+</td>
+</tr>
+<!--setColorContourClear-->
+<tr>
+<td valign=top>
+<a href="Shea_util/setColorContourClear.html">
+setColorContourClear</a></td>
+<td>
+Sets the color contours between two given levels to transparent.
+</td>
+</tr>
+<!--ShadeCOI-->
+<tr>
+<td valign=top>
+<a href="Shea_util/ShadeCOI.html">
+ShadeCOI</a></td>
+<td>
+Adds the cone of influence as a shaded polygon.
+</td>
+</tr>
+<!--ShadeGeLeContour-->
+<tr>
+<td valign=top>
+<a href="Shea_util/ShadeGeLeContour.html">
+ShadeGeLeContour</a></td>
+<td>
+Shades contour regions given low and high values and a shade pattern.<br> (Deprecated. Use <a href="../Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>.)
+</td>
+</tr>
+<!--ShadeGtContour-->
+<tr>
+<td valign=top>
+<a href="Shea_util/ShadeGtContour.html">
+ShadeGtContour</a></td>
+<td>
+Shades contour regions above a given value with the given fill pattern.<br> (Deprecated. Use <a href="../Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>.)
+</td>
+</tr>
+<!--ShadeLtContour-->
+<tr>
+<td valign=top>
+<a href="Shea_util/ShadeLtContour.html">
+ShadeLtContour</a></td>
+<td>
+Shades contour regions below a given value with the given fill pattern.<br> (Deprecated. Use <a href="../Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>.)
+</td>
+</tr>
+<!--ShadeLtGtContour-->
+<tr>
+<td valign=top>
+<a href="Shea_util/ShadeLtGtContour.html">
+ShadeLtGtContour</a></td>
+<td>
+Shades contour regions below a given value and above a given value with the specified fill patterns.<br> (Deprecated. Use <a href="../Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>.)
+</td>
+</tr>
+<!--simple_legend-->
+<tr>
+<td valign=top>
+<a href="Shea_util/simple_legend.html">
+simple_legend</a></td>
+<td>
+Creates a legend based on user supplied resources.
+</td>
+</tr>
+<!--simple_legend_ndc-->
+<tr>
+<td valign=top>
+<a href="Shea_util/simple_legend_ndc.html">
+simple_legend_ndc</a></td>
+<td>
+Creates a legend in NDC space based on user supplied resources.
+</td>
+</tr>
+<!--skewT_BackGround-->
+<tr>
+<td valign=top>
+<a href="Skewt_func/skewT_BackGround.html">
+skewT_BackGround</a></td>
+<td>
+Creates a background chart for Skew T, Log P plotting.
+</td>
+</tr>
+<!--skewT_PlotData-->
+<tr>
+<td valign=top>
+<a href="Skewt_func/skewT_PlotData.html">
+skewT_PlotData</a></td>
+<td>
+Plot a sounding and (optionally) winds on Skew T, Log P charts created by <a href="Skewt_func/skewT_BackGround.html"><strong>skewT_BackGround</strong></a>.
+</td>
+</tr>
+<!--symMinMaxPlt-->
+<tr>
+<td valign=top>
+<a href="Contributed/symMinMaxPlt.html">
+symMinMaxPlt</a></td>
+<td>
+Calculates the minimum/maximum values for a variable and uses <a href="Built-in/nice_mnmxintvl.html"><strong>nice_mnmxintvl</strong></a> to calculate the symmetric contour interval.
+</td>
+</tr>
+<!--tdclrs-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdclrs.html">
+tdclrs</a></td>
+<td>
+Defines a set of colors for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines.
+</td>
+</tr>
+<!--tdctri-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdctri.html">
+tdctri</a></td>
+<td>
+Cuts the triangles in a triangle list with a plane perpendicular to an axis (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdcudp-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdcudp.html">
+tdcudp</a></td>
+<td>
+Not yet implemented.
+</td>
+</tr>
+<!--tdcurv-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdcurv.html">
+tdcurv</a></td>
+<td>
+Draws the projection of a curve defined by an array of points in 3-space.
+</td>
+</tr>
+<!--tddtri-->
+<tr>
+<td valign=top>
+<a href="Built-in/tddtri.html">
+tddtri</a></td>
+<td>
+Draws triangles defined by a triangle list (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdez2d-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdez2d.html">
+tdez2d</a></td>
+<td>
+Draws a surface on the specified workstation.
+</td>
+</tr>
+<!--tdez3d-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdez3d.html">
+tdez3d</a></td>
+<td>
+Draws an isosurface on the specified workstation.
+</td>
+</tr>
+<!--tdgetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdgetp.html">
+tdgetp</a></td>
+<td>
+Retrieves <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> parameter values.
+</td>
+</tr>
+<!--tdgrds-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdgrds.html">
+tdgrds</a></td>
+<td>
+Draws perimeters, ticks, and grid lines on the six sides of a box (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdgrid-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdgrid.html">
+tdgrid</a></td>
+<td>
+Draws a grid on a particular face of a box in 3-space (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdgtrs-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdgtrs.html">
+tdgtrs</a></td>
+<td>
+Gets the definition of a specified rendering style (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdinit-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdinit.html">
+tdinit</a></td>
+<td>
+Defines eye position, line of sight, up direction, and stereo flag for selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines.
+</td>
+</tr>
+<!--tditri-->
+<tr>
+<td valign=top>
+<a href="Built-in/tditri.html">
+tditri</a></td>
+<td>
+Adds triangles defining an isosurface to a triangle list (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdlbla-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdlbla.html">
+tdlbla</a></td>
+<td>
+Draws labels for a particular face of a box in 3-space (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdlblp-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdlblp.html">
+tdlblp</a></td>
+<td>
+Not yet implemented.
+</td>
+</tr>
+<!--tdlbls-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdlbls.html">
+tdlbls</a></td>
+<td>
+Draws labels for all faces of a box in 3-space (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdline-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdline.html">
+tdline</a></td>
+<td>
+Draws the projection of a solid line in 3-space (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdlndp-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdlndp.html">
+tdlndp</a></td>
+<td>
+Not yet implemented.
+</td>
+</tr>
+<!--tdlnpa-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdlnpa.html">
+tdlnpa</a></td>
+<td>
+Draws the projection of a line joining two points in the reference parallelogram (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdlpdp-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdlpdp.html">
+tdlpdp</a></td>
+<td>
+Not yet implemented.
+</td>
+</tr>
+<!--tdmtri-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdmtri.html">
+tdmtri</a></td>
+<td>
+Adds triangles defining a 3D marker to a triangle list for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines.
+</td>
+</tr>
+<!--tdotri-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdotri.html">
+tdotri</a></td>
+<td>
+Orders the triangles in a triangle list for proper rendering (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdpara-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdpara.html">
+tdpara</a></td>
+<td>
+Defines the reference parallelogram for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines.
+</td>
+</tr>
+<!--tdplch-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdplch.html">
+tdplch</a></td>
+<td>
+Draws a string in the plane of the reference parallelogram (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdprpa-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdprpa.html">
+tdprpa</a></td>
+<td>
+Retrieves the coordinates of a projection in the projection plane, given the parallelogram coordinates of a point (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdprpi-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdprpi.html">
+tdprpi</a></td>
+<td>
+Retrieves the parallelogram coordinates of a point in the reference parallelogram, given a point in the projection plane (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines.)
+</td>
+</tr>
+<!--tdprpt-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdprpt.html">
+tdprpt</a></td>
+<td>
+Retrieves the coordinates of its projection in the projection plane, given the coordinates of a point in 3-space (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdsetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdsetp.html">
+tdsetp</a></td>
+<td>
+Sets <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> parameter values.
+</td>
+</tr>
+<!--tdsort-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdsort.html">
+tdsort</a></td>
+<td>
+Sorts an array (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdstri-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdstri.html">
+tdstri</a></td>
+<td>
+Adds triangles defining a simple surface to a triangle list (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdstrs-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdstrs.html">
+tdstrs</a></td>
+<td>
+Sets the values defining a selected rendering style (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--tdttri-->
+<tr>
+<td valign=top>
+<a href="Built-in/tdttri.html">
+tdttri</a></td>
+<td>
+Adds triangles defining a trajectory to a triangle list (for use with selected <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">TDPACK</a> routines).
+</td>
+</tr>
+<!--WindRoseBasic-->
+<tr>
+<td valign=top>
+<a href="Wind_rose/WindRoseBasic.html">
+WindRoseBasic</a></td>
+<td>
+Plots a basic wind rose.
+</td>
+</tr>
+<!--WindRoseColor-->
+<tr>
+<td valign=top>
+<a href="Wind_rose/WindRoseColor.html">
+WindRoseColor</a></td>
+<td>
+Plot a wind rose diagram where different colors are used to differentiate speed ranges.
+</td>
+</tr>
+<!--WindRoseThickLine-->
+<tr>
+<td valign=top>
+<a href="Wind_rose/WindRoseThickLine.html">
+WindRoseThickLine</a></td>
+<td>
+Plot a black and white wind rose diagram where different line thicknesses are used to differentiate speed ranges.
+</td>
+</tr>
+<!--wmbarb-->
+<tr>
+<td valign=top>
+<a href="Built-in/wmbarb.html">
+wmbarb</a></td>
+<td>
+Draws wind barbs on the given workstation.
+</td>
+</tr>
+<!--wmbarbmap-->
+<tr>
+<td valign=top>
+<a href="Built-in/wmbarbmap.html">
+wmbarbmap</a></td>
+<td>
+Draws wind barbs over maps.
+</td>
+</tr>
+<!--wmdrft-->
+<tr>
+<td valign=top>
+<a href="Built-in/wmdrft.html">
+wmdrft</a></td>
+<td>
+Draws weather front lines on the given workstation.
+</td>
+</tr>
+<!--wmgetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/wmgetp.html">
+wmgetp</a></td>
+<td>
+Retrieves parameter values for selected <a href="http://www.ncarg.ucar.edu//supplements/wmap/index.html">Wmap</a> routines.
+</td>
+</tr>
+<!--wmlabs-->
+<tr>
+<td valign=top>
+<a href="Built-in/wmlabs.html">
+wmlabs</a></td>
+<td>
+Plots special symbols and icons for daily weather.
+</td>
+</tr>
+<!--wmsetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/wmsetp.html">
+wmsetp</a></td>
+<td>
+Sets parameter values for selected <a href="http://www.ncarg.ucar.edu//supplements/wmap/index.html">Wmap</a> routines.
+</td>
+</tr>
+<!--wmstnm-->
+<tr>
+<td valign=top>
+<a href="Built-in/wmstnm.html">
+wmstnm</a></td>
+<td>
+Plots station model data on the given workstation.
+</td>
+</tr>
+<!--wmvect-->
+<tr>
+<td valign=top>
+<a href="Built-in/wmvect.html">
+wmvect</a></td>
+<td>
+Draws vectors on the given workstation.
+</td>
+</tr>
+<!--wmvectmap-->
+<tr>
+<td valign=top>
+<a href="Built-in/wmvectmap.html">
+wmvectmap</a></td>
+<td>
+Draws vectors over maps.
+</td>
+</tr>
+<!--wmvlbl-->
+<tr>
+<td valign=top>
+<a href="Built-in/wmvlbl.html">
+wmvlbl</a></td>
+<td>
+Draws an informational label box for plots produced by <a href="Built-in/wmvect.html"><strong>wmvect</strong></a> or <a href="Built-in/wmvectmap.html"><strong>wmvectmap</strong></a>.
+</td>
+</tr>
+<!--wrf_contour-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_contour.html">
+wrf_contour</a></td>
+<td>
+Creates a contour plot from ARW WRF model output.
+</td>
+</tr>
+<!--wrf_map-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_map.html">
+wrf_map</a></td>
+<td>
+Creates a map background for ARW WRF model data.
+</td>
+</tr>
+<!--wrf_map_overlay-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_map_overlay.html">
+wrf_map_overlay</a></td>
+<td>
+Overlays WRF plot(s) on a WRF-ARW map background (<font color=red>deprecated</font>).
+</td>
+</tr>
+<!--wrf_map_overlays-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_map_overlays.html">
+wrf_map_overlays</a></td>
+<td>
+Overlays contour and vector plots on a WRF-ARW map background.
+</td>
+</tr>
+<!--wrf_map_resources-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_map_resources.html">
+wrf_map_resources</a></td>
+<td>
+Sets map plotting resources based on an input WRF-ARW file.
+</td>
+</tr>
+<!--wrf_map_zoom-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_map_zoom.html">
+wrf_map_zoom</a></td>
+<td>
+Zooms into a portion of the ARW WRF model domain, and creates a map background (<font color=red>deprecated</font>).
+</td>
+</tr>
+<!--wrf_overlay-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_overlay.html">
+wrf_overlay</a></td>
+<td>
+Overlays multiple plots created from other WRF-ARW plot functions (<font color=red>deprecated</font>).
+</td>
+</tr>
+<!--wrf_overlays-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_overlays.html">
+wrf_overlays</a></td>
+<td>
+Overlays multiple plots, created from other ARW WRF plot functions.
+</td>
+</tr>
+<!--wrf_vector-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_vector.html">
+wrf_vector</a></td>
+<td>
+Creates a vector plot from ARW WRF model output.
+</td>
+</tr>
+
+</table><p>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/graphics_routines.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:25 GMT -->
+</html>

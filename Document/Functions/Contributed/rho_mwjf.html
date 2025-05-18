@@ -1,0 +1,556 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/rho_mwjf.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:09 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (oceanography)">
+<meta name="keywords" content="rho_mwjf">
+<title>rho_mwjf</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../ocean.html">Oceanography</a>
+<br>
+<h1>rho_mwjf</h1>
+
+<p>
+Computes ocean water density given a specified range for potential
+temperature (deg Celsius) and salinity (psu).
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function rho_mwjf (
+		t2d [*][*] : numeric,  
+		s2d [*][*] : numeric,  
+		depth  [1] : numeric   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  <a href="../Built-in/typeof.html"><strong>typeof</strong></a>(t2d)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>t2d</em>
+<p class=indent>A two-dimensional array of temperature values (must be deg C).
+</p>
+<em>s2d</em>
+<p class=indent>A two-dimensional array of the same size as <em>t2d</em> containing
+salinity values (must be psu).
+</p>
+<em>depth</em>
+<p class=indent>A scalar value for depth at which to compute density (meters).
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The results are returned in an array of the same type and size as
+<em>t2d</em>.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function computes potential density for a specifed range or
+potential T and Salt. It can also be used for water mass T-S
+diagrams (see the example below).
+<p>
+
+This function is based on Steve Yeager's "Rhoalphabeta", which
+uses the CESM3 POP equation of state "mwjf" calculation to compute
+density.
+<p>
+<B><font color="red">Note: </font></B>
+In September 2009, Dr. Arne Melson [Norwegian Meteorological Institute, 
+R & D - Oceanography ] noted that the results were applicable
+for computing surface potential density only, i.e., where depth=0. 
+A modification has since been applied [version 5.2.0] to accurately 
+compute all density surfaces (depth >= 0). 
+<p>
+
+References:
+
+<pre>
+  Levitus, S., R. Burgett, and T.P. Boyer, World Ocean Atlas
+    1994, Volume 3: Salinity, NOAA Atlas NESDIS 3, US Dept. of
+    Commerce, 1994.
+  Levitus, S. and T.P. Boyer, World Ocean Atlas 1994,
+    Volume 4: Temperature, NOAA Atlas NESDIS 4, US Dept. of
+    Commerce, 1994.
+  Dukowicz, J. K., 2000: Reduction of Pressure and Pressure
+    Gradient Errors in Ocean Simulations, J. Phys. Oceanogr.,
+    submitted.
+</pre>
+<p>
+
+
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<pre>
+; read potential temp (TEMP), salinity (SALT)
+; compute potential density (PD) for specified range PD(t,s)
+; (use ncl function based yeager's algorithm for rho computation)
+; assumes annual and zonally avgeraged input data set (i.e, one time slice)
+; used k.lindsay's "za" for zonal avg -- already binned into basins
+; plots temp vs salt (scatter plot), pd overlay
+
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"  
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"  
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"  
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  
+
+begin
+; ================================>  ; PARAMETERS
+  case    = "PHC2_gx1v3"
+  ocnfile = "za_PHC2_T_S_gx1v3.nc"
+
+  depth_min = 14895.82   ; in cm, depth of first layer to be included 
+  depth_max =  537499.9
+;
+; plot limits
+;
+  smincn = 32.5 
+  smaxcn = 37.0
+  tmincn = -2.
+  tmaxcn = 22.
+;
+; Choose basin index
+;
+; 0 = global  1 = southern ocean 2 = pacific 3 = indian 6 = atlantic 
+; 8 = labrador 9 = GIN 10 = arctic
+;
+  bi = 2 
+
+;=====> basin check 
+
+  if(bi.lt.0.or.bi.gt.10) then
+    <a href="../Built-in/print.html"><strong>print</strong></a>("basin index "+ bi + " not supported")
+    exit
+  end if
+
+  if(bi.eq.0) then
+    basin = "Global"
+    blab = "global"
+  end if
+  if(bi.eq.1) then
+      basin = "Southern Ocean"
+      blab = "so"
+  end if
+  if(bi.eq.2) then
+    basin = "Pacific Ocean"
+    blab = "pacific"
+  end if
+  if(bi.eq.3) then
+    basin = "Indian Ocean"
+    blab = "indian"
+  end if
+  if(bi.eq.6) then
+    basin = "Atlantic Ocean"
+    blab = "atlantic"
+  end if
+  if(bi.eq.8) then
+    basin = "Labrador Sea"
+    blab = "lab"
+  end if
+  if(bi.eq.9) then
+    basin = "GIN Sea"
+    blab = "gin"
+  end if
+  if(bi.eq.10) then
+    basin = "Arctic Ocean"
+    blab = "arctic"
+  end if
+
+;=====> initial resource settings
+
+  wks = <a href="../../Graphics/Interfaces/gsn_open_wks.html"><strong>gsn_open_wks</strong></a>("ps","TS_diagram")    ; Open a Postscript file
+
+;===== data 
+  focn = <a href="../Built-in/addfile.html"><strong>addfile</strong></a>(ocnfile, "r")
+  salt = focn->SALT(0,:,{depth_min:depth_max},:)   ;(basins, z_t, lat_t)
+  temp = focn->TEMP(0,:,{depth_min:depth_max},:)
+
+;====section out choice basin
+  temp_ba = temp(bi,:,:)
+  salt_ba = salt(bi,:,:)
+
+;===== put into scatter array format
+  tdata_ba = <a href="../Built-in/ndtooned.html"><strong>ndtooned</strong></a>(temp_ba)
+  sdata_ba = <a href="../Built-in/ndtooned.html"><strong>ndtooned</strong></a>(salt_ba)
+
+  ydata = tdata_ba
+  xdata = sdata_ba
+
+;============== compute potenial density (PD), using rho_mwjf
+;
+; for potential density, depth = 0. (i.e. density as if brought to surface)
+;
+;===========================================================================
+; WARNING: T-S diagrams use POTENTIAL DENSITY... if set depth to something
+; other then 0, then you will be plotting density contours computed for the
+; specified depth layer.
+;===========================================================================
+
+  depth = 0.  ;in meters
+  tspan = <a href="../Built-in/fspan.html"><strong>fspan</strong></a>(tmincn,tmaxcn,51)
+  sspan = <a href="../Built-in/fspan.html"><strong>fspan</strong></a>(smincn,smaxcn,51)
+
+  ; the more points the better... using yeager's numbers
+
+  t_range = <a href="../Built-in/new.html"><strong>new</strong></a>((/51,51/),float)
+  s_range = <a href="../Built-in/new.html"><strong>new</strong></a>((/51,51/),float)
+  t_range = <a href="../Built-in/conform.html"><strong>conform</strong></a>(t_range,tspan,0)
+  s_range = <a href="../Built-in/conform.html"><strong>conform</strong></a>(s_range,sspan,1)
+
+  pd = <strong>rho_mwjf</strong>(t_range,s_range,depth)
+
+  pd!0    = "temp"
+  pd!1    = "salt"
+  pd&temp = tspan
+  pd&salt = sspan
+  pd = 1000.*(pd-1.)        ; Put into kg/m3 pot den units
+
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(pd)
+  <a href="../Built-in/printVarInfo.html"><strong>printVarInfo</strong></a>(pd,"rho_mwjf")
+
+;=================Graphics
+
+;--- scatter plot
+  res                     = True
+  res@<a href="../../Graphics/Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a>             = False
+  res@<a href="../../Graphics/Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a>            = False
+  res@<a href="../../Graphics/Resources/xy.html#xyMarkLineModes"><em>xyMarkLineModes</em></a>     = "Markers"
+  res@<a href="../../Graphics/Resources/xy.html#xyMarkers"><em>xyMarkers</em></a>           = 16
+  res@<a href="../../Graphics/Resources/xy.html#xyMarkerColors"><em>xyMarkerColors</em></a>      = "black"
+  res@<a href="../../Graphics/Resources/pm.html#pmLegendDisplayMode"><em>pmLegendDisplayMode</em></a> = "Never"
+  res@<a href="../../Graphics/Resources/tx.html#txFontHeightF"><em>txFontHeightF</em></a>       = 0.01
+  res@<a href="../../Graphics/Resources/ti.html#tiXAxisString"><em>tiXAxisString</em></a>       = salt@units
+  res@<a href="../../Graphics/Resources/ti.html#tiXAxisFontHeightF"><em>tiXAxisFontHeightF</em></a>  = 0.02
+  res@<a href="../../Graphics/Resources/ti.html#tiYAxisString"><em>tiYAxisString</em></a>       = temp@units
+  res@<a href="../../Graphics/Resources/ti.html#tiYAxisFontHeightF"><em>tiYAxisFontHeightF</em></a>  = 0.02
+  res@<a href="../../Graphics/Resources/tr.html#trXMinF"><em>trXMinF</em></a>             = smincn
+  res@<a href="../../Graphics/Resources/tr.html#trXMaxF"><em>trXMaxF</em></a>             = smaxcn
+  res@<a href="../../Graphics/Resources/tr.html#trYMinF"><em>trYMinF</em></a>             = tmincn
+  res@<a href="../../Graphics/Resources/tr.html#trYMaxF"><em>trYMaxF</em></a>             = tmaxcn
+  res@<a href="../../Graphics/Resources/gsn.html#gsnRightString"><em>gsnRightString</em></a>      = depth_min/100. + "-"+depth_max/100. +"m"
+  res@<a href="../../Graphics/Resources/gsn.html#gsnLeftString"><em>gsnLeftString</em></a>       = basin
+
+  plot = <a href="../../Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a>(wks,xdata,ydata,res)
+
+;----- pd overlay
+  resov                          = True
+  resov@<a href="../../Graphics/Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a>                  = False
+  resov@<a href="../../Graphics/Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a>                 = False
+  resov@<a href="../../Graphics/Resources/cn.html#cnLevelSelectionMode"><em>cnLevelSelectionMode</em></a>     = "AutomaticLevels"
+  resov@<a href="../../Graphics/Resources/cn.html#cnInfoLabelOn"><em>cnInfoLabelOn</em></a>            = "False"
+  resov@<a href="../../Graphics/Resources/cn.html#cnLineLabelPlacementMode"><em>cnLineLabelPlacementMode</em></a> = "Constant"
+  resov@<a href="../../Graphics/Resources/cn.html#cnLineLabelFontHeightF"><em>cnLineLabelFontHeightF</em></a>     = ".02"
+  
+  plotpd = <a href="../../Graphics/Interfaces/gsn_csm_contour.html"><strong>gsn_csm_contour</strong></a>(wks,pd,resov)
+  <a href="../Built-in/overlay.html"><strong>overlay</strong></a>(plot,plotpd)
+
+
+; panel resources
+  pan                     = True
+  pan@<a href="../../Graphics/Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a>         = True
+  pan@<a href="../../Graphics/Resources/gsn.html#gsnPaperOrientation"><em>gsnPaperOrientation</em></a> = "portrait"
+  pan@<a href="../../Graphics/Resources/tx.html#txFontHeightF"><em>txFontHeightF</em></a>       = 0.025
+  pan@<a href="../../Graphics/Resources/tx.html#txString"><em>txString</em></a>            = case + " ANN AVG:  T-S Diagram  "
+  <a href="../../Graphics/Interfaces/gsn_panel.html"><strong>gsn_panel</strong></a>(wks,plot,(/1,1/),pan)
+
+end
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/rho_mwjf.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:09 GMT -->
+</html>

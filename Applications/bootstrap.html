@@ -1,0 +1,691 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/bootstrap.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:05:49 GMT -->
+<head>
+<meta name="description" content="Bootstrapping and Resampling statistical methods."> 
+<TITLE>NCL: Bootstrap and Resampling</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <font size=-1><a href="../index-2.html">NCL Home></a>
+<a href="index-2.html">Application examples></a>
+<a href="list_dataP.html">Data Analysis</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a>
+</font>
+
+<br>
+    <h1>NCL: Bootstrapping and Resampling</h1>
+
+<p>
+<p>
+  <div class=mainimage>
+  <img src="Images/bootstrap_stat_2_1_lg.png" align=left border=0></a>
+  </div>
+
+<p>
+    <div class=text>
+<a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)"><b>Bootstrapping</b></a> 
+is a statistical method that uses data resampling with replacement 
+(see: <b><a href="../Document/Functions/Contributed/generate_sample_indices.html"><strong>generate_sample_indices</strong></a></b>)
+to estimate the robust properties of nearly any statistic. Most commonly, these include
+standard errors and confidence intervals of a population parameter like a mean, median, 
+correlation coefficient or regression coefficient.  Bootstrapping statistics has two 
+attractive attributes: 
+<p>
+<ul>
+<li> It is particularly useful when dealing with small sample sizes. 
+<li> It makes no apriori assumption about the distribution of the sample data.
+</ul>
+<p>
+<b>References:</b>
+<pre>
+Computer Intensive Methods in Statistics 
+   P. Diaconis and B. Efron 
+   Scientific American (1983), 248:116-130  
+   doi:10.1038/scientificamerican0583-116
+   <a href="http://www.nature.com/scientificamerican/journal/v248/n5/pdf/scientificamerican0583-116.pdf"><b>http://www.nature.com/scientificamerican/journal/v248/n5/pdf/scientificamerican0583-116.pdf</b></a>
+   
+An Introduction to the Bootstrap 
+   B. Efron and R.J. Tibshirani, Chapman and Hall (1993) 
+
+Statistical methods for the analysis of simulated and observed climate data
+   Barbara Hennemuth et al (2013)
+   Applied in projects and institutions dealing with climate change impact and adaptation
+   <a href="http://www.climate-service-center.de/imperia/md/content/csc/projekte/csc-report13_englisch_final-mit_umschlag.pdf"> <b>CSC Report 13</b></a>
+   
+Bootstrap Methods and Permutation Tests: Companion Chapter 18 to the Practice of Business Statistics
+   Hesterberg, T. et al (2003)
+   <a href="http://statweb.stanford.edu/~tibs/stat315a/Supplements/bootstrap.pdf"><b>http://statweb.stanford.edu/~tibs/stat315a/Supplements/bootstrap.pdf</b></a>
+
+Climate Time Series Analysis: Classical Statistical and Bootstrap Methods
+   M. Mudelsee (2014) Second edition. Springer, Cham Heidelberg New York Dordrecht London
+   ISBN: 978-3-319-04449-1, e-ISBN: 978-3-319-04450-7
+   doi: 10.1007/978-3-319-04450-7
+   xxxii + 454 pp; Atmospheric and Oceanographic Sciences Library, Vol. 51
+</pre>
+</div> 
+<p>
+<div class=text>
+NCL (6.4.0 ) currently has four bootstrap statistic functions and one bootstrap utility function:
+<p>
+<ul>
+<li> <a href="../Document/Functions/Bootstrap/bootstrap_correl.html"><strong>bootstrap_correl</strong></a>
+<li> <a href="../Document/Functions/Bootstrap/bootstrap_diff.html"><strong>bootstrap_diff</strong></a>
+<li> <a href="../Document/Functions/Bootstrap/bootstrap_estimate.html"><strong>bootstrap_estimate</strong></a>       ; utility 
+<li> <a href="../Document/Functions/Bootstrap/bootstrap_regcoef.html"><strong>bootstrap_regcoef</strong></a>
+<li> <a href="../Document/Functions/Bootstrap/bootstrap_stat.html"><strong>bootstrap_stat</strong></a>
+</ul>
+Some NCL bootstrap functions allow for 
+<a href="https://en.wikipedia.org/wiki/Resampling_(statistics)#Subsampling">
+<b>subsampling</b></a> (<em>n</em><b>&lt</b><em>N</em>) and for sequential blocks (sequences) of values. 
+More involved sampling strategies may require custom codes. A user could extract
+one of the above core functions from the contributed.ncl library and modify as needed.
+</div>
+<div class=text>
+Several of the NCL examples use two 'law school' data sets from Efron and Tibshirani (1993). 
+These contain LSAT (Law School Admission Test) scores and subsequent GPAs (Grade Point Averages).
+One data set, <a href="Data/asc/law_school_82.txt"><b>law_school_82.txt</b></a>, contains the 
+LSAT and GPA for 82 law schools; the second data set, 
+<a href="Data/asc/law_school_15.txt"><b>law_school_15.txt</b></a> contains a random sample 
+from 15 of the 82 schools.  The reason for using these is that WWW-accessible results using both 
+<b>R</b> and <a href="https://www.mathworks.com/examples/statistics/mw/stats-ex84701200-bootstrap-resampling"> <b>Matlab_1</b></a> and
+<a href="http://www.mathworks.com/help/stats/bootstrp.html"><b>Matlab_2</b> </a>
+are readily available for comparison purposes. 
+See: <a href="http://test.www.ncl.ucar.edu/Applications/regress.shtml"><b>regression Example 7</b></a> 
+for a visualization of these files.
+</div> 
+<p>
+    <div class=ex>
+    <!--Resampling-->
+    <a name=ex1></a>
+    <a href="Images/resampling_1_1_lg.png">
+    <img src="Images/resampling_1_1_sm.png" align=left border=2></a>
+    <a href="Images/resampling_1_2_lg.png">
+    <img src="Images/resampling_1_2_sm.png" align=left border=2></a>
+    <a href="Images/resampling_1_3_lg.png">
+    <img src="Images/resampling_1_3_sm.png" align=left border=2></a>
+    <a href="Scripts/resampling_1.html">resampling_1.ncl</a>:
+These distributions of sampling indices illustrate properties of resampling 
+with replacement from a uniform distribution using
+<b><a href="../Document/Functions/Contributed/generate_sample_indices.html"><strong>generate_sample_indices</strong></a></b>. 
+Clearly, a reasonably large <B>N</b> is needed to 'reasonably' sample all combinations.
+    </div>
+<p>
+    <div class=ex>
+    <!--Resampling-->
+    <a name=ex2></a>
+<b>A simple example of using sampling with replacement</b> to derive a bootstrapped mean 
+and 95% confidence limits. Here x(N):
+<pre>
+
+   nBoot =   10000                           
+   xBoot = <a href="../Document/Functions/Built-in/new.html"><strong>new</strong></a> (nBoot, typeof(x))
+   
+   do ns=0,nBoot-1                        ; generate multiple estimates
+      iw = <a href="../Document/Functions/Contributed/generate_sample_indices.html"><strong>generate_sample_indices</strong></a>(N,<b><font color=red>1</font></b>)) ; indices with replacement
+      xBoot(ns) = <a href="../Document/Functions/Built-in/dim_avg_n.html"><strong>dim_avg_n</strong></a>( x(iw), 0 )  ; compute average 
+   end do
+   
+   xAvgBoot = <a href="../Document/Functions/Built-in/dim_avg_n.html"><strong>dim_avg_n</strong></a>(xBoot,0)         ; Averages of bootstrapped samples
+   xStdBoot = <a href="../Document/Functions/Built-in/dim_stddev_n.html"><strong>dim_stddev_n</strong></a>(xBoot,0)      ; Std Dev  "        "        "
+   xStdErrBoot = xStdBoot/nBoot           ; Std. Error of bootstrapped estimates
+   
+   ia = <a href="../Document/Functions/Built-in/dim_pqsort_n.html"><strong>dim_pqsort_n</strong></a>(xBoot, 2, 0)        ; sort bootstrap means into ascending order
+   
+   n025     = <a href="../Document/Functions/Built-in/round.html"><strong>round</strong></a>(0.025*(nBoot-1),3)    ; indices for sorted array
+   n500     = <a href="../Document/Functions/Built-in/round.html"><strong>round</strong></a>(0.500*(nBoot-1),3)                             
+   n975     = <a href="../Document/Functions/Built-in/round.html"><strong>round</strong></a>(0.975*(nBoot-1),3)
+   
+   xBoot_025= xBoot(n025)                 ;  2.5% level
+   xBoot_500= xBoot(n500)                 ; 50.0% level  (median)
+   xBoot_975= xBoot(n975)                 ; 97.5% level
+</pre>
+<p>
+Note: since 'x(N)' is rank one, the following functions could have been used in place of the 
+<b>dim_*_n</b> functions: <a href="../Document/Functions/Built-in/avg.html"><strong>avg</strong></a>, <a href="../Document/Functions/Built-in/stddev.html"><strong>stddev</strong></a> 
+and <a href="../Document/Functions/Built-in/qsort.html"><strong>qsort</strong></a>. Of course, the arguments would have to change accordingly.
+
+    </div>
+
+    <div class=ex>
+    <!--BootStrap-->
+    <a name=ex1></a>
+    <a href="Images/bootstrap_stat_1_1_lg.png">
+    <img src="Images/bootstrap_stat_1_1_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_stat_1_2_lg.png">
+    <img src="Images/bootstrap_stat_1_2_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_stat_1_3_lg.png">
+    <img src="Images/bootstrap_stat_1_3_sm.png" align=left border=2></a>
+
+    <a href="Scripts/bootstrap_stat_1.html">bootstrap_stat_1.ncl</a>: 
+
+These illustrate various properties of the mean (opt@<em>stat</em>=0) 
+using different bootstrap sampling parameters. 
+<p>
+<ul>
+    <li> use the 82-school data set and resample using the full data set (<em>N</em>=82, <em>n</em>=82)  
+    <li> use the 82-school data set and resample using 15-member subsets (<em>N</em>=82, <em>n</em>=15) 
+    <li> use the 15-school data set and resample using only this subset (<em>N</em>=15, <em>n</em>=15)
+</ul>
+In all cases, the bootstrapped estimates are generated using <em>nBoot</em>=1000.
+Each figure contains two histograms. The left (green) histogram show  the
+distribution of the original sample and assorted 'conventional' statistics: 
+sample mean, standard deviation, standard error, t-value and the 2.5% and 97.5% 
+confidence bounds . The right (blue) histogram shows the distribution of 
+bootstrapped sample means; the standard deviation of the bootstrapped means;
+the standard error of the bootstrapped means and the 2.5% and 97.5% 
+bootstrapped values.
+    </div>
+
+    <div class=ex>
+    <!--Bootstrap-->
+    <a name=ex1a></a>
+    <a href="Images/bootstrap_stat_1a_lg.png">
+    <img src="Images/bootstrap_stat_1a_sm.png" align=left border=2></a>
+    <a href="Scripts/bootstrap_stat_1a.html">bootstrap_stat_1a.ncl</a>:
+This is the same as <b>bootstrap_stat_1.ncl</b> except the figure includes
+graphical markers (here, all asterisks) that indicate the location of the bootstrapped 
+low (2.5%), median (50%) and high (97.5%) values. The procedure which attaches 
+the markers to the histogram graphical object is named
+<a href="Scripts/histogram_marker.html"><b>histogram_marker.ncl</b> </a>.
+    </div>
+
+    <div class=ex>
+    <!--Bootstrap-->
+    <a name=ex2></a>
+    <a href="Images/bootstrap_stat_2_1_lg.png">
+    <img src="Images/bootstrap_stat_2_1_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_stat_2_2_lg.png">
+    <img src="Images/bootstrap_stat_2_2_sm.png" align=left border=2></a>
+
+    <a href="Scripts/bootstrap_stat_2.html">bootstrap_stat_2.ncl</a>: 
+Bootstrap January monthly <a href="Data/cdf/Boulder.temp.1897-2014.nc"><b>mean temperatures</b></a>
+(degF; left histogram pair) and May monthly
+<a href="Data/cdf/Boulder.precip.1897-2014.nc"><b>precipitation totals</b></a> (inches)
+totals (right histogram pair) for Boulder, CO for the period 1897-2014. 
+Estimate various properties of the mean. The total sample 
+size for each month is <em>N</em>=114. Here, 30-year sub-samples (<em>n</em>=30)
+are are generated <em>nBoot</em>=1000 times. 
+   </div>
+
+    <div class=ex>
+    <!--BootStrap-->
+    <a name=ex1></a>
+    <a href="Images/bootstrap_correl_1_1_lg.png">
+    <img src="Images/bootstrap_correl_1_1_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_correl_1_2_lg.png">
+    <img src="Images/bootstrap_correl_1_2_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_correl_1_3_lg.png">
+    <img src="Images/bootstrap_correl_1_3_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_correl_1_4_lg.png">
+    <img src="Images/bootstrap_correl_1_4_sm.png" align=left border=2></a>
+
+    <a href="Scripts/bootstrap_correl_1.html">bootstrap_correl_1.ncl</a>: 
+
+These estimate the correlation coefficient between the 82-school LSAT and GPA 
+using classical statistics and via the bootstrap method. <p>
+The first rule of data processing is <b>look at your data</b>; 
+the second rule of data processing is <b>understand your data</b>. 
+This example illustrates two simple approaches.
+
+<ul>
+    <li> a simple line plot of the 82-school LSAT and GPA values 
+    <li> histograms of each variable                             
+    <li> use the 82-school data set and resample using the full data set (<em>N</em>=82, <em>n</em>=82)  
+    <li> use the 82-school data set and resample using 15-member subsets (<em>N</em>=82, <em>n</em>=15) 
+</ul>
+<p>
+The two text boxes show values derived using the original single sample the bootstrap estimates. The latter have used the Fischer z-transform to calculate various statistics. 
+<p>
+    </div>
+
+    <div class=ex>
+    <!--BootStrap-->
+    <a name=ex1></a>
+    <a href="Images/bootstrap_correl_1_5_lg.png">
+    <img src="Images/bootstrap_correl_1_5_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_correl_1_6_lg.png">
+    <img src="Images/bootstrap_correl_1_6_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_correl_1_7_lg.png">
+    <img src="Images/bootstrap_correl_1_7_sm.png" align=left border=2></a>
+
+    <a href="Scripts/bootstrap_correl_1.html">bootstrap_correl_1.ncl</a>: 
+
+This example estimates the correlation coefficient between the 15-school LSAT and GPA 
+using classical statistics and via the bootstrap method. <p>
+This example follows the methodology of the previous example.    
+
+<ul>
+    <li> a simple line plot of the 15-school LSAT and GPA values 
+    <li> histograms of each variable                             
+    <li> Since <em>N</em>=15, only  <em>n</em>=15 is used.
+</ul>
+<p>
+This example (<em>N</em>=15, <em>n</em>=15) 'matches' the Matlab_1 example. 
+<p>
+The two text boxes show values derived using the original single sample the bootstrap estimates. The latter have used the Fischer z-transform to calculate various statistics. 
+<p>
+    </div>
+
+    <div class=ex>
+    <!--Bootstrap-->
+    <a name=ex2></a>
+    <a href="Images/bootstrap_correl_2_1_lg.png">
+    <img src="Images/bootstrap_correl_2_1_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_correl_2_2_lg.png">
+    <img src="Images/bootstrap_correl_2_2_sm.png" align=left border=2></a>
+
+    <a href="Scripts/bootstrap_correl_2.html">bootstrap_correl_2.ncl</a>: 
+<p>
+Correlate the SOI_SIGNAL (Southern Oscillation Index Signal) and monthly temperature 
+anomalies. Show the 2.5% and 97.5% limits derived using 'conventional' (left column) 
+and bootstrap (right column) statistics.  
+<p>
+<b>Reference:</b>
+   Trenberth (1984), "Signal versus Noise in the Southern Oscillation" 
+   Monthly Weather Review 112:326-332 
+    </div>
+
+    <div class=ex>
+    <!--BootStrap-->
+    <a name=ex1></a>
+    <a href="Images/bootstrap_regcoef_1_1_lg.png">
+    <img src="Images/bootstrap_regcoef_1_1_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_regcoef_1_2_lg.png">
+    <img src="Images/bootstrap_regcoef_1_2_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_regcoef_1_3_lg.png">
+    <img src="Images/bootstrap_regcoef_1_3_sm.png" align=left border=2></a>
+
+    <a href="Scripts/bootstrap_regcoef_1.html">bootstrap_regcoef_1.ncl</a>: 
+
+These estimate the linear regression coefficient between the LSAT and GPA. Additional 
+information based upon the original sample is provided via 
+<a href="../Document/Functions/Contributed/regline_stats.html"><strong>regline_stats</strong></a>.
+<ul>
+    <li> use the 82-school data set and resample using the full data set (<em>N</em>=82, <em>n</em>=82)  
+    <li> use the 82-school data set and resample using 15-member subsets (<em>N</em>=82, <em>n</em>=15) 
+    <li> use the 15-school data set and resample using only this subset (<em>N</em>=15, <em>n</em>=15)
+</ul>
+    </div>
+
+    <div class=ex>
+    <!--Bootstrap-->
+    <a name=ex2></a>
+    <a href="Images/bootstrap_regcoef_2_1_lg.png">
+    <img src="Images/bootstrap_regcoef_2_1_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_regcoef_2_2_lg.png">
+    <img src="Images/bootstrap_regcoef_2_2_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_regcoef_2_3_lg.png">
+    <img src="Images/bootstrap_regcoef_2_3_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_regcoef_2_4_lg.png">
+    <img src="Images/bootstrap_regcoef_2_4_sm.png" align=left border=2></a>
+
+    <a href="Scripts/bootstrap_regcoef_2.html">bootstrap_regcoef_2.ncl</a>: 
+Use the <a href="http://hadobs.metoffice.com/hadcrut3/diagnostics/global/nh+sh/"> 
+<b>UKMO global annual temperature anomalies</b></a> 
+to estimate the linear regression coefficient (trend=degC/year).<p><p><p>
+<ul>
+
+    <li> use the <em>N</em>=165 annual values with no sub-sampling (<em>n</em>=<em>N</em>=165); left histogram  
+    <li> use the <em>N</em>=165 annual values with sub-sampling <em>n</em>=30 year; right histogram
+</ul>
+<p> See also: <a href="regress.html"><b>manken_1.ncl</b></a>.
+    </div>
+
+    <div class=ex>
+    <!--Bootstrap-->
+    <a name=ex2></a>
+    <a href="Images/bootstrap_regcoef_3_1_lg.png">
+    <img src="Images/bootstrap_regcoef_3_1_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_regcoef_3_2_lg.png">
+    <img src="Images/bootstrap_regcoef_3_2_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_regcoef_3_3_lg.png">
+    <img src="Images/bootstrap_regcoef_3_3_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_regcoef_3_4_lg.png">
+    <img src="Images/bootstrap_regcoef_3_4_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_regcoef_3_5_lg.png">
+    <img src="Images/bootstrap_regcoef_3_5_sm.png" align=left border=2></a>
+    <p><p><a href="Scripts/bootstrap_regcoef_3.html">bootstrap_regcoef_3.ncl</a>: 
+Read annual temperature values spanning 1500 years (600-2099) from the <b>L</b>arge 
+<b>ENS</b>emble (<a href="https://www2.cesm.ucar.edu/models/experiments/LENS"><b>LENS</b></a>) 
+control run. Plot the time series with the fitted regresions line; the variable 
+distribution and the regression coefficient distributions derived using a 36-year 
+sub-sampling period: (i) default random sampling; (ii) <em>opt</em>="sequential", 
+and (iii) methodical (overlapping) segments (running blocks). Technically, (iii) is
+not bootstrapping because there is no random sampling. The point is that (ii) and (iii) are
+essentially identical. Hence, no explicit 'running_block' or 'running_sequential' option is offered. 
+<p>
+Why the difference in regression coefficient magnitudes between the default (i) and
+the sequential (ii) and running blocks (iii). The reason is that the default random sampling
+is using n=36 values from the entire 1500 year series. The (ii) <em>opt</em>="sequential"
+and (iii) running-block were sample n=36 sequential values. The sequential values have some 'memory.'
+    </div>
+
+    <div class=ex>
+    <!--Bootstrap-->
+    <a name=ex1></a>
+    <a href="Images/bootstrap_diff_1_1_lg.png">
+    <img src="Images/bootstrap_diff_1_1_sm.png" align=left border=2></a>
+    <a href="Images/bootstrap_diff_1_2_lg.png">
+    <img src="Images/bootstrap_diff_1_2_sm.png" align=left border=2></a>
+    <a href="Scripts/bootstrap_diff_1.html">bootstrap_diff_1.ncl</a>:
+<p>
+Calculate the conventional and bootstrapped difference statistics between two samples using default 
+sampling sizes: NX=25 and NY=18. (See the left figure.)  
+The bootstrapped confidence intervals 'match' the R-generated 95% confidence 
+values of 2.14 (2.5%) and 6.77 (97.5%).  The conventional confidence limits 
+provided by the reference are 1.96 and 6.80. NCL's and R's  p-value=0.0007474 match.    
+<p>
+The right figure shows the distribution with user specified sub-sampling: 
+specifically: <em>opt</em>=True with <em>opt</em>@sample_size_x=9 and <em>opt</em>@sample_size_y=7.
+<p>
+    </div>
+
+    <div class=ex>
+    <!--Bootstrap-->
+    <a name=ex2></a>
+    <a href="Images/bootstrap_diff_2_lg.png">
+    <img src="Images/bootstrap_diff_2_sm.png" align=left border=2></a>
+    <a href="Scripts/bootstrap_diff_2.html">bootstrap_diff_2.ncl</a>:
+<p>
+Using Boulder, CO annual <a href="Data/cdf/Boulder.precip.1897-2014.nc"><b>precipitation</b></a>
+calculate the conventional and bootstrapped difference statistics between two periods: (a)
+1897-1979 and (b) 1980-2014. 
+    </div>
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</body>    
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/bootstrap.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:06:07 GMT -->
+</html>
+
+

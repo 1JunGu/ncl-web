@@ -1,0 +1,89 @@
+;----------------------------------------------------------------------
+; interp1d_4.ncl
+;
+; Concepts illustrated:
+;   - Comparing functions for interpolating a 1D array of points
+;   - Overlaying XY plots on each other
+;   - Paneling multiple XY plots on a page
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;---Specify the input X and Y arrays
+  xi = (/  0.00,  2.00,  5.00,  8.00, 10.00, 13.00,     \
+          15.00, 18.00, 21.00, 23.00, 30.00        /)
+  yi = (/  1.00,  0.81,  0.00, -0.81, -1.00, -0.84,     \
+          -0.56,  0.04,  0.73,  1.18,  2.0         /)
+
+;---Create the output X coordinate array.
+  nxo = 30
+  xo = fspan(0.,30.,nxo)
+
+; 
+; Interpolate from a few points to more points, using three functions 
+; for comparison: ftcurv, linint1, and csa1
+;
+  yo_ln = linint1(xi,yi,False,xo,0)
+  yo_ft = ftcurv(xi, yi, xo)
+  knots = 4
+  yo_cs = csa1(xi, yi, knots, xo)
+
+  yo_ln@long_name = "linint1 interpolation"
+  yo_ft@long_name = "ftcurv interpolation"
+  yo_cs@long_name = "csa1 interpolation"
+
+  wks = gsn_open_wks("png","interp1d")      ; send graphics to PNG file
+
+  res                  = True
+  res@gsnMaximize      = True
+  res@gsnFrame         = False
+  res@gsnDraw          = False
+
+  res@xyLineThicknessF = 3.0
+
+  res@xyMarkLineMode   = "MarkLines"
+  res@xyMarker         = 16         ; Filled dot
+  res@xyMarkerColor    = "blue"
+  res@xyMarkerSizeF    = 0.015
+
+  res@trXMinF          = min(xi)-1
+  res@trXMaxF          = max(xi)+1
+  res@trYMinF          = min(yi)-1
+  res@trYMaxF          = max(yi)+1
+
+;---Create three plots of original data (for overlays later)
+  res@tiMainString = "ftcurv"
+  xy_orig_ft  = gsn_csm_xy(wks,xi,yi,res)
+
+  res@tiMainString = "linint1"
+  xy_orig_ln  = gsn_csm_xy(wks,xi,yi,res)
+
+  res@tiMainString = "csa1 - knots = " + knots
+  xy_orig_cs  = gsn_csm_xy(wks,xi,yi,res)
+
+  res@xyMarkLineMode = "Markers"
+  res@xyMarkerColor  = "red"
+  res@xyMarkerSizeF  = 0.01    ; make a little smaller than original curve
+
+;---Create XY plots with interpolated points.
+  xy_interp_ft = gsn_csm_xy(wks,xo,yo_ft,res)
+  xy_interp_ln = gsn_csm_xy(wks,xo,yo_ln,res)
+  xy_interp_cs = gsn_csm_xy(wks,xo,yo_cs,res)
+
+;---Overlay interpolated plot on original plots
+  overlay(xy_orig_ft,xy_interp_ft)
+  overlay(xy_orig_ln,xy_interp_ln)
+  overlay(xy_orig_cs,xy_interp_cs)
+
+;---Panel both plots for comparison  
+  pres                         = True
+  pres@gsnMaximize             = True
+  pres@gsnPanelMainString      = "blue = original values, red = interpolated values"
+  pres@gsnPanelMainFont        = "helvetica-bold"
+  pres@gsnPanelMainFontHeightF = 0.02
+  pres@gsnPanelRowSpec         = True ; 1 plot first row, 2 plots second row
+  gsn_panel(wks,(/xy_orig_ft,xy_orig_ln,xy_orig_cs/),(/1,2/),pres)
+end
+

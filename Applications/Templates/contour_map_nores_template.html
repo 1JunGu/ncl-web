@@ -1,0 +1,15 @@
+; Note: as of NCL V6.2.0, you don't need these load commands
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;---Read data
+  filename = "file.nc"
+  a = addfile(filename,"r")
+  x = a->x
+
+  wks = gsn_open_wks("x11","contour_map")
+
+  res  = True
+  plot = gsn_csm_contour_map(wks,x,res)
+end

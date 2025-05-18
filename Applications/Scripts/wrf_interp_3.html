@@ -1,0 +1,60 @@
+;----------------------------------------------------------------------
+; wrf_interp_3.ncl
+;----------------------------------------------------------------------
+; Concepts illustrated:
+;   - Interpolating a vertical cross-section from a 3D WRF-ARW field.
+;----------------------------------------------------------------------
+; wrf_user_vert_cross and wrf_user_interp_level replace the 
+; deprecated wrf_user_intrp3d function. 
+;
+; NCL V6.6.0 or higher is required to run this example.
+;----------------------------------------------------------------------
+
+begin
+  dir = "wrf_files/"
+  a   = addfile(dir+"wrfout_d03_2012-04-22_23_00_00.nc","r")
+
+  z    = wrf_user_getvar(a, "z",0)          ; grid point height
+  qv   = wrf_user_getvar(a, "QVAPOR",0)     ; cloud field
+  lats = wrf_user_getvar(a, "lat",0)
+  lons = wrf_user_getvar(a, "lon",0)
+
+  start_lat       = 38
+  end_lat         = 40
+  start_lon       = -118
+  end_lon         = -115
+  opt             = True
+  opt@latlon      = True
+  opt@linecoords  = True
+  opt@file_handle = a
+  qv_latlon       = wrf_user_vert_cross(qv,z,(/start_lon,start_lat,end_lon,end_lat/),opt)
+
+  printVarSummary(qv)          ; [bottom_top | 31] x [south_north | 546] x [west_east | 480]
+  printVarSummary(qv_latlon)   ; [vertical | 100] x [cross_line_idx | 171]
+
+  wks = gsn_open_wks("png","wrf_interp")
+
+  res                      = True
+  res@gsnMaximize          = True     ; maximize plot in frame
+  res@cnFillOn             = True     ; turn on contour fill
+  res@cnLinesOn            = False    ; turn off contour lines
+  res@cnLineLabelsOn       = False    ; turn off line labels
+  res@lbOrientation        = "Vertical"
+  res@lbLabelFontHeightF   = 0.01
+  res@tiMainString         = "Cross section from ("+start_lat+","+start_lon+ \
+                                           ") to ("+end_lat + ","+end_lon+")"
+  res@gsnStringFontHeightF = 0.015
+  res@tmXBLabelFontHeightF = 0.01
+  res@tmXBLabelAngleF      = 45.
+
+;--Explicitly set lat/lon labels for X axis
+  xvalues = ispan(0,dimsizes(qv_latlon(0,:))-1,1)
+  ll_step = 15                                       ; step interval for tickmarks
+  res@tmXBMode          = "Explicit"
+  res@tmXBValues        = xvalues(::ll_step)
+  res@tmXBLabels        = sprintf("%6.2f",qv_latlon@lats(::ll_step)) + "~S~o~N~N~C~" + \
+                          sprintf("%6.2f",qv_latlon@lons(::ll_step)) + "~S~o~N~E"
+  plot = gsn_csm_contour(wks,qv_latlon,res)
+
+end
+

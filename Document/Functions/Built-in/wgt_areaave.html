@@ -1,0 +1,577 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/wgt_areaave.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:22 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (general applied math)">
+<meta name="keywords" content="wgt_areaave">
+<title>wgt_areaave</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>wgt_areaave</h1>
+
+<p>
+Calculates the area average of a quantity using weights.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function wgt_areaave (
+		q        : numeric,  
+		wgty [*] : numeric,  
+		wgtx [*] : numeric,  
+		opt      : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>q</em>
+<p class=indent>An array of 2 or more dimensions containing the data to be
+averaged.  The rightmost dimensions should correspond to "latitude"
+(lat) and "longitude" (lon) when dealing with quantities on a sphere
+([...,],lat,lon), and "y" and "x" otherwise ([...,],y,x).
+</p>
+<em>wgty</em>
+<p class=indent>A scalar (typically 1.0) or singly-dimensioned array of size "lat" (y)
+containing the weights.
+</p>
+<em>wgtx</em>
+<p class=indent>A scalar (typically 1.0) or singly-dimensioned array of size "lon" (x)
+containing the weights.
+</p>
+<em>opt</em>
+<p class=indent>If <I>opt</I> = 0, the area average is calculated using available non-missing data.
+If <I>opt</I> = 1, then if <B>any</B> point in <em>q</em> is missing, the area average
+is not computed. In this case, it will be set to the missing value, which is indicated by
+<em>q</em>@<a href="../../Language/fillval.html">_FillValue</a>, or the default missing value if <em>q</em>@_FillValue is not set.</p>
+<p class=indent>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+Returns a scalar if <em>q</em> is a two dimensional array. Otherwise, the output
+dimensionality is the same as the leftmost <I>n</I> - 2 dimensions of the input.<P>
+
+The return type is float if the input is float, and double if the input
+is of type double.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function computes a weighted area average. It ignores missing values (<I>q</I>@_FillValue). 
+<p>
+If <em>q</em> has no missing values, <strong>wgt_areaave</strong> is equivalent to:
+<pre>
+   <em>q</em>_ave = SUM[<em>q</em>*<em>wgty</em>*<em>wgtx</em>]/SUM[<em>wgty</em>*<em>wgtx</em>] 
+</pre>
+
+<p>
+Use the <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a> function if metadata retention is desired.
+The interface is identical.<p> 
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a>,
+<a href="wgt_areaave2.html"><strong>wgt_areaave2</strong></a>,
+<a href="wgt_arearmse.html"><strong>wgt_arearmse</strong></a>,
+<a href="wgt_arearmse2.html"><strong>wgt_arearmse2</strong></a>,
+<a href="wgt_areasum2.html"><strong>wgt_areasum2</strong></a>,
+<a href="wgt_runave.html"><strong>wgt_runave</strong></a>,
+<a href="wgt_volave.html"><strong>wgt_volave</strong></a>,
+<a href="wgt_volave_ccm.html"><strong>wgt_volave_ccm</strong></a>,
+<a href="wgt_volrmse.html"><strong>wgt_volrmse</strong></a>,
+<a href="wgt_volrmse_ccm.html"><strong>wgt_volrmse_ccm</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><P>
+Let <I>u(lat, lon)</I> be a global array with dimension sizes
+nlat = 64, mlon = 128; <i>lat</i> and <i>lon</i> contain longitudes and gaussian latitudes;
+and <i>gwgt</i> contains the gaussian weights. Compute the area average
+using several weighting approaches: (a) explicitly use the
+area of each grid cell; (b) uses only gaussian weights; (c) use
+the cosine of the latitudes. 
+<PRE>
+  lat   = f->lat
+  lon   = f->lon
+  gwgt  = f->gwgt
+
+  jlat  = <a href="dimsizes.html"><strong>dimsizes</strong></a>( lat )
+
+  rad    = 4.0*<a href="atan.html"><strong>atan</strong></a>(1.0)/180.0
+  re     = 6371220.0
+  rr     = re*rad
+
+  dlon   = <a href="abs.html"><strong>abs</strong></a>(lon(2)-lon(1))*rr
+  dx     = dlon*<a href="cos.html"><strong>cos</strong></a>(lat*rad)
+;                                     lat can have variable spacing
+  dy     = <a href="new.html"><strong>new</strong></a> ( jlat, <a href="typeof.html"><strong>typeof</strong></a>(dx))
+                                                            ; close enough
+  dy(0)  = <a href="abs.html"><strong>abs</strong></a>(lat(2)-lat(1))*rr
+  dy(1:jlat-2)  = <a href="abs.html"><strong>abs</strong></a>(lat(2:jlat-1)-lat(0:jlat-3))*rr*0.5   
+  dy(jlat-1)    = <a href="abs.html"><strong>abs</strong></a>(lat(jlat-1)-lat(jlat-2))*rr
+
+  area   = dx*dy                                ; cell area function of latitude only
+
+  clat   = <a href="cos.html"><strong>cos</strong></a>(lat*rad)
+
+  uAve_area = <strong>wgt_areaave</strong>(u, area, 1.0, 1)
+  uAve_gwgt = <strong>wgt_areaave</strong>(u, gwgt, 1.0, 1)
+  uAve_clat = <strong>wgt_areaave</strong>(u, clat, 1.0, 1)
+
+  ; Use <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a> if metadata retention is desired
+  ; uAve_area = <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a>(u, area, 1.0, 1)
+  ; uAve_gwgt = <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a>(u, gwgt, 1.0, 1)
+  ; uAve_clat = <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a>(u, clat, 1.0, 1)
+
+  <a href="print.html"><strong>print</strong></a>("uAve_area="+uAve_area+"   uAve_gwgt="+uAve_gwgt+"   uAve_clat="+uAve_clat)
+</PRE>
+The results are:
+<p>
+<PRE>
+    uAve_area=15.1826   uAve_gwgt=15.1828   uAve_clat=15.1818
+</PRE>
+
+<B>Example 2</B><P>
+
+Let <I>q(time, lev, lat, lon)</I> be a global array with dimension sizes
+ktime = 120, nlev = 28, nlat = 64, mlon = 128 and <I>wgty(nlat)</I> be a
+1-dimensional array containing gaussian or cosine weights.  Assume that
+no special weighting is applied in the longitude (x) direction. Then:
+
+<PRE>
+   glAve = <strong>wgt_areaave</strong>(q, wgty, 1.0, 1)   ; glAve(ktime, nlev)
+
+   ; Use <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a> if metadata retention is desired
+   ; glAve = <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a>(q, wgty, 1.0, 1)   ; glAve(ktime, nlev)
+</PRE>
+
+will calculate the area (global) average for each time and level.
+<I>glAve</I> will be a 2-dimensional array with dimensions
+(ktime, nlev) [(120, 28)].  If a missing value is encountered at any of
+the two rightmost dimensions, then the result will be set to <I>q@_FillValue</I> (opt = 1).<P>
+
+<B>Example 3</B><P>
+
+<PRE>
+   nhAve = <strong>wgt_areaave</strong>(q(:, :, 33:nlat-1, :), wgty(33:nlat), 1.0, 0)
+
+   ; Use <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a> if metadata retention is desired
+   ; nhAve = <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a>(q(:, :, 33:nlat-1, :), wgty(33:nlat), 1.0, 0)
+</PRE>
+
+will calculate the area (northern hemisphere) average for each time
+and level.
+<a href="../../Manuals/Ref_Manual/NclVariables.html#StandardSubscripts">Standard subscripting</a>
+is used to subset the input global array.  <I>nhAve</I> will be a 2-dimensional array with dimensions
+(ktime, nlev) [(120, 28)].  If a missing value is encountered at any of the two
+rightmost dimensions, it is ignored (equivalent to a weight of 0.0) and the average
+is calculated using available non-missing data (opt = 0).<P>
+
+<B>Example 4</B><P>
+
+<PRE>
+   shAve = <strong>wgt_areaave</strong>(q(:, 5:7, {-90:0}, :), wgty({-90:0}), 1.0, 0) 
+
+   ; Use <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a> if metadata retention is desired
+   ; shAve = <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a>(q(:, 5:7, {-90:0}, :), wgty({-90:0}), 1.0, 0)
+</PRE>
+
+will calculate the area (southern hemisphere) average for each time
+and only at levels = 5, 6, 7.
+<a href="../../Manuals/Ref_Manual/NclVariables.html#CoordinateSubscripts">Coordinate subscripting</a>
+and standard subscripting are used to subset the input global array.
+<I>shAve</I> will have dimensions (ktime, 3).<P>
+
+<B>Example 5</B><P>
+
+Compute area root-mean-square difference between two quantities.  Let
+<I>q</I> and <I>r</I> (time, lev, lat, lon) be global arrays with
+dimension sizes ktime = 120, nlev = 28, nlat = 64, mlon = 128, and <I>wgty</I>(nlat)
+be a 1-dimensional array containing gaussian or cosine weights. Assume
+that no special weighting is applied in the longitude (x)
+direction. Then:<P>
+
+<PRE>
+   rmse = <a href="sqrt.html"><strong>sqrt</strong></a>(<strong>wgt_areaave</strong>((q - r)&sup2;, wgty&sup2;, 1.0, 1) )  ; rmse(ktime, nlev)
+
+   ; Use <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a> if metadata retention is desired
+   ; rmse = <a href="sqrt.html"><strong>sqrt</strong></a>(<a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a>((q - r)&sup2;, wgty&sup2;, 1.0, 1) )  ; rmse(ktime, nlev)
+</PRE>
+
+will calculate the area (global) root-mean-square-difference for each
+time and level. <I>rmse</I> will be a 2-dimensional array with
+dimensions (ktime, nlev) [(120, 28)]. If a missing value is encountered
+at any of the two rightmost dimensions, then the result will be set to
+<I>q</I>@_FillValue (opt = 1).
+<p>
+
+<B>Example 6</B><P>
+
+Step-by-step illustration based on a user question. This illustrates that
+NCL array syntax must be aware of _FillValue.<p>
+<pre>
+  latt    = (/-90,-45,0,45,90/) ; dummy latitudes
+  rad     = 4.*<a href="atan.html"><strong>atan</strong></a>(1.)/180.    ;
+  cost    = <a href="cos.html"><strong>cos</strong></a>(latt*rad)       ; cosine weights
+ 
+  ny      = 5
+  mx      = 2
+  x       = <a href="new.html"><strong>new</strong></a>((/ny,mx/),float)  ; dummy fields
+  x(:,0)  = (/-99,1,1,1,-99/)   ; with FillValue
+  x(:,1)  = (/-99,2,3,-99,-99/)
+  x@_FillValue = -99
+
+; function
+
+  xave_a = <strong>wgt_areaave</strong>(x,cost,1.0,0)
+
+  ; Use <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a> if metadata retention is desired
+  ; xave_a = <a href="../Contributed/wgt_areaave_Wrap.html"><strong>wgt_areaave_Wrap</strong></a>(x,cost,1.0,0)
+
+  kmsg_a = <a href="num.html"><strong>num</strong></a>(<a href="ismissing.html"><strong>ismissing</strong></a>(x))
+  <a href="print.html"><strong>print</strong></a>("xave_a="+xave_a+"         kmsg_a="+kmsg_a)
+
+; loop
+
+  sumx  = 0.0
+  sumw  = 0.0
+  kmsg_b= 0
+  do n=0,ny-1
+    do m=0,mx-1
+       if (.not.<a href="ismissing.html"><strong>ismissing</strong></a>(x(n,m))) then
+           sumx = sumx + x(n,m)*cost(n)
+           sumw = sumw + cost(n)
+       else
+           kmsg_b = kmsg_b + 1
+       end if
+    end do
+  end do
+
+  xave_b = sumx/sumw
+  <a href="print.html"><strong>print</strong></a>("xave_b="+xave_b+"         kmsg_b="+kmsg_b)
+
+; Use calc as stated on http://www.ncl.ucar.edu/Document/Functions/Built-in/wgt_areaave.shtml
+; x_ave = <a href="sum.html"><strong>sum</strong></a>(x*wgty*wgtx)/<a href="sum.html"><strong>sum</strong></a>(wgty*wgtx)
+
+  wgty  = <a href="conform.html"><strong>conform</strong></a>(x,cost, 0)    ; (ny,mx)      
+  wgtx  = <a href="conform.html"><strong>conform</strong></a>(x, 1  ,-1)    ; (ny,mx)      
+
+; NCL array computation
+
+  x_ave = <a href="sum.html"><strong>sum</strong></a>(x*wgty*wgtx)/<a href="sum.html"><strong>sum</strong></a>(wgty*wgtx)  
+  <a href="print.html"><strong>print</strong></a>("[A] <a href="sum.html"><strong>sum</strong></a>(x*wgty*wgtx)/<a href="sum.html"><strong>sum</strong></a>(wgty*wgtx)="+x_ave+"     not correct")
+
+; (wgty*wgtx) not aware of when x@_FillValue
+
+  WGTX  = <a href="where.html"><strong>where</strong></a>(<a href="ismissing.html"><strong>ismissing</strong></a>(x), 0.0, 1.0 ) 
+  WGTY  = <a href="where.html"><strong>where</strong></a>(<a href="ismissing.html"><strong>ismissing</strong></a>(x), 0.0, wgty) 
+  x_ave = <a href="sum.html"><strong>sum</strong></a>(x*wgty*wgtx)/<a href="sum.html"><strong>sum</strong></a>(WGTY*WGTX)   
+  <a href="print.html"><strong>print</strong></a>("[B] <a href="sum.html"><strong>sum</strong></a>(x*wgty*wgtx)/<a href="sum.html"><strong>sum</strong></a>(WGTY*WGTX)="+x_ave)
+</pre>
+ 
+Output
+<pre>
+(0)	xave_a=1.65685         kmsg_a=5
+(0)	xave_b=1.65685         kmsg_b=5
+(0)	[A] <a href="sum.html"><strong>sum</strong></a>(x*wgty*wgtx)/<a href="sum.html"><strong>sum</strong></a>(wgty*wgtx)=1.41421     not correct
+(0)	[B] <a href="sum.html"><strong>sum</strong></a>(x*wgty*wgtx)/<a href="sum.html"><strong>sum</strong></a>(WGTY*WGTX)=1.65685
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/wgt_areaave.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:22 GMT -->
+</html>

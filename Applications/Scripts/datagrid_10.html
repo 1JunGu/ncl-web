@@ -1,0 +1,57 @@
+;======================================================================
+; datagrid_10.ncl
+;
+; Concepts illustrated:
+;   - Drawing the edges of a full ICON mesh using gsn_coordinates
+;======================================================================
+; This ICON mesh only has 20480 cells, so the whole mesh is drawn.
+;
+; See datagrid_11.ncl, which draws only part of a triangular mesh
+; with 2,949,120 cells.
+;======================================================================
+load "$NCARGTEST/nclscripts/functions.ncl"
+
+begin
+;---Open ICON file and read some data
+  fili = "ICON.nc"
+
+  diri = "$NCARGTEST/nclscripts/cdf_files/"
+  fili = "triangular_grid_ICON.nc"
+  
+  f = addfile(diri+fili,"r")
+  dims = getfilevardimsizes(f,"clat")
+
+  wks = gsn_open_wks("png","datagrid")
+
+  res                     = True
+
+  res@gsnMaximize                 = True
+  res@gsnDraw                     = False
+  res@gsnFrame                    = False
+
+  res@mpLimitMode                 = "LatLon"
+  res@mpOutlineBoundarySets       = "AllBoundaries"
+  res@mpDataBaseVersion           = "MediumRes"
+  res@mpProjection                = "orthographic"
+  res@mpFillOn                    = False
+  res@mpPerimOn                   = False
+  res@mpGeophysicalLineThicknessF = 3.0
+  res@mpNationalLineThicknessF    = 3.0
+
+  res@tiMainString                = "ICON mesh (" + dims(0) + " triangles)"
+
+;---Create the map, but don't draw it yet.
+  map = gsn_csm_map(wks,res)
+
+;---Set resources for drawing the ICON edges.
+  opt = True
+  opt@gsnCoordsMeshClosePolygons = True
+  opt@gsnCoordsConvertRad2Deg    = True
+  opt@gsnCoordsMeshLatBounds     = f->clat_vertices
+  opt@gsnCoordsMeshLonBounds     = f->clon_vertices
+  opt@gsnCoordsDebug             = True
+  opt@gsLineColor                = "Purple"
+  opt@gsLineThicknessF           = 3.0
+
+  gsn_coordinates(wks,map,(/f->S(0,0,:)/),opt)   ; the f->S doesn't get used, since we provided all the data via opt.
+end

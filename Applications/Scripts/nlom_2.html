@@ -1,0 +1,64 @@
+;*****************************************************
+; nlom_2.ncl
+;*****************************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;
+; This file still has to be loaded manually
+external SUBS "./composit.so"
+;*****************************************************
+begin
+;*****************************************************
+; open file and read in data
+;*****************************************************
+  f1 = addfile("SSTTPMODGB12_HIN1993_19930415_IAS.nc","r")
+  tmp = f1->SSTTPMODGB12_HIN1993__from_NLOM
+  lat  = tmp&Latitude
+  lon  = tmp&Longitude
+;*****************************************************
+; mask out pacific with fortran subroutine composit
+;*****************************************************
+  sst = tmp
+  SUBS::composit(tmp,lat,lon,dimsizes(lat),dimsizes(lon),tmp@_FillValue,sst)
+;**************************************************
+; assign required attributes
+;**************************************************
+  sst&Longitude@units    = "degrees_east"
+  sst&Latitude@units     = "degrees_north"
+;**************************************
+;   Create plot
+;***************************************
+  wks  = gsn_open_wks("png","nlom")               ; send graphics to PNG file
+  
+  res                             = True          ; plot mods desired
+  
+  res@cnFillOn                    = True          ; turn on color 
+  res@cnFillPalette               = "BlAqGrYeOrRe"; set color map
+  res@cnFillMode                  = "RasterFill"  ; raster mode (req for mem)
+  res@cnLinesOn                   = False         ; no contour lines
+  res@gsnAddCyclic                = False         ; regional data
+  
+  res@cnLevelSpacingF             =  0.2          ; contour interval
+  
+  res@cnMissingValFillColor       = "gray"
+  
+  res@pmLabelBarOrthogonalPosF    = 0.06          ; move label bar down
+  
+  res@mpDataBaseVersion           = "MediumRes"    ; use finer database
+  res@mpOutlineOn                 = True          ; turn on cont. outlines
+  res@mpMaxLatF                   = max(lat)      ; zoom in
+  res@mpMaxLonF                   = max(lon)
+  res@mpMinLatF                   = min(lat)
+  res@mpMinLonF                   = min(lon)
+  
+  res@gsnLeftString               = sst@long_name ; left string title
+  res@gsnRightString              = sst@units     ; right string title
+  res@gsnMaximize                 = True          ; blow up plot
+  
+  plot = gsn_csm_contour_map(wks,sst,res)
+end 
+
+
+

@@ -1,0 +1,795 @@
+<html>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Crop/refevt_penman_fao56.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:07 GMT -->
+<head>
+<meta name="description" content="Crop functions (crop)">
+<meta name="keywords" content="refevt_penman_fao56">
+<title>refevt_penman_fao56</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../meteo.html">Meteorology</a>,
+<a class=crumb href="../crop.html">Crop</a>
+<br>
+<h1>refevt_penman_fao56</h1>
+
+<p>
+Use the full Penman-Monteith equation to derive reference evapotranspiration as described in
+<a href="http://www.fao.org/docrep/x0490e/x0490e07.htm"><b>FAO 56</b></a>.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.4.0">version 6.4.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/crop.ncl"  ; This library is <b>automatically loaded</b>
+                                                      ; from NCL V6.5.0 onward.
+                                                      ; No need for user to explicitly load.
+
+	function refevt_penman_fao56 (
+		Tmean        : numeric,  
+		netrad       : numeric,  
+		G            : numeric,  
+		g            : numeric,  
+		u2           : numeric,  
+		edef         : numeric,  
+		D            : numeric,  
+		albedo_crop  : numeric,  
+		cnum         : numeric,  
+		cden         : numeric,  
+		ounit    [1] : integer   
+	)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>Tmean</em>
+<p class=indent>Scalar or array containing the mean temperature(s) (degC).
+This is equation 9 in the FAO-56 document: <em>Tmean</em>=(Tmin+Tmax)/2.
+</p>
+<em>netrad</em>
+<p class=indent>Scalar or array containing the <b>net</b> radiation at the crop surface (MJ/(m2-day)).
+This is equation 40 in the FAO-56 document. See: 
+<a href="netrad_fao56.html"><strong>netrad_fao56</strong></a>.
+</p>
+<em>G</em>
+<p class=indent>Scalar or array containing the soil heat flux density (MJ/(m2-day)). 
+<ul>
+<li> Monthly data: This is equation 41 in the FAO-56 document. See:
+<a href="soil_heatflux_month_fao56.html"><strong>soil_heatflux_month_fao56</strong></a>
+<li> Daily data: This is equation 42 in the FAO-56 document. Hence, <em>G</em>=0.0 for daily data
+<li> Hourly data: 
+<ul>
+    <li> Daylight hours: This is equation 45 n the FAO-56 document: <em>G</em>=0.1*<em>netrad</em>
+    <li> Nighttime hours: This is equation 46 n the FAO-56 document: <em>G</em>=0.5*<em>netrad</em>
+</ul>
+</ul>
+</p>
+<em>g</em>
+<p class=indent>Scalar or array containing the psychrometric constant (kPa/sqrt[degC]). 
+This is equation 8 in the FAO-56 document. See:
+<a href="psychro_fao56.html"><strong>psychro_fao56</strong></a>
+</p>
+<em>u2</em>
+<p class=indent>Scalar or array containing the wind speed (m/s) at 2-meters. If not available set to 2.0. 
+This is equation 47 in the FAO-56 document. See:
+<a href="u2_fao56.html"><strong>u2_fao56</strong></a>
+</p>
+<em>edef</em>
+<p class=indent>Scalar or array containing the vapor pressure deficit (kPa): <b>(es-ea)</b> where 
+<b>es</b> is the saturation vapor presssure and <b>ea</b> is the actual vapor presssure.
+See: <a href="satvpr_mean_fao56.html"><strong>satvpr_mean_fao56</strong></a>, <a href="satvpr_tdew_fao56.html"><strong>satvpr_tdew_fao56</strong></a>,
+<a href="actvpr_mnmx_fao56.html"><strong>actvpr_mnmx_fao56</strong></a>, <a href="actvpr_rhmean_fao56.html"><strong>actvpr_rhmean_fao56</strong></a>,
+</p>
+<em>D</em>
+<p class=indent>Scalar or array containing the slope of the vapor pressure curve (kPa/C). 
+This is equation 13 in the FAO-56 document. See:
+<a href="satvpr_slope_fao56.html"><strong>satvpr_slope_fao56</strong></a>
+</p>
+<em>cnum</em>
+<p class=indent>A scalar or array containing the crop coefficient(s) to be used in the numerator of the Penman-Monteith equation.
+If an array is input, the array must have the same size and shape as <em>Tmean</em> in the Penman-Monteith equation. 
+This coefficient is a function of the time step and aerodynamic resistance (i.e., reference type)
+</p>
+<p class=indent>
+Typical constant values for daily or monthly applications are
+<ul> 
+<li> <em>cnum</em> = <b>900</b> is the value for the 'classic' short reference crop. 
+<li> <em>cnum</em> = <b>1600</b> is the value for the tall reference crop.
+</ul>
+</p>
+<p class=indent>
+For <a href="http://www.kimberly.uidaho.edu/water/asceewri/ASCE_Standardized_Ref_ET_Eqn_Phoenix2000.pdf">
+hourly time steps </a> the ASCE Standardized reference suggests:
+<ul> 
+<li> <em>cnum</em> = <b>37</b> for short crop hourly (day or night time) 
+<li> <em>cnum</em> = <b>66</b> for tall crop hourly (day or night time) 
+</ul>
+</p>
+<em>cden</em>
+<p class=indent>A scalar or array containing the crop coefficient(s) to be used in the denominator of the Penman-Monteith equation.
+If an array is input, the array must have the same size and shape as <em>Tmean</em> in Penman-Monteith equation. 
+This coefficient is a function of the time step and aerodynamic resistance (i.e., reference type)
+</p>
+<p class=indent>
+Typical constant values for monthly applications are
+<ul> 
+<li> <em>cden</em> = <b>0.34</b> are the values for the 'classic' short reference crop.
+<li> <em>cden</em> = <b>0.38</b> are the values for the tall reference crop.
+</ul>
+</p>
+<p class=indent>
+For <a href="http://www.kimberly.uidaho.edu/water/asceewri/ASCE_Standardized_Ref_ET_Eqn_Phoenix2000.pdf">
+hourly time steps </a> the ASCE Standardized reference suggests:
+<ul> 
+<li> <em>cnum</em> = <b>0.24</b> for short crop hourly day application
+<li> <em>cnum</em> = <b>0.96</b> for short crop hourly night application
+<li> <em>cnum</em> = <b>0.25</b> for tall crop hourly day application
+<li> <em>cnum</em> = <b>1.76</b> for tall crop hourly night application
+</ul>
+</p>
+<em>ounit</em>
+<p class=indent>An  integer indicating the desired units of the returned reference evapotranspiration.  
+<ul>
+<li> <em>ounit</em>=0 ; output units => mm/day
+<li> <em>ounit</em>=1 ; output units => MJ/(m2-day)
+<li> <em>ounit</em>=2 ; output units => W/m2   
+</ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+An array the same size as <em>Tmean</em> containing the estimates of reference evapotranspiration.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+Estimates evapotranspiration vis the full Penman-Monteith equation as described in 
+the <i>Food and Agriculture Organization (FAO) Irrigation and Drainage Paper 56</i> entitled:
+<a href="http://www.fao.org/docrep/x0490e/x0490e00.htm"><b>Crop evapotranspiration - Guidelines for computing crop water requirement</b> </a>.
+Specifically, see <a href="http://www.fao.org/docrep/x0490e/x0490e07.htm">Chapters 3 and 4</a>.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../crop.html"><b>Crop & Evapotranspiration functions</b></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+Example 1:</b> Replicate example 17 in <a href="http://www.fao.org/docrep/x0490e/x0490e07.htm">Chapter 4</a>.
+Here <em>ounit</em>=0. <b>Mean monthly data are used.</b>
+<pre>
+   jday    = 105       ; mid April
+   lat     = 13.73     ; Bangkok, Thailand
+   tmax    = 34.8      ; C
+   tmin    = 25.6
+   ea      = 2.85      ; kPa     (specified in this example)
+
+   u2      = 2.0       ; m/s     
+   z       = 2.0       ; m
+   sunhr   = 8.5       ; hrs/day
+
+   P0      = 101.3     ; kPa
+   Z0      = 0.0       ; m
+   albedo  = 0.23      ; crop albedo
+
+   cnum    = 900.      ; short crop numerator coefficient for monthly data
+   cden    = 0.34      ; short crop denominator coefficient for monthly data
+
+   tavgmon = (/30.2, 29.2 /)   ; C
+
+   tunit   = 0         ; degC
+   runit   = 1         ; MJ/(m2-day)
+   punit   = 2         ; kPa  
+
+<b>;=============================================</b>
+
+   tavg   = (tmin+tmax)*0.5                                 ; 30.2 C
+   slp    = <a href="%20satvpr_slope_fao56.html"><strong> satvpr_slope_fao56</strong></a>(tavg, (/0,2/))              ; 0.246 kPa
+   p      = <a href="prsatm_tz_fao56.html"><strong>prsatm_tz_fao56</strong></a>(tavg, 2.0, P0, Z0, (/0,2/))    ; 101.222 kPa
+   g      = <a href="psychro_fao56.html"><strong>psychro_fao56</strong></a>(p, (/0,0/) )                     ; 0.0673
+   G      = <b>0.14</b>*(tavgmon(0)-tavgmon(1))                    ; 0.14 MJ/(m2-day) [EQN 44]
+
+   esTmin = <a href="satvpr_mean_fao56.html"><strong>satvpr_mean_fao56</strong></a>(tmin, (/0,2/))              ; 3.283 kPa   [EQN 11]
+   esTmax = <a href="satvpr_mean_fao56.html"><strong>satvpr_mean_fao56</strong></a>(tmax, (/0,2/))              ; 5.560 kPa
+   esAvg  = (esTmin+esTmax)*0.5                             ; 4.422       [EQN 12]
+   edef   = esAvg-ea                                        ; 1.572
+                                                            ; Example 5
+   radext = <a href="radext_fao56.html"><strong>radext_fao56</strong></a>(jday, lat, 1)                     ; 38.06 MJ/(m2-day)
+   sunhrx = <a href="daylight_fao56.html"><strong>daylight_fao56</strong></a>(jday, lat)                       ; 12.31 hr
+   radsol = <a href="radsol_fao56.html"><strong>radsol_fao56</strong></a>(radext,sunhrx,sunhr,(/1,1/),False) ; 22.65 MJ/(m2-day)
+   radsol_clr = <a href="radsol_clrsky_fao56.html"><strong>radsol_clrsky_fao56</strong></a>(radext, False)          ; 28.54 MJ/(m2-day)
+
+   netlw  = <a href="netlw_fao56.html"><strong>netlw_fao56</strong></a>(tmin, tmax, ea, radext, radsol, (/0,1/), False) ; 3.11 MJ/(m2-day) 
+   netsw  = <a href="netsw_fao56.html"><strong>netsw_fao56</strong></a>(radsol, albedo)                    ; 17.44 MJ/(m2-day)
+   netrad = <a href="netrad_fao56.html"><strong>netrad_fao56</strong></a>(netsw, netlw)                      ; 14.33
+
+                                                            ; function
+   REFEVT = <strong>refevt_penman_fao56</strong>(tavg, netrad, G, g, u2 \
+                               , edef, slp, albedo, cnum, cden, 0)            ; <b>5.72 mm/day</b>
+
+                                                            ; explicitly calculate
+   dnom   = <b>slp + g*(1+cden*u2)</b>                             ; 0.359 (denominator)
+   refevt = <b>(0.408*(netrad-G)*slp + g*(cnum/(tavg+273))*u2*edef)/dnom</b>         ; <b>5.72 mm/day</b>
+   refevt@long_name = "Penman-Monteith reference evapotranspiration: inline"
+   refevt@units     = "mm/day"
+   <a href="../Built-in/print.html"><strong>print</strong></a>(refevt)
+   <a href="../Built-in/print.html"><strong>print</strong></a>(REFEVT)
+
+<b>;=============================================</b>
+; For comparison ... Use Hargreaves approximation: tmin, tmax, radext
+<b>;=============================================</b>
+   refevt_hg  = <a href="refevt_hargreaves_fao56.html"><strong>refevt_hargreaves_fao56</strong></a>( tmin, tmax, radext, (/0,1,0/) )     ; <b>5.20 mm/day</b>
+   <a href="../Built-in/print.html"><strong>print</strong></a>(refevt_hg)
+</pre>
+The (edited) output for the above:
+<p>
+<pre>
+     Variable: refevt
+     Type: float
+                 1 values
+     Number of Dimensions: 1
+     Dimensions and sizes:	[1]
+     Coordinates: 
+     Number Of Attributes: 2
+       units :	mm/day
+       long_name :	Penman-Monteith reference evapotranspiration
+
+     (0)	<b>5.716062</b>
+     
+     
+     Variable: REFEVT
+     Type: float
+     Total Size: 4 bytes
+                 1 values
+     Number of Dimensions: 1
+     Dimensions and sizes:	[1]
+     Coordinates: 
+     Number Of Attributes: 4
+       long_name :	Penmon-Monteith reference evapotranspiration (month)
+       units :	mm/day
+       url :	http://www.fao.org/docrep/X0490E/x0490e07.htm
+       info :	FAO 56; EQN 6; penman_fao56
+       parameters:  cc(0)=900 cc(1)=0.34
+
+     (0)	<b>5.716062</b>
+     
+     
+     Variable: refevt_hg
+     Type: float
+     Total Size: 4 bytes
+                 1 values
+     Number of Dimensions: 1
+     Dimensions and sizes:	[1]
+     Coordinates: 
+     Number Of Attributes: 4
+       long_name :	reference evapotranspiration: Hargreaves 
+       units :	mm/day
+       url :	http://www.fao.org/docrep/X0490E/x0490e07.htm
+       info :	FAO 56; EQN 52; refevt_hargreaves_fao56
+
+     (0)	<b>5.19954</b>
+
+
+</pre> 
+<p>
+<b>Example 2:</b> 
+Replicate example 18 in <a href="http://www.fao.org/docrep/x0490e/x0490e07.htm">Chapter 4</a>.
+Here <em>ounit</em>=0. <b>Daily data are used.</b> As recommended for daily data, the soil 
+heat flux (<em>G</em>)
+is set to 0.0
+<p>
+<pre>
+;========================
+; Charper 4: example 18
+;========================
+; This was done this way to mimic Example 18
+;========================
+
+   jday  = 187       ; 6 July
+   lat   = 50.80     ; Brussels, Belgium
+   staz  = 100.0     ; station altitude (m)
+
+   tmax  = 21.5      ; C
+   tmin  = 12.3
+   rhmax = 84.0      ; %
+   rhmin = 63.0
+   uz    = 10.0      ; km/hr
+   z     = 10.0      ; m      (wind height above ground)
+   sunhr = 9.25      ; hrs/day
+
+                     ; standard constants
+   P0    = 101.3     ; kPa
+   Z0    = 0.0       ; m
+   albedo= 0.23      ; default
+
+;===================
+
+   tavg   = (tmin+tmax)*0.5                            ; 16.9   C
+   slp    = <a href="satvpr_slope_fao56.html"><strong>satvpr_slope_fao56</strong></a>(tavg, 0)                ; 0.122  kPa/C
+   p      = <a href="prsatm_tz_fao56.html"><strong>prsatm_tz_fao56</strong></a>(tavg, staz, P0, Z0, 0)    ; 100.11  kPa
+   g      = <a href="psychro_fao56.html"><strong>psychro_fao56</strong></a>(p, 0)                       ; 0.0666  kPa/sqrt(c)
+
+   <b>G      = 0.0                                        ; recommended for daily data</b>
+                                                       ; Example 3
+   esTmin = <a href="satvpr_mean_fao56.html"><strong>satvpr_mean_fao56</strong></a>(tmin, 0)               ; 1.431   [EQN 11]
+   esTmax = <a href="satvpr_mean_fao56.html"><strong>satvpr_mean_fao56</strong></a>(tmax, 0)               ; 2.564
+   esAvg  = (esTmin+esTmax)*0.5                        ; 1.997   [EQN 12]
+
+   u2     = <a href="u2_fao56.html"><strong>u2_fao56</strong></a>(uz, z, 1)                        ; 2.078 m/s  [wunit=1: km/hr->m/s)
+   ea     = <a href="actvpr_mnmx_fao56.html"><strong>actvpr_mnmx_fao56</strong></a>(tmin, tmax, rhmin, rhmax, 0)   ; 1.409
+                                                       ; Example 5
+   edef = esAvg-ea                                     ; 0.589
+
+   radext = <a href="radext_fao56.html"><strong>radext_fao56</strong></a>(jday, lat, 1)                 ; 41.088 MJ/(m2-day)
+   sunhrx = <a href="daylight_fao56.html"><strong>daylight_fao56</strong></a>(jday, lat)                  ; 16.10 hr
+   radsol = <a href="radsol_fao56.html"><strong>radsol_fao56</strong></a>(radext,sunhrx,sunhr,(/1,1/),False) ; 22.07 MJ/(m2-day)
+   radsol_clr = <a href="radsol_clrsky_fao56.html"><strong>radsol_clrsky_fao56</strong></a>(radext, False)     ; 30.82 MJ/(m2-day); FAO 56 says 30.90
+   netlw  = <a href="netlw_fao56.html"><strong>netlw_fao56</strong></a>(tmin, tmax, ea, radext, radsol, (/0,1/), False) ; 3.73 MJ/(m2-day); FAO 56 says 3.71
+   netsw  = <a href="netsw_fao56.html"><strong>netsw_fao56</strong></a>(radsol, albedo)               ; 17.00 MJ/(m2-day)
+   netrad = <a href="netrad_fao56.html"><strong>netrad_fao56</strong></a>(netsw, netlw)                 ; 13.27 MJ/(m2-day)
+
+   dnom = slp + g*(1+0.34*u2)                          ; 0.236
+   dnom@long_name = "denominator in P-M"
+
+   ET0 = (0.408*(netrad-G)*slp + g*(900.0/(tavg+273))*u2*edef)/dnom                      ; <b>3.877 mm/day</b>
+   ET0@units = "mm/day"
+   <a href="../Built-in/print.html"><strong>print</strong></a>(ET0)
+
+   refevt = <strong>refevt_penman_fao56</strong>(tavg, netrad, G, g, u2, edef, slp, (/900.0, 0.34/), 0)   ; <b>3.877 mm/day</b>
+   <a href="../Built-in/print.html"><strong>print</strong></a>(refevt)
+
+;=====================
+; Use Hargreaves approximation: tmin, tmax, radext
+;=====================
+   refevt_hg  = <a href="refevt_hargreaves_fao56.html"><strong>refevt_hargreaves_fao56</strong></a>( tmin, tmax, radext, (/0,1,0/) )                ; <b>4.06 mm/day</b>
+   <a href="../Built-in/print.html"><strong>print</strong></a>(refevt_hg)
+
+
+
+</pre>
+<p>
+The (edited) output follows:
+<p>
+<pre>
+     Variable: ET0
+     Type: float
+     Total Size: 4 bytes
+                 1 values
+     Number of Dimensions: 1
+     Dimensions and sizes:	[1]
+     Coordinates: 
+     Number Of Attributes: 1
+       units :	mm/day
+     (0)	<b>3.877064</b>
+     
+     
+     Variable: refevt
+     Type: float
+     Total Size: 4 bytes
+                 1 values
+     Number of Dimensions: 1
+     Dimensions and sizes:	[1]
+     Coordinates: 
+     Number Of Attributes: 5
+       long_name :	Penmon-Monteith reference evapotranspiration (month)
+       units :	mm/day
+       url :	http://www.fao.org/docrep/X0490E/x0490e07.htm
+       info :	FAO 56; EQN 6; refevt_penman_fao56
+       parameters :	cc(0)=900 cc(1)=0.34
+     (0)	<b>3.877064</b>
+     
+     
+     Variable: refevt_hg
+     Type: float
+     Total Size: 4 bytes
+                 1 values
+     Number of Dimensions: 1
+     Dimensions and sizes:	[1]
+     Coordinates: 
+     Number Of Attributes: 4
+       long_name :	reference evapotranspiration: Hargreaves 
+       units :	mm/day
+       url :	http://www.fao.org/docrep/X0490E/x0490e07.htm
+       info :	FAO 56; EQN 52; refevt_hargreaves_fao56
+     (0)	<b>4.058171</b>
+
+</pre>
+<p>
+<b>Example 3:</b> 
+Replicate example 20 in <a href="http://www.fao.org/docrep/x0490e/x0490e07.htm">Chapter 4</a>.
+Here, <bi>only</ib> <em>tmin</em> and <em>tmax</em> are available.
+FAO 56 recommends that <em>G</em>=0.0 and <em>u2</em>=2.0.``
+<p>
+<pre>
+   jday  = 196       ; 6 July
+   lat   = 45.72     ; Lyons, France
+   staz  = 200.0     ; station altitude (m)
+
+   tmax  = 26.6      ; C
+   tmin  = 14.8
+
+   u2    = 2.00      ; recommended
+   krs   = 0.16
+   G     = 0.0       ; recommended for daily data
+
+   P0    = 101.3     ; kPa
+   Z0    = 0.0       ; m
+   albedo= 0.23      ; default
+   
+;===================
+  
+   tavg   = (tmin+tmax)*0.5                            ; 20.7   C
+   slp    = <a href="satvpr_slope_fao56.html"><strong>satvpr_slope_fao56</strong></a>(tavg, 0)               ; 0.150  kPa/C
+   p      = <a href="prsatm_tz_fao56.html"><strong>prsatm_tz_fao56</strong></a>(tavg, staz, P0, Z0, 0)    ; 98.96  kPa
+   g      = <a href="psychro_fao56.html"><strong>psychro_fao56</strong></a>(p, 0)                       ; 0.0666  kPa/sqrt(c)
+                                                       ; Example 3
+   esTmin = <a href="satvpr_mean_fao56.html"><strong>satvpr_mean_fao56</strong></a>(tmin, 0)               ; 1.684   [EQN 11]
+   esTmax = <a href="satvpr_mean_fao56.html"><strong>satvpr_mean_fao56</strong></a>(tmax, 0)               ; 3.483
+   esAvg  = (esTmin+esTmax)*0.5                        ; 2.583   [EQN 12]
+                                                       ; assume tmin=tdew
+   edef   = esAvg-esTmin                               ; 0.90  
+   radext = <a href="radext_fao56.html"><strong>radext_fao56</strong></a>(jday, lat, 1)                ; 40.55  MJ/(m2-day)
+   radsol = <a href="radsol3_hargreaves_fao56.html"><strong>radsol3_hargreaves_fao56</strong></a>(tmin, tmax, radext, krs, (/0,1,1/))  ; 22.29 MJ/(m2-day)
+
+   opt    = True
+   opt@z  = staz
+   radsol_clr = <a href="radsol_clrsky_fao56.html"><strong>radsol_clrsky_fao56</strong></a>(radext, opt)       ; 30.578   EQN 37
+   
+ ;;ea = esTmin
+   netlw = <a href="netlw_fao56.html"><strong>netlw_fao56</strong></a>(tmin, tmax, esTmin, radext, radsol, (/0,1/), False) ; 3.71 MJ/(m2-day); FAO 56 says 3.68 
+   netsw = <a href="netsw_fao56.html"><strong>netsw_fao56</strong></a>(radsol, albedo)                ; 17.16 MJ/(m2-day)
+   netrad= <a href="netrad_fao56.html"><strong>netrad_fao56</strong></a>(netsw, netlw)                 ; 13.45 MJ/(m2-day) ; FAO 56 says 13.48
+
+   dnom = slp + g*(1+0.34*u2)                          ; 0.236
+   dnom@long_name = "denominator in P-M"
+
+   ET0 = (0.408*(netrad-G)*slp + g*(900.0/(tavg+273))*u2*edef)/dnom                      ; <b>4.553 mm/day</b>
+   ET0@units = "mm/day"
+   <a href="../Built-in/print.html"><strong>print</strong></a>(ET0)
+
+   refevt = <strong>refevt_penman_fao56</strong>(tavg, netrad, G, g, u2, edef, slp, (/900.0, 0.34/), 0)   ; <b>4.553 mm/day </b>
+   <a href="../Built-in/print.html"><strong>print</strong></a>(refevt)
+
+;=====================
+; Use Hargreaves approximation: tmin, tmax, radext
+;=====================
+   refevt_hg  = <a href="refevt_hargreaves_fao56.html"><strong>refevt_hargreaves_fao56</strong></a>( tmin, tmax, radext, (/0,1,0/) )                ; <b>5.03 mm/day</b>
+   <a href="../Built-in/print.html"><strong>print</strong></a>(refevt_hg)
+</pre>
+The output is here
+<pre>
+     Variable: ET0
+     Type: float
+     Total Size: 4 bytes
+                 1 values
+     Number of Dimensions: 1
+     Dimensions and sizes:	[1]
+     Coordinates: 
+     Number Of Attributes: 1
+       units :	mm/day
+     (0)	<b>4.55321</b>
+     
+     
+     Variable: refevt
+     Type: float
+     Total Size: 4 bytes
+                 1 values
+     Number of Dimensions: 1
+     Dimensions and sizes:	[1]
+     Coordinates: 
+     Number Of Attributes: 5
+       long_name :	Penmon-Monteith reference evapotranspiration (month)
+       units :	mm/day
+       url :	http://www.fao.org/docrep/X0490E/x0490e07.htm
+       info :	FAO 56; EQN 6; refevt_penman_fao56
+       parameters :	cc(0)=900 cc(1)=0.34
+     (0)	<b>4.55321</b>
+     
+     
+     Variable: refevt_hg
+     Type: float
+     Total Size: 4 bytes
+                 1 values
+     Number of Dimensions: 1
+     Dimensions and sizes:	[1]
+     Coordinates: 
+     Number Of Attributes: 4
+       long_name :	reference evapotranspiration: Hargreaves 
+       units :	mm/day
+       url :	http://www.fao.org/docrep/X0490E/x0490e07.htm
+       info :	FAO 56; EQN 52; refevt_hargreaves_fao56
+     (0)	<b>5.033028</b>
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Crop/refevt_penman_fao56.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:08 GMT -->
+</html>

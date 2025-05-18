@@ -1,0 +1,63 @@
+;----------------------------------------------------------------------
+; This is a basic NCL template for drawing vectors over a map.
+;
+; Use "vector_template.ncl" if you don't need to put the
+; vectors over a map.
+;----------------------------------------------------------------------
+; Note: as of NCL V6.2.0, you don't need these load commands
+;----------------------------------------------------------------------
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;---Read data
+  filename = "file.nc"
+  a = addfile(filename,"r")
+  u = a->u
+  v = a->v 
+
+  lat = a->lat      ; Only necessary if "u" and "v" don't 
+  lon = a->lon      ; contain 1D coordinate arrays.
+
+;---Open workstation
+  wks = gsn_open_wks("x11","vector_map")   ; "ps", "pdf", "png"
+
+;---Set some resources
+  res                      = True
+
+  res@gsnMaximize          = True     ; maximize plot in frame
+
+;---Set these two if arrows are too short
+  res@vcRefLengthF         = some floating point value
+  res@vcRefMagnitudeF      = some floating point value
+
+  res@vcMinFracLengthF     = 0.05     ; length of min vector as fraction
+                                      ; of reference vector.
+
+  res@vcMinDistanceF       = 0.02     ; "thin" vectors
+
+  res@vcMonoLineArrowColor = False    ; color arrows based on magnitude
+  res@vcLevelPalette       = "rainbow"         ; define colormap for vectors
+
+  res@vcGlyphStyle         = "CurlyVector"     ; turn on curly vectors
+
+  res@tiMainString         = "Data file is " + filename
+
+;---Set to False if regional data or setting vfXArray/vfYArray
+  res@gsnAddCyclic      = True
+
+  res@vfXArray          = lon   ; Only necessary if u and v don't
+  res@vfYArray          = lat   ; contain 1D coordinate arrays
+
+;
+; Zoom in on map if desired. There are other ways to zoom in on
+; map if you have a different projection, like lambert conformal.
+;
+  res@mpMinLatF         = min(lat)
+  res@mpMaxLatF         = max(lat)
+  res@mpMinLonF         = min(lon)
+  res@mpMaxLonF         = max(lon)
+  res@mpCenterLonF      = (res@mpMinLonF + res@mpMaxLonF) / 2.
+
+  vector = gsn_csm_vector_map(wks,u,v,res)
+end

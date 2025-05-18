@@ -1,0 +1,763 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/regline_stats.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:08 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions ( statistics)">
+<meta name="keywords" content="regline_stats">
+<title>regline_stats</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+unknown
+<br>
+<h1>regline_stats</h1>
+
+<p>
+Performs simple linear regression including confidence estimates, an ANOVA table and 95% mean response estimates.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.2.0">version 6.2.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function regline_stats (
+		x [*] : numeric,  
+		y [*] : numeric   
+	)
+
+	<a href="../return_val.html">return_val</a> [1] :  float or double with many attributes
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>A one dimensional array of size <i>N</i> containing the independent variable. 
+Missing values, indicated by <b>_FillValue</b>, are allowed but are ignored.
+</p>
+<em>y</em>
+<p class=indent>A one-dimensional array of length <i>N</i> containing the corresponding dependent variable.
+Missing values, indicated by <b>_FillValue</b>, are allowed but are ignored.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A scalar containing the calculated linear regression coefficient.
+In addition, many statistical quantities are returned as attributes
+of <em>b</em>. The 95% limits were introduced in version 6.4.0
+<p>
+The return value will be of type double if
+<em>x</em> or <em>y</em> is double, and float otherwise.
+<P>
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<strong>regline_stats</strong> performs a simple linear
+regression. The calculated <b>regression coefficient</b> represents 
+the rate of change in the dependent variable for a unit change 
+in the independent variable. This coefficient is sometimes 
+referred to as the <b>slope</b> or <b>trend</b>.
+<P>
+The user may wish to take into account the uncertainty associated
+with each estimated parameter and the overall uncertainty. 
+This information is returned as the attributes <b>stderr</b>, <b>tval</b> 
+and <b>pval</b>.  In addition, an 
+<b>AN</B>alysis <b>O</B>f <b>VA</B>riance [<b>ANOVA</b>] table
+is returned. 
+<P>
+Any missing values are ignored.
+<br> 
+Missing values should be indicated by the <a href="../../Language/fillval.html">_FillValue</a> attribute.
+<P>
+Chad Hermann created a function <b>linreg</b> which derived many of 
+the same statistics. It is written entirely in NCL and is 
+<a href="../../../Applications/Scripts/linreg.html"><b>here</b></a>.
+<P>
+Debasish Mazumder (NCAR/RAL) submitted code for the 95% mean response about the
+regression line. This was included within the
+<strong>regline_stats</strong> in the 6.4.0 release of NCL.
+A reference for this is Chapter 11 of
+<pre>
+        Applied Statistics and Probability for Engineers
+        D. C. Montgomery and G. C. Runge
+        ISBN: 0471204544
+</pre>
+<p>
+From the WWW:
+<ul>
+<li> the <b>confidence</b> intervals tells you about the likely location of the true population parameter
+<li> the <b>prediction</b> intervals must account for both the uncertainty in knowing the value of the 
+population mean, plus data scatter. So a prediction interval is always wider than a confidence interval.
+</ul>
+<p>
+<B>GRAPHICS NOTE:</B> For the computations, the <em>x</em> and <em>y</em> pairs 
+can be in any order. However,
+subsequent use for plotting lines often requires that the <em>x</em> and 
+the associated <em>y</em> be in monotonically {in/de}creasing order. See Example 2 below.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Built-in/regline.html"><strong>regline</strong></a>,
+<a href="../Built-in/reg_multlin.html"><strong>reg_multlin</strong></a>,
+<a href="reg_multlin_stats.html"><strong>reg_multlin_stats</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+See examples <a href="../../../Applications/regress.html"><b>regress_1a.ncl</b></a> 
+and
+<a href="../../../Applications/regress.html"><b>regress_1b.ncl</b></a> for plot and usage of returned information.
+<B>Example 1</B><p>
+
+ The following example was taken from:
+<pre>
+
+    Brownlee
+    Statistical Theory and Methodology
+    J Wiley 1965   pgs: 342-346     QA276  .B77
+
+</pre>
+See example <a href="../../../Applications/regress.html"><b>regress_1a.ncl</b></a> for plot and usage of returned information.
+<pre>
+
+      x    = (/ 1190.,1455.,1550.,1730.,1745.,1770. \
+             ,  1900.,1920.,1960.,2295.,2335.,2490. \
+             ,  2720.,2710.,2530.,2900.,2760.,3010. /)
+      
+      y    = (/ 1115.,1425.,1515.,1795.,1715.,1710. \
+             ,  1830.,1920.,1970.,2300.,2280.,2520. \
+             ,  2630.,2740.,2390.,2800.,2630.,2970. /)
+      
+
+   rc =  <strong>regline_stats</strong>(x,y) ; linear regression coef
+   <a href="../Built-in/print.html"><strong>print</strong></a>(rc)
+
+</PRE>
+The <a href="../Built-in/print.html"><strong>print</strong></a>(rc) yielded the following (edited) output.
+All the comments were manually added.
+<PRE>
+
+        Variable: rc
+        Type: float
+        Total Size: 4 bytes
+                    1 values
+        Number of Dimensions: 1
+        Dimensions and sizes:	[1]
+        Coordinates: 
+        Number Of Attributes: 38
+          _FillValue :	9.96921e+36
+
+          long_name :	simple linear regression
+          model :	Yest = b(0) + b(1)*X
+
+          N :	18                              ; # of observations
+          NP :	1                               ; # of predictor variables
+          M :	2                               ; # of returned coefficients
+          bstd :	(  0, 0.9947125 )       ; standardized regression coefficient
+                                                ; [ignore 1st element]
+
+                                                ; <B>ANOVA</B> information: SS=>Sum of Squares
+          SST :	4823324                         ; Total SS:      sum((Y-Yavg)^2) 
+          SSE :	50871.91                        ; Residual SS:   sum((Yest-Y)^2)
+          SSR :	4772452                         ; sum((Yest-Yavg)^2)
+
+          MST :	283724.9
+          MSE :	3179.494
+          MSE_dof :	16
+          MSR :	4772452
+
+          RSE :	56.387                          ; residual standard error; sqrt(MSE)
+          RSE_dof :	15
+
+          F :	1501.01                         ; MSR/MSE
+          F_dof :	( 1, 16 )
+          F_pval :	1.51066e-17
+
+          r2 :	0.989453                        ; square of the Pearson correlation coefficient 
+          r :	0.9947125                       ; multiple (overall) correlation: sqrt(r2)
+          r2a :	0.9887938                       ; adjusted r2... better for small N
+
+          fuv :	0.01054698                      ; (1-r2): fraction of variance of the regressand
+                                                ; (dependent variable) Y which cannot be explained
+                                                ;  i.e., which is not correctly predicted, by the 
+                                                ; explanatory variables X.
+
+          Yest :	[ARRAY of 18 elements]  ; Yest = b(0) + b(1)*x 
+          Yavg :	2125.278                ; <a href="../Built-in/avg.html"><strong>avg</strong></a>(y)
+          Ystd :	532.6583                ; <a href="../Built-in/stddev.html"><strong>stddev</strong></a>(y)
+          Xavg :	2165                    ; <a href="../Built-in/avg.html"><strong>avg</strong></a>(x)
+          Xstd :	543.6721                ; <a href="../Built-in/stddev.html"><strong>stddev</strong></a>(x)
+
+          stderr :	( 56.05802, 0.02515461 )     ; std. error of each <b>b</b>
+          tval :	( 0.2738642, 38.74285 )      ; t-value
+          pval :	( 0.7874895, 5.017699e-18 )  ; p-value
+
+                                                ; following <b><font color=green>added in version 6.4.0</font></b>
+          b95  :        ( 0.9212361, 1.027887 ) ;  2.5% and 97.5% regression coef. confidence intervals
+          y95  :        ( -459.9983, 490.703 )  ;  2.5% and 97.5% y-intercept confidence intervals
+          YMR025 :      [ARRAY of 18 elements]  ;  2.5% mean response
+          YMR975 :      [ARRAY of 18 elements]  ; 97.5% mean response
+          YPI025 :	[ARRAY of 18 elements]  ;  2.5% predition interval
+          YPI975 :	[ARRAY of 18 elements]  ; 97.5% predition interval
+
+                                                ; <b><font color=red>Original <a href="../Built-in/regline.html"><strong>regline</strong></a> attributes</font></b> 
+                                                ; provided for backward cmpatibility
+          <b><font color=red>nptxy</font></b> :	18
+          <b><font color=red>xave</font></b> :	2165
+          <b><font color=red>yave</font></b> :	2125.278
+          <b><font color=red>rstd</font></b> :	56.387
+          <b><font color=red>yintercept</font></b> :	15.35228
+
+          b :	( 15.35228, 0.9745615 )         ; b(0) + b(1)*x
+
+        (0)	0.9745615                       ; regression coefficient 
+
+</PRE>
+<p>
+<B>Example 2</B><p>
+
+ The following example was taken from:
+<a href="http://www.stat.ucla.edu/~hqxu/stat105/pdf/ch11.pdf"><b>http://www.stat.ucla.edu/~hqxu/stat105/pdf/ch11.pdf</b></a>. 
+It is a commonly used WWW example.  AS noted above,  
+<strong>regline_stats</strong> does not require any special ordering. However for subs
+Here the independent values (<em>x</em>) and associated dependent variables (<em>y</em>) 
+are placed into ascending order for subsequent plotting. 
+<p>
+See example <a href="../../../Applications/regress.html"><b>regress_1b.ncl</b></a> for plot and usage of returned information.
+<p>
+<pre>
+
+;                      Hydrocarbon level (%)    
+    x  = (/ 0.99, 1.02, 1.15, 1.29, 1.46, 1.36, 0.87, 1.23, 1.55, 1.40  \
+          , 1.19, 1.15, 0.98, 1.01, 1.11, 1.20, 1.26, 1.32, 1.43, 0.95 /)
+;                             Purity     (%)    
+    y  = (/ 90.01, 89.05, 91.43, 93.74, 96.73, 94.45, 87.59, 91.77, 99.42, 93.65  \
+          , 93.54, 92.52, 90.56, 89.54, 89.85, 90.39, 93.25, 93.41, 94.98, 87.33  /)  
+
+; perform regression on the variables
+
+    rc =  <strong>regline_stats</strong>(xx,yy) ; linear regression coef
+    <a href="../Built-in/print.html"><strong>print</strong></a>(rc)
+
+; For graphical purposes, it is recommended that the independent variable be 
+; monotonically {in/de}creasing
+
+    ii =  <a href="../Built-in/dim_pqsort_n.html"><strong>dim_pqsort_n</strong></a>(x,1,0)
+    xx = x(ii)
+    yy = y(ii)
+
+    ...
+
+    plot = <a href="../../Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a>(wks,xx,yy, res)
+
+</pre>
+yielded
+<pre>
+
+        Variable: rc
+        Type: float
+        Total Size: 4 bytes
+                    1 values
+        Number of Dimensions: 1
+        Dimensions and sizes:	[1]
+        Coordinates: 
+        Number Of Attributes: 41
+          _FillValue :	9.96921e+36
+          long_name :	simple linear regression
+
+          model :	Yest = b(0) + b(1)*X
+          N :	20
+          NP :	1
+          M :	2
+          bstd :	(  0, 0.9367155 )
+          SST :	173.3769
+          SSE :	21.24981
+          SSR :	152.1272
+          MST :	9.125101
+          MSE :	1.180545
+          MSE_dof :	18
+          MSR :	152.1272
+          RSE :	1.086529
+          RSE_dof :	17
+          F :	128.8618
+          F_dof :	( 1, 18 )
+          F_pval :	1.227305e-09
+          r2 :	0.8774363
+          r :	0.9367157
+          r2a :	0.8706272
+          fuv :	0.1225637
+          Yest :	[ARRAY of 20 elements]
+          Yavg :	92.1605
+          Ystd :	3.020778
+          Xavg :	1.196
+          Xstd :	0.1893034
+          stderr :	( 1.593479, 1.316763 )
+          tval :	( 46.61706, 11.35169 )
+          pval :	( 4.660713e-21, 6.580665e-10 )
+          nptxy :	20
+          xave :	1.196
+          yave :	92.1605
+          rstd :	1.086529
+          yintercept :	74.28331
+        
+          b :	( 74.28331, 14.94748 )
+          b95 :	( 12.18108, 17.71389 )
+          y95 :	( 60.07995, 88.48667 )
+          YMR025 :      [ARRAY of 20 elements]  ;  2.5% mean response
+          YMR975 :      [ARRAY of 20 elements]  ; 97.5% mean response
+          YPI025 :	[ARRAY of 20 elements]  ;  2.5% predition interval
+          YPI975 :	[ARRAY of 20 elements]  ; 97.5% predition interval
+
+        (0)	14.94748
+</pre>
+
+<b>Example 3</b><p>
+
+Use the 'Old Faithful' data set used by several 
+<a href="https://www.r-project.org/"><b>R</b></a> regression examples
+Here, we use NCL's <a href="../Built-in/regline.html"><strong>regline</strong></a> and the ANOVA version 
+<strong>regline_stats</strong>.
+<p>
+See <a href="../../../Applications/regress.html"><b>regress_8.ncl</b></a>
+for a plot of the data and the regression line.
+<p>
+<pre>
+<b>Simplefied R code:</b>
+
+    eruption.lm = <b>lm</b>(eruptions ~ waiting, data=faithful)
+    <b>summary</b>(eruption.lm) 
+
+<b>Summary output:</b>
+
+    Call: 
+    lm(formula = eruptions ~ waiting, data = faithful) 
+     
+    Residuals: 
+        Min      1Q  Median      3Q     Max 
+    -1.2992 -0.3769  0.0351  0.3491  1.1933 
+     
+    Coefficients: 
+                Estimate Std. Error t value Pr(>|t|) 
+   <b> (Intercept) -1.87402    0.16014   -11.7   <2e-16 *** 
+    waiting      0.07563    0.00222    34.1   <2e-16 *** </b>
+    --- 
+    Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 
+     
+    Residual standard error: <b>0.497</b> on 270 degrees of freedom 
+    Multiple R-squared: <b>0.811</b>,      Adjusted R-squared: <b>0.811</b> 
+    <bF-statistic: 1.16e+03 on 1 and 270 DF,  p-value: <2e-16</b> 
+
+</pre>
+The NCL code is:
+<pre>
+
+   diri = "./"
+   fili = "faithful_R.dat"
+   pthi = diri + fili
+
+   ncol = 3
+   data = <a href="readAsciiTable.html"><strong>readAsciiTable</strong></a>(pthi, ncol, "float", 1)
+
+   x    = data(:,2)   ; eruption interval (minutes); independent
+   y    = data(:,1)   ; eruption duration (minutes); dependent
+   nxy  = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(y)
+
+   x@long_name = "Eruption Interval (min)"
+   y@long_name = "Eruption Duration (min)"
+
+  ;print("============ OLD Faithful================")
+  ;print(<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%4.0f", x)+"  "+<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%4.0f", y))
+  ;print("=========================================")
+
+;---Assorted statistics and regression line fit
+  ;rxy = <a href="../Built-in/escorc.html"><strong>escorc</strong></a>(x,y)         ;  cross-correlation
+  ;print(rxy)
+  ;print("=========================================")
+
+   rcl  = <a href="../Built-in/regline.html"><strong>regline</strong></a>(x, y)      ; basic linear regression
+   <a href="../Built-in/print.html"><strong>print</strong></a>(rcl)
+
+   df   = rcl@nptxy-2
+   prob = (1 - <a href="../Built-in/betainc.html"><strong>betainc</strong></a>(df/(df+rcl@tval^2), df/2.0, 0.5) )
+   print("=========================================")
+
+   rcl_anova =  <strong>regline_stats</strong>(x,y) ; linear regression: ANOVA
+   <a href="../Built-in/print.html"><strong>print</strong></a>(rcl_anova)
+   print("=========================================")
+</pre>
+The (slightly) edited output is:
+<pre>
+
+   Variable: <b>rcl</b>
+   Type: float
+   Total Size: 4 bytes
+               1 values
+   Number of Dimensions: 1
+   Dimensions and sizes:	[1]
+   Coordinates: 
+   Number Of Attributes: 7
+     _FillValue :	9.96921e+36
+     <b>yintercept :	-1.874016</b>
+     yave :	3.487783
+     xave :	70.89706
+     <b>nptxy :	272</b>
+     rstd :	0.002218541
+     <b>tval :	34.08904</b>
+   (0)	<b>0.07562795</b>
+   (0)	=========================================
+   
+   
+   Variable: <b>rcl_anova</b>
+   Type: float
+   Total Size: 4 bytes
+               1 values
+   Number of Dimensions: 1
+   Dimensions and sizes:	[1]
+   Coordinates: 
+   Number Of Attributes: 44
+     _FillValue :	9.96921e+36
+     long_name :	simple linear regression
+     <b>model :	Yest = b(0) + b(1)*X</b>
+
+     N :	272
+     NP :	1
+     M :	2
+     bstd :	(  0, 0.9008112 )
+     SST :	353.0395
+     SSE :	66.56177
+     SSR :	286.4776
+     MST :	1.302729
+     MSE :	0.2465251
+     MSE_dof :	270
+     MSR :	286.4776
+     RSE :	0.4965129
+     RSE_dof :	269
+     <b>F :	1162.063</b>
+     <b>F_dof :	( 1, 270 )</b>
+     <b>F_pval :	 0</b>
+     <b>r2 :	0.8114605</b>
+     r :	0.900811
+     r2a :	0.8107622
+     fuv :	0.1885395
+     Yest :	<ARRAY of 272 elements>
+     Yavg :	3.487783
+     Ystd :	1.141371
+     Xavg :	70.89706
+     Xstd :	13.59497
+     stderr :	( 0.1601433, 0.002218541 )
+     <b>tval :	( -11.70212, 34.08904 )</b>
+     <b>pval :	( 7.089058e-26,  0 )</b>
+     nptxy :	272
+     xave :	70.89706
+     yave :	3.487783
+     <b>rstd :	0.4965129</b>
+     <b>yintercept :	-1.874016</b>
+     <b>b :	( -1.874016, 0.07562795 )</b>
+     <b>tnull :	34.08905</b>
+     b95 :	( 0.07126011, 0.07999578 )
+     y95 :	( -2.189304, -1.558728 )
+     YMR025 :	<ARRAY of 272 elements>
+     YMR975 :	<ARRAY of 272 elements>
+     YPI025 :	<ARRAY of 272 elements>
+     YPI975 :	<ARRAY of 272 elements>
+   <b>(0)	0.07562795</b>
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/regline_stats.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:08 GMT -->
+</html>

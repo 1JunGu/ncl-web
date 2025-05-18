@@ -1,0 +1,209 @@
+;----------------------------------------------------------------------
+; This example uses ESMF regridding software to regrid from an
+; unstructured SE grid to a CAM finite volume grid (96 x 144).
+;----------------------------------------------------------------------
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/esmf/ESMF_regridding.ncl"
+
+;---Specify remap method  
+    map_method = "patch"     ; "bilinear" , "patch",  "conserve"
+
+;---Specify original source SE grid resolution
+    SE_res       = "ne30"
+
+;---Specify name of destination grid
+    DstGridName  = "FV_96x144"
+
+;---Data file containing source file(s) and variables
+    SE_dir   = "/ptmp/shea/SE_REGRID/ORIG_FILES/"
+    SE_file  = systemfunc("cd "+SE_dir +" ; ls b.e11.B1850C5CN.ne30_g16.tuning.004.cam.h0.*.nc")
+    SE_nfile = dimsizes(SE_file)
+    print(SE_file)
+
+;---Weight file (previously generated)
+    WGT_dir   = "/ptmp/shea/SE_REGRID/"
+    WGT_file  = "SE_"+str_upper(SE_res)+"_to_"+DstGridName+"."+map_method+".nc"
+    WGT_path  = WGT_dir + WGT_file
+    print(WGT_file)
+
+;--- Output directory which will contain the regridded file(s)
+    RGRD_dir  = "/ptmp/shea/SE_REGRID/FV_REGRID/"
+
+;---Specify a list of 1D variables on the *source SE file* that should NOT be copied
+    var_in_exclude = (/"lat", "lon", "area", "date_written", "time_written"/)  
+
+;---Specify a list of variables on the source SE file that should be directly copied 
+    var_in_copy = (/"time_bnds"/)  
+
+;---Specify a list of variables to be regridded
+    var_out        = "All_Variables"     ; to be regridded
+   ;var_out        = (/"T","U10","V10")  ; selected variables
+
+;---Read from the weight file the method used to derive the remap weights
+    fWGT           = addfile(WGT_path, "r")
+
+;;; map_method     = fWGT@map_method       ; NO ... poor default
+    dst_grid_dims  = fWGT->dst_grid_dims
+    dst_mlon       = dst_grid_dims(0)
+    dst_nlat       = dst_grid_dims(1)
+    dst_lat        = fWGT->yc_b(::dst_mlon)
+    dst_lon        = fWGT->xc_b(:dst_mlon-1)
+
+;---Generate or read the latitudinal weights dir the FV grid
+    gw  = latRegWgt(dst_lat, "double", 0)
+    gw!0= "lat"
+
+;---Use the destination (FV) grid info on the weight file to create lat/lon
+    lat       = dst_lat                  ; get from weight file
+    lat@long_name = "latitude"
+    lat!0     = "lat"
+    lat@units = "degrees_north"
+    lat&lat   =  lat
+    nlat      = dimsizes(lat)            ; same as dst_nlat
+
+    lon       = dst_lon
+    lon@long_name = "longitude"
+    lon!0     = "lon"
+    lon@units = "degrees_east"
+    lon&lon   =  lon
+    mlon      = dimsizes(lon)            ; same as dst_mlon
+
+;---Get all variables on the SE file (Use 1st file)
+    sfile    = addfile(SE_dir + SE_file(0),"r")
+    var_in   = getfilevarnames( sfile )
+    nvar_in  = dimsizes(var_in)
+    print(var_in)
+
+    Opt_RGRD  = True
+
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;                    CREATE netCDF       
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ do nf=0,SE_nfile-1                      ; loop over all the source SE files
+                                         ; name of file with regridded data
+    RGRD_file = DstGridName+"."+map_method+"."+SE_file(nf)
+    RGRD_path = RGRD_dir + RGRD_file
+
+    system("/bin/rm -f "+RGRD_path)      ; delete any pre-existing file
+    rgrd_nc   = addfile(RGRD_path, "c")  ; open for writing
+
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;                    PREDEFINE MODE
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    setfileoption(rgrd_nc,"DefineMode",True)
+
+;===================================================================
+; create global attributes of the netCDF file containing regridded data
+;===================================================================
+    global    = True
+    global@separator2= "---------------------------------------"
+    copy_VarAtts(sfile, global)
+    global@separator1= "------- SOURCE FILE ATTRIBUTES --------"
+
+    if (isatt(sfile,"title")) then
+        global@TITLE = "REMAPPED: "+sfile@title
+    end if
+
+    global@remap         = "NCL: ESMF_regrid_with_weights"
+    global@map_method    = map_method
+    global@creation_date = systemfunc("date")
+    
+    fileattdef( rgrd_nc, global )        ; copy file attributes to netCDF file
+
+;===================================================================
+; predefine the coordinate dimension names and their sizes
+;===================================================================
+    dNames   = getvardims(sfile)       ; get level info from source file
+    dSizes   = getfiledimsizes(sfile)
+    ia       = ind(dNames.eq."lev" )   ; # of levels 
+    ib       = ind(dNames.eq."ilev")
+    klev     = dSizes(ia)
+    klevi    = dSizes(ib)
+                                       ; standard CAM dimensions
+    dimNames = (/"time",    "lat",    "lon", "lev",  "ilev", "nbnd", "chars"/)  
+    dimSizes = (/ -1   ,    nlat ,    mlon ,  klev,  klevi ,   2   ,    8   /) 
+    dimUnlim = (/ True ,    False,    False, False,  False , False , False  /)   
+    filedimdef(rgrd_nc,dimNames,dimSizes,dimUnlim)
+
+;--- The following are explicitly added because they are 'special'
+
+   filevardef(rgrd_nc, "lat", typeof(lat), getvardims(lat)) 
+   filevarattdef(rgrd_nc,"lat" ,lat)           
+
+   filevardef(rgrd_nc, "lon", typeof(lon), getvardims(lon)) 
+   filevarattdef(rgrd_nc,"lon" ,lon)           
+
+   filevardef(rgrd_nc, "gw", typeof(gw), getvardims(gw)) 
+   filevarattdef(rgrd_nc,"gw" ,gw)           
+
+;--- Loop over all variables and predfine meta data
+    do nv=0,nvar_in-1
+       if (.not.any(var_in(nv).eq.var_in_exclude)) then 
+        if(var_out(0).eq."All_Variables"          .or. \
+           any(var_in(nv).eq.var_out)             .or. \
+           any(var_in(nv).eq.var_in_copy)       ) then
+
+           rank_in = dimsizes(getfilevardimsizes(sfile, var_in(nv)))
+
+           if (rank_in .eq.1 .or. any(var_in(nv).eq.var_in_copy) ) then
+               filevardef(rgrd_nc, var_in(nv), getfilevartypes(sfile,var_in(nv)) \
+                                             , getfilevardims(sfile,var_in(nv))  )
+;
+           end if
+           if (rank_in .eq.2 .and. .not.any(var_in(nv).eq.var_in_copy)) then
+               filevardef(rgrd_nc, var_in(nv), getfilevartypes(sfile,var_in(nv)) \
+                                             , (/ "time", "lat", "lon" /)        )
+           end if
+           if (rank_in .eq.3) then
+               vdims = getfilevardims(sfile, var_in(nv))
+               filevardef(rgrd_nc, var_in(nv), getfilevartypes(sfile,var_in(nv)) \
+                                             , (/ "time", vdims(1),  "lat", "lon" /)        )
+           end if
+
+           dumAtts = new( 1, getfilevartypes(sfile,var_in(nv)))
+           varAtts = getfilevaratts(sfile, var_in(nv))
+           if (.not.ismissing(varAtts(0))) then
+               nAtts = dimsizes(varAtts)
+               do na=0,nAtts-1
+                  dumAtts@$varAtts(na)$ = sfile->$var_in(nv)$@$varAtts(na)$
+               end do
+               filevarattdef(rgrd_nc, var_in(nv) , dumAtts)
+           end if
+           delete([/varAtts, dumAtts/])   ; may change size next iteration
+        end if
+       end if
+    end do       ; nv
+
+;===================================================================
+; explicitly exit file definition mode. **NOT REQUIRED in NCL**
+;===================================================================
+    setfileoption(rgrd_nc,"DefineMode",False)
+            
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;        Write the basic and regridded data values to the predefined structures
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    rgrd_nc->lat = (/ lat /)
+    rgrd_nc->lon = (/ lon /)
+    rgrd_nc->gw  = (/ gw  /)
+
+    do nv=0,nvar_in-1
+       if (.not.any(var_in(nv).eq.var_in_exclude)) then 
+        if(var_out(0).eq."All_Variables"          .or. \
+           any(var_in(nv).eq.var_out)             .or. \
+           any(var_in(nv).eq.var_in_copy)       ) then
+
+           rank_in = dimsizes(getfilevardimsizes(sfile, var_in(nv)))
+
+           if (rank_in .eq.1 .or. any(var_in(nv).eq.var_in_copy) ) then
+               rgrd_nc->$var_in(nv)$ = (/ sfile->$var_in(nv)$ /)
+           end if
+           if (rank_in .ge.2 .and. .not.any(var_in(nv).eq.var_in_copy)) then
+               rgrd_nc->$var_in(nv)$ = (/ ESMF_regrid_with_weights(sfile->$var_in(nv)$,WGT_path,Opt_RGRD) /)
+           end if
+        end if
+       end if
+    end do       ; nv
+ end do          ; nf
+

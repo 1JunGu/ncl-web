@@ -1,0 +1,15 @@
+; Note: as of NCL V6.2.0, you don't need these load commands
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+  filename = "file.nc"
+  a = addfile(filename,"r")
+  u = a->u
+  v = a->v 
+
+  wks = gsn_open_wks("x11","vector_map")
+
+  res  = True
+  vector = gsn_csm_vector_map(wks,u,v,res)
+end

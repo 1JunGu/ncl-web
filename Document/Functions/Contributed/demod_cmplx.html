@@ -1,0 +1,458 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/demod_cmplx.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:21 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions ( statistics)">
+<meta name="keywords" content="demod_cmplx">
+<title>demod_cmplx</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+unknown
+<br>
+<h1>demod_cmplx</h1>
+
+<p>
+Perform a complex demodulation on a time series.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.4.0">version 6.4.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function demod_cmplx (
+		x      [*] : numeric,  
+		frqdem [1] : numeric,  
+		frqcut [1] : numeric,  
+		nwt    [1] : integer,  
+		ndim   [1] : integer,  
+		opt    [1] : logical   
+	)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>A one-dimensional (non-stationary) time series. The 'time' should be equally spaced.
+</p>
+<em>frqdem</em>
+<p class=indent>The demodulation frequency. The choice of <em>frqdem</em> may be guided by theory 
+or by a (say) Fourier analysis (e.g., a periodogram) of a series. 
+Allowed range:  0.0 < <em>frqdem</em> < 0.5
+</p>
+<em>frqcut</em>
+<p class=indent>The <i>low-pass filter</i> cutoff frequency. 
+The function  <a href="../Built-in/filwgts_lanczos.html"><strong>filwgts_lanczos</strong></a> is used to perform the low-pass filter.
+</p>
+<em>nwt</em>
+<p class=indent>A scalar indicating the total number of weights (must be an odd number; <em>nwt</em> &gt;= 3). 
+The more weights, the better the filter, but there is a greater loss of data at the ends.
+</p>
+<em>ndim</em>
+<p class=indent>The dimension of <em>x</em> containing the time series. Currently, this argument is ignored.
+Set to 0.
+</p>
+<em>opt</em>
+<p class=indent>A logical variable.  If the default value(s) are to be used, set to False.
+If <em>opt</em>=True, then the following attribute can be set:
+<PRE>   
+   opt = True
+   opt@<bi>nsigma</bi> = 2        ; default: nsigma=1
+</PRE>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A variable of type list containing three arrays of the same size, shape and type as <em>x</em>. 
+The three variables (arrays) are the:
+<pre>
+     (1) low-pass demodulated amplitudes.
+     (2) wrapped phases
+     (3) unwrapped phases
+</pre>
+<b>NOTE:</b>
+The variables within the list can be accessed directly. However, many users find it clearer to 
+explicitly extract the variables and subsequently delete the returned list variable. See examples.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The term demodulation refers to extracting (recovering) information about a <i>specific signal</i> 
+from a series containing information from many signals.  Here, complex demodulation is a method for 
+analyzing nonstationary time series about a harmonic (frequency) component.
+It enables the amplitude and phase of a particular frequency component of a time series to be 
+described as functions of time. It is local in that the components are allowed 
+to change slowly over time. 
+The purpose is to estimate the amplitude [ <b>A</b>(t) ] and phase [ <b>P</b>(t) ] of a slowly 
+varying oscillation in the neighborhood of <em>frqdem</em>, 
+The resulting series <b>must</b> be further post-processed via a low-pass filter. 
+This function uses <a href="../Built-in/filwgts_lanczos.html"><strong>filwgts_lanczos</strong></a>. 
+<p>
+As noted in the S-Plus "demod" function documentation: 
+<pre>
+     To better understand the results of complex demodulation 
+     several low pass filters should be tried: the smaller the low pass band, 
+     the less instantaneous in time but more specific in frequency is the result.
+</pre>
+<p>
+The complex demodulation process, implemented by <strong>demod_cmplx</strong>, consists of several steps:
+<pre>
+   (1) A demodulation frequency (<em>frqdem</em>) is specified.
+   (2) Compute the real (cosine) and imaginary (sine) components at each time step.
+   (3) Low pass filter each component using a specified low pass
+       cutoff frequency (<em>frqcut</em>).
+   (4) Compute the amplitudes [ <b>A</b>(t) ] and phases [ <b>P</b>(t) ]
+       using the low pass filtered components (3).
+</pre>
+<p>
+The phases returned in step (4) are calculated via <a href="../Built-in/atan2.html"><strong>atan2</strong></a> and range from -pi to +pi.
+These are called 'wrapped phases.' Unfortunately, the resulting phase plots may appear quite noisy and
+are difficult to interpret. For graphical and interpretation purposes, the wrapped phases are often
+unwrapped. NCL's <a href="unwrap_phase.html"><strong>unwrap_phase</strong></a> can be 
+<p>
+References:
+<pre>
+     <a href="https://iujfk.files.wordpress.com/2013/04/bloomfield-2000-fourier-analysis-of-time-series-an-introduction-2ed.pdf"><b>Fourier Analysis of Time Series</b></a>
+      Peter Bloomfield
+      Wiley, 2000
+
+      Bloomfield, P. (1976)
+      Fourier Analysis of Time series: An Introduction
+      Wiley , 1976:  Chapter 6
+
+      Kessler: U. Washington: <a href="http://faculty.washington.edu/kessler/generals/complex-demodulation.pdf"><b>Complex Demodulation</b></a>
+
+      PMEL: <a href="http://www.pmel.noaa.gov/maillists/tmap/ferret_users/fu_2007/pdfHMANlJLqCE.pdf"><b>Complex Demodulation</b></a>
+
+      Thompson, R. (1999):  Journal of Hydrology 224: 169-183
+      <a href="https://www.geos.ed.ac.uk/homes/thompson/Precip.pdf"><b>A time-series analysis of the changing seasonality of precipitation
+                           in the British Isles and neighbouring areas</b></a>
+</pre>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Built-in/filwgts_lanczos.html"><strong>filwgts_lanczos</strong></a>, <a href="../Built-in/atan2.html"><strong>atan2</strong></a>,
+<a href="../Built-in/wgt_runave_n.html"><strong>wgt_runave_n</strong></a>, <a href="unwrap_phase.html"><strong>unwrap_phase</strong></a>,
+<a href="../Built-in/specx_anal.html"><strong>specx_anal</strong></a>, <a href="../Built-in/fourier_info.html"><strong>fourier_info</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+See worked examples on the <a href="../../../Applications/spec.html">
+<b>Spectral Analysis and Complex Demodulation</b></a> page.
+<p>
+<b>Example 1</b>: Let x(time), frqdem=0.21, frqcut=0.015, nwt=71,  ndim=0, then
+<pre>
+   demod_x = <strong>demod_cmplx</strong>(x, frqdem, frqcut, nwt, ndim, False)   ; demod_x[3]
+   <a href="../Built-in/print.html"><strong>print</strong></a>(demod_x)                    ; type list
+                                                      
+                                     ; For clarity, explicitly extract the 3 variables
+   amp     = demod_x[0]              ; [0] list syntax;     amp(time)
+   phase_1 = demod_x[1]              ; [1]              phase_1(time)    ; wrapped
+   phase_2 = demod_x[2]              ; [2]              phase_2(time)    ; unwrapped
+   <a href="../Built-in/delete.html"><strong>delete</strong></a>(demod_x)                   ; no longer needed
+
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(amp)
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(phase_1)
+   <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(phase_2)
+
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/demod_cmplx.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:21 GMT -->
+</html>

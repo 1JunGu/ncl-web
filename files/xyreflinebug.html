@@ -1,0 +1,29 @@
+; To fix the bug, download the gsn_csm_640_fix.ncl file and uncomment this line.
+
+  f     = addfile ("$NCARG_ROOT/lib/ncarg/data/cdf/uv300.nc","r")
+  u     = f->U 
+
+  wks   = gsn_open_wks ("png","xyreflinebug")
+
+  res                       = True
+  res@gsnMaximize           = True
+
+  res@xyMarkLineMode        = "MarkLines"
+  res@xyLineThicknessF      = 3.0
+  res@xyMarkerThicknessF    = 2.0
+  res@xyMarkerSizeF         = 0.01
+  res@xyMarkers             = 16
+  res@xyMarkerColor         = "seagreen"
+
+
+  res@gsnYRefLine           = 21
+  res@gsnYRefLineColor      = "saddlebrown"
+  res@gsnYRefLineThicknessF = 5.0
+
+  res@tiMainFontHeightF     = 0.018
+  res@tiMainString          = "NCL Version " + get_ncl_version()
+
+  plot1 = gsn_csm_xy (wks,u&lat,u(0,:,{82}),res)
+
+
+

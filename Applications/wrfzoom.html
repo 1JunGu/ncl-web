@@ -1,0 +1,518 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/wrfzoom.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:42:59 GMT -->
+<head>
+<meta name="keywords" content="NCL, graphics, visualization, WRF, zooming in on maps">
+<TITLE>NCL: WRF plotting - zooming in on maps</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_models.html">Models</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL: WRF plotting - zooming in on maps</h1>
+<div class=mainimage>
+<img src="Images/wrf_zoom_1_2_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+This page illustrates different ways to zoom in on
+WRF-ARW plots drawn over maps.
+<p>
+
+Currently, three methods are illustrated below:
+
+<ol>
+<li>Using <a href="../Document/Functions/WRF_arw/wrf_contour.html"><strong>wrf_contour</strong></a> or
+<a href="../Document/Functions/WRF_arw/wrf_vector.html"><strong>wrf_vector</strong></a> with
+<a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a> to plot the data,
+which uses the native WRF map projection defined on the file.
+<p>
+
+<li>Using <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a> 
+with <a href="../Document/Functions/WRF_arw/wrf_map_resources.html"><strong>wrf_map_resources</strong></a>
+to plot the data in the native WRF map projection defined
+on the file.
+<p>
+
+<li>Using <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a> to
+plot the data, but in a different projection than what is defined on
+the file.
+</ol>
+<p>
+
+The first two methods require setting the special <b>ZoomIn</b> option
+to True, and setting the <b>Xstart</b>, <b>Xend</b>, <b>Ystart</b>,
+and <b>Yend</b> options as described below.<p>
+
+The second method requires that you read the latitude / longitude
+variables off the WRF file (they usually have names like "XLAT" and
+"XLONG").
+
+</div>
+
+<div class=ex>
+<!--wrf_zoom_1-->
+<a name=ex1></a>
+<a href="Images/wrf_zoom_1_1_lg.png">
+<img src="Images/wrf_zoom_1_1_sm.png" align=left border=2></a>
+<a href="Images/wrf_zoom_1_2_lg.png">
+<img src="Images/wrf_zoom_1_2_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_zoom_1.html">wrf_zoom_1.ncl</a>: 
+
+This script creates two plots using wrf_<i>xxxx</i> plotting functions:
+<p>
+
+<ol>
+<li>A simple filled contour plot of the HGT variable read off a WRF output file.
+<li>The same data, but zoomed in on the upper left corner of the map.
+</ol>
+<p>
+
+In order to zoom in on WRF-ARW data and keep the same map projection
+that is defined on the file, you must:
+
+<ul>
+
+<li>Calculate the indexes of the zoomed in area of interest.
+
+<li>Use the indexes to subset the variable(s) you are interested in
+plotting, before
+calling <a href="../Document/Functions/WRF_arw/wrf_contour.html"><strong>wrf_contour</strong></a> or
+<a href="../Document/Functions/WRF_arw/wrf_vector.html"><strong>wrf_vector</strong></a>.
+
+<li>Use the same indexes for setting the
+special <b>Xstart</b>, <b>Xend</b>, <b>Ystart</b>, and <b>Yend</b>
+resources, and set the special <b>ZoomIn</b> resource to True before
+calling
+<a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a>.
+</ul>
+<p>
+A Python version of the wrf_zoom_1_2 projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/WRF/NCL_WRF_zoom_1_2.html#sphx-glr-gallery-wrf-ncl-wrf-zoom-1-2-py">here</a>.
+</div>
+
+<div class=ex>
+<!--wrf_zoom_2-->
+<a name=ex2></a>
+<a href="Images/wrf_zoom_2_1_lg.png">
+<img src="Images/wrf_zoom_2_1_sm.png" align=left border=2></a>
+<a href="Images/wrf_zoom_2_2_lg.png">
+<img src="Images/wrf_zoom_2_2_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_zoom_2.html">wrf_zoom_2.ncl</a>: This example
+plots the same data as the previous example, except this time
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a> is used to plot the data.
+<p>
+
+The data is still being plotted in the native WRF map projection, so
+you must call <a href="../Document/Functions/WRF_arw/wrf_map_resources.html"><strong>wrf_map_resources</strong></a>
+in order to set the correct map resources.  You must also call this
+function after setting the <b>ZoomIn</b> / <b>Xstart</b> / <b>Xend</b> /
+/ <b>YStart</b> / <b>YEnd</b> resources, or the map won't be properly
+zoomed.
+<p>
+
+The reason for using <a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>
+instead of <a href="../Document/Functions/WRF_arw/wrf_contour.html"><strong>wrf_contour</strong></a>
+and <a href="../Document/Functions/WRF_arw/wrf_map_overlays.html"><strong>wrf_map_overlays</strong></a> is simply if you don't want
+all the extra titles and layout that the wrf_<i>xxxx</i> functions give you.
+
+</div>
+
+<div class=ex>
+<!--wrf_zoom_3-->
+<a name=ex3></a>
+<a href="Images/wrf_zoom_3_1_lg.png">
+<img src="Images/wrf_zoom_3_1_sm.png" align=left border=2></a>
+<a href="Images/wrf_zoom_3_2_lg.png">
+<img src="Images/wrf_zoom_3_2_sm.png" align=left border=2></a>
+<a href="Scripts/wrf_zoom_3.html">wrf_zoom_3.ncl</a>:  This
+example plots the same data as the previous two examples, except
+the data is overlaid on a standard lat/lon map projection. 
+<p>
+
+In order to plot data in a non-native projection, you must:
+
+<ul>
+
+<li>Read the 2D lat/lon arrays off the file and attach them as special
+lat2d / lon2d attributes to the data being plotted.
+
+<li>Zoom in on the area of interest by setting desired NCL map resources.
+</ul>
+<p>
+
+You no longer need to
+call <a href="../Document/Functions/WRF_arw/wrf_map_resources.html"><strong>wrf_map_resources</strong></a> or set the
+special ZoomIn/X/YStart/End resources when zooming in.
+<p>
+
+Note that if you plot WRF-ARW data in a different map projection than
+what's defined on the WRF file, you may see the grid is slightly skewed.
+The results are still correct, but the image will be oriented a little
+differently. 
+<p>
+
+The reason for plotting WRF-ARW data in a non-native projection may be
+if you need to compare WRF data to another data variable that is
+defined on a different map projection.
+
+</div>
+<div class=ex>
+<!--dataonmap_zoom_10-->
+<a name=ex10zoom></a>
+<a href="Images/dataonmap_zoom_10_1_lg.png">
+<img src="Images/dataonmap_zoom_10_1_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_zoom_10_2_lg.png">
+<img src="Images/dataonmap_zoom_10_2_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_zoom_10.html">dataonmap_zoom_10.ncl</a><br>
+<b>Curvilinear grid</b><p>
+<b>Data</b>: <a href="Data/cdf/wrfout_d01_2003-07-15_00_00_00.html">wrfout_d01_2003-07-15_00:00:00</a> (NetCDF WRF output file)
+<p>
+
+This example plots the Q2 variable read off a WRF output file and
+illustrates yet another way to zoom in on the data, by actually
+selecting a lat/lon area of interest, instead of "the upper left domain" 
+like the previous examples. 
+
+<p>
+
+This example shows two ways to zoom in on WRF-ARW data: 1) using the
+same native WRF map projection, or 2) plotting the data in a different
+map projection.
+<p>
+
+The first plot shows how to plot the data in the native map
+projection by first using the
+<a href="../Document/Functions/WRF_arw/wrf_user_ll_to_xy.html"><strong>wrf_user_ll_to_xy</strong></a> function to
+calculate the x,y index locations into the 'q2' array that represent
+the approximate lat/lon area of interest. These index values are used
+with the <b>ZoomIn</b> resource to set the special <b>Xstart</b>, <b>Xend</b>,
+<b>Ystart</b>, and <b>Yend</b> resources before you call
+<a href="../Document/Functions/WRF_arw/wrf_map_resources.html"><strong>wrf_map_resources</strong></a> to set the
+correct NEW native map projection parameters.
+<p>
+
+The second plot shows how to plot the data using the 2D lat/lon arrays
+read off the file. In this case, you don't need the special index
+values, because NCL will use the lat/lon arrays to figure out the
+correct subset of the data to plot.
+<p>
+
+You may notice that the two plots are not plotted in the exact same
+lat/lon area.  This is because the lat/lon corners of the first plot
+are only *approximately* equal to the requested lat/lon area of
+interest. The <a href="../Document/Functions/WRF_arw/wrf_user_ll_to_xy.html"><strong>wrf_user_ll_to_xy</strong></a>
+function gives you the x,y indexes that are closest to the actual
+lat/lon area of interest.
+<p>
+
+The second plot is the exact area requested, because NCL now has the
+actual lat/lon arrays, and can use this to interpolate the data 
+as needed, in the area of interest.
+<p>
+
+For another example of subsetting a WRF map domain, see the
+"wrf_Zoom.ncl" example
+at <a href="http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Graphics/NCL/Examples/SPECIAL/wrf_Zoom.htm">http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Graphics/NCL/Examples/SPECIAL/wrf_Zoom.htm</a>
+
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/wrfzoom.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:43:06 GMT -->
+</html>
+
+

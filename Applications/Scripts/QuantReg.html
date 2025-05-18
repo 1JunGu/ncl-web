@@ -1,0 +1,44 @@
+#! /usr/bin/env Rscript
+# R script that performs quantile regression using R package quantreg
+# See https://cran.r-project.org/web/packages/quantreg/quantreg.pdf for
+# all options and parameter values
+# Note: quantreg has to be installed if not present already
+# See https://cran.r-project.org/web/packages/quantreg/vignettes/rq.pdf
+#
+# Author: L. Terray 15/08/2018 CERFACS
+# ---------------------------------------------------------------------
+args = commandArgs(trailingOnly=TRUE)
+if (length(args)!=3) {
+   stop("Three arguments must be supplied.n", call.=FALSE)
+   }
+# load library
+library(quantreg)
+
+# Read data coming from ncl script
+dat = read.csv(args[1])
+
+# Define quantile sequence
+tau_seq <- seq(0.025,0.975,0.025)
+
+# Calculate regression coefficient for the first quantile
+qreg <- rq(dat$tmx ~ dat$time, tau = tau_seq[1], method="br")
+
+# Calculate 95% confidence interval (alpha = 0.05)
+out <- summary(qreg, se="rank", alpha = 0.05)
+
+# Write results (Coeff + Conf.Int) in file rqfit.csv
+write.table(out$coefficients,file = args[2], append = FALSE, quote = TRUE,sep = " ", col.names = FALSE, row.names = FALSE)
+
+# Loop on remaining quantiles, repeating all the above steps
+for(i in 2:length(tau_seq)){
+      qreg <- rq(dat$tmx ~ dat$time, tau = tau_seq[i], method="br")
+      out <- summary(qreg, se="rank", alpha = 0.05)
+      write.table(out$coefficients,file = args[2], append = TRUE, quote = TRUE,sep = " ", col.names = FALSE, row.names = FALSE)
+      }
+      
+# Calculate also Ordinary least square (ols) coeff. and standard error for comparison
+ols <- lm(dat$tmx ~ dat$time)
+lfi <- summary(lm(dat$tmx ~ dat$time))
+# Write coeff and std.err on file rgols.csv
+write.table(lfi$coefficients,file = args[3], append = FALSE, quote = TRUE,sep = " ", col.names = FALSE, row.names = FALSE)
+

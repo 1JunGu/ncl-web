@@ -1,0 +1,523 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/wrf_cape_3d.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:23 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (rip)">
+<meta name="keywords" content="wrf_cape_3d">
+<title>wrf_cape_3d</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../wrf.html">WRF</a>,
+<a class=crumb href="../rip.html">RIP</a>
+<br>
+<h1>wrf_cape_3d</h1>
+
+<p>
+Computes convective available potential energy (CAPE) and convective
+inhibition (CIN).
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function wrf_cape_3d (
+		p       : numeric,  
+		t       : numeric,  
+		q       : numeric,  
+		z       : numeric,  
+		zsfc    : numeric,  
+		psfc    : numeric,  
+		opt [1] : logical   
+	)
+
+	<a href="../return_val.html">return_val</a> [2,...] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>p</em>
+<p class=indent>An array containing full model pressure values [must be Pa]. Could be
+ordered bottom_top or top_bottom. This array must be the same
+dimensionality as <em>t</em>, <em>q</em>, and <em>z</em>.  See the <a
+href="#Description">description</a> section for more information on
+dimension requirements.
+</p>
+<em>t</em>
+<p class=indent>An array containing temperature values [K]. Must be ordered similar to
+<em>p</em>, <em>q</em>, and <em>z</em>. This array must be the same
+dimensionality as <em>p</em>, <em>q</em>, and <em>z</em>.  See the <a
+href="#Description">description</a> section for more information on
+dimension requirements.
+</p>
+<em>q</em>
+<p class=indent>An array containing water vapor mixing ratio [kg/kg]. Must be ordered
+similar to <em>p</em>, <em>t</em>, and <em>z</em>.  This array must be
+the same dimensionality as <em>p</em>, <em>t</em>, and <em>z</em>.
+See the <a href="#Description">description</a> section for more
+information on dimension requirements.
+</p>
+<em>z</em>
+<p class=indent>An array containing full model height [m]. Must be ordered similar to
+<em>p</em>, <em>t</em>, and <em>q</em>. This array must be the same
+dimensionality as <em>p</em>, <em>t</em>, and <em>q</em>.  See the <a
+href="#Description">description</a> section for more information on
+dimension requirements.
+</p>
+<em>zsfc</em>
+<p class=indent>A scalar or array containing surface height (terrain) [m].  Must be
+the same dimensionality as <em>psfc</em>.  See the <a
+href="#Description">description</a> section for more information on
+dimension requirements.
+</p>
+<em>psfc</em>
+<p class=indent>A scalar or array containing surface pressures [hPa]. Must be the same
+dimensionality as <em>zsfc</em>.  See the <a
+href="#Description">description</a> section for more information on
+dimension requirements.
+</p>
+<em>opt</em>
+<p class=indent>Set to False for pressure level data.  Set to True for
+terrain-following data.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+This function returns a 2 x <a href="dimsizes.html"><strong>dimsizes</strong></a>(<em>p</em>)
+array, where index 0 of the leftmost dimension contains the CAPE
+values, and index 1 of the leftmost dimension contains the CIN values.
+<p>
+
+In <a href="../../../prev_releases.html#6.1.0">version 6.1.0</a>, this
+function was upgraded to return a "_FillValue" attribute.  See
+the <a href="#Description">description</a> section below for more
+information.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function replaces the now obsolete
+<a href="rip_cape_3d.html"><strong>rip_cape_3d</strong></a>.
+<p>
+
+This function uses the <a
+href="http://www2.mmm.ucar.edu/mm5/documents/ripug_V4.html">RIP</a>
+[Read/Interpolate/plot] code to compute both convective available
+potential energy [CAPE: j/kg] and convective inhibition [CIN: j/kg]
+for every grid point in the entire 3D domain (testing each grid point
+as a parcel).  CAPE is defined as the accumulated buoyant energy from
+the level of free convection (LFC) to the equilibrium level (EL).  CIN
+is defined as the accumulated negative buoyant energy from the parcel
+starting point to the LFC. The word "parcel" here refers to a 500
+meter deep parcel, with actual temperature and moisture averaged over
+</p>
+<p>
+
+There are three possible cases for the input dimension sizes:
+
+<ul>
+
+<li><em>p</em>, <em>t</em>, <em>q</em>, <em>z</em> (time,lev,lat,lon)
+and <em>psfc</em>, <em>zsfc</em> (time,lat,lon)
+
+<li><em>p</em>, <em>t</em>, <em>q</em>, <em>z</em> (lev,lat,lon) and
+<em>psfc</em>, <em>zsfc</em> (lat,lon)
+
+<li><em>p</em>, <em>t</em>, <em>q</em>, <em>z</em> (lev) and
+<em>psfc</em>, <em>zsfc</em> (scalars)
+
+</ul>
+
+The return array, <em>return_val</em>, will be dimensioned 2 x
+dimsizes(<em>p</em>):
+
+<blockquote>
+<em>return_val</em>(0,...) will contain CAPE<BR>
+<em>return_val</em>(1,...) will contain CIN <BR>
+</blockquote>
+<p>
+
+Previous to <a href="../../../prev_releases.html#6.1.0">version 6.1.0</a>,
+this function returned a value of -0.1 for out-of-range values. This
+has been replaced with a missing value, and a "_FillValue" attribute
+is also set. The <a href="../../Language/fillval.html">value of
+the missing value</a> depends on the type of the return array (float or
+double).
+<p>
+
+<font color="red">
+This routine does not do anything special with missing
+values.  If you pass in missing values, they will get used as if they
+were valid values in the calculations. So, make sure your data
+contains no missing values before you call this routine.
+</font>
+<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="wrf_cape_2d.html"><strong>wrf_cape_2d</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><P>
+
+Assume the file PTZQ.txt contains values of p, t, z and q at 33 levels
+from a sounding. The station's geopotential elevation is 117.6 gpm and
+the surface presure is 996.95 hPa.  The data follows the terrain.
+<p>
+
+<pre>
+     data = <a href="asciiread.html"><strong>asciiread</strong></a>("PTQZ.txt", (/33,4/), "float")
+     p    = data(:,0)
+     t    = data(:,1)
+     q    = data(:,2)
+     z    = data(:,3)  
+     
+     zsfc = 117.6
+     psfc = 996.95
+     
+     cinfo= <strong>wrf_cape_3d</strong>(p, t, q, z, zsfc, psfc, True) ; cinfo(2,...)
+</pre>
+     
+<B>Example 2</B><P>
+
+Read model data from a file. Each of the p, t, z and q variables is
+3-dimensional (lev,lat,lon) or 4-dimensional (time,lev,lat,lon).  The
+surface elevations are 2-dimensional (lat,lon). The surface pressure
+is 2-dimensional (lat,lon) if there is no time dimension and
+3-dimensional (time,lat,lon) if there is a time dimension.  The data
+is on pressure levels.
+<p>
+
+<pre>
+     f = <a href="addfile.html"><strong>addfile</strong></a>("model.nc" , "r")
+     
+     p = f->P             ; (lev,lat,lon) or (time,lev,lat,lon)     
+     t = f->T
+     q = f->Q
+     z = f->Z
+     
+     zsfc = f->TOPOGRAPHY ; (lat,lon)
+     psfc = f->PS         ; (lat,lon) or (time,lat,lon)
+     
+     cinfo = <strong>wrf_cape_3d</strong>(p, t, q, z, zsfc, psfc, False) ; cinfo(2,...)
+</pre>
+<p>
+
+<B>Example 3</B><P>
+
+The function <a href="../WRF_arw/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>,
+(available in the $NCARG_ROOT/lib/ncarg/nclscripts/wrf/WRFUserARW.ncl
+script) can also be used to calculate many diagnostics in one step.
+<p>
+
+<pre>
+  load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+  load "$NCARG_ROOT/lib/ncarg/nclscripts/wrf/WRFUserARW.ncl"
+
+  a = <a href="addfile.html"><strong>addfile</strong></a>("wrfout_d01_2000-01-24_12:00:00.nc","r")
+
+  cape3d = <a href="../WRF_arw/wrf_user_getvar.html"><strong>wrf_user_getvar</strong></a>(a,"cape_3d",-1)
+
+  ;cape = cape3d(0,....)
+  ;cin = cape3d(1,....)
+
+</pre>
+
+You can see some other example scripts and their resultant images at:
+
+<blockquote>
+<a href="http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Graphics/NCL/">http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Graphics/NCL/</a>
+</blockquote>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/wrf_cape_3d.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:23 GMT -->
+</html>

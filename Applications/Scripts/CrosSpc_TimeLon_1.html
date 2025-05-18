@@ -1,0 +1,227 @@
+;*************************************************
+; CrosSpc_TimeLon_1.ncl
+;
+; Concepts illustrated:
+;   - Read anomalies (Annual Cycle removed) for two variables 
+;   - Red one or more specified latitudes
+;   - At a specified latitude [LAT] loop over each longitude
+;   - Calculate and store each each cross-spectral component
+;   - Plot
+;******************************************************
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/diagnostics_cam.ncl"
+;******************************************************
+;
+;******************** MAIN **********************************
+;
+  twStrt = 19960101          ; time window (tw)
+ ;twLast = 19991231
+  twLast = 20041231
+
+  xName  = "OLR_anom"        ; name of variable on OLR file
+  dirx   = "./"
+  filx   = "olr.day.anomalies.1980-2005.nc"
+
+  plvl   = 850
+  yName  = "VWND_anom"       ; name of variable on anomaly file
+  diry   = "./"
+  fily   = "vwnd.day."+plvl+".anomalies.1980-2005.nc"
+
+;;latN       =  15.
+;;latS       = -15.
+  latN       =  10.0        ; read on lat
+  latS       =  10.0
+  LAT        =  10.0        
+
+  pltName    = "CrosSpc_TimeLon"      ; output plot name
+  pltType    = "png"                  ; x11, ps, eps, pdf, png
+  pltDir     = "./"                   ; output plot directory
+;************************************************************
+; OLR anomalies:
+;     time indices corresponding to the desired time window
+;     Read user specified period
+;************************************************************
+  f      = addfile(dirx+filx, "r")
+  date_x = cd_calendar(f->time, -2)   ; entire file
+  iStrt  = ind(date_x.eq.twStrt)      ; desired dates
+  iLast  = ind(date_x.eq.twLast)
+  delete(date_x)
+                                      ; P(time,lat,lon)
+  if (getfilevartypes(f,xName) .eq. "short") then
+      X  = short2flt( f->$xName$(iStrt:iLast,{latS:latN},:))
+  else
+      X  = f->$xName$(iStrt:iLast,{latS:latN},:)
+  end if
+
+  if (X&lon(0) .lt. 0) then
+      X = lonFlip( X )       ; force 0 to 360 to match Y
+  end if
+
+  printVarSummary( X )
+  printMinMax(X, True)
+
+  time_x = X&time                     ; clarity
+  date_x = cd_calendar(time_x, -2 )   ; yyyymmdd
+
+; ***********************************************************
+; U ANOMALIES:
+;     time indices corresponding to the desired time window
+;     Read user specified period
+;************************************************************
+
+  f      = addfile(diry+fily, "r")
+  date_y = cd_calendar(f->time, -2)     ; entire file
+  iStrt  = ind(date_y.eq.twStrt)        ; desired dates
+  iLast  = ind(date_y.eq.twLast)
+  delete(date_y)
+                                        ; U(time,lat,lon)
+  if (getfilevartypes(f,yName) .eq. "short") then
+      Y  = short2flt( f->$yName$(iStrt:iLast,{latS:latN},:))
+  else
+      Y  = f->$yName$(iStrt:iLast,{latS:latN},:)
+  end if
+
+  if (Y&lon(0) .lt. 0) then
+      Y = lonFlip( Y )       ; force 0 to 360 to match X
+  end if
+
+  printVarSummary( Y )
+  printMinMax(Y, True)
+
+  time_y = Y&time                     ; clarity
+  date_y = cd_calendar(time_y , -2 )  ; yyyymmdd
+
+;************************************************
+; make sure dates/sizes agree
+;************************************************
+
+  if (.not.all(date_x.eq.date_y)) then
+      print("****date mismatch: exit****")
+      exit
+  end if
+  dimX = dimsizes(X)
+  dimY = dimsizes(Y)
+  if (.not.all(dimX.eq.dimY)) then
+      print("****size mismatch: exit****")
+      print("dimsizes(X)="+dimX)
+      print("dimsizes(Y)="+dimY)
+      exit
+  end if
+
+  if (.not.all(X&lon.eq.Y&lon)) then
+      print("****longitude mismatch: exit****")
+      exit
+  end if
+
+  ntim = dimX(0)
+  nlat = dimX(1)
+  mlon = dimX(2)
+
+;*****************************************************
+; Calculate the cross-spectra
+; Place results into pre-allocated arrays for subsequent plotting
+;*****************************************************
+  nfrq = ntim/2
+  COHER = new((/nfrq,mlon/),typeof(X),X@_FillValue)
+  PHASE = new((/nfrq,mlon/),typeof(X),X@_FillValue)
+  COSPC = new((/nfrq,mlon/),typeof(X),X@_FillValue)
+  QUSPC = new((/nfrq,mlon/),typeof(X),X@_FillValue)
+
+  sm    = 31
+  pct   = 0.10
+
+  do ml=0,mlon-1
+     spec = specxy_anal(X(:,{LAT},ml),Y(:,{LAT},ml),0,sm,pct)
+
+     COHER(:,ml) = spec@coher
+     PHASE(:,ml) = spec@phase  ; degrees
+     COSPC(:,ml) = spec@cospc
+     QUSPC(:,ml) = spec@quspc
+  end do
+
+; add meta
+
+  COHER!0   = "frq"
+  PHASE!0   = "frq"
+  COSPC!0   = "frq"
+  QUSPC!0   = "frq"
+  COHER&frq = spec@frq
+  PHASE&frq = spec@frq
+  COSPC&frq = spec@frq
+  QUSPC&frq = spec@frq
+  
+  COHER!1   = "lon"
+  PHASE!1   = "lon"
+  COSPC!1   = "lon"
+  QUSPC!1   = "lon"
+  COHER&lon = X&lon
+  PHASE&lon = X&lon
+  COSPC&lon = X&lon
+  QUSPC&lon = X&lon
+
+  COHER@long_name = "coherence^2"
+  PHASE@long_name = "phase"
+  COSPC@long_name = "cospectrum"
+  QUSPC@long_name = "quadrature spectrum"
+
+  printVarSummary(COHER)
+  printMinMax(COHER,0)
+  print("---")
+  printVarSummary(PHASE)
+  printMinMax(PHASE,0)
+  print("---")
+  printVarSummary(COSPC)
+  printMinMax(COSPC,0)
+  print("---")
+  printVarSummary(QUSPC)
+  printMinMax(QUSPC,0)
+  print("---")
+
+;************************************************
+; plot
+;************************************************
+  yrStrt = twStrt/10000 
+  yrLast = twLast/10000 
+
+  wks = gsn_open_wks("png","CrosSpc_TimeLon")             ; send graphics to PNG file
+
+ plot = new(4,graphic)                         ; create graphic array
+
+ res                      = True
+ res@gsnDraw              = False        ; do not draw picture
+ res@gsnFrame             = False        ; do not advance frame
+ res@cnFillOn             = True         ; turn on color fill
+ res@cnLinesOn            = False        ; no contour lines
+ res@cnLineLabelsOn       = False        ; no contour line labels
+ res@cnFillMode           = "RasterFill" ; Raster Mode
+ res@tmYLFormat           = "f"          ; Y-axis
+ res@gsnAddCyclic         = True         ; force cyclic point (replicate)
+ res@lbOrientation        = "Vertical"   ; vertical label bar
+
+ res@cnFillPalette        = "ViBlGrWhYeOrRe"
+
+ symMinMaxPlt (COSPC,20,False,res)  
+ plot(0)=gsn_csm_contour(wks,COSPC,res)
+
+ symMinMaxPlt (QUSPC,20,False,res)  
+ plot(1)=gsn_csm_contour(wks,QUSPC,res)
+
+ res@cnLevelSelectionMode = "ManualLevels"     ; set manual contour levels
+ res@cnMinLevelValF       = -160               ; set min contour level
+ res@cnMaxLevelValF       =  160               ; set max contour level
+ res@cnLevelSpacingF      =   20               ; set contour spacing
+;res@cnFillPalette        = "cmocean_phase"    ; 6.5.0
+;res@cnFillPalette        = "circular_0"
+ res@cnFillPalette        = "circular_2"
+ plot(3)=gsn_csm_contour(wks,PHASE,res)
+
+ res@cnMinLevelValF       = 0.0                ; set min contour level
+ res@cnMaxLevelValF       = 0.5                ; set max contour level
+ res@cnLevelSpacingF      = 0.025               ; set contour spacing
+ res@cnFillPalette        = "WhiteBlueGreenYellowRed"
+ COHER = where(COHER.lt.0.10, COHER@_FillValue, COHER)   ; esthetics
+ plot(2)=gsn_csm_contour(wks,COHER,res)
+
+ resP                 = True
+ resP@gsnMaximize     = True
+ resP@gsnPanelMainString = "OLR vs V"+plvl+" Anomalies: LAT="+LAT+": "+yrStrt+"-"+yrLast
+ gsn_panel(wks,plot,(/2,2/),resP)

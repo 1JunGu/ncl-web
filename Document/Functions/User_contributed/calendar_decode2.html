@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/User_contributed/calendar_decode2.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:14 GMT -->
+<head>
+<meta name="description" content="NCL user contributed functions (date routines)">
+<meta name="keywords" content="calendar_decode2">
+<title>calendar_decode2</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../date.html">Date routines</a>
+<br>
+<h1>calendar_decode2</h1>
+
+<p>
+Translates numeric time coordinates to calendar times.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#5.2.0">version 5.2.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/contrib/calendar_decode2.ncl"
+
+	function calendar_decode2 (
+		time       : numeric,  
+		option [1] : integer   
+	)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>time</em>
+<p class=indent>An array of numeric time coordinates in one of the supported calendar
+systems.  See dimension restrictions below.
+</p>
+<p class=indent>
+
+<em>time</em>@units = Udunits-style time reference string, scalar.
+E.g. "days since 1800-1-1 00:00:00".  The attribute name
+"units" must be lowercase.  The string value is case
+insensitive.  The units attribute is required.
+</p>
+<p class=indent>
+
+<em>time</em>@calendar = name of calendar system, string scalar.
+E.g. "gregorian".  The attribute name "calendar" must be lowercase.
+The string value is case insensitive.  The calendar attribute is
+optional.  If missing, Gregorian is implied.
+</p>
+<em>option</em>
+<p class=indent>A scalar integer indicating the format of the output. See description
+below.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+An array of translated date and time values equivalent to the input
+time coordinates.  The format of the output array is selected by the
+<em>option</em> parameter.
+<p>
+
+<em>option</em> = 0 or -5: The result array will be of type float
+(option 0) or integer (option -5), with one added dimension on the
+right:
+
+<blockquote>
+	     result(:,0) --> years<br>
+	     result(:,1) --> months<br>
+	     result(:,2) --> days<br>
+	     result(:,3) --> hours<br>
+	     result(:,4) --> minutes<br>
+	     result(:,5) --> seconds<br>
+</blockquote>
+<p>
+
+Other options: The result array will have the same dimensions as the
+input array.  For a description of the other formats, see the
+documentation for <a href="../Built-in/ut_calendar.html"><strong>ut_calendar</strong></a>.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This version contains partial support for several calendar systems
+described in CF-1 conventions. It was updated in NCL Version 6.4.0
+to call <a href="../Built-in/cd_calendar.html"><strong>cd_calendar</strong></a> under the hood in place of
+<a href="../Built-in/ut_calendar.html"><strong>ut_calendar</strong></a>.
+<p>
+
+The COARDS convention is also
+supported, as it uses the Gregorian calendar by default.  This is
+the definitive reference for CF-1:
+<p>
+
+<blockquote>
+    <a href="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.4/ch04s04.html">http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.4/ch04s04.html</a><br>
+</blockquote>
+<p>
+
+Supported calendar systems:
+
+<dl>
+<dt>gregorian or standard
+
+<dd>Mixed Gregorian/Julian calendar as defined by UDUNITS.  This is
+the default when the "calendar" attribute is missing. See caution
+below.
+<p>
+
+<dt>proleptic_gregorian
+<dd>Gregorian calendar extended to dates before 1582-10-15.
+<p>
+
+<dt>noleap or 365_day
+<dd>Gregorian calendar with no leap years.  Every year has 365 days.
+<p>
+
+<dt>all_leap or 366_day
+<dd>Gregorian calendar with every year being a leap year.  Every
+year has 366 days.
+<p>
+
+<dt>360_day
+<dd>All years are 360 days divided into 30 day months.
+<p>
+
+</dl>
+
+Calendar systems in CF-1.4, not currently supported here:
+<p>
+
+<blockquote>
+    julian<br>
+    "none"<br>
+</blockquote>
+<p>
+
+Custom calendar attributes in CF-1.4, not currently supported here:
+
+<blockquote>
+    month_lengths<br>
+    leap_year<br>
+    leap_month<br>
+</blockquote>
+<p>
+
+Caution:  When using the "gregorian" calendar system, the UDUNITS
+mixed Gregorian/Julian interpretation is used.
+<p>
+
+<blockquote>
+    <a href="http://www.unidata.ucar.edu/packages/udunits">http://www.unidata.ucar.edu/packages/udunits</a>
+</blockquote>
+<p>
+
+For the mixed Gregorian/Julian calendar, it is strongly recommended
+that all encoded dates as well as the reference date in the units
+string be greater than or equal to October 15, 1582.  This is the
+valid start date for the contemporary interval of the Gregorian
+calendar system.
+<p>
+
+<font color=red>Known bug in NCL V6.4.0 and earlier</font>: Many users
+have reported a "60 second" bug in several of NCL's date conversion
+routines, in which you get a value of "<i>n</i> minutes, 60 seconds"
+instead of "<i>n+1</i> minutes, 0 seconds". See
+the <a href="../../../current_release.html#DateConversionsBugsFixed6.4.0">6.4.0 release notes</a>
+for details. If you encounter this bug, please email the
+<a href="../../../Support/email_lists.html">ncl-talk</a> group with the
+details.  Meanwhile, you can ry the <i>temporary</i>
+<a href="calendar_decode2_fix.html"><strong>calendar_decode2_fix</strong></a>, which was added in NCL
+V6.4.0 for test purposes and potentially as a replacement function. A
+decision will be made about this function in a future release of NCL.
+<p>
+
+Restrictions in this version:
+<p>
+
+When calendar = "gregorian" or equivalent, this routine defers to
+NCL's <a href="../Built-in/ut_calendar.html"><strong>ut_calendar</strong></a> function and includes all of its
+functionality.
+<p>
+
+This also applies for "proleptic_gregorian" or equivalent, but only
+when all dates including the time unit string are "safe" dates later
+than 1582.
+<p>
+
+The following apply when any of the other supported calendars are used:
+<p>
+
+<ul>
+<li>Options:
+<p>
+
+For proleptic_gregorian calendar with any dates 1852 or
+earlier, only output options 0 and -5 are supported.
+<p>
+
+<li>Dimensions:
+<p>
+
+For output options 0 and -5, all calendars other than gregorian and
+proleptic_gregorian, the input time variable must be scalar or a one
+dimensional array.  For all other output options, there is no
+restriction on dimensionality.
+<p>
+
+<li>Units string syntax must be one of these three:
+<p>
+
+<blockquote>
+  uuuu since y-m-d<br>
+  uuuu since y-m-d h:m:s<br>
+  uuuu since y-m-d h:m:s.s<br>
+</blockquote>
+<p>
+
+For example:
+<p>
+
+<blockquote>
+  days since 1800-1-1<br>
+  days since 1800-01-01 0:0:0<br>
+  days since 1800-01-01 00:00:0.000<br>
+</blockquote>
+<p>
+
+<li>Base unit for time (uuuu) must be one of these:
+<p>
+
+<blockquote>
+  day or days<br>
+  hour or hours<br>
+  minute or minutes<br>
+  second or seconds<br>
+</blockquote>
+<p>
+
+<li>The base year must be zero or positive.
+<p>
+
+<li>Time of day in the units string is NOT CHECKED and MUST BE ZERO.
+<p>
+
+<li>(LATER: Time of day in the units string is restricted to zero only.)
+<p>
+
+<li>The time zone suffix in the units string is not supported and must
+not be included.
+<p>
+
+<li>The global "conventions" attribute is not checked for consistency
+with calendar attributes encountered.
+<p>
+
+<li>Type and dimension checking of calendar attributes is minimal.
+
+</ul>
+<p>
+
+General notes:
+<p>
+
+Following typical conventions, attribute names are CASE SENSITIVE.
+<p>
+
+String attribute values are CASE INSENSITIVE.
+<p>
+
+
+<b>Author:</b>
+<blockquote>
+  Dave Allured<br>
+  <a href ="mailto:dave.allured@noaa.gov">dave.allured@noaa.gov</a><br>
+  University of Colorado, CIRES Climate Diagnostics Center (CDC)<br>
+  <a href="http://cires.colorado.edu/science/centers/cdc/">http://cires.colorado.edu/science/centers/cdc/</a><br>
+  NOAA/ESRL/PSD, Climate Analysis Branch (CAB)<br>
+  <a href="http://www.esrl.noaa.gov/psd/psd1/">http://www.esrl.noaa.gov/psd/psd1/</a><br>
+</blockquote>
+<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Built-in/cd_calendar.html"><strong>cd_calendar</strong></a>,
+<a href="../Built-in/cd_inv_calendar.html"><strong>cd_inv_calendar</strong></a>,
+<a href="../Built-in/ut_calendar.html"><strong>ut_calendar</strong></a>,
+<a href="../Built-in/ut_inv_calendar.html"><strong>ut_inv_calendar</strong></a>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/User_contributed/calendar_decode2.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:14 GMT -->
+</html>

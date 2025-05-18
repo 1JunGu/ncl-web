@@ -1,0 +1,716 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/cancor.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:14 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (general applied math)">
+<meta name="keywords" content="cancor">
+<title>cancor</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>cancor</h1>
+
+<p>
+Performs canonical correlation analysis between two sets of variables.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function cancor (
+		x [*][*] : numeric,  
+		y [*[[*] : numeric,  
+		option   : logical   
+	)
+
+	<a href="../return_val.html">return_val</a> [*] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>An array of  two dimensions of size (NX,NOBS) where NOBS represents 
+the number of observations and NX represents the number of independent
+variables. The <em>x</em> are the (linearly independent) predictor variables.
+</p>
+<em>y</em>
+<p class=indent>An array of  two dimensions of size (NY,NOBS) where NOBS represents 
+the number of observations and NY represents the number of dependent
+variables. The <em>y</em> are the (dependent) predictand variables. Note:
+ NY.le.NX.
+</p>
+<em>option</em>
+<p class=indent>A logical variable. Currently not used.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+An array containing the canonical correlation
+coefficients. The return values will be of type double if
+<em>x</em> or <em>y</em> is double, and float otherwise.
+<p>
+A suite of attributes is returned: 
+<pre>
+          (a) <b>ndof</b>:  degrees of freedom (one dimensional array)
+          (b) <b>chisq</b>: chi-squares values (one dimensional array)
+          (c) <b>wlam</b> : Wilk's Lambda (one dimensional array)
+          (d) <b>coefx</b>: two dimensional array (NY,NX) containing the 
+                     right hand [x] canonical loading coefficients.
+          (f) <b>coefy</b>: two dimensional array (NY,NY) containing the 
+                     left hand [y] canonical loading coefficients.
+</pre>
+<b>ndof</b> will be type integer. <b>chisq</b>, <b>coefr</b> and
+<b>coefl</b> will be of the same type as the returned canonical
+correlations.
+<P>
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<p>
+<b>PLEASE NOTE: </b> Cherry (1996) discusses Singular Value Decomposition (SVD) and Canonical Correlation Analysis (CCA). 
+Cherry's summary comment is: "Both methods have a high potential to produce spurious spatial patterns. 
+Caution is always called for in interpreting results from either method." Newman and Sardeshmukh (1995) 
+came to a similar conclusion in their paper which focused on SVD: "These results suggest that any physical
+interpretation of SVD pairs may be unjustified."
+<pre>
+
+<b>REFERENCES:</b>
+
+Cherry, S. (1996): <a href="https://doi.org/10.1175/1520-0442(1996)009<2003:SVDAAC>2.0.CO;2"> <b>Singular Value Decomposition Analysis and Canonical Correlation Analysis</b></a>. 
+J. Climate: pp 2003-2009.
+
+Newman, M. and Sardeshmukh, P.D. (1995): <a href="https://doi.org/10.1175/1520-0442(1995)008<0352:ACCSVD>2.0.CO;2"><b>A Caveat Concerning Singular Value Decomposition</b></a> 
+J. Climate: pp 352-360.
+
+------------------------------------------------------------
+</pre>
+<strong>cancor</strong> performs canonical correlation
+analysis (CCA). Canonical correlation explores the relationships 
+between standardized variables.  The objectives are similar to multiple 
+linear regression except there are multiple <em>y</em> variables 
+(<i>i.e.</i>, determine linear combinations of the <em>y</em> 
+variables which are well explained by linear combinations of the 
+<em>x</em> variables).  It can be used as either 
+a hypothesis testing or an exploratory method.   
+<p>
+It <i>may</i> be possible to ascribe physical interpretation
+to the results. However, like EOF analysis, the mathematical
+manipulations are not based on physical equations.
+<p>
+The <em>y</em> are the dependent variables and <em>x</em> are the
+predictor variables. The <b>ndof</b> and <b>chisq</b> information can
+be used to test the null hypothesis that all canonical correlations
+are zero. NCL's <a href="gammainc.html"><strong>gammainc</strong></a> can be used to determine
+the significance level. See the examples. 
+ 
+<p>
+The eigenvalues may be determined by squaring returned canonical correlations. 
+<p>
+The canonical scores can be derived by multiplying
+the standardized original variables by the canonical loading vectors
+<b>coefx</b> and <b>coefy</b>. 
+<p>
+NCL uses <b>"SUBROUTINE CANOR"</b> from the old IBM 
+"Scientific Subroutine Package" (SSP) to perform the calculations.
+<pre>
+
+       http://www.decuslib.com/decus/vax87d/rcaf87/ssp/ssp.for 
+
+</pre>
+<b>NOTE:</b> Some users have reported obvious errors when using
+many more variables than observations. Although the original 
+documentation for the subroutine does not contain any comments
+regarding this situation, it seems that the number of observations 
+should be (?much?)  larger than the combined number of variables. 
+
+ </b>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="reg_multlin.html"><strong>reg_multlin</strong></a>,<a href="gammainc.html"><strong>gammainc</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+Data Source:
+<pre>
+  Statistics and Data Analysis in Geology
+  John C Davis
+  John Wiley and Sons: 2002:   3rd Edition
+</pre>
+
+<B>Example 1</B><p>
+This is the "well" data from the above source [Table 6-38, p583].
+The <em>y</em> are the core measurements and the <em>x</em> are
+the log measurements. 
+<P>
+
+<pre>
+begin
+  y = (/  (/  3.1,  3.4,  3.4,  2.8,  2.5,  2.3,  2.3,  2.6 \  
+           ,  6.0,  5.2,  3.9,  4.7,  5.1,  5.0,  6.1/)     \
+       ,  (/ 64.0, 69.0, 65.0, 62.0, 56.0, 56.0, 54.0, 60.0 \
+           , 97.0, 67.0, 82.0, 80.0, 77.0, 79.0, 81.0/)     \
+       ,  (/ 28.8, 25.1, 38.0, 15.1, 58.9, 61.7,129.0,110.0 \
+           ,  5.2, 18.2, 26.9, 12.9, 12.0, 11.0, 70.8/)     /)
+
+  x = (/  (/  0.1,  0.4,  0.1,  0.4,  0.1,  0.3,  0.2,  1.6 \  
+           ,  0.0, 18.0,  6.5,  2.5,  0.1,  0.0,  0.0/)     \
+       ,  (/  3.9,  7.0,  6.1,  6.2,  5.9,  4.7,  6.2, 12.7 \
+           ,  3.0, 18.9, 18.4, 17.9, 12.3, 10.4,  5.2/)     \ 
+       ,  (/ 28.2, 17.2, 24.6, 19.3, 15.3, 14.9, 29.0, 26.7 \
+           ,  0.0, 26.4, 19.0, 16.8, 11.7,  0.0,  0.0/)     \ 
+       ,  (/ 53.8, 55.6, 54.2, 63.0, 73.0, 61.6, 37.1, 34.6 \
+           , 96.6, 32.3, 48.3, 48.0, 72.6, 91.4, 97.8/)     /)
+
+         ; the following is for informational purposes only
+
+  dimy   = <a href="dimsizes.html"><strong>dimsizes</strong></a>(y)
+  dimx   = <a href="dimsizes.html"><strong>dimsizes</strong></a>(x)
+
+  my     = dimy(0)   ; Y
+  mx     = dimx(0)   ; X
+  nobs   = dimx(1)   
+   
+         ; canonical correlation
+
+  opt    = False
+  canr   = <strong>cancor</strong>(x, y, opt)
+
+  prob   = <a href="gammainc.html"><strong>gammainc</strong></a>( 0.5*canr@chisq,  0.5*canr@ndof ) 
+
+  <a href="print.html"><strong>print</strong></a>(canr)
+  <a href="print.html"><strong>print</strong></a>(canr@ndof)
+  <a href="print.html"><strong>print</strong></a>(canr@chisq)
+  <a href="print.html"><strong>print</strong></a>(canr@wlam)
+  <a href="print.html"><strong>print</strong></a>(canr@coefx)
+  <a href="print.html"><strong>print</strong></a>(canr@coefy)
+
+  <a href="print.html"><strong>print</strong></a>(prob)
+end
+</pre>
+
+The (edited) output from the <a href="print.html"><strong>print</strong></a> follows:
+<pre>
+Variable: <b>canr</b>
+Type: float
+Dimensions and sizes:   [4]
+
+(0)     0.8672 
+(1)     0.5953 
+(2)     0.2670
+
+Variable: <b>ndof</b>
+Type: integer
+Dimensions and sizes:   [3]
+
+(0)     12
+(1)     6
+(2)     2
+
+Variable: <b>chisq</b>
+Type: float
+Number of Dimensions: 1
+
+(0)     20.96687
+(1)      5.62574
+(2)      0.81361
+
+Variable: <b>wlam</b>
+Type: float
+Dimensions and sizes:   [3]
+
+(0)     0.14866
+(1)     0.59963
+(2)     0.92870
+
+
+Variable: <b>coefx</b>
+Type: float
+Dimensions and sizes:   [3] x [4]
+
+(0,0)   -0.38379
+(0,1)   -0.32543
+(0,2)   -0.11506
+(0,3)   -0.85647
+
+(1,0)    0.34417
+(1,1)   -0.04713
+(1,2)    0.67963
+(1,3)    0.64607
+
+(2,0)   -0.15488
+(2,1)    0.33424
+(2,2)    0.63058
+(2,3)    0.68312
+
+
+Variable: <b>coefy</b>
+Type: float
+Dimensions and sizes:   [3] x [3]
+
+(0,0)   -0.69702
+(0,1)    0.16100
+(0,2)    0.17747
+
+(1,0)    0.42498
+(1,1)   -0.68048
+(1,2)   -0.21716
+
+(2,0)   -0.21955
+(2,1)    0.10104
+(2,2)   -0.19530
+
+
+Variable: <b>prob</b>
+Type: float
+Dimensions and sizes:   [3]
+(0)     0.949132
+(1)     0.533608
+(2)     0.334226
+</pre>
+
+
+<B>Example 2</B><p>
+Data Values (BOXES.TXT) from the above reference: There are 7 variables (columns)
+and 25 rows (observations). 
+
+<pre>
+  3.760  3.660  0.540  5.275  9.768 13.741  4.782
+  8.590  4.990  1.340 10.022  7.500 10.162  2.130
+  6.220  6.140  4.520  9.842  2.175  2.732  1.089
+  7.570  7.280  7.070 12.662  1.791  2.101  0.822
+  9.030  7.080  2.590 11.762  4.539  6.217  1.276
+  5.510  3.980  1.300  6.924  5.326  7.304  2.403
+  3.270  0.620  0.440  3.357  7.629  8.838  8.389
+  8.740  7.000  3.310 11.675  3.529  4.757  1.119
+  9.640  9.490  1.030 13.567 13.133 18.519  2.354
+  9.730  1.330  1.000  9.871  9.871 11.064  3.704
+  8.590  2.980  1.170  9.170  7.851  9.909  2.616
+  7.120  5.490  3.680  9.716  2.642  3.430  1.189
+  4.690  3.010  2.170  5.983  2.760  3.554  2.013
+  5.510  1.340  1.270  5.808  4.566  5.382  3.427
+  1.660  1.610  1.570  2.799  1.783  2.087  3.716
+  5.900  5.760  1.550  8.388  5.395  7.497  1.973
+  9.840  9.270  1.510 13.604  9.017 12.668  1.745
+  8.390  4.920  2.540 10.053  3.956  5.237  1.432
+  4.940  4.380  1.030  6.678  6.494  9.059  2.807
+  7.230  2.300  1.770  7.790  4.393  5.374  2.274
+  9.460  7.310  1.040 11.999 11.579 16.182  2.415
+  9.550  5.350  4.250 11.742  2.766  3.509  1.054
+  4.940  4.520  4.500  8.067  1.793  2.103  1.292
+  8.210  3.080  2.420  9.097  3.753  4.657  1.719
+  9.410  6.440  5.110 12.495  2.446  3.103  0.914
+</pre>
+<P>
+Use <a href="asciiread.html"><strong>asciiread</strong></a> to read the BOXES.TXT ascii 
+file with no "header" information. 
+<P>
+The above book uses the first three columns as the dependent
+<em>y</em> variables and the last 4 columns as the predictor
+<em>x</em> variables. The input array must be partitioned
+using NCL's <a href="../../Manuals/Ref_Manual/NclExpressions.html#Multi-dimensionalArraysAndExpressions">array syntax</a>
+and <a href="../../Manuals/Ref_Manual/NclVariables.html#NamedSubscripting">dimension reordering</a>. 
+The example will explicitly create <em>x</em>
+and <em>y</em> variables for clarity.
+<P>
+<pre>
+       diri    = "./"
+       fili    = "BOXES.TXT"
+                                         ; read the entire data array
+       nvar    = 7                       ; total number of variables
+       nrow    = 25                      ; number of observations
+       data    = <a href="asciiread.html"><strong>asciiread</strong></a>( diri+fili, (/nrow,ncol/), "float")
+       data!0  = "row"                   ; name the dimensions
+       data!1  = "col"
+                                         ; match book subsetting
+       my      = 3                       ; y
+       mx      = 4                       ; x
+   
+                                         ; reorder via named dimensions [3 x 25]
+                                         ; subset via array syntax      [4 x 25]
+       y       = data(col|0:my-1,row|:)  ; [var | 3] x [row | 25]
+       x       = data(col|my:   ,row|:)  ; [var | 4] x [row | 25]
+
+       canr    = <strong>cancor</strong>( x, y, False)
+
+       prob    = <a href="gammainc.html"><strong>gammainc</strong></a>( 0.5*canr@chisq,  0.5*canr@ndof )
+
+       <a href="print.html"><strong>print</strong></a>(canr)
+       <a href="print.html"><strong>print</strong></a>(canr@ndof)
+       <a href="print.html"><strong>print</strong></a>(canr@chisq)
+       <a href="print.html"><strong>print</strong></a>(canr@wlam)
+       <a href="print.html"><strong>print</strong></a>(canr@coefx)
+       <a href="print.html"><strong>print</strong></a>(canr@coefy)
+
+       <a href="print.html"><strong>print</strong></a>(prob)
+</pre>
+The (edited) output from the <a href="print.html"><strong>print</strong></a> follows:
+<pre>
+Variable: <b>canr</b>
+Type: float
+Dimensions and sizes:   [3]
+
+(0)     0.99955
+(1)     0.92110
+(2)     0.80859
+
+Variable: <b>ndof</b>
+Type: integer
+Dimensions and sizes:   [3]
+
+(0)     12
+(1)     6
+(2)     2
+
+Variable: <b>chisq</b>
+Type: float
+Dimensions and sizes:   [3]
+
+(0)    209.3185
+(1)     61.8984
+(2)     22.2766
+
+Variable: <b>wlam</b>
+Type: float
+Dimensions and sizes:   [3]
+
+(0)      4.68973e-05
+(1)      0.05246
+(2)      0.34618
+
+
+Variable: <b>coefx</b>
+Type: float
+Dimensions and sizes:   [4] x [4]
+(0,0)   -0.64619
+(0,1)    0.57264
+(0,2)   -0.50207
+(0,3)   -0.04935
+
+(1,0)   -0.04152
+(1,1)   -0.63496
+(1,2)    0.77130
+(1,3)    0.01363
+
+(2,0)    0.03209
+(2,1)   -0.74671
+(2,2)    0.65935
+(2,3)    0.08145
+
+
+Variable: <b>coefy </b>
+Type: float
+Dimensions and sizes:   [4] x [3]
+(0,0)   -0.34595
+(0,1)   -0.29475
+(0,2)   -0.13627
+
+(1,0)   -0.05936
+(1,1)    0.14891
+(1,2)   -0.15603
+
+(2,0)   -0.09560
+(2,1)    0.07232
+(2,2)    0.04031
+
+Variable: <b>prob</b>                [comment: the reason for the <i>very</i> large
+Type: float                   [         correlations is that the <em>y</em>
+(0)      1.0                  [         were derived from the <em>x</em>      ]
+(1)      0.99999
+(2)      0.99998
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/cancor.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:14 GMT -->
+</html>

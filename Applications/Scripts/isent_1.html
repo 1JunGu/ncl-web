@@ -1,0 +1,63 @@
+;**********************************************************
+; isent_1.ncl
+;
+; Concepts illustrated:
+;   - Reading CAM hybrid level coefficients and temperature
+;   - Compute pressures at each model level
+;   - Compute potential temperature (theta) on model levels
+;   - Interpolate zonal winds to user specified isentropic levels
+;   - Plot at user specified isentropic level
+;**********************************************************
+;                     MAIN
+;**********************************************************
+; open file and read required data
+;**********************************************************
+  f = addfile("atmos.nc","r")
+
+  hya  = f->hyam                       ; hybrid coef
+  hyb  = f->hybm 
+  ps   = f->PS                         ; surface pressure [Pa]
+  p0   = 100000.                       ; since ps is in Pa or [ f*>P0]
+
+  T    = f->T                          ; temperature at hybrid levels
+;***********************************************************
+; Calculate pressure at each level at all grid points
+;***********************************************************
+  ph           = T                                         ; transfer meta data
+  ph           = pres_hybrid_ccm (ps, p0, hya, hyb)        ; ph(ntim,klvl,nlat,mlon)
+  ph@long_name = "pressure at each hybrid level"
+  ph@units     = ps@units
+;***********************************************************
+; Calculate potential temperature at each level aat all grid points
+;***********************************************************
+  theta           = T                                      ; create/transfer meta data
+  theta           = T*(100000/ph)^0.286                    ; calculate potential temperature
+;***********************************************************
+; User specified isentropic levels
+;***********************************************************
+  lvl           = ispan(400,240,20)*1.                     ; specify desired isentropic levels
+;**********************************************************
+; Read in a variable to be interpolated
+;**********************************************************
+  x    = f->U                                              ; zonal wind
+;**********************************************************  
+; use int2p_n to interpolate: 
+;*********************************************************
+  ityp = 0
+  pdim = 1
+  
+  xlvl = int2p_n_Wrap (theta, x, lvl, ityp, pdim) 
+ ;printVarSummary(xlvl)
+;*********************************************************
+; create plot
+;*********************************************************
+  tlvl = 300
+  wks  = gsn_open_wks("png","isent")             ; send graphics to PNG file
+
+  res                 = True                     ; plot mods desired
+  res@cnFillOn        = True                     ; turn on color
+  res@cnFillPalette   = "BlAqGrYeOrRe"           ; set color map
+  res@cnLinesOn       = False                    ; turn off contour lines
+  res@tiMainString    = "U: Isentropic Level of "+tlvl   ; title
+
+  plot = gsn_csm_contour_map(wks,xlvl(0,{tlvl},:,:),res)  

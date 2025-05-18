@@ -1,0 +1,132 @@
+;----------------------------------------------------------------------
+; ESMF_regrid_template.ncl
+;
+; This is a template file for use with ESMF regridding. This is the
+; template that uses the single "ESMF_regrid" function to do the 
+; regridding. There's another template, "ESMF_template.ncl", that
+; does the regridding in several individual steps. This can be 
+; useful if you need to skip any of the steps.
+;
+; The ESMF_regrid function does the following:
+;
+;   1. Generates a description file (SCRIP or ESMF) for the source grid.
+;
+;   2. Generates a description file (SCRIP or ESMF) for the destination
+;      grid.
+;
+;   3. Generates the weights file, using the source and destination
+;      files.
+;
+;   4. Applies the weights to the data you want to regrid.
+;
+;   5. Attaches metadata to regridded variable, if appropriate.
+;
+;----------------------------------------------------------------------
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/esmf/ESMF_regridding.ncl"
+
+begin
+;---Input file that contains lat/lon grid of source grid, and some data to regrid
+    srcFileName = "sst.nc"
+
+;---Input file that contains lat/lon grid of destination grid, if applicable.
+    dstFileName = "output_grid.nc"
+
+;---Open the source data file and get some data to regrid
+    sfile = addfile(srcFileName,"r")
+    x     = sfile->X            ; You may need to subscript this.
+
+;---Open the destination data file
+    dfile = addfile(dstFileName,"r")
+
+;---Set up options for regridding
+    Opt                = True
+
+    Opt@SrcGridLat     = sfile->lat    ; Be sure to use appropriate names 
+    Opt@SrcGridLon     = sfile->lon    ;here
+    Opt@SrcRegional    = True          ; Necessary if source grid not global
+    Opt@SrcTitle       = "NCEP Grid"   ; Optional 
+    Opt@SrcMask2D      = where(.not.ismissing(x),1,0) ; Necessary if has
+                                                      ; missing values.
+
+;
+; If your destination grid is contained in a file, then use this code.
+; Otherwise, if you just want to regrid to a generic grid, like a
+; "1x1 degree grid, then skip to the next set of resources.
+;
+    dstlat             = dfile->lat    ; Be sure to use appropriate names 
+    dstlon             = dfile->lon    ; here.
+    Opt@DstGridLon     = dstlon
+    Opt@DstGridLat     = dstlat
+    Opt@DstMask2D = where(.not.ismissing(dstlat).and.\
+                          .not.ismissing(dstlon),1,0) ; Necessary if lat/lon
+                                                      ; has missing values.
+;
+; Use this if you just want to regrid to some generic grid, like a "1x
+; "1x1 degree grid.
+;
+;;  Opt@DstGridType    = "1x"
+
+    Opt@DstRegional    = True          ; Necessary if destination grid not global
+
+    Opt@ForceOverwrite = True          ; Optional, but recommended
+    Opt@PrintTimings   = True          ; Optional
+
+    Opt@InterpMethod   = "bilinear"    ; "patch", "conserve"
+
+    x_regrid = ESMF_regrid(x,Opt)
+    printVarSummary(x_regrid)          ; Make sure this looks okay!
+
+;----------------------------------------------------------------------
+;     Plot the original and regridded data.
+;----------------------------------------------------------------------
+    wks = gsn_open_wks("ps","ESMF")             ; ESMF.ps
+
+    res                     = True              ; Plot mods desired.
+    res@gsnDraw             = False             ; We will panel later.
+    res@gsnFrame            = False
+
+    res@gsnMaximize         = True              ; Maximize plot
+    
+    res@mpMaxLatF           =   90              ; Set accordingly
+    res@mpMinLatF           =  -90
+    res@mpMinLonF           = -180
+    res@mpMaxLonF           =  180
+
+    res@cnFillOn            = True              ; color plot desired
+    res@cnLinesOn           = False             ; turn off contour lines
+    res@cnLineLabelsOn      = False             ; turn off contour lines
+
+;;--Change (maybe)
+    mnmxint = nice_mnmxintvl( min(var), max(var), 18, False)
+    res@cnLevelSelectionMode = "ManualLevels"
+    res@cnMinLevelValF       = mnmxint(0)
+    res@cnMaxLevelValF       = mnmxint(1)
+    res@cnLevelSpacingF      = mnmxint(2)
+
+    res@lbLabelBarOn        = False              ; Labelbar will be in panel
+
+;---Plot data on original grid
+    res@gsnAddCyclic = False
+
+    dims = tostring(dimsizes(x))
+    res@tiMainString = "Original data (" + str_join(dims," x ") + ")"
+    plot_orig = gsn_csm_contour_map(wks,x,res)     
+    delete(dims)
+
+;---Plot data on new grid
+    res@gsnAddCyclic = True
+
+    dims = tostring(dimsizes(x_regrid))
+    res@tiMainString = "Regridded data (" + str_join(dims," x ") + ")"
+    plot_regrid = gsn_csm_contour_map(wks,x_regrid,res)     
+
+;---Resources for paneling
+    pres                  = True
+    pres@gsnMaximize      = True
+    pres@gsnPanelLabelBar = True
+
+    gsn_panel(wks,(/plot_orig,plot_regrid/),(/2,1/),pres)
+end

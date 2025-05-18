@@ -1,0 +1,166 @@
+;*************************************************
+; regress_8.ncl
+;
+; Concepts illustrated:
+;   - Read bivariate ascii file
+;   - Calculate assorted statistics
+;   - Calculating a bivariate regression line (regline)
+;   - Calculating a bivariate regression line + an ANOVA  (regline_stats)
+;   - Explore data:
+;   +    Draw histograms of each variable     
+;   +    Draw a PDF (Probability Distribution Function) using the two variables
+;   +    Draw scatter plot with a simple linear regression line
+;*************************************************
+; See R Examples: These use the 'Old Faithful' data: eruption-length and time-between-eruptions
+; http://www.r-tutor.com/elementary-statistics/simple-linear-regression/significance-test-linear-regression
+; http://www.r-tutor.com/elementary-statistics/quantitative-data/scatter-plot
+; http://www.r-tutor.com/elementary-statistics/quantitative-data/histogram
+;
+; http://rstudio-pubs-static.s3.amazonaws.com/171204_97e4c740be07426a9ecd8efcca153d8a.html
+;
+;*************************************************
+; R-code
+;*************************************************
+; > eruption.lm = lm(eruptions ~ waiting, data=faithful)
+; > summary(eruption.lm) 
+; Call: 
+; lm(formula = eruptions ~ waiting, data = faithful) 
+;  
+; Residuals: 
+;     Min      1Q  Median      3Q     Max 
+; -1.2992 -0.3769  0.0351  0.3491  1.1933 
+;  
+; Coefficients: 
+;             Estimate Std. Error t value Pr(>|t|) 
+; (Intercept) -1.87402    0.16014   -11.7   <2e-16 *** 
+; waiting      0.07563    0.00222    34.1   <2e-16 *** 
+; --- 
+; Signif. codes:  0 ’***’ 0.001 ’**’ 0.01 ’*’ 0.05 ’.’ 0.1 ’ ’ 1 
+;  
+; Residual standard error: 0.497 on 270 degrees of freedom 
+; Multiple R-squared: 0.811,      Adjusted R-squared: 0.811 
+; F-statistic: 1.16e+03 on 1 and 270 DF,  p-value: <2e-16 
+;*************************************************
+
+   diri = "./"
+   fili = "faithful_R.dat" 
+   pthi = diri + fili
+
+   ncol = 3
+   data = readAsciiTable(pthi%2c.html ncol, "float", 1)
+   
+   x    = data(:,2)   ; eruption interval (minutes)
+   y    = data(:,1)   ; eruption duration (minutes)
+   nxy  = dimsizes(y)
+
+   x@long_name = "Eruption Interval (min)"
+   y@long_name = "Eruption Duration (min)"
+
+   print("============ OLD Faithful================")
+   print(sprintf("%4.0f", x)+"  "+sprintf("%4.0f", y))
+   print("=========================================")
+
+;---Assorted statistics and regression line fit
+   rxy = escorc(x,y)         ;  cross-correlation
+   print(rxy)   
+   print("=========================================")
+
+   rcl  = regline(x, y)      ; basic linear regression
+   print(rcl)
+   print("=========================================")
+
+   rcl_anova =  regline_stats(x,y) ; linear regression: ANOVA
+   print(rcl_anova)   
+   print("=========================================")
+                                                            
+;--Two-dimensional PDF (Probability Duistribution)
+  opt          = True
+  opt@bin_nice = True
+  pdf2 = pdfxy(x, y, 20, 20, opt)       ; Manually set the bin intervals (...20,20,...)
+  pdf2@_FillValue = -999.0
+  pdf2 = where(pdf2.eq.0, pdf2@_FillValue, pdf2) 
+ ;print(pdf2)
+
+;**********************************************************************
+; Markers *do not require* any ordering
+; Plot lines *do require* that the abscissa ('x') be in monotonic order
+; Sort the data into ascending order based on the abscissa
+;**********************************************************************
+
+   mono  = 1                            ; ascending=1 , descending=-1
+   ii    = dim_pqsort_n(x,mono,0)
+   x    := x(ii)                        ; ascending order 
+   y    := y(ii)
+
+   tm = trend_manken(y, True, 0) 
+   print(tm)
+   print("=========================================")
+
+   print(sprintf("%4.0f", x)+"  "+sprintf("%4.0f", y))
+
+   data      := new ( (/2,nxy/), typeof(y))
+   data(0,:)  = y 
+   data(1,:)  = rcl*(x-rcl@xave) + rcl@yave        ; y = m*x + B
+
+;**********************************************************************
+; plotting parameters
+;**********************************************************************
+  plot = new( 3, "graphic")
+
+  wks  = gsn_open_wks("png","regress") 
+
+;---Explore each variabke via histograms: use default historam  values     
+
+  resh          = True 
+  resh@gsnDraw  = False
+  resh@gsnFrame = False
+  plot(0)  = gsn_histogram(wks,y,resh)
+  plot(1)  = gsn_histogram(wks,x,resh)
+
+;---Plot PDF 
+
+  rescn    = True
+  rescn@gsnDraw              = False
+  rescn@gsnFrame             = False
+  rescn@cnFillOn             = True     ; turn on color fill
+  rescn@cnFillPalette        = "amwg"   ; set color map
+  rescn@cnFillMode           = "RasterFill"       ; Raster Mode
+  rescn@cnLinesOn            = False    ; no contour lines
+  rescn@cnLineLabelsOn       = False    ; no contour line labels
+  rescn@cnInfoLabelOn        = False
+ ;rescn@cnLabelBarEndStyle   = "ExcludeOuterBoxes"
+  rescn@tiXAxisString        = x@long_name  
+  rescn@tiYAxisString        = y@long_name   
+ ;rescn@tiXAxisOffsetYF      = 0.195
+  rescn@lbOrientation        = "vertical" ; vertical label bar
+  plot(2) = gsn_csm_contour (wks,pdf2, rescn)
+  
+  resP                     = True                ; modify the panel plot
+  resP@gsnMaximize         = True                ; maximize plot in frame
+  resP@gsnPanelMainString  = "Old Faithful: Explore Data"
+  resP@gsnPanelRowSpec     = True                   ; tell panel what order to plot
+  gsn_panel(wks,plot,(/2,1/),resP)
+
+;---Scatter and Regression line
+  res                     = True                   ; plot mods desired
+  res@gsnFrame            = False
+  res@xyMarkLineModes     = (/"Markers","Lines"/)  ; choose which have markers
+  res@xyMarkers           = 16                     ; choose type of marker 
+  res@xyMarkerColor       = "red"                  ; Marker color
+  res@xyMarkerSizeF       = 0.0075                 ; Marker size (default 0.01)
+  res@xyDashPatterns      = 1                      ; solid line 
+  res@xyLineThicknesses   = (/1,2/)                ; set second line to 2
+  res@tiMainString        = "Old Faithful: Regression"
+  plt    = gsn_csm_xy (wks,x,data,res)   
+
+  txres = True                                 ; label BW line
+  txres@txFontHeightF = 0.0175                 ; font height
+  txres@txJust        = "CenterCenter"         ; Set lable location
+
+  if (rcl_anova@b(0).gt.0) then
+      text  = "erdur = "+ sprintf("%5.3f", rcl_anova@b(1))+"*erInt  + "+sprintf("%5.3f", abs(rcl_anova@b(0)))
+  else
+      text  = "erdur = "+ sprintf("%5.3f", rcl_anova@b(1))+"*erInt  - "+sprintf("%5.3f", abs(rcl_anova@b(0)))
+  end if
+  gsn_text(wks,plt,text, 70 , 5.6 ,txres) 
+  frame(wks)

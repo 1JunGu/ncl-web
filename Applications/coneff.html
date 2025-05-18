@@ -1,0 +1,767 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/coneff.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:12:27 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+special contour effects like shading and bolding.">
+<meta name="keywords" content="NCL, graphics, visualization, resources,
+contours">
+<TITLE>NCL Graphics: Contour Effects</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: Contour Effects</h1>
+
+<div class=mainimage>
+<img src="Images/coneff_8_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+There are numerous examples of contour effects throughout the
+<a href="index-2.html">Applications page</a>.  This page is dedicated
+to specialized ways of controlling the look of contours, via shading,
+transparency (new in V6.1.0), color fill, line thicknesses, and dashed
+patterns.
+<p>
+
+Three new resources were added in V6.1.0, allowing you to specify a
+color palette for filled contours (and whether to span that color
+palette), and controlling the opacity of color colors.
+
+<p>
+<ul>
+
+<li><a href="../Document/Graphics/Resources/cn.html#cnFillPalette"><em>cnFillPalette</em></a> - allows you to
+specify a color palette for your filled contours. This can be
+a <a href="../Document/Graphics/color_tables.html">color map name</a>,
+or an array of
+<a href="../Document/glossary.html#ColorIndex">color indexed values</a>,
+<a href="../Document/glossary.html#RGB">RGB values</a>, or 
+<a href="../Document/glossary.html#RGBA">RGBA values</a>.
+
+<li><a href="../Document/Graphics/Resources/cn.html#cnSpanFillPalette"><em>cnSpanFillPalette</em></a> - 
+a True/False resource allowing you to indicate whether the 
+current fill palette should be fully spanned.
+
+<li><a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a> - a resource
+that allows you to set the opacity of all colors in a contour
+plot.
+</ul>
+<p>
+
+In addition, in V6.1.0,
+the <a href="../Document/Graphics/Resources/cn.html#cnFillColors"><em>cnFillColors</em></a> resource can now
+be given an <i>n</i> x 4 array of RGBA values, allowing to specify the
+opacity of individual colors.
+<p>
+
+Three other popular resources and a function include:<p>
+
+<ul>
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnContourZeroLineThicknessF"><em>gsnContourZeroLineThicknessF</em></a> - a
+resource for setting the thickness of the zero contour
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnContourNegLineDashPattern"><em>gsnContourNegLineDashPattern</em></a> -  
+a resource for setting the dash pattern for negative contours
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnContourPosLineDashPattern"><em>gsnContourPosLineDashPattern</em></a> - a
+resource for setting the dash pattern for positive contours
+
+<li><a href="../Document/Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a> - a function
+for controlling the shading and filling of contours
+
+</ul>
+<p>
+
+This page mentions some older methods for doing shading
+and color fill, all of which have been superceded by
+<a href="../Document/Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>:<p>
+
+<ul>
+<li><a href="../Document/Functions/Shea_util/ColorShadeLeGeContour.html"><strong>ColorShadeLeGeContour</strong></a>
+<li><a href="../Document/Functions/Shea_util/ColorNegDashZeroPosContour.html"><strong>ColorNegDashZeroPosContour</strong></a>
+<li><a href="../Document/Functions/Shea_util/ShadeLtContour.html"><strong>ShadeLtContour</strong></a>
+<li><a href="../Document/Functions/Shea_util/ShadeGtContour.html"><strong>ShadeGtContour</strong></a>
+<li><a href="../Document/Functions/Shea_util/ShadeLtGtContour.html"><strong>ShadeLtGtContour</strong></a>
+<li><a href="../Document/Functions/Shea_util/ShadeGeLeContour.html"><strong>ShadeGeLeContour</strong></a>
+</ul>
+
+</div>
+
+<div class=ex>
+<!--coneff_1-->
+<a name=ex1></a>
+<a href="Images/coneff_1_lg.png">
+<img src="Images/coneff_1_sm.png" align=left border=2></a>
+<a href="Scripts/coneff_1.html">coneff_1.ncl</a>: Draw the zero contour line
+with double thickness.
+<p>
+<a href="../Document/Graphics/Resources/gsn.html#gsnContourZeroLineThicknessF"><em>gsnContourZeroLineThicknessF</em></a> sets the thickness of the zero contour.
+</div>
+
+<div class=ex>
+<!--coneff_2-->
+<a name=ex2></a>
+<a href="Images/coneff_2_lg.png">
+<img src="Images/coneff_2_sm.png" align=left border=2></a><br>
+<a href="Scripts/coneff_2.html">coneff_2.ncl</a>: Draws the zero
+contour line with a user-defined thickness value.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnContourZeroLineThicknessF"><em>gsnContourZeroLineThicknessF</em></a> sets the
+thickness of the zero contour.
+
+</div>
+
+<div class=ex>
+<!--coneff_3-->
+<a name=ex3></a>
+<a href="Images/coneff_3_lg.png">
+<img src="Images/coneff_3_sm.png" align=left border=3></a><br>
+<a href="Scripts/coneff_3.html">coneff_3.ncl</a>: Draws negative contours
+as dashed.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnContourNegLineDashPattern"><em>gsnContourNegLineDashPattern</em></a> dashes the
+negative contours,
+and <a href="../Document/Graphics/Resources/gsn.html#gsnContourPosLineDashPattern"><em>gsnContourPosLineDashPattern</em></a> dashes
+the positive contours.
+
+</div>
+
+<div class=ex>
+<!--coneff_4-->
+<a name=ex4></a>
+<a href="Images/coneff_4_lg.png">
+<img src="Images/coneff_4_sm.png" align=left border=2></a>
+<a href="Scripts/coneff_4.html">coneff_4.ncl</a>: Draws negative contours
+as dashed and removes the zero line.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnContourZeroLineThicknessF"><em>gsnContourZeroLineThicknessF</em></a> eliminates
+the zero contour (by setting = 0), <a href="../Document/Graphics/Resources/gsn.html#gsnContourNegLineDashPattern"><em>gsnContourNegLineDashPattern</em></a> dashes the negative
+contours, and <a href="../Document/Graphics/Resources/gsn.html#gsnContourPosLineDashPattern"><em>gsnContourPosLineDashPattern</em></a> dashes the positive
+contours.
+
+</div>
+
+<div class=ex>
+<!--coneff_5-->
+<a name=ex5></a>
+<a href="Images/coneff_5_lg.png">
+<img src="Images/coneff_5_sm.png" align=left border=2></a>
+<a href="Scripts/coneff_5.html">coneff_5.ncl</a>: Draws negative 
+contours as dashed.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnContourNegLineDashPattern"><em>gsnContourNegLineDashPattern</em></a> dashes the
+negative contours.
+
+</div>
+
+<div class=ex>
+<!--coneff_6-->
+<a name=ex6></a>
+<a href="Images/coneff_6_lg.png">
+<img src="Images/coneff_6_sm.png" align=left border=3></a>
+<a href="Scripts/coneff_6.html">coneff_6.ncl</a>: Not only draws
+negative contours as dashed, but draws pos,neg, and zero contours
+in different colors.
+<p>
+
+<a href="../Document/Functions/Shea_util/ColorNegDashZeroPosContour.html"><strong>ColorNegDashZeroPosContour</strong></a> is used
+to create this contour effect.
+<p>
+
+<a href="../Document/Graphics/Resources/mp.html#mpOutlineOn"><em>mpOutlineOn</em></a> = True, turns on the
+continental map outline.
+
+</div>
+
+<div class=ex>
+<!--coneff_7-->
+<a name=ex7></a>
+<a href="Images/coneff_7_lg.png">
+<img src="Images/coneff_7_sm.png" align=left border=2></a>
+<a href="Scripts/coneff_7.html">coneff_7.ncl</a>: A panel plot 
+demonstrating four ways to selectively shade contour data. All of
+these functions require user defined <a
+href="../Document/Graphics/fill_patterns.html">fill patterns</a>.
+<p>
+
+The four functions listed below have been superceded by the single
+function <a href="../Document/Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>. (<font color="red"><i>Available in <a href="../prev_releases.html#4.3.0">version 4.3.0</a> and later.</i></font>)
+We recommend you use this instead. See <a href="coneff.html#ex13">coneff_13</a> below for a demonstration of how to use 
+<a href="../Document/Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>.<p>
+
+<a href="../Document/Functions/Shea_util/ShadeLtContour.html"><strong>ShadeLtContour</strong></a><br>
+<a href="../Document/Functions/Shea_util/ShadeGtContour.html"><strong>ShadeGtContour</strong></a><br>
+<a href="../Document/Functions/Shea_util/ShadeLtGtContour.html"><strong>ShadeLtGtContour</strong></a><br>
+<a href="../Document/Functions/Shea_util/ShadeGeLeContour.html"><strong>ShadeGeLeContour</strong></a>
+
+<p>
+<b>Note!</b> <a href="../Document/Functions/Shea_util/ShadeLtContour.html"><strong>ShadeLtContour</strong></a>,
+<a href="../Document/Functions/Shea_util/ShadeGtContour.html"><strong>ShadeGtContour</strong></a> and <a href="../Document/Functions/Shea_util/ShadeLtGtContour.html"><strong>ShadeLtGtContour</strong></a> all use greater (less)
+than, and NOT greater (less) than or equal to. These functions will
+find the closest CONTOUR less than the specified threshold value when
+choosing when to start shading. This is important to note when the
+threshold values are being set in the above functions. For example, if
+there are contour levels at (/1.0,1.5,2.0,2.5/), and one wants to
+shade all areas greater than 2., <a href="../Document/Functions/Shea_util/ShadeGtContour.html"><strong>ShadeGtContour</strong></a> should be used as such: plot
+= ShadeGtContour(plot,2.2,1) ShadeGtContour will select the first
+contour <i>less</i> than the given threshold value, in this case it
+will select the 2 contour level. Thus, all areas greater than 2. will
+be shaded. If instead 2.0 is specified as the threshold value, then
+all contours <i>greater</i> than 1.5 and higher will be shaded. This
+is because the 1.5 contour is the next contour level less than (and
+not equal to) the given threshold value of 2.
+
+</div>
+
+<div class=ex>
+<!--coneff_8-->
+<a name=ex8></a>
+<a href="Images/coneff_8_lg.png">
+<img src="Images/coneff_8_sm.png" align=left border=3></a>
+<a href="Scripts/coneff_8.html">coneff_8.ncl</a>: Will shade values 
+using color rather than fill patterns.
+<p>
+
+<a href="../Document/Functions/Shea_util/ColorShadeLeGeContour.html"><strong>ColorShadeLeGeContour</strong></a> is used to
+create this contour effect. Note: <a href="../Document/Functions/Shea_util/ColorShadeLeGeContour.html"><strong>ColorShadeLeGeContour</strong></a> has been superceded by
+the more versatile <a href="../Document/Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>. We recommend you use this
+instead. See <a href="coneff.html#ex13">coneff_13</a> below for a demonstration of how to use 
+<a href="../Document/Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--coneff_9-->
+<a name=ex9></a>
+<a href="Images/coneff_9_lg.png">
+<img src="Images/coneff_9_sm.png" align=left border=2></a>
+<a href="Scripts/coneff_9.html">coneff_9.ncl</a>: Shows how to take the
+function in <a href="coneff.html#ex6">example 6</a> to make a 
+particular line disappear. 
+<p>
+
+The color "transparent" exists in NCL, so that in this example the line
+is draw but colored "invisible". 
+
+</div>
+
+<div class=ex>
+<!--coneff_10-->
+<a name=ex10></a>
+<a href="Images/coneff_10_lg.png">
+<img src="Images/coneff_10_sm.png" align=left border=2></a>
+
+<a href="Scripts/coneff_10.html">coneff_10.ncl</a>: This example 
+illustrates the use of shadings and hatchings to create a black and 
+white plot. Actually, only one shading and one hatching pattern are 
+used but the density of the patterns are altered giving the impression 
+of several different patterns. 
+<p>
+
+<a href="../Document/Graphics/Resources/cn.html#cnFillPatterns"><em>cnFillPatterns</em></a> is the resource
+that will allow the user specify what <a
+href="../Document/Graphics/fill_patterns.html">fill patterns</a> to
+use.
+
+</div>
+
+<div class=ex>
+<!--coneff_11-->
+<a name=ex11></a>
+<a href="Images/coneff_11_1_lg.png">
+<img src="Images/coneff_11_1_sm.png" align=left border=2></a>
+<a href="Images/coneff_11_2_lg.png">
+<img src="Images/coneff_11_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/coneff_11.html">coneff_11.ncl</a>: You can control the
+size of the dots in the 
+<a href="../Document/Graphics/fill_patterns.html">stipple fill pattern #17</a>
+using the <a href="../Document/Graphics/Resources/cn.html#cnFillDotSizeF"><em>cnFillDotSizeF</em></a> resource.
+<p>
+
+This is useful for publication in which the default dot size is too
+small when a figure is reduced.
+<p>
+
+</div>
+
+<div class=ex>
+<!--coneff_12-->
+<a name=ex12></a>
+<a href="Images/coneff_12_lg.png">
+<img src="Images/coneff_12_sm.png" align=left border=2></a>
+<a href="Scripts/coneff_12.html">coneff_12.ncl</a>: This example shows
+how to apply a fill pattern and/or fill color to areas with missing
+data. It also shows how to turn on the missing value perimeter
+line. Note: NCL treats all values set to the attribute _FillValue as
+missing values.
+<p>
+
+When <a href="../Document/Graphics/Resources/cn.html#cnFillOn"><em>cnFillOn</em></a>=True, NCL color
+fills areas with missing values the backgroud color, in this case
+white. This is shown in the top plot.
+<p>
+
+The middle plot has the missing value perimeter turned on via <a href="../Document/Graphics/Resources/cn.html#cnMissingValPerimOn"><em>cnMissingValPerimOn</em></a>, and the perimeter
+line color is set to red using <a href="../Document/Graphics/Resources/cn.html#cnMissingValPerimColor"><em>cnMissingValPerimColor</em></a>. The missing value
+fill pattern is set to solid fill (0) using <a href="../Document/Graphics/Resources/cn.html#cnMissingValFillPattern"><em>cnMissingValFillPattern</em></a>, and the missing
+value fill color is set to blue using <a href="../Document/Graphics/Resources/cn.html#cnMissingValFillColor"><em>cnMissingValFillColor</em></a>.  Important note:
+Even if you just want to fill missing areas with a color as in this
+case, you still need to set <a href="../Document/Graphics/Resources/cn.html#cnMissingValFillPattern"><em>cnMissingValFillPattern</em></a> = 0. If you do
+not set <a href="../Document/Graphics/Resources/cn.html#cnMissingValFillPattern"><em>cnMissingValFillPattern</em></a>,
+the default = -1, and no pattern or color fill will be drawn.
+<p>
+
+The bottom plot is the result of setting <a href="../Document/Graphics/Resources/cn.html#cnMissingValFillPattern"><em>cnMissingValFillPattern</em></a>
+= 5, <a href="../Document/Graphics/Resources/cn.html#cnMissingValFillScaleF"><em>cnMissingValFillScaleF</em></a>
+= .8 (increase the density of the fill pattern), changing <a href="../Document/Graphics/Resources/cn.html#cnMissingValPerimColor"><em>cnMissingValPerimColor</em></a>
+to black, setting the missing value perimiter line to dash using <a href="../Document/Graphics/Resources/cn.html#cnMissingValPerimDashPattern"><em>cnMissingValPerimDashPattern</em></a>,
+and increasing the thickness of the missing value perimeter line by
+using <a href="../Document/Graphics/Resources/cn.html#cnMissingValPerimThicknessF"><em>cnMissingValPerimThicknessF</em></a>.
+<p>
+
+For this example, <a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a> is
+set to the default "AreaFill".  Not all of the above missing value
+resources work with every <a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a>.  For instance, "CellFill" and
+"RasterFill" modes do not allow use of <a href="../Document/Graphics/Resources/cn.html#cnMissingValFillPattern"><em>cnMissingValFillPattern</em></a> (= 0 for these
+modes).  Please consult the <a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a> documentation for more details
+about what missing value resources can be used with each FillMode.
+
+</div>
+
+<div class=ex>
+<!--coneff_13-->
+<a name=ex13></a>
+<a href="Images/coneff_13_1_lg.png">
+<img src="Images/coneff_13_1_sm.png" align=left border=2></a>
+<a href="Images/coneff_13_2_lg.png">
+<img src="Images/coneff_13_2_sm.png" align=left border=2></a>
+<a href="Scripts/coneff_13.html">coneff_13.ncl</a>: In version <a
+href="../prev_releases.html#4.3.0">4.3.0</a> a new function <a href="../Document/Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a> was added that allows you
+to add shading and/or color fill between specified contour levels in
+your plot. Note that the shading will always begin at a contour, 
+and not neccesarily at the user specified <a href="../Document/Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a> input arguments.
+Check your plot to make sure that the results are what you expected.
+<p>
+The first frame shows how to do pattern shading four different ways, and the second 
+frame shows the same thing using solid color fill.
+<p>
+</div>
+
+<div class=ex>
+<!--coneff_14-->
+<a name=ex14></a>
+<a href="Images/coneff_14_lg.png">
+<img src="Images/coneff_14_sm.png" align=left border=2></a>
+<a href="Scripts/coneff_14.html">coneff_14.ncl</a>: Overlay
+shaded contours on color-filled contours, and create two
+separate labels for each set of contours.
+</div>
+
+<div class=ex>
+<!--coneff_15--> <a name=ex15></a>
+<a href="Images/coneff_15_lg.png">
+<img src="Images/coneff_15_sm.png" align=left border=2></a>
+
+<a href="Scripts/coneff_15.html">coneff_15.ncl</a>: Using the <a href="../Document/Graphics/Resources/cn.html#cnLevelFlags"><em>cnLevelFlags</em></a> resource to control which
+contour lines get drawn.  You can set this resource to an array of
+strings with the values "NoLine", "LineOnly", "LabelOnly", or
+"LineAndLabel".
+
+</div>
+
+<div class=ex>
+<!--coneff_16--> <a name=ex16></a>
+<a href="Images/coneff_16_1_lg.png">
+<img src="Images/coneff_16_1_sm.png" align=left border=2></a>
+<a href="Images/coneff_16_2_lg.png">
+<img src="Images/coneff_16_2_sm.png" align=left border=2></a>
+<a href="Scripts/coneff_16.html">coneff_16.ncl</a>: Using the <a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a> resource to 
+make the contour fill more transparent.  The first frame has
+no transparency, and the second frame has some transparency.
+You may notice that the filled contours are slightly different over
+land. This is because the land is filled in gray.
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Contours/NCL_coneff_16.html#sphx-glr-gallery-contours-ncl-coneff-16-py">here</a>.
+
+</div>
+
+<div class=ex>
+<!--coneff_17--> <a name=ex17></a>
+<a href="Images/coneff_17_1_lg.png">
+<img src="Images/coneff_17_1_sm.png" align=left border=2></a>
+<a href="Images/coneff_17_2_lg.png">
+<img src="Images/coneff_17_2_sm.png" align=left border=2></a>
+<a href="Images/coneff_17_3_lg.png">
+<img src="Images/coneff_17_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/coneff_17.html">coneff_17.ncl</a>: This example shows
+how to force a color fill for a contour field that is constant, by
+setting <a href="../Document/Graphics/Resources/cn.html#cnConstFEnableFill"><em>cnConstFEnableFill</em></a> to
+True. (<i>This resource may default to this value in a future version
+of NCL.</i>)<p>
+
+The first frame shows the default behavior for contouring a constant
+field, and the second frame shows the use
+of <a href="../Document/Graphics/Resources/cn.html#cnConstFEnableFill"><em>cnConstFEnableFill</em></a>.  The third
+frame shows how to turn off the "constant field" label in the middle
+of the plot.
+<p>
+
+There are many resources for customizing the "constant field" label.
+Go to the <a href="../Document/Graphics/Resources/cn.html">contour resources page</a>
+and search for resources starting with "cnConstF".
+<p>
+
+Note: this script will produce the following warnings:
+<p>
+<pre>
+  warning:ContourPlotInitialize: scalar field is constant; no contour 
+            lines will appear; use cnConstFEnableFill to enable fill
+</pre>
+</div>
+
+<div class=ex>
+<!--Wavelet_3-->
+<a name=ex3></a>
+<a href="Images/wavelet_3_1_lg.png">
+<img src="Images/wavelet_3_1_sm.png" align=left border=2></a>
+<a href="Images/wavelet_3_2_lg.png">
+<img src="Images/wavelet_3_2_sm.png" align=left border=2></a>
+<a href="Images/wavelet_3_3_lg.png">
+<img src="Images/wavelet_3_3_sm.png" align=left border=2></a>
+<a href="Scripts/wavelet_3.html">wavelet_3.ncl</a>: This example
+shows how to use the gsnShadeFillScaleF and gsnShadeDotSizeF
+resources to control the density and size of pattern and stipple
+shading patterns added by <a href="../Document/Graphics/Interfaces/gsn_contour_shade.html"><strong>gsn_contour_shade</strong></a>.<p>
+<font color="red"><i>Available in <a href="../prev_releases.html#6.4.1">version 6.4.1</a> and later.</i></font>
+</div>
+
+<div class=ex>
+<!--coneff_18--> <a name=ex18></a>
+<a href="Images/coneff_18_1_lg.png">
+<img src="Images/coneff_18_1_sm.png" align=left border=2></a>
+<a href="Images/coneff_18_2_lg.png">
+<img src="Images/coneff_18_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/coneff_18.html">coneff_18.ncl</a>: This example shows
+how to draw a basic contour map plot, and then modify it by setting
+the thickness and dash pattern of the contour lines.  This is similar
+to the <a href="Scripts/coneff_4.html">coneff_4.ncl</a> example, but
+shows how to change the thickness of any contour line, not just the
+zero line like with <a href="../Document/Graphics/Resources/gsn.html#gsnContourZeroLineThicknessF"><em>gsnContourZeroLineThicknessF</em></a>.
+<p>
+You can also use the <a href="../Document/Graphics/Resources/cn.html#cnFillOpacity"><em>cnFillOpacity</em></a> resource
+to set the opacity of the contours on a contour plot. It is used in this plot to
+emphasize the changes to the contour lines.  In addition, this script contains
+custom functions to set the patterns and thicknesses of the contour lines based on
+either user-specified values or default values.
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/coneff.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:12:40 GMT -->
+</html>
+
+

@@ -1,0 +1,272 @@
+;----------------------------------------------------------------------
+; mask_18.ncl
+;
+; Concepts illustrated:
+;   - Creating a mask from a Lambert Conformal map boundary
+;   - Using gc_inout to mask data inside a given lat/lon polygon
+;   - Using functions for cleaner code
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"  
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"  
+;----------------------------------------------------------------------
+
+;----------------------------------------------------------------------
+; This function traverses a given map plot's viewport boundary
+; starting with the lower left corner and going counter-clockwise
+; around the boundary until we're back at the lower left corner. It 
+; then uses ndctodata to convert these viewport boundary coordinates to
+; lat/lon coordinates, using the given map plot.
+;----------------------------------------------------------------------
+undef("get_latlon_bounding_polygon")
+function get_latlon_bounding_polygon(map_plot[1]:graphic)
+local vpx, vpy, vpw, vph, delta, xstart, xend, ystart, yend,\
+      nlatlon, vpy_1d_arr, vpx_1d_arr, vpx_polygon, vpy_polygon
+begin
+;---Retrieve the viewport information for the map plot
+  getvalues map_plot
+    "vpXF"      : vpx
+    "vpYF"      : vpy
+    "vpWidthF"  : vpw
+    "vpHeightF" : vph
+  end getvalues
+
+;---Add a little bit of a margin to prevent missing values being returned by ndctodata
+  delta  = 0.0000001
+  xstart = vpx+delta
+  ystart = vpy-vph+delta
+  xend   = vpx+vpw-delta
+  yend   = vpy-delta 
+
+  nlatlon = 10
+  vpy_1d_arr  = fspan(ystart,yend,nlatlon)
+  vpx_1d_arr  = fspan(xstart,xend,nlatlon)
+  vpy_polygon = new(4*nlatlon+1,float)    ; have to get the lat/lon for all four sides of
+  vpx_polygon = new(4*nlatlon+1,float)    ; the plot
+
+;
+; Starting at the lower left corner of the plot, create a polygon in
+; viewport coordinates by traversing the four axes counter-clockwise.
+;
+;    - left-to-right on bottom axis
+;    - bottom-to-top on right Y axis
+;    - right-to-left on top axis
+;    - top-to-bottom on left axis
+;
+; FYI: The lower left corner is (vpx,vpy-vph) and the upper right
+; corner is (vpx+vpw,vpy).
+;
+;---bottom X axis
+  vpy_polygon(     0:nlatlon-1)       = vpy_1d_arr(0)
+  vpx_polygon(     0:nlatlon-1)       = vpx_1d_arr
+
+;---right Y axis
+  vpy_polygon(  nlatlon:2*nlatlon-1)  = vpy_1d_arr
+  vpx_polygon(  nlatlon:2*nlatlon-1)  = vpx_1d_arr(nlatlon-1)
+
+;---top X axis
+  vpy_polygon(2*nlatlon:3*nlatlon-1)  = vpy_1d_arr(nlatlon-1)
+  vpx_polygon(2*nlatlon:3*nlatlon-1)  = vpx_1d_arr(::-1)        ; need to reverse
+
+;---left Y axis
+  vpy_polygon(3*nlatlon:4*nlatlon-1)  = vpy_1d_arr(::-1)        ; need to reverse
+  vpx_polygon(3*nlatlon:4*nlatlon-1)  = vpx_1d_arr(0)
+
+  vpy_polygon(4*nlatlon)              = vpy_1d_arr(0)    ; Final point must be equal to
+  vpx_polygon(4*nlatlon)              = vpx_1d_arr(0)    ; 1st point, to close polygon.
+
+
+;---Convert viewport polygon to lat/lon polygon and return lat/lon as a list.
+  lat_polygon = new(4*nlatlon+1,float)   ; same size as vpx/vpy_polygon
+  lon_polygon = new(4*nlatlon+1,float)
+
+  ndctodata(map_plot,vpx_polygon,vpy_polygon,lon_polygon,lat_polygon)
+  return([/lat_polygon,lon_polygon/])
+end
+
+;----------------------------------------------------------------------
+; Given a data array, create a contour/map lambert conformal plot.
+; Note: the values for the lambert conformal parallels, meridian, and
+; map corners are hard-coded to be an area that covers the United 
+; States.
+;---------------------------------------------------------------------- 
+undef("create_lambert_conformal_plot")
+function create_lambert_conformal_plot(wks,data[*][*]:numeric,levels)
+local res
+begin
+;---Create resources for lambert conformal map plot
+  res                        = True               ; plot mods desired
+  res@gsnMaximize            = True               ; enlarge image  
+  res@gsnFrame               = False
+  res@gsnDraw                = False
+  res@mpFillOn               = False
+
+  res@cnFillOn               = True               ; color fill  
+  res@cnLinesOn              = False              ; no contour lines
+  res@cnLineLabelsOn         = False              ; no contour labels
+  res@cnInfoLabelOn          = False              ; no contour info label
+  res@cnFillOpacityF         = 0.75               ; colors partially transparent
+  
+  res@cnLevelSelectionMode   = "ExplicitLevels"
+  res@cnLevels               = levels
+
+  res@mpDataBaseVersion     = "MediumRes"     ; better map outlines
+  res@pmTickMarkDisplayMode = "Always"        ; turn on nicer map tickmarks
+
+  res@mpProjection          = "LambertConformal"
+  res@mpLambertParallel1F   = 25
+  res@mpLambertParallel2F   = 25
+  res@mpLambertMeridianF    = 265
+
+  res@mpLimitMode           = "Corners"          ; choose region of map
+  res@mpRightCornerLonF     = -57.38041
+  res@mpRightCornerLatF     = 55.48146
+  res@mpLeftCornerLonF      = -126.138
+  res@mpLeftCornerLatF      = 16.281
+  
+;---Create the lambert conformal plot and return.
+  plot_lc = gsn_csm_contour_map(wks,data,res)
+
+  return(plot_lc)
+end
+
+;----------------------------------------------------------------------
+; Given a data array, create a contour/map lat/lon (cylindrical 
+; equidistant)  plot.
+;
+; Note: the values for min/max of the map porjection are hard-coded to
+; be an area that roughly covers the United States.
+;---------------------------------------------------------------------- 
+undef("create_latlon_plot")
+function create_latlon_plot(wks,data[*][*]:numeric,levels)
+local res
+begin
+;---Create resources for lambert conformal map plot
+  res                        = True               ; plot mods desired
+  res@gsnMaximize            = True               ; enlarge image  
+  res@gsnFrame               = False
+  res@gsnDraw                = False
+  res@mpFillOn               = False
+  res@mpDataBaseVersion      = "MediumRes"     ; better map outlines
+  res@pmTickMarkDisplayMode  = "Always"        ; turn on nicer map tickmarks
+
+  res@cnFillOn               = True               ; color fill  
+  res@cnLinesOn              = False              ; no contour lines
+  res@cnLineLabelsOn         = False              ; no contour labels
+  res@cnInfoLabelOn          = False              ; no contour info label
+  res@cnFillOpacityF         = 0.75               ; colors partially transparent
+  res@lbOrientation          = "Vertical"
+
+  res@cnLevelSelectionMode   = "ExplicitLevels"
+  res@cnLevels               = levels
+
+;---Zoom in on area of interest (United States in this example).
+  res@mpMinLatF              =  0
+  res@mpMaxLatF              = 70
+  res@mpMinLonF              = -150
+  res@mpMaxLonF              = -50
+
+;---Create the latlon (cylndrical equidistant) plot and return
+  plot_ce = gsn_csm_contour_map(wks,data,res)
+
+  return(plot_ce)
+end
+
+;----------------------------------------------------------------------
+; Given a data array with lat/lon coordinate arrays and a lat/lon
+; polygon, create a mask array where all values inside the lat/lon
+; polygon are kept, and all other values are set to missing.
+;
+; Note that this function assumes the data is rectilinear, with 
+; coordinate arrays called "lat" and "lon". You will need to adjust 
+; this code if your data is not rectilinear, or if your lat/lon
+; coordinate arrays are called something different.
+;
+; latlon_polygon is assumed to be a list, where the first element
+; is the 1D latitude array representing the polygon, and the second
+; element is the 1D longitude array.
+;----------------------------------------------------------------------
+undef("create_mask_array")
+function create_mask_array(data,latlon_polygon:list)
+local lat1d,lon1d
+begin
+  lat1d = ndtooned(conform(data,data&lat,0))
+  lon1d = ndtooned(conform(data,data&lon,1))
+  imask = reshape(gc_inout(lat1d,lon1d,latlon_polygon[0],latlon_polygon[1]),\
+                  dimsizes(data))
+  return(imask)
+end
+
+
+;----------------------------------------------------------------------
+; Given a data array and a mask array of the same size, mask the
+; data array and copy metadata.
+;----------------------------------------------------------------------
+undef("apply_mask")
+function apply_mask(data:numeric,imask:logical)
+begin
+  if(.not.isatt(data,"_FillValue"))
+    data@_FillValue = default_fillvalue(typeof(data))
+  end if
+  data_mask = where(imask,data,data@_FillValue)
+  copy_VarMeta(data,data_mask)
+  return(data_mask)
+end
+
+;----------------------------------------------------------------------
+; Given a data array and a lat/lon polygon, create a lat/lon plot with 
+; extra primitives added to mark the lat/lon polygon and the missing
+; and non-missing coordinates of the data.
+;----------------------------------------------------------------------
+undef("create_plot_with_primitives")
+function create_plot_with_primitives(wks,data,latlon_polygon,levels)
+local gnres, primres
+begin
+  plot_prim = create_latlon_plot(wks,data,levels)
+
+  gnres = True
+  gnres@gsMarkerIndex            = 16
+  gnres@gsMarkerSizeF            = 5
+  gnres@gsnCoordsMissingColor    = "orange1"
+  gnres@gsnCoordsNonMissingColor = "navyblue"
+  gnres@gsnCoordsAttach          = True
+  gsn_coordinates(wks,plot_prim,data,gnres)
+
+  primres                  = True
+  primres@gsMarkerIndex    = 16
+  primres@gsMarkerColor    = "red"
+  primres@gsLineColor      = "red"
+  primres@gsLineThicknessF = 3
+  plot_prim@$unique_string("markers")$ = gsn_add_polymarker(wks,plot_prim,\
+                                latlon_polygon[1],latlon_polygon[0],primres)
+  plot_prim@$unique_string("lines")$ = gsn_add_polyline(wks,plot_prim,\
+                                latlon_polygon[1],latlon_polygon[0],primres)
+  return(plot_prim)
+end
+
+;----------------------------------------------------------------------
+; Main code
+;----------------------------------------------------------------------
+begin
+  a = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/uv300.nc","r")
+  u = a->U(1,:,:)                                ; read July zonal winds
+
+  wks  = gsn_open_wks ("png", "mask")
+
+  cn_levels      = ispan(-12,40,4)     ; contour levels to use
+  plot_lc        = create_lambert_conformal_plot(wks,u,cn_levels)
+  latlon_polygon = get_latlon_bounding_polygon(plot_lc)
+  imask          = create_mask_array(u,latlon_polygon)
+  u_mask         = apply_mask(u,imask)
+
+  plot_orig_prim = create_plot_with_primitives(wks,u,latlon_polygon,cn_levels)
+  plot_mask_prim = create_plot_with_primitives(wks,u_mask,latlon_polygon,cn_levels)
+  plot_orig      = create_latlon_plot(wks,u,cn_levels)
+  plot_mask      = create_latlon_plot(wks,u_mask,cn_levels)
+
+;---Panel plot with and without primitives (markers and lines) added.
+  pres = True
+  gsn_panel(wks,(/plot_orig_prim,plot_mask_prim/),(/2,1/),pres)
+  gsn_panel(wks,(/plot_orig,plot_mask/),(/2,1/),pres)
+
+end

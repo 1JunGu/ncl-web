@@ -1,0 +1,191 @@
+;----------------------------------------------------------------------
+; polyg_28.ncl
+;----------------------------------------------------------------------
+; Concepts illustrated:
+;   - Using a local function to generate a 'triangle' grid       
+;   - Use polymarkers for the grid locations; write grid index locations
+;   - Use polygon and polyline to draw grid outline and bidecting lines
+;   - Use the attributes: 'trGridType', 'sfXArray and sfYArray to create a contour plot
+;----------------------------------------------------------------------
+; An extension would be to generate thc contour plot 1st [ gsnDraw/gsnFrame=False ]]
+; Use 'gsn_add_polyline' to draw the bisecting lines
+; Maybe: 'gsn_add_polymarker' to add the locations        
+; Finall draw and advance the frame.
+;----------------------------------------------------------------------
+
+undef("triangle_grid")
+function triangle_grid(N[1]:integer, t[6]:numeric)
+;
+; Source:
+; https://people.sc.fsu.edu/~jburkardt/f_src/triangle_grid/triangle_grid.html
+;
+;    Input: N       - the number of subintervals.
+;           t(6)    - coordinates of the points defining the triangle.
+;
+;    Output: tg(2,((N+1)*(N+2))/2), the coordinates of the points in the triangle.
+;
+;    Choosing N = 10, for instance, breaks each side into 10 subintervals,
+;    and produces a grid of ((10+1)*(10+2))/2 = 66 points.
+;
+local ng, tg, p, i, j, k, m
+begin
+  ng = ( ( N + 1 ) * ( N + 2 ) ) / 2;
+  tg = new( (/2*ng/), "double", "No_FillValue") 
+  tg = 0.0d
+
+  p = 0
+
+  do i=0,N
+    do j=0,N-i
+       k = N - i - j 
+
+      do m=0,1
+        ;tg(m+p*2) = ( i*t(m+0*2) + j*t(m+1*2) + k*t(m+2*2) )/N
+         tg(m+p*2) = ( i*t(m)     + j*t(m+2)   + k*t(m+4  ) )/N
+      end do
+
+      p = p + 1
+    end do
+  end do
+
+  tg@ntri = ng    ; attribute
+  return(tg)
+end
+;=========================================================================
+;                              MAIN
+;=========================================================================
+
+  N = 10   ; # of subintervals
+
+; 't' are the cartesian coordinates of the points defining the triangle.
+; These are the vertices. They can be inputs in any order.
+ 
+  tv =  (/(/0.0d, 0.0d /) \                    ; lower left
+         ,(/1.0d, 0.0d /) \                    ; lower right
+         ,(/0.5d, 0.86602540378443860d/) /)    ; sqrt(3)/2;  mid-point 
+  printVarSummary(tv)    ; t(3,2)
+
+  tri = triangle_grid(N, ndtooned(tv))         ; tri(132)
+
+  xtri = tri(0::2)                             ; clarity , explicitly extract 
+  ytri = tri(1::2)                             ; (66)
+; print( sprintf("%6.3f", xtri)+"  "+sprintf("%6.3f", ytri))
+; print("---")
+
+  ntri = tri@ntri                            ; number of pts 
+  print("ntri="+ntri)
+  print("---")
+
+;=========================================================================
+;                              PLOT
+;=========================================================================
+  wks = gsn_open_wks("png","polyg")     
+
+  res = True
+  res@gsnMaximize = True
+  res@gsnDraw     = False
+ ;res@gsnFrame    = True    ; The frame is not advanced by default.
+
+  res@trYMinF = -0.25           ; Set minimum Y-axis value.
+  res@trYMaxF =  1.0            ; set maximum Y-axis value.
+  res@trXMinF = -0.25           ; Set minimum X-axis value.
+  res@trXMaxF =  1.25           ; Set maximum X-axis value.
+
+;===============
+;  PLOT 1
+;===============
+
+  res@tiMainString = "Triangle Locations: polymarker and text"
+  plot = gsn_blank_plot(wks,res)
+
+; Add markers and index values
+
+  mkres               = True
+  mkres@gsMarkerIndex = 16     ; Filled circle
+  mkres@gsMarkerSizeF = 0.01
+  mark =  gsn_add_polymarker(wks, plot, xtri, ytri, mkres)
+
+
+  xytxt := ind_resolve(ispan(0,ntri-1,1), (/(ntri/2),2/))
+  txres  =  True
+  txres@txFontHeightF = 0.0125
+  text = gsn_add_text(wks, plot, "("+xytxt(:,0)+","+xytxt(:,1)+")", xtri, ytri+0.015, txres)
+
+  draw(plot)
+  frame(wks)
+
+;===============
+;  PLOT 2
+;===============
+
+  res@tiMainString = "Triangle: polygon,  polyline"
+  plt = gsn_blank_plot(wks,res)
+
+  plres                  = True
+  plres@gsLineColor      = "black"
+  plres@gsLineThicknessF = 2.0
+
+  dimtv = dimsizes(tv)
+  TV    = new( (/dimtv(0)+1,dimtv(1)/), typeof(tv), "No_FillValue")
+  TV(0:2,:) = tv
+  TV( 3 ,:) = tv(0,:)   ; add cyclic point
+
+  bound = gsn_add_polyline(wks, plt,TV(:,0), TV(:,1), plres)
+
+  plres@gsLineColor      = "red"
+  xx    = (/ tv(2,0), tv(2,0) /)
+  yy    = (/ tv(0,1) ,tv(2,1) /)  
+  line1 = gsn_add_polyline(wks, plt, xx, yy, plres) 
+
+  plres@gsLineColor      = "blue"
+  xx    = (/ tv(0,0), 0.5*(tv(2,0)+tv(1,0)) /) 
+  yy    = (/ tv(0,1), 0.5*(tv(1,1)+tv(2,1)) /) 
+  line2 = gsn_add_polyline(wks, plt, xx, yy, plres) 
+  
+  plres@gsLineColor      = "green"
+  xx    = (/ tv(1,0), 0.5*(tv(0,0)+tv(2,0)) /) 
+  yy    = (/ tv(1,1), 0.5*(tv(1,1)+tv(2,1)) /) 
+  line3 = gsn_add_polyline(wks, plt, xx, yy, plres) 
+
+  xx   := (/ 0.375, 0.60 , 0.350, 0.650, 0.350, 0.650 /)
+  yy   := (/ 0.50 , 0.50 , 0.275, 0.275, 0.100, 0.100 /)
+  nn    = dimsizes(xx)
+  lab   = ""+ispan(1,nn,1)
+  txres@txFontHeightF = 0.05   
+
+  dum = 0
+  do n=0,nn-1 
+    dum@$unique_string("n")$ = gsn_add_text(wks, plt, lab(n) , xx(n), yy(n), txres) 
+  end do
+
+  draw(plt)
+  frame(wks)
+
+;===============
+;  PLOT 3
+;===============
+  val = random_normal(10, 5, ntri)
+
+  rescn                      = True
+ ;rescn@gsnMaximize          = True
+ ;rescn@gsnFrame             = False   ; Want to draw markers later.
+ ;rescn@gsnDraw              = False
+
+ ;rescn@cnLevelSelectionMode = "ManualLevels"
+ ;rescn@cnMinLevelValF       = 
+ ;rescn@cnMaxLevelValF       =
+ ;rescn@cnLevelSpacingF      = 
+
+  rescn@cnFillOn             = True
+  rescn@cnLinesOn            = False
+  rescn@cnLineLabelsOn       = False
+
+  rescn@lbOrientation        = "vertical"
+  rescn@lbBoxLinesOn         = False
+
+  rescn@trGridType           = "TriangularMesh"
+  rescn@sfXArray             = xtri
+  rescn@sfYArray             = ytri
+
+  rescn@tiMainString = "Triangle Contour: TriangularMesh, sf[X,Y]Array"
+  pltcn = gsn_csm_contour(wks,val,rescn)

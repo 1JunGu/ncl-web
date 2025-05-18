@@ -1,0 +1,568 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/tdez3d.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:17 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (graphics routines)">
+<meta name="keywords" content="tdez3d">
+<title>tdez3d</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../graphics_routines.html">Graphics routines</a>
+<br>
+<h1>tdez3d</h1>
+
+<p>
+Draws an isosurface on the specified workstation.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	procedure tdez3d (
+		wks     [1] : graphic,  
+		x       [*] : float,    
+		y       [*] : float,    
+		z       [*] : float,    
+		u [*][*][*] : float,    
+		value   [1] : float,    
+		rmult   [1] : float,    
+		theta   [1] : float,    
+		phi     [1] : float,    
+		ist     [1] : integer   
+	)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>wks</em>
+<p class=indent>An NCL workstation identifier for where you want to draw the
+isosurface.  The <em>wks</em> identifier is one returned either from
+calling <a href="../../Graphics/Interfaces/gsn_open_wks.html"><strong>gsn_open_wks</strong></a> or calling
+<a href="../../Manuals/Ref_Manual/NclStatements.html#Create">create</a> to create a Workstation object.</p>
+<p class=indent>
+</p>
+<em>x</em>
+<p class=indent>A one-dimensional array specifying X-coordinate values; must be
+monotonically increasing.
+</p>
+<em>y</em>
+<p class=indent>A one-dimensional array specifying Y-coordinate values; must be
+monotonically increasing.
+</p>
+<em>z</em>
+<p class=indent>A one-dimensional array specifying Z-coordinate values; must be
+monotonically increasing.
+</p>
+<em>u</em>
+<p class=indent>A three-dimensional array specifying functional values at the X, Y,
+and Z coordinate values in the first three arguments.  The values of
+<em>u</em> are stored with the first dimension varying the fastest,
+i.e. <em>u</em>(i,j,k) is the data value at
+(<em>x</em>(i),<em>y</em>(j),<em>z</em>(k)) for i=0,
+<a href="dimsizes.html"><strong>dimsizes</strong></a>(<em>x</em>)-1,
+j=0,<a href="dimsizes.html"><strong>dimsizes</strong></a>(<em>y</em>)-1, and
+k=0,<a href="dimsizes.html"><strong>dimsizes</strong></a>(<em>z</em>)-1.
+</p>
+<em>value</em>
+<p class=indent>The isovalue.
+</p>
+<em>rmult</em>
+<br>
+<em>theta</em>
+<br>
+<em>phi</em>
+<p class=indent>Values specifying an eye position (the point from which the surface
+will be viewed); these values are defined as follows: </p>
+<p class=indent>
+
+<UL>
+
+<LI><em>rmult</em> is a multiplier of the diagonal length (DL) of the
+smallest box containing the surface to be drawn.
+
+<LI><em>theta</em> is an angle (in degrees) in the XY plane 
+measured positive counter-clockwise from the X axis.
+
+<LI><em>phi</em> is an angle (in degrees) measured from the 
+positive Z axis toward the XY plane.
+
+</UL>
+</p>
+<p class=indent>
+
+Thus, the coordinate (<em>rmult</em>*DL,<em>theta,phi</em>) is the
+spherical coordinate for the eye position.  If <em>rmult</em> =
+<em>theta</em> = <em>phi</em> = 0., a default eye position
+(2.5,-55.,70.) is chosen. </p>
+<p class=indent>
+
+The point looked <em>at</em> is calculated to be the midpoint of
+the box determined by the <em>x</em>, <em>y</em>, and <em>z</em> array 
+limits.
+</p>
+<em>ist</em>
+<p class=indent>A style index defining the colors used to shade the
+surface.  The legal values for <em>ist</em> are as follows:
+</p>
+<p class=indent>
+
+<TABLE BORDER CELLPADDING=5><TH><em>ist</em><TH>Description<TR>
+<TD VALIGN=TOP>1 <TD>produce a wire-frame surface<TR>
+<TD VALIGN=TOP>2 <TD>use gray shades underneath; gray shades on top<TR>
+<TD VALIGN=TOP>3 <TD>use gray shades underneath; red shades on top<TR>
+<TD VALIGN=TOP>4 <TD>use gray shades underneath; green shades on top<TR>
+<TD VALIGN=TOP>5 <TD>use gray shades underneath; blue shades on top<TR>
+<TD VALIGN=TOP>6 <TD>use gray shades underneath; cyan shades on top<TR>
+<TD VALIGN=TOP>7 <TD>use gray shades underneath; gray shades on top<TR>
+<TD VALIGN=TOP>8 <TD>use gray shades underneath; magenta shades on top
+</TABLE>
+</p>
+<p class=indent>
+
+If <em>ist</em> is positive, then black is used for the background
+color and white for the foreground color; if <em>ist</em> is the
+negative of any of the above values, then white is used for the
+background color and black for the foreground color.  If <em>ist</em>
+falls outside of the legal range, it defaults to 6.
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function draws an isosurface on the specified workstation, using
+the low-level package, <a href="http://www.ncarg.ucar.edu//supplements/tdpack/">Tdpack</a>.
+<P>
+
+When <strong>tdez3d</strong> is called, a color table is defined for the
+workstation specified by <em>wks</em> in the first argument. <i>This
+color table will supersede any color table that has been
+previously defined.</i>  The color table that is defined is:
+ 
+<P>
+<TABLE BORDER CELLPADDING=5><TH>Color index<TH>Colors<TR>
+<TD VALIGN=TOP>0<TD>black if <em>IST</em> is positive; white if <em>IST</em> is negative<TR>
+<TD VALIGN=TOP>1<TD>white if <em>IST</em> is positive; black if <em>IST</em> is negative<TR>
+<TD VALIGN=TOP>2<TD>red<TR>
+<TD VALIGN=TOP>3<TD>green<TR>
+<TD VALIGN=TOP>4<TD>blue<TR>
+<TD VALIGN=TOP>5<TD>cyan<TR>
+<TD VALIGN=TOP>6<TD>magenta<TR>
+<TD VALIGN=TOP>7<TD>yellow<TR>
+<TD VALIGN=TOP>8-37<TD>grayscale from white to black<TR>
+<TD VALIGN=TOP>38-67<TD>shades of gray<TR>
+<TD VALIGN=TOP>68-97<TD>shades of red<TR>
+<TD VALIGN=TOP>98-127<TD>shades of green<TR>
+<TD VALIGN=TOP>128-157<TD>shades of blue<TR>
+<TD VALIGN=TOP>158-187<TD>shades of cyan<TR>
+<TD VALIGN=TOP>188-217<TD>shades of magenta<TR>
+<TD VALIGN=TOP>218-247<TD>shades of yellow<TR>
+</TABLE>
+ 
+<P>
+<strong>tdez3d</strong> does not call <a href="frame.html"><strong>frame</strong></a>.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+Initialization routines:
+<a href="tdinit.html"><strong>tdinit</strong></a>,
+<a href="tdpara.html"><strong>tdpara</strong></a>,
+<a href="tdclrs.html"><strong>tdclrs</strong></a>
+<p>
+
+Parameter access routines:
+<a href="tdgetp.html"><strong>tdgetp</strong></a>,
+<a href="tdgtrs.html"><strong>tdgtrs</strong></a>,
+<a href="tdsetp.html"><strong>tdsetp</strong></a>,
+<a href="tdstrs.html"><strong>tdstrs</strong></a>
+<p>
+
+Point transforming routines:
+<a href="tdprpt.html"><strong>tdprpt</strong></a>,
+<a href="tdprpa.html"><strong>tdprpa</strong></a>,
+<a href="tdprpi.html"><strong>tdprpi</strong></a>
+<p>
+
+Line drawing routines:
+<a href="tdline.html"><strong>tdline</strong></a>,
+<a href="tdlndp.html"><strong>tdlndp</strong></a>,
+<a href="tdlnpa.html"><strong>tdlnpa</strong></a>,
+<a href="tdlpdp.html"><strong>tdlpdp</strong></a>,
+<a href="tdcurv.html"><strong>tdcurv</strong></a>,
+<a href="tdcudp.html"><strong>tdcudp</strong></a>
+<p>
+
+Grid drawing routines:
+<a href="tdgrds.html"><strong>tdgrds</strong></a>,
+<a href="tdgrid.html"><strong>tdgrid</strong></a>
+<p>
+
+Label drawing routines:
+<a href="tdlbls.html"><strong>tdlbls</strong></a>,
+<a href="tdlbla.html"><strong>tdlbla</strong></a>,
+<a href="tdlblp.html"><strong>tdlblp</strong></a>,
+<a href="tdplch.html"><strong>tdplch</strong></a>
+<p>
+
+Surface drawing routines:
+<a href="tddtri.html"><strong>tddtri</strong></a>,
+<a href="tdstri.html"><strong>tdstri</strong></a>,
+<a href="tditri.html"><strong>tditri</strong></a>,
+<a href="tdmtri.html"><strong>tdmtri</strong></a>,
+<a href="tdttri.html"><strong>tdttri</strong></a>,
+<a href="tdctri.html"><strong>tdctri</strong></a>,
+<a href="tdotri.html"><strong>tdotri</strong></a>,
+<a href="tdsort.html"><strong>tdsort</strong></a>
+<p>
+
+Simplified interface routines:
+<a href="tdez2d.html"><strong>tdez2d</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+The following code produces an isosurface:
+
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+
+begin
+;
+;  Create the data array for the isosurface.
+;
+  rbig1 = 6.
+  rbig2 = 6.
+  rsml1 = 2.
+  rsml2 = 2.
+  nix = 21
+  niy = 31
+  niz = 19
+  xi = <a href="ispan.html"><strong>ispan</strong></a>(1,nix,1)*1.
+  yi = <a href="ispan.html"><strong>ispan</strong></a>(1,niy,1)*1.
+  zi = <a href="ispan.html"><strong>ispan</strong></a>(1,niz,1)*1.
+  ui = <a href="new.html"><strong>new</strong></a>((/nix,niy,niz/),float)
+
+  jcent1 = niy*.5 - rbig1*.5
+  jcent2 = niy*.5 + rbig2*.5
+  do i=1,nix
+    fimid = i-nix/2.
+    do j=1,niy
+      fjmid1 = j-jcent1
+      fjmid2 = j-jcent2
+      do k=1,niz
+        fkmid = k-niz/2
+        f1 = <a href="sqrt.html"><strong>sqrt</strong></a>(rbig1*rbig1/(fjmid1*fjmid1+fkmid*fkmid+.1))
+        f2 = <a href="sqrt.html"><strong>sqrt</strong></a>(rbig2*rbig2/(fimid*fimid+fjmid2*fjmid2+.1))
+        fip1 = (1.-f1)*fimid
+        fip2 = (1.-f2)*fimid
+        fjp1 = (1.-f1)*fjmid1
+        fjp2 = (1.-f2)*fjmid2
+        fkp1 = (1.-f1)*fkmid
+        fkp2 = (1.-f2)*fkmid
+        ui(i-1,j-1,k-1) = <a href="min.html"><strong>min</strong></a>((/fimid*fimid+fjp1*fjp1+fkp1*fkp1-rsml1*rsml1, \
+                                fkmid*fkmid+fip2*fip2+fjp2*fjp2-rsml2*rsml2/))
+      end do
+    end do
+  end do
+
+;
+; Open workstation, draw isosurface, and advance frame.
+;
+  wks = <a href="../../Graphics/Interfaces/gsn_open_wks.html"><strong>gsn_open_wks</strong></a>("ps","tdpack")
+
+  <strong>tdez3d</strong>(wks,xi,yi,zi,ui,0.,1.8,-45.,58.,-4)
+
+  <a href="frame.html"><strong>frame</strong></a>(wks)
+end
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/tdez3d.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:17 GMT -->
+</html>

@@ -1,0 +1,158 @@
+;======================================================================
+; datagrid_9.ncl
+;
+; Concepts illustrated:
+;   - Drawing MPAS mesh vertex edges and centers using gsn_coordinates
+;   - Annotating a plot with text, boxes, and lines.
+;======================================================================
+; NCL Version 6.6.0 or later is required for this capability.
+;======================================================================
+
+;======================================================================
+; This procedure prints the elapsed time.
+;======================================================================
+undef("print_elapsed_time")
+procedure print_elapsed_time(stime,etime,title)
+local diff_time
+begin
+  diff_time = etime - stime
+  print("=====> CPU Elapsed Time: " + title + ": " + diff_time + \
+        " seconds <=====")
+end
+
+;======================================================================
+; Main code
+;======================================================================
+begin
+  code_start_time = get_cpu_time() 
+
+;---Open MPAS file and read some data
+  mpas_file = "x1.2621442.output.2010-10-23_00.00.00.html"
+  f   = addfile(mpas_file,"r")
+  t2m = f->t2m(3,:)              ; select 2nd timestep
+
+;---Needed for plotting later.
+  r2d = get_r2d("float")
+  t2m@lat1d = f->latCell * r2d    
+  t2m@lon1d = f->lonCell * r2d
+
+;---Open PNG file to write graphics to. PS file will be too large
+  wks = gsn_open_wks("png","datagrid")
+
+;---Settings for graphics options
+  graphics1_start_time = get_cpu_time()
+
+  res                       = True
+
+  res@gsnMaximize           = True
+  res@gsnDraw               = False     ; Don't draw plot right away because we
+  res@gsnFrame              = False     ; want to add a box to it.
+
+  res@cnFillOn              = True
+  res@cnLinesOn             = False
+  res@cnLineLabelsOn        = False
+  res@cnFillMode            = "RasterFill"    ; can be faster than "AreaFill"
+  res@cnLevelSpacingF       = 5               ; NCL chose 10
+
+  res@tiMainString          = "t2m variable on full MPAS mesh : " + dimsizes(t2m) + " cells"
+  res@tiMainFont            = "helvetica"
+
+  res@mpFillOn              = False
+  res@mpDataBaseVersion     = "MediumRes"
+  res@pmTickMarkDisplayMode = "Always"   ; Nicer tickmark labels
+
+;---Create a plot of the full data variable over the whole globe
+  plot = gsn_csm_contour_map(wks,t2m,res)
+
+  minlat  =  35
+  maxlat  =  45
+  minlon  = -110
+  maxlon  = -100
+
+;
+; Annotate plot with a box around the area of interest, a text string
+; and a line leading to the box.
+;
+  lnres                       = True     ; line and box resources
+  lnres@gsLineColor           = "Blue4"
+  lnres@gsLineThicknessF      = 7.0      ; make box & line really thick so they're visible
+
+  txres                       = True     ; text resources
+  txres@txFontHeightF         = 0.012
+  txres@txJust                = "TopRight"
+; txres@txPerimOn             = True
+  txres@txBackgroundFillColor = "white"
+
+  line_id = gsn_add_polyline(wks,plot,(/-120,minlon/),(/20,minlat/),lnres)
+  text_id = gsn_add_text(wks,plot,"area of interest",-120,20,txres)
+  box_id  = gsn_add_polyline(wks,plot,(/minlon,minlon,maxlon,maxlon,minlon/),\
+                                      (/minlat,maxlat,maxlat,minlat,minlat/),lnres)
+
+  draw(plot)      ; This draws the plot with the box
+  frame(wks)
+
+  graphics1_end_time = get_cpu_time()
+  print_elapsed_time(graphics1_start_time,graphics1_end_time,"Creating and drawing first plot")
+
+;---Recreate the same plot, but zoom in on a smaller area of interest.
+  graphics2_start_time = get_cpu_time()
+
+  res@mpLimitMode            = "LatLon"
+  res@mpMinLatF              = minlat
+  res@mpMaxLatF              = maxlat
+  res@mpMinLonF              = minlon
+  res@mpMaxLonF              = maxlon
+  res@mpDataSetName          = "Earth..4"    ; Turns on U.S. county outlines
+  res@mpCountyLineThicknessF = 2.0
+  res@tiMainString           = "Subsetted MPAS mesh : 5021 cells"
+  res@lbOrientation          = "Vertical"
+
+;---Create a plot of the subsetted data variable over a smaller region
+  plot = gsn_csm_contour_map(wks,t2m,res)
+
+  graphics2_end_time = get_cpu_time()
+  print_elapsed_time(graphics2_start_time,graphics2_end_time,"Creating second plot")
+
+;
+; The gsnCoordsMesh resources used below were added in NCL V6.6.0, and are 
+; needed in order to draw a hexagonal mesh in which each cell may have a
+; different number of edges.  By setting gsnCoordsMin/MaxLat/Lon to a
+; smaller domain, this can greatly speed up the code, especially if the
+; mesh is dense.
+;
+  mesh_start_time = get_cpu_time()
+
+  gsres                               = True
+  gsres@gsnCoordsMinLat               = minlat     ; makes edge plotting go faster!
+  gsres@gsnCoordsMaxLat               = maxlat
+  gsres@gsnCoordsMinLon               = minlon
+  gsres@gsnCoordsMaxLon               = maxlon
+
+;---These resources define the mesh edges
+  gsres@gsnCoordsMeshLatVertices        = f->latVertex
+  gsres@gsnCoordsMeshLonVertices        = f->lonVertex
+  gsres@gsnCoordsMeshVerticesOnCell     = f->verticesOnCell
+  gsres@gsnCoordsMeshNumEdgesOnCell     = f->nEdgesOnCell
+  gsres@gsnCoordsMeshClosePolygons      = True
+  gsres@gsnCoordsMeshVerticesStartIndex = 1
+  gsres@gsnCoordsConvertRad2Deg         = True
+
+;---This prints a bunch of debug information
+  gsres@gsnCoordsDebug                = True
+
+;---Define color and thickness of mesh lines
+  gsres@gsLineColor                   = "NavyBlue"      ; default is black
+  gsres@gsMarkerIndex                 = 1               ; small filled dot ; 16 is too large
+  gsres@gsLineThicknessF              = 2.0             ; default is 1
+ 
+;---This attaches the edges, dots, and draws the plot
+  gsn_coordinates(wks,plot,t2m,gsres)
+
+  mesh_end_time = get_cpu_time()
+  print_elapsed_time(mesh_start_time,mesh_end_time,"Adding mesh to second plot")
+  print_elapsed_time(graphics2_start_time,mesh_end_time,"Creating, drawing second plot with mesh")
+
+;---Print final CPU timings
+  code_end_time = get_cpu_time()
+  print_elapsed_time(code_start_time,code_end_time,"Total script")
+end

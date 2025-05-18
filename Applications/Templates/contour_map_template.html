@@ -1,0 +1,67 @@
+;----------------------------------------------------------------------
+; This is a basic NCL template for creating contours over maps.
+;
+; Use "contour_template.ncl" if you don't need to put the
+; contours over a map.
+;----------------------------------------------------------------------
+
+; Note: as of NCL V6.2.0, you don't need these load commands
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;---Read data
+  filename = "file.nc"
+  a = addfile(filename,"r")
+  x = a->x
+
+  lat = a->lat      ; Only necessary if "x" doesn't
+  lon = a->lon      ; contain 1D coordinate arrays.
+
+;---Open workstation
+  wks = gsn_open_wks("x11","contour_map")   ; "ps", "pdf", "png"
+
+;---Set some resources
+  res                   = True
+
+  res@gsnMaximize       = True     ; maximize plot in frame
+
+;---These are sample resources you might want to set
+  res@cnFillOn          = True     ; turn on contour fill
+  res@cnFillPalette     = "amwg"   ; define color map for contours
+
+  res@cnLinesOn         = False    ; turn off contour lines
+  res@cnLineLabelsOn    = False    ; turn off line labels
+
+;---Use if you have a high-res grid that could be slow to plot.
+; res@cnFillMode        = "RasterFill"
+
+;---This can also speed things up
+; res@trGridType        = "TriangularMesh"
+
+;---Uncomment if you want to change the contour levels
+;  mnmxint = nice_mnmxintvl( min(x), max(x), 18, False)
+;  res@cnLevelSelectionMode = "ManualLevels"
+;  res@cnMinLevelValF       = mnmxint(0)
+;  res@cnMaxLevelValF       = mnmxint(1)
+;  res@cnLevelSpacingF      = mnmxint(2)
+
+  res@tiMainString       = "Data file is " + filename
+
+;---Set to False if plotting regional data or setting sfXArray/sfYArray
+  res@gsnAddCyclic      = True
+
+  res@sfXArray          = lon   ; Only necessary if x doesn't 
+  res@sfYArray          = lat   ; contain 1D coordinate arrays
+;
+; Zoom in on map if desired. There are other ways to zoom in on
+; map if you have a different projection, like lambert conformal.
+;
+  res@mpMinLatF         = min(lat)
+  res@mpMaxLatF         = max(lat)
+  res@mpMinLonF         = min(lon)
+  res@mpMaxLonF         = max(lon)
+  res@mpCenterLonF      = (res@mpMinLonF + res@mpMaxLonF) / 2.
+
+  plot = gsn_csm_contour_map(wks,x,res)
+end

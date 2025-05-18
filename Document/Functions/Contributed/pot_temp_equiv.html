@@ -1,0 +1,491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/pot_temp_equiv.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:03 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (meteorology)">
+<meta name="keywords" content="pot_temp_equiv">
+<title>pot_temp_equiv</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../meteo.html">Meteorology</a>
+<br>
+<h1>pot_temp_equiv</h1>
+
+<p>
+Compute the equivalent potential temperature using an approximation which does not use the lifting condensation temperature.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.4.0">version 6.4.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function pot_temp_equiv (
+		p              : numeric,  ; float, double, integer only
+		t              : numeric,  
+		w              : numeric,  
+		dim        [1] : integer,  
+		humVarType [1] : string    
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(<em>t</em>)] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>p</em>
+<p class=indent>Array containing pressure levels (Pa).
+</p>
+<em>t</em>
+<p class=indent>Array containing temperatures (K).
+</p>
+<em>w</em>
+<p class=indent>Array containing the humidity related quantity. See the <em>humVarType</em> argument description.
+</p>
+<em>dim</em>
+<p class=indent>The dimension of <em>t</em> which corresponds to <em>p</em>. 
+<b>NOTE:</b> If the rank and sizes of <em>t</em> are the same as those of <em>p</em> this argument is ignored.
+A suggested placeholder is <em>dim</em>=-1.
+</p>
+<em>humVarType</em>
+<p class=indent>Identifies the quantity associated with the <em>w</em> argument.
+<ul>
+<li> "q" for specific humidity (dimensionless: kg/kg) 
+<li> "r" for mixing ratio (dimensionless: kg/kg) 
+<li> "rh" for relative humidity (%) 
+<li> "td" for dew point depression (K)
+</ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A multi-dimensional array of the same size and shape as <em>t</em>. The output will be double 
+if <em>t</em> or <em>p</em> is of type double. All approprate meta data is returned.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<p>
+Calculate the equivalent potential temperature (theta_e). Over the years there have been numerous methods used
+to estimate equivalent potential temperature. Some are appropriate only for limited ranges. None agree 'perfectly.'
+<p>
+This function uses the formulation described in the Wikipedia reference:
+<pre>
+    <a href="https://en.wikipedia.org/wiki/Equivalent_potential_temperature"><b>Wikipedia: Equivalent Potential Temperature</b></a>
+</pre>
+As noted in <b>www.atmo.arizona.edu/students/courselinks/.../EquivalentPotentialTemperature.doc</b>:
+"The problem with this approximate equation is that it assumes all of the water vapor is condensed out and converted to sensible heat at the present pressure of the air parcel.  This is incorrect because the water condenses out as the air parcel is lifted into the uppermost troposphere where the pressure is lower such that the adiabatic compression when the air is brought to the surface will be larger.  So we can anticipate this equation <b>will systematically underestimate theta_e</b>."
+<p>
+A weakness of this formulation is that it does not use the "lifting condensation temperature." 
+For researchers analyzing buoyancy differences among tropical disturbances this simplification (omission) can
+be lead to significantly different theta_e. 
+<p>
+It is recommended to use <a href="pot_temp_equiv_tlcl.html"><strong>pot_temp_equiv_tlcl</strong></a> available in NCL 6.5.0.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="pot_temp_equiv_tlcl.html"><strong>pot_temp_equiv_tlcl</strong></a>,
+<a href="../Built-in/wrf_eth.html"><strong>wrf_eth</strong></a>,
+<a href="../meteo.html"><b>Meteorology functions</b></a>,
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1:</B> Compare with the WRF function, <a href="../Built-in/wrf_eth.html"><strong>wrf_eth</strong></a>. Differences may
+be due to different algorithms and/or constants. Note that extra coding is necessary to 'broadcast'
+the one-dimension (1D) array to 3D for use by the WRF function.   
+
+<pre>
+
+; pressure (Pa)
+     p  = (/ 97067.80, 96040.00, 94825.50, 93331.30, 91371.40, 88947.80, 86064.70, 82495.50 \
+           , 78140.20, 73035.40, 67383.70, 61327.50, 54994.70, 48897.30, 43034.60, 37495.20 \
+           , 32555.80, 28124.40, 24201.00, 20693.00, 17600.60, 14877.30, 12477.20, 10400.20 \
+           ,  8553.98,  6984.69,   646.18 /)
+
+; temperature (K)
+     t  = (/  291.15,    291.60,   292.05,  292.13,    292.06,   291.17,   289.11,  287.49 \
+           ,  286.25,    282.14,   277.42,  272.91,    266.99,   261.64,   254.40,  246.38 \
+           ,  238.10,    229.76,   220.88,  213.65,    212.42,   212.58,   212.91,  213.34 \
+           ,  213.73,    214.55,   216.59 /)  
+     
+; specific humidity (kg/kg; dimensionless))
+     w  = (/0.012258,  0.012111, 0.011914, 0.011483, 0.010575, 0.008992, 0.006021,0.002559 \
+           ,0.005169,  0.005746, 0.001608, 0.001645, 0.001382, 0.000235, 0.000094,0.000178 \
+           ,0.000136,  0.000079, 0.000050, 0.000025, 0.000023, 0.000023, 0.000014,0.000010 \
+           ,0.000008,  0.000007, 0.000007 /)
+
+; Compute 
+     dim = 0
+     ept = <strong>pot_temp_equiv</strong>(p, t, w, dim, "q")  
+
+; Compare with WRF function (different algorithm)
+; The <b>wrf_eth</b> requires 3D or 4D input. Use <b>conform_dims</b> to force desired dimensionality.
+
+; compare with 'wrf_eth' ... this requires 3D or 4D
+
+  klvl = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(p)
+
+  p3   = <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a>((/klvl,1,1/), p, 0)
+  t3   = <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a>((/klvl,1,1/), t, 0)
+  w3   = <a href="../Built-in/conform_dims.html"><strong>conform_dims</strong></a>((/klvl,1,1/), w, 0)
+
+  ept_wrf = <a href="../Built-in/wrf_eth.html"><strong>wrf_eth</strong></a> ( w3, t3, p3 )     ; [klvl] x [1] x [1]
+
+  ept_dif = ept-ept_wrf(:,0,0)         ; difference
+
+  print(<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%8.2f", p)  +"  " \
+       +<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%8.2f", t)  +"  " \
+       +<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%9.6f", w)  +"  " \
+       +<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%7.2f", ept)+"  " \
+       +<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%7.2f", ept_wrf(:,0,0)) \
+       +<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%9.2f", ept_dif))
+
+</pre>
+would yield
+<pre>
+           P          T         W        <b>ept    ept_wrf     diff</b>
+(0)	97067.80    291.15   0.012258   324.91   328.77    -3.86
+(1)	96040.00    291.60   0.012111   325.97   329.91    -3.94
+(2)	94825.50    292.05   0.011914   327.10   331.12    -4.01
+(3)	93331.30    292.13   0.011483   327.55   331.53    -3.98
+(4)	91371.40    292.06   0.010575   327.09   330.91    -3.82
+(5)	88947.80    291.17   0.008992   324.52   327.91    -3.40
+(6)	86064.70    289.11   0.006021   317.57   320.08    -2.51
+(7)	82495.50    287.49   0.002559   310.51   311.95    -1.43
+(8)	78140.20    286.25   0.005169   321.08   323.34    -2.26
+(9)	73035.40    282.14   0.005746   324.44   326.65    -2.21
+(10)	67383.70    277.42   0.001608   315.05   316.00    -0.95
+(11)	61327.50    272.91   0.001645   318.56   319.47    -0.91
+(12)	54994.70    266.99   0.001382   320.83   321.58    -0.75
+(13)	48897.30    261.64   0.000235   321.71   321.95    -0.24
+(14)	43034.60    254.40   0.000094   323.99   324.13    -0.14
+(15)	37495.20    246.38   0.000178   326.67   326.86    -0.19
+(16)	32555.80    238.10   0.000136   328.58   328.74    -0.16
+(17)	28124.40    229.76   0.000079   330.41   330.54    -0.13
+(18)	24201.00    220.88   0.000050   331.47   331.59    -0.12
+(19)	20693.00    213.65   0.000025   335.21   335.32    -0.11
+(20)	17600.60    212.42   0.000023   349.03   349.16    -0.13
+(21)	14877.30    212.58   0.000023   366.49   366.63    -0.15
+(22)	12477.20    212.91   0.000014   385.95   386.11    -0.16
+(23)	10400.20    213.34   0.000010   407.35   407.53    -0.18
+(24)	 8553.98    213.73   0.000008   431.53   431.73    -0.20
+(25)	 6984.69    214.55   0.000007   459.00   459.23    -0.23
+(26)	  646.18    216.59   0.000007   914.70   915.57    -0.87
+
+</pre>
+<p>
+<B>Example 2:</B> Consider <em>p</em>, <em>t</em> and  <em>w</em> with dimensionality (ntim,klev,nlat,mlon)
+and appropriate units. Here  <em>w</em> contains mixing ratio (<em>humVarType</em>="r"). 
+Since all variables <b>conform</b>, the <em>dim</em> argument is ignored (set to -1 for convenience or 1)
+
+<pre>
+
+     theta_e = <strong>pot_temp_equiv</strong>(p, t, w, -1, "r") ; dim=-1 or 1  
+</pre>
+<p>
+<B>Example 3:</B> Consider <em>t</em> and  <em>w</em> with dimensionality (ntim,klev,nlat,mlon)
+and <em>p</em>(klev).  Here <em>w</em> contains  relative humidity (%; <em>humVarType</em>="rh").
+This is commonly encountered for isobaric analyses. Here, 
+NCL's dimension numbering is (0[ntim],1[klev],2[nlat],3[mlon]) so <em>dim</em>=1. 
+
+<pre>
+     theta_e = <strong>pot_temp_equiv</strong>(p, t, w, 1, "rh") 
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/pot_temp_equiv.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:03 GMT -->
+</html>

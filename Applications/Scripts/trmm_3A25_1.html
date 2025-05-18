@@ -1,0 +1,155 @@
+;***************************************************************
+; trmm_3A25_1.ncl
+;
+; Concepts illustrated:
+;   - Reading 3A25 HDF4-SDS files
+;   - Adding Climate-Forecast (CF) meta data (attributes and coordinates
+;   - Explore variable statistical distribution
+;   - Creating a simple plot
+;***************************************************************
+; TRMM: In the following, search for 3A25
+; http://apdrc.soest.hawaii.edu/datadoc/trmm_3_mon.php
+; https://www.eorc.jaxa.jp/TRMM/documents/PR_algorithm_product_information/pr_manual/PR_Instruction_Manual_V7_L1.pdf
+; https://disc2.gesdisc.eosdis.nasa.gov/data/TRMM_L3/TRMM_3B43/doc/README.TRMM_V7.pdf
+; https://pmm.nasa.gov/data-access/downloads/trmm
+;***************************************************************
+; TRMM: 3A25: Gridded Spaceborne Radar Rainfall 
+; The 3A25 TRMM dataset is an accumulation of the TRMM 2A25 PR retrieval algorithm. 
+; This dataset contains MONTHLY MEAN values of the surface rainfall rate, 
+; vertical rain profile, stratiform/convective fraction, and numerous other 
+; related parameters.
+;***************************************************************
+; Algorithm 3A25 gives the space-time averages of accumulations of  
+; 1C21,  2A21, 2A23 and 2A25 products. The most important output products are 
+; monthly averaged  rain  rates  over 0.5x0.5 and 5x5 grid  boxes. 
+;***************************************************************
+; Data minutae:
+;    Grids: 5x5 and 0.5x0.5
+;    Missing Value = _FillValue ==> -9999.9
+;    nh1 : Number of fixed heights about the earth [ 2,4, ??? ...]
+;          Confusion: documentation indicates 5 levels: 2, 4, 6, 10, and 15 km
+;          However, the 3A25 HDF files indicate 4 levels
+;    Nominal Coverage: Latitude: 40S-40N    Longitude: 180W-180E
+;          0.5x0.5 deg:  36.75S to 36.75N 
+;            5x5   deg:  37.5S  to 37.5N
+;***************************************************************
+; User Input
+;***************************************************************
+                                             ; INPUT
+   diri   = "./"                             ; input directory
+   fili   = "3A25.20150201.7.HDF"            ; HDF-SDS                   
+
+;; varName= "rainMean1"                      ; ( nh1, nlon , nlat ) => (4, 72,  16) => 5x5
+   varName= "rainMean2"                      ; ( nh1, nlonh, nlath) => (4 720, 148) => 0.5x0.5
+
+                                             ; OUTPUT
+   PLOT   = True                             ; generate plots
+   if (PLOT) then
+       pltLevel= 2                           ; level to plot [2,4,6,10]
+       pltDir  = "./"                        ; directory for plot output
+       pltName = "trmm_3A25_"+varName+"_"+pltLevel+"km"  ; plot name root
+       pltType = "png" ; "x11"               ; send graphics to X11 or  PNG file
+   end if
+
+;***************************************************************
+; End User Input
+;***************************************************************
+; Miscellaneous: Parse the file name to extract strings/ date info
+;***************************************************************
+   id          = str_get_cols(fili, 0, 3)          ; string
+   yyyy        = toint(str_get_cols(fili, 5, 8))   ; integer
+   mm          = toint(str_get_cols(fili, 9,10))
+   dd          = toint(str_get_cols(fili,11,12))
+   yyyymmdd    = toint(str_get_cols(fili, 5,12))
+
+;***************************************************************
+; Read hdf 
+;***************************************************************
+
+   f      = addfile (diri+fili, "r")
+   data   = f->$varName$                       ; (level, lon, lat)
+   data!0 = "level"
+   data!1 = "lon"
+   data!2 = "lat"
+   dimd   = dimsizes(data)
+   nh1    = dimd(0)
+   nlon   = dimd(1)
+   nlat   = dimd(2)
+                         
+;---Create netCDF CF style meta data
+
+   data@long_name  = data@hdf_name 
+   data@_FillValue = -9999.9
+
+   level           = (/2, 4, 6, 10 /)      ; guess
+   level!0         = "level"
+   level@units     = "km"
+
+   if (nlon.eq.720) then
+       lon = fspan(-179.875,179.875,nlon)
+       lat = fspan(-49.875 , 49.875,nlat)
+   else
+       lon = fspan(-177.5  ,177.5  ,nlon)
+       lat = fspan(-37.5   , 37.5  ,nlat)
+   end if
+   lon!0         = "lon"
+   lat!0         = "lat"
+   lon@long_name = "longitude"
+   lat@long_name = "latitude"
+   lat@units     = "degrees_north"
+   lon@units     = "degrees_east"
+
+;---Associate meta data with variable [data object]
+;---Reshape: NCL graphiics expects [...,lat,lon] order
+
+   data&level    = level
+   data&lat      = lat
+   data&lon      = lon
+   data         := data(level|:, lat|:, lon|:)  
+   printVarSummary(data)
+   print("===========")
+   
+;***************************************************************
+; Simple data exploration: 
+;***************************************************************
+
+   opt = True
+   opt@PrintStat = True
+   stat_data = stat_dispersion(data, opt )
+   print("===========")
+
+;************************************************
+; Create plot ?
+;************************************************
+   if (PLOT) then
+
+       wks    = gsn_open_wks(pltType, pltDir+pltName)
+   
+       res                      = True     ; plot mods desired
+       res@gsnMaximize          = True     ; make ps/eps/pdf large
+       res@tiMainString         = fili
+       res@gsnCenterString      = pltLevel+"km"
+     
+       res@cnFillOn             = True     ; turn on color fill
+       res@cnLinesOn            = False    ; turn of contour lines
+      ;res@cnFillMode           = "CellFill"           ; Cell Mode
+       res@cnFillMode           = "RasterFill"         ; Raster Mode
+       res@cnLineLabelsOn       =  False       ; Turn off contour lines
+       res@cnLevelSelectionMode = "ExplicitLevels"              
+     ;;res@cnLevels             = (/0.2,0.35,0.5,0.75,1.00,1.50,2.0,2.5,3.0,5.0/) ; "mm/hr" 
+       res@cnLevels             = (/0.25,0.50,1.0,1.25,1.5,1.75,2.0,2.5,3.0,4.0/) ; "mm/hr",  2km 
+       colors = (/"Blue","PaleTurquoise","PaleGreen","SeaGreen3" ,"Yellow"  \
+                 ,"Orange","HotPink","Red","Violet", "Purple", "Brown"/)
+       res@cnFillPalette        = colors   ; set color map
+      ;res@cnFillPalette        = "WhBlGrYeRe"   ; set color map
+       res@cnMissingValFillPattern = 0
+       res@cnMissingValFillColor   = "white"  ;   "LightGray"   ; "white", "black"
+
+       res@mpMinLatF            = -40. 
+       res@mpMaxLatF            =  40.
+       res@mpCenterLonF         = 180.
+      ;res@mpFillOn             = False
+
+       plot    = gsn_csm_contour_map_ce(wks,data({pltLevel},:,:), res)
+
+   end if

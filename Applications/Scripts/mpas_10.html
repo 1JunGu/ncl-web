@@ -1,0 +1,162 @@
+;----------------------------------------------------------------------
+; mpas_10.ncl
+;
+; Concepts illustrated:
+;   - Plotting MPAS data using cell fill
+;   - Constructing the lat/lon edges of an MPAS mesh for cell fill
+;   - Using get_cpu_time to calculate timings for various parts of the script
+;   - Using functions for cleaner code
+;----------------------------------------------------------------------
+; This script shows how to create a cell-filled contour plot of data
+; on an MPAS mesh.
+;
+; This script uses CellFill to create the plot, which takes longer
+; than RasterFill because it requires that you construct the 
+; lat/lon edges of each lat/lon cell center. This extra step can 
+; account for almost half the time it takes to run this script. The 
+; results are generally nicer than RasterFill.
+;
+; This particular file has 2.6 million cells, which takes about 62
+; seconds to plot. You can make this script run faster by writing
+; the lat/lon cell edges to a NetCDF file and then subsequently
+; reading in this file instead of calculating the edges every time.
+; See "mpas_vert_file" below.
+;----------------------------------------------------------------------
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+
+;----------------------------------------------------------------------
+; Prints elapsed time given a start and end time, and a title.
+;----------------------------------------------------------------------
+procedure print_elapsed_time(start_time,end_time,title)
+begin
+  print("----------------------------------------------------------------------")
+  print("Elapsed time : " + title + " : " + (end_time-start_time) + " CPU seconds.")
+  print("----------------------------------------------------------------------")
+end
+
+;----------------------------------------------------------------------
+; Given an array of lat/lon vertexes, and arrays containing the number
+; of edges and the indexes for the cell edges, construct the polygon cells
+; that surround each cell center of the MPAS mesh.
+;----------------------------------------------------------------------
+function construct_vertices_on_cell(latVertex,lonVertex,verticesOnCell,nEdgesOnCell)
+local dims, nCells, maxEdges, ii, i
+begin
+  start_create_boundaries = get_cpu_time()   
+  dims     = dimsizes(verticesOnCell)
+  nCells   = dims(0)
+  maxEdges = dims(1)
+
+  latVerticesOnCell = new((/ nCells, maxEdges /),double)    
+  lonVerticesOnCell = new((/ nCells, maxEdges /),double)
+
+  print("Constructing the lat/lon polygons for each cell")
+  do i = 0, maxEdges - 1
+    latVerticesOnCell(:,i)  = latVertex(verticesOnCell(:,i) - 1)
+    lonVerticesOnCell(:,i)  = lonVertex(verticesOnCell(:,i) - 1)
+  end do
+
+;---For polygons that don't use the full maxEdges, fill in the rest of them.
+  ii = ind(nEdgesOnCell.lt.maxEdges)
+  do i = 0, dimsizes(ii)-1
+    latVerticesOnCell(ii(i), nEdgesOnCell(ii(i)):maxEdges-1 ) = latVerticesOnCell(ii(i),nEdgesOnCell(ii(i))-1)
+    lonVerticesOnCell(ii(i), nEdgesOnCell(ii(i)):maxEdges-1 ) = lonVerticesOnCell(ii(i),nEdgesOnCell(ii(i))-1)
+  end do
+
+  print_elapsed_time(start_create_boundaries,get_cpu_time(),"creating cell boundaries")
+  return([/latVerticesOnCell,lonVerticesOnCell/])
+end
+
+;----------------------------------------------------------------------
+; Main code
+;----------------------------------------------------------------------
+begin
+  start_code = get_cpu_time()   
+
+;---Open the file and read some data
+  start_read_data = get_cpu_time()   
+  dir            = "../Data/2017082400_uni/"
+  mpas_init_file = "init.nc"
+  mpas_diag_file = "diag.2017-08-24_12.00.00.nc"
+  fi             = addfile(dir+mpas_init_file,"r")
+  fd             = addfile(dir+mpas_diag_file,"r")
+
+  varname        = "olrtoa"                ; variable to plot
+  data           = fd->$varname$(0,:)      ; get first time step
+  latCell        = fi->latCell
+  lonCell        = fi->lonCell
+  lonVertex      = fi->lonVertex
+  latVertex      = fi->latVertex
+  verticesOnCell = fi->verticesOnCell
+  nEdgesOnCell   = fi->nEdgesOnCell
+  print_elapsed_time(start_read_data,get_cpu_time(),"reading data")
+
+;---Convert to degrees from radians
+  RAD2DEG   = get_r2d(typeof(lonCell))      ; Radian to Degree
+  latCell   = latCell*RAD2DEG
+  lonCell   = lonCell*RAD2DEG
+  latVertex = latVertex*RAD2DEG
+  lonVertex = lonVertex*RAD2DEG
+
+  dims     = dimsizes(verticesOnCell)
+  nCells   = dims(0)
+  maxEdges = dims(1)
+
+;---Print some information, look at your data!
+  print("Diag file   : " + dir+mpas_diag_file)
+  print("Init file   : " + dir+mpas_init_file)
+  print("# cells     : " + nCells)
+  print("max # edges : " + maxEdges)
+;
+; In order to do a CellFill plot, you need to provide the boundaries
+; of each cell. This section can be slow!
+;
+  mpas_vert_file = "vertices_on_cell.nc"
+  if(.not.isfilepresent(dir+mpas_vert_file)) then
+    latlon_list = construct_vertices_on_cell(latVertex,lonVertex,verticesOnCell,nEdgesOnCell)
+    latVerticesOnCell = latlon_list[0]
+    lonVerticesOnCell = latlon_list[1]
+    delete(latlon_list)
+;---Write lat/lon vertices to a NetCDF so we can reuse this later.
+    fout = addfile(dir+mpas_vert_file,"c")         ; Write to a file so we can reuse them later.
+    fout->latVerticesOnCell = latVerticesOnCell    ; This can save a lot of time.
+    fout->lonVerticesOnCell = lonVerticesOnCell
+  else
+    print("Reading the lat/lon cell polygons off a file")
+    fv = addfile(dir+mpas_vert_file,"r")        ; Read already-constructed cell vertexes off file.
+    latVerticesOnCell = fv->latVerticesOnCell
+    lonVerticesOnCell = fv->lonVerticesOnCell
+  end if
+
+;---Start the graphics
+  start_graphics = get_cpu_time()   
+
+  print("Starting the graphics")
+
+  wks = gsn_open_wks("png","mpas")
+
+  res                       = True
+  res@gsnMaximize           = True
+
+  res@cnFillOn              = True              ; turn on contour fill
+  res@cnFillMode            = "CellFill"        ; faster than "AreaFill", slower than "RasterFill"
+  res@cnLinesOn             = False             ; turn off contour lines
+  res@cnLineLabelsOn        = False             ; turn off contour labels
+  res@mpFillOn              = False             ; turn off map fill
+  res@lbBoxLinesOn          = False             ; turn off labelbar box lines
+
+  res@sfYArray              = latCell           ; where to overlay contours
+  res@sfXArray              = lonCell
+  res@sfYCellBounds         = latVerticesOnCell ; necessary for CellFill 
+  res@sfXCellBounds         = lonVerticesOnCell
+
+  res@tiMainString          = mpas_diag_file + " (" + varname + ", " + nCells + " cells)"
+
+  map = gsn_csm_contour_map(wks,data,res)
+
+  print_elapsed_time(start_graphics,get_cpu_time(),"plotting data")
+  print_elapsed_time(start_code,get_cpu_time(),get_script_prefix_name())
+end

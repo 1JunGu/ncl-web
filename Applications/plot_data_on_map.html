@@ -1,0 +1,1675 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/plot_data_on_map.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:14:09 GMT -->
+<head>
+<meta name="description" content="Describes how to plot data on a map using the gsn_csm_xxx_map functions.">
+<meta name="keywords" content="NCL, graphics, visualization, data overlays, maps">
+<TITLE>NCL Graphics: Plotting data on a map using gsn_csm_xxx functions</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+
+<H1>NCL Graphics: Plotting data on a map using gsn_csm_xxx functions</H1>
+
+<div class=mainimage>
+<img src="Images/dataonmap_1_1_lg.png" align=left border=0></a>
+<p>
+</div>
+
+<div class=text>
+
+This page is an introduction to using
+the <a href="../Document/Graphics/Interfaces/index.html">gsn_csm_<i>xxxx</i>_map</a>
+functions to plot data (contours, vectors, streamlines) over a map.
+<p>
+
+All of the data files for the examples below can either be found on the 
+<a href="Data/index.html">data page</a>, or via instructions
+included in the scripts.
+<p>
+
+<h3>KNOW YOUR DATA</h3>
+
+To correctly plot data on a map, you must KNOW YOUR DATA.
+<p>
+
+<b>What type of latitude (lat) / longitude (lon) structure
+is your data on?</b>
+<p>
+
+<ol>
+<li><a href="../Document/glossary.html#RectilinearGrid">Rectilinear grid</a>
+<li><a href="../Document/glossary.html#CurvilinearGrid">Curvilinear grid</a>
+<li>Random points
+<li><a href="../Document/glossary.html#UnstructuredMesh">Unstructured mesh</a>
+</ol>
+<p>
+
+To determine what kind of lat/lon structure your data is on, use a
+UNIX command line tool
+like <a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a> on
+your data file, or use <a href="../Document/Functions/Built-in/printVarSummary.html"><strong>printVarSummary</strong></a> after you
+read a data variable. The examples below explain how to identify your
+lat/lon structure.
+
+<p>
+
+<b>Is your data global or regional?</b><p>
+
+If your data is regional (i.e. it doesn't cover the full map), then
+you may need to:
+
+<ol>
+<li>Set the special <a href="../Document/Graphics/Resources/gsn.html#gsnAddCyclic"><em>gsnAddCyclic</em></a> resource to False.
+<p>
+
+<li>Set additional map resources to zoom in on the map area of interest.
+</ol>
+<p>
+
+<b>Do your lat/lon arrays have units of "degrees_north" and "degrees_east"?</b>
+<p>
+
+If your lat/lon arrays don't have "units" attributes, or they don't
+have "degrees" type of units, then your data may not plot correctly.
+See
+<a href="#ex7">example 7</a> below for how to fix this.
+<p>
+
+<b>Is your data large?</b><p>
+
+If you have a big grid or mesh that you want to generate
+contours for, then you may want to do "raster fill"
+contours instead of "area fill" contours for faster plotting.
+See examples <a href="#ex8">8</a> and <a href="#ex13">13</a>.
+<p>
+
+
+<b>Does your data need to be reordered to be plotted correctly?</b>
+<p>
+
+If your data variable is a two-dimensional (2D) array ordered lon x
+lat, you will need to reorder it to be lat x
+lon. See <a href="#ex8">example 8</a> below.
+
+<p>
+
+<b>Is your lat/lon data not in degrees?</b>
+<p>
+
+If your lat/lon data is in radians or meters or some units other than
+"degrees" you will need to convert it to degrees before you can plot
+your data. See <a href="#ex13">example 13</a> below.
+<p>
+
+<b>Is your data already projected onto a particular map projection?</b>
+<p>
+
+If your data is already projected onto a particular map projection,
+this is called data on a 
+<a href="../Document/glossary.html#NativeGrid">native grid</a>.
+If you know the exact parameters for the map
+projection, then you can plot the data without needing any lat / lon
+arrays at all. This can significantly speed up plotting because the
+data doesn't need to go through a mathematical transformation to be
+plotted correctly.
+<p>
+
+To plot data in its native projection, you first have to set up the
+map projection parameters EXACTLY as what your data are projected
+onto, and then set
+res@<a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> to True (or the
+equivalent "NDCViewport", in NCL V6.5.0)
+<p>
+
+It is possible to plot data on a native grid in a different map
+projection, if you have the lat/lon values for each data
+point. However, if you do this, you do NOT want to
+set <a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> to True, because
+now you are not plotting in a native projection.
+<p>
+
+For examples of plotting data both in a native projection and a different
+projection, see examples <a href="#ex3native">3</a>,
+<a href="#ex4native">4</a>, and <a href="#ex10">10</a>  below.
+<p>
+
+
+<b>Is your data "packed" on the file?</b>
+<p>
+
+Sometimes data is "packed" on a file to save space. This means you
+will need to unpack it before it will plot correctly. If your data is
+of type "short" or "byte" when you read it off the file, then this may
+be a indication that you need to unpack it. See
+<a href="#ex9">example 9</a> below.
+<p>
+
+<b>Does the data itself have errors?</b>
+<p>
+
+If you have everything correct in your script and the data still is
+not being plotted correctly, then some possible sources of the problem
+can be:
+
+<ul>
+<li>Not having the correct units for your lat/lon arrays
+<li>Having <a href="../Document/glossary.html#NaN">NaN</a> values in your data
+<li>Having data that needs to be "unpacked"
+<li>Not having the correct missing value (_FillValue attribute)
+</ul>
+<p>
+
+If you do have problems, LOOK AT YOUR DATA:
+
+<ul>
+<li>Use <a href="../Document/Functions/Built-in/printVarSummary.html"><strong>printVarSummary</strong></a> and 
+<a href="../Document/Functions/Contributed/printMinMax.html"><strong>printMinMax</strong></a> to look
+at your data, your lat/lon arrays, and 
+your metadata.<p>
+<li>Pay close attention to any warnings or errors
+that are produced when running your script.
+</ul>
+<p>
+
+For examples of fixing "bad" data, see examples <a href="#ex7">7</a>
+and <a href="#ex12">12</a> below.
+<p>
+
+
+</div>
+
+<div class=ex>
+<!--dataonmap_1-->
+<a name=ex1></a>
+<a href="Images/dataonmap_1_1_lg.png">
+<img src="Images/dataonmap_1_1_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_1_2_lg.png">
+<img src="Images/dataonmap_1_2_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_grid_1_lg.png">
+<img src="Images/dataonmap_grid_1_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_1.html">dataonmap_1.ncl</a> / 
+<a href="Scripts/dataonmap_grid_1.html">dataonmap_grid_1.ncl</a><br>
+<b>Rectilinear grid</b><p>
+<b>Data</b>: <a href="Data/cdf/uv300.nc">uv300.nc</a> (NetCDF file, included
+with NCL distribution)
+<p>
+
+Data on a <a href="../Document/glossary.html#RectilinearGrid">rectilinear grid</a>
+is the simplest data to plot because the latitude and longitude
+coordinate arrays are automatically attached to the data variable when
+you read it in.
+<p>
+
+You can quickly tell if your data is on a rectilinear grid
+by looking at the <a href="../Document/Functions/Built-in/printVarSummary.html"><strong>printVarSummary</strong></a> output
+of your data variable:
+<p>
+<pre>
+   Variable: u
+   Type: float
+   Total Size: 32768 bytes
+               8192 values
+   Number of Dimensions: 2
+   Dimensions and sizes : [lat | 64] x [lon | 128]
+   <b>Coordinates : 
+            lat : [-87.8638..87.8638]
+            lon : [-180..177.1875]</b>
+   Number Of Attributes : 5
+   time : 1
+   _FillValue : -999
+   long_name : Zonal Wind
+   units : m/s
+</pre>
+<p>
+
+Note the "Coordinates:" line, which is followed by two lines
+indicating the range of the "lat" and "lon" arrays. This means you
+have data on a rectilinear grid.  If your data is on any other type of
+grid (curvilinear, unstructured mesh, random), then there will
+be <b>no lat/lon arrays</b> listed after the "Coordinates:" line.
+<p>
+
+To plot this data, simply read the "u" variable and pass it to
+<a href="../Document/Graphics/Interfaces/gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>. This
+function will look for coordinate arrays attached to "u", and will
+use them for plotting:
+<p>
+
+<pre>
+  u = a->U(0,:,:)
+
+  wks = gsn_open_wks("png","dataonmap")
+
+  res              = True
+  res@cnFillOn     = True
+  res@tiMainString = "Plotting rectilinear data"
+
+  plot = gsn_csm_contour_map(wks,u,res)
+</pre>
+<p>
+
+The second frame shows how easy it is to plot the data on a different
+map projection, simply by setting
+<a href="../Document/Graphics/Resources/mp.html#mpProjection"><em>mpProjection</em></a> to the desired
+projection, like "Robinson".
+<p>
+
+The third frame is from the
+<a href="Scripts/dataonmap_grid_1.html">dataonmap_grid_1.ncl</a>
+script. It demonstrates how to call
+<a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> to add the
+lat/lon lines associated with your data.
+
+</div>
+
+<div class=ex>
+<!--dataonmap_2-->
+<a name=ex2></a>
+<a href="Images/dataonmap_2_lg.png">
+<img src="Images/dataonmap_2_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_2.html">dataonmap_2.ncl</a><br>
+<b>Rectilinear grid</b><p>
+<b>Data</b>: <a href="Data/cdf/uv300.nc">uv300.nc</a> (NetCDF file, included
+with NCL distribution)
+<p>
+
+This is the same rectilinear grid as the previous example, except a
+vector plot is drawn. Both "u" and "v" have coordinate arrays attached
+to them, so there's nothing special you need to do to correctly plot this
+over a map.
+<p>
+
+<pre>
+   Variable : u
+   Type : float
+   . . .
+   Number of Dimensions: 2
+   Dimensions and sizes: [lat | 64] x [lon | 128]
+   <b>Coordinates: 
+               lat: [-87.8638..87.8638]
+               lon: [-180..177.1875]</b>
+   Number Of Attributes: 5
+    . . .
+   
+   Variable: v
+   Type: float
+   . . .
+   Number of Dimensions: 2
+   Dimensions and sizes: [lat | 64] x [lon | 128]
+   <b>Coordinates: 
+               lat: [-87.8638..87.8638]
+               lon: [-180..177.1875]</b>
+   Number Of Attributes:  5
+   . . .
+</pre>
+</div>
+
+<div class=ex>
+<!--dataonmap_3-->
+<a name=ex3></a>
+<a href="Images/dataonmap_3_1_lg.png">
+<img src="Images/dataonmap_3_1_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_3_2_lg.png">
+<img src="Images/dataonmap_3_2_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_grid_3_lg.png">
+<img src="Images/dataonmap_grid_3_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_3.html">dataonmap_3.ncl</a><br>
+<b>Curvilinear grid</b><p>
+<b>Data:</b> <a href="Data/grb/ruc.html">ruc.grb</a> (GRIB file)
+<p>
+
+Data on a <a href="../Document/glossary.html#CurvilinearGrid">curvilinear grid</a>
+is data whose latitude / longitude coordinates are represented by
+2-dimensional (2D) latitude / longitude arrays.
+<p>
+
+When you read a data variable represented by 2D lat/lon arrays, these
+arrays will NOT be attached as coordinate arrays to the data like they
+are with rectilinear data.
+<p>
+
+First, note the output from <a href="../Document/Functions/Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>.  It
+has a "Coordinates" line, but there are no coordinate variables listed
+after it:
+<p>
+
+<pre>
+    Variable: temp
+    Type: float
+    Number of Dimensions: 3
+    Dimensions and sizes: [lv_SPDY3 | 6] x [gridx_236 | 113] x [gridy_236 | 151]
+    <b>Coordinates: </b>
+    Number Of Attributes: 13
+    . . .
+</pre>
+
+This means you don't have any lat/lon data attached to this
+variable, and hence this data is not rectilinear.
+<p>
+
+Second, note that there is a "coordinates" <b>attribute</b> attached
+to your variable with the string value "gridlat_236 gridlon_236":
+<p>
+
+<pre>
+    Variable: temp
+    . . .
+    Number Of Attributes: 13
+    long_name : Temperature
+    units : K
+    _FillValue : 1e+20
+    <b>coordinates : gridlat_236 gridlon_236</b>
+    . . .
+</pre>
+<p>
+
+If you do have a "coordinates" <b>attribute</b>, then it most likely
+includes the names of the variables on the file that contain that
+variable's lat/lon coordinate information, in this case "gridlat_236"
+and "gridlon_236".
+<p>
+
+Doing a "ncl_filedump" on this file indeed shows these two variables
+exist on the file, and they are both 2-dimensional and the same size
+as the lat/lon dimensions of the data variable. This means you have
+data on a curvilinear grid.
+<p>
+
+<pre>
+   <b>Variable: gridlat_236 (file variable)</b>
+   Type: float
+   . . .
+   Number of Dimensions: 2
+   Dimensions and sizes: [gridx_236 | 113] x [gridy_236 | 151]
+   Coordinates: 
+   Number Of Attributes: 15
+   . . .
+
+   <b>Variable: gridlon_236 (file variable)</b>
+   Type: float
+   . . .
+   Number of Dimensions: 2
+   Dimensions and sizes: [gridx_236 | 113] x [gridy_236 | 151]
+   Coordinates: 
+   Number Of Attributes: 15
+  . . .
+</pre>
+
+To plot data on a curvilinear grid, you must read these 2D lat/lon
+variables from the file and attach them to the data variable as special
+attributes called "lat2d" and "lon2d":
+<p>
+
+<pre>
+  . . .
+  temp       = a->TMP_236_SPDY   ; 6 x 113 x 151
+  temp@lat2d = a->gridlat_236    ;     113 x 151
+  temp@lon2d = a->gridlon_236    ;     113 x 151
+  . . .
+  res          = True
+  res@cnFillOn = True
+
+  plot = gsn_csm_contour_map(wks,temp(0,:,:),res)
+</pre>
+<p>
+
+In the second frame of this example, we simply zoom in on the area of
+interest, by setting the <a href="../Document/Graphics/Resources/mp.html#mpMinLatF"><em>mpMinLatF</em></a>
+/ <a href="../Document/Graphics/Resources/mp.html#mpMaxLatF"><em>mpMaxLatF</em></a>
+/ <a href="../Document/Graphics/Resources/mp.html#mpMinLonF"><em>mpMinLonF</em></a>
+/ <a href="../Document/Graphics/Resources/mp.html#mpMaxLonF"><em>mpMaxLonF</em></a> resources.
+<p>
+
+The third frame is from
+the <a href="Scripts/dataonmap_grid_3.html">dataonmap_grid_3.ncl</a>
+script.  It demonstrates how to
+call <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> to add the
+lat/lon lines associated with your data.
+
+</div>
+
+<div class=ex>
+<!--dataonmap_3-->
+<a name=ex3native></a>
+<a href="Images/dataonmap_native_3_lg.png">
+<img src="Images/dataonmap_native_3_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_native_grid_3_lg.png">
+<img src="Images/dataonmap_native_grid_3_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_native_3.html">dataonmap_native_3.ncl</a> /
+<a href="Scripts/dataonmap_native_grid_3.html">dataonmap_native_grid_3.ncl</a><br>
+<b>Curvilinear grid in a native projection</b><p>
+<b>Data:</b> <a href="Data/grb/ruc.html">ruc.grb</a> (GRIB file)
+<p>
+
+This script plots the same data as the previous example, except
+it plots the data on its <a href="../Document/glossary.html#NativeGrid">native grid</a>
+using map projection information attached as attributes to the 
+lat/lon arrays on the file:
+<p>
+<pre>
+  a    = addfile("ruc.grb","r")
+  <b>lat  = a->gridlat_236</b>      ; Needed only for projection information
+  <b>lon  = a->gridlon_236</b>
+  . . .
+  res@mpLeftCornerLatF  = <b>lat@corners(0)</b>
+  res@mpLeftCornerLonF  = <b>lon@corners(0)</b>
+  res@mpRightCornerLatF = <b>lat@corners(2)</b>
+  res@mpRightCornerLonF = <b>lon@corners(2)</b>
+
+  res@mpProjection        = <b>lat@mpProjection</b>
+  res@mpLambertMeridianF  = <b>lat@mpLambertMeridianF</b>
+  res@mpLambertParallel1F = <b>lat@mpLambertParallel1F</b>
+  res@mpLambertParallel2F = <b>lat@mpLambertParallel2F</b>
+</pre>
+
+When plotting data natively, you must set the
+special <a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> resource to
+True (or the equivalent "NDCViewport", in NCL V6.5.0), to tell NCL not
+to do a map transformation.
+<p>
+
+The second frame is from
+the <a href="Scripts/dataonmap_native_grid_3.html">dataonmap_native_grid_3.ncl</a>
+script.  It demonstrates how to
+call <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> to add the
+lat/lon lines associated with your data.  
+
+</div>
+
+<div class=ex>
+<!--dataonmap_4-->
+<a name=ex4></a>
+<a href="Images/dataonmap_4_lg.png">
+<img src="Images/dataonmap_4_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_4.html">dataonmap_4.ncl</a><br>
+<b>Curvilinear grid</b><p>
+<b>Data:</b> <a href="Data/grb/ruc2.bgrb.20020418.i12.html">ruc2.bgrb.20020418.i12.f00</a> (GRIB file)<p>
+
+This GRIB file is similar to the previous one, in that
+the data variables contain a "coordinates" attribute
+indicating the name of the lat/lon variables on the file.
+<p>
+
+This time a vector plot is being drawn. The special "lat2d" /
+"lon2d" arrays must be attached to both the u and v data
+arrays.
+<p>
+
+<pre>
+  u       = f->U_GRD_252_HTGL
+  v       = f->V_GRD_252_HTGL
+  lat2d   = f->gridlat_252  
+  lon2d   = f->gridlon_252  
+  u@lat2d = lat2d
+  u@lon2d = lon2d
+  v@lat2d = lat2d
+  v@lon2d = lon2d
+</pre>
+
+</div>
+
+<div class=ex>
+<!--dataonmap_4-->
+<a name=ex4native></a>
+<a href="Images/dataonmap_native_4_lg.png">
+<img src="Images/dataonmap_native_4_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_nonnative_4_lg.png">
+<img src="Images/dataonmap_nonnative_4_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_native_4.html">dataonmap_native_4.ncl</a> /
+<a href="Scripts/dataonmap_nonnative_4.html">dataonmap_nonnative_4.ncl</a><br>
+<b>Curvilinear grid plotted in both native and non-native projections</b><p>
+<b>Data:</b> <a href="Data/grb/ruc2.bgrb.20020418.i12.html">ruc2.bgrb.20020418.i12.f00</a> (GRIB file)<p>
+<p>
+
+The "native" script plots the same curvilinear vector data as in the
+previous example, except using the Lambert Conformal native map
+projection parameters provided on the file. It also overlays the
+vectors on filled geopotential height contours, which are on the same
+lat/lon curvilinear grid.
+<p>
+
+As with example <a href="#ex3native">dataonmap_native_3.ncl</a>, the
+map projection information is obtained from special attributes
+attached to the lat/lon arrays, and the special
+resource <a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> is set to
+True.
+<p>
+
+The "nonnative" version of the script plots the exact same data in a basic
+cylindrical equidistant map projection.
+</div>
+
+
+<div class=ex>
+<!--dataonmap_5-->
+<a name=ex5></a>
+<a href="Images/dataonmap_5_lg.png">
+<img src="Images/dataonmap_5_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_grid_5_lg.png">
+<img src="Images/dataonmap_grid_5_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_5.html">dataonmap_5.ncl</a> / 
+<a href="Scripts/dataonmap_5_640.html">dataonmap_5_640.ncl</a> / 
+<a href="Scripts/dataonmap_grid_5.html">dataonmap_grid_5.ncl</a><br>
+<b>Random data</b><p>
+<b>Data</b>: <a href="Data/asc/pw.html">pw.dat</a> (ASCII file)<p>
+
+If you have a one-dimensional (1D) array of data represented by 1D
+lat/lon arrays of the same length, then this is considered to either
+be an "unstructured mesh" or "random points".
+<p>
+
+This example shows how to plot 32 random data points, given a lat/lon
+value for each point. The data are read off
+the ASCII file using <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>.
+<p>
+
+To correctly plot random data over a map, you must set the
+special <a href="../Document/Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a>
+and <a href="../Document/Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> resources to the
+one-dimensional longitude / latitude arrays, respectively:
+<p>
+
+<pre>
+  pwv = tofloat(str_get_field(lines(1:),4," "))
+  lat = tofloat(str_get_field(lines(1:),2," "))
+  lon = tofloat(str_get_field(lines(1:),3," "))
+  . . .
+  res          = True
+  res@cnFillOn = True
+  res@sfXArray = lon
+  res@sfYArray = lat
+
+  plot = gsn_csm_contour_map(wks,pwv,res)  
+</pre>
+<p>
+
+NCL will internally interpolate the data to a triangular mesh before
+plotting it.
+<p>
+
+<b>You cannot currently plot vectors that are on random points or an
+unstructured mesh.</b>
+<p>
+
+In NCL Version 6.4.0, you will be able to use special "lat1d" and
+"lon1d" attributes to plot the data
+(see <a href="Scripts/dataonmap_5_640.html">dataonmap_5_640.ncl</a>). There's
+no real advantage to this method over the sfXArray / sfYArray method,
+except that it's similar to the model for curvilinear data that uses
+the "lat2d" and "lon2d" attributes:
+<p>
+
+<pre>
+  pwv       = tofloat(str_get_field(lines(1:),4," "))
+  pwv@lat1d = tofloat(str_get_field(lines(1:),2," "))
+  pwv@lon1d = tofloat(str_get_field(lines(1:),3," "))
+  . . .
+  res          = True
+  res@cnFillOn = True
+
+  plot = gsn_csm_contour_map(wks,pwv,res)  
+</pre>
+<p>
+
+The second frame shows how to plot the 32 random lat/lon locations 
+using <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a>.
+</div>
+
+<div class=ex>
+<!--dataonmap_6-->
+<a name=ex6></a>
+<a href="Images/dataonmap_6_lg.png">
+<img src="Images/dataonmap_6_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_6.html">dataonmap_6.ncl</a><br>
+<b>Triangular mesh</b><p>
+<b>Data</b>: ctcbay.nc (NetCDF file, included
+with NCL distribution)
+<p>
+
+If you have 1D data and lat/lon arrays all the same length, and you
+also have a variable that contains a triangular mesh of your data, then
+you can set the
+special <a href="../Document/Graphics/Resources/sf.html#sfElementNodes"><em>sfElementNodes</em></a> resource
+to this connectivity mesh for faster plotting results:
+<p>
+<pre>
+  . . .
+  x   = f->data     ; 1D array of data (length npts)
+  lat = f->lat      ; 1D array of data (length npts)
+  lon = f->lon      ; 1D array of data (length npts)
+  ele = f->ele      ; n x 3 (triangular mesh that connects the cells)
+  . . .
+  res                = True
+  res@sfYArray       = lat
+  res@sfXArray       = lon
+  res@sfElementNodes = ele
+  res@cnFillOn       = True
+  . . .
+  plot = gsn_csm_contour_map(wks,depth,res)
+</pre>
+<p>
+
+Note that the leftmost dimension of the triangular mesh will likely be
+larger than the length of your 1D data arrays.
+
+</div>
+
+<div class=ex>
+<!--dataonmap_7-->
+<a name=ex7></a>
+<a href="Images/dataonmap_7_1_lg.png">
+<img src="Images/dataonmap_7_1_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_7_2_lg.png">
+<img src="Images/dataonmap_7_2_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_7_3_lg.png">
+<img src="Images/dataonmap_7_3_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_grid_7_lg.png">
+<img src="Images/dataonmap_grid_7_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_7.html">dataonmap_7.ncl</a> /
+<a href="Scripts/dataonmap_grid_7.html">dataonmap_grid_7.ncl</a><br>
+<b>Rectilinear grid</b><p>
+<b>Data</b>: Tstorm.cdf (NetCDF file, included with NCL distribution)
+<p>
+
+The data for this example is on a rectilinear grid, but if you
+try to plot it the usual way, you will get the following warnings
+and an incorrect plot:
+<p>
+
+<pre>
+  check_for_y_lat_coord: Warning: Data either does not contain a valid 
+  latitude coordinate array or doesn't contain one at all.
+  A valid latitude coordinate array should have a 'units' 
+  attribute equal to one of the following values: 
+  'degrees_north' 'degrees-north' 'degree_north' 'degrees north' 
+</pre>
+<p>
+
+This is due to the fact that the lat/lon arrays do not have "units"
+attributes of "degrees_north" and "degrees_east" respectively:
+<p>
+
+<pre>
+   Variable: lat (coordinate)
+   . . .
+   Number of Dimensions: 1
+   Dimensions and sizes: [lat | 33]
+   Coordinates: 
+   <b>Number Of Attributes: 0</b>
+   
+   Variable: lon (coordinate)
+   . . .
+   Number of Dimensions: 1
+   Dimensions and sizes: [lon | 36]
+   Coordinates: 
+   <b>Number Of Attributes: 0</b>
+   
+</pre>
+You can fix this by attaching the expected "units" attribute to both coordinate
+arrays, via the "t" data variable:
+<p>
+<pre>
+   t&lat@units = "degrees_north"
+   t&lon@units = "degrees_east"
+</pre>
+<p>
+
+You will then get a second error:
+<p>
+
+<pre>
+   gsn_add_cyclic: Warning: The range of your longitude data is not 360.
+   You may want to set the gsnAddCyclic resource to False to avoid a
+   warning message from the spline function.
+</pre>
+<p>
+This can be fixed by setting the special <a href="../Document/Graphics/Resources/gsn.html#gsnAddCyclic"><em>gsnAddCyclic</em></a> to 
+resource to False as suggested.
+<p>
+
+The second frame shows the result of the plot once you add the missing
+"units" and turn off the cyclic point.  The third frame simply zooms
+in on the map area of interest.
+<p>
+
+The last frame is from
+the <a href="Scripts/dataonmap_grid_7.html">dataonmap_grid_7.ncl</a>
+script.  It demonstrates how to
+call <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> to add markers
+at lat/lon locations associated with your data. The red markers
+indicate areas where the data contains missing values.
+
+</div>
+
+<div class=ex>
+<!--dataonmap_8-->
+<a name=ex8></a>
+<a href="Images/dataonmap_8_lg.png">
+<img src="Images/dataonmap_8_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_8.html">dataonmap_8.ncl</a><br>
+<b>Rectilinear grid</b><p>
+<b>Data</b>: <a href="Data/hdf/3B-MO.MS.MRG.3IMERG.20140701-S000000-E235959.07.V03D.HDF5">3B-MO.MS.MRG.3IMERG.20140701-S000000-E235959.07.V03D.HDF5</a> (HDF5 file)<p>
+ 
+The data for this example is on a rectilinear grid, but it is ordered
+longitude x latitude:
+<p>
+
+<pre>
+   Variable: p
+   Type: float
+   . . .
+   Number of Dimensions: 2
+   Dimensions and sizes: [lon | 3600] x [lat | 1800]
+   Coordinates: 
+               lon: [-179.95..179.95]
+               lat: [-89.95..89.95]
+   Number Of Attributes: 6
+   . . .
+</pre>
+<p>
+
+In order to plot this data correctly, it must
+be <a href="../Document/Language/reorder.html">reordered</a> to be lat
+x lon. In this script, the reordering is done right inside the
+plotting call, but you could also do it earlier in the script, 
+like when reading in the variable.
+<p>
+
+<pre>
+  plot = gsn_csm_contour_map(wks, p(lat|:,lon|:), res)
+</pre>
+<p>
+
+This is a rather large grid (3600 x 1800).  In order to speed up the
+plotting, we are using "raster" fill for the contours
+(<a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a>="RasterFill").  This
+can make things SIGNIFICANTLY faster for large grids.
+<p>
+
+The default contour fill mode is "AreaFill".  If you try to contour
+this data using "AreaFill", you will get a fatal error:
+
+<pre>
+  ContourPlotDraw: Workspace reallocation would exceed maximum size 100000000
+</pre>
+<p>
+
+You can increase the "workspace size", but it's not really
+worth it! Here are the timing results between using
+"RasterFill" and "AreaFill":
+<p>
+
+<pre>
+  AreaFill:   Elapsed time = 1070.93 CPU seconds.
+  RasterFill: Elapsed time = 1.01304 CPU seconds.
+</pre>
+
+
+</div>
+
+
+<div class=ex>
+<!--dataonmap_9-->
+<a name=ex9></a>
+<a href="Images/dataonmap_9_lg.png">
+<img src="Images/dataonmap_9_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_grid_9_lg.png">
+<img src="Images/dataonmap_grid_9_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_9.html">dataonmap_9.ncl</a>
+<a href="Scripts/dataonmap_grid_9.html">dataonmap_grid_9.ncl</a><br>
+<b>Curvilinear grid</b><p>
+<b>Data</b>: <a href="Data/cdf/slp.1963.nc">slp.1963.nc</a> (NetCDF file)<p>
+
+The data for this example is "packed" on the file. That is, it is of
+type "short" and you must multiply or divide it by a "scale factor" to
+get the correct values. Sometimes you must also add or subtract an
+"add offset" value. NCL will not do this automatically!  Use functions
+like <a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a>
+or <a href="../Document/Functions/Contributed/short2flt_hdf.html"><strong>short2flt_hdf</strong></a> to help you
+unpack the data.
+<p>
+
+If you see data that is type "short" or "byte", this is usually an
+indication that it has to be unpacked before you can do calculations
+with it or plot it. You can further identify whether data needs to be
+unpacked by the examining the <a href="../Document/Functions/Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>
+output for the presence of attributes "scale_factor" and/or
+"add_offset" or something similar:
+<p>
+
+<pre>
+   Variable: slp
+   Type: short
+   Number of Dimensions: 3
+   Dimensions and sizes: [time | 365] x [lat | 73] x [lon | 144]
+   Coordinates: 
+        time: [17198568..17207304]
+        lat: [90..-90]
+        lon: [ 0..357.5]
+   Number Of Attributes: 17
+   long_name : mean Daily Sea Level Pressure
+   units : Pascals
+   <b>add_offset : 119765
+   scale_factor : 1</b>
+   valid_range : ( 87000, 115000 )
+   actual_range : ( 94395, 111535 )
+   missing_value : 32766
+   _FillValue : 32766
+   . . . 
+</pre>
+<p>
+
+You should also call <a href="../Document/Functions/Contributed/printMinMax.html"><strong>printMinMax</strong></a>
+on "slp_short" to look at the min/max:
+<p>
+
+<pre>
+  mean Daily Sea Level Pressure (Pascals) : min=-25370   max=-8230
+</pre>
+<p>
+
+From these min/max values, you can see right away that these are not
+not valid numbers for pressure.
+<p>
+
+In this script, the <a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a>
+function is used to unpack the data. This function also copies over
+the metadata. For a "cleaner" plot, we converted the values to "hPa"
+by mutiplying by 0.01 and updated the "units" attribute to reflect
+this change.
+<p>
+
+<pre>
+  slp_float = short2flt(slp_short)    ; unpack the data
+  slp_float = slp_float * 0.01        ; convert to hPa
+  slp_float@units = "hPa"             ; update the units
+</pre>
+<p>
+
+Calling <a href="../Document/Functions/Contributed/printMinMax.html"><strong>printMinMax</strong></a> on
+"slp_float" results in reasonable values:
+<p>
+
+<pre>
+   mean Daily Sea Level Pressure (hPa) : min=943.95   max=1115.35
+</pre>
+<p>
+
+<b>Important note about packed data:</b><p>
+
+The COARDS and CF conventions require the following formula and the
+specific names "scale_factor" and "add_offset":
+<p>
+
+<pre>
+    x = xShort*scale_factor + add_offset
+</pre>
+<p>
+
+Many NASA (mainly HDF) require:
+
+<pre>
+    x = (xShort-add_offset)*scale_factor
+</pre>
+<p>
+
+Since there are no specific required names,
+the <a href="../Document/Functions/Contributed/short2flt.html"><strong>short2flt</strong></a> function looks for
+many names:<p>
+
+<pre>
+  "add_offset", "offset", "OFFSET", "Offset", "_offset",
+  "Intercept", "intercept", "add_off", "ADD_OFF"
+
+  "scale", "SCALE", "Scale", "_scale", "scale_factor", "factor",
+  "Scale_factor", "Slope" , "slope", "ScaleFactor", "Scale_Factor",
+  "SCALING_FACTOR"
+</pre>
+<p>
+
+The <a href="../Document/Functions/Contributed/short2flt_hdf.html"><strong>short2flt_hdf</strong></a> function looks
+for these names:
+<p>
+
+<pre>
+  "add_offset", "offset", "OFFSET", "Offset", "_offset",
+  "Intercept", "intercept", "scalingIntercept", "INTERCEPT",
+  "add_off"
+
+  "scale", "SCALE", "Scale", "_scale", "scale_factor",
+  "Scale_factor", "Slope" , "slope", "ScaleFactor",
+  "Scale_Factor", "scalingSlope", "SCALING_FACTOR",
+  "SCALE_FACTOR", "SLOPE"
+</pre>
+<p>
+
+Sometimes the metadata on the file will provide information on how the
+data should be unpacked, or you may need to find some documentation on
+your file.  Generally, the "scale_factor" attribute is the value that
+you multiply your data by, and the "add_offset" attribute is the value
+that you add <i>after</i> you multiple the scale factor. If you have a
+well-written file, then the metadata may also indicate a "valid range"
+for your data (see above output). This makes it easier to examine your
+results and make sure you are unpacking the data correctly.
+<p>
+
+
+The second frame is from
+the <a href="Scripts/dataonmap_grid_9.html">dataonmap_grid_9.ncl</a>
+script.  It demonstrates how to
+call <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> to add 
+the lat/lon lines associated with your data.
+
+</div>
+
+<div class=ex>
+<!--dataonmap_10-->
+<a name=ex10></a>
+<a href="Images/dataonmap_10_1_lg.png">
+<img src="Images/dataonmap_10_1_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_10_2_lg.png">
+<img src="Images/dataonmap_10_2_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_10.html">dataonmap_10.ncl</a><br>
+<b>Curvilinear grid</b><p>
+<b>Data</b>: <a href="Data/cdf/wrfout_d01_2003-07-15_00_00_00.html">wrfout_d01_2003-07-15_00:00:00</a> (NetCDF WRF output file)
+<p>
+
+This example plots data on a WRF-ARW grid, which is on a curvilinear
+grid.
+<p>
+
+The first frame plots the data using
+the <a href="../Document/glossary.html#NativeGrid">native</a> map projection on
+the file.  The second frame plots the data by reading the XLAT / XLONG
+arrays off the file and attaching them to "q2" via the special "lat2d"
+/ "lon2d" attributes.
+<p>
+
+This is an older WRF-ARW file, whose variables do not contain any
+metadata that describes the lat / lon coordinates. WRF-ARW lat/lon
+arrays have names like "XLAT", "XLONG", "XLAT_U", "XLONG_U", "XLAT_V",
+"XLONG_V", etc.  If you're not sure which ones to use, look at size of
+your data variable and pick the corresponding XLAT/XLONG variable that
+matches the size of your data variable.
+<p>
+
+"XLAT" and "XLONG" are used in this example, but these are the only
+lat/lon arrays on this particular file.
+<p>
+
+<pre>
+   Variable: q2
+   Type: float
+   . . .
+   Number of Dimensions: 3
+   Dimensions and sizes: [Time | 1] x [south_north | 160] x [west_east | 180]
+   Coordinates: 
+   Number Of Attributes: 5
+   FieldType : 104
+   MemoryOrder : XY 
+   description : QV at 2 M
+
+   float XLAT ( Time, south_north, west_east )
+   FieldType :104
+   MemoryOrder :XY 
+   description :LATITUDE, SOUTH IS NEGATIVE
+   units : degree
+
+   float XLONG ( Time, south_north, west_east )
+   FieldType : 104
+   MemoryOrder : XY 
+   description : LONGITUDE, WEST IS NEGATIVE
+   units : degree
+
+</pre>
+<p>
+
+Newer WRF ARW files will have a "coordinates" attribute for the data
+variables that help you identify the correct lat/lon arrays associated
+with your data. For example:
+<p>
+
+<pre>
+   float SST ( Time, south_north, west_east )
+   FieldType : 104
+   MemoryOrder : XY 
+   description : SEA SURFACE TEMPERATURE
+   units : K
+   <b>coordinates : XLONG XLAT</b>
+
+   float V ( Time, bottom_top, south_north_stag, west_east )
+   FieldType : 104
+   MemoryOrder : XYZ
+   description : y-wind component
+   units : m s-1
+   stagger : Y
+   <b>coordinates : XLONG_V XLAT_V</b>
+</pre>
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/WRF/NCL_dataonmap_10.html#sphx-glr-gallery-wrf-ncl-dataonmap-10-py">here</a>.
+</div>
+
+<div class=ex>
+<!--dataonmap_zoom_10-->
+<a name=ex10zoom></a>
+<a href="Images/dataonmap_zoom_10_1_lg.png">
+<img src="Images/dataonmap_zoom_10_1_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_zoom_10_2_lg.png">
+<img src="Images/dataonmap_zoom_10_2_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_zoom_10.html">dataonmap_zoom_10.ncl</a><br>
+<b>Curvilinear grid</b><p>
+<b>Data</b>: <a href="Data/cdf/wrfout_d01_2003-07-15_00_00_00.html">wrfout_d01_2003-07-15_00:00:00</a> (NetCDF WRF output file)
+<p>
+
+This example plots the same data as the previous example, except now we are zooming in
+on a lat/lon area of interest. This example shows two ways to zoom in on WRF-ARW data:
+1) using the same native WRF map projection, or 2) plotting the data in a different map
+projection.
+<p>
+
+The first plot shows how to plot the data in the native map
+projection by first using the
+<a href="../Document/Functions/WRF_arw/wrf_user_ll_to_xy.html"><strong>wrf_user_ll_to_xy</strong></a> function to
+calculate the x,y index locations into the 'q2' array that represent
+the approximate lat/lon area of interest. These index values are
+used with the 'ZoomIn' resource to set the special Xstart, Xend, Ystart, and Yend
+resources before you call
+<a href="../Document/Functions/WRF_arw/wrf_map_resources.html"><strong>wrf_map_resources</strong></a> to set the
+correct NEW native map projection parameters.
+<p>
+
+The second plot shows how to plot the data using the 2D lat/lon arrays
+read off the file. In this case, you don't need the special index
+values, because NCL will use the lat/lon arrays to figure out the
+correct subset of the data to plot.
+<p>
+
+You may notice that the two plots are not plotted in the exact same
+lat/lon area.  This is because the lat/lon corners of the first plot
+are only *approximately* equal to the requested lat/lon area of
+interest. The <a href="../Document/Functions/WRF_arw/wrf_user_ll_to_xy.html"><strong>wrf_user_ll_to_xy</strong></a>
+function gives you the i,j indexes that are closest to the actual
+lat/lon area of interest.
+<p>
+
+The second plot is the exact area requested, because NCL now has the
+actual lat/lon arrays, and can use this to interpolate the data 
+as needed, in the area of interest.
+<p>
+
+For another example of subsetting a WRF map domain, see the
+"wrf_Zoom.ncl" example
+at <a href="http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Graphics/NCL/Examples/SPECIAL/wrf_Zoom.htm">http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Graphics/NCL/Examples/SPECIAL/wrf_Zoom.htm</a>
+
+</div>
+
+<div class=ex>
+<!--dataonmap_11-->
+<a name=ex11></a>
+<a href="Images/dataonmap_11_1_lg.png">
+<img src="Images/dataonmap_11_1_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_11_2_lg.png">
+<img src="Images/dataonmap_11_2_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_11.html">dataonmap_11.ncl</a><br>
+<b>Curvilinear grid</b><p>
+<b>Data</b>: <a href="Data/cdf/ctorca.nc">ctorca.nc</a> (NetCDF file)<p>
+
+This example plots data on an ORCA (ocean model) grid, which is on a
+rather quirky, non-uniform curvilinear grid (see the second frame).
+<p>
+
+Note that the "sst" variable doesn't have a "coordinates" attribute,
+but it does have an "associate" attribute with the string value
+"time_counter nav_lat nav_lon":
+<p>
+
+<pre>
+   Variable: sst
+   Type: float
+   . . .
+   Number of Dimensions: 2
+   Dimensions and sizes: [y | 149] x [x | 182]
+   Coordinates: 
+   Number Of Attributes: 13
+   time_counter : 43200
+   units : C
+   missing_value : 1e+20
+   valid_min : 1e+20
+   valid_max : -1e+20
+   long_name : SST
+   short_name : sosstsst
+   <b>associate : time_counter nav_lat nav_lon</b>
+   _FillValue : 1e+20
+</pre>
+<p>
+
+Based on an educated guess, we looked for "nav_lat" and "nav_lon" 
+on the file, and were able to use these for the "sst"
+"lat2d" / "lon2d" data attributes.
+</pre>
+<p>
+
+The contours are drawn in "CellFill" mode. The second frame turns on
+the cell edges so you can actually see the structure of this
+non-uniform grid.
+
+</div>
+
+<div class=ex>
+<!--dataonmap_12-->
+<a name=ex12></a>
+<a href="Images/dataonmap_12_lg.png">
+<img src="Images/dataonmap_12_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_12.html">dataonmap_12.ncl</a><br>
+<b>Rectilinear grid</b><p>
+<b>Data:</b> Download any one of the NetCDF files from:<br>
+<a href="ftp://podaac-ftp.jpl.nasa.gov/OceanCirculation/oscar/preview/L4/resource/LAS/oscar_third_deg_180/">ftp://podaac-ftp.jpl.nasa.gov/OceanCirculation/oscar/preview/L4/resource/LAS/oscar_third_deg_180/</a>
+<p>
+
+This example plots streamlines on a relatively large rectilinear
+lat/lon grid (481 x 1081). Note the "NaN" ("not a number") values for
+the "_FillValue" and "missing_value" attributes when you do a
+printVarSummary of the data:
+<p>
+
+<pre>
+   Variable: u
+   Type: double
+   . . .
+   Number of Dimensions: 4
+   Dimensions and sizes:[time | 33] x [depth | 1] x [latitude | 481] x [longitude | 1081]
+   Coordinates: 
+            time: [8488..8650.667]
+            depth: [15..15]
+            latitude: [  80.. -80]
+            longitude: [-180.. 180]
+   Number Of Attributes: 4
+   units : meter/sec
+   long_name : Ocean Surface Zonal Currents
+   <b>missing_value : nan
+   _FillValue : nan</b>
+</pre>
+<p>
+
+The NaN values are suspicious, so we also
+used <a href="../Document/Functions/Contributed/printMinMax.html"><strong>printMinMax</strong></a> to check the
+min/max of the data:
+<p>
+
+<pre>
+   Ocean Surface Zonal Currents (meter/sec) : min=nan   max=nan
+   Ocean Surface Meridional Currents (meter/sec) : min=nan   max=nan
+</pre>
+<p>
+
+You cannot have <i>any</i> NaN values in your data when plotting
+with NCL, so you must use the <a href="../Document/Functions/Built-in/replace_ieeenan.html"><strong>replace_ieeenan</strong></a> function
+to replace these values with missing values. Once you do this, the min/max
+values look more reasonable:
+<p>
+
+<pre>
+   Ocean Surface Zonal Currents (meter/sec) : min=-3.518722   max=3.7021546
+   Ocean Surface Meridional Currents (meter/sec) : min=-3.319664   max=3.662057
+</pre>
+
+</div>
+
+<div class=ex>
+<!--dataonmap_13-->
+<a name=ex13></a>
+<a href="Images/dataonmap_13_lg.png">
+<img src="Images/dataonmap_13_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_13.html">dataonmap_13.ncl</a> / 
+<a href="Scripts/dataonmap_13_640.html">dataonmap_13_640.ncl</a><br>
+<b>Hexagonal mesh</b><p>
+<b>Data</b>: <a href="Data/cdf/MPAS.nc">MPAS.nc</a> (NetCDF file)<p>
+
+This example shows how to create a filled contour plot of data on a
+hexagonal mesh (163,842 cells). The data and the lat/lon arrays are
+all one-dimensional arrays of the same length:
+<p>
+<pre>
+   Variable: sp
+   Type: double
+   Number of Dimensions: 1
+   Dimensions and sizes: [nCells | 163842]
+
+   Variable: latCell
+   Type: double
+   Number of Dimensions: 1
+   Dimensions and sizes: [nCells | 163842]
+
+   Variable: lonCell
+   Type: double
+   Number of Dimensions: 1
+   Dimensions and sizes: [nCells | 163842]
+</pre>
+<p>
+
+A couple of notes: 
+<ol>
+
+<li>The lat/lon arrays on this file are in
+"radians" and must be converted to "degrees".<p>
+
+<li>Raster contours
+(<a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a>="RasterFill") are
+used here for faster plotting.<p>
+</ol>
+<p>
+
+As with the previous unstructured examples, you must set the
+special <a href="../Document/Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a>
+and <a href="../Document/Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> resources to the
+one-dimensional lat / lon arrays, respectively, or use the "lat1d" /
+"lon1d" attributes if you have NCL V6.4.0 or later:
+<p>
+
+If you have NCL V6.3.0 or earlier:
+<p>
+
+<pre>
+  RAD2DEG = 180.0d/(atan(1)*4.0d)  ; Radian to Degree
+  sp      = f->surface_pressure(0,:)    ; 163842 points
+  lonCell = f->lonCell * RAD2DEG        ; ditto
+  latCell = f->latCell * RAD2DEG        ; ditto
+  . . .
+  res          = True
+  res@cnFillOn = True
+  res@sfXArray = lonCell
+  res@sfYArray = latCell
+
+  plot = gsn_csm_contour_map(wks,x,res)  
+</pre>
+<p>
+
+If you have NCL V6.4.0 or later:
+<p>
+
+<pre>
+  RAD2DEG = <a href="../Document/Functions/Contributed/get_r2d.html"><strong>get_r2d</strong></a>("float")            ; new function in V6.4.0
+  sp       = f->surface_pressure(0,:)
+  sp@lat1d = f->latCell * RAD2DEG
+  sp@lon1d = f->lonCell * RAD2DEG
+  . . .
+  res          = True
+  res@cnFillOn = True
+  plot = gsn_csm_contour_map(wks,sp,res)  
+</pre>
+<p>
+
+</div>
+<div class=ex>
+<!--dataonmap_14-->
+<a name=ex14></a>
+<a href="Images/dataonmap_14_1_lg.png">
+<img src="Images/dataonmap_14_1_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_14_2_lg.png">
+<img src="Images/dataonmap_14_2_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_14_3_lg.png">
+<img src="Images/dataonmap_14_3_sm.png" align=left border=2></a>
+<a href="Images/dataonmap_14_4_lg.png">
+<img src="Images/dataonmap_14_4_sm.png" align=left border=2></a>
+<a href="Scripts/dataonmap_14.html">dataonmap_14.ncl</a> / 
+<b>Rectilinear grid</b><p>
+<b>Data</b>: <a href="Data/cdf/ts_Amon_CESM1-CAM5_historical_r1i1p1_185001-200512.nc">ts_Amon_CESM1-CAM5_historical_r1i1p1_185001-200512.nc</a> (NetCDF file)<p>
+
+The purpose of this script is to further illustrate the difference
+between plotting data that contains lat/lon coordinates, and plotting
+data in its native map projection (without lat/lon coordinate arrays).
+<p>
+
+In this case, we are plotting rectilinear data, so the native
+projection is effectively the default projection (cylindrical
+equidistant). You just have to make sure that when you plot it
+natively, you give it the correct min/max lat and lon values.  In this
+case, the latitude values for this data go from -90 to 90, and the
+longitude values go from 0 to 358.75, so all we need to set, really,
+is the maximum longitude (<a href="../Document/Graphics/Resources/mp.html#mpMaxLonF"><em>mpMaxLonF</em></a>)
+to 358.75 (because NCL uses -90 to 90 and 0 to 360 by default).
+<p>
+
+Additionally, this example shows how to plot both types of data when
+using the three different values
+of <a href="../Document/Graphics/Resources/mp.html#mpShapeMode"><em>mpShapeMode</em></a>:
+
+<ul>
+<li>FixedAspectFitBB   (default)
+<li>FreeAspect
+<li>FixedAspectNoFitBB
+</ul>
+<p>
+
+The "FixedAspectNoFitBB" is not a commonly used setting, but if you do
+use it and you are plotting your data natively, then you need to make
+sure that
+<a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> is set to "NDCDataExtent".
+<p>
+
+Here are the three possible values for <a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a>:
+
+<ul>
+<li>DataTransform (default)
+<li>NDCViewport
+<li>NDCDataExtent
+</ul>
+<p>
+
+The first two frames are global plots, the first frame being the 
+data with lat/lon coordinate arrays, and the second being
+data without lat/lon coordinate arrays.
+<p>
+
+The third and fourth frames are regional plots, with the third frame being
+the data with lat/lon coordinate arrays, and the second being data
+without lat/lon coordinate arrays.
+<p>
+
+This script will only work with NCL Version 6.5.0 or later, because
+we had to fix a bug in the gsn_csm scripts that didn't allow 
+<a href="../Document/Graphics/Resources/tf.html#tfDoNDCOverlay"><em>tfDoNDCOverlay</em></a> to be set with a string value. 
+
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/plot_data_on_map.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:14:28 GMT -->
+</html>
+

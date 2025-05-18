@@ -1,0 +1,657 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/colormap.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:12:53 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+color maps.">
+<meta name="keywords" content="NCL, graphics, visualization, color maps,
+color tables">
+<TITLE>NCL Graphics: Color maps</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: Color Maps</h1>
+
+<div class=mainimage>
+<img src="Images/colormap_1_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+This suite of examples shows how to change, create, draw, reverse, and
+otherwise manipulate colors and color maps (also known as "color
+tables").
+<p>
+
+NCL has a built-in list of
+available <a href="../Document/Graphics/color_table_gallery.html">color
+tables</a> and a suite
+of <a href="../Document/Graphics/named_colors.html">650 named
+colors</a> you can use.
+<p>
+
+Note: in <a href="../prev_releases.html#6.1.0">NCL V6.1.0</a>, a new
+color model was introduced, which replaces the concept of associating
+color maps with a workstation. For backwards compatibility, the old
+color model is still supported.  Many of the examples here are
+for the workstation color map, but can still be very useful for
+both color models.
+<p>
+
+Here are some functions and procedures that are useful in 
+working with color maps and colors in general:
+<p>
+
+<ul>
+
+<li><a href="../Document/Functions/Built-in/draw_color_palette.html"><strong>draw_color_palette</strong></a> - draws the given colors or
+color map as a series of filled boxes.
+
+<li><a href="../Document/Functions/Built-in/get_color_rgba.html"><strong>get_color_rgba</strong></a> - chooses an RGB triplet or RGBA
+quadruplet for a scalar value, given a color map and a range of
+values.
+
+<li><a href="../Document/Graphics/Interfaces/namedcolor2rgb.html"><strong>namedcolor2rgb</strong></a> / 
+<a href="../Document/Graphics/Interfaces/namedcolor2rgba.html"><strong>namedcolor2rgba</strong></a>
+- returns the RGB triplets or RGBA quadruplets of the given list of
+named colors.
+
+<li><a href="../Document/Functions/Built-in/read_colormap_file.html"><strong>read_colormap_file</strong></a> - reads an NCL system colormap
+file or a user-defined colormap.
+
+<li><a href="../Document/Graphics/Interfaces/span_color_rgba.html"><strong>span_color_rgba</strong></a> - given the
+number of desired color values, return an array of RGB triplets or
+RGBA quadruplets that nicely span the given color map.
+
+<li><a href="../Document/Graphics/Interfaces/span_named_colors.html"><strong>span_named_colors</strong></a> - returns an
+RGB array that is a span between given list of named colors.
+
+</ul>
+<p>
+
+Here are some older functions that are useful when working
+with the color map associated with the workstation:
+<p>
+
+<ul>
+<li><a href="../Document/Graphics/Interfaces/gsn_define_colormap.html"><strong>gsn_define_colormap</strong></a> - defines a color map for the given workstation.
+<li><a href="../Document/Graphics/Interfaces/gsn_draw_colormap.html"><strong>gsn_draw_colormap</strong></a> - draws the current color map for the given workstation.
+<li><a href="../Document/Graphics/Interfaces/gsn_draw_named_colors.html"><strong>gsn_draw_named_colors</strong></a> - draws the given list of named colors.
+<li><a href="../Document/Graphics/Interfaces/gsn_merge_colormaps.html"><strong>gsn_merge_colormaps</strong></a> - merges two color maps and sets this as the color map for the given workstation.
+<li><a href="../Document/Graphics/Interfaces/gsn_retrieve_colormap.html"><strong>gsn_retrieve_colormap</strong></a> - retrieves a color map for the given workstation.
+<li><a href="../Document/Graphics/Interfaces/gsn_reverse_colormap.html"><strong>gsn_reverse_colormap</strong></a> - reverses the color map associated the given workstation. *
+</ul>
+
+
+</div>
+
+<div class=text>
+<b>CMYK color</b><p>
+
+If you need to use CMYK color, then this is only supported with the
+old style color model (pre NCL V6.1.0), and hence you must use "oldps"
+or "oldpdf" as the output format. You can set this via a workstation
+resource, before you
+call <a href="../Document/Graphics/Interfaces/gsn_open_wks.html"><strong>gsn_open_wks</strong></a>:
+
+<pre>
+ type = "oldps"     ; cannot use "ps" or "pdf"
+ type@<a href="../Document/Graphics/Resources/wk.html#wkColorModel"><em>wkColorModel</em></a> = "cmyk"
+ wks = <a href="../Document/Graphics/Interfaces/gsn_open_wks.html"><strong>gsn_open_wks</strong></a>(type,"example")
+</pre>
+<p>
+
+Note: a user reported a noticeable degradation in the color quality
+when using the old postscript and pdf drivers along with the CMYK
+option. He said he's been able to submit RGB figures to various
+journals for the last few years, and never had a problem. If you have
+to send in CMYK graphics, then submit the figures as RGB (which is the
+default in NCL), and then use an external package like Illustrator to
+convert them to CMYK.
+
+</div>
+
+<div class=ex>
+<!--Colormap_1-->
+<a name=ex1></a>
+<a href="Images/colormap_1_lg.png">
+<img src="Images/colormap_1_sm.png" align=left border=2></a>
+
+<a href="Scripts/colormap_1.html">colormap_1.ncl</a>: Demonstrates
+drawing the current color map associated with the workstation
+using <a href="../Document/Graphics/Interfaces/gsn_draw_colormap.html"><strong>gsn_draw_colormap</strong></a>.
+<p>
+
+Note: if you are setting a color map in your <a
+href="../Document/Graphics/hlures.html">.hluresfile</a>, then your
+output from this script may be different.
+
+</div>
+
+<div class=ex>
+<!--Colormap_2-->
+<a name=ex2></a>
+<a href="Images/colormap_2_1_lg.png">
+<img src="Images/colormap_2_1_sm.png" align=left border=2></a>
+<a href="Images/colormap_2_2_lg.png">
+<img src="Images/colormap_2_2_sm.png" align=left border=2></a>
+<a href="Images/colormap_2_3_lg.png">
+<img src="Images/colormap_2_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/colormap_2.html">colormap_2.ncl</a>: Demonstrates
+changing the color map associated with the workstation using: 1) one
+of the <a href="../Document/Graphics/color_tables.html">built-in color
+tables</a>, 2) an array
+of <a href="../Document/Graphics/named_colors.html">named colors</a>,
+or 3)
+<a href="../Document/glossary.html#RGB">RGB values</a>.
+<p>
+
+The <a href="../Document/Graphics/Interfaces/gsn_define_colormap.html"><strong>gsn_define_colormap</strong></a> function
+is used to set all three color maps.
+<p>
+
+See the "<a href="#ex2a">colormap_2a.ncl</a>" example that follows,
+for a newer method of drawing a given set of colors or a color map,
+that doesn't require
+calling <a href="../Document/Graphics/Interfaces/gsn_define_colormap.html"><strong>gsn_define_colormap</strong></a>.
+<p>
+
+If you like a particular color map you've created, you can put it in a
+file, and put it in a directory where you can then load it as if it
+were an NCL built-in color table. See <a
+href="../Document/Graphics/create_color_table.html">creating your own
+color table file</a> for more information.
+
+</div>
+
+<div class=ex>
+<!--Colormap_2a-->
+<a name=ex2a></a>
+<a href="Images/colormap_2a_1_lg.png">
+<img src="Images/colormap_2a_1_sm.png" align=left border=2></a>
+<a href="Images/colormap_2a_2_lg.png">
+<img src="Images/colormap_2a_2_sm.png" align=left border=2></a>
+<a href="Images/colormap_2a_3_lg.png">
+<img src="Images/colormap_2a_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/colormap_2a.html">colormap_2a.ncl</a>: This example
+draws the same color maps as the previous example, but it uses
+the <a href="../Document/Functions/Built-in/draw_color_palette.html"><strong>draw_color_palette</strong></a> procedure added in NCL
+V6.3.0. This procedure doesn't require that you first
+call <a href="../Document/Graphics/Interfaces/gsn_define_colormap.html"><strong>gsn_define_colormap</strong></a> to
+set the color map.
+<p>
+
+Note that the color tables are drawn slightly differently than they
+are with <a href="../Document/Graphics/Interfaces/gsn_define_colormap.html"><strong>gsn_define_colormap</strong></a>.  For
+one, they are drawn left-to-right, top-to-bottom, rather than
+top-to-bottom, left-to-right.
+</div>
+
+<div class=ex>
+<!--Colormap_3--> <a name=ex3></a>
+<a href="Images/colormap_3_1_lg.png">
+<img src="Images/colormap_3_1_sm.png" align=left border=3></a>
+<a href="Images/colormap_3_2_lg.png">
+<img src="Images/colormap_3_2_sm.png" align=left border=3></a>
+<a href="Scripts/colormap_3.html">colormap_3.ncl</a>: Demonstrates
+how to reverse the workstation color map using <a href="../Document/Graphics/Interfaces/gsn_reverse_colormap.html"><strong>gsn_reverse_colormap</strong></a>. 
+<p>
+
+See the "<a href="#ex3a">colormap_3a.ncl</a>" example that follows,
+for a different method of reversing a color map.
+<p>
+
+</div>
+ 
+<div class=ex>
+<!--Colormap_3a--> <a name=ex3a></a>
+<a href="Images/colormap_3a_1_lg.png">
+<img src="Images/colormap_3a_1_sm.png" align=left border=3></a>
+<a href="Images/colormap_3a_2_lg.png">
+<img src="Images/colormap_3a_2_sm.png" align=left border=3></a>
+<a href="Scripts/colormap_3a.html">colormap_3a.ncl</a>: This example is
+similar to the previous example, except it shows how to reverse the
+workstation color map using <a href="../Document/Functions/Built-in/read_colormap_file.html"><strong>read_colormap_file</strong></a> to
+first read the color map, and then the array syntax "::-1" to reverse
+it.  It draws the color map using
+the <a href="../Document/Functions/Built-in/draw_color_palette.html"><strong>draw_color_palette</strong></a> procedure added in NCL
+V6.3.0.
+
+</div>
+ 
+<div class=ex>
+<!--Colormap_4-->
+<a name=ex4></a>
+<a href="Images/colormap_4_1_lg.png">
+<img src="Images/colormap_4_1_sm.png" align=left border=3></a>
+<a href="Images/colormap_4_2_lg.png">
+<img src="Images/colormap_4_2_sm.png" align=left border=3></a>
+<a href="Images/colormap_4_3_lg.png">
+<img src="Images/colormap_4_3_sm.png" align=left border=3></a>
+<a href="Scripts/colormap_4.html">colormap_4.ncl</a>: Demonstrates
+merging two colormaps on the workstation
+using  <a href="../Document/Graphics/Interfaces/gsn_merge_colormaps.html"><strong>gsn_merge_colormaps</strong></a>.  You can only do this
+with two colormaps whose sum total is fewer than 256 colors.
+The background/foreground colors are retained from the
+first colormap only.
+<p>
+
+Note: merging color maps is not really necessary under the new color
+model.  See
+example <a href="rgbacolor.html#ex13">newcolor_13.ncl</a>
+on the RGBA examples page for a way to use multiple color maps on a
+single page.
+
+</div>
+ 
+<div class=ex>
+<!--Colormap_5-->
+<a name=ex5></a>
+
+<a href="Images/colormap_5_lg.png">
+<img src="Images/colormap_5_sm.png" align=left border=3></a>
+
+<a href="Scripts/colormap_5.html">colormap_5.ncl</a>: Demonstrates
+adding colors to an existing colormap, using
+<a href="../Document/Functions/Built-in/NhlNewColor.html"><strong>NhlNewColor</strong></a>. This is only necessary for NCL
+versions 6.0.0 or earlier, if you need to use one or
+more <a href="../Document/Graphics/named_colors.html">named colors</a>
+and they are not in your current color map. In version 6.1.0
+and later, named colors do not need to be added. 
+<p>
+
+In order to add named colors to a colormap, you need to get their
+corresponding RGB triplet from the <a
+href="Scripts/rgb.txt">$NCARG_ROOT/lib/ncarg/database/rgb.txt</a>
+file. This will be in values from 0 to 255, so you first need to
+divide the values by 255 to get an RGB triplet.
+
+</div>
+ 
+<div class=ex>
+<!--Colormap_6-->
+<a name=ex6></a>
+<a href="Images/colormap_6_1_lg.png">
+<img src="Images/colormap_6_1_sm.png" align=left border=2></a>
+<a href="Images/colormap_6_2_lg.png">
+<img src="Images/colormap_6_2_sm.png" align=left border=2></a>
+<a href="Images/colormap_6_3_lg.png">
+<img src="Images/colormap_6_3_sm.png" align=left border=2></a>
+<a href="Scripts/colormap_6.html">colormap_6.ncl</a>: Uses 
+<a href="../Document/Functions/Built-in/hsvrgb.html"><strong>hsvrgb</strong></a> to draw some illustrative
+<a href="../Document/glossary.html#HSV">HSV</a> color wheels.
+See the next example for how to create a colormap using this function.
+
+</div>
+
+<div class=ex>
+<!--Colormap_7-->
+<a name=ex7></a>
+ <a href="Images/colormap_7_lg.png">
+<img src="Images/colormap_7_sm.png" align=left border=2></a>
+<a href="Scripts/colormap_7.html">colormap_7.ncl</a>: Uses values
+from the above HSV color wheels to generate colormaps than span
+from one color to another.
+<p>
+
+The colormap is drawn using <a href="../Document/Graphics/Interfaces/gsn_labelbar_ndc.html"><strong>gsn_labelbar_ndc</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--Colormap_8-->
+<a name=ex8></a>
+<a href="Images/colormap_8_1_lg.png">
+<img src="Images/colormap_8_1_sm.png" align=left border=2></a>
+<a href="Images/colormap_8_2_lg.png">
+<img src="Images/colormap_8_2_sm.png" align=left border=2></a>
+<a href="Images/colormap_8_3_lg.png">
+<img src="Images/colormap_8_3_sm.png" align=left border=2></a>
+<a href="Scripts/colormap_8.html">colormap_8.ncl</a>: Uses 
+<a href="../Document/Graphics/Interfaces/span_named_colors.html"><strong>span_named_colors</strong></a>
+to generate a color table that spans between given
+named colors.
+<p>
+
+You can optionally set the attributes "NumColorsInRange"
+or "NumColorsInTable" to indicate the maximum number of
+colors allowed in the table, or the number of colors in each
+range between named colors.
+
+</div>
+
+<div class=ex>
+<!--Colormap_9-->
+<a name=ex9></a>
+ <a href="Images/colormap_9_lg.png">
+<img src="Images/colormap_9_sm.png" align=left border=2></a>
+<a href="Scripts/colormap_9.html">colormap_9.ncl</a>: Uses the
+<a href="../Document/Graphics/Interfaces/span_named_colors.html"><strong>span_named_colors</strong></a> function
+to create a color map that reverses itself at the midpoint.
+<p>
+
+The colors passed to the function are
+(/"red","green","blue","purple","blue","green","red"/), with
+20 colors between each range.
+
+</div>
+<div class=ex>
+<!--Colormap_10-->
+<a name=ex10></a>
+ <a href="Images/colormap_10_1_lg.png">
+<img src="Images/colormap_10_1_sm.png" align=left border=2></a>
+ <a href="Images/colormap_10_2_lg.png">
+<img src="Images/colormap_10_2_sm.png" align=left border=2></a>
+ <a href="Images/colormap_10_3_lg.png">
+<img src="Images/colormap_10_3_sm.png" align=left border=2></a>
+ <a href="Images/colormap_10_4_lg.png">
+<img src="Images/colormap_10_4_sm.png" align=left border=2></a>
+<a href="Scripts/colormap_10.html">colormap_10.ncl</a>: Draws
+every NCL colormap as a horizontal labelbar. Only the first four
+frames are shown here. NCL V6.4.0 produces 24 frames with 240 color
+maps. NCL V6.5.0 produces 25 frames with 265 color maps.
+
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/colormap.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:13:07 GMT -->
+</html>
+
+

@@ -1,0 +1,43 @@
+;----------------------------------------------------------------------
+; The purpose of this script is to illustrate an issue with NCL
+; versions 6.1.0 through 6.1.2 in which thin lines were showing up
+; on some map plots. This issue has been improved for NCL V6.2.0.
+;
+; Running this script requires downloading the high resolution 
+; RANGS/GSHHS database. For more information, see:
+;
+; http://www.ncl.ucar.edu/Document/Graphics/rangs.shtml
+;----------------------------------------------------------------------
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"   
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"   
+
+begin
+  version = get_ncl_version()
+
+;---Set lat/lon limits 
+  minlon   =   4
+  maxlon   =  20
+  minlat   =  55
+  maxlat   =  70
+
+;---Set some plot resources
+  res                       = True
+  
+  res@gsnMaximize           = True           ; maximize plot in frame
+
+  res@mpDataBaseVersion     = "HighRes"
+
+  res@mpLimitMode           = "LatLon"
+  res@mpMinLatF             = minlat
+  res@mpMaxLatF             = maxlat 
+  res@mpMinLonF             = minlon
+  res@mpMaxLonF             = maxlon
+
+  res@pmTickMarkDisplayMode = "Always"      ; tickmarks for some maps
+
+  res@tiMainString          = "NCL V" + version
+
+  wks = gsn_open_wks("png","map_thin_line_"+version)
+  plot = gsn_csm_map(wks,res)
+
+end

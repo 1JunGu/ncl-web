@@ -1,0 +1,26 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+  x = fspan(0.,100.,51)                    ; generate dummy data
+  y = sin(x*6.28/50.)
+
+  wks = gsn_open_wks ("ncgm", "bar" )      ; open workstation
+
+  res                          = True
+  res@gsnMaximize              = True      ; maximize plot on page
+  res@gsnXYBarChart            = True      ; turn on bar charts
+  res@gsnXYBarChartOutlineOnly = True      ; draw outlines only
+
+  plot = gsn_csm_xy (wks,x,y,res)          ; draw first plot
+
+  delete(res@gsnXYBarChartOutlineOnly)
+
+  res@gsnYRefLine           = 0            ; reference line
+  res@gsnAboveYRefLineColor = "red"        ; above ref line fill red
+  res@gsnBelowYRefLineColor = "blue"       ; below ref line fill blue
+
+  plot = gsn_csm_xy (wks,x,y,res)          ; draw second plot
+end
+
+

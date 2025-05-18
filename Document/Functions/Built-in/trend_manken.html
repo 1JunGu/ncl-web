@@ -1,0 +1,527 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/trend_manken.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:18 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (statistics)">
+<meta name="keywords" content="trend_manken">
+<title>trend_manken</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+<a class=crumb href="../statistics.html">Statistics</a>
+<br>
+<h1>trend_manken</h1>
+
+<p>
+Calculates <a href="http://vsp.pnnl.gov/help/Vsample/Design_Trend_Mann_Kendall.htm">Mann-Kendall
+ non-parametric test for monotonic trend</a> and the
+<a href="http://en.wikipedia.org/wiki/Theil–Sen_estimator">Theil-Sen</a> robust estimate of linear trend.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.3.0">version 6.3.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function trend_manken (
+		x       : numeric,  
+		opt [1] : logical,  
+		dims    : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>Series to be tested. 
+If there is a strong seasonal cycle, the data should be deseasonalized,
+prior to input.  The successive input values are assummed to be 
+independent and evenly spaced.  The series must be at least 10 values. 
+Currently, missing values are <b>not</b> allowed.
+</p>
+<em>dims</em>
+<p class=indent>The dimension(s) of x on which to calculate the average. Must be consecutive and monotonically increasing.
+</p>
+<em>opt</em>
+<p class=indent>In NCL V6.4.0, the <em>return_trend</em> attribute was added such that
+if <em>opt</em>=True and <em>opt@return_trend</em>=False, only the
+Mann-Kendall trend significance is returned.
+</p>
+<p class=indent>
+
+This argument was inactive in NCL V6.3.0 and earlier.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The <a href="http://test.www.ncl.ucar.edu/Document/Functions/Built-in/trend_manken.shtml"><b>Mann-Kendall
+trend significance</b></a> and
+the <a href="http://en.wikipedia.org/wiki/Theil–Sen_estimator"><b>Theil-Sen</b></a>
+estimate of linear trend (<i>aka</i>, Sen trend estimate) will be
+returned for series.
+<p>
+
+NOTE: for large arrays with very long time series, calculating  the 
+linear trend estimate will result in a large memory requirement and slower
+execution. This is because internally the slope estimates must be
+stored [N*(N-1)/2, where N is the length of the time series] and
+subsequently sorted into ascending order. To turn off
+this calculation, set <em>opt</em>=True and <em>opt@return_trend</em>=False.
+<p>
+
+The output will be double if x is double, and float otherwise.
+
+
+<p>
+The output dimensionality is best described via examples:
+The dimension rank of the input variable will be reduced 
+by the rank of <em>dims</em> and an 'extra' dimension of size 2 will be prepended.
+Let NT refer to the 'time' dimension; KZ,NY,MX refer to spatial dimensions and NE refer to an ensemble dimension.
+<pre> 
+   x(NT)            : p=<strong>trend_manken</strong>(x,False,0) => p(2) where p(0)=probability,  p(1)=trend
+   x(NT,NY,MX)      : p=<strong>trend_manken</strong>(x,False,0) => p(2,NY,MX) 
+   x(NY,MX,NT)      : p=<strong>trend_manken</strong>(x,False,2) => p(2,NY,MX) 
+   x(NT,KZ,NY,MX)   : p=<strong>trend_manken</strong>(x,False,0) => p(2,KZ,NY,MX) 
+   x(NE,NT,KZ,NY,MX): p=<strong>trend_manken</strong>(x,False,1) => p(2,NE,KZ,NY,MX) 
+</pre>
+<p>
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The 
+<a href="http://vsp.pnnl.gov/help/Vsample/Design_Trend_Mann_Kendall.htm"><b>Mann-Kendall (M-K)</b></a> 
+test is a non-parametric (ie, distribution free)
+test used to detect the presence of linear or non-linear trends in time series data. 
+The M-K test assesses if a series is steadily increasing/decreasing or unchanging. 
+<p>
+The null hypothesis is that there is no trend.
+The three alternative hypotheses are that there is a negative, non-null, or positive trend.
+<p>
+The series should be pre-whitened if serial correlation exits and/or deseasonalized 
+if an annual cycle is present. 
+<p>
+The M-K test is based on the relative ranking of the data values. 
+Ties are allowed and appropriate corrections are made to the variance.  
+The <b>S</b> statistic used to estimate the significance is calculated
+via: 
+<pre>
+                                           = 1 (X(k)-X(i)) > 0
+         S = <b>SUM</b>[ <b>SIGN</b>((X(k)-X(i)) ]       = 0  X(k)=X(i) 
+                                           =-1 (X(k)-X(i)) < 0
+</pre>
+<p>
+The Theil-Sen trend estimate is a robust estimate of linear trend.
+It is the median of slopes between all data pairs.
+<pre>
+         trend = <b>MEDIAN</b>[ (X(k)-X(i))/(k-i) ]  ; all i < k 
+</pre>
+The <a href="http://en.wikipedia.org/wiki/Theil–Sen_estimator"><b>Theil-Sen</b></a>
+trend estimation method
+"is insensitive to outliers; it can be significantly more accurate than simple linear 
+regression for skewed and heteroskedastic data, and competes well against non-robust 
+least squares even for normally distributed data in terms of statistical power. It has 
+been called 'the most popular nonparametric technique for estimating a linear trend'."
+<p>
+A nice description for the Theil-Sen estimate and simple linear regression is 
+<a href="http://tamino.wordpress.com/2013/03/02/theil-sen/"><b>here</b></a>.
+<p>
+The underlying code follows the first part of:
+<pre>
+       http://vsp.pnnl.gov/help/Vsample/Design_Trend_Mann_Kendall.htm
+</pre>
+The following illustrates usage:
+<pre>
+       <a href="http://www.academia.edu/1254217/RAINFALL_TREND_ANALYSIS_BY_MANN-KENDALL_TEST_A_CASE_STUDY_OF_NORTH-EASTERN_PART_OF_CUTTACK_DISTRICT_ORISSA"><b>
+            Mondal et al (2012): RAINFALL TREND ANALYSIS BY MANN-KENDALL TEST: 
+                            A CASE STUDY OF NORTH-EASTERN PART OF CUTTACK DISTRICT, ORISS</b></a>
+
+       International Journal of Geology, Earth and Environmental Sciences ISSN: 2277-2081 (Online) 
+       An Online International Journal Available at http://www.cibtech.org/jgee.htm
+       2012 Vol. 2 (1) January-April,  pp.70-78/Mondal et al.
+</pre>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Contributed/regline_stats.html"><strong>regline_stats</strong></a>, <a href="regline.html"><strong>regline</strong></a>, <a href="ttest.html"><strong>ttest</strong></a>, <a href="rtest.html"><strong>rtest</strong></a>, <a href="betainc.html"><strong>betainc</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+Please see: Mann-Kendall <a href="../../../Applications/regress.html"><b>
+Regression & Trend</b> Examples 1 and 2 </a>
+<p>
+<b>Example 1</b> <p>
+Some pathological examples with the probability (significance) and Theil-Sen
+trend estimate indicated to the right:
+<pre>
+     a  = <a href="ispan.html"><strong>ispan</strong></a>(1,20,1)    
+     pa = <strong>trend_manken</strong>(a, False, 0)     ; pa(0)=1.0   ,   pa(1)=1.0
+     
+     b  = (/1,2,3,4,5,6,5,4,3,2,1/)
+     pb = <strong>trend_manken</strong>(b, False, 0)     ; pb(0)=0.0   ,   pb(1)=0.0
+
+     c  = (/-1,2,-3,4,-5,6,-7,8,-9,10,-11,12/)
+     pc = <strong>trend_manken</strong>(c, False, 0)     ; pc(0)=<b>0.2683</b>,   pc(1)=1.0  
+</pre>
+<p>
+For comparison, on the last example R (after loading the 'Kendall' library) returns:
+<pre>
+    < <b>library(Kendall)</b>
+    > q  <- c(-1,2,-3,4,-5,6,-7,8,-9,10,-11,12)
+    > x  <- c(1,2,3,4,5,6,7,8,9,10,11,12)
+    > qx <-Kendall(x,y)
+    > qx
+
+      tau = 0.0909, 2-sided pvalue =<b>0.7317</b>    (Note: 1-0.7317= <b>0.2683</b> which matches NCL)
+</pre>
+ 
+<b>Example 1a</b><p>
+
+In NCL V6.4.0 and later, if <em>opt</em>=True
+and <em>opt@return_trend=False</em>, then only the probability is
+returned:
+
+<pre>
+     a  = <a href="ispan.html"><strong>ispan</strong></a>(1,20,1)    
+     opt = True
+     opt@return_trend = False
+     pa = <strong>trend_manken</strong>(a, opt, 0)     ; pa=1.0
+</pre>
+<p>
+
+<p>
+<b>Example 2</b><p>
+
+Read a <a href="http://hadobs.metoffice.com/hadcrut3/diagnostics/global/nh+sh/">
+<b>time series of global anomalies</b></a> and calculate 
+the significance and the Theil-Sen trend estimate. 
+The data are annual means and reside in column 2 of the input file. The file structure is described <a href="http://hadobs.metoffice.com/hadcrut3/diagnostics/time-series.html"><b>here</b></a>. 
+
+<pre>
+   diri = "./"
+   fili = "TA_Globe.1850-2014.txt"
+   pthi = diri+fili
+
+   nrow = <a href="../Contributed/numAsciiRow.html"><strong>numAsciiRow</strong></a>(pthi)
+   data = <a href="asciiread.html"><strong>asciiread</strong></a>(pthi,(/nrow,12/),"float")
+
+   ta   = data(:,1)   ; for clarity
+
+   opt  = False
+   pt   = <strong>trend_manken</strong>(ta, opt, 0)   ; ===> pt(0)=1.000  pt(1)= 0.004
+
+</pre>
+The overall trend is 0.00443 per year (~0.04 C/decade) for 1850-2014. 
+However, the series is perhaps better analyzed by partitioning 
+the series into two periods (1850-1929) and (1930-2014). In the 1st period, 
+the trend was ~0.0 while in the latter half the trend was 0.08 C/decade. 
+
+<p>
+<b>Example 3</b><p>
+
+Consider q(time,lat,lon) Calculate the probability level and Theil-Sen
+linear trend estimates at every grid point.
+<pre>
+     opt = False
+     pq  = <strong>trend_manken</strong>(q, opt, 0)  ; ===> px(2,nlat,mlon)
+                                      ; if meta data is desired
+     <a href="../Contributed/copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(q(0,:,:),pq(0,:,:))
+     pq!0= "prob_trend"               ; ===> size 2
+     <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(pq)            ; ===> pq(prob_trend,lat,lon)
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/trend_manken.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:18 GMT -->
+</html>

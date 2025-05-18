@@ -1,0 +1,541 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/str_get_cols.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:14 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (string manipulators)">
+<meta name="keywords" content="str_get_cols">
+<title>str_get_cols</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../string.html">String manipulation</a>
+<br>
+<h1>str_get_cols</h1>
+
+<p>
+Returns an array of substrings, given a start and end index into
+the given string.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#5.1.1">version 5.1.1</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function str_get_cols (
+		string_val    : string,   
+		start_col [1] : integer,  
+		end_col   [1] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="dimsizes.html"><strong>dimsizes</strong></a>(string_val)] :  string
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>string_val</em>
+<p class=indent>An array of strings of any dimensionality.
+</p>
+<em>start_col</em>
+<br>
+<em>end_col</em>
+<p class=indent>Scalar integers representing the start column and end column to
+be grabbed from a string. Numbering is 0-based, so the first column
+is 0.
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function returns an array of substrings with the same
+dimensionality as the input strings, but with the strings subscripted
+from <em>start_col</em> to <em>end_col</em>.
+</p>
+
+<p>
+You can use negative index values to indicate a count from
+the end of the string. For example, -1 represents the last
+character in a string, -2 the second-to-the-last character, etc.
+</p>
+
+<p>
+If <em>end_col</em> is greater than <em>start_col</em>, then
+the substring will be reversed (see example below).
+</p>
+
+If just one of <em>start_col</em> and/or <em>end_col</em> are
+out-of-bounds, then the string will be subscripted only to the end or
+beginning as appropriate.  If both are out-of-bounds, then an empty
+string ("") will be returned.
+<p>
+
+If input strings are missing, then missing values will be returned.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="str_fields_count.html"><strong>str_fields_count</strong></a>,
+<a href="str_get_field.html"><strong>str_get_field</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<b>Example 1</b><p>
+
+Assume you have an ASCII file, "asc3.txt":
+
+<pre>
+200306130209   0.38   25.28 10088 233.95   6  92  9.99  9.99 99999.0   0.0 -9.99 167.9 p p p 1782  BOS_1  ATL 3              
+200306130209   0.38   25.28 10088 233.95   6  92  9.99  9.99 99999.0   0.0 -9.99 167.9 p p p 1782  ORD_2  ATL 3              
+200306122341 -45.10  168.70   914 279.35   4 272  9.99  9.99     1.1   0.0  0.01 -99.9 p p p 4552  DTW_3  MSP 3              
+200306122341 -45.10  168.70   914 279.35   4 272  9.99  9.99     1.1   0.0  0.01 -99.9 p p p 4552  SDF_4  MHR 3 
+</pre>
+
+Use <a href="str_fields_count.html"><strong>str_fields_count</strong></a> to count the number of fields
+separated by one or more spaces, <a href="str_get_field.html"><strong>str_get_field</strong></a>
+to retrieve the fields, and then <strong>str_get_cols</strong>
+to retrieve subsets of these fields:
+
+<pre>
+ flnm = "asc3.txt"
+ strs = <a href="asciiread.html"><strong>asciiread</strong></a>(flnm,-1,"string")
+
+ delim = " "
+ nfields = <a href="str_fields_count.html"><strong>str_fields_count</strong></a>(strs(0), delim)   ; Count the fields separated
+                                              ; by one or more spaces.
+ <a href="print.html"><strong>print</strong></a>(nfields)                               ; nfields = 20
+
+ field = 1
+ subStrings = <a href="str_get_field.html"><strong>str_get_field</strong></a>(strs, field, delim)
+ <a href="print.html"><strong>print</strong></a>(subStrings)              ; (/"200306130209","200306130209",...,/)
+
+ year = <strong>str_get_cols</strong>(subStrings, 0, 3)
+ <a href="print.html"><strong>print</strong></a>(year)                   ; (/"2003","2003","2003","2003"/)
+
+ month = <strong>str_get_cols</strong>(subStrings, 4, 5)
+ <a href="print.html"><strong>print</strong></a>(month)                  ; (/"06","06","06","06"/)
+
+ day = <a href="stringtoint.html"><strong>stringtoint</strong></a>(<strong>str_get_cols</strong>(subStrings, 6, 7))
+ <a href="print.html"><strong>print</strong></a>(day)                    ; (/13,13,12,12/)
+
+ hour = <a href="stringtoint.html"><strong>stringtoint</strong></a>(<strong>str_get_cols</strong>(subStrings, 8, 9))
+ <a href="print.html"><strong>print</strong></a>(hour)                   ; (/2,2,23,23)
+
+ minute = <a href="stringtoint.html"><strong>stringtoint</strong></a>(<strong>str_get_cols</strong>(subStrings, 10, 11))
+ <a href="print.html"><strong>print</strong></a>(minute)                  ; (/9,9,41,41/)
+</pre>
+
+<b>Example 2</b><p>
+
+Assume you have the same ASCII file and the same <tt>strs</tt> arrays
+as in example 1, but that you want to read in the first 12
+characters and reverse them:
+
+<pre>
+ date = <strong>str_get_cols</strong>(strs, 11, 0)
+ <a href="print.html"><strong>print</strong></a>(date)                        ; (/"902031603002","902031603002",.../)
+</pre>
+
+To read in the second-to-the-last field, you can
+do this one of two ways:
+
+<pre>
+ field = nfields-1
+ subStrings = <a href="str_get_field.html"><strong>str_get_field</strong></a>(strs, field, delim)
+ <a href="print.html"><strong>print</strong></a>(subStrings)              ; (/"ATL","ATL","MSP","MHR"/)
+</pre>
+
+Or:
+
+<pre>
+ subStrings = <strong>str_get_cols</strong>(strs,-5,-3)
+ <a href="print.html"><strong>print</strong></a>(subStrings)              ; (/"ATL","ATL","MSP","MHR"/)
+</pre>
+
+This second method is only good if you don't have extra whitespace
+at the end of your lines in the file. 
+<p>
+<b>Example 3</b><p>
+How can the following file (sample_sounding.txt) be read?
+<pre>
+    PRES   HGHT   TEMP   DWPT   RELH   MIXR   DRCT   SKNT   THTA   THTE
+    hPa     m      C      C      %    g/kg    deg   knot     K      K
+-------------------------------------------------------------------------
+  1013.0     17   22.8   16.8     69  12.02     20     10  294.9  329.5
+  1012.0     26   22.8   16.9     70  12.15    350     14  294.9  330.0
+  1000.0    136   22.4   18.8     80           345     16  295.6  335.5
+   984.0    275   21.3            83           345     20  295.8  335.5
+   930.0    763   17.6            97           350     14  296.8
+</pre>
+Use a combination of <strong>str_get_cols</strong>  and <a href="tofloat.html"><strong>tofloat</strong></a>.
+When <a href="tofloat.html"><strong>tofloat</strong></a> encounters a non-numeric type (here, spaces)
+it issues a warning message. It uses the default float _FillValue (= 9.96921e+36).
+The simple function below results in a cleaner code and changes the return _FillValue.
+<p>
+To suppress these warning messages use the answer to 
+<a href="../../../FAQ/index.html#err_msgs_005"> How can I turn off NCL warning messages?</a>
+
+<pre>
+<a href="undef.html"><strong>undef</strong></a>("strflt")
+<b>function</b> strflt(dstr[*]:string, colStrt[1]:integer, colLast[1]:integer)
+<b>begin</b>
+  dat = <a href="tofloat.html"><strong>tofloat</strong></a>( <strong>str_get_cols</strong>(dstr, colStrt, colLast) )
+  dat@_FillValue = -999.0       ; change from 9.96921e+36
+  return(dat)
+<b>end</b>
+
+
+   err = <a href="NhlGetErrorObjectId.html"><strong>NhlGetErrorObjectId</strong></a>()
+   setvalues err
+    "errLevel" : "Fatal"          ; only report Fatal errors
+   end setvalues
+
+   diri  = "./"
+   fili  = "sample_sounding.txt"
+   dstr  = <a href="asciiread.html"><strong>asciiread</strong></a>(diri+fili, -1, "string")
+
+   nrow  = <a href="dimsizes.html"><strong>dimsizes</strong></a>(dstr)
+   nhead =  3
+   nlvl  = nrow-nhead
+
+   p  = strflt(dstr(nhead:), 0, 7)
+   h  = strflt(dstr(nhead:),10,14)
+   ts = strflt(dstr(nhead:),16,21)
+   td = strflt(dstr(nhead:),22,28)
+   rh = strflt(dstr(nhead:),30,35)
+   mr = strflt(dstr(nhead:),37,42)
+   wd = strflt(dstr(nhead:),44,49)
+   ws = strflt(dstr(nhead:),50,56)
+   ta = strflt(dstr(nhead:),57,63)
+   te = strflt(dstr(nhead:),64,70)
+
+   <a href="print.html"><strong>print</strong></a>(p)
+   <a href="print.html"><strong>print</strong></a>(td)
+</pre>
+The output looks like:
+<pre>
+
+Variable: pstr
+Type: float
+Total Size: 20 bytes
+            5 values
+Number of Dimensions: 1
+Dimensions and sizes:   [5]
+Coordinates: 
+Number Of Attributes: 1
+  _FillValue :  -999
+(0)     1013
+(1)     1012
+(2)     1000
+(3)     984
+(4)     930
+
+=============
+
+Variable: tdstr
+Type: float
+Total Size: 20 bytes
+            5 values
+Number of Dimensions: 1
+Dimensions and sizes:   [5]
+Coordinates: 
+Number Of Attributes: 1
+  _FillValue :  -999
+(0)     16.8
+(1)     16.9
+(2)     18.8
+(3)     -999
+(4)     -999
+
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/str_get_cols.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:14 GMT -->
+</html>

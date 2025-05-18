@@ -1,0 +1,1373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/statistics.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:26 GMT -->
+<head>
+<title>NCL Function Documentation: Statistics</title>
+</head>
+<body>
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="index.html" class="subitem">Category Listing</a></li>
+						<li><a href="list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+
+			      <div id="general_main">
+
+<h1>Statistics</h1>
+
+<table cellspacing=4 cellpadding=10 width=100% border=1>
+
+<!--avg-->
+<tr>
+<td valign=top>
+<a href="Built-in/avg.html">
+avg</a></td>
+<td>
+Computes the average of a variable regardless of dimensionality.
+</td>
+</tr>
+<!--betainc-->
+<tr>
+<td valign=top>
+<a href="Built-in/betainc.html">
+betainc</a></td>
+<td>
+Evaluates the incomplete beta function.
+</td>
+</tr>
+<!--bin_avg-->
+<tr>
+<td valign=top>
+<a href="Built-in/bin_avg.html">
+bin_avg</a></td>
+<td>
+Calculates gridded binned averages and counts on a rectilinear grid using randomly spaced data.
+</td>
+</tr>
+<!--bin_sum-->
+<tr>
+<td valign=top>
+<a href="Built-in/bin_sum.html">
+bin_sum</a></td>
+<td>
+Calculates binned sums and counts over multiple invocations of the procedure on a rectilinear grid.
+</td>
+</tr>
+<!--bootstrap_correl-->
+<tr>
+<td valign=top>
+<a href="Bootstrap/bootstrap_correl.html">
+bootstrap_correl</a></td>
+<td>
+Bootstrap estimates of sample cross correlations (<i>ie</i>, Pearson's correlation coefficient)  between two variables.
+</td>
+</tr>
+<!--bootstrap_diff-->
+<tr>
+<td valign=top>
+<a href="Bootstrap/bootstrap_diff.html">
+bootstrap_diff</a></td>
+<td>
+Bootstrap mean differences from two samples.
+</td>
+</tr>
+<!--bootstrap_estimate-->
+<tr>
+<td valign=top>
+<a href="Bootstrap/bootstrap_estimate.html">
+bootstrap_estimate</a></td>
+<td>
+Extract the user specified element from the bootstrapped values.
+</td>
+</tr>
+<!--bootstrap_regcoef-->
+<tr>
+<td valign=top>
+<a href="Bootstrap/bootstrap_regcoef.html">
+bootstrap_regcoef</a></td>
+<td>
+Bootstrap estimates of linear regression coefficient.
+</td>
+</tr>
+<!--bootstrap_stat-->
+<tr>
+<td valign=top>
+<a href="Bootstrap/bootstrap_stat.html">
+bootstrap_stat</a></td>
+<td>
+Bootstrap estimates of a user specified statistic derived from a variable.
+</td>
+</tr>
+<!--ceemdan-->
+<tr>
+<td valign=top>
+<a href="Built-in/ceemdan.html">
+ceemdan</a></td>
+<td>
+Complete Ensemble Empirical Mode Decomposition with Adaptive Noise.
+</td>
+</tr>
+<!--cohsq_c2p-->
+<tr>
+<td valign=top>
+<a href="Contributed/cohsq_c2p.html">
+cohsq_c2p</a></td>
+<td>
+Given coherence-squared and the effective degrees-of-freedom, calculate the associated probability.
+</td>
+</tr>
+<!--cohsq_p2c-->
+<tr>
+<td valign=top>
+<a href="Contributed/cohsq_p2c.html">
+cohsq_p2c</a></td>
+<td>
+Calculate the value(s) of coherence-squared required for a specified significance level and effectiove degrees-of-freedom.
+</td>
+</tr>
+<!--dim_acumrun_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_acumrun_n.html">
+dim_acumrun_n</a></td>
+<td>
+Calculates individual accumulated sums of sequences ('runs') of a specified length.
+</td>
+</tr>
+<!--dim_avg-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_avg.html">
+dim_avg</a></td>
+<td>
+Computes the average of a variable's rightmost dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_avg_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_avg_n.html">
+dim_avg_n</a></td>
+<td>
+Computes the average of a variable's given dimension(s) at all other dimensions.
+</td>
+</tr>
+<!--dim_avg_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_avg_n_Wrap.html">
+dim_avg_n_Wrap</a></td>
+<td>
+Computes the average of a variable's given dimensions at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_avg_wgt-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_avg_wgt.html">
+dim_avg_wgt</a></td>
+<td>
+Computes the weighted average of a variable's rightmost dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_avg_wgt_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_avg_wgt_n.html">
+dim_avg_wgt_n</a></td>
+<td>
+Computes the weighted average of a variable's given dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_avg_wgt_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_avg_wgt_n_Wrap.html">
+dim_avg_wgt_n_Wrap</a></td>
+<td>
+Computes the weighted average of a variable's given dimension at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_avg_wgt_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_avg_wgt_Wrap.html">
+dim_avg_wgt_Wrap</a></td>
+<td>
+Computes the weighted average of a variable's rightmost dimension at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_avg_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_avg_Wrap.html">
+dim_avg_Wrap</a></td>
+<td>
+Computes the average of a variable's rightmost dimension at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_cumsum-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_cumsum.html">
+dim_cumsum</a></td>
+<td>
+Calculates the cumulative sum along the rightmost dimension.
+</td>
+</tr>
+<!--dim_cumsum_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_cumsum_n.html">
+dim_cumsum_n</a></td>
+<td>
+Calculates the cumulative sum along the given dimension(s).
+</td>
+</tr>
+<!--dim_cumsum_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_cumsum_n_Wrap.html">
+dim_cumsum_n_Wrap</a></td>
+<td>
+Calculates the cumulative sum along the given dimension(s) and retains metadata.
+</td>
+</tr>
+<!--dim_cumsum_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_cumsum_Wrap.html">
+dim_cumsum_Wrap</a></td>
+<td>
+Calculates the cumulative sum along the rightmost dimension and retains metadata.
+</td>
+</tr>
+<!--dim_gamfit_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_gamfit_n.html">
+dim_gamfit_n</a></td>
+<td>
+Fit data to the two parameter gamma distribution.
+</td>
+</tr>
+<!--dim_max-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_max.html">
+dim_max</a></td>
+<td>
+Finds the maximum of a variable's rightmost dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_max_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_max_n.html">
+dim_max_n</a></td>
+<td>
+Finds the maximum of a variable's given dimensions at all other dimensions.
+</td>
+</tr>
+<!--dim_max_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_max_n_Wrap.html">
+dim_max_n_Wrap</a></td>
+<td>
+Computes the maximum of a variable's given dimensions at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_median-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_median.html">
+dim_median</a></td>
+<td>
+Computes the median of a variable's rightmost dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_median_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_median_n.html">
+dim_median_n</a></td>
+<td>
+Computes the median of a variable's given dimensions at all other dimensions.
+</td>
+</tr>
+<!--dim_min-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_min.html">
+dim_min</a></td>
+<td>
+Finds the minimum of a variable's rightmost dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_min_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_min_n.html">
+dim_min_n</a></td>
+<td>
+Finds the minimum of a variable's given dimensions at all other dimensions.
+</td>
+</tr>
+<!--dim_min_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_min_n_Wrap.html">
+dim_min_n_Wrap</a></td>
+<td>
+Computes the minimum of a variable's given dimensions at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_numrun_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_numrun_n.html">
+dim_numrun_n</a></td>
+<td>
+Counts the number of "runs" (sequences) within a series containing zeros and ones.
+</td>
+</tr>
+<!--dim_rmsd-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_rmsd.html">
+dim_rmsd</a></td>
+<td>
+Computes the root-mean-square-difference between two variables' rightmost  dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_rmsd_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_rmsd_n.html">
+dim_rmsd_n</a></td>
+<td>
+Computes the root-mean-square-difference between two variables' given dimensions at all other dimensions.
+</td>
+</tr>
+<!--dim_rmsd_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_rmsd_n_Wrap.html">
+dim_rmsd_n_Wrap</a></td>
+<td>
+Computes the root-mean-square-difference between two variables' given dimensions at all other dimensions.
+</td>
+</tr>
+<!--dim_rmsd_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_rmsd_Wrap.html">
+dim_rmsd_Wrap</a></td>
+<td>
+Computes the root-mean-square-difference between two variables' rightmost  dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_rmvmean-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_rmvmean.html">
+dim_rmvmean</a></td>
+<td>
+Calculates and removes the mean of the (rightmost) dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_rmvmean_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_rmvmean_n.html">
+dim_rmvmean_n</a></td>
+<td>
+Calculates and removes the mean of the given dimension(s) at all other dimensions.
+</td>
+</tr>
+<!--dim_rmvmean_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_rmvmean_n_Wrap.html">
+dim_rmvmean_n_Wrap</a></td>
+<td>
+Calculates and removes the mean of the given dimensions at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_rmvmean_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_rmvmean_Wrap.html">
+dim_rmvmean_Wrap</a></td>
+<td>
+Calculates and removes the mean of the (rightmost) dimension at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_rmvmed-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_rmvmed.html">
+dim_rmvmed</a></td>
+<td>
+Calculates and removes the median of the (rightmost) dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_rmvmed_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_rmvmed_n.html">
+dim_rmvmed_n</a></td>
+<td>
+Calculates and removes the median of the given dimension(s) at all other dimensions.
+</td>
+</tr>
+<!--dim_rmvmed_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_rmvmed_n_Wrap.html">
+dim_rmvmed_n_Wrap</a></td>
+<td>
+Calculates and removes the median of the given dimensions at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_rmvmed_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_rmvmed_Wrap.html">
+dim_rmvmed_Wrap</a></td>
+<td>
+Calculates and removes the median of the (rightmost) dimension at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_standardize-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_standardize.html">
+dim_standardize</a></td>
+<td>
+Calculates standardized anomalies of the rightmost dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_standardize_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_standardize_n.html">
+dim_standardize_n</a></td>
+<td>
+Calculates standardized anomalies of the given dimension(s) at all other dimensions.
+</td>
+</tr>
+<!--dim_standardize_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_standardize_n_Wrap.html">
+dim_standardize_n_Wrap</a></td>
+<td>
+Calculates standardized anomalies of the given dimensions at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_standardize_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_standardize_Wrap.html">
+dim_standardize_Wrap</a></td>
+<td>
+Calculates standardized anomalies of the rightmost dimension at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_stat4-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_stat4.html">
+dim_stat4</a></td>
+<td>
+Computes the first four moments (average, sample variance, skewness, and kurtosis) of the rightmost dimension for all other dimensions.
+</td>
+</tr>
+<!--dim_stat4_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_stat4_n.html">
+dim_stat4_n</a></td>
+<td>
+Computes the first four moments (average, sample variance, skewness, and kurtosis) of the given dimension(s) for all other dimensions.
+</td>
+</tr>
+<!--dim_stddev-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_stddev.html">
+dim_stddev</a></td>
+<td>
+Computes the sample standard deviation of a variable's rightmost dimension at all other dimensions.
+</td>
+</tr>
+<!--dim_stddev_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_stddev_n.html">
+dim_stddev_n</a></td>
+<td>
+Computes the sample standard deviation of a variable's given dimension(s) at all other dimensions.
+</td>
+</tr>
+<!--dim_stddev_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_stddev_n_Wrap.html">
+dim_stddev_n_Wrap</a></td>
+<td>
+Computes the sample standard deviation of a variable's given dimension(s) at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_stddev_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_stddev_Wrap.html">
+dim_stddev_Wrap</a></td>
+<td>
+Computes the sample standard deviation of a variable's rightmost dimension at all  other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_sum_wgt_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_sum_wgt_n_Wrap.html">
+dim_sum_wgt_n_Wrap</a></td>
+<td>
+Computes the weighted sum of a variable's given dimension at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_sum_wgt_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_sum_wgt_Wrap.html">
+dim_sum_wgt_Wrap</a></td>
+<td>
+Computes the weighted sum of a variable's rightmost dimension at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_variance-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_variance.html">
+dim_variance</a></td>
+<td>
+Computes the unbiased estimates of the variance of a variable's rightmost dimension.
+</td>
+</tr>
+<!--dim_variance_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dim_variance_n.html">
+dim_variance_n</a></td>
+<td>
+Computes the unbiased estimates of the variance of a variable's given dimension(s) at all other dimensions.
+</td>
+</tr>
+<!--dim_variance_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_variance_n_Wrap.html">
+dim_variance_n_Wrap</a></td>
+<td>
+Computes unbiased estimates of the variance of a variable's given dimension(s) at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dim_variance_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dim_variance_Wrap.html">
+dim_variance_Wrap</a></td>
+<td>
+Computes unbiased estimates of the variance of a variable's rightmost dimension at all other dimensions and retains metadata.
+</td>
+</tr>
+<!--dtrend-->
+<tr>
+<td valign=top>
+<a href="Built-in/dtrend.html">
+dtrend</a></td>
+<td>
+Estimates and removes the least squares linear trend of the rightmost dimension from all grid points.
+</td>
+</tr>
+<!--dtrend_msg-->
+<tr>
+<td valign=top>
+<a href="Built-in/dtrend_msg.html">
+dtrend_msg</a></td>
+<td>
+Estimates and removes the least squares linear trend of the rightmost dimension from all grid points (<a href="../Language/fillval.html">missing values</a> allowed).
+</td>
+</tr>
+<!--dtrend_msg_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dtrend_msg_n.html">
+dtrend_msg_n</a></td>
+<td>
+Estimates and removes the least squares linear trend of the <em>dim</em>-th dimension from all grid points (<a href="../Language/fillval.html">missing values</a> allowed).
+</td>
+</tr>
+<!--dtrend_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dtrend_n.html">
+dtrend_n</a></td>
+<td>
+Estimates and removes the least squares linear trend of the given dimension from all grid points.
+</td>
+</tr>
+<!--dtrend_quadratic-->
+<tr>
+<td valign=top>
+<a href="Built-in/dtrend_quadratic.html">
+dtrend_quadratic</a></td>
+<td>
+Estimates and removes the least squares quadratic trend of the rightmost dimension from all grid points.
+</td>
+</tr>
+<!--dtrend_quadratic_msg_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/dtrend_quadratic_msg_n.html">
+dtrend_quadratic_msg_n</a></td>
+<td>
+Estimates and removes the least squares quadratic trend of the <em>dim</em>-th dimension from all grid points (<a href="../Language/fillval.html">missing values</a> allowed).
+</td>
+</tr>
+<!--eemd-->
+<tr>
+<td valign=top>
+<a href="Built-in/eemd.html">
+eemd</a></td>
+<td>
+Perform ensemble empirical mode decomposition (EEMD).
+</td>
+</tr>
+<!--equiv_sample_size-->
+<tr>
+<td valign=top>
+<a href="Built-in/equiv_sample_size.html">
+equiv_sample_size</a></td>
+<td>
+Estimates the number of independent values in a series of correlated values.
+</td>
+</tr>
+<!--esccr-->
+<tr>
+<td valign=top>
+<a href="Built-in/esccr.html">
+esccr</a></td>
+<td>
+Computes sample cross-correlations.
+</td>
+</tr>
+<!--esccv-->
+<tr>
+<td valign=top>
+<a href="Built-in/esccv.html">
+esccv</a></td>
+<td>
+Computes sample cross-covariances.
+</td>
+</tr>
+<!--escorc-->
+<tr>
+<td valign=top>
+<a href="Built-in/escorc.html">
+escorc</a></td>
+<td>
+Computes the (Pearson) sample linear cross-correlations at lag 0 only.
+</td>
+</tr>
+<!--escorc_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/escorc_n.html">
+escorc_n</a></td>
+<td>
+Computes the (Pearson) sample linear cross-correlations at lag 0 only, across the specified dimensions.
+</td>
+</tr>
+<!--escovc-->
+<tr>
+<td valign=top>
+<a href="Built-in/escovc.html">
+escovc</a></td>
+<td>
+Computes sample cross-covariances at lag 0 only.
+</td>
+</tr>
+<!--exponential_curve_fit-->
+<tr>
+<td valign=top>
+<a href="Contributed/exponential_curve_fit.html">
+exponential_curve_fit</a></td>
+<td>
+Calculates the coefficients for a simple exponential curve fit of the form <b>'</b> y = A*<a href="Built-in/exp.html"><strong>exp</strong></a>(B*x)<b>'</b> using least squares.
+</td>
+</tr>
+<!--extval_frechet-->
+<tr>
+<td valign=top>
+<a href="Ext_val/extval_frechet.html">
+extval_frechet</a></td>
+<td>
+Calculates the probability (PDF) and cumulative (CDF) distribution functions of the  Frechet Type II distribution given the shape, scale and location parameters.
+</td>
+</tr>
+<!--extval_gev-->
+<tr>
+<td valign=top>
+<a href="Ext_val/extval_gev.html">
+extval_gev</a></td>
+<td>
+Calculates the probability (PDF) and cumulative (CDF) distribution functions of the  Generalized Extreme Value (GEV) distribution given the shape, scale and location parameters.
+</td>
+</tr>
+<!--extval_gumbel-->
+<tr>
+<td valign=top>
+<a href="Ext_val/extval_gumbel.html">
+extval_gumbel</a></td>
+<td>
+Calculates the probability (PDF) and cumulative (CDF) distribution functions of the  Gumbel (Type I) distribution function given the scale and location parameters.
+</td>
+</tr>
+<!--extval_mlegam-->
+<tr>
+<td valign=top>
+<a href="Ext_val/extval_mlegam.html">
+extval_mlegam</a></td>
+<td>
+Estimates the location, shape, scale and other parameters for the Gamma distribution using maximum-likelihood estimation (MLE).
+</td>
+</tr>
+<!--extval_mlegev-->
+<tr>
+<td valign=top>
+<a href="Built-in/extval_mlegev.html">
+extval_mlegev</a></td>
+<td>
+Estimates the shape, scale and location parameters for the Generalized Extreme-Value (GEV) distribution using Maximum-Likelihood Estimation (MLE).
+</td>
+</tr>
+<!--extval_pareto-->
+<tr>
+<td valign=top>
+<a href="Ext_val/extval_pareto.html">
+extval_pareto</a></td>
+<td>
+Calculates the probability (PDF) and cumulative (CDF) distribution functions of the  Pareto distributions (Generalized, Type I, TYpe II) given the shape, scale and location parameters.
+</td>
+</tr>
+<!--extval_recurrence_table-->
+<tr>
+<td valign=top>
+<a href="Ext_val/extval_recurrence_table.html">
+extval_recurrence_table</a></td>
+<td>
+Calculates the recurrence interval (<em>return period</em>), cumulative and exceedence probabilities based upon a time series.
+</td>
+</tr>
+<!--extval_return_period-->
+<tr>
+<td valign=top>
+<a href="Ext_val/extval_return_period.html">
+extval_return_period</a></td>
+<td>
+Calculates the period of an event (eg, flood, heat wave, drought)  occurring given an average event recurrence interval and specified probability level.
+</td>
+</tr>
+<!--extval_return_prob-->
+<tr>
+<td valign=top>
+<a href="Ext_val/extval_return_prob.html">
+extval_return_prob</a></td>
+<td>
+Calculates the probability of an event (eg, flood, heat wave, drought) given an average event interval and a specified exceedance period.
+</td>
+</tr>
+<!--extval_weibull-->
+<tr>
+<td valign=top>
+<a href="Ext_val/extval_weibull.html">
+extval_weibull</a></td>
+<td>
+Calculates the probability (PDF) and cumulative (CDF) distribution functions of the  Weibull Type III distribution given the shape, scale and location parameters.
+</td>
+</tr>
+<!--ftest-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftest.html">
+ftest</a></td>
+<td>
+Applies F-test for variances and returns an estimate of the statistical significance.
+</td>
+</tr>
+<!--genNormalDist-->
+<tr>
+<td valign=top>
+<a href="Contributed/genNormalDist.html">
+genNormalDist</a></td>
+<td>
+Generates a normal distribution.
+</td>
+</tr>
+<!--kde_n_test-->
+<tr>
+<td valign=top>
+<a href="Built-in/kde_n_test.html">
+kde_n_test</a></td>
+<td>
+Uses gaussian kernel density estimation (KDE) to estimate the probability density function of a random variable. <font color=red>This function is under construction and is available for testing only. It may not be released with NCL V6.5.0.</font>
+</td>
+</tr>
+<!--kmeans_as136-->
+<tr>
+<td valign=top>
+<a href="Built-in/kmeans_as136.html">
+kmeans_as136</a></td>
+<td>
+Performs k-means clustering via the Hartigan and Wong AS-136 algorithm.
+</td>
+</tr>
+<!--kolsm2_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/kolsm2_n.html">
+kolsm2_n</a></td>
+<td>
+Uses the Kolmogorov-Smirnov two-sample test to determine if two samples are from the same distribution.
+</td>
+</tr>
+<!--max-->
+<tr>
+<td valign=top>
+<a href="Built-in/max.html">
+max</a></td>
+<td>
+Computes the maximum value of a multi-dimensional array.
+</td>
+</tr>
+<!--min-->
+<tr>
+<td valign=top>
+<a href="Built-in/min.html">
+min</a></td>
+<td>
+Computes the minimum value of a multi-dimensional array.
+</td>
+</tr>
+<!--pattern_cor-->
+<tr>
+<td valign=top>
+<a href="Contributed/pattern_cor.html">
+pattern_cor</a></td>
+<td>
+Compute centered or uncentered  pattern correlation.
+</td>
+</tr>
+<!--pdfxy-->
+<tr>
+<td valign=top>
+<a href="Contributed/pdfxy.html">
+pdfxy</a></td>
+<td>
+Generates a joint probability density distribution. (Please use <a href="Contributed/pdfxy_conform.html"><strong>pdfxy_conform</strong></a>.)
+</td>
+</tr>
+<!--pdfxy_bin-->
+<tr>
+<td valign=top>
+<a href="Built-in/pdfxy_bin.html">
+pdfxy_bin</a></td>
+<td>
+Performs looping necessary to calculate the bivariate  (joint) probability distribution (see <a href="Contributed/pdfxy.html"><strong>pdfxy</strong></a>).
+</td>
+</tr>
+<!--pdfxy_conform-->
+<tr>
+<td valign=top>
+<a href="Contributed/pdfxy_conform.html">
+pdfxy_conform</a></td>
+<td>
+An interface to <a href="Contributed/pdfxy.html"><strong>pdfxy</strong></a> that allows the input arrays to be different sizes.
+</td>
+</tr>
+<!--regcoef-->
+<tr>
+<td valign=top>
+<a href="Built-in/regcoef.html">
+regcoef</a></td>
+<td>
+Calculates the linear regression coefficient between two variables.
+</td>
+</tr>
+<!--regCoef-->
+<tr>
+<td valign=top>
+<a href="Built-in/regCoef-1.html">
+regCoef</a></td>
+<td>
+Calculates the linear regression coefficient between two variables.
+</td>
+</tr>
+<!--regCoef_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/regCoef_n.html">
+regCoef_n</a></td>
+<td>
+Calculates the linear regression coefficient between two variables on the given dimensions.
+</td>
+</tr>
+<!--regline-->
+<tr>
+<td valign=top>
+<a href="Built-in/regline.html">
+regline</a></td>
+<td>
+Calculates the linear regression coefficient between two series.
+</td>
+</tr>
+<!--regline_weight-->
+<tr>
+<td valign=top>
+<a href="Contributed/regline_weight.html">
+regline_weight</a></td>
+<td>
+Calculates the linear regression coefficient between two series where one variable is weighted by some measure of uncertainty.
+</td>
+</tr>
+<!--spcorr-->
+<tr>
+<td valign=top>
+<a href="Built-in/spcorr.html">
+spcorr</a></td>
+<td>
+Computes <a href="http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient"> <b>Spearman rank order correlation (Rho)</b></a> correlation coefficient.
+</td>
+</tr>
+<!--spcorr_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/spcorr_n.html">
+spcorr_n</a></td>
+<td>
+Computes  <a href="http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient"> <b>Spearman rank order correlation (Rho)</b></a> correlation coefficient across the given dimension.
+</td>
+</tr>
+<!--stat2-->
+<tr>
+<td valign=top>
+<a href="Built-in/stat2.html">
+stat2</a></td>
+<td>
+Calculates the first two moments of the given input.
+</td>
+</tr>
+<!--stat4-->
+<tr>
+<td valign=top>
+<a href="Built-in/stat4.html">
+stat4</a></td>
+<td>
+Calculates estimates of the first four moments (mean, variance, skewness, and kurtosis) of the given input.
+</td>
+</tr>
+<!--stat_dispersion-->
+<tr>
+<td valign=top>
+<a href="Contributed/stat_dispersion.html">
+stat_dispersion</a></td>
+<td>
+Computes a number of robust statistics.
+</td>
+</tr>
+<!--stat_medrng-->
+<tr>
+<td valign=top>
+<a href="Built-in/stat_medrng.html">
+stat_medrng</a></td>
+<td>
+Calculates median, range, and mid-range of the given input.
+</td>
+</tr>
+<!--stat_trim-->
+<tr>
+<td valign=top>
+<a href="Built-in/stat_trim.html">
+stat_trim</a></td>
+<td>
+Calculates trimmed estimates of the first two moments of the given input.
+</td>
+</tr>
+<!--stddev-->
+<tr>
+<td valign=top>
+<a href="Built-in/stddev.html">
+stddev</a></td>
+<td>
+Calculates the sample standard deviation.
+</td>
+</tr>
+<!--student_t-->
+<tr>
+<td valign=top>
+<a href="Built-in/student_t.html">
+student_t</a></td>
+<td>
+Calculates the two-tailed probability of the Student-t distribution.
+</td>
+</tr>
+<!--taylor_stats-->
+<tr>
+<td valign=top>
+<a href="Contributed/taylor_stats.html">
+taylor_stats</a></td>
+<td>
+Calculates statistics needed for the Taylor Diagram: pattern_correlation, ratio and bias.
+</td>
+</tr>
+<!--trend_manken-->
+<tr>
+<td valign=top>
+<a href="Built-in/trend_manken.html">
+trend_manken</a></td>
+<td>
+Calculates <a href="http://vsp.pnnl.gov/help/Vsample/Design_Trend_Mann_Kendall.htm">Mann-Kendall  non-parametric test for monotonic trend</a> and the <a href="http://en.wikipedia.org/wiki/Theil–Sen_estimator">Theil-Sen</a> robust estimate of linear trend.
+</td>
+</tr>
+<!--ttest-->
+<tr>
+<td valign=top>
+<a href="Built-in/ttest.html">
+ttest</a></td>
+<td>
+Returns an estimate of the statistical significance and, optionally, the t-values.
+</td>
+</tr>
+<!--unwrap_phase-->
+<tr>
+<td valign=top>
+<a href="Contributed/unwrap_phase.html">
+unwrap_phase</a></td>
+<td>
+Unwrap (correct) phase angles to produce smoother phase plots.
+</td>
+</tr>
+<!--variance-->
+<tr>
+<td valign=top>
+<a href="Built-in/variance.html">
+variance</a></td>
+<td>
+Computes an unbiased estimate the variance of all input points.
+</td>
+</tr>
+<!--weibull-->
+<tr>
+<td valign=top>
+<a href="Built-in/weibull.html">
+weibull</a></td>
+<td>
+Derives the shape and scale parameters for the Weibull distribution via maximum likelihood estimates.
+</td>
+</tr>
+<!--zscore-->
+<tr>
+<td valign=top>
+<a href="Contributed/zscore.html">
+zscore</a></td>
+<td>
+Computes the zscore of a variable's given dimensions at all other dimensions and retains metadata.
+</td>
+</tr>
+
+</table><p>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/statistics.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:26 GMT -->
+</html>

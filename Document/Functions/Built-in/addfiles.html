@@ -1,0 +1,780 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/addfiles.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:08 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (file io)">
+<meta name="keywords" content="addfiles">
+<title>addfiles</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../io.html">File I/O</a>
+<br>
+<h1>addfiles</h1>
+
+<p>
+Creates a reference that spans multiple data files.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function addfiles (
+		file_path [*] : string,  
+		status        : string   
+	)
+
+	<a href="../return_val.html">return_val</a> [1] :  list
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>file_path</em>
+<p class=indent>A one-dimensional array of strings containing the full or relative path of the 
+data files to be referenced.
+</p>
+<em>status</em>
+<p class=indent>Single string that specifies whether the files should be opened as 
+read-only ("r") , read-write ("w") or create ("c").
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+<b>Note 1:</b> As of version <a href="../../../prev_releases.html#5.1.0">5.1.0</a>,
+most of the operations available for the list of files
+returned by the  <strong>addfiles</strong> function have been
+reimplemented. Aggregated variables now include coordinate variables
+and attribute metadata. The aggregated dimension can be subscripted
+using integer, vector, or coordinate subscripting. Other features are under development.
+<p>
+
+<b>Note 2:</b> Version <a href="../../../prev_releases.html#5.1.1">5.1.1</a>
+contains some important bug fixes for the new implementation. These
+include fixes for a problem with non-unity strides along the
+aggregated dimension, for a problem with files improperly remaining
+open for the lifetime of the script, and also for a problem where the
+returned variable in certain cases may have an internal tag incorrectly set to indicate a
+scalar variable, resulting in odd behavior. Users of version <a
+href="../../../prev_releases.html#5.1.0">5.1.0</a> are advised not to trust the contents of variables read using <strong>addfiles</strong> and to upgrade as soon as possible to <a href="../../../prev_releases.html#5.1.1">5.1.1</a>.
+<p>
+
+<b>GRIB2 backwards incompatibility note:</b> In version <a
+href="../../../prev_releases.html#5.2.0">5.2.0</a>, the GRIB2 code tables
+were extensively revised to bring them up-to-date with the currently
+documented state of the parameter tables primarily as defined by
+NCEP. This may cause some backwards incompatibility issues. For more
+information and a work-around, see the "<a
+href="../../Manuals/Ref_Manual/NclFormatSupport.html#GRIB2Incompatibility">GRIB2
+backwards incompatibility alert</a>" section in the <a
+href="../../Manuals/Ref_Manual/index.html">NCL Reference Manual</a>.
+<p>
+
+The <strong>addfiles</strong> function provides
+the user with the ability to access data spanning multiple files.
+The function returns a single variable of type list
+containing a list of references to the files pointed
+to by the <I>file_path</I> argument.  Files pointed to by the
+<I>file_path</I> string must be in a 
+<a href="../../Manuals/Ref_Manual/NclFormatSupport.html">supported file format</a> 
+and have a supported file extension at the end of each file name.  The extension
+is required even though it need not be part of the actual filename. The currently
+supported formats, valid status values, and accepted extensions are:
+
+<dl>
+<dt>NetCDF ("r", "w", "c")</dt>
+<dd>".nc", ".cdf", ".netcdf"</dd>
+<p>
+
+<dt>GRIB versions 1 and 2 ("r")
+<dd>".gr", ".gr1", ".grb", ".grib", ".grb1", ".grib1", ".gr2", "grb2", ".grib2"<p>
+(<b><i>GRIB2 support available in versions <a
+href="../../../prev_releases.html#4.3.0">4.3.0</a> or later.</i> </b>) </dd>
+<p>
+
+<dt>HDF ("r", "w", "c")</dt>
+<dd>".hdf", ".hd"</dd>
+<p>
+
+<dt>HDFEOS ("r")</dt>
+<dd>".hdfeos", "he2", "he4"</dd>
+<p>
+
+<dt>HDF5 ("r", "w")</dt>
+<dd>".h5"
+<p>
+(<b><i>Limited HDF5 support available in versions <a href="../../../prev_releases.html#6.0.0">6.0.0</a> or later.</i> </b>)
+</dd>
+<p>
+
+<dt>HDFEOS5 ("r")</dt>
+<dd>".he5"</dd>
+<p>
+
+<dt>CCM ("r")</dt>
+<dd>".ccm"</dd>
+<p>
+
+<dt>Shapefile ("r")</dt>
+<dd>".shp" (Shapefile), ".mif" (MapInfo), ".gmt" (Generic Mapping Tools), ".rt1" (TIGER)<p>
+(<b><i>Support for Shapefiles and other geospatial vector-data formats
+is available in versions <a
+href="../../../prev_releases.html#5.1.1">5.1.1</a> or later. This may not be available on all
+systems.</i></b>)</dd>
+
+</dl><p>
+
+<a href="addfile.html"><strong>addfile</strong></a> handles these extensions 
+in a case-insensitive manner: ".grib", ".GRIB", and ".Grib" all 
+indicate a GRIB file.<p>
+
+If the <em>status</em> "c" is set, the file is created if
+it doesn't exist. If it does exist, an error message is printed and
+the default missing value for files is returned. If "w" is set, and
+the files all exist and have permissions that allow for reading and
+writing, then the files are opened for reading and writing. If any of
+these conditions fail, an error message is reported and the default
+file missing value is returned. Similarly, if "r" is set, the files
+must exist and the user must have read permissions on those files.
+Otherwise, an error message is printed and the default missing value
+is returned. See the <a href="ismissing.html"><strong>ismissing</strong></a> function
+on how to detect the returned missing value in a program.<P>
+
+The <strong>addfiles</strong> function differs from the 
+<a href="addfile.html"><strong>addfile</strong></a> function in several ways:
+
+<OL>
+
+<li>Whereas <a href="addfile.html"><strong>addfile</strong></a> returns a reference to a single file in a
+variable of type <b>file</b>, <strong>addfiles</strong> returns a variable
+of type <b>list</b> that contains references, each of type <b>file</b>,  to multiple files.
+This combination of the <b>list</b> and <b>file</b> types forms a specialized <b>list</b> type. It
+provides a means of obtaining the aggregated contents of variables that span the complete list of files. <p>
+
+<LI>It is not yet possible to use the file <b>list</b> type variable 
+as input to the "getfile<i>xxxx</i>" suite of functions. However, since each element of the
+<b>list</b> is actually a <b>file</b> type variable, you can input a single element of
+the <b>list</b> as an argument to any of these functions, e.g.:
+
+<pre>
+  files = <a href="systemfunc.html"><strong>systemfunc</strong></a>("ls *.nc")  
+  f = <strong>addfiles</strong>(files,"r")
+  dsizes = <a href="getfiledimsizes.html"><strong>getfiledimsizes</strong></a>(f[0])
+</pre>
+<p>
+
+<li>The variables contained in a file opened using the 
+<a href="addfile.html"><strong>addfile</strong></a> function are accessed using syntax such as this:
+
+<pre>
+  T = f->T(:,0:5,:,:)
+</pre>
+
+In contrast, variables aggregated across multiple files opened using the <strong>addfiles</strong> 
+function are accessed using square brackets to reference the file list elements. The syntax looks like this:
+
+<pre>
+  T_agg = f[:]->T(:,0:5,:,:)
+</pre>
+
+Note that integer subscripting can be applied inside the square brackets to define a subset of the
+file list:
+
+<pre>
+  T_agg = f[0:10:2]->T(:,0:5,:,:)
+</pre>
+
+<LI>
+When a regular NCL variable such as <code>T</code> above is created by
+assignment from a regular <b>file</b> type variable, all attributes
+and properly subscripted coordinate variables are assigned to the NCL
+variable along with the actual data. Prior to version <a
+href="../../../prev_releases.html#5.1.0">5.1.0</a>, a variable such as
+<code>T_agg</code> above generated by assignment from a file
+<b>list</b> variable contained no attribute or coordinate metadata.
+However, beginning with version <a
+href="../../../prev_releases.html#5.1.0">5.1.0</a>, aggregated variables
+created from a file list operation do contain standard metadata. It is
+no longer necessary to use the <a href="../Contributed/addfiles_GetVar.html"><strong>addfiles_GetVar</strong></a> function for this
+purpose. Also, beginning with version <a
+href="../../../prev_releases.html#5.1.0">5.1.0</a>, all forms of subscripting
+(integer, coordinate, and vector) are supported for the
+aggregated (leftmost) dimension with one caveat: the indexes comprising a vector subscript must increase
+or decrease monotonically. Unlike normal vector subscripting, vector subscripts
+of the aggregated dimension cannot have repeated elements or arbitrary ordering of the elements. 
+The intention is to remove this restriction in a future release.
+<p>
+
+<li>
+
+Although files can be opened for writing using
+<strong>addfiles</strong>, the current implementation does not
+support writing data using the square bracket list syntax described
+above. You can only write to individual file members of the list by
+assigning a list element to a single file variable, e.g.:
+
+<pre>
+  f = <strong>addfiles</strong>(files,"w")
+  f_single = f[0]
+</pre>
+
+The variable <code>f_single</code> is in every way equivalent to a
+file variable created using <a href="addfile.html"><strong>addfile</strong></a>. You can modify
+its contents using any operation valid for a <b>file</b> type
+variable. However, attempts to modify the aggregated contents of a file list using syntax such as:
+
+<pre>
+  f[:]->T(:,0,0) = 5.0 
+</pre>
+
+currently produce no result.  Modification across the aggregated contents using file
+<b>list</b> type syntax will be implemented in a future release.
+
+</OL>
+
+The aggregated contents of the file list may be accessed using two 
+different options, "cat" (the default) or "join", as specified by the
+<a href="ListSetType.html"><strong>ListSetType</strong></a> procedure. The "cat" option causes the elements of
+the existing leftmost dimension in a variable be concatenated together to form a dimension
+whose size is the sum of the sizes of the dimension in each file. If the leftmost dimension of the
+individual variables in each file has an associated coordinate variable, an aggregated coordinate
+variable will be created and returned along with the data variable. The
+"join" option results in the creation of a new leftmost dimension with one element from each file. 
+In this case the size of the new dimension will be equal to the number of files (with valid
+elements) in the list. Since the new dimension is created during the aggregation process, no 
+coordinate variable will be returned along with the data variable.
+
+<p>Under what conditions should the "cat" (default) and "join" options
+be used?  Generally speaking, if the leftmost dimension of a variable
+is a "record" dimension (say, "time") with successive coordinates in
+each file, then the "cat" option is best. If, however, there is no
+record dimension (e.g. [lev,lat,lon] where the existing dimensions
+have the same size and coordinate values in all files), then the "join" option is
+appropriate.
+<p>
+
+Currently, no checking is done in either "join" or "cat" mode to determine whether the files
+are correctly ordered. NCL assumes that the string array used as the <i>file_path</i> argument
+contains the file names in the proper order. In "cat" mode, NCL errors are the likely result of out-of-order files; this is because the 
+coordinate values of the leftmost dimension will form a non-monotonic sequence. In "join" mode,
+NCL will not emit any errors, but the results will not be correct.
+
+<p>If you use a command like
+<a href="systemfunc.html"><strong>systemfunc</strong></a> ("ls *.nc") to get a list of the files to be aggregated,
+then you need to make sure that the "ls" command gives you the files in the correct order. If it does not, 
+one possible fix is to rename the files to ensure the correct order. Another might be to create a text file 
+containing the names of each file, one per line, in the proper order. Then you could use <a href="asciiread.html"><strong>asciiread</strong></a> to ingest 
+the filenames into a string array.
+
+<p>Whether in "join" or "cat" mode, NCL checks the dimensionality
+(i.e., the number and size of the non-aggregated dimensions) of the
+subject variable in each file as it is being aggregated. The
+dimensionality of the variable in the first file of the aggregation
+sets the standard. If the dimensionality of an identically-named variable in a
+subsequent file does not conform, a warning is issued and its
+contents will not be used as part of the aggregated result.
+
+<p>Users who aggregate <i>many</i> NetCDF files together in a single call to
+the <strong>addfiles</strong> function should be aware that there
+are limits on the number of files that can be simultaneously open.
+<i>Many</i> is, of course, a relative term. <a
+href="http://www.opendap.org/">OPeNDAP-enabled</a> NCL is restricted
+by the OPeNDAP NetCDF client library to 64 open files when accessing
+files either locally or over the network.  Otherwise, typical
+Unix/Linux systems usually allow 1024 open files, although this value
+can vary for older or less-common sytems, and it can also be tweaked when building the OS kernel. 
+Note that the actual number of open files possible may be somewhat less than the limit because of file
+descriptors used internally.
+However, NCL can optionally close files after each access, in effect removing this
+limitation. This is accomplished by invoking the
+<a href="setfileoption.html"><strong>setfileoption</strong></a> procedure to set the option
+<i>SuppressClose</i> to <i>False</i>. This is only an issue for
+NetCDF, because, in general, for other file formats supported by NCL,
+files are closed after each access.
+<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="addfile.html"><strong>addfile</strong></a>, <a href="setfileoption.html"><strong>setfileoption</strong></a>,
+<a href="ListGetType.html"><strong>ListGetType</strong></a>,
+<a href="ListSetType.html"><strong>ListSetType</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+Below are some basic examples for using <strong>addfiles</strong> for
+reading and writing various supported formats.  For more extensive
+examples, see the <a href="../../../Applications/list_io.html">File I/O</a>
+section of the <a href="../../../Applications/index.html">Applications</a> page.<p>
+
+<b>Note: all examples assume NCL version <a href="../../../prev_releases.html#5.1.0">5.1.0</a></b><br><br>
+
+<B>Example 1</B><P>
+
+Read in a series of netCDF files (here, 5 files each with 12 time steps), and
+read into memory the four dimensional variable T(ntim,klvl,nlat,mlon),
+where ntim=12, klvl=5, nlat=48, mlon=96:
+
+<PRE>
+   fils = <a href="systemfunc.html"><strong>systemfunc</strong></a> ("ls /model/annual*.nc") ; file paths
+   f    = <strong>addfiles</strong> (fils, "r")   
+
+   <a href="ListSetType.html"><strong>ListSetType</strong></a> (f, "cat")        ; concatenate (=default)
+   T    = f[:]->T                ; read T from all files
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a> (T)
+</PRE>
+
+The <a href="printVarSummary.html"><strong>printVarSummary</strong></a> procedure yields:
+
+<PRE>
+     Variable: T
+     Type: float
+     Total Size: 5529600 bytes
+                 1382400 values
+     Number of Dimensions: 4
+     Dimensions and sizes:   [time | 60] x [lev 5] x [lat | 48] x [lon | 96]
+     Coordinates: 
+          time: [2349..4143]
+          lev: [850..200]
+          lat: [-87.15909..87.15909]
+          lon: [ 0..356.25]
+   Number Of Attributes: 2
+     units :       K
+     long_name :   temperature
+</PRE>
+
+The size of the time dimension is now 60 (=5*12), while the other
+dimensions remain the same. 
+
+<br><br>
+<B>Example 2</B><P>
+
+The "XXX" files have no record dimension. All records are 5 (levels) x
+48 (latitudes) x 96 (longitudes). Here we use the "join" option. This
+adds an extra dimension.
+
+<PRE>
+   diri = "/fs/cgd/data0/casguest/CLASS/"   ; input directory
+   fils = <a href="systemfunc.html"><strong>systemfunc</strong></a> ("ls "+diri+"XXX*.nc") ; file paths
+   f    = <strong>addfiles</strong> (fils, "r")   ; note the "s" of <a href="addfile.html"><strong>addfile</strong></a>
+   <a href="ListSetType.html"><strong>ListSetType</strong></a> (f, "join")       
+   T    = f[:]->T                ; read T from all files
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a> (T)
+</PRE>
+
+The <a href="printVarSummary.html"><strong>printVarSummary</strong></a> procedure yields:
+
+<PRE>
+   Variable: T
+   Type: float
+   Total Size:  460800 bytes
+                115200 values
+   Number of Dimensions: 5
+   Dimensions and sizes:   [ncl_join | 5] x [lev | 5] x [lat | 48] x [lon | 96]
+   Coordinates: 
+            lev: [850000..250.]
+            lat: [-87.15909..87.15909]
+            lon: [ 0..356.25]
+   Number Of Attributes: 2
+     units :       K
+     long_name :   temperature
+</PRE>
+
+<br><br>
+<B>Example 3</B><P>
+
+Generally, when there is a record dimension one uses the "cat" option.
+In this example, let's assume the five different runs were made for a
+particular year. Each run was done using, say, different boundary
+layer parameterizations. Here the time variable is the same for each
+file and we want to compare the five different cases.  The appropriate
+choice for this case is "join":
+
+<PRE>
+   diri = "/fs/cgd/data0/casguest/CLASS/"   ; input directory
+   fils = <a href="systemfunc.html"><strong>systemfunc</strong></a> ("ls "+diri+"Bound*.nc") ; file paths
+
+   f    = <strong>addfiles</strong> (fils, "r")   ; note the "s" of <a href="addfile.html"><strong>addfile</strong></a>
+
+   <a href="ListSetType.html"><strong>ListSetType</strong></a> (f, "join")
+   T    = f[:]->T                ; read T from all files
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a> (T)
+</PRE>
+
+The <a href="printVarSummary.html"><strong>printVarSummary</strong></a> procedure yields:
+
+<PRE>
+   Variable: T
+   Type: float
+   Total Size: 5529600 bytes
+               1382400 values
+   Number of Dimensions: 5
+   Dimensions and sizes:   [ncl_join | 5] x [time | 12] x [lev | 5] x [lat | 48] x [lon | 96]
+   Coordinates: 
+            time: [2349..2683]
+            lev: [850..250.]
+            lat: [-87.15909..87.15909]
+            lon: [ 0..356.25]
+   Number Of Attributes: 2
+     units :       K
+     long_name :   temperature
+</PRE>
+
+<B>Example 4</B><P>
+
+
+Read in the same series of netCDF files as in example 1, but access only each eighth step of
+the aggregated time dimension, and latitudes between -40 and +40. Since there are 12 timesteps in each file,
+two timesteps will be extracted from the first file, one from the second, two from the third, and so forth.
+
+<PRE>
+   fils = <a href="systemfunc.html"><strong>systemfunc</strong></a> ("ls /model/annual*.nc") ; file paths
+   f    = <strong>addfiles</strong> (fils, "r")   
+
+   <a href="ListSetType.html"><strong>ListSetType</strong></a> (f, "cat")       ; concatenate (=default)
+   T    = f[:]->T(::8,:,{-40:40},:)     ; read T with a stride of 8
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a> (T)
+</PRE>
+
+The <a href="printVarSummary.html"><strong>printVarSummary</strong></a> procedure yields:
+
+<PRE>
+     Variable: T
+     Type: float
+     Total Size: 337920 bytes
+                 84480 values
+     Number of Dimensions: 4
+     Dimensions and sizes:   [time | 8] x [lev 5] x [lat | 22] x [lon | 96]
+     Coordinates: 
+          time: [2349..4052]
+          lev: [850..200]
+          lat: [-38.94342..38.94342]
+          lon: [ 0..356.25]
+   Number Of Attributes: 2
+     units :       K
+     long_name :   temperature
+</PRE>
+
+<B>Example 5</B><P>
+
+Consider netCDF files in a suite of directories <b>1985</b>, <b>1986</b>,....<b>1990</b>,
+<b>1999</b>, <b>2000</b>, <b>2009</b>, <b>2010</b>, <b>2015</b>. Each has one or more netCDF
+files. They may be accessed via:
+
+<PRE>
+   fils = <a href="systemfunc.html"><strong>systemfunc</strong></a>("ls [1-2][8-9-0-1]*/*nc")
+   <b>print</b>(fils)
+
+   f   = <strong>addfiles</strong> (fils, "r") 
+   x   = f[:]->X
+   <b>printVarSummary</b>(x)
+</PRE>
+Edited output:
+<PRE>
+
+Variable: fils
+Type: string
+[snip]
+Dimensions and sizes:   [31]
+[snip]
+        1985/foo.1985_time.nc 
+        ....
+        1995/foo.1995_time.nc
+        ....
+        2008/foo.2008_time.nc
+        2009/foo.2009_time.nc
+        2010/foo.2010_time.nc
+        ....
+        2015/foo.2015_time.nc
+</PRE>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/addfiles.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:08 GMT -->
+</html>

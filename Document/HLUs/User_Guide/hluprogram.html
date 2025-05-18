@@ -1,0 +1,708 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/User_Guide/hluprogram.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 18:42:04 GMT -->
+<head>
+<title>Writing an HLU program</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index.html">HLUs ></a>
+<a class=crumb href="index-2.html">User Guide </a>
+
+<br>
+
+<h1>Writing an HLU program</h1>
+
+This module describes general steps to follow in writing an HLU program;
+it provides examples for writing a TextItem program in Fortran and C.
+<p>
+<ol>
+<li>Write an HLU program in either Fortran or C using API functions.
+The logical program steps are:
+<p>
+<ul>
+<li>Select a header file that matches each object type to be created.
+<p>
+<li>Open the HLU library.
+<p>
+<li>Create an App object to provide access to the resource database (optional).
+<p>
+<li>Create a DataItem object (only needed for XyPlot or ContourPlot objects).
+<p>
+<li>Create workstation object(s) (XWorkstation, NcgmWorkstation, or PSWorkstation).
+<p>
+<li>Create view object(s) (ContourPlot, XyPlot, TextItem, etc.).
+<p>
+<li>Assign resources to objects in the code or in a resource file.
+<p>
+<li>Draw to send the graphics to the output workstation.
+<p>
+<li>Frame to cause a pause or erase (X11), or a picture advance (PS, NCGM).
+<p>
+<li>Destroy all created objects.
+<p>
+<li>Close the HLU library.
+</ul>
+<p>
+A recommended approach is to look at the many examples existing under
+<a href="../../../Applications/BasicExamples/ng4ex.html">ng4ex</a> and select
+the one which is closest to your desired task.
+<p>
+<li>Create a resource data file. Set resources to desired values.
+<p>
+<li>Compile and execute the program using nhlcc, nhlf77, or the make files.
+<p>
+<li>Run the program module and look at the graphical output.
+<p>
+<li>Change resources in the resource file and re-execute the program module.
+<p>
+</ol>
+
+<H2>Components of a TextItem program</H2>
+
+<H3>Building a Fortran program</H3>
+<p>
+<ol>
+<li>Select the needed objects.
+<p>
+First, let's set our resources in a local resource file which is
+specific to this application. Thus we will use the combination of
+<a href="../API/NhlInitialize.html"><strong>NhlInitialize</strong></a> and an <a href="../API/NhlCreate.html"><strong>NhlCreate</strong></a> of an app object. We could also
+have chosen to use <a href="../API/NhlOpen.html"><strong>NhlOpen</strong></a> and
+set the resources in the file whose pathname is given by system
+variable $(NCARG_USRRESFILE).  Or we could choose to set resources
+directly in the program using arguments in Create calls or by using
+the <a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> function.
+
+<p>
+We do not need a data object since <a href="../Classes/TextItem.html"><strong>TextItem</strong></a> does not import data.
+The text string to be written is merely entered as a resource.
+<p>
+Next, we need a workstation object in which to draw or write our
+graphical instructions. Suppose we just choose an X11 window
+which is an <a href="../Classes/XWorkstation.html"><strong>XWorkstation</strong></a> object.
+<p>
+Finally, we need a view object, namely TextItem.
+<p>
+<li>Select the needed header files.
+<p>
+Now that we know which objects we need, we can define the header
+files that are needed; these include:
+<p>
+Fortran:
+<p>
+<pre>
+      external nhlfappclass<BR>
+      external nhlfxworkstationclass<BR>
+      external nhlftextitemclass<BR>
+</pre>
+<p>
+App, TextItem, and XWorkstation are the classes that we are going
+to use in this program.
+<p>
+
+<a href="hluheaders.html#Fortran_headers">Fortran
+headers</a> lists the headers for all objects.
+
+<p>
+<li>Open and initialize the HLU library.
+<p>
+Fortran:
+<p>
+<pre>
+      call nhlfinitialize
+</pre>
+<p>
+<li>Create an application context. Set the app dir to the current
+directory so the application looks for a resource file in the
+working directory.
+<p>
+Fortran:
+<p>
+<pre>
+      call nhlfrlcreate(rlist,'setrl')<BR>
+      call nhlfrlclear(rlist)<BR>
+      call nhlfrlsetstring(rlist,'appDefaultParent','True',ierr)<BR>
+      call nhlfrlsetstring(rlist,'appUsrDir','./',ierr)<BR>
+      call nhlfcreate(appid,'tx01',nhlfappclass,0,rlist,ierr)<BR>
+</pre>
+<p>
+This section of code creates a resource list needed to configure the application object, clears the list, sets
+the NhlNappUsrDir resource of the App class, with a <a href="../API/NhlRLSetString.html"><strong>NhlRLSetString</strong></a> call,
+to the current working directory ("./"), then creates an application
+object whose id is returned within the parameter appid. Since the name of the 
+application is set to "tx01" in the create call, the resource file is named tx01
+with a .res appended: tx01.res. This app object is of type
+<a href="../Classes/App.html"><strong>App</strong></a> class.
+<p>
+When we run this program, it will expect to find a resource file
+named tx01.res in the current working directory.
+<p>
+<li>Create an XWorkstation object.
+<p>
+Fortran:
+<p>
+<pre>
+      call nhlfrlclear(rlist)<BR>
+      call nhlfrlsetstring(rlist,'wkPause','True',ierr)<BR>
+      call nhlfcreate(wid,'tx01Work',nhlfxworkstationclass,<BR>
+     $     0,rlist,ierr)<BR>
+</pre>
+<p>
+This section of code clears the resource list, sets a resource which
+will cause the XWorkstation object to pause when <a href="../API/NhlFrame.html"><strong>NhlFrame</strong></a> is called on
+the the XWorkstation object. This is done by setting the XWorkstation 
+resource NhlNwkPause to True. The XWorkstation object is then created 
+an XWorkstation object. The id is returned in wid. This is an object of type
+NhlxWorkstationClass. 
+<p>
+<li>Set any resources in rlist (optional) and create a TextItem object.
+<p>
+Fortran:
+<p>
+<pre>
+      call nhlfrlclear(rlist)<BR>
+      call nhlfrlsetfloat(rlist,'txPosXF',.5,ierr)<BR>
+      call nhlfrlsetfloat(rlist,'txPosYF',.5,ierr)<BR>
+      call nhlfrlsetfloat(rlist,'txFontHeightF',.2,ierr)<BR>
+      call nhlfrlsetstring(rlist,'txString','NCAR Graphics',ierr)<BR>
+      call nhlfcreate(pid,'TextItems',nhlftextitemclass,<BR>
+     $     wid,rlist,ierr)<BR>
+</pre>
+<p>
+This section of code clears the resource list, defines the position
+to locate the output text string in the X11 window. The position
+is set to (.5,.5) in (X,Y) viewport coordinates, called normalized device coordinates.  The entire viewport is 0. to 1. in both dimensions. 
+ This section also sets the height of the output
+string to be .2 or approximately one fifth of the X11 window.
+The resources
+NhlNtxPosXF, NhlNtxPosYF, and NhlNtxFontHeightF are added to rlist using
+the <a href="../API/NhlRLSetFloat.html"><strong>NhlRLSetFloat</strong></a> function and NhlNtxString is set using the NhlRLSetString functions. 
+The TextItem object is then created and returns
+its id in pid. This is an object of type NhltextItemClass,
+it has the parent wid, and its resources are set by rlist.
+<p>
+<strong>Note:</strong> The location, height and string resources could also be set in the
+<a href="hluimplmt/rescfiles.html">resource file</a> tx01.res.
+<p>
+<li>Output the graphics to the X11 window.
+<p>
+Fortran:
+<p>
+<pre>
+      call nhlfdraw(pid,ierr)           ...or call nhlfdraw(wid,ierr)<BR>
+      call nhlfframe(wid,ierr)<BR>
+</pre>
+<p>
+The draw function causes the TextItem object, id = pid, to be drawn. 
+The Frame function flushes the output device. Since we set the NhlNwkPause 
+XWorkstation resource to True, the plot will be drawn and held in the window 
+awaiting a mouse click in the window.
+<p>
+<li>Destroy all objects that are no longer needed (optional).
+<p>
+If you intend to continue the program and create some new and different
+App, Plot, or Workstation objects, and if you no longer need any of the
+current objects, then good programming practice is to delete the objects
+that are no longer required in order to keep the memory size of your
+program down. If you are about to end the program, go to Step 9.
+<p>
+Fortran:
+<p>
+<pre>
+      call nhlfdestroy(pid,ierr)<BR>
+      call nhlfdestroy(wid,ierr)<BR>
+      call nhlfdestroy(appid,ierr)<BR>
+</pre>
+<p>
+<li>Close the HLU library and exit.
+<p>
+Fortran:
+<p>
+<pre>
+      call nhlfclose<BR>
+      stop<BR>
+      end<BR>
+</pre>
+<p>
+This section of code destroys all existing objects, closes the HLU
+library, and exits our program.
+<p>
+</ol>
+
+<H3>Building a C program</H3>
+<p>
+<ol>
+<li>Select the needed objects.
+<p>
+
+First, let's set our resources in a local resource file that is
+specific to this application. Thus we will use the combination of
+<a href="../API/NhlInitialize.html"><strong>NhlInitialize</strong></a> and an <a href="../API/NhlCreate.html"><strong>NhlCreate</strong></a> of an app object. We could also
+have chosen to use <a href="../API/NhlOpen.html"><strong>NhlOpen</strong></a> and
+set the resources in the file whose pathname is given by system
+variable $(NCARG_USRRESFILE).  Or we could choose to set resources
+directly in the program using arguments in Create calls or by using
+the <a href="../API/NhlSetValues.html"><strong>NhlSetValues</strong></a> function.
+
+<p>
+We do not need a data object since <a href="../Classes/TextItem.html"><strong>TextItem</strong></a> does not import data.
+The text string to be written is merely entered as a resource.
+<p>
+Next, we need a workstation object in which to draw or write our
+graphical instructions. Suppose we just choose an X11 window
+which is an <a href="../Classes/XWorkstation.html"><strong>XWorkStation</strong></a> object.
+<p>
+Finally, we need a view object, namely TextItem.
+<p>
+<li>Select the needed header files.
+<p>
+Now that we know which objects we need, we can define the header
+files that are needed; these include:
+<p>
+C:
+<p>
+#include &lt;ncarg/hlu/hlu.h&gt;
+<p>
+The HLU library header is always required.
+<p>
+C:
+<p>
+<pre>
+#include &lt;ncarg/hlu/App.h&gt;<BR>
+#include &lt;ncarg/hlu/TextItem.h&gt;<BR>
+#include &lt;ncarg/hlu/XWorkstation.h&gt;<BR>
+</pre>
+<p>
+App, TextItem, and XWorkstation are the objects we are going
+to use in this program.
+<p>
+<a href="hluheaders.html#C_headers">C
+headers</a> lists the headers for all objects.
+<p>
+<li>Open and initialize the HLU library.
+<p>
+C:
+<p>
+<pre>
+	NhlInitialize();
+</pre>
+<p>
+<li>Create an application context. Set the app dir to the current
+directory so the application looks for a <a href="hluimplmt/rescfiles.html">resource file</a> in the
+working directory.
+<p>
+C:
+<p>
+<pre>
+	rlist = NhlRLCreate(NhlSETRL);<BR>
+	NhlRLClear(rlist);<BR>
+	NhlRLSetString(rlist,NhlNappDefaultParent,"True");<BR>
+	NhlRLSetString(rlist,NhlNappUsrDir,"./");<BR>
+	NhlCreate(&appid,"tx01",NhlappClass,NhlDEFAULT_APP,rlist);<BR>
+</pre>
+<p>
+This section of code creates a resource list needed to configure the application
+ object, clears the list, sets
+the NhlNappUsrDir resource of the App class, with a SetString call,
+to the current working directory ("./"), then creates an application
+object whose id is returned within the parameter appid. Since the name of the
+application is set to "tx01" in the create call, the resource file is named tx01
+with a .res appended: tx01.res. This app object is of type
+<a href="../Classes/App.html"><strong>App</strong></a> class.
+<p>
+When we run this program, it will expect to find a resource file
+named tx01.res in the current working directory.
+<p>
+<li>Create an XWorkstation object.
+<p>
+C:
+<p>
+<pre>
+	NhlRLClear(rlist);<BR>
+	NhlRLSetInteger(rlist,NhlNwkPause,True);<BR>
+	NhlCreate(&wid,"txxwork",NhlxWorkstationClass,NhlDEFAULT.APP,rlist);<BR>
+</pre>
+<p>
+This section of code clears the resource list, sets a resource which
+will cause the XWorkstation object to pause when <a href="../API/NhlFrame.html"><strong>NhlFrame</strong></a> is called on
+the the XWorkstation object. This is done by setting the XWorkstation
+resource NhlNwkPause to True. The XWorkstation object is then created
+an XWorkstation object. The id is returned in wid. This is an object of type
+NhlxWorkstationClass.
+<p>
+<li>Set any resources in rlist (optional) and create a TextItem object.
+<p>
+C:
+<p>
+<pre>
+	NhlRLClear(rlist);<BR>
+	NhlRLSetFloat(rlist,NhlNtxPosXF,.5);<BR>
+	NhlRLSetFloat(rlist,NhlNtxPosYF,.5);<BR>
+	NhlRLSetFloat(rlist,NhlNtxFontHeightF,.2);<BR>
+	NhlRLSetString(rlist,NhlNtxString,"NCAR Graphics");<BR>
+	NhlCreate(&pid,"TextItems",<BR>
+		  NhltextItemClass,wid,rlist);<BR>
+</pre>
+<p>
+This section of code clears the resource list, defines the position
+to locate the output text string in the X11 window. The position
+is set to (.5,.5) in (X,Y) viewport coordinates, called normalized device coordinates.  The entire viewport is 0. to 1. in both dimensions.
+ This section also sets the height of the output
+string to be .2 or approximately one fifth of the X11 window.
+The resources
+NhlNtxPosXF, NhlNtxPosYF, and NhlNtxFontHeightF are added to rlist using
+the <a href="../API/NhlRLSetFloat.html"><strong>NhlRLSetFloat</strong></a> function and NhlNtxString is set using the <a href="../API/NhlRLSetString.html"><strong>NhlRLSetString</strong></a> functions.
+The TextItem object is then created and returns
+its id in pid. This is an object of type NhltextItemClass,
+it has the parent wid, and its resources are set by rlist.
+<p>
+<strong>Note:</strong> The location, height and string resources could also be set in the
+resource file tx01.res.
+
+<p>
+<li>Output the graphics to the X11 window.
+<p>
+C:
+<p>
+<pre>
+	NhlDraw(pid);<BR>
+	NhlFrame(wid);<BR>
+</pre>
+<p>
+The draw function causes the TextItem object, id = pid, to be
+drawn. The frame function flushes the output device.
+Since we set the NhlNwkPause XWorkstation
+resource to True, the plot will be drawn and held in the window
+awaiting a mouse click in the window.
+<p>
+<li>Destroy all objects that are no longer needed (optional).
+<p>
+If you intend to continue the program and create some new and different
+app, plot, or workstation objects, and if you no longer need any of the
+current objects, then good programming practice is to delete the objects
+that are no longer required in order to keep the memory size of your
+program down. If you are about to end the program, go to Step 9.
+<p>
+C:
+<p>
+<pre>
+	NhlDestroy(appid);<BR>
+	NhlDestroy(pid);<BR>
+	NhlDestroy(wid);<BR>
+</pre>
+<p>
+<li>Close the HLU library and exit.
+<p>
+C:
+<p>
+<pre>
+	NhlClose();<BR>
+	exit(0);<BR>
+</pre>
+<p>
+This section of code destroys all existing objects, closes the HLU
+library, and exits our program.
+<p>
+</ol>
+<H3>See also:</H3>
+<p>
+<ul>
+<li><A href="../../../Applications/BasicExamples/ng4ex.html">ng4ex command</a>
+<li><a href="../Classes/index.html">HLU classes</a>
+<li><a href="../API/index.html">HLU API</a>
+</ul>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/HLUs/User_Guide/hluprogram.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 18:42:04 GMT -->
+</html>
+

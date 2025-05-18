@@ -1,0 +1,1520 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/interp.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:26 GMT -->
+<head>
+<title>NCL Function Documentation: Interpolation</title>
+</head>
+<body>
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="index.html" class="subitem">Category Listing</a></li>
+						<li><a href="list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+
+			      <div id="general_main">
+
+<h1>Interpolation</h1>
+
+
+You can look at this <a
+href="Images/OLD_NCL_RegriddingDecisionTree.pdf">decision tree
+figure</a> created several years ago to help you figure out which
+interpolation or regridding routine to use. This is a bit out-of-date;
+we'll try to update it when we can.  <p>
+
+For regridding routines, see the full list in the <a
+href="regrid.html">regridding category list</a>.
+
+
+
+<table cellspacing=4 cellpadding=10 width=100% border=1>
+
+<!--area_conserve_remap-->
+<tr>
+<td valign=top>
+<a href="Built-in/area_conserve_remap.html">
+area_conserve_remap</a></td>
+<td>
+Performs areal conservative remapping from one rectilinear grid to another.
+</td>
+</tr>
+<!--area_conserve_remap_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/area_conserve_remap_Wrap.html">
+area_conserve_remap_Wrap</a></td>
+<td>
+Performs areal conservative remapping from one rectilinear grid to another and retains metadata.
+</td>
+</tr>
+<!--area_hi2lores-->
+<tr>
+<td valign=top>
+<a href="Built-in/area_hi2lores.html">
+area_hi2lores</a></td>
+<td>
+Interpolates from high resolution rectilinear grids to low resolution recitlinear grids using local area averaging.
+</td>
+</tr>
+<!--area_hi2lores_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/area_hi2lores_Wrap.html">
+area_hi2lores_Wrap</a></td>
+<td>
+Interpolates from high resolution rectilinear grids to low resolution rectilinear grids using local area averaging and retains metadata.
+</td>
+</tr>
+<!--bin_avg-->
+<tr>
+<td valign=top>
+<a href="Built-in/bin_avg.html">
+bin_avg</a></td>
+<td>
+Calculates gridded binned averages and counts on a rectilinear grid using randomly spaced data.
+</td>
+</tr>
+<!--csa1-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa1.html">
+csa1</a></td>
+<td>
+Calculates an approximating cubic spline for the input data, one 1-dimensional section at a time.
+</td>
+</tr>
+<!--csa1d-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa1d.html">
+csa1d</a></td>
+<td>
+Calculates an approximating cubic spline for the input data, one 1-dimensional section at a time.
+</td>
+</tr>
+<!--csa1s-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa1s.html">
+csa1s</a></td>
+<td>
+Calculates an approximating cubic spline for the input data, one 1-dimensional section at a time.
+</td>
+</tr>
+<!--csa1x-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa1x.html">
+csa1x</a></td>
+<td>
+Calculates an approximating cubic spline for the input data, one 1-dimensional section at a time.
+</td>
+</tr>
+<!--csa1xd-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa1xd.html">
+csa1xd</a></td>
+<td>
+Calculates an approximating cubic spline for the input data, one 1-dimensional section at a time.
+</td>
+</tr>
+<!--csa1xs-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa1xs.html">
+csa1xs</a></td>
+<td>
+Calculates an approximating cubic spline for the input data, one 1-dimensional section at a time.
+</td>
+</tr>
+<!--csa2-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2.html">
+csa2</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa2d-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2d.html">
+csa2d</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa2l-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2l.html">
+csa2l</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa2ld-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2ld.html">
+csa2ld</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa2ls-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2ls.html">
+csa2ls</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa2lx-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2lx.html">
+csa2lx</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa2lxd-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2lxd.html">
+csa2lxd</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa2lxs-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2lxs.html">
+csa2lxs</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa2s-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2s.html">
+csa2s</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa2x-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2x.html">
+csa2x</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa2xd-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2xd.html">
+csa2xd</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa2xs-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa2xs.html">
+csa2xs</a></td>
+<td>
+Calculates an approximating cubic spline for two-dimensional input data.
+</td>
+</tr>
+<!--csa3-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3.html">
+csa3</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csa3d-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3d.html">
+csa3d</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csa3l-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3l.html">
+csa3l</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csa3ld-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3ld.html">
+csa3ld</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csa3ls-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3ls.html">
+csa3ls</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csa3lx-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3lx.html">
+csa3lx</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csa3lxd-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3lxd.html">
+csa3lxd</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csa3lxs-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3lxs.html">
+csa3lxs</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csa3s-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3s.html">
+csa3s</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csa3x-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3x.html">
+csa3x</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csa3xd-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3xd.html">
+csa3xd</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csa3xs-->
+<tr>
+<td valign=top>
+<a href="Built-in/csa3xs.html">
+csa3xs</a></td>
+<td>
+Calculates an approximating cubic spline for three-dimensional input data.
+</td>
+</tr>
+<!--csc2s-->
+<tr>
+<td valign=top>
+<a href="Built-in/csc2s.html">
+csc2s</a></td>
+<td>
+Converts Cartesian coordinates on a unit sphere to spherical coordinates (lat/lon).
+</td>
+</tr>
+<!--csgetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/csgetp.html">
+csgetp</a></td>
+<td>
+Retrieves <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#ControlParameter">control parameters</a> for <a href="http://www.ncarg.ucar.edu//ngmath/cssgrid/csshome.html">Cssgrid</a> routines.
+</td>
+</tr>
+<!--css2c-->
+<tr>
+<td valign=top>
+<a href="Built-in/css2c.html">
+css2c</a></td>
+<td>
+Converts spherical coordinates (lat/lon) to Cartesian coordinates on a unit sphere.
+</td>
+</tr>
+<!--cssetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/cssetp.html">
+cssetp</a></td>
+<td>
+Sets <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#ControlParameter">control parameters</a> for <a href="http://www.ncarg.ucar.edu//ngmath/cssgrid/csshome.html">Cssgrid</a> routines.
+</td>
+</tr>
+<!--cssgrid-->
+<tr>
+<td valign=top>
+<a href="Built-in/cssgrid.html">
+cssgrid</a></td>
+<td>
+Uses <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#TensionSpline">tension splines</a> to interpolate unstructured (randomly-spaced) data on a unit sphere to data values on a rectilinear grid.
+</td>
+</tr>
+<!--cssgrid_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/cssgrid_Wrap.html">
+cssgrid_Wrap</a></td>
+<td>
+Uses <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#TensionSpline">tension splines</a> to interpolate unstructured (randomly-spaced) data on a unit sphere to data values on a rectilinear grid (retains metadata).
+</td>
+</tr>
+<!--csstri-->
+<tr>
+<td valign=top>
+<a href="Built-in/csstri.html">
+csstri</a></td>
+<td>
+Calculates a <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#DelaunayTriangulation">Delaunay triangulation</a> of data randomly positioned on the surface of a sphere.
+</td>
+</tr>
+<!--csvoro-->
+<tr>
+<td valign=top>
+<a href="Built-in/csvoro.html">
+csvoro</a></td>
+<td>
+Determines <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#VoronoiPolygon">Voronoi polygons</a> for data randomly positioned on a sphere and returns vertices for the one surrounding a specified input point.
+</td>
+</tr>
+<!--curvilinear_to_SCRIP-->
+<tr>
+<td valign=top>
+<a href="ESMF/curvilinear_to_SCRIP.html">
+curvilinear_to_SCRIP</a></td>
+<td>
+Writes the description of a curvilinear grid to a SCRIP file.
+</td>
+</tr>
+<!--dsgetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/dsgetp.html">
+dsgetp</a></td>
+<td>
+Gets <a href="http://www.ncarg.ucar.edu//ngmath/dsgrid/parameters.html">parameters</a> for <a href="http://www.ncarg.ucar.edu//ngmath/dsgrid/dshome.html">Dsgrid</a> routines.
+</td>
+</tr>
+<!--dsgrid2-->
+<tr>
+<td valign=top>
+<a href="Built-in/dsgrid2.html">
+dsgrid2</a></td>
+<td>
+Interpolates data from an unstructured (randomly-spaced) grid to a rectilinear grid using inverse distance weighted interpolation.
+</td>
+</tr>
+<!--dsgrid2d-->
+<tr>
+<td valign=top>
+<a href="Built-in/dsgrid2d.html">
+dsgrid2d</a></td>
+<td>
+Interpolates double data from an unstructured (randomly-spaced) grid to a rectilinear grid using inverse distance weighted interpolation. (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--dsgrid2s-->
+<tr>
+<td valign=top>
+<a href="Built-in/dsgrid2s.html">
+dsgrid2s</a></td>
+<td>
+Interpolates float data from an unstructured (randomly-spaced) grid to a rectilinear grid using inverse distance weighted interpolation. (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--dsgrid3-->
+<tr>
+<td valign=top>
+<a href="Built-in/dsgrid3.html">
+dsgrid3</a></td>
+<td>
+Interpolates data from an unstructured (randomly-spaced) grid to a 3D grid using inverse distance weighted interpolation.
+</td>
+</tr>
+<!--dsgrid3d-->
+<tr>
+<td valign=top>
+<a href="Built-in/dsgrid3d.html">
+dsgrid3d</a></td>
+<td>
+Interpolates double data from an <a href="../glossary.html#UnstructuredGrid">unstructured</a> (randomly-spaced) grid to a 3D grid using inverse distance weighted interpolation.  (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--dsgrid3s-->
+<tr>
+<td valign=top>
+<a href="Built-in/dsgrid3s.html">
+dsgrid3s</a></td>
+<td>
+Interpolates float data from an <a href="../glossary.html#UnstructuredGrid">unstructured</a> (randomly-spaced) grid to a 3D grid using inverse distance weighted interpolation.  (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--dspnt2-->
+<tr>
+<td valign=top>
+<a href="Built-in/dspnt2.html">
+dspnt2</a></td>
+<td>
+Interpolates 2D data at specified points.
+</td>
+</tr>
+<!--dspnt2d-->
+<tr>
+<td valign=top>
+<a href="Built-in/dspnt2d.html">
+dspnt2d</a></td>
+<td>
+Interpolates 2D data at specified points.   (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--dspnt2s-->
+<tr>
+<td valign=top>
+<a href="Built-in/dspnt2s.html">
+dspnt2s</a></td>
+<td>
+Interpolates 2D float data at specified points.   (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--dspnt3-->
+<tr>
+<td valign=top>
+<a href="Built-in/dspnt3.html">
+dspnt3</a></td>
+<td>
+Interpolates 3D data at specified points.
+</td>
+</tr>
+<!--dspnt3d-->
+<tr>
+<td valign=top>
+<a href="Built-in/dspnt3d.html">
+dspnt3d</a></td>
+<td>
+Interpolates 3D double data at specified points. (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--dspnt3s-->
+<tr>
+<td valign=top>
+<a href="Built-in/dspnt3s.html">
+dspnt3s</a></td>
+<td>
+Interpolates 3D float data at specified points. (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--dssetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/dssetp.html">
+dssetp</a></td>
+<td>
+Sets <a href="http://www.ncarg.ucar.edu//ngmath/dsgrid/parameters.html">parameters</a> for <a href="http://www.ncarg.ucar.edu//ngmath/dsgrid/dshome.html">Dsgrid</a> routines.
+</td>
+</tr>
+<!--ESMF_regrid-->
+<tr>
+<td valign=top>
+<a href="ESMF/ESMF_regrid.html">
+ESMF_regrid</a></td>
+<td>
+Regrids data from one lat/lon grid to another, using ESMF software.
+</td>
+</tr>
+<!--ESMF_regrid_gen_weights-->
+<tr>
+<td valign=top>
+<a href="ESMF/ESMF_regrid_gen_weights.html">
+ESMF_regrid_gen_weights</a></td>
+<td>
+Writes a weight file using the offline ESMF weight generator.
+</td>
+</tr>
+<!--ESMF_regrid_with_weights-->
+<tr>
+<td valign=top>
+<a href="ESMF/ESMF_regrid_with_weights.html">
+ESMF_regrid_with_weights</a></td>
+<td>
+Using the provided weight file, regrids data from one lat/lon grid to another.
+</td>
+</tr>
+<!--ftcurv-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftcurv.html">
+ftcurv</a></td>
+<td>
+Calculates an interpolatory spline through a sequence of functional values.
+</td>
+</tr>
+<!--ftcurvd-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftcurvd.html">
+ftcurvd</a></td>
+<td>
+Calculates the derivatives of an interpolatory spline under tension.
+</td>
+</tr>
+<!--ftcurvi-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftcurvi.html">
+ftcurvi</a></td>
+<td>
+Calculates integrals of an interpolatory spline under tension between two user-specified limits.
+</td>
+</tr>
+<!--ftcurvp-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftcurvp.html">
+ftcurvp</a></td>
+<td>
+Calculates an interpolatory spline under tension through a sequence of functional values for a periodic function.
+</td>
+</tr>
+<!--ftcurvpi-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftcurvpi.html">
+ftcurvpi</a></td>
+<td>
+Calculates an integral of an interpolatory spline between two specified points.
+</td>
+</tr>
+<!--ftcurvps-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftcurvps.html">
+ftcurvps</a></td>
+<td>
+Calculates a smoothing spline.
+</td>
+</tr>
+<!--ftcurvs-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftcurvs.html">
+ftcurvs</a></td>
+<td>
+Calculates a smoothing spline.
+</td>
+</tr>
+<!--ftgetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftgetp.html">
+ftgetp</a></td>
+<td>
+Retrieves <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#ControlParameter">control parameters</a> for <a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/fithome.html">Fitgrid</a> routines.
+</td>
+</tr>
+<!--ftkurv-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftkurv.html">
+ftkurv</a></td>
+<td>
+Calculates an interpolatory spline for parametric curves.
+</td>
+</tr>
+<!--ftkurvd-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftkurvd.html">
+ftkurvd</a></td>
+<td>
+Calculates an interpolatory spline for parametric curves; it also calculates first and second derivatives of the interpolatory spline.
+</td>
+</tr>
+<!--ftkurvp-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftkurvp.html">
+ftkurvp</a></td>
+<td>
+Calculates an interpolatory spline under tension through a sequence of points in the plane forming a closed curve.
+</td>
+</tr>
+<!--ftkurvpd-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftkurvpd.html">
+ftkurvpd</a></td>
+<td>
+Calculates an interpolatory spline for closed parametric curves; it also calculates first and second derivatives of the interpolatory spline.
+</td>
+</tr>
+<!--ftsetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftsetp.html">
+ftsetp</a></td>
+<td>
+Sets <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#ControlParameter">control parameters</a> for <a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/fithome.html">Fitgrid</a> routines.
+</td>
+</tr>
+<!--ftsurf-->
+<tr>
+<td valign=top>
+<a href="Built-in/ftsurf.html">
+ftsurf</a></td>
+<td>
+Calculates an interpolatory surface passing through a rectangular grid of function values.
+</td>
+</tr>
+<!--idsfft-->
+<tr>
+<td valign=top>
+<a href="Built-in/idsfft.html">
+idsfft</a></td>
+<td>
+Interpolates 2D random data.
+</td>
+</tr>
+<!--int2p-->
+<tr>
+<td valign=top>
+<a href="Built-in/int2p.html">
+int2p</a></td>
+<td>
+Interpolates pressure levels to a different set of pressure levels.
+</td>
+</tr>
+<!--int2p_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/int2p_n.html">
+int2p_n</a></td>
+<td>
+Interpolates pressure levels to a different set of pressure levels on the given dimension.
+</td>
+</tr>
+<!--int2p_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/int2p_n_Wrap.html">
+int2p_n_Wrap</a></td>
+<td>
+Interpolates pressure levels to a different set of pressure levels and returns metadata.
+</td>
+</tr>
+<!--int2p_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/int2p_Wrap.html">
+int2p_Wrap</a></td>
+<td>
+Interpolates pressure levels to a different set of pressure levels and returns metadata.
+</td>
+</tr>
+<!--latlon_to_SCRIP-->
+<tr>
+<td valign=top>
+<a href="ESMF/latlon_to_SCRIP.html">
+latlon_to_SCRIP</a></td>
+<td>
+Writes the description of a lat/lon grid to a SCRIP file.
+</td>
+</tr>
+<!--linint1-->
+<tr>
+<td valign=top>
+<a href="Built-in/linint1.html">
+linint1</a></td>
+<td>
+Interpolates from one series to another using piecewise linear interpolation across the rightmost dimension.
+</td>
+</tr>
+<!--linint1_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/linint1_n.html">
+linint1_n</a></td>
+<td>
+Interpolates from one series to another using piecewise linear interpolation across the given dimension.
+</td>
+</tr>
+<!--linint1_n_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/linint1_n_Wrap.html">
+linint1_n_Wrap</a></td>
+<td>
+Interpolates from one series to another using piecewise linear interpolation across the given dimension, and retains metadata.
+</td>
+</tr>
+<!--linint1_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/linint1_Wrap.html">
+linint1_Wrap</a></td>
+<td>
+Interpolates from one series to another using piecewise linear interpolation, and retains metadata.
+</td>
+</tr>
+<!--linint2-->
+<tr>
+<td valign=top>
+<a href="Built-in/linint2.html">
+linint2</a></td>
+<td>
+Interpolates from a rectilinear grid to another rectilinear grid using bilinear interpolation.
+</td>
+</tr>
+<!--linint2_points-->
+<tr>
+<td valign=top>
+<a href="Built-in/linint2_points.html">
+linint2_points</a></td>
+<td>
+Interpolates from a rectilinear grid to an unstructured grid or locations using bilinear interpolation.
+</td>
+</tr>
+<!--linmsg-->
+<tr>
+<td valign=top>
+<a href="Built-in/linmsg.html">
+linmsg</a></td>
+<td>
+Linearly interpolates to fill in missing values.
+</td>
+</tr>
+<!--linmsg_n-->
+<tr>
+<td valign=top>
+<a href="Built-in/linmsg_n.html">
+linmsg_n</a></td>
+<td>
+Linearly interpolates to fill in missing values, given the dimension to do the interpolation across.
+</td>
+</tr>
+<!--natgrid-->
+<tr>
+<td valign=top>
+<a href="Built-in/natgrid.html">
+natgrid</a></td>
+<td>
+Interpolates data from an unstructured (randomly-spaced) grid to a rectilinear grid using natural neighbor interpolation.
+</td>
+</tr>
+<!--natgrid_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/natgrid_Wrap.html">
+natgrid_Wrap</a></td>
+<td>
+Interpolates data from an unstructured (randomly-spaced) grid to a rectilinear grid using natural neighbor interpolation and retains metadata.
+</td>
+</tr>
+<!--natgridd-->
+<tr>
+<td valign=top>
+<a href="Built-in/natgridd.html">
+natgridd</a></td>
+<td>
+Interpolates double data on an unstructured grid to a rectilinear grid. (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--natgrids-->
+<tr>
+<td valign=top>
+<a href="Built-in/natgrids.html">
+natgrids</a></td>
+<td>
+Interpolates float data on an unstructured grid to a rectilinear grid. (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--nngetaspectd-->
+<tr>
+<td valign=top>
+<a href="Built-in/nngetaspectd.html">
+nngetaspectd</a></td>
+<td>
+Retrieves an <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#Aspect">aspect</a> at a specified coordinate position.
+</td>
+</tr>
+<!--nngetaspects-->
+<tr>
+<td valign=top>
+<a href="Built-in/nngetaspects.html">
+nngetaspects</a></td>
+<td>
+Retrieves an <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#Aspect">aspect</a> at a specified coordinate position.
+</td>
+</tr>
+<!--nngetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/nngetp.html">
+nngetp</a></td>
+<td>
+Retrieves <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#ControlParameter">control parameters</a> for <a href="http://www.ncarg.ucar.edu//ngmath/natgrid/nnhome.html">Natgrid</a> routines.
+</td>
+</tr>
+<!--nngetsloped-->
+<tr>
+<td valign=top>
+<a href="Built-in/nngetsloped.html">
+nngetsloped</a></td>
+<td>
+Retrieves a <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#Slope">slope</a> at a specified coordinate position.
+</td>
+</tr>
+<!--nngetslopes-->
+<tr>
+<td valign=top>
+<a href="Built-in/nngetslopes.html">
+nngetslopes</a></td>
+<td>
+Retrieves a <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#Slope">slope</a> at a specified coordinate position.
+</td>
+</tr>
+<!--nngetwts-->
+<tr>
+<td valign=top>
+<a href="Built-in/nngetwts.html">
+nngetwts</a></td>
+<td>
+Retrieves natural neighbors and weights for the function values at those neighbors.
+</td>
+</tr>
+<!--nngetwtsd-->
+<tr>
+<td valign=top>
+<a href="Built-in/nngetwtsd.html">
+nngetwtsd</a></td>
+<td>
+Retrieves natural neighbors and weights for the function values at those neighbors.
+</td>
+</tr>
+<!--nnpnt-->
+<tr>
+<td valign=top>
+<a href="Built-in/nnpnt.html">
+nnpnt</a></td>
+<td>
+Interpolates from 2D random data to get values at a specified set of points.
+</td>
+</tr>
+<!--nnpntd-->
+<tr>
+<td valign=top>
+<a href="Built-in/nnpntd.html">
+nnpntd</a></td>
+<td>
+Interpolates from 2D random double data to get values at a specified set of points.  (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--nnpntend-->
+<tr>
+<td valign=top>
+<a href="Built-in/nnpntend.html">
+nnpntend</a></td>
+<td>
+Terminates interpolation from 2D random data to get values at a specified set of points.
+</td>
+</tr>
+<!--nnpntendd-->
+<tr>
+<td valign=top>
+<a href="Built-in/nnpntendd.html">
+nnpntendd</a></td>
+<td>
+Terminates interpolation from 2D random data to get values at a specified set of points.
+</td>
+</tr>
+<!--nnpntinit-->
+<tr>
+<td valign=top>
+<a href="Built-in/nnpntinit.html">
+nnpntinit</a></td>
+<td>
+Initializes internal quantities, for given input data, to allow subsequent <a href="Built-in/nnpnt.html"><strong>nnpnt</strong></a> calls to interpolate at specified points.
+</td>
+</tr>
+<!--nnpntinitd-->
+<tr>
+<td valign=top>
+<a href="Built-in/nnpntinitd.html">
+nnpntinitd</a></td>
+<td>
+Initializes internal quantities, for given input data, to allow subsequent <a href="Built-in/nnpntd.html"><strong>nnpntd</strong></a> calls to interpolate at specified points.
+</td>
+</tr>
+<!--nnpntinits-->
+<tr>
+<td valign=top>
+<a href="Built-in/nnpntinits.html">
+nnpntinits</a></td>
+<td>
+Initializes internal quantities, for given input data, to allow subsequent <a href="Built-in/nnpnts.html"><strong>nnpnts</strong></a> calls to interpolate at specified points.
+</td>
+</tr>
+<!--nnpnts-->
+<tr>
+<td valign=top>
+<a href="Built-in/nnpnts.html">
+nnpnts</a></td>
+<td>
+Interpolates from 2D random float data to get values at a specified set of points.  (<font color=red>Deprecated version</font>.)
+</td>
+</tr>
+<!--nnsetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/nnsetp.html">
+nnsetp</a></td>
+<td>
+Sets <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#ControlParameter">control parameters</a> for <a href="http://www.ncarg.ucar.edu//ngmath/natgrid/nnhome.html">Natgrid</a> routines.
+</td>
+</tr>
+<!--obj_anal_ic-->
+<tr>
+<td valign=top>
+<a href="Built-in/obj_anal_ic.html">
+obj_anal_ic</a></td>
+<td>
+Iterative improvement objective analysis.
+</td>
+</tr>
+<!--obj_anal_ic_deprecated-->
+<tr>
+<td valign=top>
+<a href="Contributed/obj_anal_ic_deprecated.html">
+obj_anal_ic_deprecated</a></td>
+<td>
+Iterative correction objective analysis (Cressman, Barnes) (<font color="red">deprecated</font>)
+</td>
+</tr>
+<!--obj_anal_ic_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/obj_anal_ic_Wrap.html">
+obj_anal_ic_Wrap</a></td>
+<td>
+Iterative improvement objective analysis and returns meta data.
+</td>
+</tr>
+<!--poisson_grid_fill-->
+<tr>
+<td valign=top>
+<a href="Built-in/poisson_grid_fill.html">
+poisson_grid_fill</a></td>
+<td>
+Replaces all missing (_FillValue) values in a grid with values derived from solving Poisson's equation via relaxation.
+</td>
+</tr>
+<!--rcm2points-->
+<tr>
+<td valign=top>
+<a href="Built-in/rcm2points.html">
+rcm2points</a></td>
+<td>
+Interpolates data on a curvilinear grid (i.e. RCM, WRF, NARR) to  an unstructured grid.
+</td>
+</tr>
+<!--rcm2rgrid-->
+<tr>
+<td valign=top>
+<a href="Built-in/rcm2rgrid.html">
+rcm2rgrid</a></td>
+<td>
+Interpolates data on a curvilinear grid (i.e. RCM, WRF, NARR) to a rectilinear grid.
+</td>
+</tr>
+<!--rectilinear_to_SCRIP-->
+<tr>
+<td valign=top>
+<a href="ESMF/rectilinear_to_SCRIP.html">
+rectilinear_to_SCRIP</a></td>
+<td>
+Writes the description of a rectilinear grid to a SCRIP file.
+</td>
+</tr>
+<!--rgrid2rcm-->
+<tr>
+<td valign=top>
+<a href="Built-in/rgrid2rcm.html">
+rgrid2rcm</a></td>
+<td>
+Interpolates data on a rectilinear lat/lon grid to a curvilinear grid like those used by the RCM, WRF and NARR models/datasets.
+</td>
+</tr>
+<!--shgetnp-->
+<tr>
+<td valign=top>
+<a href="Built-in/shgetnp.html">
+shgetnp</a></td>
+<td>
+Finds the nearest point, or points (in a specified set of points), to a given point in 3-space.
+</td>
+</tr>
+<!--shgetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/shgetp.html">
+shgetp</a></td>
+<td>
+Retrieves <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#ControlParameter">control parameters</a> for <a href="http://www.ncarg.ucar.edu//ngmath/shgrid/shhome.html">Shgrid</a> routines.
+</td>
+</tr>
+<!--shgrid-->
+<tr>
+<td valign=top>
+<a href="Built-in/shgrid.html">
+shgrid</a></td>
+<td>
+Interpolates data from an unstructured grid to a grid in 3-space.
+</td>
+</tr>
+<!--shsetp-->
+<tr>
+<td valign=top>
+<a href="Built-in/shsetp.html">
+shsetp</a></td>
+<td>
+Sets <a href="http://www.ncarg.ucar.edu//ngmath/definitions.html#ControlParameter">control parameters</a> for <a href="http://www.ncarg.ucar.edu//ngmath/shgrid/shhome.html">Shgrid</a> routines.
+</td>
+</tr>
+<!--sigma2hybrid-->
+<tr>
+<td valign=top>
+<a href="Built-in/sigma2hybrid.html">
+sigma2hybrid</a></td>
+<td>
+Interpolates from sigma to hybrid coordinates.
+</td>
+</tr>
+<!--trop_wmo-->
+<tr>
+<td valign=top>
+<a href="Built-in/trop_wmo.html">
+trop_wmo</a></td>
+<td>
+Determines the level of the thermal tropopause.
+</td>
+</tr>
+<!--unstructured_to_ESMF-->
+<tr>
+<td valign=top>
+<a href="ESMF/unstructured_to_ESMF.html">
+unstructured_to_ESMF</a></td>
+<td>
+Writes the description of an unstructured grid to an ESMF file.
+</td>
+</tr>
+<!--wrf_interp_1d-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_interp_1d.html">
+wrf_interp_1d</a></td>
+<td>
+Linearly interpolates a one-dimensional variable in the vertical.
+</td>
+</tr>
+<!--wrf_interp_2d_xy-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_interp_2d_xy.html">
+wrf_interp_2d_xy</a></td>
+<td>
+Extracts a cross section from a given input field.
+</td>
+</tr>
+<!--wrf_interp_3d_z-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_interp_3d_z.html">
+wrf_interp_3d_z</a></td>
+<td>
+Interpolates to a specified pressure/height level.
+</td>
+</tr>
+<!--wrf_user_interp_level-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_interp_level.html">
+wrf_user_interp_level</a></td>
+<td>
+Interpolates a horizontal slice from a three-dimensional WRF-ARW field at the given vertical level(s).
+</td>
+</tr>
+<!--wrf_user_interp_line-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_interp_line.html">
+wrf_user_interp_line</a></td>
+<td>
+Interpolates a two-dimensional WRF-ARW field along a line.
+</td>
+</tr>
+<!--wrf_user_intrp2d-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_intrp2d.html">
+wrf_user_intrp2d</a></td>
+<td>
+Interpolates ARW WRF 2D model data along a given line (<font color=red>deprecated</font>).
+</td>
+</tr>
+<!--wrf_user_intrp3d-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_intrp3d.html">
+wrf_user_intrp3d</a></td>
+<td>
+Interpolates ARW WRF model data vertically or horizontally (<font color=red>deprecated</font>).
+</td>
+</tr>
+<!--wrf_user_unstagger-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_unstagger.html">
+wrf_user_unstagger</a></td>
+<td>
+Unstaggers an input variable along a specified dimension.
+</td>
+</tr>
+<!--wrf_user_vert_cross-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_vert_cross.html">
+wrf_user_vert_cross</a></td>
+<td>
+Interpolates a vertical cross-section from a three-dimensional WRF-ARW field at the given vertical level(s).
+</td>
+</tr>
+<!--wrf_user_vert_interp-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_vert_interp.html">
+wrf_user_vert_interp</a></td>
+<td>
+Vertically interpolates ARW WRF variables given the type of surface and a set of new levels.
+</td>
+</tr>
+
+</table><p>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/interp.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:26 GMT -->
+</html>

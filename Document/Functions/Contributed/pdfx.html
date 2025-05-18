@@ -1,0 +1,539 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/pdfx.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:02 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (general applied math)">
+<meta name="keywords" content="pdfx">
+<title>pdfx</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>pdfx</h1>
+
+<p>
+Generates a univariate probability density distribution (PDF).
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function pdfx (
+		x        : numeric,  
+		nbin [1] : integer,  
+		opt  [1] : logical   
+	)
+
+	<a href="../return_val.html">return_val</a> [*] :  double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>An array of any dimensionality.
+</p>
+<em>nbin</em>
+<p class=indent>Number of bins to use. Specifying 0 will result in 25 bins being used.
+Otherwise, this must be greater than 2.
+</p>
+<em>opt</em>
+<p class=indent>Attributes may be associated with this variable. The attributes
+will alter the default behavior of the <strong>pdfx</strong> function. 
+</p>
+<p class=indent>
+Setting opt=True will activate use of the options.
+<ul>
+<li><em>v510</em>     - The original <strong>pdfx</strong> 
+has been modified. The new [5.1.1] function was created to be more consistent
+with the <a href="pdfxy.html"><strong>pdfxy</strong></a> released with 5.1.1. 
+Setting the <em>v510</em> attribute to True will result in the 
+original v5.1.0 version being used.  [see <b>Description</b>] 
+<li><em>bin_min</em>  - minimum value for the bin boundary.
+<li><em>bin_max</em>  - maximum value for the bin boundary.
+<li><em>bin_nice</em> - "nice" bin boundary values and 
+spacing will be calculated. If the user has specified <em>nbin</em>,
+it will be ignored and the calculated number of bins
+will be used. 
+</ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A one-dimensional (double) array of size <em>nbin</em> or, if the
+<em>nbin</em> argument is set to zero, 25. The PDF units 
+are percent [%]. The following
+attributes will be associated with the return variable.
+<p>
+
+<ul>
+<li><em>nbins</em> - the number of bins used.
+
+<li><em>bin_spacing</em> - the spacing of the bins used.
+
+<li><em>bin_bound_min</em> - the minimum boundary bin value.
+
+<li><em>bin_bound_max</em> - the maximum boundary bin value.
+
+<li><em>bin_center</em> - a one-dimensional array of size <em>nbins</em> 
+containing the  center points of each bin. For plotting these can be 
+used as the "x" [abscissa].
+
+<li><em>bin_bounds</em> - a one-dimensional array of size (<em>nbins</em> +1)
+containing the boundaries of each bin.
+
+</ul>
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The input array <em>x</em> is partitioned into <em>nbin</em> sections.
+The user may set the desired minimum, maximum and the number of bins.
+<p>
+The original version of <strong>pdfx</strong>
+was released in version <b>5.1.0</b>. The 
+<a href="pdfxy.html"><strong>pdfxy</strong></a> function was released with version
+<b>5.1.1</b>. To make the 
+<strong>pdfx</strong> consistent with the
+binning used with <a href="pdfxy.html"><strong>pdfxy</strong></a>, the function
+was altered: (a) The default number of bins was changed from 50 to 25; (b) the
+method used to create the bins was changed; (c) the returned units were changed
+from fraction to percent. Setting the <em>v510</em> attribute
+to True will result in the original version of 
+<strong>pdfx</strong> being used. 
+<p>
+<strong>pdfx</strong> returns type "double".
+If type float is desired, use <a href="dble2flt.html"><strong>dble2flt</strong></a>.
+<p>
+NCL has a specialized histogram plot function. This creates very
+nice looking plots and returns information as attributes. See below.
+<p>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="pdfxy.html"><strong>pdfxy</strong></a>,
+<a href="genNormalDist.html"><strong>genNormalDist</strong></a>,
+<a href="../../Graphics/Interfaces/gsn_histogram.html"><strong>gsn_histogram</strong></a>
+<p>
+<a href="../../../Applications/histo.html">histogram plot examples</a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<b>Example 1 </b>
+<p>
+Using default settings:
+
+<pre>
+  z    = <a href="../Built-in/random_normal.html"><strong>random_normal</strong></a> (0,50, (/96,144/))
+  zpdf = <strong>pdfx</strong>(z, 0, False)   ; default is 25
+  <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>( zpdf )
+</pre>
+
+The <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a> yields:
+<pre>
+
+Variable: zpdf
+Type: <b>double</b>
+Total Size: 200 bytes
+             25 values
+Number of Dimensions: 1
+Dimensions and sizes:   [x | 25]
+Coordinates: 
+            x: [-194.2047106424968..221.6110242207845]
+Number Of Attributes: 10
+  bin_center :  <ARRAY of 25 elements>
+  bin_bounds :  <ARRAY of 26 elements>
+  bin_bound_min :       -202.8675384521484
+  bin_bound_max :       230.2738520304362
+  bin_spacing : 17.32565561930339
+  nbins :       25
+  nMax :        13824
+  nUse :        13824
+  long_name :   PDF
+  units :       frequency
+</pre>
+  The <a href="../Built-in/print.html"><strong>print</strong></a>(zpdf@bin_center+"   "+zpdf) yields:
+<pre>
+(0)    -194.205   0.000217014
+(1)    -176.879   0
+(2)    -159.553   0.000868056
+(3)    -142.228   0.00253183
+(4)    -124.902   0.00679977
+(5)    -107.576   0.0143229
+(6)    -90.2508   0.0284288
+(7)    -72.9251   0.0485388
+(8)    -55.5995   0.0744358
+(9)    -38.2738   0.098235
+(10    -20.9482   0.126447
+(11)    -3.6225   0.1386
+(12)    13.7032   0.133825
+(13)    31.0288   0.112992
+(14)    48.3545   0.0882523
+(15)    65.6801   0.0578704
+(16)    83.0058   0.0350116
+(17)    100.331   0.0183738
+(18)    117.657   0.00896991
+(19)    134.983   0.00325521 
+(20)    152.308   0.00130208
+(21)    169.634   0.00036169
+(22)    186.96    0.000217014
+(23)    204.285   7.2338e-05
+(24)    221.611   7.2338e-05
+</pre>
+A simple x-y plot could be generated by using the 
+returned <em>bin_center</em> atribute values as "x"
+and the "zpdf" values as "y".
+<pre>
+
+  wks  = <a href="../../Graphics/Interfaces/gsn_open_wks.html"><strong>gsn_open_wks</strong></a> ("x11","PDFX")
+  res  = True
+  res@<a href="../../Graphics/Resources/gsn.html#gsnCenterString"><em>gsnCenterString</em></a> = "default 25 bins"
+  plot = <a href="../../Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a> (wks, zpdf@bin_center, zpdf, res)
+
+</pre>
+The default return type is "double". The above could be changed to "float" via
+<pre>
+  zpdf = <a href="dble2flt.html"><strong>dble2flt</strong></a>(<strong>pdfx</strong>(z, 0, False) )
+</pre>
+<p>
+<b>Example 2:</b> <p>
+Specify that 50 bins be used and the minimum and/or maximum 
+boundary bin values to use. This will result in a more 'ragged' PDF.
+<p>
+<pre>
+  opt         = True
+  opt@bin_min = -250.
+  opt@bin_max =  250.
+  zpdf = <strong>pdfx</strong>(z, 50, opt)  
+</pre>
+
+<p>
+<b>Example 3:</b><p>
+Specify that 35 bins be used and have the function
+calculate "nice" boundary bin values and spacing.
+<p>
+<pre>
+  opt          = True
+  opt@bin_nice = True
+  zpdf = <strong>pdfx</strong>(z, 35, opt)  
+</pre>
+<p>
+<b>Example 4:</b><p> 
+Calculate the probability density distributions of
+multiple arrays and plot the distributions of each on a single plot.
+The arrays need not be the same size or shape but they must be
+of the same variable. Let a(nt,nn,mm), b(kk), c(jdim,idim) 
+be from different sources,
+<p>
+See Examples 1 and 2 at:
+<p>
+<a href="../../../Applications/pdf.html">Probability Distributions</a>
+<pre> 
+</pre> 
+
+<p>
+<b>Example 5:</b><p>
+Use the original <strong>pdfx</strong> version.
+<p>
+<pre>
+  opt          = True
+  opt@v510     = True
+  zpdf = <strong>pdfx</strong>(z, 0, opt)  
+</pre>
+
+<p>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/pdfx.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:02 GMT -->
+</html>

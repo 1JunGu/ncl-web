@@ -1,0 +1,691 @@
+<html>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/ESMF/ESMF_regrid_with_weights.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:00 GMT -->
+<head>
+<meta name="description" content="ESMF regridding functions (interpolation)">
+<meta name="keywords" content="ESMF_regrid_with_weights">
+<title>ESMF_regrid_with_weights</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../ESMF.html">ESMF</a>,
+<a class=crumb href="../regrid.html">Regridding</a>,
+<a class=crumb href="../interp.html">Interpolation</a>
+<br>
+<h1>ESMF_regrid_with_weights</h1>
+
+<p>
+Using the provided weight file, regrids data from one lat/lon grid to another.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.1.0">version 6.1.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/esmf/ESMF_regridding.ncl"  ; This library is <b>automatically loaded </b>
+                                                                  ; from NCL V6.5.0 onward.
+                                                                  ; No need for user to explicitly load.
+
+	function ESMF_regrid_with_weights (
+		data        : numeric,  
+		wgtFile [1] : string,   
+		opt     [1] : logical   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>data</em>
+<p class=indent>The data to regrid. This can be any dimensionality, but the rightmost
+dimensions must match what was originally indicated in the source
+grid file.
+</p>
+<em>wgtFile</em>
+<p class=indent>Name of the input NetCDF file that contains the weights.
+</p>
+<em>opt</em>
+<p class=indent>An optional variable to set certain attributes for this function.
+If set to False, none of the attributes will have an effect.
+</p>
+<p class=indent>
+
+See below for a full list of attributes.
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+<strong>ESMF_regrid_with_weights</strong> regrids
+data from a source grid to a destination grid, using weights stored in
+the <em>wgtFile</em> NetCDF file.<p>
+
+As of V6.1.0 (not V6.1.0-beta), this function will return type float
+if <em>data</em> is float, and double if <em>data</em> is double or
+the special "ReturnDouble" attribute is set to True (see below).
+<p>
+
+<b>Important changes incorporated in the return variable after
+V6.1.0-beta was released</b>:<p>
+
+<ul>
+
+<li>If regridding to a rectilinear grid, coordinate variables will be
+attached by default. If regridding to a curvilinear grid, "lat2d" and
+"lon2d" attributes will be attached to the output array.  If
+regridding to an unstructured grid, "lat1d" and "lon1d" attributes
+will be attached to the output array.  You can set opt@CopyVarCoords
+to False if you don't want this behavior.<p>
+
+<li>"long_name" attribute will not be modified<p>
+
+<li>"remap" attribute added - Note: there's a "bug" if the "patch"
+method is used. The ESMF regridder returns "Bilinear remapping" as
+the mapping used.<p>
+
+<li>"missing_value" attribute added<p>
+
+<li>"_FillValue_original" attribute removed<p>
+
+<li>"missing_value_original" attribute removed<p>
+
+</ul>
+<p>
+
+<strong>ESMF_regrid_with_weights</strong> is part of
+a suite of regridding routines based
+on <a href="http://www.earthsystemmodeling.org/">Earth System Modeling
+Framework</a> (ESMF) software. 
+<p>
+
+This function can be used on its own to regrid data from one grid to
+another, if you already have a weights file. Otherwise the regridding
+can be done via a multi-step process that includes this function.
+<p>
+
+If you don't already have a weights file, then the multi-step process
+involves:
+
+<ol>
+<li>Creating the description NetCDF file for the source grid.
+<li>Creating the description NetCDF file for the destination grid.
+<li>Calculating and writing the weights to a NetCDF file.
+<li>Applying the weights to regrid the data from the source grid to
+the destination grid.
+<li>Copying attributes and coordinates to the newly regridded variable.
+</ol>
+<p>
+
+The source and destination grids can be
+<a href="../../glossary.html#RectilinearGrid">rectilinear</a>,
+<a href="../../glossary.html#CurvilinearGrid">curvilinear</a>, or
+<a href="../../glossary.html#UnstructuredGrid">unstructured</a>.
+<p>
+
+The weight file is generated
+by <a href="ESMF_regrid_gen_weights.html"><strong>ESMF_regrid_gen_weights</strong></a>.
+<p>
+
+The attributes that can be attached to <em>opt</em> include:
+
+<ul>
+
+<a name="CopyVarAtts"></a>
+<li><b>CopyVarAtts</b> (default = True)<p>
+
+The attributes of the variable being regridded will be copied to the
+regridded variable, unless this is set to False.  Attributes that
+will <i>not</i> be copied include "lat2d", "lon2d", "lat1d",
+"lon1d", and "coordinates".
+<p>
+
+<a name="CopyVarCoords"></a>
+<li><b>CopyVarCoords</b> (default = True in V6.1.0 and later)<p>
+
+This function will attempt to copy over any coordinate arrays, unless
+this attribute is set to False. It gets the coordinate information from
+the weights file.
+<p>
+
+If the destination grid is rectilinear, then the coordinates will be
+copied as 1D coordinate arrays. If the destination grid is
+curvilinear, then the coordinates will be attached as special
+attributes called "lat2d" and "lon2d".  If the destination grid is
+unstructured, then the coordinates will be attached as special
+attributes called "lat1d" and "lon1d".
+<p>
+
+<li><b>ReturnDouble</b> (added in V6.1.0)<p>
+
+If set to True, then the return value from this function will
+be double, regardless of the type of the input <em>data</em>.<p>
+
+<li><b>RemapIndexes</b> (default = False)<p>
+
+If set to True, then this indicates that the weights in this file
+apply to a 1D grid is a subset of a larger <i>n</i>D grid. This means
+the values have to be remapped onto the original destination grid
+using index values indicated by <em>Indexes</em>, and the dimension
+sizes indicated by <em>IndexesDims</em>.
+<p>
+
+<li><b>Indexes</b> (no default)<p>
+See the description for <em>RemapIndexes</em>.
+<p>
+
+<li><b>IndexesDims</b> (no default)<p>
+See the description for <em>RemapIndexes</em>.
+<p>
+
+<li><b>PrintTimings</b> (default = False)<p>
+Print the CPU time spent in this routine.
+<p>
+
+<li><b>Debug</b> (default = False)
+Turn on debug print statements.
+<p>
+
+</ul>
+<p>
+
+This function is part of a suite of regridding routines based on
+the <a href="http://www.earthsystemmodeling.org/">Earth System
+Modeling Framework</a> (ESMF) software.
+<p>
+
+The four basic steps for regridding data using the ESMF tools include:
+
+<ol>
+
+<li>Writing the description of the source grid to a SCRIP or ESMF
+description file, using one of
+<a href="latlon_to_SCRIP.html"><strong>latlon_to_SCRIP</strong></a>,
+<a href="rectilinear_to_SCRIP.html"><strong>rectilinear_to_SCRIP</strong></a>,
+<a href="curvilinear_to_SCRIP.html"><strong>curvilinear_to_SCRIP</strong></a>,
+or <a href="unstructured_to_ESMF.html"><strong>unstructured_to_ESMF</strong></a>.
+
+<p>
+
+<li>Writing the description of the destination grid to a SCRIP or ESMF
+description file, using one of
+<a href="latlon_to_SCRIP.html"><strong>latlon_to_SCRIP</strong></a>,
+<a href="rectilinear_to_SCRIP.html"><strong>rectilinear_to_SCRIP</strong></a>,
+<a href="curvilinear_to_SCRIP.html"><strong>curvilinear_to_SCRIP</strong></a>,
+or <a href="unstructured_to_ESMF.html"><strong>unstructured_to_ESMF</strong></a>.
+<p>
+
+<li>Generating the weights using
+<a href="ESMF_regrid_gen_weights.html"><strong>ESMF_regrid_gen_weights</strong></a>.
+<p>
+
+<li>Regridding the data using <strong>ESMF_regrid_with_weights</strong>.
+<p>
+</ol>
+<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="ESMF_regrid.html"><strong>ESMF_regrid</strong></a>,
+<a href="latlon_to_SCRIP.html"><strong>latlon_to_SCRIP</strong></a>,
+<a href="rectilinear_to_SCRIP.html"><strong>rectilinear_to_SCRIP</strong></a>,
+<a href="curvilinear_to_SCRIP.html"><strong>curvilinear_to_SCRIP</strong></a>,
+<a href="unstructured_to_ESMF.html"><strong>unstructured_to_ESMF</strong></a>,
+<a href="ESMF_regrid_gen_weights.html"><strong>ESMF_regrid_gen_weights</strong></a>,
+<strong>ESMF_regrid_with_weights</strong>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+There's a suite of examples available on
+our <a href="../../../Applications/ESMF.html">ESMF applications page</a>, and
+a set of <a href="../../../Applications/Templates/index.html">basic ESMF template
+scripts</a> to help you get started.
+<p>
+
+<b>Example 1</b><p>
+
+This example regrids data from a global rectilinear NCEP grid (64 x
+181) to a 5x5 degree lat/lon grid (25 x 72), using the default
+"bilinear" interpolation method.
+<p>
+
+This example assumes the description and weight files have not been
+generated. If they have, then see example 2 below.
+<p>
+
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/esmf/ESMF_regridding.ncl"
+
+begin
+;---Input file
+    srcFileName = "sst.nc"
+
+;---Output (and input) files
+    srcGridName = "src_SCRIP.nc"
+    dstGridName = "dst_SCRIP.nc"
+    wgtFileName = "NCEP_2_Rect.nc"
+
+;----------------------------------------------------------------------
+; Convert original source NCEP grid to a SCRIP convention file.
+;----------------------------------------------------------------------
+    src_file = addfile(srcFileName,"r")
+    temp     = src_file->TEMP(0,0,:,:)
+
+    Opt                = True
+    Opt@GridMask       = where(.not.ismissing(temp),1,0)   ; use "Mask2D" in NCL V6.2.1 and earlier
+    Opt@ForceOverwrite = True
+    Opt@PrintTimings   = True
+    Opt@Title          = "NCEP Grid"
+
+    rectilinear_to_SCRIP(srcGridName,temp&LAT,temp&LON,Opt)
+
+;---Clean up
+    delete(Opt)
+
+;----------------------------------------------------------------------
+; Convert destination grid to a SCRIP convention file.
+;----------------------------------------------------------------------
+    Opt                = True
+    Opt@LLCorner       = (/ -60.d,   0.d/)
+    Opt@URCorner       = (/  60.d, 355.d/)
+    Opt@ForceOverwrite = True
+    Opt@PrintTimings   = True
+
+    latlon_to_SCRIP(dstGridName,"5x5",Opt)
+
+;---Clean up
+    delete(Opt)
+
+;----------------------------------------------------------------------
+; Generate the weights that take you from the NCEP grid to a
+; 5x5 degree grid.
+;----------------------------------------------------------------------
+    Opt                      = True
+    Opt@InterpMethod         = "bilinear"     ; default
+    Opt@ForceOverwrite       = True
+    Opt@PrintTimings         = True
+
+    ESMF_regrid_gen_weights(srcGridName,dstGridName,wgtFileName,Opt)
+
+    delete(Opt)
+
+;----------------------------------------------------------------------
+; Apply the weights to a given variable on the NCEP file.
+;----------------------------------------------------------------------
+    Opt                = True
+    Opt@PrintTimings   = True
+
+    temp_regrid = ESMF_regrid_with_weights(temp,wgtFileName,Opt)
+    printVarSummary(temp_regrid)
+
+;----------------------------------------------------------------------
+; Plot the original and regridded data on a panel plot
+;----------------------------------------------------------------------
+    wks = gsn_open_wks("ps","ESMF")             ; ESMF.ps
+    gsn_define_colormap(wks,"gui_default")      ; choose colormap
+
+    res                     = True              ; Plot mods desired.
+    res@gsnDraw             = False             ; We will panel later.
+    res@gsnFrame            = False
+
+    res@gsnMaximize         = True              ; Maximize plot
+    
+    res@mpMaxLatF           = 60                 ; choose map range
+    res@mpMinLatF           = -60 
+
+    res@cnFillOn            = True              ; color plot desired
+    res@cnLinesOn           = False             ; turn off contour lines
+    res@cnLineLabelsOn      = False             ; turn off contour lines
+
+    res@cnLevelSelectionMode =  "ManualLevels"   ; manual levels
+    res@cnMinLevelValF       = 4                 ; min level
+    res@cnMaxLevelValF       = 32                ; max level
+    res@cnLevelSpacingF      =  2                ; interval
+
+    res@lbLabelBarOn        = False              ; Labelbar will be in panel
+
+;---Plot data on original grid
+    res@gsnAddCyclic = False
+
+    dims = tostring(dimsizes(temp))
+    res@tiMainString = "NCEP monthly means temp: original data (" + \
+                       str_join(dims," x ") + ")"
+    plot_orig = gsn_csm_contour_map(wks,temp,res)     
+
+;---Plot data interpolated onto 5x5 degree grid
+    res@gsnAddCyclic = True
+
+    dims = tostring(dimsizes(temp_regrid))
+    res@tiMainString = "NCEP monthly means temp: regridded to 5x5 grid (" +\
+                       str_join(dims," x ") + ")"
+    plot_regrid = gsn_csm_contour_map(wks,temp_regrid,res)     
+
+;---Resources for paneling
+    pres                  = True
+    pres@gsnMaximize      = True
+    pres@gsnPanelLabelBar = True
+
+    gsn_panel(wks,(/plot_orig,plot_regrid/),(/2,1/),pres)
+end
+</pre>
+<p>
+
+<b>Example 2</b><p>
+
+This example assumes the "NCEP_2_Rect.nc" weight file from the
+previous example has already been generated. It uses this
+weight file to regrid a new variable from the same "sst.nc" 
+input file.
+<p>
+
+
+The same weights file can only be used if the source and destination
+lat/lon grids are the same, <i>and</i> if the mask for the new
+variable is the same as the mask for the "temp" variable.
+<p>
+
+<pre>
+. . .
+    sfile = addfile("sst.nc","r")
+    P  = sfile->P(0,0,:,:)
+
+    P_regrid = <strong>ESMF_regrid_with_weights</strong>(P,"NCEP_2_Rect.nc",False)
+    printVarSummary(P_regrid)
+. . .
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/ESMF/ESMF_regrid_with_weights.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:00 GMT -->
+</html>

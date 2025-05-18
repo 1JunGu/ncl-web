@@ -1,0 +1,538 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ftsurf.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:31 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (ngmath routines)">
+<meta name="keywords" content="ftsurf">
+<title>ftsurf</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../interp.html">Interpolation</a>,
+<a class=crumb href="../ngmath.html">Ngmath routines</a>
+<br>
+<h1>ftsurf</h1>
+
+<p>
+Calculates an interpolatory surface passing through a rectangular grid of
+function values.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function ftsurf (
+		xi     : numeric,  
+		yi     : numeric,  
+		zi     : numeric,  
+		xo [*] : numeric,  
+		yo [*] : numeric   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>xi</em>
+<p class=indent>An array whose rightmost dimension is of arbitrary length (say <i>mi</i>),
+containing X coordinates for grid lines in the X direction.
+</p>
+<em>yi</em>
+<p class=indent>An array whose rightmost dimension is of arbitrary length (say <i>ni</i>)
+containing Y coordinates for grid lines in the Y direction.  All but the
+rightmost dimensions of <em>xi</em> and <em>yi</em> must be the same.
+</p>
+<em>zi</em>
+<p class=indent>An array having two or more dimensions.  The rightmost two dimensions must have
+sizes <i>mi</i> and <i>ni</i>, respectively, and the leftmost two dimensions
+must be the same as <em>xi</em> and <em>yi</em>.  These last two dimensions
+contain functional values at the grid points defined by <em>xi</em> and
+<em>yi</em>.  <em>zi</em> should not contain missing values, as missing values
+are not treated in any special way.
+</p>
+<em>xo</em>
+<p class=indent>A 1D array specifying the X (say <i>mo</i> in number) coordinates for the
+output interpolation grid.
+</p>
+<em>yo</em>
+<p class=indent>A 1D array specifying the Y (say <i>no</i> in number) coordinates for the
+output interpolation grid.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+An array of interpolated values defined on the specified output grid.  The
+returned array will have the same number of dimensions as <em>zi</em>.  The
+final two dimension sizes of the returned array are the same as those of
+<em>xo</em> and <em>yo</em>, respectively.  All other dimension sizes will
+be the same as those of <em>zi</em>.  If <em>zo</em> is the array returned
+from interpolating data on a two-dimensional array <em>zi</em>, then
+<em>zo</em><i>(i,j)</i> will be the interpolated value at
+<i>(</i><em>xo</em><i>(i),</i><em>yo</em><i>(j))</i> for 0 .le. <i>i</i> .lt.
+<i>mo</i> and 0 .le. <i>j</i> .lt. <i>no</i>.  <em>zo</em> will be of
+type double if any of the input is double, and float otherwise. <P>
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The surface computed is a tensor product of splines under tension.
+<strong>ftsurf</strong> is in the
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/fithome.html">Fitgrid</a> package -
+a package containing 1D and 2D interpolators using cubic splines under 
+tension.  
+
+<P>
+<strong>ftsurf</strong> does not recognize missing values.
+
+There are some parameters that can alter the behavior of
+<strong>ftsurf</strong>.  These parameters all have reasonable default
+values.  However, users may change any of these parameters by invoking
+<a href="ftsetp.html"><strong>ftsetp</strong></a> prior to calling <strong>ftsurf</strong>.
+<strong>ftsurf</strong> is called <i>after</i> all of the desired values
+for control parameters have been set.
+<P>
+Control parameters that apply to <strong>ftsurf</strong> are:
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sig">sig</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sl1">zx1</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sln">zxm</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">zy1</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">zyn</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">z11</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">zm1</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">z1n</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">zmn</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">df1</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">df2</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">df3</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">df4</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">df5</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">df6</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">df7</a>,
+<a href="http://www.ncarg.ucar.edu//ngmath/fitgrid/parameters.html#Sf1">df8</a>.
+<P>
+The value for the parameter sig specifies the tension factor.
+Values near zero result in a cubic spline; large values (e.g. 30)
+result in nearly a polygonal line. A typical value is 1. (the
+default).  For values of sig larger than about 40. an internal
+overflow exception may be generated, so sig should be kept smaller
+than that value.
+<P>
+zx1 is an array containing mi X-partial derivatives of the
+function along the line xi(0), that is zx1(j) is the X-partial
+derivative at point (x(0),y(j)) for j=0,ni-1. This parameter may
+be defaulted by setting the value for df1 appropriately. The
+default is to compute zx1 internally. Values for zx1 can be set
+using the procedure <a href="ftsetp.html"><strong>ftsetp</strong></a>. 
+<P>
+zxm is an array containing n X-partial derivatives of the
+function along the line xi(mi-1), that is zxm(j) is the X-partial
+derivative at point (xi(mi-1),yi(j)) for j=0,ni-1. This parameter
+may be defaulted by setting the value for df2 appropriately.
+The default is to compute zx2 internally. Values for zxm can
+be set using the procedure <a href="ftsetp.html"><strong>ftsetp</strong></a>. 
+<P>
+zy1 is an array containing m Y-partial derivatives of the
+function along the line yi(0), that is zy1(j) is the Y-partial
+derivative at point (x(i),y(0)) for i=0,mi-1. This parameter may
+be defaulted by setting the value for df3 appropriately. The
+default is to compute zy1 internally. Values for zy1 can be set
+using the procedure <a href="ftsetp.html"><strong>ftsetp</strong></a>. 
+<P>
+zyn is an array containing m Y-partial derivatives of the
+function along the line yi(ni-1), that is zyn(j) is the Y-partial
+derivative at point (x(i),y(ni-1)) for i=0,mi-1. This parameter
+may be defaulted by setting the value for df4 appropriately.
+The default is to compute zyn internally. Values for zyn can be
+set using the procedure <a href="ftsetp.html"><strong>ftsetp</strong></a>. 
+<P>
+z11, zm1, z1n, zmn specify X-Y-partial derivatives of the
+function at the four corners (xi(0),yi(0)), (xi(mi-1),yi(0)),
+(xi(0),yi(ni-1)), (xi(mi-1),yi(ni-1)), These parameters may be
+defaulted by setting the values for df5, df6, df7, df8,
+appropriately. The default is to compute z11, zm1, z1n, zmn
+internally. 
+<P>
+You can extrapolate values with <strong>ftsurf</strong> (that is
+calculate interpolated values for coordinates outside of the scope
+of the input grid), but these values are, in general, unreliable.
+
+
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><P>
+
+<PRE>
+begin
+  nxi = 11
+  nyi = 17
+  xi = <a href="fspan.html"><strong>fspan</strong></a>(0.,1.,nxi)
+  yi = <a href="fspan.html"><strong>fspan</strong></a>(0.,1.,nyi)
+  zi = <a href="new.html"><strong>new</strong></a>((/nxi,nyi/),float)
+  do i=0,nxi-1
+    do j=0,nyi-1
+      zi(i,j) = 0.5 + 0.25*<a href="sin.html"><strong>sin</strong></a>(-7.*xi(i)) + 0.25*<a href="cos.html"><strong>cos</strong></a>(5.*yi(j))
+    end do
+  end do
+  nxo = 31
+  nyo = 21
+  xo = <a href="fspan.html"><strong>fspan</strong></a>(0.,1.,nxo)
+  yo = <a href="fspan.html"><strong>fspan</strong></a>(0.,1.,nyo)
+  zo = <strong>ftsurf</strong>(xi,yi,zi,xo,yo)
+end
+</PRE>
+
+<B>Example 2</B><P>
+
+<PRE>
+begin
+
+;
+;  Create the input arrays.
+;
+  nxi = 11
+  nyi = 17
+  xi = <a href="fspan.html"><strong>fspan</strong></a>(0.,1.,nxi)
+  yi = <a href="fspan.html"><strong>fspan</strong></a>(0.,1.,nyi)
+  zi = <a href="new.html"><strong>new</strong></a>((/2,5,nxi,nyi/),float)
+ 
+  do m=0,1
+    divm = 1./(1.*(m+1))
+    do k=0,4
+      divk = 1./(1.*(k+1))
+      do i=0,nxi-1
+          zi(m,k,i,:) = 0.5 + 0.25*divk*<a href="sin.html"><strong>sin</strong></a>(-7.*xi(i)) + 0.25*divm*<a href="cos.html"><strong>cos</strong></a>( 5.*yi)
+      end do
+    end do
+  end do
+
+;
+;  Set up the output grid and interpolate.
+;
+  nxo = 31
+  nyo = 21
+  xo = <a href="fspan.html"><strong>fspan</strong></a>(0.,1.,nxo)
+  yo = <a href="fspan.html"><strong>fspan</strong></a>(0.,1.,nyo)
+  zo = <strong>ftsurf</strong>(xi,yi,zi,xo,yo)
+
+;
+; Create an XWorkstation object.
+;
+  wid = create "<strong>ftsurf</strong>" xWorkstationClass defaultapp
+    "wkPause" : "True"
+  end create
+
+  rho = 3.
+  theta = 36.
+  phi = 67.
+
+;
+;  Draw plots.
+;
+  do m=0,1
+    do k=0,4
+      <a href="tdez2d.html"><strong>tdez2d</strong></a>(wid,xo,yo,zo(m,k,:,:),rho,theta,phi,6)
+      <a href="frame.html"><strong>frame</strong></a>(wid)
+    end do
+  end do
+
+end
+</PRE>
+</p><a name="Errors"></a>
+<h2>Errors</h2>
+<p>
+<DL>
+   <DD> = 1 if the number of <em>xi</em> or <em>yi</em> values is less than 2.
+   <DD> = 2 if the <em>xi</em> or <em>yi</em> values are not strictly increasing.
+</DL>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/ftsurf.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:31 GMT -->
+</html>

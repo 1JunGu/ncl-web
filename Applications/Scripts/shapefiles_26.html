@@ -1,0 +1,235 @@
+;----------------------------------------------------------------------
+; shapefiles_26.ncl
+;
+; Concepts illustrated:
+;   - Reading hourly station precipitation from different data sources
+;   - Calculate monthly precipitation totals
+;   - Predefine a grid  
+;   - Apply objective analysis [Barnes: Iterative Correction]
+;   - Maskthe derived grid  based on a geographical area 
+;     obtained from a USA shapefile
+;   - Plot station locations and the derived gridded values 
+;----------------------------------------------------------------------
+;  Source file overview
+;
+;netcdf Combined_4Datasets_201808C {
+;dimensions:
+;        time = 744 ;
+;        station = 2229 ;
+;variables:
+;        double Time(time) ;
+;                Time:units = "hours since 1800-01-01 00:00:00" ;
+;                Time:calendar = "standard" ;
+;        float Latitude(station) ;
+;                Latitude:units = "degrees_north" ;
+;                Latitude:hdf_name = "Latitude" ;
+;        float Longitude(station) ;
+;                Longitude:units = "degrees_east" ;
+;                Longitude:hdf_name = "Longitude" ;
+;        float METAR_Precipitation(time, station) ;
+;                METAR_Precipitation:_FillValue = -9999.f ;
+;        float HRRR_Precipitation(time, station) ;
+;                HRRR_Precipitation:_FillValue = 1.e+20f ;
+;        float GOES_Precipitation(time, station) ;
+;                GOES_Precipitation:_FillValue = -1.f ;
+;        float Stage4_Precipitation(time, station) ;
+;               Stage4_Precipitation:_FillValue = 1.e+20f ;
+;----------------------------------------------------------------------
+load "./shapefile_utils.ncl"
+
+;---Source data
+
+  diri  = "./"
+  fili  = "Combined_4Datasets_201808C.nc"
+  pthi  = diri+fili
+  f     = addfile(pthi,"r")
+
+  yyyymm= cd_calendar(f->Time(0),-1)
+
+  a     = f->METAR_Precipitation       ; (time, station) 
+  a@long_name = "METAR: Hourly"
+  a@units     = "mm"
+
+  b     = f->HRRR_Precipitation        ; (time, station) 
+  b@long_name = "HRRR: Hourly"
+  b@units     = "mm"
+
+  c     = f->GOES_Precipitation        ; (time, station) 
+  c@long_name = "GOES: Hourly"
+  c@units     = "mm"
+
+  d     = f->Stage4_Precipitation      ; (time, station) 
+  d@long_name = "Stage4: Hourly"
+  d@units     = "mm"
+
+  lat  = f->Latitude    
+  lon  = f->Longitude  
+
+  printMinMax(lat,0)      ; min=  24.556   max= 49.3183
+  printMinMax(lon,0)      ; min=-124.563   max=-67.7921
+  print("-----")
+
+;---Create destinaltion grid. Resolution is arbitrary.
+
+  latS = min(lat)
+  latN = max(lat)
+  lonW = min(lon)
+  lonE = max(lon)
+
+  dlat = 0.5              ; lat grid spacing
+  dlon = 0.5              ; lon  "     "
+  nlat = toint((latN-latS)/dlat) + 1
+  mlon = toint((lonE-lonW)/dlon) + 1
+  LAT  = fspan(latS, latN, nlat) 
+  LON  = fspan(lonW, lonE, mlon) 
+  LAT!0= "LAT"
+  LON!0= "LON"
+  LAT@units = "degrees_north"
+  LON@units = "degrees_east"
+
+;---Calculate monthly total (sum) at each station  
+
+  aMon := dim_sum_n(a,0)                          ; (station)
+  aMon@long_name = "METAR: Monhly Total"
+  aMon@units     = a@units
+
+  bMon := dim_sum_n(b,0)                          ; (station)
+  bMon@long_name = "HRRR: Monhly Total"
+  bMon@units     = b@units
+
+  cMon := dim_sum_n(c,0)                          ; (station)
+  cMon@long_name = "GOES: Monhly Total"
+  cMon@units     = c@units
+
+  dMon := dim_sum_n(d,0)                          ; (station)
+  dMon@long_name = "Stage4: Monhly Total"
+  dMon@units     = d@units
+
+;---Use iterative correction objective analysis
+;---Specify search radii [play with this]
+
+  rscan    = (/1.5,1,0.5/)
+
+  aGRID    = obj_anal_ic_Wrap(lon,lat,aMon, LON,LAT,rscan,False)
+  bGRID    = obj_anal_ic_Wrap(lon,lat,bMon, LON,LAT,rscan,False)
+  cGRID    = obj_anal_ic_Wrap(lon,lat,cMon, LON,LAT,rscan,False)
+  dGRID    = obj_anal_ic_Wrap(lon,lat,dMon, LON,LAT,rscan,False)
+
+  printVarSummary(aGRID)      
+  printMinMax(aGRID,0)
+  print("-----")
+
+;============================================================
+; Rewad
+;============================================================
+
+;---Read the new mask from the NetCDF file 
+  dirShape   = "./"
+  mask_fname = dirShape+"/usa_mask_5m.nc"
+  fmask      = addfile(mask_fname,"r")
+  usa_mask  = fmask->USA_mask
+
+;---Create masked data array
+
+  aGRIDmask = where(usa_mask.eq.1, aGRID, aGRID@_FillValue)
+  bGRIDmask = where(usa_mask.eq.1, bGRID, bGRID@_FillValue)
+  cGRIDmask = where(usa_mask.eq.1, cGRID, cGRID@_FillValue)
+  dGRIDmask = where(usa_mask.eq.1, dGRID, dGRID@_FillValue)
+  copy_VarMeta(aGRID, aGRIDmask) ; meta data
+  copy_VarMeta(bGRID, bGRIDmask)
+  copy_VarMeta(cGRID, cGRIDmask)
+  copy_VarMeta(dGRID, dGRIDmask)
+
+  printVarSummary(aGRIDmask)
+  printMinMax(aGRIDmask,0)
+
+;============================================================
+; PLOT
+;============================================================
+  dirP = "./"
+  filP = "shapefiles_26"
+  pthP = dirP+filP
+  wks  = gsn_open_wks ("png", pthP)              ; send graphics to PNG file
+  
+  res                     = True                 ; plot mods desired
+  res@gsnDraw             = False
+  res@gsnFrame            = False
+  res@gsnAddCyclic        = False
+
+  res@cnFillOn            = True
+;;res@cnFillPalette       = "precip2_17lev"   ; set color map
+;;res@cnFillPalette       = "prcp_1"          ; set color map
+  res@cnFillPalette       = "WhiteBlueGreenYellowRed"
+  res@cnLinesOn           =  False            ; Turn off contour lines
+  res@cnLineLabelsOn      =  False            ; Turn off contour line labels
+  res@lbLabelBarOn        =  False            ; turn off individual cb's
+
+  res@cnFillMode          = "RasterFill"
+ ;res@cnRasterSmoothingOn = True
+
+;;res@cnLevelSelectionMode= "ManualLevels"    ; set manual contour levels
+;;res@cnMinLevelValF      =  25.0             ; set min contour level
+;;res@cnMaxLevelValF      = 400.0             ; set max contour level
+;;res@cnLevelSpacingF     =  25.0              ; set contour spacing
+
+  res@cnLevelSelectionMode= "ExplicitLevels"              
+  res@cnLevels            = (/2.5,10,25,37.5,50,75,100,125,150 \
+                             ,175,200,225,250,275,300,350,400/)
+  res@pmLabelBarWidthF    = 0.8              ; default = 0.6
+                                             ; map outlines
+; Area Limit
+  res@mpLimitMode         = "Corners"
+  res@mpLeftCornerLatF    = 21.0
+  res@mpLeftCornerLonF    = -122.0
+  res@mpRightCornerLatF   = 47.75
+  res@mpRightCornerLonF   = -61.75
+    
+; Projection Settings
+  res@mpProjection        = "LambertConformal"
+  res@mpLambertParallel1F = 38.5
+  res@mpLambertParallel2F = 38.5
+  res@mpLambertMeridianF  = 262.5
+
+ ;res@pmTickMarkDisplayMode = "Always"
+ ;res@mpFillOn           = False
+  res@mpOutlineDrawOrder = "PostDraw"
+  res@mpOutlineBoundarySets = "GeophysicalAndUSStates"
+  res@mpPerimOn = True
+
+  res@gsnLeftString  = ""
+  res@gsnRightString = ""
+
+  plot    = new (4,"graphic")
+  plot(0) = gsn_csm_contour_map(wks, aGRIDmask, res)
+  plot(1) = gsn_csm_contour_map(wks, bGRIDmask, res)
+  plot(2) = gsn_csm_contour_map(wks, cGRIDmask, res)
+  plot(3) = gsn_csm_contour_map(wks, dGRIDmask, res)
+
+; Station Marker Settings
+  mkres = True
+  mkres@gsMarkerIndex   = 16
+  mkres@gsMarkerSizeF   = 0.001
+  mkres@gsnCoordsAttach = True
+  mkres@gsnCoordsLat    = lat
+  mkres@gsnCoordsLon    = lon
+  dum0 = gsn_add_polymarker(wks,plot(0),lon,lat,mkres)
+  dum1 = gsn_add_polymarker(wks,plot(1),lon,lat,mkres)
+  dum2 = gsn_add_polymarker(wks,plot(2),lon,lat,mkres)
+  dum3 = gsn_add_polymarker(wks,plot(3),lon,lat,mkres)
+
+  txres               = True
+  txres@txFontHeightF = 0.0200 
+  txres@txJust        = "CenterCenter"
+ ;txres@txFontColor   = 
+  txt0 = gsn_add_text(wks,plot(0),"METAR"  ,-118.0, 25.0 ,txres)
+  txt1 = gsn_add_text(wks,plot(1),"HRRR"   ,-118.0, 25.0 ,txres)
+  txt2 = gsn_add_text(wks,plot(2),"GOES"   ,-118.0, 25.0 ,txres)
+  txt3 = gsn_add_text(wks,plot(3),"Stage4" ,-118.0, 25.0 ,txres)
+
+  resP = True
+  resP@gsnMaximize         = True
+ ;resP@gsnPanelMainString  = "obj_anal_ic: "+yyyymm
+  resP@gsnPanelMainString  = "Precipitation (mm): "+yyyymm
+  resP@gsnPanelLabelBar    = True                ; add common colorbar
+;;resP@lbLabelFontHeightF  = 0.007               ; make labels smaller
+  gsn_panel(wks,plot,(/2,2/),resP)               ; now draw as one plot

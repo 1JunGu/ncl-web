@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/method_2.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 16:16:08 GMT -->
+<head>
+<meta name="description" content="NCL file IO example page. Demonstrates
+how to write netCDF data by predefining the file.">
+<TITLE>NCL: Creating NetCDF output with file predefinition</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_io.html">File IO</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+><a class=crumb href="write_netcdf.html">write netCDF</a><br>
+
+<h1>NCL: Creating NetCDF output with file predefinition</h1>
+
+This approach requires the use of NCL's 
+<a href="../Document/Functions/Built-in/setfileoption.html"><strong>setfileoption</strong></a>,
+<a href="../Document/Functions/Built-in/fileattdef.html"><strong>fileattdef</strong></a>,
+<a href="../Document/Functions/Built-in/filedimdef.html"><strong>filedimdef</strong></a>, <a href="../Document/Functions/Built-in/filevardef.html"><strong>filevardef</strong></a>, and
+<a href="../Document/Functions/Built-in/filevarattdef.html"><strong>filevarattdef</strong></a>.  It requires the user to define file
+contents before data values are written to file.
+<p>
+
+This code snippet shows the efficient way to write netCDF files from
+NCL. It is assumed that the variables and coordinates have already
+been read from another file or have been created within an NCL
+script. Variables are assumed to already have the required metadata,
+that is, attributes and dimension names, and if appropriate, coordinate
+information.
+<p>
+
+<pre>
+    ...
+    ;===================================================================  
+    ; Assume variables T, PS and ORO exist and that they have 
+    ; associated meta data: (a) coordinate variables time, lev, lat, lon       
+    ; and (b) attributes
+    ;===================================================================  
+        ntim  = <a href="../Document/Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a>(time)                 ; get dimension sizes  
+	klev  = dimsizes(lev)                                               
+	nlat  = dimsizes(lat)  
+	nlon  = dimsizes(lon)      
+
+        diro = "./"                     ; Output directory
+        filo = "example.nc"             ; Output file
+	<a href="../Document/Functions/Built-in/system.html"><strong>system</strong></a>("/bin/rm -f " + diro + filo)    ; remove if exists
+	fout  = addfile (diro + filo, "c")  ; open output file
+
+    ;===================================================================
+    ; explicitly declare file definition mode. Improve efficiency.
+    ;===================================================================
+        <a href="../Document/Functions/Built-in/setfileoption.html"><strong>setfileoption</strong></a>(fout,"DefineMode",True)
+
+    ;===================================================================
+    ; create global attributes of the file
+    ;===================================================================
+        fAtt               = True            ; assign file attributes
+	fAtt@title         = "NCL Efficient Approach to netCDF Creation"  
+	fAtt@source_file   =  "original-file.nc"
+	fAtt@Conventions   = "None"   
+	fAtt@creation_date = <a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a> ("date")        
+	<a href="../Document/Functions/Built-in/fileattdef.html"><strong>fileattdef</strong></a>( fout, fAtt )            ; copy file attributes    
+
+    ;===================================================================
+    ; predefine the coordinate variables and their dimensionality
+    ; Note: to get an UNLIMITED record dimension, we set the dimensionality
+    ; to -1 (or the actual size) and set the dimension name to True.
+    ;===================================================================
+        dimNames = (/"time", "lat", "lon", "lev"/)  
+	dimSizes = (/ -1   ,  nlat,  nlon, nlev /) 
+	dimUnlim = (/ True , False, False, False/)   
+	<a href="../Document/Functions/Built-in/filedimdef.html"><strong>filedimdef</strong></a>(fout,dimNames,dimSizes,dimUnlim)
+
+    ;===================================================================
+    ; predefine the the dimensionality of the variables to be written out
+    ;===================================================================
+    ; Here we are using NCL functions to facilitate defining 
+    ; each variable's dimension name(s) and type. 
+    ; The following could be replaced with explicit, user defined dimension 
+    ; names different from those associated with the variable in memory. 
+    ; Say, PS(time,lat,lon) in the NCL script. They could be redefined for the file via: 
+    ; filevardef(fout, "PS"   ,typeof(PS) ,(/"TIME","latitude","longitude"/)) 
+    ;===================================================================
+       <a href="../Document/Functions/Built-in/filevardef.html"><strong>filevardef</strong></a>(fout, "time" ,<a href="../Document/Functions/Built-in/typeof.html"><strong>typeof</strong></a>(time),<a href="../Document/Functions/Built-in/getvardims.html"><strong>getvardims</strong></a>(time)) 
+       filevardef(fout, "lev"  ,typeof(lev),getvardims(lev) )                           
+       filevardef(fout, "lat"  ,typeof(lat),getvardims(lat))                          
+       filevardef(fout, "lon"  ,typeof(lon),getvardims(lon))                          
+       filevardef(fout, "T"    ,typeof(T)  ,getvardims(T))    
+       filevardef(fout, "PS"   ,typeof(PS) ,getvardims(PS))          
+       filevardef(fout, "TOPOG",typeof(ORO),getvardims(ORO))  ; variable name on the file                
+                                                              ; different from name on script
+    ;===================================================================
+    ; Copy attributes associated with each variable to the file
+    ; All attributes associated with each variable will be copied.
+    ;====================================================================
+       <a href="../Document/Functions/Built-in/filevarattdef.html"><strong>filevarattdef</strong></a>(fout,"T",T)                           ; copy T attributes
+       filevarattdef(fout,"time" ,time)                    ; copy time attributes
+       filevarattdef(fout,"lev"  ,lev)                     ; copy lev attributes
+       filevarattdef(fout,"lat"  ,lat)                     ; copy lat attributes
+       filevarattdef(fout,"lon"  ,lon)                     ; copy lon attributes
+       filevarattdef(fout,"PS"   ,PS)                      ; copy PS attributes
+       filevarattdef(fout,"TOPOG",ORO)                     ; copy TOPOG attributes
+
+    ;===================================================================
+    ; explicitly exit file definition mode. **NOT REQUIRED**
+    ;===================================================================
+        <a href="../Document/Functions/Built-in/setfileoption.html"><strong>setfileoption</strong></a>(fout,"DefineMode",False)
+
+    ;===================================================================
+    ; output only the data values since the dimensionality and such have
+    ; been predefined. The "(/", "/)" syntax tells NCL to only output the
+    ; data values to the predefined locations on the file.
+    ;====================================================================
+       fout->time   = (/time/)     
+       fout->lev    = (/lev/)
+       fout->lat    = (/lat/)
+       fout->lon    = (/lon/) 
+       fout->T      = (/T/)
+       fout->Z      = (/PS/)
+       fout->TOPOG  = (/ORO/)
+</pre>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</BODY>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/method_2.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 16:16:08 GMT -->
+</HTML>
+

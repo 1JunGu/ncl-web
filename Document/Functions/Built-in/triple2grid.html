@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/triple2grid.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:18 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (regridding)">
+<meta name="keywords" content="triple2grid">
+<title>triple2grid</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../regrid.html">Regridding</a>
+<br>
+<h1>triple2grid</h1>
+
+<p>
+Places unstructured (randomly-spaced) data onto the nearest locations
+of a rectilinear grid.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function triple2grid (
+		x      [*] : numeric,  
+		y      [*] : numeric,  
+		data       : numeric,  
+		xgrid  [*] : numeric,  
+		ygrid  [*] : numeric,  
+		option [1] : logical   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="dimsizes.html"><strong>dimsizes</strong></a>(ygrid)][<a href="dimsizes.html"><strong>dimsizes</strong></a>(xgrid)] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<br>
+<em>y</em>
+<p class=indent>One-dimensional arrays of the same length containing the coordinates
+associated with the data values.  For geophysical variables,
+<em>x</em> and <em>y</em> correspond to longitude and latitude
+respectively.
+</p>
+<em>data</em>
+<p class=indent>A multi-dimensional array, whose rightmost dimension is the same length
+as <em>x</em> and <em>y</em>, containing the values associated with
+the <em>x</em> and <em>y</em> coordinates. Missing values, indicated
+via <em>data</em>@<a href="../../Language/fillval.html">_FillValue</a>, may be
+present but will be ignored.
+</p>
+<em>xgrid</em>
+<p class=indent>A one-dimensional array of length <em>M</em> containing the <em>x</em>
+coordinates associated with the returned two-dimensional grid. For
+geophysical variables, these are longitudes.  The coordinates' values
+must be monotonically increasing.
+</p>
+<em>ygrid</em>
+<p class=indent>A one-dimensional array of length <em>N</em> containing the <em>y</em>
+coordinates associated with the returned two-dimensional grid. For
+geophysical variables, these are latitudes.  The coordinates' values
+must be monotonically increasing.
+</p>
+<em>option</em>
+<p class=indent>If <em>option</em>=False, this function will operate under default
+mode with <em>domain</em> set to 1 and method set to 0. 
+<b>Warning</b>: <em>option</em>=False could result in many of the
+target grid point to be set to _FillValue if the number of grid points
+is large (ie: a high resolution grid) and the number of observations
+relatively small.
+</p>
+<p class=indent>
+
+If <em>option</em>=True, then this variable may have associated with
+it the attributes <em>domain</em>, <em>method</em> and/or <em>distmx</em>.</p>
+<p class=indent>
+
+<DL>
+
+<DT><em>option</em>@<em>method</em>
+
+<DD>An integer value that defaults to 1 if <em>option</em> is True,
+and 0 otherwise. A value of <em>option</em>@<em>method</em>=1 means to
+use the great circle distance formula for distance calculations.
+</p>
+<p class=indent>
+
+<DT><em>option</em>@<em>domain</em>
+
+<DD>A float value that should be set to a value &gt;= 0<br>
+(<font color=red>As of NCL V6.4.0, the default is 1.0. The default was
+previously set to 0.0</font>).</p>
+<p class=indent>
+
+If present, the larger this factor the wider the spatial domain
+allowed to influence grid boundary
+points. Typically, <em>option</em>@<em>domain</em> is 1.0 or 2.0. If
+<em>option</em>@<em>domain</em> <= 0.0, then values located outside
+the grid domain specified by <em>xgrid</em> and <em>ygrid</em> will
+not be used.
+</p>
+<p class=indent>
+                       
+<DT><em>option</em>@<em>distmx</em>
+
+<DD>Setting <em>option</em>@<em>distmx</em> allows the user
+to specify a search radius <b>(km)</b> beyond which observations
+are not considered  for nearest neighbor. 
+Only applicable when <em>option</em>@<em>method</em> = 1. 
+The default <em>distmx</em>=1e20 (km) means that every grid point
+will have a nearest neighbor. It is suggested that users specify some
+reasonable value for <em>distmx</em>.</p>
+<p class=indent> 
+
+</DL>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The return array will be <em>K</em> x <em>N</em> x <em>M</em>, where
+<em>K</em> represents the leftmost dimensions of <em>data</em>.  It
+will be of type double if any of the input is double, and float
+otherwise.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function
+puts <a href="../../glossary.html#UnstructuredGrid">unstructured</a>
+data (randomly-spaced) onto the nearest locations of
+a <a href="../../glossary.html#RectilinearGrid">rectilinear</a> grid.
+<p>
+
+Use the <a href="../Contributed/triple2grid_Wrap.html"><strong>triple2grid_Wrap</strong></a> function if metadata retention is desired.
+The interface is identical.
+<p>
+
+<font color=red>A bug was found in this function in NCL V6.3.0 and
+earlier which caused the output grid to be shifted by one cell in some
+cases. This bug was fixed in NCL V6.4.0; additionally, the default
+value of <em>domain</em> option is now set to 1.0 instead of
+0.0.</font>
+<p>
+
+This function does <i>not</i> perform interpolation; rather, each
+individual data point is assigned to the nearest grid point. It is
+possible that upon return, <em>grid</em> will contain grid points set
+to <em>data</em>@_FillValue if no
+<em>x</em>(<em>n</em>),<em>y</em>(<em>n</em>) are nearby.<P>
+                                                          
+For more robust regridding, see the
+<a href="../../../Applications/ESMF.html">ESMF regridding examples</a>, which
+show how to regrid data from and to <a href="../../glossary.html#RectilinearGrid">rectilinear</a>,
+<a href="../../glossary.html#CurvilinearGrid">curvilinear</a>, or
+<a href="../../glossary.html#UnstructuredGrid">unstructured</a>
+grids. <font color="red"><i>Available in <a href="../../../prev_releases.html#6.1.0">version 6.1.0</a> and later.</i></font>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Contributed/triple2grid_Wrap.html"><strong>triple2grid_Wrap</strong></a>,
+<a href="../ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a>,
+<a href="obj_anal_ic.html"><strong>obj_anal_ic</strong></a>,
+<a href="../Contributed/obj_anal_ic_Wrap.html"><strong>obj_anal_ic_Wrap</strong></a>,
+<a href="triple2grid2d.html"><strong>triple2grid2d</strong></a>,
+<a href="grid2triple.html"><strong>grid2triple</strong></a>, <a href="natgrid.html"><strong>natgrid</strong></a>,
+<a href="poisson_grid_fill.html"><strong>poisson_grid_fill</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><p>
+
+Assume <em>xlon</em>, <em>ylat</em> and <em>zVal</em> are one-dimensional
+(1D) arrays of length <em>KPTS</em>. Let <em>lon</em> and <em>lat</em>
+be 1D arrays specifying grid locations. Then:
+
+<pre>
+   grid = <strong>triple2grid</strong>(xlon,ylat,zVal, lon,lat, False)
+
+; Use triple2grid_Wrap if metadata retention is desired
+;  grid = <a href="../Contributed/triple2grid_Wrap.html"><strong>triple2grid_Wrap</strong></a>(xlon,ylat,zVal, lon,lat, False)
+</pre>
+<p>
+
+Generally, <em>opt</em>=False is <b>not</b> recommended unless there input triplet has a
+<b>large</b> number of points.
+<p>
+
+<B>Example 2</B><p>
+
+Same as Example 1 but observations within 275 km of a grid point
+will be considered as a "nearest neighbor". The great circle
+distance formula will be used to calculate distances.
+
+<pre>
+   opt  = True           ; method=1 and domain=1 are set (domain was set to 0 in NCL V6.3.0 and earlier)
+   opt@distmx = 275      ; kilometers
+   grid = <strong>triple2grid</strong>(xlon,ylat,zVal, lon,lat, opt)
+
+; Use triple2grid_Wrap if metadata retention is desired
+;  grid = <a href="../Contributed/triple2grid_Wrap.html"><strong>triple2grid_Wrap</strong></a>(xlon,ylat,zVal, lon,lat, opt)
+</pre>
+<p>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/triple2grid.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:18 GMT -->
+</html>

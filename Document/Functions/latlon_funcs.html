@@ -1,0 +1,680 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/latlon_funcs.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:25 GMT -->
+<head>
+<title>NCL Function Documentation: Lat/lon functions</title>
+</head>
+<body>
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="index.html" class="subitem">Category Listing</a></li>
+						<li><a href="list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+
+			      <div id="general_main">
+
+<h1>Lat/lon functions</h1>
+
+<table cellspacing=4 cellpadding=10 width=100% border=1>
+
+<!--add90LatX-->
+<tr>
+<td valign=top>
+<a href="Shea_util/add90LatX.html">
+add90LatX</a></td>
+<td>
+Adds two fake pole points (90S and 90N) to the rightmost dimension of the given data.
+</td>
+</tr>
+<!--add90LatY-->
+<tr>
+<td valign=top>
+<a href="Shea_util/add90LatY.html">
+add90LatY</a></td>
+<td>
+Adds two fake pole points (90S and 90N) to the leftmost dimension of the given data.
+</td>
+</tr>
+<!--area_poly_sphere-->
+<tr>
+<td valign=top>
+<a href="Built-in/area_poly_sphere.html">
+area_poly_sphere</a></td>
+<td>
+Calculates the area enclosed by an arbitrary polygon on the sphere.
+</td>
+</tr>
+<!--bin_avg-->
+<tr>
+<td valign=top>
+<a href="Built-in/bin_avg.html">
+bin_avg</a></td>
+<td>
+Calculates gridded binned averages and counts on a rectilinear grid using randomly spaced data.
+</td>
+</tr>
+<!--bin_sum-->
+<tr>
+<td valign=top>
+<a href="Built-in/bin_sum.html">
+bin_sum</a></td>
+<td>
+Calculates binned sums and counts over multiple invocations of the procedure on a rectilinear grid.
+</td>
+</tr>
+<!--gaus-->
+<tr>
+<td valign=top>
+<a href="Built-in/gaus.html">
+gaus</a></td>
+<td>
+Computes Gaussian latitudes and weights.
+</td>
+</tr>
+<!--gaus_lobat-->
+<tr>
+<td valign=top>
+<a href="Built-in/gaus_lobat.html">
+gaus_lobat</a></td>
+<td>
+Computes Gaussian latitudes and weights using Gauss-Lobatto quadrature.
+</td>
+</tr>
+<!--gaus_lobat_wgt-->
+<tr>
+<td valign=top>
+<a href="Built-in/gaus_lobat_wgt.html">
+gaus_lobat_wgt</a></td>
+<td>
+Computes Gauss-Lobatto weights given a one-dimensional array of  Gauss-Lobatto latitudes.
+</td>
+</tr>
+<!--gc_aangle-->
+<tr>
+<td valign=top>
+<a href="Built-in/gc_aangle.html">
+gc_aangle</a></td>
+<td>
+Finds the acute angle between two great circles on the globe.
+</td>
+</tr>
+<!--gc_clkwise-->
+<tr>
+<td valign=top>
+<a href="Built-in/gc_clkwise.html">
+gc_clkwise</a></td>
+<td>
+Tests clockwise/counterclockwise ordering of points on spherical polygon.
+</td>
+</tr>
+<!--gc_dangle-->
+<tr>
+<td valign=top>
+<a href="Built-in/gc_dangle.html">
+gc_dangle</a></td>
+<td>
+Finds the directed angle between two great circles having a specified intersection point.
+</td>
+</tr>
+<!--gc_inout-->
+<tr>
+<td valign=top>
+<a href="Built-in/gc_inout.html">
+gc_inout</a></td>
+<td>
+Determines if a list of lat/lon specified points are inside or outside of spherical lat/lon polygon(s).
+</td>
+</tr>
+<!--gc_latlon-->
+<tr>
+<td valign=top>
+<a href="Built-in/gc_latlon.html">
+gc_latlon</a></td>
+<td>
+Finds the great circle distance (true surface distance) between two points on the globe and interpolates points along the great circle.
+</td>
+</tr>
+<!--gc_onarc-->
+<tr>
+<td valign=top>
+<a href="Built-in/gc_onarc.html">
+gc_onarc</a></td>
+<td>
+Determines if a point on the globe lies on a specified great circle arc.
+</td>
+</tr>
+<!--gc_pnt2gc-->
+<tr>
+<td valign=top>
+<a href="Built-in/gc_pnt2gc.html">
+gc_pnt2gc</a></td>
+<td>
+Finds the angular distance from a point to a great circle.
+</td>
+</tr>
+<!--gc_qarea-->
+<tr>
+<td valign=top>
+<a href="Built-in/gc_qarea.html">
+gc_qarea</a></td>
+<td>
+Finds the area of a quadrilateral patch on the unit sphere.
+</td>
+</tr>
+<!--gc_tarea-->
+<tr>
+<td valign=top>
+<a href="Built-in/gc_tarea.html">
+gc_tarea</a></td>
+<td>
+Finds the area of a triangular patch on the unit sphere.
+</td>
+</tr>
+<!--getind_latlon2d-->
+<tr>
+<td valign=top>
+<a href="Contributed/getind_latlon2d.html">
+getind_latlon2d</a></td>
+<td>
+Returns the indices (subscripts) of two-dimensional latitude/longitude arrays closest to a user-specified latitude/longitude coordinate pair.
+</td>
+</tr>
+<!--landsea_mask-->
+<tr>
+<td valign=top>
+<a href="Shea_util/landsea_mask.html">
+landsea_mask</a></td>
+<td>
+Returns a grid that contains a land/sea mask given any latitude and longitude array.
+</td>
+</tr>
+<!--latGau-->
+<tr>
+<td valign=top>
+<a href="Contributed/latGau.html">
+latGau</a></td>
+<td>
+Generates gaussian latitudes and associated metadata.
+</td>
+</tr>
+<!--latGauWgt-->
+<tr>
+<td valign=top>
+<a href="Contributed/latGauWgt.html">
+latGauWgt</a></td>
+<td>
+Generates gaussian weights and associated metadata.
+</td>
+</tr>
+<!--latGlobeF-->
+<tr>
+<td valign=top>
+<a href="Contributed/latGlobeF.html">
+latGlobeF</a></td>
+<td>
+Generates latitudes and associated metadata for a global <a href="sphpk_grids.html#FixedGrids"> fixed</a> grid.
+</td>
+</tr>
+<!--latGlobeFo-->
+<tr>
+<td valign=top>
+<a href="Contributed/latGlobeFo.html">
+latGlobeFo</a></td>
+<td>
+Generates latitudes and associated metadata for a global <a href="sphpk_grids.html#FixedOffsetGrids"> fixed offset</a> grid.
+</td>
+</tr>
+<!--latlon2utm-->
+<tr>
+<td valign=top>
+<a href="Built-in/latlon2utm.html">
+latlon2utm</a></td>
+<td>
+Converts from lat/lon to UTM using a specified datum.
+</td>
+</tr>
+<!--latRegWgt-->
+<tr>
+<td valign=top>
+<a href="Contributed/latRegWgt.html">
+latRegWgt</a></td>
+<td>
+Generates [sin(lat+dlat/2)-sin(lat-dlat/2)] weights for equally  spaced (regular) global grids that will sum to 2.0.
+</td>
+</tr>
+<!--lonFlip-->
+<tr>
+<td valign=top>
+<a href="Contributed/lonFlip.html">
+lonFlip</a></td>
+<td>
+Reorders a global <a href="../glossary.html#RectilinearGrid">rectilinear</a> array about the central longitude coordinate variable.
+</td>
+</tr>
+<!--lonGlobeF-->
+<tr>
+<td valign=top>
+<a href="Contributed/lonGlobeF.html">
+lonGlobeF</a></td>
+<td>
+Generates longitudes and associated metadata for a global  <a href="sphpk_grids.html#FixedGrids"> fixed</a> grid.
+</td>
+</tr>
+<!--lonGlobeFo-->
+<tr>
+<td valign=top>
+<a href="Contributed/lonGlobeFo.html">
+lonGlobeFo</a></td>
+<td>
+Generates longitudes and associated metadata for a global  <a href="sphpk_grids.html#FixedOffsetGrids"> fixed offset</a> grid.
+</td>
+</tr>
+<!--lonPivot-->
+<tr>
+<td valign=top>
+<a href="Contributed/lonPivot.html">
+lonPivot</a></td>
+<td>
+Pivots an array about a user-specified longitude (<a href="../glossary.html#RectilinearGrid">rectilinear</a> grids only).
+</td>
+</tr>
+<!--nggcog-->
+<tr>
+<td valign=top>
+<a href="Built-in/nggcog.html">
+nggcog</a></td>
+<td>
+Calculates the latitudes and longitudes of a set of points approximating a circle at a given point on the surface of the globe.
+</td>
+</tr>
+<!--niceLatLon2D-->
+<tr>
+<td valign=top>
+<a href="Contributed/niceLatLon2D.html">
+niceLatLon2D</a></td>
+<td>
+Check two-dimensional map coordinates to see if they have a "nice" structure.
+</td>
+</tr>
+<!--NormCosWgtGlobe-->
+<tr>
+<td valign=top>
+<a href="Contributed/NormCosWgtGlobe.html">
+NormCosWgtGlobe</a></td>
+<td>
+Create normalized cosine weights that sum to 2.0.
+</td>
+</tr>
+<!--plt_pdfxy-->
+<tr>
+<td valign=top>
+<a href="Shea_util/plt_pdfxy.html">
+plt_pdfxy</a></td>
+<td>
+Creates a nice plot of the joint probability array created by the <a href="Contributed/pdfxy.html"><strong>pdfxy</strong></a> function.
+</td>
+</tr>
+<!--region_ind-->
+<tr>
+<td valign=top>
+<a href="Contributed/region_ind.html">
+region_ind</a></td>
+<td>
+Returns the indices (subscripts) of two-dimensional latitude/longitude arrays that span user specified latitude/longitude boundaries.
+</td>
+</tr>
+<!--utm2latlon-->
+<tr>
+<td valign=top>
+<a href="Built-in/utm2latlon.html">
+utm2latlon</a></td>
+<td>
+Converts from UTM to lat/lon using a specified datum.
+</td>
+</tr>
+<!--wrf_ij_to_ll-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_ij_to_ll.html">
+wrf_ij_to_ll</a></td>
+<td>
+Finds the nearest longitude, latitude locations to the specified model grid indices (i,j) (<font color=red>deprecated</font>).
+</td>
+</tr>
+<!--wrf_latlon_to_ij-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_latlon_to_ij.html">
+wrf_latlon_to_ij</a></td>
+<td>
+Finds the nearest model grid indices (i,j) to the specific location(s) in latitude and longitude (<font color=red>deprecated</font>).
+</td>
+</tr>
+<!--wrf_ll_to_ij-->
+<tr>
+<td valign=top>
+<a href="Built-in/wrf_ll_to_ij.html">
+wrf_ll_to_ij</a></td>
+<td>
+Finds the nearest model grid indices (i,j) to the specified location(s) in longitude and latitude (<font color=red>deprecated</font>).
+</td>
+</tr>
+<!--wrf_user_ij_to_ll-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_ij_to_ll.html">
+wrf_user_ij_to_ll</a></td>
+<td>
+Finds the nearest longitude, latitude locations to the specified WRF-ARW model grid indexes (<font color=red>deprecated</font>).
+</td>
+</tr>
+<!--wrf_user_ll_to_ij-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_ll_to_ij.html">
+wrf_user_ll_to_ij</a></td>
+<td>
+Finds the nearest WRF-ARW model grid indexes (i,j) to the requested longitude and latitude locations (<font color=red>deprecated</font>).
+</td>
+</tr>
+<!--wrf_user_ll_to_xy-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_ll_to_xy.html">
+wrf_user_ll_to_xy</a></td>
+<td>
+Finds the nearest WRF-ARW model grid indexes (0-based) that are the closest to the requested longitude and latitude locations.
+</td>
+</tr>
+<!--wrf_user_xy_to_ll-->
+<tr>
+<td valign=top>
+<a href="WRF_arw/wrf_user_xy_to_ll.html">
+wrf_user_xy_to_ll</a></td>
+<td>
+Finds the nearest longitude, latitude locations to the specified WRF-ARW model grid indexes.
+</td>
+</tr>
+
+</table><p>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/latlon_funcs.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:25 GMT -->
+</html>

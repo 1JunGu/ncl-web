@@ -1,0 +1,81 @@
+;----------------------------------------------------------------------
+; overlay_15.ncl
+;
+; Concepts illustrated:
+;   - Overlaying XY plots on each other
+;   - Using "setvalues" to change titles of an existing plot
+;   - Generating dummy data using "random_uniform"
+;----------------------------------------------------------------------
+
+begin
+  col1  = "red"      ; define colors for 
+  col2  = "green4"   ; each of 3 curves
+  col3  = "blue4"
+;
+; Create three curves with different start and end X values and of 
+; different lengths. Use random_uniform to generate dummy Y values.
+;
+  npts1 = 12
+  npts2 = 15
+  npts3 = 18
+  x1 = fspan(3,75,npts1)
+  x2 = fspan(1,70,npts2)
+  x3 = fspan(2,60,npts3)
+  y1 = toint(random_uniform( -7,12,npts1))
+  y2 = toint(random_uniform(-10,10,npts2))
+  y3 = toint(random_uniform( -5, 8,npts3))
+
+  wks   = gsn_open_wks ("png","overlay")  ; send graphics to PNG file
+
+;---Set resources common to all three plots
+  res                   = True
+  res@gsnMaximize       = True   ; Maximize size of each plot
+  res@vpWidthF          = 0.75   ; Change aspect ratio of
+  res@vpHeightF         = 0.4    ;   all three plots.
+  res@xyLineThicknessF  = 3.     ; Thicken the lines
+
+  res@xyLineColor       = col1
+  res@xyMarkerColor     = col1
+  res@tiMainString      = col1 + " curve only"
+  plot1 = gsn_csm_xy (wks,x1,y1,res)
+
+  res@xyLineColor       = col2
+  res@tiMainString      = col2 + " curve only"
+  res@tiXAxisString     = "X axis for plot2"
+  res@tiYAxisString     = "Y axis for plot2"
+  plot2 = gsn_csm_xy (wks,x2,y2,res)
+;
+; Create the plot that will become the base plot (plot3).
+;
+; Note that the X and Y axes associated with the base plot will be
+; used. If the overlaid plots have a wider range for the X/Y axes,
+; then you must set the trX/Y/Min/MaxF resources to change the range
+; of the axes as desired.
+;
+  res@xyLineColor     = col3
+  res@tiMainString    = col3 + " curve only"
+  res@tiXAxisString   = "X axis for plot3"
+  res@tiYAxisString   = "Y axis for plot3"
+  plot3 = gsn_csm_xy (wks,x3,y3,res)
+
+;
+; When doing an overlay, the tiMainString / tiYAxisString / tiXAxisString
+; are inherited from the base plot. Here, we fix the titles using
+; setvalues, but we could have also set this title when creating the
+; base plot.
+;
+  setvalues plot3
+    "tiMainString"  : col1 + ", " + col2 + " curves overlaid on " + \
+                      col3 + " curve"
+    "tiXAxisString" : "X axis inherited from third plot"
+    "tiYAxisString" : "Y axis inherited from third plot"
+  end setvalues
+
+;--Overlay plot1 and plot2 on plot3
+  overlay(plot3,plot1)   ; plot1 becomes part of plot3
+  overlay(plot3,plot2)   ; plot2 becomes part of plot3
+
+  draw(plot3)            ; This will draw all three plots, using
+  frame(wks)             ; plot3 as the base.
+end
+

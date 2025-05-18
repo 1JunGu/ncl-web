@@ -1,0 +1,445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/contourLev.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:12:48 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to change the contour levels.">
+<meta name="keywords" content="NCL, graphics, visualization, contour levels">
+<TITLE>NCL Graphics: Contour Levels</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a>
+    <h1>NCL Graphics: Contour Levels</h1>
+
+    <div class=mainimage>
+    <img src="Images/conLev_1_1_lg.png" align=left border=0></a>
+    </div>
+
+    <div class=text>
+    This page shows how to change contour levels.<p>
+    </div>
+
+    <div class=ex>
+    <!--conLab_1-->
+    <a name=ex1></a>
+    <a href="Images/conLev_1_lg.png">
+    <img src="Images/conLev_1_sm.png" align=left border=2></a>
+    <a href="Scripts/conLev_1.html">conLev_1.ncl</a>: 
+    Demonstrates how to set the contour levels manually.
+    <p>
+    <a href="../Document/Graphics/Resources/cn.html#cnLevelSelectionMode"><em>cnLevelSelectionMode</em></a> is set
+    to ManualLevels (default is AutomaticLevels), which allows the
+    user to set the minimum contour level (by
+    using <a href="../Document/Graphics/Resources/cn.html#cnMinLevelValF"><em>cnMinLevelValF</em></a>), the
+    maximum contour level
+    (via <a href="../Document/Graphics/Resources/cn.html#cnMaxLevelValF"><em>cnMaxLevelValF</em></a>), and the
+    contour interval
+    (with <a href="../Document/Graphics/Resources/cn.html#cnLevelSpacingF"><em>cnLevelSpacingF</em></a>).
+    <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Contours/NCL_conLev_1.html#sphx-glr-gallery-contours-ncl-conlev-1-py">here</a>.
+    </div>
+
+    <div class=ex>
+    <!--conLab_2-->
+    <a name=ex2></a>
+    <a href="Images/conLev_2_lg.png">
+    <img src="Images/conLev_2_sm.png" align=left border=2></a>
+    <a href="Scripts/conLev_2.html">conLev_2.ncl</a>: 
+    Sets the contours based solely on a user-defined number of contour levels.
+    <p>
+    When <a href="../Document/Graphics/Resources/cn.html#cnLevelSelectionMode"><em>cnLevelSelectionMode</em></a> is
+    set to EqualSpacedLevels (default is AutomaticLevels),
+    <a href="../Document/Graphics/Resources/cn.html#cnMaxLevelCount"><em>cnMaxLevelCount</em></a> can be used
+    to set the number of contour levels. You cannot set
+    <a href="../Document/Graphics/Resources/cn.html#cnMinLevelValF"><em>cnMinLevelValF</em></a>,
+    <a href="../Document/Graphics/Resources/cn.html#cnMaxLevelValF"><em>cnMaxLevelValF</em></a>, or
+    <a href="../Document/Graphics/Resources/cn.html#cnLevelSpacingF"><em>cnLevelSpacingF</em></a> when
+    using EqualSpacedLevels.
+    <p>
+    If the data array x is to be plotted, the contour interval is set
+    by the following equation:
+    <p>
+    (max(x)-min(x))/cnMaxLevelCount = CI
+    <p>
+    The minimum contour level is then set to min(x)+CI, and the
+    maximum contour level is set to max(x)-CI.
+    </div>
+
+    <div class=ex>
+    <!--conLev_3-->
+    <a name=ex3></a>
+    <a href="Images/conLev_3_lg.png">
+    <img src="Images/conLev_3_sm.png" align=left border=2></a>
+    <a href="Scripts/conLev_3.html">conLev_3.ncl</a>: 
+    This script demonstrates the meaning of color-filled
+    contour levels in NCL.
+    <p>
+    A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Contours/NCL_conLev_3.html#sphx-glr-gallery-contours-ncl-conlev-3-py">here</a>.
+
+    </div>
+
+    <div class=ex>
+    <!--conLev_4-->
+    <a name=ex4></a>
+    <a href="Images/conLev_4_lg.png">
+    <img src="Images/conLev_4_sm.png" align=left border=2></a>
+    <a href="Scripts/conLev_4.html">conLev_4.ncl</a>: 
+    Demonstrates how to set the contour levels explicitly. 
+    <p>
+    <a href="../Document/Graphics/Resources/cn.html#cnLevelSelectionMode"><em>cnLevelSelectionMode</em></a> is set
+    to ExplicitLevels (default is AutomaticLevels), which allows the
+    user to set the contour levels by
+    using <a href="../Document/Graphics/Resources/cn.html#cnLevels"><em>cnLevels</em></a>. The special
+    value "-1" is used to indicate transparent fill (no fill) 
+    for the -1 to 1 range.
+    <p>
+    <a href="../Document/Graphics/Resources/cn.html#cnFillColors"><em>cnFillColors</em></a> 
+    is also set here to explicitly set the colors to be used for the color shading. 
+
+<p>
+A Python version of this projection is available <a href="https://geocat-examples.readthedocs.io/en/latest/gallery/Contours/NCL_conLev_4.html#sphx-glr-gallery-contours-ncl-conlev-4-py">here</a>. 
+    </div>
+
+    <div class=ex>
+    <!--conLev_5-->
+    <a name=ex5></a>
+    <a href="Images/conLev_5_1_lg.png">
+    <img src="Images/conLev_5_1_sm.png" align=left border=2></a>
+    <a href="Images/conLev_5_2_lg.png">
+    <img src="Images/conLev_5_2_sm.png" align=left border=2></a>
+    <a href="Scripts/conLev_5.html">conLev_5.ncl</a>: 
+
+    Demonstrates how to create contours of a constant field. This
+    example only works if your data array also contains missing
+    values. The <a href="../Document/Functions/Built-in/where.html"><strong>where</strong></a> function is used set these
+    missing values to some constant value (that is not equal to the
+    constant value you already have).  This gives NCL two values to
+    contour.
+    <p>
+    The first frame creates a 2-box labelbar. The second frame creates
+    a 1-box labelbar, by coloring the 2-box labelbar in the same color.
+    <p>
+    In a future release of NCL, we plan to add a special contour
+    resource that handles constant fields more easily.
+    <p>
+    </div>
+
+
+    <div class=ex>
+    <!--conLev_6-->
+    <a name=ex6></a>
+    <a href="Images/conLev_6_1_lg.png">
+    <img src="Images/conLev_6_1_sm.png" align=left border=2></a>
+    <a href="Images/conLev_6_2_lg.png">
+    <img src="Images/conLev_6_2_sm.png" align=left border=2></a>
+    <a href="Scripts/conLev_6.html">conLev_6.ncl</a>: 
+
+    Demonstrates how to contour data using exact levels. This
+    example uses dummy data that has values at exact intervals
+    from -30 to 100 in steps of 10, and shows how to select
+    these contour levels and create a labelbar with centered labels.
+    <p>
+    The first plot is the default contour plot which lets NCL select
+    the contour levels. The second plot sets the contour levels
+    explicitly, and centers the labelbar labels.
+    <p>
+    The key is that you need to select one fewer contour levels than
+    what you want, since the contouring in NCL always represents
+    values in a range, and not exactly equal to a value.
+    </div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/contourLev.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:12:53 GMT -->
+</html>
+
+

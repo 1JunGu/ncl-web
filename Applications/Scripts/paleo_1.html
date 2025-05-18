@@ -1,0 +1,33 @@
+;************************************
+; CSM_Graphics: paleo_1.ncl
+;************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl" 
+;
+; This file still has to be loaded manually
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl" 
+;************************************
+begin
+;************************************
+  in = addfile("h_avg_Y0050_D000.00.nc","r")
+  T=in->T(0,0,:,{0:360})              ; get rid of cyclic points
+  lat_t=in->lat_t                     ; read in lat and lon
+  lon_t=in->lon_t({0:360})
+;************************************
+  wks = gsn_open_wks("png","paleo")   ; send graphics to PNG file
+  
+  res                      = True     ; plot mods desired
+  res@cnFillOn             = True     ; turn on color fill
+  res@cnFillPalette        = "gui_default" ; set color map
+  res@mpOutlineOn          = False    ; turn off continental outline
+  res@mpCenterLonF         = 180      ; center longitude at 180
+  res@mpFillOn             = False    ; turn off modern continents
+
+  plot = gsn_csm_contour_map(wks,T,res)     ; create plot
+ 
+end
+
+

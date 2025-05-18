@@ -1,0 +1,67 @@
+;*******************************************************
+; leg_sl_14.ncl
+;
+; Concepts illustrated:
+;   - Manually creating a legend using simple_legend
+;   - Drawing a legend for only two of four curves
+;*******************************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"
+
+begin
+;---Create dummy data for four curves
+  NPTS  = 500
+  PI100 = 0.031415926535898
+
+  x      = ispan(0,NPTS-1,1)
+  y      = new((/4,NPTS/),float)
+  theta  = PI100*x
+  y(0,:) = sin(theta)
+  y(1,:) = 2+sin(2*sqrt(fabs(theta)))   ; Make sure they
+  y(2,:) = 4+sin(3*sqrt(fabs(theta)))   ; don't intersect.
+  y(3,:) = 6+sin(10*sqrt(fabs(theta)))
+
+  wks = gsn_open_wks("png","leg_sl")      ; send graphics to PNG file 
+
+  res                        = True
+  res@gsnMaximize            = True       ; Maximize plot in frame.
+  res@gsnDraw                = False
+  res@gsnFrame               = False
+
+  res@xyMonoDashPattern      = True       ; make all lines are solid
+
+  res@trYMinF                = min(y)-2   ; leave a margin for legend
+  res@trYMaxF                = max(y)+1
+  res@trXMinF                = min(x)
+  res@trXMaxF                = max(x)
+
+  res@xyLineThicknessF       = 2.5                  ; line thickness
+  res@xyLineColors           = (/"green","purple","blue","red"/) ; colors of XY curves
+
+;---Create an XY plot with four curves
+  plot = gsn_csm_xy(wks,x,y,res)
+
+;
+; Create a legend such that the label for the fourth curve appears above
+; the label for the third curve.  No legend is created for the first two
+; curves.
+
+  genres                         = True
+  genres@XPosPercent             = 60  ; set position of legend on X axis...
+  genres@YPosPercent             = 10  ; ... and Y axis
+  lineres                        = True
+  lineres@lgLineColors           = res@xyLineColors(3:2) ; index 3=curve 4, 2=curve 3
+  lineres@LineLengthPercent      = 15
+  lineres@lgLineThicknesses      = 3.5
+  textres                        = True  
+  textres@lgLabels               = (/"line4","line3"/)
+  textres@lgLabelFontHeightF     = 0.01
+
+  dum = simple_legend(wks, plot, genres, lineres, textres)
+
+  draw(plot)
+  frame(wks)
+end

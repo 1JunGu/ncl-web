@@ -1,0 +1,140 @@
+;----------------------------------------------------------------------
+; ESMF_rect_to_5deg.ncl
+;
+; This is an NCL/ESMF template file for regridding from a 
+; rectilinear grid to a 5 degree grid. It uses ESMF_regrid 
+; to do the regridding.
+;
+; This script can be easily modified to do use something other than
+; a 5 degree grid: "1x1", "2x3", "G64", "0.25deg", etc.
+;
+; The assumption is that the rectilinear grid will be represented
+; as coordinate arrays of the "var" variable. If this isn't the
+; case, you will need to read the lat/lon rectilinear arrays 
+; separately and set them via the SrcGridLat/SrcGridLon attributes
+; (see later code).
+; 
+; Search for lines with ";;---Change (likely)" or ";;---Change (maybe)".
+; These are the lines you will likely or maybe have to change.
+;
+; Of course, you'll probably want to change other aspects of this
+; code, like the options for plotting (titles, colors, etc).
+;
+; For more information on ESMF_regrid, see: 
+;
+;    http://www.ncl.ucar.edu/Document/Functions/ESMF/ESMF_regrid.shtml
+;----------------------------------------------------------------------
+; This example uses the ESMF application "ESMF_RegridWeightGen" to 
+; generate the weights.
+;
+; For more information about ESMF:
+;
+;        http://www.earthsystemmodeling.org/
+;
+; This script uses built-in functions that are only available in 
+; NCL V6.1.0-beta and later.
+;----------------------------------------------------------------------
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/esmf/ESMF_regridding.ncl"
+
+begin
+;---Data file containing source grid
+    src_file = "XXXXX.nc"              ;;---Change (likely)
+    sfile    = addfile(src_file,"r")
+
+;---Get variable to regrid
+    varname = "T"                      ;;---Change (likely)
+    var     = sfile->$varname$         ; Assumption is that "var"
+                                       ; contains coordinate arrays.
+    printVarSummary(var)               ; Make sure it has coord arrays.
+
+;---Set up regridding options
+    Opt                   = True
+
+;---"bilinear" is the default. "patch" and "conserve" are other options.
+    Opt@InterpMethod      = "bilinear"        ;;---Change (maybe)
+
+    Opt@WgtFileName       = "rect_to_5deg.nc"
+;
+; These next two lines only needed if "var" doesn't
+; contain coordinate arrays.
+;
+;   Opt@SrcGridLat        = sfile->lat        ;;--Change (maybe)
+;   Opt@SrcGridLon        = sfile->lon        ;;--Change (maybe)
+
+    Opt@SrcRegional       = False             ;;--Change (maybe)
+    Opt@SrcInputFileName  = src_file          ; optional, but good idea
+    Opt@SrcMask2D         = where(.not.ismissing(var),1,0) ; Necessary if has
+                                                           ; missing values.
+
+    Opt@DstGridType       = "5deg"            ; Destination grid
+    Opt@DstLLCorner       = (/ -60.d,   0.d/) ;;--Change (likely)
+    Opt@DstURCorner       = (/  60.d, 355.d/) ;;--Change (likely)
+    Opt@DstRegional       = True              ;;--Change (maybe)
+
+    Opt@ForceOverwrite    = True
+    Opt@PrintTimings      = True
+    Opt@Debug             = True
+
+    var_regrid = ESMF_regrid(var,Opt)     ; Do the regridding
+
+    printVarSummary(var_regrid)           ; Check that everything
+    printMinMax(var_regrid,0)             ; looks okay.
+
+;----------------------------------------------------------------------
+; Plotting section
+;
+; This section creates filled contour plots of both the original
+; data and the regridded data, and panels them.
+;----------------------------------------------------------------------
+    wks = gsn_open_wks("ps","rect_to_5deg")
+
+    res                       = True
+
+    res@gsnMaximize           = True
+
+    res@gsnDraw               = False
+    res@gsnFrame              = False
+
+    res@cnFillOn              = True
+    res@cnLinesOn             = False
+    res@cnLineLabelsOn        = False
+    res@cnFillMode            = "RasterFill"
+
+    res@lbLabelBarOn          = False    ; Turn on later in panel
+
+    res@mpMinLatF             = min(var&lat)
+    res@mpMaxLatF             = max(var&lat)
+    res@mpMinLonF             = min(var&lon)
+    res@mpMaxLonF             = max(var&lon)
+
+;;--Change (maybe)
+    mnmxint = nice_mnmxintvl( min(var), max(var), 18, False)
+    res@cnLevelSelectionMode = "ManualLevels"
+    res@cnMinLevelValF       = mnmxint(0)
+    res@cnMaxLevelValF       = mnmxint(1)
+    res@cnLevelSpacingF      = mnmxint(2)
+
+;---Resources for plotting regridded data
+    res@gsnAddCyclic  = False            ;;---Change (maybe)
+    res@tiMainString  = "5 degree grid (" + Opt@InterpMethod + ")"
+
+    plot_regrid = gsn_csm_contour_map(wks,var_regrid,res)
+
+;---Resources for plotting original data
+    dims = tostring(dimsizes(var))
+    res@gsnAddCyclic = False            ;;---Change (maybe)
+    res@tiMainString = "Original rectilinear grid (" +  \
+                        str_join(dims," x ") + ")"
+
+    plot_orig = gsn_csm_contour_map(wks,var,res)  
+
+;---Compare the plots in a panel
+    pres                   = True
+    pres@gsnMaximize       = True
+    pres@gsnPanelLabelBar  = True
+
+    gsn_panel(wks,(/plot_orig,plot_regrid/),(/2,1/),pres)
+end

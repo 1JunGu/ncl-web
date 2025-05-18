@@ -1,0 +1,502 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/raster.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:14:28 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+the use of raster color.">
+<meta name="keywords" content="NCL, graphics, visualization, color, raster">
+<TITLE>NCL Graphics: Contour Raster Mode</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_tech.html">Plot techniques</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+<h1>NCL Graphics: Contour Raster Mode</h1>
+
+<div class=mainimage>
+<img src="Images/raster_1_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+Raster contours (<a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a> =
+"RasterFill") are created by individually assigning colors to the
+elements of a 2D array of rectangular cells. With raster contours,
+only solid fill is possible and therefore resources related to
+pattern fill have no effect.
+<p>
+
+Raster fill can be much faster than the default "area fill".  If the
+raster contours look too "blocky", you can try setting <a href="../Document/Graphics/Resources/cn.html#cnRasterSmoothingOn"><em>cnRasterSmoothingOn</em></a> = True.
+<p>
+Prior to version <a href="../prev_releases.html#6.2.0">6.2.0</a>, 
+the raster fill mode did not support transparency. For that reason,
+areas outside the grid or with missing values were filled in the background
+color (usually white). Now these areas are set by default to the <code>Transparent</code>
+color index just as they are using the other fill modes. This allows for more
+flexibility in overlaying a raster fill plot over other plot objects such as
+a background map. It is easy enough to obtain the look generated by previous versions
+of NCL if you set the resource <a href="../Document/Graphics/Resources/cn.html#cnMissingValFillColor"><em>cnMissingValFillColor</em></a>
+to "white".
+
+<p>If raster and area contours are not generating what you want, you can
+try "cell fill": <a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a> =
+"CellFill". Cell-filled contours are created by drawing filled
+polygons whose edges are defined by the borders between adjacent grid
+cells.
+<p>
+
+For examples of cell fill, see the 
+<a href="2Dvertcoord.html">2D vertical coordinates</a> 
+or <a href="orca.html">ORCA</a> pages.
+
+</div>
+
+<div class=ex>
+<!--Raster_1-->
+<a name=ex1></a>
+<a href="Images/raster_1_lg.png">
+<img src="Images/raster_1_sm.png" align=left border=2></a>
+<a href="Scripts/raster_1.html">raster_1.ncl</a>: A typical raster plot.
+<p>
+
+<a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a> = "RasterFill" turns
+on raster fill mode. When this is on, it is better to turn off the
+contour lines by setting <a href="../Document/Graphics/Resources/cn.html#cnLinesOn"><em>cnLinesOn</em></a> = False.
+
+<p>
+
+To fill the continents with color and an outline, <br>
+
+<a href="../Document/Graphics/Resources/cn.html#cnLineDrawOrder"><em>cnLineDrawOrder</em></a> =
+"Predraw"</resref>, <a href="../Document/Graphics/Resources/cn.html#cnFillDrawOrder"><em>cnFillDrawOrder</em></a> = "Predraw"</resref>,
+<a href="../Document/Graphics/Resources/cn.html#cnFillOn"><em>cnFillOn</em></a> = True, are set. Without
+these, only the continental outlines are drawn.
+<p>
+
+<a href="../Document/Graphics/Resources/mp.html#mpLandFillColor"><em>mpLandFillColor</em></a> = "LightYellow",
+chooses which color out of the colormap to draw the continents. The
+default is light grey.
+<p>
+
+<a href="../Document/Graphics/Resources/cn.html#cnFillOn"><em>cnFillOn</em></a> = True, also turns on
+the label bar. If <a href="../Document/Graphics/Resources/cn.html#cnFillMode"><em>cnFillMode</em></a> =
+"RasterFill", alone is selected, then you will get color with no label
+bar.
+
+</div>
+
+<div class=ex>
+<!--Raster_2-->
+<a name=ex2></a>
+<a href="Images/raster_2_lg.png">
+<img src="Images/raster_2_sm.png" align=left border=2></a> 
+
+<a href="Scripts/raster_2.html">raster_2.ncl</a>: A reproduction of a
+figure published in a 1997 Science article.  This plot does not have
+the "boxy" appearance of a raster plot because the grid cell size is
+very small.
+<p>
+
+<a href="../Document/Graphics/Resources/mp.html#mpGeophysicalLineColor"><em>mpGeophysicalLineColor</em></a> = "white",
+changes the continental outline color to white.
+
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnPolar"><em>gsnPolar</em></a> = "SH", selects the southern
+hemisphere for a polar plot.
+
+</div>
+
+<div class=ex>
+<!--Raster_3-->
+<a name=ex3></a>
+<a href="Images/raster_3_lg.png">
+<img src="Images/raster_3_sm.png" align=left border=2></a> 
+
+<a href="Scripts/raster_3.html">raster_3.ncl</a>: This vegetation
+raster plot is generated using 2-dimensional latitude and longitude
+coordinate values. These values are attached as attributes to the data
+(veg@lat2d and veg@lon2d), since traditional coordinate array syntax
+can't be used (these have to be 1-dimensional).
+<p>
+
+The <a href="../Document/Graphics/Resources/gsn.html#gsnRightStringOrthogonalPosF"><em>gsnRightStringOrthogonalPosF</em></a> and
+<a href="../Document/Graphics/Resources/gsn.html#gsnLeftStringOrthogonalPosF"><em>gsnLeftStringOrthogonalPosF</em></a> resources are
+used to move the two subtitles up from the plot.
+<p>
+
+</div>
+
+<div class=ex>
+<!--Raster_4-->
+<a name=ex4></a>
+<a href="Images/raster_4_lg.png">
+<img src="Images/raster_4_sm.png" align=left border=2></a> 
+
+<a href="Scripts/raster_4.html">raster_4.ncl</a>: 
+This script shows how to create a topographic map using a
+raster contour graphic colored by elevation.
+<p>
+
+This example is also available as a Python script using
+<a href="http://www.pyngl.ucar.edu/">PyNGL</a> to generate the
+graphics and <a href="http://www.pyngl.ucar.edu/Nio.shtml">PyNIO</a>
+to read the data from a netCDF file.  See the <a
+href="http://www.pyngl.ucar.edu/Examples/gallery.shtml">PyNGL
+gallery</a> for a pointer to the script.
+<p>
+
+This example was written by Mark Stevens of NCAR.
+
+</div>
+
+<div class=ex>
+<!--Raster_5-->
+<a name=ex5></a>
+<a href="Images/raster_5_1_lg.png">
+<img src="Images/raster_5_1_sm.png" align=left border=2></a> 
+<a href="Images/raster_5_2_lg.png">
+<img src="Images/raster_5_2_sm.png" align=left border=2></a> 
+
+<a href="Scripts/raster_5.html">raster_5.ncl</a>: This script shows how
+to force full-sized raster cells at the X and Y axis boundaries. You
+need to have coordinate arrays that are one element longer than the
+dimensions of your data. This forces the data values to represent
+the <i>center</i> of a grid, rather than the <i>corners</i> of a grid.
+<p>
+
+For example, if your array is dimensioned 8 x 8, then your coordinate
+arrays must have 9 elements each.  To contour this kind of data, you
+must set the <a href="../Document/Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> and
+<a href="../Document/Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> resources to
+these two arrays.
+</div>
+
+<div class=ex>
+<!--Raster_6-->
+<a name=ex6></a>
+<a href="Images/raster_6_lg.png">
+<img src="Images/raster_6_sm.png" align=left border=2></a>
+
+<a href="Scripts/raster_6.html">raster_6.ncl</a>: 
+This is a slight variation of the previous example. It is a 
+two-dimensional histogram where the X and Y bin boundaries 
+are irregularly spaced. 
+
+</div>
+
+<div class=ex>
+<!--Raster_7-->
+<a name=ex7></a>
+<a href="Images/raster_7_lg.png">
+<img src="Images/raster_7_sm.png" align=left border=2></a>
+
+<a href="Scripts/raster_7.html">raster_7.ncl</a>: 
+This is yet another variation of example 5. This
+is to illustrate how a raster plot is created. 
+NCL internally contructs a box around each data value,
+and fills that box in the appropriate color indicated 
+by your contour levels and the color map.
+
+</div>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/raster.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:14:32 GMT -->
+</html>
+
+

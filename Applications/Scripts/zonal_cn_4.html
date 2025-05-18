@@ -1,0 +1,48 @@
+;*************************************************
+; NCL tutorial script: zonal_4.ncl
+;************************************************
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;************************************************
+begin
+;************************************************
+; variable and file handling
+;************************************************
+   fn  = "atmos.nc"   ; define filename
+   in  = addfile(fn,"r")                         ; open netcdf file
+   T   = in->T                                   ; select variable to ave
+   lat = in->lat                                 ; pull lat off file
+;************************************************
+;  calculate zonal average of 3d variable
+;************************************************
+   zave = dim_avg(T)                             ; calculate zonal ave
+   zave@long_name=T@long_name                    ; copy long_name for plot
+;************************************************
+;  calculate eta
+;************************************************
+   a=in->hyam                                    ; select hyam 
+   b=in->hybm                                    ; select hybm
+   p=in->P0                                      ; select P0
+   eta = (a+b)*p                                 ; calc eta
+   eta = eta/100                                 ; scale eta by 100
+;************************************************
+; create contour plot but don't draw it yet
+;************************************************
+   wks  = gsn_open_wks("x11","zonal_cn")           ; Opens a ps file 
+
+   r                       = True                 ; plot mods desired
+   r@sfYArray              = eta                  ; use eta for y axis
+   r@sfXArray              = lat                  ; use lat for x axis
+   r@tiXAxisString         = "latitude"           ; x-axis label
+   r@tiYAxisString         = "eta x 1000"         ; y-axis label
+   r@cnInfoLabelOn         = False                ; turn off contour info lab
+   r@trXReverse            = True                 ; reverse x-axis
+   r@trYReverse            = True                 ; reverse y-axis
+   r@gsnYAxisIrregular2Log = True                 ; set y-axis to log scale
+ 
+
+   plot = gsn_contour(wks,zave(0,:,:),r)          ; creates plot
+;***********************************************
+end
+
+

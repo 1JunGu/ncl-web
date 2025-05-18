@@ -1,0 +1,590 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/dim_numrun_n.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:22 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (drought)">
+<meta name="keywords" content="dim_numrun_n">
+<title>dim_numrun_n</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+<a class=crumb href="../statistics.html">Statistics</a>,
+<a class=crumb href="../drought.html">Drought</a>
+<br>
+<h1>dim_numrun_n</h1>
+
+<p>
+Counts the number of "runs" (sequences) within a series containing zeros and ones.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.1.0">version 6.1.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function dim_numrun_n (
+		x       : integer,  
+		opt [1] : integer,  
+		dim [1] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  integer
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>An array of any dimensionality containing only 0s and 1s.
+</p>
+<em>opt</em>
+<p class=indent>Scalar integer which indicates how "runs" will be counted.
+<em>opt</em>=0 will result in the total number of runs; 
+<em>opt</em>=1 will result in the number of unique "runs". 
+See Examples.
+</p>
+<em>dim</em>
+<p class=indent>Equal to the dimension of <em>x</em> on which to count the number of
+runs.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+An integer array with the same dimensionality as <em>x</em>.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+The <strong>dim_numrun_n</strong> function counts the number of 
+"runs" 1s in the dimension indicated by <em>dim</em> for each index of
+the remaining dimensions.  Missing values are not allowed.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="num.html"><strong>num</strong></a>, <a href="dim_num_n.html"><strong>dim_num_n</strong></a>,
+<a href="dim_avg_wgt.html"><strong>dim_avg_wgt</strong></a> and <a href="dim_avg_wgt_n.html"><strong>dim_avg_wgt_n</strong></a>, 
+<a href="dim_avg_n.html"><strong>dim_avg_n</strong></a>, <a href="dim_median_n.html"><strong>dim_median_n</strong></a>,
+<a href="dim_max_n.html"><strong>dim_max_n</strong></a>, <a href="dim_min_n.html"><strong>dim_min_n</strong></a>,
+<a href="dim_rmsd_n.html"><strong>dim_rmsd_n</strong></a>, <a href="dim_rmvmean_n.html"><strong>dim_rmvmean_n</strong></a>,
+<a href="dim_rmvmed_n.html"><strong>dim_rmvmed_n</strong></a>, <a href="dim_standardize_n.html"><strong>dim_standardize_n</strong></a>,
+<a href="dim_stat4_n.html"><strong>dim_stat4_n</strong></a>, <a href="dim_stddev_n.html"><strong>dim_stddev_n</strong></a>,
+<a href="dim_sum_n.html"><strong>dim_sum_n</strong></a>, <a href="dim_variance_n.html"><strong>dim_variance_n</strong></a>,
+<a href="../Contributed/copy_VarMeta.html"><strong>copy_VarMeta</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+The <strong>dim_numrun_n</strong> function returns an integer 
+array of the same size and shape as the input array. 
+Each subscript of the dimension being
+operated upon corresponds to a "run". 
+<b>Since NCL subscripts are zero-based, the length of the 
+"run" is the subscript plus one.</b>
+<p>
+Toni Klemm [TAMU] contributed a comment on determining the average run length:
+<pre>
+   It took me a while to understand what I was getting with <b>dim_numrun_n</b>, 
+   but it saves me a lot of coding and is exactly what I needed!
+
+   For future reference, to better understand the data you get from dim_numrun_n and 
+   opt=1, it helps looking at example 2. opt=1 gives you the data in column <b>r1</b>, 
+   which refers to column <b>run_length</b>. <b>r1</b> tells you how many consecutive runs of 
+   1s of different lengths the dummy data in example 2 has, e.g., 3 runs with a 
+   single 1, 1 run with two 1s, 3 runs with three 1s, and so on.
+
+   To calculate the average length of consecutive 1s, multiply <b>run_length</b> and <b>r1</b>, 
+   to take the sum of the product, and divide it by the sum of <b>r1</b>. Essentially:
+
+   Average length = <a href="sum.html"><strong>sum</strong></a>(<b>run_length</b>*<b>r1</b>) / <a href="sum.html"><strong>sum</strong></a>(<b>r1</b>)
+
+   I hope that helps future users. It is a great function!
+
+</pre>
+The <a href="dim_avg_wgt.html"><strong>dim_avg_wgt</strong></a> and <a href="dim_avg_wgt_n.html"><strong>dim_avg_wgt_n</strong></a> function perform this task.
+
+<p>
+<B>Example 1</B><P>
+<pre>
+    x  = (/1,0,1,0,1,1,1,0,1,1,0,1,1,0/)
+    r0 = <strong>dim_numrun_n</strong> (x, <b>0</b>, 0)  ; ==> r0=(/9,4,1,0,0,0,0,0,0,0,0,0,0,0/)   
+    r1 = <strong>dim_numrun_n</strong> (x, <b>1</b>, 0)  ; ==> r1=(/2,2,1,0,0,0,0,0,0,0,0,0,0,0/) 
+
+    nx = <a href="dimsizes.html"><strong>dimsizes</strong></a>(x)
+    do n=0,nx-1
+       <a href="print.html"><strong>print</strong></a>((n+1)+"  ==> "+r0(n)+"   "+r1(n)) ; "run" length is index plus one  
+    end do
+</pre>
+will yield
+<pre>
+        run
+ index length        r0    r1
+   0      1    ==>    9     2
+   1      2    ==>    4     2
+   2      3    ==>    1     1
+   3      4    ==>    0     0
+   4      5    ==>    0     0
+[snip]
+   12     13   ==>    0     0
+   13     14   ==>    0     0
+</pre>
+
+<B>Example 2</B><P>
+Same as Example 1 but a longer series. It illustrates that 1s at the beginning and end
+are included in the run count.
+<pre>
+    x  = (/1,0,1,1,1,0,0,1,1,0 \
+          ,1,1,1,0,1,0,1,0,1,1 \
+          ,1,0,1,1,1,1,1,1,1,0 \
+          ,0,0,1,1,1,1,1,1,1,1 \
+          ,1,1,1,1,0,0,1,1,1,1 /)
+
+    r0 = <strong>dim_numrun_n</strong> (x, 0, 0)  
+    r1 = <strong>dim_numrun_n</strong> (x, 1, 0) 
+</pre>
+will yield
+<pre>
+        run
+ index length        r0    r1
+   0      1    ==>   37     3
+   1      2    ==>   27     1
+   2      3    ==>   20     3
+   3      4    ==>   14     1
+   4      5    ==>   11     0
+   5      6    ==>    9     0
+   6      7    ==>    7     1
+   7      8    ==>    5     0
+   8      9    ==>    4     0
+   9     10    ==>    3     0
+  10     11    ==>    2     0
+  11     12    ==>    1     1
+  12     13    ==>    0     0
+  13     14    ==>    0     0
+[SNIP]
+  48     49    ==>    0     0
+  49     50    ==>    0     0
+</pre>
+
+<B>Example 3</B><P>
+
+Let p(time,lat,lon) contain (say) daily precipitation
+and "wdval" indicate a value that should
+be the boundary between wet and dry. Of course, "wdval=0.0" is common.
+Create an array of 0s and 1s  
+and compute the number of unique wet and dry sequences. 
+NCL regards the leftmost dimension (here, "time") as number 0. 
+<p>
+<pre>
+   wdval  = 0.0
+   dry    = <a href="where.html"><strong>where</strong></a>( p.le.wdval, 1, 0) ; create 0/1 array
+   wet    = <a href="where.html"><strong>where</strong></a>( p.gt.wdval, 1, 0)
+
+   dryrun = <strong>dim_numrun_n</strong> (dry, 1, 0) ; opt=1 means "unique"
+   wetrun = <strong>dim_numrun_n</strong> (wet, 1, 0) 
+
+   <a href="delete.html"><strong>delete</strong></a>(dry)
+   <a href="delete.html"><strong>delete</strong></a>(wet)
+
+; optional ... add meta data
+
+   dryrun@long_name = "total dry runs"
+   dryrun@wet_dry_crit_value = wdval
+   <a href="../Contributed/copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(p, dryrun)          ; contributed.ncl
+
+   wetrun@long_name = "unique wet runs"
+   wetrun@wet_dry_crit_value = wdval
+   <a href="../Contributed/copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(p, wetrun) 
+</pre>
+
+<B>Example 4</B><P>
+
+Let tmx(time,lat,lon) contain (say) daily maximum temperatures
+and 'tcrit' be some critical temperature.  Create an array of 
+0s and 1s and compute the total and unique
+sequences of daily maximum temperatures 
+in a row that exceed 'tcrit.'
+NCL regards the leftmost dimension (here, "time") as number 0. 
+<p>
+<pre>
+   tcrit  = 35.
+   hot    = <a href="where.html"><strong>where</strong></a>( tmx.ge.tcrit, 1, 0) ; create 0/1 array
+
+   hot0   = <strong>dim_numrun_n</strong>(hot, 0, 0)    ; opt=0 means "total"
+   hot1   = <strong>dim_numrun_n</strong>(hot, 1, 0)    ; opt=1 means "unique"
+
+; optional ... add meta data
+
+   hot0@long_name = "total hot runs"
+   hot0@hot_crit_value = tcrit
+   <a href="../Contributed/copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(tmx, dryrun)          ; contributed.ncl
+
+   hot1@long_name = "unique hot runs"
+   hot1@hot_crit_value = tcrit
+   <a href="../Contributed/copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(tmx, wetrun) 
+</pre>
+
+<B>Example 5</B><P>
+
+Calculate the maximum run length of x[*] greater than 5.85 and less than 9.1
+
+<pre>
+   xband     = <a href="where.html"><strong>where</strong></a>( x.gt.5.85 .and. x.lt.9.1, 1, 0)  ; (/1,0,1,0,1,1,1,0,1,1,0,1,1,0/)
+   xband_run = <strong>dim_numrun_n</strong>(xband, 0, 0)                       ; (/9,4,1,0,0,0,0,0,0,0,0,0,0,0/)  
+   indmx     = <a href="ind.html"><strong>ind</strong></a>(xband_run.ne.0)                             ; (/0, 1, 2/) ==> subscripts (index)    
+   if (.not.indmx(0)) then
+       mxrun = indmx(<a href="dimsizes.html"><strong>dimsizes</strong></a>(indmx)-1) + 1  ; add 1 because NCL is 0-based indexing
+   end if
+   <a href="print.html"><strong>print</strong></a>(mxrun)                 ; ==> mxrun=3  
+</pre>
+
+<B>Example 6</B><P>
+
+Calculate the maximum run length for x(ntime,nlat,mlon) when greater than 5.85 and less than 9.1 at each grid point. In general, the returned index values will be different at each grid point.
+Here a function is created for cleaner code:
+
+<pre>
+undef("maxrunlen")
+function maxrunlen( runs )                     
+; find max run length
+; Example:
+; runs = <strong>dim_numrun_n</strong>(p.gt.5, 0, 0) ; where p(ntim) or p(ntim,jlat,ilon)
+;                                   ; runs(ntim) or runs(ntim,jlat,ilon)
+; maxrun = maxrunlen( runs )
+
+local dimr, rankr, maxrun, i, j, indrun
+begin
+  dimr   = <a href="dimsizes.html"><strong>dimsizes</strong></a>(runs)         
+  rankr  = <a href="dimsizes.html"><strong>dimsizes</strong></a>(dimr)
+
+  if (.not.(rankr.eq.1 .or. rankr.eq.3)) then
+      <a href="print.html"><strong>print</strong></a>("maxrunlen: rankr="+rankr+" not yet supported")
+      exit
+  end if
+
+  if (rankr.eq.1) then
+      maxrun = <a href="new.html"><strong>new</strong></a>( 1, "integer", -999)
+      indrun = <a href="ind.html"><strong>ind</strong></a>( runs.ne.0 )   
+      if (.not.<a href="ismissing.html"><strong>ismissing</strong></a>(indrun(0))) then
+          maxrun = indrun(<a href="dimsizes.html"><strong>dimsizes</strong></a>(indrun)-1) + 1
+      else
+          maxrun = 0
+      end if
+  end if
+
+  if (rankr.eq.3) then
+      maxrun = <a href="new.html"><strong>new</strong></a> ( dimr(1:rankr-1), "integer", -999)
+      do j=0,dimr(1)-1
+        do i=0,dimr(2)-1
+           indrun = <a href="ind.html"><strong>ind</strong></a>( runs(:,j,i).ne.0 )   
+           if (.not.<a href="ismissing.html"><strong>ismissing</strong></a>(indrun(0))) then
+               maxrun(j,i) = indrun(<a href="dimsizes.html"><strong>dimsizes</strong></a>(indrun)-1) + 1
+           end if
+           <a href="delete.html"><strong>delete</strong></a>(indrun)       ; may change size next iteration
+        end do
+      end do
+      <a href="../Contributed/copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(runs(0,:,:), maxrun)
+  end if
+
+  maxrun@long_name = "max run length"
+  return(maxrun)
+end
+
+[SNIP]
+
+  xband     = <a href="where.html"><strong>where</strong></a>( x.gt.5.85 .and. x.lt.9.1, 1, 0)       ; xband(ntime,nlat,mlon)
+  xband_run = <strong>dim_numrun_n</strong>(xband, 0, 0)                    ; xband_run(ntime,nlat,mlon)  
+
+  xband_maxrun = maxrunlen( xband_run )
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/dim_numrun_n.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:22 GMT -->
+</html>

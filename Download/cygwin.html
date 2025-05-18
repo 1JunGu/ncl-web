@@ -1,0 +1,801 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Download/cygwin.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:43:20 GMT -->
+<head>
+<meta name="description" content="How to install and run the NCAR Command Language on a Windows/Cygwin/X system">
+<meta name="keywords" content="NCL installation">
+<TITLE>Installing and running NCL under Cygwin/X</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL ></a>
+<a class=crumb href="index.html">Download ></a>
+<a class=crumb href="windows.html">Windows notes</a>
+
+<H1>Installing and running NCL under Cygwin/X</H1>
+
+This document contains detailed notes on installing and running NCL on
+a Windows system under Cygwin/X.
+<p>
+
+You must first download and install the 32-bit version
+of <A HREF="http://x.cygwin.com/">Cygwin/X</A>. Cygwin/X provides you
+with a UNIX shell and an X server from which you can then run NCL.<P>
+
+<b>Very important note: You must install the 32-bit version of
+Cygwin/X and not the 64-bit version of Cygwin/X.</b>  To get the
+32-bit version of Cygwin/X, install it via the "<b>setup-x86.exe</b>"
+program and not the "setup-x86_64.exe" program. Details are included
+below.<p>
+
+Here are some step-by-step instructions for getting NCL to run
+under Cygwin/X. Please read these instructions all the way
+through before starting the installation. 
+<p>
+
+<UL>
+<LI><A HREF="#InstallCygwinX">Install Cygwin/X</A>
+<LI><A HREF="#RunCygwinX">Run Cygwin/X</A>
+<LI><A HREF="#CheckHomeDirectory">Make sure you have a Cygwin home directory</A>
+<LI><A HREF="#DownloadNCL">Download NCL</A>
+<LI><A HREF="#InstallNCL">Install NCL</A>
+<LI><A HREF="#SetUpEnvironment">Set up your environment to run NCL</A>
+<LI><A HREF="#SetUpCShell">Set up C-shell</A>
+<LI><A HREF="#SetUpDisplay">Set up DISPLAY environment variable</A>
+<LI><A HREF="#TestNCL">Test NCL</A>
+<LI><A HREF="#Troubleshooting">Troubleshooting problems</A>
+</UL>
+<p>
+
+<A NAME="InstallCygwinX"></A>
+<HR>
+<H2>Install Cygwin/X</H2>
+  
+To download and install Cygwin/X, go to the URL:
+<p>
+
+<BLOCKQUOTE>
+<A HREF="http://x.cygwin.com/">http://x.cygwin.com/</A>
+</BLOCKQUOTE>
+<p>
+
+Read the "Downloading and installing" paragraph, which tells you which
+installation file you need to download and what to do with it. These
+notes are based on running version 2.891 of setup-x86.exe or later.
+<p>
+
+<b>Important note:</b> Cygwin comes with two versions of
+the <b>setup</b> program. They are called <b>setup-x86.exe</b>
+and <b>setup-x86_64.exe</b>.  Download the <b>setup-x86.exe</b> one,
+because the other one is for 64-bit Cygwin. NCL can't be installed under
+64-bit Cygwin because there are many external packages that NCL
+depends on that aren't buildable under 64-bit Cygwin.
+<p>
+
+We recommend that you look through the
+"<A HREF="http://x.cygwin.com/docs/ug/setup-cygwin-x-installing.html">Installing
+Cygwin/X</A>" in
+the <I><A HREF="http://x.cygwin.com/docs/ug/cygwin-x-ug.html">Cygwin/X
+User's Guide</A></I>, as it has some nice diagrams showing you each
+step of the installation process.<P>
+
+We found a nice
+<a href="https://www.youtube.com/watch?v=TjxEH_tr7e0">video on
+installing Cygwin</a>. This video is for Cygwin and not Cygwin/X, but
+the instructions are pretty much the same. Make sure you point your
+browser at x.cygwin.org instead of cygwin.com, and that you download
+the "setup-x86.exe" program instead of "setup.exe". At the 4:12 mark
+in the video, it talks about how to select various packages for
+Cygwin, which will be very helpful when you get to the next section on
+selecting the required packages you have to download.  You don't need
+to install the packages that the instructor is talking about, but it
+certainly won't hurt anything if you do.
+<p>
+
+When you start the installation process (by downloading "setup-x86.exe"
+and double-clicking on the file wherever you downloaded it), you will
+be asked where to install Cygwin. I <B>highly</B> recommend that you
+select the default options, unless you know what you are doing.
+<p>
+
+You will eventually be asked to select a mirror site from which to
+download the software.  I have found that some mirrors work better
+than others, and you may have to try several before you get a
+successful installation. I recommend starting with a mirror that is
+close to your geographic location, so the download is hopefully
+quicker.
+<p>
+
+Once you select a mirror site, you will be prompted for which packages
+to install. The packages have categories like "Shells", "Devel",
+"Graphics", etc.  Clicking on the plus (+) sign next to each category
+name will expand or close the list of packages associated with that
+category.  There's a search box at the top that is very useful 
+to find packages that you are not sure what category they're in.
+<p>
+
+Note that when you select one package, it may cause several other
+packages to be chosen as well. This is okay; don't go back and
+unselect those packages!<P>
+
+Some categories and their related packages that you should install 
+are included below:  
+
+<UL>
+
+<LI><B>Category "Devel":</B> install "autoconf", "binutils", "bison",
+"byacc", "flex", "gcc", "gcc4", "gcc4-fortran", "gcc-g++", "gdb", 
+"make", "makedepend", "openssl-devel".<P>
+
+<LI><B>Category "Editors":</B> [optional] some popular editors that
+you might want for editing your files include "nedit", "emacs", and
+"vim".<P>
+ 
+<LI><B>Category "Graphics":</B> [optional] install "ghostscript" for
+viewing PostScript files, "ImageMagick" for "convert"<P>
+
+<LI><B>Category "Libs":</B> "expat", "libcurl4", "libexpat-devel",
+"libgfortran4", "libidn-devel", "libxml2", "libtirpc", "zlib"<P>
+
+<LI><B>Category "Net":</B> `install "libcurl-devel", "libcurl4", and
+"openssh".<P>
+
+<LI><B>Category "Shells":</B> install "bash", "sh-utils", "pdsh", and
+"tcsh".<P>
+
+<LI><B>Category "X11":</B> install all of the required packages that
+the "<a
+href="http://x.cygwin.com/docs/ug/setup-cygwin-x-installing.html">Installing
+Cygwin/X</a>" section mentions (see #15 where it lists all the "X11"
+packages and whether they are required or optional).  As of July
+2018, the list of packages that we recommend are:
+<p>
+<ul>
+<li>libX11-devel
+<li>libX11-6
+<li>libXaw-devel
+<li>libXaw7
+<li>libXm4
+<li>libXmu-devel
+<li>libXpm4
+<li>libXt-devel
+<li>libcairo-devel
+<li>libcairo2
+<li>libfontconfig-devel
+<li>libfontconfig1
+<li>libfreetype-devel
+<li>libfreetype6
+<li>libxcb-devel
+<li>xauth
+<li>xclock
+<li>xinit
+<li>xorg-server
+<li>xterm
+<li>X-start-menu-icons
+<li>X-startup-scripts
+</ul>
+</ul>
+<p>
+
+To select any of these packages for installation, click on the little
+circular icon next to it until you get a version number. Make sure you
+select the latest version number, if there are multiple ones.  Some of
+the other options will be things like "skip", "uninstall", and "keep",
+which you don't want to use the first time through.)<P>
+
+If the installation is successful, then the last item may be a window
+asking if you want to create some icon shortcuts for your desktop.
+Answer "yes" to this question as it will provide you with a little
+"startxwin" icon under Windows that you can double-click to start up
+Cygwin/X.<P>
+
+If the installation fails or hangs while trying to install the
+software, then reboot if necessary, and rerun the <B>setup-x86.exe</B>
+file as you did before, only this time choose a different mirror
+site.<P>
+
+<A NAME="RunCygwinX"></A>
+<HR>
+<h2>Run Cygwin/X</h2>
+
+Once the installation of Cygwin/X is complete, you need to run
+<a href="http://x.cygwin.com/docs/ug/using.html">Cygwin/X</a> if you
+plan to run NCL scripts that send their graphics to an X11 window. If
+you don't care about X11 windows, then you can run NCL commands from a
+Cygwin window.
+<p>
+
+To run Cygwin/X, you must first run Cygwin, and type "startxwin" 
+in the Cygwin Terminal. If this is successful, then a little "X" icon
+will appear on your task bar (usually in the lower right of the screen).
+If you are having difficulty starting Cygwin/X, then read the section "<A
+HREF="http://x.cygwin.com/docs/ug/using.html">Using Cygwin/X</A>" on
+how to start it.
+<p>
+
+<b><font color=red>Note for Windows 10 users</b></font>: The Cygwin/X
+icon will show up as a small icon with a black C and a green X inside
+of it. If you left-click on this, a menu will come up. Select "System
+Tools" and then "XTerm" to start Cygwin/X.
+<p>
+
+<B>You must run Cygwin or X/Cygwin before proceeding to the next
+section.</B><P>
+
+<B>Tip</B>: if you installed Cygwin to the suggested
+location, then the Cygwin files will be installed under
+various directories under "<B>c:\cygwin</B>", and a home directory
+will be created for you under a path like "<B>c:\cygwin\home\</B>".<P>
+
+<A NAME="CheckHomeDirectory"></A>
+<HR>
+<h2>Make sure you have a Cygwin home directory</h2>
+
+Note: some users have reported that a home directory has not been set
+up for them by Cygwin. I read in several FAQs that if the name of your
+home directory has a space in it, it won't work. I found an FAQ on
+this topic at <a
+href="http://www-cdf.fnal.gov/~cplager/cygwin.html#tidbits">http://www-cdf.fnal.gov/~cplager/cygwin.html#tidbits</a>:
+<p>
+
+<blockquote>
+
+Cygwin doesn't like it if there is a space in your Windows
+username. If you have a space, do the following after installing
+Cygwin:
+<p>
+
+<ul>
+
+<li>Edit /etc/passwd (using either emacs, vi, or even Windows Wordpad)
+
+<li>Find your entry (it will start with your windows username)
+
+<li>Take the space out of your username (1st entry) and your home
+directory (2nd to last entry).
+
+<li>Quit all Cygwin
+
+<li>Use Windows Explorer to rename your home directory
+(for example "C:\cygwin\home\cplager")
+
+</blockquote>
+<p>
+
+<A NAME="DownloadNCL"></A>
+<HR>
+<h2>Download NCL</h2>
+
+Now you are ready to download and install NCL. If you haven't already,
+go to the <a href="http://www.earthsystemgrid.org/">Climate Data
+Gateway</a> web site and download the NCL binary that has the word
+"CYGWIN" in the name of the file.
+<p>
+
+Here's a <a href="https://www.earthsystemgrid.org/dataset/ncl.650.dap/file.html">direct
+link to the location of NCL V6.5.0 for Cygwin</a>.
+<P>
+
+A good place to save this file is in the location
+"<B>c:\cygwin\home\<I>xxx</I></B>", where <I><B>xxx</B></I> is the
+home directory the Cygwin/X installation set up for you. <P>
+
+<A NAME="InstallNCL"></A>
+<HR>
+<h2>Install NCL</h2>
+
+Once you have the *.tar.gz file, decide where you want to install NCL.
+If you are new to UNIX and don't know where you want to put it, then I
+recommend installing NCL in the directory "/usr/local". I'll use this
+path in my example below, and I will assume that you saved the file to
+"c:\cygwin\home\<B><I>xxx</I></B>", using "JohnDoe" as an example
+for <I><B>xxx</B></I>, and
+"ncl_ncarg-6.5.0.CYGWIN_NT-10.0-WOW_i686.tar.gz" as the name of the
+file. (The name of the file may vary slightly, since the version
+number changes almost monthly.)<P>
+
+From the Cygwin/X window that you opened earlier, type the
+following commands:
+
+<PRE>
+    mkdir /usr/local
+    cd /usr/local
+    gunzip /cygwin/home/JohnDoe/ncl_ncarg-6.5.0.CYGWIN_NT-10.0-WOW_i686.tar.gz
+    tar -xvf /cygwin/home/JohnDoe/ncl_ncarg-6.5.0.CYGWIN_NT-10.0-WOW_i686.tar
+</PRE>
+
+<B>Note:</B> the path "/usr/local" may already exist, in which case
+you'll get an error message when you type "mkdir /usr/local". This is
+okay, and you can safely ignore the message.<P>
+
+<A NAME="SetUpEnvironment"></A>
+<HR>
+<h2>Set up your environment to run NCL</h2>
+
+Every user of NCL needs to set their environment before they can use
+NCL. You can do this by opening your
+"c:\cygwin\home\<I>xxx</I>\.bashrc" (or
+"c:\cygwin\home\<I>xxx</I>\.bash_profile" if ".bashrc" doesn't exist)
+file with a UNIX editor and adding the lines:
+<p>
+
+<PRE>
+    export NCARG_ROOT=/usr/local
+    export PATH=/usr/local/bin:$PATH
+</PRE>
+
+Please note that you must use a UNIX editor to change this file, and
+not a Windows application like "notepad".  The UNIX editor should be
+invoked from a Cygwin or X/Cygwin window. If you are unfamiliar with
+UNIX editors, we recommend that you
+use <a href="http://www.nedit.org/">nedit</a>, which is available
+through the Cygwin "setup-x86.exe" program.
+<p>
+
+Make sure you add the above lines <I>after</I> the last reference to
+PATH.  If PATH already has "/usr/local/bin" as part of it, then you
+don't need to add the last line.
+<p>
+
+If you plan to use csh (C-shell) or tcsh , then add the following
+lines to your "c:\cygwin\home\<I>xxx</I>\.cshrc" (or ".tcshrc") file:
+<p>
+
+<PRE>
+    setenv NCARG_ROOT /usr/local
+    setenv PATH /usr/local/bin:$PATH
+</PRE>
+
+To make sure these changes take effect right away, you can "source"
+the files, or completely exit your Cygwin/X window and start
+it up again.  Here's how to source the files:
+<p>
+
+csh/tcsh:
+
+<PRE>
+    source ~/.cshrc  
+    source ~/.tcshrc
+</PRE>
+<p>
+
+bash/ksh:
+
+<PRE>
+    . ~/.bashrc
+    . ~/.bash_profile
+</PRE>
+<p>
+
+<A NAME="SetUpCShell"></A>
+<HR>
+<h2>Set up C-shell</h2>
+
+If you plan to use the "ng4ex" script, then you'll need to make sure
+you have C-shell before you can run it.<P>
+
+In the same Cygwin/X window, type:
+
+<PRE>
+   which csh
+   which tcsh
+</PRE>
+
+If it reports that csh cannot be found but that tcsh can, then type the
+following:
+
+<PRE>
+    ln -s /usr/bin/tcsh.exe /usr/bin/csh.exe
+    csh
+</PRE>
+
+This will put you into a C-shell environment.  You only need to
+execute the "ln -s" command once, but the "csh" command you will need
+to execute any time you are not in C-shell.<P>
+
+If the above "which" commands report that neither "tcsh" or "csh" can
+be found, thn you need to run "setup-x86.exe" again, and make sure that
+you select the "tcsh" package (which falls under the "Shells"
+category) to be installed.<P>
+
+<A NAME="SetUpDisplay"></A>
+<HR>
+<h2>Set up DISPLAY environment variable</h2>
+
+In order to run any X applications, including running NCL to display
+graphics to your screen, you may need to set up your environment by
+opening "c:\cygwin\home\<I>xxx</I>\.bashrc" in your favorite editor,
+and adding the following lines at the bottom:
+  
+<PRE>
+    export DISPLAY=:0.0
+</PRE>
+
+If you are using C-shell, then edit "c:\cygwin\home\<I>xxx</I>\.cshrc"
+and add the following line:
+
+<PRE>
+    setenv DISPLAY :0.0
+</PRE>
+
+You should now be ready to run NCL.<P>
+
+<A NAME="TestNCL"></A>
+<HR>
+<h2>Test NCL</h2>
+
+To test your installation of NCL, type the following:<P>
+
+<PRE>
+    ncl -V
+</PRE>
+
+This should echo the version of NCL, like "6.5.0".
+<p>
+
+For a graphical test, type:
+<p>
+
+<PRE>
+    cp $NCARG_ROOT/lib/ncarg/nclex/xyplot/xy04n.ncl .
+    ncl xy04n.ncl
+</PRE>
+<p>
+
+A window with an XY plot should pop up. If you click anywhere in the
+window with your left mouse button, the window will go away.<P>
+
+If you have problems, then please review the troubleshooting section
+that follows.
+
+<A NAME="Troubleshooting"></A>
+<HR>
+<h2>Troubleshooting problems</h2>
+
+If you are having problems running the test in the above section,
+then here are some troubleshooting tips:
+<p>
+
+<UL>
+
+<LI>If you get an error about "ncl" not being able to
+find a missing "lib<i>xxxx</i>.so" library, then
+rerun the Cygwin "setup-x86.exe" program and search for <i>xxxx</i>.
+Make sure this package will get installed and finish running
+the "setup-x86.exe" program. You will probably need to logout and possibly
+even reboot for the change to work properly.
+<p>
+
+<LI>If you get the error:
+<p>
+
+<PRE>
+ warning:GKS:GOPWK: --X driver error: error opening display
+</PRE>
+
+then this probably means that your DISPLAY environment variable
+is not set, or it is set incorrectly. Please type:
+
+<PRE>
+printenv DISPLAY
+</PRE>
+
+and make sure that it is set to what is discussed in the 
+"<A HREF="#SetUpDisplay">Set up DISPLAY environment variable</A>" section
+above.
+<p>
+
+<LI>If it appears your DISPLAY is set correctly, and yet "ng4ex" still
+doesn't work, then you might be running the commands from a Cygwin
+window, and not a Cygwin/X window. The distinction is important, and
+you need to be running "ng4ex" from a Cygwin/X Window.  Please read
+the section "<A HREF="#RunCygwinX">Run Cygwin/X</A>" and make sure you
+follow these instructions and then run "ng4ex" from this window.
+<P>
+
+You can tell if your Cygwin window is really a Cygwin/X window by the
+"X" icon that should appear in the upper left corner of the window.
+
+</UL>
+<p>
+
+If you still have problems, then send email to <A
+HREF="mailto:ncl-install@ucar.edu">ncl-install@ucar.edu</A>.  You need to <a
+href="http://mailman.ucar.edu/mailman/listinfo/ncl-install">be a
+member</a> in order to post.
+<p>
+
+</UL>
+<HR>
+    
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Download/cygwin.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:43:20 GMT -->
+</html>

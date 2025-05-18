@@ -1,0 +1,205 @@
+load "$NCARG_ROOT/lib/ncarg/nclex/gsun/gsn_code.ncl"
+; 
+; This program prints one screen for each font table.
+; This is the script used to generate the font tables at:
+;
+;   http://www.ncl.ucar.edu/Document/Graphics/Images/font0.png
+;   http://www.ncl.ucar.edu/Document/Graphics/Images/font1.png
+;   http://www.ncl.ucar.edu/Document/Graphics/Images/font2.png
+;   ...
+;   http://www.ncl.ucar.edu/Document/Graphics/Images/font37.png
+;   ...
+;
+; The "convert" command used to convert *.ps to *.png is near the end
+;
+
+begin
+  fontnames = new(138,string)
+  fontnames = ""
+  fontnames(0) =             "pwritx_database"
+  fontnames(1) =             "default"
+  fontnames(2) =             "cartographic_roman"
+  fontnames(3) =             "cartographic_greek"
+  fontnames(4) =             "simplex_roman"
+  fontnames(5) =             "simplex_greek"
+  fontnames(6) =             "simplex_script"
+  fontnames(7) =             "complex_roman"
+  fontnames(8) =             "complex_greek"
+  fontnames(9) =             "complex_script"
+  fontnames(10) =            "complex_italic"
+  fontnames(11) =            "complex_cyrillic"
+  fontnames(12) =            "duplex_roman"
+  fontnames(13) =            "triplex_roman"
+  fontnames(14) =            "triplex_italic"
+  fontnames(15) =            "gothic_german"
+  fontnames(16) =            "gothic_english"
+  fontnames(17) =            "gothic_italian"
+  fontnames(18) =            "math_symbols"
+  fontnames(19) =            "symbol_set1"
+  fontnames(20) =            "symbol_set2"
+  fontnames(21) =            "helvetica"
+  fontnames(22) =            "helvetica-bold"
+  fontnames(25) =            "times-roman"
+  fontnames(26) =            "times-bold"
+  fontnames(29) =            "courier"
+  fontnames(30) =            "courier-bold"
+  fontnames(33) =            "greek"
+  fontnames(34) =            "math-symbols"
+  fontnames(35) =            "text-symbols"
+  fontnames(36) =            "weather1"
+  fontnames(37) =            "weather2"
+  fontnames(121) =           "o_helvetica"
+  fontnames(122) =           "o_helvetica-bold"
+  fontnames(125) =           "o_times-roman"
+  fontnames(126) =           "o_times-bold"
+  fontnames(129) =           "o_courier"
+  fontnames(130) =           "o_courier-bold"
+  fontnames(133) =           "o_greek"
+  fontnames(134) =           "o_math-symbols"
+  fontnames(135) =           "o_text-symbols"
+  fontnames(136) =           "o_weather1"
+  fontnames(137) =           "o_weather2"
+
+  characters = (/(/"A","B","C","D","E","F","G","H","I","J"/), \
+                 (/"K","L","M","N","O","P","Q","R","S","T"/), \
+                 (/"U","V","W","X","Y","Z","a","b","c","d"/), \
+                 (/"e","f","g","h","i","j","k","l","m","n"/), \
+                 (/"o","p","q","r","s","t","u","v","w","x"/), \
+                 (/"y","z","1","2","3","4","5","6","7","8"/), \
+                 (/"9","0","-","=","\","`","!","@","#","$"/), \
+                 (/"%","^","&","*","(",")","_","+","|","~"/), \
+                 (/"[","]","{","}",";","'",":"," ",",","."/), \
+                 (/"/","<",">","?"," "," "," "," "," "," "/)/)
+
+;
+; The double quote (") is a special character that we can only
+; get by converting its integer equivalent to a character.
+;  
+  characters(8,7) = integertocharacter(34)
+;
+; The text will be drawn in an area defined by X=(0.05,0.95) and 
+; Y=(0.0,0.9).  This is to leave room for the font name at the top.
+;
+  xbeg  = 0.05
+  xend  = 0.95
+  ybeg  = 0.00
+  yend  = 0.90
+  xpos  = fspan(xbeg,xend,11)
+  ypos  = fspan(yend,ybeg,11)
+  boxwh = xpos(1) - xpos(0)       ; box width/height
+
+  xpos1  = xpos + boxwh/2.     ; X and Y positions of the
+  ypos1  = ypos - boxwh/2.     ; individual characters.
+
+  xpos2  = xpos + boxwh/5.     ; X and Y positions of the
+  ypos2  = ypos - boxwh/5.     ; upper left corner characters.
+
+  txres1                = True
+  txres1@txFontHeightF  = boxwh/3.0
+  txres1@txFuncCode     = ":"
+
+  txres2                = True
+  txres2@txFontHeightF  = boxwh/6.
+  txres2@txFont         = "Helvetica" 
+  txres2@txFuncCode     = ":"
+
+  ttres                 = True
+  ttres@txFontHeightF   = 0.04
+  ttres@txFuncCode      = ":"
+;
+; Loop through all fonts and draw a table of characters with
+; that font.  The tables will be 10 x 10.
+;
+  lineres = True
+  lineres@gsLineThicknessF = 1.5
+
+  fontnums = (/35,37,135,137/)   ; Font tables to look at
+  do ifont=0,dimsizes(fontnums)-1
+    ifn = fontnums(ifont)
+    if(fontnames(ifn).ne."") then
+      print("font: " + fontnames(ifn))
+;
+; Open workstation and redefine colortable.
+;
+      wks = gsn_open_wks("x11","fonts")
+
+      setvalues wks
+        "wkColorMap"        : "rainbow"
+        "wkBackgroundColor" : (/1.,1.,1/)
+        "wkForegroundColor" : (/0.,0.,0/)
+      end setvalues
+;
+; Title with the font name.
+;
+      title = ":F21:Font " + ifn + ", " + fontnames(ifn)
+      gsn_text_ndc(wks,title,0.5,0.95,ttres)
+;
+; Change the text font.
+;
+      txres1@txFont = ifn
+;
+; Loop thru 10 x 10 table of characters and draw each character
+; and grid line.
+;
+      do n = 0,9
+        do m = 0,9
+;
+; Check if we are about to print the function code.  If so, we
+; temporarily have to change the function code to something else.
+;
+          if(characters(n,m).eq.":") then
+            txres1@txFuncCode = "~"
+            txres2@txFuncCode = "~"
+          end if
+;
+; First print little character in upper left corner, showing what
+; the alpha-numeric character is.
+;
+          gsn_text_ndc(wks,characters(n,m),xpos2(m),ypos2(n),txres2)
+;
+; Now print the character in the new font table.
+;
+; We have to do something special if we are at table 35 and
+; drawing the characters that generate the UCAR/NCAR fonts.
+; They are too big for their squares, so they need to be made
+; smaller.
+;
+          if(ifn.eq.35.and.any(characters(n,m).eq.(/"v","w"/))) then
+            txres1@txFontHeightF = txres1@txFontHeightF/2.
+          end if
+          gsn_text_ndc(wks,characters(n,m),xpos1(m),ypos1(n),txres1)
+;
+; Reset original font size.
+;
+          if(ifn.eq.35.and.any(characters(n,m).eq.(/"v","w"/))) then
+            txres1@txFontHeightF = boxwh/2.5
+          end if
+;
+; Change function code back if necessary.
+;
+          if(characters(n,m).eq.":") then
+            txres1@txFuncCode = ":"
+            txres2@txFuncCode = ":"
+          end if
+;
+; Draw a grid line.
+;
+          gsn_polyline_ndc(wks,(/xpos(m),xpos(m)/),(/ybeg,yend/),lineres)
+        end do
+;
+; Draw a grid line.
+;
+        gsn_polyline_ndc(wks,(/xbeg,xend/),(/ypos(n),ypos(n)/),lineres)
+      end do
+;
+; Draw last two grid lines.
+;
+      gsn_polyline_ndc(wks,(/xbeg,xend/),(/ypos(10),ypos(10)/),lineres)
+      gsn_polyline_ndc(wks,(/xpos(10),xpos(10)/),(/ybeg,yend/),lineres)
+;
+; Advance frame.
+;
+      frame(wks)
+    end if
+  end do
+end

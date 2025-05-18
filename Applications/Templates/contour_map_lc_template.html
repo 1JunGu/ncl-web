@@ -1,0 +1,80 @@
+;----------------------------------------------------------------------
+; This is a basic NCL template for creating contours over a Lambert
+; Conformal map. Creating this kind of map requires that you know
+; the two parallels and meridian of the Lambert Conformal projection
+; for your data. This information is sometimes on your data file.
+;
+; Use "contour_map_template.ncl" if you don't need to put the
+; contours over a Lambert Conformal map.
+;----------------------------------------------------------------------
+
+; Note: as of NCL V6.2.0, you don't need these load commands
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;---Read data
+  filename = "file.nc"
+  a = addfile(filename,"r")
+  x = a->x
+; 
+; This section is only necessary if "x" doesn't
+; contain 1D coordinate arrays.
+;
+  lat         = a->lat               ; lat and lon must have the 
+  lon         = a->lon               ; same dimension sizes
+  nlat        = dimsizes(lat(:,0))     
+  nlon        = dimsizes(lat(0,:))
+
+;---Open workstation
+  wks = gsn_open_wks("x11","contour_map")   ; "ps", "pdf", "png"
+
+;---Set some resources
+  res                   = True
+
+  res@gsnMaximize       = True     ; maximize plot in frame
+
+;
+; The following resources are required for drawing a Lambert
+; Conformal map. This information may be on your data file.
+; You will very likely need to change these values.
+;  
+  res@mpProjection        = "LambertConformal"
+  res@mpLambertParallel1F = 30.
+  res@mpLambertParallel2F = 55.
+  res@mpLambertMeridianF  = 45.
+
+;
+; Resources for zooming in on a Lambert conformal map,
+; if you have a 2D lat/lon grid.
+;
+  res@mpLimitMode       = "Corners"
+  res@mpLeftCornerLatF  = lat(0,0)
+  res@mpLeftCornerLonF  = lon(0,0)
+  res@mpRightCornerLatF = lat(nlat-1,nlon-1)
+  res@mpRightCornerLonF = lon(nlat-1,nlon-1)
+
+;---Only required if your data doesn't have 1D coordinate variables
+  res@sfXArray          = lon
+  res@sfYArray          = lat
+
+;---These are sample resources you might want to set
+  res@cnFillOn          = True     ; turn on contour fill
+  res@cnFillPalette     = "amwg"   ; define color map for contours
+  res@cnLinesOn         = False    ; turn off contour lines
+  res@cnLineLabelsOn    = False    ; turn off line labels
+
+;---Uncomment if you want to change the contour levels
+;  mnmxint = nice_mnmxintvl( min(x), max(x), 18, False)
+;  res@cnLevelSelectionMode = "ManualLevels"
+;  res@cnMinLevelValF       = mnmxint(0)
+;  res@cnMaxLevelValF       = mnmxint(1)
+;  res@cnLevelSpacingF      = mnmxint(2)
+
+  res@tiMainString      = "Data file is " + filename
+
+;---Set to False if plotting regional data or setting sfXArray/sfYArray
+  res@gsnAddCyclic      = True
+
+  plot = gsn_csm_contour_map(wks,x,res)
+end

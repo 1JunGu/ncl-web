@@ -1,0 +1,230 @@
+----------------------------------------------------------------------
+; shapefiles_25.ncl
+;
+; Concepts illustrated:
+;   - Reading hourly station precipitation for one month
+;   - Calculate monthly precipitation totals
+;   - Predefine a grid  
+;   - Apply objective analysis [Barnes: Iterative Correction]
+;   - Maskthe derived grid  based on a geographical area 
+;     obtained from a USA shapefile
+;   - Plot station locations and the derived gridded values 
+;----------------------------------------------------------------------
+;  Source file overview
+;
+;netcdf Combined_4Datasets_201808C {
+;dimensions:
+;        time = 744 ;
+;        station = 2229 ;
+;variables:
+;        double Time(time) ;
+;                Time:units = "hours since 1800-01-01 00:00:00" ;
+;                Time:calendar = "standard" ;
+;                Time:_FillValue = 9.96920996838687e+36 ;
+;                Time:hdf_name = "Time" ;
+;        float Latitude(station) ;
+;                Latitude:units = "degrees_north" ;
+;                Latitude:_FillValue = -9999.f ;
+;                Latitude:hdf_name = "Latitude" ;
+;        float Longitude(station) ;
+;                Longitude:units = "degrees_east" ;
+;                Longitude:_FillValue = -9999.f ;
+;                Longitude:hdf_name = "Longitude" ;
+;        float METAR_Precipitation(time, station) ;
+;                METAR_Precipitation:_FillValue = -9999.f ;
+;----------------------------------------------------------------------
+
+load "./shapefile_utils.ncl"
+
+;---Source data
+
+  diri  = "./"
+  fili  = "Combined_4Datasets_201808C.nc"
+  pthi  = diri+fili
+  f     = addfile(pthi,"r")
+
+  yyyymm= cd_calendar(f->Time(0),-1)
+
+  x     = f->METAR_Precipitation       ; (time, station) 
+  x@long_name = "METAR: Hourly"
+  x@units     = "mm"
+
+  lat  = f->Latitude    
+  lon  = f->Longitude  
+
+;---Examine data
+
+  printVarSummary(x)
+  printMinMax(x,0)
+  print("-----")
+
+  printMinMax(lat,0)      ; min=  24.556   max= 49.3183
+  printMinMax(lon,0)      ; min=-124.563   max=-67.7921
+  print("-----")
+
+;---Create destinaltion grid. Resolution is arbitrary.
+
+  latS = min(lat)
+  latN = max(lat)
+  lonW = min(lon)
+  lonE = max(lon)
+
+  dlat = 0.5              ; lat grid spacing
+  dlon = 0.5              ; lon  "     "
+  nlat = toint((latN-latS)/dlat) + 1
+  mlon = toint((lonE-lonW)/dlon) + 1
+  LAT  = fspan(latS, latN, nlat) 
+  LON  = fspan(lonW, lonE, mlon) 
+  LAT!0= "LAT"
+  LON!0= "LON"
+  LAT@units = "degrees_north"
+  LON@units = "degrees_east"
+
+;---Calculate monthly total (sum) at each station  
+
+  xMon := dim_sum_n(x,0)                          ; (station)
+  xMon@long_name = "METAR: Monhly Total"
+  xMon@units     = x@units
+
+  printVarSummary(xMon)
+  printMinMax(xMon,0)
+  print("-----")
+
+;---Use iterative correction objective analysis
+;---Specify search radii [play with this]
+
+  rscan    = (/1.5,1,0.5/)
+  opt_obj  = False                                ; no options          
+  xGRID    = obj_anal_ic_Wrap(lon,lat,xMon, LON,LAT,rscan,opt_obj)
+
+  printVarSummary(xGRID)      
+  printMinMax(xGRID,0)
+  print("-----")
+
+;============================================================
+; Create shapefile mask for coterminus USA
+;
+; If you already have the mask NetCDF file, set this to False. 
+; Creating the mask can be slow!
+;============================================================
+
+;---Name of shapefile containing USA outlines
+  dirShape  = "./"
+  shp_fname = dirShape+"cb_2018_us_nation_5m.shp"
+  CREATE_MASK = False 
+
+;---Whether to draw lat/lon points and shapefile outlines
+  ADD_LATLON_POINTS      = False
+  ADD_SHAPEFILE_OUTLINES = True
+
+;---Name of file to write mask to or to read mask from.
+  mask_fname = dirShape+"/usa_mask_5m.nc"
+
+  if(CREATE_MASK) then
+    print("Creating the 5m mask file...")
+
+;---Create a new mask using a shapefile of USA
+   ;dimGRID              = dimsizes(xGRID) 
+    opt_mask             = True
+    opt_mask@return_mask = True
+;   opt_mask@debug       = True
+    opt_mask@minlon      = lonW       ; Makes the shapefile masking
+    opt_mask@maxlon      = lonE       ; go faster.
+    opt_mask@minlat      = latS   
+    opt_mask@maxlat      = latN  
+    usa_mask             = shapefile_mask_data(xGRID,shp_fname,opt_mask)
+    usa_mask@long_name   = "USA 5m mask"
+    usa_mask@units       = "1=in, 0=out"
+    copy_VarCoords(xGRID, usa_mask)
+
+    printVarSummary(usa_mask)
+    printMinMax(usa_mask,0)
+
+;---Write new mask to file
+     system("rm -f " + mask_fname)
+     fout           = addfile(mask_fname,"c")
+     fout->USA_mask = usa_mask
+   else
+     print("Reading mask off file.")
+
+;---Read the new mask from the NetCDF file 
+     fmask    = addfile(mask_fname,"r")
+     usa_mask = fmask->USA_mask
+   end if
+
+;---Apply mask to xGRID      
+
+   xGRIDmask = where(usa_mask.eq.1, xGRID, xGRID@_FillValue)
+   copy_VarMeta(xGRID, xGRIDmask)
+
+   printVarSummary(xGRIDmask)
+   printMinMax(xGRIDmask,0)
+
+;============================================================
+; PLOT
+;============================================================
+  dirP = "./"
+  filP = "shapefiles_25"
+  pthP = dirP+filP
+  wks  = gsn_open_wks ("png", pthP)              ; send graphics to PNG file
+  
+  res                     = True                 ; plot mods desired
+  res@gsnMaximize         = True
+  res@gsnDraw             = False
+  res@gsnFrame            = False
+  res@gsnAddCyclic        = False
+
+  res@cnFillOn            = True
+;;res@cnFillPalette       = "precip2_17lev"   ; set color map
+;;res@cnFillPalette       = "prcp_1"          ; set color map
+  res@cnFillPalette       = "WhiteBlueGreenYellowRed"
+  res@cnLinesOn           =  False            ; Turn off contour lines
+  res@cnLineLabelsOn      =  False            ; Turn off contour line labels
+
+  res@cnFillMode          = "RasterFill"
+ ;res@cnRasterSmoothingOn = True
+
+;;res@cnLevelSelectionMode= "ManualLevels"    ; set manual contour levels
+;;res@cnMinLevelValF      =  25.0             ; set min contour level
+;;res@cnMaxLevelValF      = 400.0             ; set max contour level
+;;res@cnLevelSpacingF     =  25.0              ; set contour spacing
+
+  res@cnLevelSelectionMode= "ExplicitLevels"              
+  res@cnLevels            = (/2.5,10,25,37.5,50,75,100,125,150 \
+                             ,175,200,225,250,275,300,350,400/)
+ ;res@pmLabelBarWidthF    = 0.8              ; default = 0.6
+                                             ; map outlines
+; Area Limit
+  res@mpLimitMode         = "Corners"
+  res@mpLeftCornerLatF    = 21.0
+  res@mpLeftCornerLonF    = -122.0
+  res@mpRightCornerLatF   = 47.75
+  res@mpRightCornerLonF   = -61.75
+    
+; Projection Settings
+  res@mpProjection        = "LambertConformal"
+  res@mpLambertParallel1F = 38.5
+  res@mpLambertParallel2F = 38.5
+  res@mpLambertMeridianF  = 262.5
+
+  res@pmTickMarkDisplayMode = "Always"
+ ;res@mpFillOn           = False
+  res@mpOutlineDrawOrder = "PostDraw"
+  res@mpOutlineBoundarySets = "GeophysicalAndUSStates"
+  res@mpPerimOn = True
+
+  res@gsnCenterString       = yyyymm
+  res@tiMainString          = "obj_anal_ic"
+
+  plot = gsn_csm_contour_map(wks, xGRIDmask, res)
+
+; Station Marker Settings
+  mkres = True
+  mkres@gsMarkerIndex   = 16
+  mkres@gsMarkerSizeF   = 0.001
+  mkres@gsnCoordsAttach = True
+  mkres@gsnCoordsLat    = lat
+  mkres@gsnCoordsLon    = lon
+  dum1 = gsn_add_polymarker(wks,plot,lon,lat,mkres)
+  draw(plot)
+  frame(wks)

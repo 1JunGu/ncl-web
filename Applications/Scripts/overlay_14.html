@@ -1,0 +1,112 @@
+;----------------------------------------------------------------------
+; overlay_14.ncl
+;
+; Concepts illustrated:
+;   - Coordinate subscripting
+;   - Overlaying filled contour plots with different axes ranges
+;   - Explicitly setting contour levels
+;   - Overlay xy-object onto contour object 
+;----------------------------------------------------------------------
+;---Original Source code: 
+;   - Ehimen Williams: Institute of Meteorology and Geophysics
+;   - University of Cologne, Germany
+;----------------------------------------------------------------------
+
+;---User specified 
+   pltType = "png" 
+   pltDir  = "./"
+   pltName = "overlay" 
+
+   nt      = 0                                     ; time index
+   LON     = 96                                    ; longitude for X-Section
+   pltTitle= "NCEP/NCAR Reanalysis Data June-September 2016 @ "+LON+"E"
+
+;---Read data
+;---Dimension Sizes: lon = 33 ; lat = 23 ; level = 12 ; time = 1
+;---User coordinate subscripting {...} for desired longitude
+
+   a  = addfile("mainprf.nc","r")
+   t  = a->air(nt,:,:,{LON})                       ; (time,level,lat,lon) => (level,lat)
+   w  = a->omega(nt,:,:,{LON})                     ; (level,lat)
+   u  = a->uwnd(nt,:,:,{LON})                      ; (level,lat)
+   v  = a->vwnd(nt,:,:,{LON})                      ; (level,lat)
+   v  = 0.                                         ; force 0.0
+   g  = a->hgt(nt,:,{LON})                         ; (time,lat,lon) => (lat);  geopotential (m)
+
+;---Standard atmosphere
+   gp = 1013*(1-6.5/288000*g)^5.255                ; geopotential (m) => hPa
+   gp@units  = "hPa"
+   copy_VarCoords(g,gp)                            ; g1(lat)
+  ;printVarSummary(gp)
+  ;printMinMax(gp,0)
+ 
+;---Plot
+   pltPath = pltDir + pltName
+   wks  = gsn_open_wks (pltType,pltPath)           ; send graphics to PNG file
+  
+   res   = True                                    ; plot mods desired
+   
+   res@cnFillOpacityF       = 0.4
+   res@tiMainString         = pltTitle
+  
+   res@gsnDraw              = False                ; do not draw the plot
+   res@gsnFrame             = False                ; do not advance the frame
+
+   res@cnLevelSelectionMode = "ManualLevels"       ; manually select levels
+   res@cnLevelSpacingF      = 10.0                 ; contour spacing
+   res@cnMinLevelValF       = 300.                 ; min level
+   res@cnMaxLevelValF       = 390.                 ; max level
+   res@cnLineLabelsOn       = False                ; turn on line labels
+   res@cnFillOn             = True                 ; turn on color fill
+   res@cnFillPalette        = "MPL_rainbow"        ; choose colormap
+  
+   res@tiYAxisString        = "Pressure Levels (hPa)"
+   res@gsnLeftString        = "Mean Potential Air Temperature"
+   res@gsnRightString       = t@units
+  
+   res@vcRefMagnitudeF      = 5.0                  ; define vector ref mag
+   res@vcRefLengthF         = 0.08                 ; define length of vec ref
+   res@vcGlyphStyle         = "CurlyVector"        ; turn on curly vectors
+   res@vcMinDistanceF       = 0.04                 ; thin out vectors
+   res@vcMapDirection       = True
+  
+   res@vcLineArrowColor         = "Blue"           ; change vector color 
+   res@vcLineArrowThicknessF    = 2.0              ; change vector thickness
+   res@vcRefAnnoArrowLineColor  = "black"          ; change ref vector color
+   res@vcRefAnnoArrowUseVecColor= False            ; don't use vec color for ref
+  
+   plot1  = gsn_csm_pres_hgt_vector(wks, t,v,w, res) 
+  ;------------------------------------------------
+   sres   = True                                   ; plot mods desired
+    
+   sres@cnLineLabelsOn      = True                 ; turn on line labels
+   sres@cnLineColor         = "Red"                ; color of contour
+   sres@cnInfoLabelOn       = False                ; turn off info label
+   sres@gsnDraw             = False                ; do not draw the plot
+   sres@gsnFrame            = False                ; do not advance the frame
+  
+   sres@gsnLeftString       = " "
+   sres@gsnRightString      = " "
+  
+   plot2  = gsn_csm_pres_hgt(wks, u, sres )
+
+  ;-----------------------
+   mres   = True
+   mres@gsnLeftString       = " "
+   mres@gsnRightString      = " "
+   mres@gsnDraw             = False                ; do not draw the plot
+   mres@gsnFrame            = False                ; do not advance the frame
+   mres@xyLineThicknesses   = (/3.0/)              ; make line thicker
+   mres@xyLineColors        = (/"green"/)          ; change line color
+  
+   mres@gsnBelowYRefLineColor = (/ "black", "black"/)  
+   mres@gsnYRefLine           = (/ 100 ,1000 /)   
+  
+   plot3  = gsn_csm_xy(wks,gp&lat,gp,mres)         ; overlay geopotential 'pressure' line    
+  ;print("xy: "+gp&lat+"  "+gp)
+
+  ;-----------------------------
+   overlay(plot1,plot2)
+   overlay(plot1,plot3)
+   draw(plot1)
+   frame(wks)

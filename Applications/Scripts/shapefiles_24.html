@@ -1,0 +1,455 @@
+;----------------------------------------------------------------------
+; shapefiles_24.ncl
+;
+; Concepts illustrated:
+;   - Creating a mask array using outlines from a shapefile
+;   - Using functions for cleaner code
+;   - Masking a data array based on a geographical area obtained from a shapefile
+;   - Calculating area of a shapefile outline using area_poly_sphere
+;   - Calculating area of a series of quadrilaterals using gc_qarea
+;----------------------------------------------------------------------
+
+load "./shapefile_utils.ncl" 
+
+procedure print_dotted_line()
+begin
+  print("===========================================================")
+end
+
+;----------------------------------------------------------------------
+; This procedure prints information about original data and masked data.
+;----------------------------------------------------------------------
+procedure print_array_info(data,data_mask)
+local count_valid_values_orig, count_valid_values_mask, \
+      count_msg_values_orig, count_msg_values_mask
+begin
+  printVarSummary(data_mask)  
+  printMinMax(data_mask,0)  
+  print_dotted_line()
+
+  count_valid_values_orig = num(.not.ismissing(data))
+  count_valid_values_mask = num(.not.ismissing(data_mask))
+  count_msg_values_orig   = num(ismissing(data))
+  count_msg_values_mask   = num(ismissing(data_mask))
+
+  print("Original data:")
+  print("   # of valid values   = " + count_valid_values_orig)
+  print("   # of missing values = " + count_msg_values_orig)
+  print("Masked data:")
+  print("   # of valid values   = " + count_valid_values_mask)
+  print("   # of missing values = " + count_msg_values_mask)
+  print_dotted_line()
+end
+
+;----------------------------------------------------------------------
+; This procedure adds coordinate arrays to the existing data array
+; given delta lat/lon values and a start lat/lon value.
+;----------------------------------------------------------------------
+undef("add_latlon_metadata")
+procedure add_latlon_metadata(data[*][*],delta_lat,delta_lon,lat_ll,lon_ll)
+local lat, lon
+begin
+  dims = dimsizes(data)
+  lon        = ispan(0,dims(1)-1,1) * delta_lon + lon_ll
+  lat        = ispan(0,dims(0)-1,1) * delta_lat + lat_ll
+  lat        = lat(::-1)     ; reverse the latitudes
+  lat@units  = "degrees_north"
+  lon@units  = "degrees_east"
+  lat!0      = "lat"
+  lon!0      = "lon"
+  lat&lat    = lat
+  lon&lon    = lon
+
+  data!0    = "lat"     ; rectilinear
+  data!1    = "lon"
+  data&lat  =  lat
+  data&lon  =  lon
+end
+
+;----------------------------------------------------------------------
+; This function creates a filled contour plot over a map. We know
+; the data is all 1's or missing values, so special resources are
+; set for this.
+;----------------------------------------------------------------------
+undef("create_contour_map_plot")
+function create_contour_map_plot(wks,data,title)
+local res
+begin
+  res                       = True
+
+  res@gsnMaximize           = True          
+  res@gsnDraw               = False
+  res@gsnFrame              = False
+
+  res@mpMinLatF             = min(data&lat)
+  res@mpMaxLatF             = max(data&lat)
+  res@mpMinLonF             = min(data&lon)
+  res@mpMaxLonF             = max(data&lon)
+  res@pmTickMarkDisplayMode = "Always"    ; nicer tickmarks when map region is small.
+  res@mpOutlineOn           = False       ; Will add outlines from shapefile
+  res@mpFillOn              = False
+
+  res@cnFillOn              = True               ; color Fill 
+  res@cnFillMode            = "RasterFill"       ; Raster Mode
+  res@cnLevelSelectionMode  = "ExplicitLevels"
+  res@cnLevels              = (/1/)              ; The values are all constant.
+
+  res@cnConstFEnableFill    = True
+  res@cnConstFLabelOn       = False              ; Don't draw the "CONSTANT FIELD" string in middle of plot
+
+  res@cnLinesOn             = False              ; Turn off contour lines
+  res@cnLineLabelsOn        = False              ; Turn off contour line labels
+  res@lbLabelBarOn          = False
+
+  res@gsnAddCyclic          = False  
+
+  res@tiMainString          = title
+
+  plot = gsn_csm_contour_map(wks,data, res)
+  return(plot)
+end
+
+;----------------------------------------------------------------------
+; This procedure adds outlines from a shapefile to the given plot.
+;----------------------------------------------------------------------
+undef("add_shapefile_outlines")
+procedure add_shapefile_outlines(wks,plot,shp_filename)
+local lnres
+begin
+  lnres = True
+  lnres@gsLineThicknessF = 3.0
+  str = unique_string("line")
+  plot@$str$ = gsn_add_shapefile_polylines(wks,plot,shp_filename,lnres)
+end
+
+;----------------------------------------------------------------------
+; This procedure adds filled dots at lat/lon locations where the
+; data values are not missing.
+;----------------------------------------------------------------------
+undef("add_coordinates")
+procedure add_coordinates(wks,plot,data)
+local mkres
+begin
+  mkres                          = True
+  mkres@gsMarkerIndex            = 16     ; filled dot
+  mkres@gsMarkerSizeF            = 0.01
+  mkres@gsnCoordsNonMissingColor = "DarkOrchid4"
+  mkres@gsnCoordsMissingColor    = "olivedrab3"
+  mkres@gsnCoordsAttach          = True
+  gsn_coordinates(wks,plot,data,mkres)
+end
+  
+function create_map_plot(wks,shp_lat,shp_lon,res)
+local res2
+begin
+  res2 = res
+  res2@gsnMaximize           = True          
+  res2@gsnFrame              = False
+  res2@gsnDraw               = False
+  res2@mpMinLatF             = min(shp_lat)-.01
+  res2@mpMinLonF             = min(shp_lon)-.01
+  res2@mpMaxLatF             = max(shp_lat)+.01
+  res2@mpMaxLonF             = max(shp_lon)+.01
+  res2@pmTickMarkDisplayMode = "Always"    ; nicer tickmarks when map region is small.
+  res2@mpOutlineOn           = False       ; Will add outlines from shapefile
+  res2@mpFillOn              = False
+  map = gsn_csm_map(wks,res2)
+  return(map)
+end
+
+;----------------------------------------------------------------------
+; This procedure calculates the area in km^2 for two cases:
+;
+;    1. The area enclosed by a polygon read off a shapefile.
+;    2. The area taken up by the points in a 2D array that
+;       were masked against the shapefile polygon.
+;
+; For case #2, this procedure converts the 2D data array that's been
+; masked to a 1D array, so it can get the 1D indexes where values are
+; not missing. This information is used to construct a quadrilateral 
+; around each valid lat/lon pair so we can calculate an approximate 
+; area in km^2, using gc_qarea.
+;
+; If CREATE_PLOT is True, then a plot is created showing the filled 
+; shapefile polygon and the individual quadrilaterals created for
+; the masked array.
+;----------------------------------------------------------------------
+undef("calculate_area_size")
+procedure calculate_area_size(wks,data,shp_filename,delta_lat,delta_lon)
+local sf,shp_lat,shp_lon,map,dims,nlat,nlon,masked_area,\
+      lat1d,lon1d,res,qlat,qlon,gnres,str,ivalid
+begin
+;----------------------------------------------------------------------
+; 1. Calculate area for outline on a shapefile.
+;----------------------------------------------------------------------
+  sf      = addfile(shp_filename,"r")
+  shp_lat = sf->y    ; for plotting purposes
+  shp_lon = sf->x    
+  R       = 6371     ; km
+  R@units = "km"
+  shapefile_area = area_poly_sphere(shp_lat,shp_lon,R)
+
+;----------------------------------------------------------------------
+;  2. Calculate area for data array that was masked by same shapefile
+;     outline.
+;----------------------------------------------------------------------
+
+;---- Convert arrays to 1D and get indexes  of non-missing points
+  dims   = dimsizes(data)
+  nlat   = dims(0)
+  nlon   = dims(1)
+  data1d = ndtooned(data)
+  lat1d  = ndtooned(conform(data,data&lat,0))
+  lon1d  = ndtooned(conform(data,data&lon,1))
+  ivalid = ind(.not.ismissing(data1d))
+  nvalid = dimsizes(ivalid)
+
+;---- Construct the quadrilaterals around each valid point
+  qlat      = new((/nvalid,5/),typeof(lat1d))
+  qlon      = new((/nvalid,5/),typeof(lon1d))
+  qlat(:,0) = lat1d(ivalid)-delta_lat/2.
+  qlat(:,1) = qlat(:,0)
+  qlat(:,2) = lat1d(ivalid)+delta_lat/2.
+  qlat(:,3) = qlat(:,2)
+  qlat(:,4) = qlat(:,0)
+  qlon(:,0) = lon1d(ivalid)-delta_lon/2.
+  qlon(:,1) = lon1d(ivalid)+delta_lon/2.
+  qlon(:,2) = qlon(:,1)
+  qlon(:,3) = qlon(:,0)
+  qlon(:,4) = qlon(:,0)
+
+;---- Calculate sum of area of the quadrilaterals.
+  R       = 6371     ; km
+  R@units = "km"
+  masked_area = sum(gc_qarea(qlat(:,0:3),qlon(:,0:3)))*R^2
+
+;---- Print the size of each area
+  print("masked area    = " + masked_area + " (km^2)")
+  print("shapefile area = " + shapefile_area + " (km^2)")
+  print_dotted_line()
+
+;----------------------------------------------------------------------
+; If desired, create a plot showing the shapefile area in blue, and 
+; masked area in pink.
+;----------------------------------------------------------------------
+  CREATE_PLOT = True
+  if(CREATE_PLOT) then
+    res = True
+    res@gsnLeftString         = "Pink squares : " + \
+                                 sprintf("%6.2f",masked_area) + " km~S~2~N~"
+    res@gsnRightString        = "Blue shapefile area : " + \
+                                 sprintf("%6.2f",shapefile_area) + " km~S~2~N~"
+
+    res@gsnStringFontHeightF         = 0.012
+    res@gsnLeftStringOrthogonalPosF  = -0.005
+    res@gsnRightStringOrthogonalPosF = -0.005
+    map = create_map_plot(wks,shp_lat,shp_lon,res)
+
+;---- Add filled shapefile polygon.
+    pres               = True
+    pres@gsEdgesOn     = True
+    pres@gsFillColor   = "lightblue"
+    pres@gsMarkerIndex = 16     ; filled dot
+    id_map = gsn_add_shapefile_polygons(wks,map,shp_filename,pres)
+
+;---- Add filled quadrilaterals, and center lat/lon location.
+    pres@gsFillColor = "hotpink"
+    do n=0,dimsizes(ivalid)-1
+      str = "gon"+n
+      map@$str$ = gsn_add_polygon(wks,map,qlon(n,:),qlat(n,:),pres)
+      str = "mrk"+n
+      map@$str$ = gsn_add_polymarker(wks,map,lon1d(ivalid),lat1d(ivalid),pres)
+    end do
+
+;---- This draws the map with the filled areas and the markers
+    draw(map)
+    frame(wks)
+  end if
+
+end
+
+undef("construct_triangular_mesh")
+function construct_triangular_mesh(wks,data,shp_filename)
+local ii, lat1d, lon1d, lat1, lon1, vertices, dim_verts,\
+lat_tri, lon_tr, R
+begin
+  sf      = addfile(shp_filename,"r")
+  shp_lat = sf->y    ; for plotting purposes
+  shp_lon = sf->x    
+
+  lat1d  = ndtooned(conform(data,data&lat,0))
+  lon1d  = ndtooned(conform(data,data&lon,1))
+  ii = ind(.not.ismissing(ndtooned(data)))
+
+  lat1d_valid = lat1d(ii)
+  lon1d_valid = lon1d(ii)
+  vertices = csstri(lat1d_valid,lon1d_valid)
+  dim_verts = dimsizes(vertices)
+  lat_tri = reshape(lat1d_valid(ndtooned(vertices)),dim_verts)
+  lon_tri = reshape(lon1d_valid(ndtooned(vertices)),dim_verts)
+  R       = 6371     ; km
+  R@units = "km"
+  masked_area = sum(gc_tarea(lat_tri,lon_tri))*R^2
+  print("Triangle area = " + masked_area)
+
+  CREATE_PLOT = True
+  if(CREATE_PLOT) then
+    res = True
+    res@gsnLeftString         = "Pink triangles : " + \
+                                 sprintf("%6.2f",masked_area) + " km~S~2~N~"
+    res@gsnStringFontHeightF         = 0.012
+    res@gsnLeftStringOrthogonalPosF  = -0.005
+    res@gsnRightStringOrthogonalPosF = -0.005
+    map = create_map_plot(wks,shp_lat,shp_lon,res)
+
+;---- Add filled shapefile polygon.
+    pres               = True
+    pres@gsEdgesOn     = True
+    pres@gsFillColor   = "lightblue"
+    pres@gsMarkerIndex = 16     ; filled dot
+    id_map = gsn_add_shapefile_polygons(wks,map,shp_filename,pres)
+
+;---- Add filled triangles, and center lat/lon location.
+    pres@gsFillColor = "hotpink"
+    do n=0,dimsizes(vertices(:,0))-1
+      str = "gon"+n
+      map@$str$ = gsn_add_polygon(wks,map,lon_tri(n,:),lat_tri(n,:),pres)
+    end do
+    do n=0,dimsizes(lat1d_valid)-1
+      str = "mrk"+n
+      map@$str$ = gsn_add_polymarker(wks,map,lon1d_valid(n),lat1d_valid(n),pres)
+    end do
+
+;---- This draws the map with the filled areas and the markers
+    draw(map)
+    frame(wks)
+  end if
+
+  return(vertices)
+end
+
+
+;----------------------------------------------------------------------
+; This procedure creates a panel plot with 2 rows and 1 column and
+; adds a common labelbar. It is assumed that both plots can be
+; represented by a single labelbar.
+;----------------------------------------------------------------------
+undef("panel_plots")
+procedure panel_plots(wks,plot_orig,plot_mask)
+local pres
+begin
+  pres                  = True
+  pres@gsnMaximize      = True
+  pres@gsnPanelLabelBar = True
+  pres@lbLabelFontHeightF = 0.012
+  gsn_panel(wks,(/plot_orig,plot_mask/),(/2,1/),pres)
+end
+
+;----------------------------------------------------------------------
+; This procedure further zooms in on an existing map plot, using
+; lat/lon read off a shapefile.
+;----------------------------------------------------------------------
+undef("create_zoomed_plot")
+procedure create_zoomed_plot(wks,plot,data,shp_filename)
+local sf, shp_lat, shp_lon
+begin
+  sf      = addfile(shp_filename,"r")
+  shp_lat = sf->y    ; for plotting purposes
+  shp_lon = sf->x    
+
+  setvalues plot
+    "mpMinLatF"    : min(shp_lat)-.01
+    "mpMinLonF"    : min(shp_lon)-.01
+    "mpMaxLatF"    : max(shp_lat)+.01
+    "mpMaxLonF"    : max(shp_lon)+.01
+    "tiMainString" : "Zoom in on shapefile area; purple dots~C~" + \
+                     "represent valid values within shapefile area"
+    "tiMainFont"   : "helvetica"
+    "tiMainFontHeightF" : 0.025
+  end setvalues
+  add_coordinates(wks,plot,data)
+  draw(plot)
+  frame(wks)
+end
+
+;----------------------------------------------------------------------
+; This driver code does the following:
+;   - Reads data from an ASCII file, include header information
+;   - Attaches lat/lon coordinate arrays to data array read from
+;     ASCII file.
+;   - Masks the data based on an outline in a shapefile
+;   - Creates a series of plots:
+;        - a panel plot of contour/map plots of the original data
+;          and masked data
+;        - a zoomed in version of the masked data plot
+;        - a plot showing how the approximate area of the masked
+;          data was determined.
+;   - Prints the area in km^2 of the shapefile area, and the
+;     masked data area.
+;
+; Note: you will get some warnings from this script. You can safely
+; ignore them:
+; 
+;   ContourPlotInitialize: scalar field is constant; no contour lines
+;                          will appear; use cnConstFEnableFill to enable fill
+;   ContourPlotSetValues: Data values out of range of levels set by
+;                         EXPLICITLEVELS mode
+;----------------------------------------------------------------------
+begin
+;---- Read ASCII data header to get some constant values.
+  hdr      = readAsciiHead("inventory.asc", 7) 
+  ncols    = toint( str_get_field(hdr(0), 2, " ") ) 
+  nrows    = toint( str_get_field(hdr(1), 2, " ") ) 
+  lonLL    = tofloat( str_get_field(hdr(2), 2, " ") ) 
+  latLL    = tofloat( str_get_field(hdr(3), 2, " ") ) 
+  deltaLon = tofloat( str_get_field(hdr(4), 2, " " ) )
+  deltaLat = tofloat( str_get_field(hdr(5), 2, " ") )
+  missingVal = tofloat( str_get_field(hdr(6), 2, " ") )
+
+  print("ncols      = " + ncols)
+  print("nrows      = " + nrows)
+  print("lonLL      = " + lonLL)
+  print("latLL      = " + latLL)
+  print("deltaLon   = " + deltaLon)
+  print("deltaLat   = " + deltaLat)
+  print("missingVal = " + missingVal)
+  print_dotted_line()
+
+;---- Read data array off ASCII file and add lat/lon metadata
+  data = readAsciiTable("inventory.asc",ncols,"float",7) 
+  data@_FillValue = missingVal
+  add_latlon_metadata(data,deltaLat,deltaLon,latLL,lonLL)
+
+;---- Use outlines in shapefile to mask data
+  shp_filename = "Cuenca_Universidad.shp" 
+  data_mask = shapefile_mask_data(data,shp_filename,True)
+  copy_VarMeta(data, data_mask)
+
+;---- Print information about both arrays
+  print_array_info(data,data_mask)
+
+;---- Start the graphics by opening PNG workstation.
+  wks = gsn_open_wks("x11","shapefiles")
+
+;---- Create plots of both original and masked data, but don't draw them yet
+  plot_orig = create_contour_map_plot(wks,data,     "Original data")
+  plot_mask = create_contour_map_plot(wks,data_mask,"Masked data")
+
+;---- Add outlines from shapefile to both plots
+  add_shapefile_outlines(wks,plot_orig,shp_filename)
+  add_shapefile_outlines(wks,plot_mask,shp_filename)
+
+;---- Draw both plots in a panel
+  panel_plots(wks,plot_orig,plot_mask)
+
+;---- Zoom in on masked plot and add dots at lat/lon locations
+  create_zoomed_plot(wks,plot_mask,data_mask,shp_filename)
+
+;---- Print areas in km^2 of shapefile area and masked area
+  calculate_area_size(wks,data_mask,shp_filename,deltaLat,deltaLon)
+
+;----Calculate area using triangular mesh
+  vertices = construct_triangular_mesh(wks,data_mask,shp_filename)
+
+end
+

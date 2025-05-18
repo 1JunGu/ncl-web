@@ -1,0 +1,98 @@
+;---------------------------------
+; maponly_29.ncl
+;---------------------------------
+;
+; Concepts illustrated:
+;
+;   - Using all three settings of mpShapeMode
+;   - Lining up titles using pmTitleZone
+;   - Paneling plots manually using viewport resources
+;   - Manually setting map colors
+;
+;---------------------------------
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"  
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"   
+;---------------------------------
+;
+; This script demonstrates how to manually panel
+; differently-sized plots, without using gsn_panel,
+; as well as using different values of mpShapeMode.
+; Also, this script illustrates how to line up titles
+; using the title-zoning resource pmTitleZone.
+;
+;---------------------------------
+
+begin
+
+;---------------------------------
+; Set up workstation and plot resources
+;---------------------------------
+  plot = new(3, "graphic")
+
+  wks = gsn_open_wks("png", "maponly")    ; send graphics to PNG file
+
+  res               = True                ; plot mods desired
+ 
+  res@mpOutlineOn   = True
+
+;---Wait to draw plots until all three plots have been created
+  res@gsnDraw       = False
+  res@gsnFrame      = False
+
+;---Set tickmark display
+  res@pmTickMarkDisplayMode = "Always"
+
+;---------------------------------
+; set mpShapeMode, width, height, and X/Y coordinates of each plot
+;---------------------------------
+
+;---Draw first plot in top half of window
+  res@mpShapeMode            = "FixedAspectFitBB"
+
+  res@vpWidthF               = 0.71
+  res@vpHeightF              = 0.35
+  res@vpXF                   = 0.17
+  res@vpYF                   = 0.92
+  res@mpLandFillColor        = "green4"
+  res@mpOceanFillColor       = "deepskyblue"
+  res@mpInlandWaterFillColor = "darkslategray2"
+
+  res@pmTitleZone          = 2   ; change title zoning to line up titles vertically
+
+  res@tiMainString         = "mpShapeMode = " + res@mpShapeMode
+  res@tiMainFontHeightF    = 0.015
+  plot(0)                  = gsn_csm_map(wks,res)
+
+;---Draw second plot in lower left corner of window
+  res@mpShapeMode          = "FreeAspect"
+
+  res@vpXF                 = 0.06
+  res@vpYF                 = 0.47
+  res@vpWidthF             = 0.43 ; Resize to a square
+  res@vpHeightF            = 0.43
+
+  res@tiMainString         = "mpShapeMode = " + res@mpShapeMode
+  plot(1)                  = gsn_csm_map(wks,res)
+
+;---Draw third plot in lower right corner of window
+  res@mpShapeMode          = "FixedAspectNoFitBB"
+
+  res@vpXF                 = 0.55
+
+
+  res@tiMainString         = "mpShapeMode = " + res@mpShapeMode
+  plot(2)                  = gsn_csm_map(wks,res)
+
+;---Draw NDC grid (for debug purposes) and plots
+  drawNDCGrid(wks)
+  draw(plot)
+  frame(wks)
+
+;---Draw plots again, but without the NDC grid
+  draw(plot)
+  frame(wks)
+
+end
+

@@ -1,0 +1,729 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/thornthwaite.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:17 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (meteorology)">
+<meta name="keywords" content="thornthwaite">
+<title>thornthwaite</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../crop.html">Crop</a>,
+<a class=crumb href="../meteo.html">Meteorology</a>
+<br>
+<h1>thornthwaite</h1>
+
+<p>
+Estimate the potential evapotranspiration (PET) via the Thornthwaite method.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.3.0">version 6.3.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function thornthwaite (
+		t       : numeric,  
+		lat     : numeric,  
+		opt [1] : logical,  
+		dim [1] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>t</em>
+<p class=indent><b>Monthly</b> near surface temperature (C). <b>The number of months (ntim) 
+must be a multiple of 12. Further, it is assumed that the data start in January.</b> 
+Common dimensionalities include: 
+<em>t</em>(ntim), <em>t</em>(ntim,ncol), <em>t</em>(ntim,nlat,mlon), <em>t</em>(ncase,ntim), <em>t</em>(ncase,ntim,nlat,mlon), <em>t</em>(ncase,ntim,klon).
+</p>
+<em>lat</em>
+<p class=indent>Latitude(s) of the current station or grid point(s). 
+<ul>
+</p>
+<p class=indent>
+<li> <em>t</em>(ntim), then <em>lat</em> is a scalar and <em>dim</em>=0 
+</p>
+<p class=indent>
+<li> <em>t</em>(ntim,ncol), and the grid is unstructured (eg: spectral element); then <em>lat</em>(ncol) and <em>dim</em>=0
+</p>
+<p class=indent>
+<li> <em>t</em>(ntim,nlat,mlon), and the grid is rectilinear, then <em>lat</em>(nlat) and <em>dim</em>=0
+</p>
+<p class=indent>
+<li> <em>t</em>(ntim,nlat,mlon), and the grid is curvilinear, then <em>lat</em>(nlat,mlon) and <em>dim</em>=0
+</p>
+<p class=indent>
+<li> <em>t</em>(ncase,ntim), then <em>lat</em> is a scalar and <em>dim</em>=1 
+</p>
+<p class=indent>
+<li> <em>t</em>(ncase,ntim,ncol), and the grid is unstructured (eg: spectral element); then <em>lat</em>(ncol) and <em>dim</em>=1
+</p>
+<p class=indent>
+<li> <em>t</em>(ncase,ntim,nlat,mlon), and the grid is curvilinear, then <em>lat</em>(nlat,mlon) and <em>dim</em>=1
+</p>
+<p class=indent>
+<li> <em>t</em>(ncase,ntim,nlat,mlon), and the grid is curvilinear, then <em>lat</em>(nlat,mlon) and <em>dim</em>=1
+</ul>
+</p>
+<em>opt</em>
+<p class=indent>Not used. Set to False.
+</p>
+<em>dim</em>
+<p class=indent>The dimension of <em>t</em> to be used to estimate the potential
+evapotranspiration (PET). This is the time dimension.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The returned PET will be the same shape, size and type
+as <em>t</em>. The units are millimeters/month (ie: monthly total).
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+Potential evapotranspiration (PET) is estimated via the method of Thornthwaite.
+The only variable used is monthly temperature [<em>t</em> (C)]. The calculated 
+climatological means are used to calculate an annual temperature efficiency index. 
+The latitude is used to adjust the number of sunlight hours over the course of the year.
+<p>
+
+This method has been the subject of many criticisms.  Generally, the Thornthwaite method underestimates PET in the arid areas and over estimates PET in the humid areas.
+
+<p>
+Also, there is confusion about the difference between <i>potential evapotranspiration (<b>PET</b>)</i> and <i>reference evapotranspiration (<b>ETo</b>)</i>. Irmak and Haman (2014) provide a nice description in their paper entitled 
+<a href="http://edis.ifas.ufl.edu/pdffiles/AE/AE25600.pdf"><b> Evapotranspiration: Potential or Reference?</b></a>.
+[UF: IFAS Extension: ABE 343].
+
+<p>
+<pre>
+<b>References:</b>
+
+C.W. Thornthwaite (1948): 
+<b>An approach toward a rational classification of climate</b>, Geographical Review 38 (1): 55-94. 
+        http://dx.doi.org/10.2307/21073
+
+A.R. Pereira, Â. Paes De Camargo (1989):
+<b>An analysis of the criticism of thornthwaite's equation for estimating potential evapotranspiration</b>
+Agricultural and Forest Meteorology, Volume 46, Issue 1, Pages 149-157
+        http://dx.doi.org/10.1016/0168-1923(89)90118-4
+
+F. Hashemi, M.T. Habibian (1979): 
+<b>Limitations of temperature-based methods in estimating crop evapotranspiration
+in arid-zone agricultural development projects</b>
+Agricultural Meteorology, Volume 20, Issue 3, June 1979, Pages 237-247
+        http://dx.doi.org/10.1016/0002-1571(79)90025-6
+
+</pre>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="dim_spi_n.html"><strong>dim_spi_n</strong></a>,
+<a href="dim_spi3_n.html"><strong>dim_spi3_n</strong></a>,
+<a href="dim_gamfit_n.html"><strong>dim_gamfit_n</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><P>
+Sellers (1969), <i>Physical Climatology</i>, pg 173 includes an example
+for one year at Aspendale, Australia.  Compute potential evapotranspiration 
+(mm/month) and compare with Sellers Table 23 which are in units of mm/day.
+<pre>
+
+   tmp           = (/23.3, 21.1, 19.6, 17.2, 12.6, 10.9 \
+                    ,10.0, 11.0, 13.0, 15.8, 17.8, 20.1/)
+   tmp@units     = "degC"
+   tmp@long_name = "Sellers, Physical Climatology; 1969, p173"
+
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(tmp)
+   <a href="print.html"><strong>print</strong></a>("min="+<a href="min.html"><strong>min</strong></a>(tmp)+"  max="+<a href="max.html"><strong>max</strong></a>(tmp))
+
+   latAsp = -38.0                                        ; Latitude of Aspendale, Australia
+   pet    = <strong>thornthwaite</strong>(tmp, latAsp, False, 0)  
+   pet@long_name = "PET: Aspendale, Australia"
+   pet@units     = "mm/month"                            ; ie, monthly total
+
+; Compare with Sellers Table 23, pg 173 which are in units of mm/day
+
+   dymo   = (/31,28,31,30,31,30,31,31,30,31,30,31/)      
+   pet    = pet/dymo                                     ; mm/month =>  mm/day
+   pet@units    = "mm/day"
+
+   pet_sellers = (/4.47, 3.51, 2.80, 2.04, 1.09, 0.80 \  
+                  ,0.74, 0.89, 1.50, 2.09, 2.73, 3.47 /)
+   pet_sellers@long_name = "PET: Sellers Table 23"
+   pet_sellers@units     = "mm/day"
+   
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(pet_sellers)
+   <a href="print.html"><strong>print</strong></a>("min="+<a href="min.html"><strong>min</strong></a>(pet_sellers)+"  max="+<a href="max.html"><strong>max</strong></a>(pet_sellers))
+
+   print(" ")
+   <a href="print.html"><strong>print</strong></a>(pet_sellers+"  "+<a href="sprintf.html"><strong>sprintf</strong></a>("%6.2f",pet) )
+
+</pre>
+The (edited) output looks like:
+<p>
+<pre>
+
+     Variable: pet_sellers
+     Type: float
+     Total Size: 48 bytes
+                 12 values
+     Number of Dimensions: 1
+     Dimensions and sizes:   [12]
+     Coordinates: 
+     Number Of Attributes: 2
+       units :       <b>mm/day</b>
+       long_name :   PET: Sellers Table 23
+
+     (0)     min=0.74  max=4.47
+
+             <b>Sellers</b>     <b>NCL</b>
+     (0)	4.47    4.32
+     (1)	3.51    3.46
+     (2)	2.80    2.81
+     (3)	2.04    2.03
+     (4)	1.09    1.11
+     (5)	0.80    0.83
+     (6)	0.74    0.74
+     (7)	0.89    0.94
+     (8)	1.50    1.37
+     (9)	2.09    2.09
+     (10)	2.73    2.73
+     (11)	3.47    3.45
+</pre>
+<p>
+<B>Example 2</B><P>
+Read an ascii file containing 
+<a href="../../../Applications/Data/asc/palmer_table1.txt"><b>Palmer's Table 1</b></a> 
+("Hydrologic accounting for central Iowa").
+There is no indication what latitude Palmer used for 'central Iowa.' This example 
+uses 42N.  This is from Palmer's (1965) classic note: <i>Meteorological Drought</i>: 
+<a href="https://www.ncdc.noaa.gov/temp-and-precip/drought/docs/palmer.pdf">
+<b>https://www.ncdc.noaa.gov/temp-and-precip/drought/docs/palmer.pdf</b></a>
+<p>
+<pre>
+   diri   = "./"
+   fili   = "palmer_table1.txt"           ; Palmer Table 1: yyyymm, T(F), P(in), PE(in)
+
+   data   = <a href="../Contributed/readAsciiTable.html"><strong>readAsciiTable</strong></a>(diri+fili, 4, "float", 3)
+   yyyymm = <a href="toint.html"><strong>toint</strong></a>(data(:,0))
+   tf     = data(:,1)                   ; Farenheit
+   prcin  = data(:,2)                   ; Inches
+   petin  = data(:,3)                   ; Inches
+
+   lat    = 42.0                        ; central Iowa (approximate)
+                                        ; convert 'tf' to degC [required by 'thornthwaite'] 
+   PETncl = <strong>thornthwaite</strong>((tf-32)*0.555556, lat, False 0)   ; mm/month
+   PETncl = PETncl*0.03937008           ; mm => inches for comparison with Palmer values
+   petdif = PETncl-petin                ; difference for print
+
+   <a href="print.html"><strong>print</strong></a>(yyyymm+ <a href="sprintf.html"><strong>sprintf</strong></a>("%8.2f",    tf)+\
+                 sprintf("%8.2f", prcin)+\
+                 sprintf("%8.2f", petin)+\
+                 sprintf("%8.2f",PETncl)+\
+                 sprintf("%8.2f",petdif))
+
+The (slightly edited)  output is as follows. All precipitation rekated values are in inches for comparison.
+<pre>
+        yyyymm    Tf       Pin     PE    PETncl  difference
+   (0)	195301   32.30    0.90    0.01    0.01   -0.00
+   (1)	195302   22.60    0.21    0.00    0.00    0.00
+   (2)	195303   36.30    3.22    0.31    0.23   -0.08
+   (3)	195304   48.50    1.16    1.63    1.45   -0.18
+   (4)	195305   60.60    5.60    3.56    3.36   -0.20
+   (5)	195306   77.80    1.03    6.37    6.25   -0.12
+   (6)	195307   76.30    3.57    6.22    6.09   -0.13
+   (7)	195308   70.30    1.84    4.84    4.70   -0.14
+   (8)	195309   69.70    3.57    4.18    4.01   -0.17
+   (9)	195310   49.80    1.95    1.52    1.37   -0.15
+   (10)	195311   37.90    0.26    0.34    0.28   -0.06
+   (11)	195312   26.90    0.89    0.00    0.00    0.00
+   (12)	195401   26.10    1.34    0.00    0.00    0.00
+   (13)	195402   25.10    0.59    0.00    0.00    0.00
+   (14)	195403   34.40    1.01    0.09    0.11    0.02
+   (15)	195404   50.10    0.61    1.82    1.64   -0.18
+   (16)	195405   70.00    0.76    5.08    4.87   -0.21
+   (17)	195406   78.40    2.10    6.53    6.36   -0.17
+   (18)	195407   79.30    4.68    6.82    6.63   -0.19
+   (19)	195408   72.90    2.83    5.25    5.12   -0.13
+   (20)	195409   61.10    5.59    3.02    2.85   -0.17
+   (21)	195410   56.50    1.15    2.28    2.08   -0.20
+   (22)	195411   41.70    5.15    0.60    0.53   -0.07
+   (23)	195412   21.00    0.34    0.00    0.00    0.00
+   (24)	195501   20.60    1.53    0.00    0.00    0.00
+   (25)	195502   28.50    1.44    0.00    0.00    0.00
+   (26)	195503   39.90    1.46    0.62    0.51   -0.11
+   (27)	195504   46.40    1.24    1.39    1.22   -0.17
+   (28)	195505   54.80    4.13    2.70    2.50   -0.20
+   (29)	195506   65.40    8.65    4.27    4.14   -0.13
+   (30)	195507   78.60    4.43    6.66    6.51   -0.15
+   (31)	195508   72.90    1.64    5.25    5.12   -0.13
+   (32)	195509   64.50    3.89    3.46    3.30   -0.16
+   (33)	195510   50.70    3.55    1.60    1.46   -0.14
+   (34)	195511   33.90    2.89    0.07    0.06   -0.01
+   (35)	195512   21.60    1.31    0.00    0.00    0.00
+</pre>
+<p>
+<B>Example 3</B><P>
+Read an ascii file containing 117 years of monthly temperatures 
+at Boulder, Colorado (source: http://www.esrl.noaa.gov/psd/boulder/). 
+Compute potential evapotranspiration (mm/month).
+<pre>
+   dirt   = "./"
+   filt   = "Boulder.temp.1897-2013.txt"   
+   
+   ncol   = 14  ; due to the structure of the data, it is better to read as 2D
+   nrow   = <a href="../Contributed/numAsciiRow.html"><strong>numAsciiRow</strong></a>(dirt+filt)      ; contributed.ncl
+   tmp2   = <a href="asciiread.html"><strong>asciiread</strong></a>(dirt+filt,(/nrow,ncol/), "float") 
+
+   tmp           = <a href="ndtooned.html"><strong>ndtooned</strong></a>(tmp2(:,1:ncol-2))              ; make one dimensional
+   tmp@units     = "degF"
+   tmp@long_name = "Boulder Temperature"
+
+   tmp    = (5.0/9.0)*(tmp-32)                           ; Convert F=>C
+   tmp@units     = "degC"
+
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(tmp)
+   <a href="print.html"><strong>print</strong></a>("tmp: min="+<a href="min.html"><strong>min</strong></a>(tmp)+"  max="+<a href="max.html"><strong>max</strong></a>(tmp))
+
+   TMP    = <a href="ndtooned.html"><strong>ndtooned</strong></a>( tmp )                          ; create a time series                           ; 
+
+
+   latBld = 40.0                                         ; Boulder is at 40N latitude
+   pet    = <strong>thornthwaite</strong>(TMP, latBld, False, 0)  
+   pet@long_name = "PET"
+   pet@units     = "mm/month"                            ; ie, monthly total
+
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(pet)
+   <a href="print.html"><strong>print</strong></a>("pet: min="+<a href="min.html"><strong>min</strong></a>(tmp)+"  max="+<a href="max.html"><strong>max</strong></a>(tmp))
+
+   <a href="write_matrix.html"><strong>write_matrix</strong></a> (<a href="onedtond.html"><strong>onedtond</strong></a>(pet,(/nyrs,12/)), "12f7.1", False) ; requires 2D
+
+
+</pre>
+The (edited) output 
+<pre>
+
+     Variable: pet
+     Type: float
+     Total Size: 11232 bytes
+                 1404 values
+     Number of Dimensions: 1
+     Dimensions and sizes:   [1404]
+     Coordinates: 
+     Number Of Attributes: 3
+       units :       <b>mm/month</b>
+       long_name :   PET: Boulder, CO
+       _FillValue :  -9999
+
+(0)  tmp: min=-8.66667  max=25.7222
+---
+     Variable: pet
+     Type: float
+     Total Size: 5616 bytes
+                 1404 values
+     Number of Dimensions: 1
+     Dimensions and sizes:   [1404]
+     Coordinates: 
+     Number Of Attributes: 3
+       units :       mm/month
+       long_name :   PET
+       _FillValue :  9.96921e+36
+(0)     pet: min=0  max=162.275
+---
+       
+          <b>J      F      M      A      M      J      J      A      S      O      N      D </b>
+     
+         0.0    0.2    7.4   38.6   86.6  103.7  129.9  115.6   94.0   44.4   16.0    0.0
+         0.0   10.1    6.0   42.2   56.5  111.6  136.5  131.1   78.7   35.9    6.3    0.0
+         0.0    0.0    3.0   41.9   74.7  108.8  123.3  121.0   91.3   39.9   28.4    4.9
+         7.1    0.0   23.1   32.2   85.1  123.5  130.3  128.0   77.1   58.2   21.7   10.2
+         6.0    0.0   15.3   36.0   83.9  109.2  149.1  124.5   76.4   48.2   28.7    3.7
+         0.1    8.7   13.2   41.0   82.8  112.4  124.1  126.4   74.5   52.0   16.4    6.0
+     [SNIP]
+         0.0    5.5   17.2   38.0   75.1  109.6  148.2  117.9   74.8   28.3   24.7    0.0
+         9.2   11.8   25.9   36.6   83.2   97.5  125.8  117.9   81.9   24.7   20.1    0.0
+         1.0    0.0   21.9   41.0   63.5  112.8  137.7  128.8   93.3   52.0   12.1    7.2
+         1.1    0.0   28.3   41.3   62.8  115.5  141.9  139.4   82.8   46.3   17.0    0.1
+        10.5    0.2   43.6   58.0   86.6  142.3  147.4  131.9   91.3   40.7   24.9    1.8
+         1.0    0.1   16.5   26.6   77.3  124.7  136.5  128.0   88.4   32.9   18.8    0.0
+</pre>
+<p>
+<B>Example 4</B><P>
+Read the Wichita data used by the <a href="http://cran.r-project.org/web/packages/SPEI/SPEI.pdf"><b>R-SPEI package</b></a>.
+Calculate the Thornthwaite estimates via NCL's <strong>thornthwaite</strong> function
+and compare with those on the file. <b>NOTE:</B> The values are basically identical.
+<p>
+<pre>
+   dirw   = "./"
+   filw   = "Wichita.Rspei.198001-201112.nc"
+   fw     = <a href="addfile.html"><strong>addfile</strong></a>(dirw+filw, "r")
+   
+   tavg   = fw->TAVG
+
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(tavg)
+   <a href="print.html"><strong>print</strong></a>("tavg: min="+<a href="min.html"><strong>min</strong></a>(tavg)+"  max="+<a href="max.html"><strong>max</strong></a>(tavg))
+   
+   lat    = fw@latitude                                  ; Wichita: 37.65N
+   pet    = <strong>thornthwaite</strong>(tavg, lat, False, 0)
+   pet@long_name = "PET: Wichita"
+   pet@units     = "mm/month"                            ; ie, monthly total
+   pet@tag       = "NCL: thormthwaite"
+   <a href="../Contributed/copy_VarCoords.html"><strong>copy_VarCoords</strong></a>(tavg, pet)
+     
+   <a href="printVarSummary.html"><strong>printVarSummary</strong></a>(pet)
+   <a href="print.html"><strong>print</strong></a>("pet: min="+min(pet)+"  max="+max(pet))
+
+   ntim = dimsizes(tavg) 
+   nyrs = ntim/12
+   <a href="write_matrix.html"><strong>write_matrix</strong></a> (onedtond(pet,(/nyrs,12/)), "12f7.1", False)
+   
+; Read SPEI-R values from R-SPEI file for comparison.
+; Note the last 2 months contain missing values.
+
+   pet_spei = fw->PET_TW
+
+   pet_diff = <a href="max.html"><strong>max</strong></a>( <a href="abs.html"><strong>abs</strong></a>(pet - pet_spei) )
+   <a href="print.html"><strong>print</strong></a>("maximum difference: pet_diff="+pet_diff)
+</pre>
+<p>
+The output is:
+<p>
+<pre>
+     Variable: tavg
+     Type: float
+     Total Size: 1536 bytes
+                 384 values
+     Number of Dimensions: 1
+     Dimensions and sizes:   [time | 384]
+     Coordinates: 
+                 time: [198001..201112]
+     Number Of Attributes: 3
+       long_name :   average temperature
+       units :       degC
+       _FillValue :  -999
+     (0)     tavg: min=-8.71  max=32.46
+     
+     Variable: pet
+     Type: float
+     Total Size: 1536 bytes
+                 384 values
+     Number of Dimensions: 1
+     Dimensions and sizes:   [time | 384]
+     Coordinates: 
+                 time: [198001..201112]
+     Number Of Attributes: 4
+       tag : NCL: thormthwaite
+       units :       mm/month
+       long_name :   PET: Wichita
+       _FillValue :  -999
+     (0)     pet: min=0  max=226.929
+
+          <b>J      F      M      A      M      J      J      A      S      O      N      D </b>
+  
+         0.0    0.0   10.9   44.2   84.4  163.2  226.9  184.8  117.6   51.7   18.3    3.1
+         0.8    6.9   23.7   76.9   80.7  152.6  186.5  147.6  104.2   43.2   18.3    0.2
+[SNIP]
+         0.0    0.1   22.6   66.6   94.2  167.7  181.6  175.5  113.6   62.8   17.4    0.9
+         0.0    0.1   24.6   58.7   97.2  171.7  220.2  183.3   93.7   81.3 -999.0 -999.0
+  
+(0)     <b>maximum difference: pet_diff=1.52588e-05 </b>
+
+
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/thornthwaite.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:17 GMT -->
+</html>

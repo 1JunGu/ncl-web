@@ -1,0 +1,93 @@
+;======================================================================
+; geo_1_660.ncl
+;
+; Concepts illustrated:
+;   - Plotting data on a geodesic mesh
+;   - Setting the cell bounds for an unstructured mesh
+;   - Drawing the geodesic mesh and cell centers using gsn_coordinates
+;   - Using opacity to emphasize or subdue overlain features
+;======================================================================
+; This script requires NCL V6.6.0 or later to run, since it uses
+; an updated version of gsn_coordinates.
+;======================================================================
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;
+; This grid came to us via Dave Randall, Todd Ringler, and Ross Heikes
+; of CSU. The data for this mesh were originally downloaded from:
+; http://kiwi.atmos.colostate.edu/BUGS/geodesic/interpolate.html
+;
+
+;---Open file and read in data
+  f = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/hswm_d000000p000.g2.nc","r")
+  ke = f->kinetic_energy(2,:)      ; 3 x 2462  (time x cells)
+
+;---Needed for plotting over a map
+  r2d = get_r2d("float")
+  ke@lon1d = f->grid_center_lon * r2d    ; 2462 cells
+  ke@lat1d = f->grid_center_lat * r2d    ;   "
+  cx       = f->grid_corner_lon * r2d    ; 2462 cells x 6 vertices
+  cy       = f->grid_corner_lat * r2d    ;   "
+
+; printVarSummary(ke)      
+
+  wks = gsn_open_wks("png",get_script_prefix_name())
+
+  res                      = True            ; plot mods desired
+  res@gsnMaximize          = True            ; largest plot possible
+  res@gsnDraw              = False           ; will draw plot later
+  res@gsnFrame             = False           ; with gsn_coordinates
+
+  res@cnFillOn             = True            ; turn on color
+  res@cnFillPalette        = "gui_default"   ; set color map
+  res@cnFillOpacityF       = 0.25            ; draw contours mostly transparent
+  res@cnLinesOn            = False           ; turn off contour lines
+  res@cnLineLabelsOn       = False           ; turn off line labels
+  res@cnLevelSpacingF      = 25              ; NCL chose 50 for this particular data
+
+  res@tiMainString         = "Geodesic centers and mesh drawn with gsn_coordinates"
+  res@tiMainFont           = "helvetica"     ; default is helvetica-bold
+  res@tiMainFontHeightF    = 0.02
+  res@gsnLeftString        = ""
+  res@gsnRightString       = ""
+
+  res@mpProjection         = "Orthographic"     ; choose projection
+  res@mpDataBaseVersion    = "MediumRes"        ; change outline database
+  res@mpCenterLatF         =  40                ; rotate globe
+  res@mpCenterLonF         = -100
+  res@mpPerimOn            = False              ; turn off map perimeter
+  res@mpGridAndLimbOn      = False        ; Less clutter
+
+;---These resources define the cell vertices
+  res@sfXCellBounds        = cx
+  res@sfYCellBounds        = cy
+
+  res@lbTitleString        = ke@long_name + " (" + ke@units + ")"
+  res@lbTitleFontHeightF   = 0.018
+  res@lbLabelFontHeightF   = 0.008
+  res@lbLabelAutoStride    = False
+  res@pmLabelBarHeightF    = 0.08
+
+;---Create plot (won't be drawn yet)
+  plot = gsn_csm_contour_map(wks,ke,res)
+
+;
+; gsn_coordinates was updated in NCL V6.6.0 to 
+; draw mesh vertices. You will need NCL V6.6.0 or
+; later for the code below to work.
+;
+  gsres                            = True
+  gsres@gsnCoordsMeshLatBounds     = cy
+  gsres@gsnCoordsMeshLonBounds     = cx
+  gsres@gsnCoordsMeshClosePolygons = True      ; necessary to get fully closed polygons
+  gsres@gsMarkerColor              = "Black"   ; color to use for cell centers
+  gsres@gsLineColor                = "Brown"   ; color to use for cell edges
+  gsres@gsMarkerSizeF              = 3.0
+  gsres@gsLineThicknessF           = 3.0
+
+;---Draws plot with markers and lines
+  gsn_coordinates(wks,plot,ke,gsres)     
+end

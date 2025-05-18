@@ -1,0 +1,1951 @@
+<html>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Tools/WRAPIT.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:32:55 GMT -->
+<head>
+<meta name="description" content="Using WRAPIT to allow calling Fortran routines from NCL">
+<title>NCL: WRAPIT</title>
+</head>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="index.html" class="subitem">Tools</a></li>
+					<li><a href="WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+
+<a class=crumb href="../../index-2.html">NCL Home ></a>
+<a class=crumb href="../index-2.html">Documentation ></a>
+<a class=crumb href="index-2.html">Tools </a>
+<br>
+
+<h1>WRAPIT</h1>
+
+<ul>
+
+<li><a href="#Introduction">Introduction to WRAPIT</a>
+<li><a href="#BasicSteps">Steps for using WRAPIT</a>
+<li><a href="#Examples">Examples</a>
+<li><a href="#WRAPITOptions">WRAPIT options</a>
+<li><a href="#SpecialConsiderations">Special considerations</a>
+<li><a href="#FixingCommonProblems">Fixing common problems</a>
+<ul>
+<li>"A syntax error occurred while parsing"
+<li>"/usr/bin/ld: cannot find -lgfortran"
+<li>Getting an "undefined symbol" when you try to use WRAPIT
+</ul>
+<li><a href="#TroubleShooting">Troubleshooting WRAPIT</a>
+</ul>
+
+<hr>
+
+<a name="Introduction"></a>
+<h2>Introduction to WRAPIT</h2>
+<p>
+
+If you have a Fortran function or procedure that you'd like to call
+from NCL, you can do it by "wrapping" this function using the WRAPIT
+script. WRAPIT works on many UNIX systems including Sun, Linux, AIX,
+and MacOSX. It does not currently work under Cygwin/Windows. This
+document does not cover how to wrap C code. For details on this, see
+the "<a href="../Manuals/Ref_Manual/NclExtend.html">Extending
+the NCL function and procedure set</a>" section in the <a
+href="../Manuals/Ref_Manual/index.html">NCL Reference Manual</a>.
+<p>
+
+In order to use WRAPIT, you must have a C compiler and a Fortran 77
+or 90 compiler. WRAPIT will look for these compilers on your system and
+exit if it can't find them.
+<p>
+
+<blockquote>
+
+In version <a href="../../prev_releases.html#5.1.1">5.1.1</a>, on Linux, MacOS, and FreeBSD systems,
+it will try to use the "gfortran" compiler by default. Before this
+version, "g77" was the default. You can use the new "-g77" option
+if you need to use "g77".
+
+</blockquote>
+
+
+When you run WRAPIT on the Fortran code you want to call from NCL, it
+creates a special C wrapper file, compiles it and the Fortran file,
+and then generates a *.so file that you can then load into NCL using
+the "external" statement.
+<p>
+
+<a name="BasicSteps"></a>
+<h2>Steps for using WRAPIT</h2>
+<p>
+
+To use WRAPIT, you must follow these three steps:
+<p>
+
+<ul>
+<li><a href="#Step_1">Step 1</a> - Write special wrapper text
+
+<li><a href="#Step_2">Step 2</a> - Run WRAPIT
+
+<li><a href="#Step_3">Step 3</a> - Load the shared object
+and call the routine
+
+</ul>
+
+<a name="Step_1"><h3>Step 1</h3></a><p>
+
+<a name="Step_1_77"><b>Fortran 77 - Add special wrapper text to
+Fortran 77 code</b></a>:<p>
+
+If you have a Fortran 77 routine, use the special interface delimiters
+"C NCLFORTSTART" and "C NCLEND" to bracket the argument declarations
+right within the Fortran code.  There shouldn't be any extra lines
+between "C NCLFORTSTART" and the subroutine line.
+
+<p>
+
+For example, assume you have a Fortran code called "ex01.f":
+<p>
+
+<pre>
+C NCLFORTSTART
+      subroutine cquad (a, b, c, nq, x, quad)
+      real x(nq), quad(nq)
+C NCLEND
+C
+C  Calculate quadratic polynomial values.
+C
+      do 10 i=1,nq
+        quad(i) = a*x(i)**2 + b*x(i) + c
+   10 continue
+
+      return
+      end
+
+C NCLFORTSTART
+      function arcln (numpnt, pointx, pointy)
+      dimension pointx(numpnt),pointy(numpnt)
+C NCLEND
+
+C
+C  Calculate arc lengths.
+C
+      if (numpnt .lt. 2) then
+        print *, 'arcln: number of points must be at least 2'
+        stop
+      endif
+      arcln = 0.
+      do 10 i=2,numpnt
+        pdist = sqrt((pointx(i)-pointx(i-1))**2 + 
+     +                        (pointy(i)-pointy(i-1))**2)
+        arcln = arcln + pdist
+   10 continue
+
+      return
+      end
+</pre>
+<p>
+
+Only the argument variables should be included between the
+delimiters. If a particular variable is not typed, then the usual
+Fortran rules will apply for typing. Additionally, only the Fortran
+subroutine(s) actually called from NCL require the interface
+delimiters. The rest of the Fortran code may include other subroutines
+without delimiters.
+<p>
+
+<a name="Step_1_90"><b>Fortran 90 - Write special wrapper text as
+separate file</b></a>:<p>
+
+If you have a Fortran 90 file, then you need to create a separate
+"stub" file that contains the "C NCLFORTSTART" and "C NCLEND"
+delimiters. For example, assume the above "cquad" routine was in a
+Fortran 90 file called "cquad.f90":
+<p>
+
+<pre>
+subroutine cquad(a,b,c,nq,x,quad)
+  implicit none
+  integer, intent(in)  ::nq
+  real,    intent(in)  ::a,b,c,x(nq)
+  real,    intent(out) ::quad(nq)
+  integer              ::i
+
+  quad = a*x**2+b*x+c
+  return
+end subroutine cquad
+</pre>
+<p>
+
+Create a <i>separate</i> file, called something like "cquad90.stub"
+that contains nothing more than the following lines:
+<p>
+
+<pre>
+C NCLFORTSTART
+      subroutine cquad(a,b,c,nq,x,quad)
+      real a,b,c
+      integer nq
+      dimension x(nq),quad(nq)
+C NCLEND
+</pre>
+<p>
+
+<a name="Step_1_commercial"><b>Commercial library routine - Write
+special wrapper text as separate file</b></a>:<p>
+
+If there's a commercial library routine you want to call from NCL, use
+the same method as with the <a href="#Step_1_90">Fortran 90
+routine</a> to create a separate "stub" file.
+<p>
+
+For example, assume you want to call the IMSL routine "rline" to fit a
+line to a set of data points via least-squares. The "rline" arguments
+are rline(nobs,x,y,b0,b1,stat) where "nobs" is the number of
+observations, "x" and "y" are the data vectors, "b0" and "b1" are the
+intercept and slope, and "stat" is a vector of length 12 containing
+assorted statistics. The Fortran stub file you create (call it
+"rline.stub") would look like:
+<p>
+
+<pre>
+C NCLFORTSTART
+      subroutine rline (n,x,y,b0,b1,stat)
+      integer n                                ! explicit typing NOT required
+      real    x(n), y(n), b0, b1, stat(12)
+C NCLEND
+</pre>
+<p>
+
+<a name="Step_2"><h3>Step 2 - Run WRAPIT</h3></a><p>
+
+<a name="Step_2_77"><b>Fortran 77 - Run <i>WRAPIT</i> to compile the
+external code(s)</b></a>:<p>
+
+Run <i>WRAPIT</i> on your code to generate a shared object. It will
+have the same name as your Fortran file, except with ".so" appended
+instead of ".f" or ".f90".
+
+For the Fortran 77 example:<p>
+
+<pre>
+   WRAPIT ex01.f
+</pre>
+<p>
+
+This should create a file called "ex01.so".
+<p>
+
+<a name="Step_2_90"><b>Fortran 90 - Run <i>WRAPIT</i> to compile the
+external code(s) and the separate wrapper text</b></a>:
+<p>
+
+Using the "cquad90.stub" file you created in the previous step, and
+assuming "cquad.f90" is the Fortran 90 file that contains the "cquad"
+subroutine, then you would run <i>WRAPIT</i> as follows:
+<p>
+
+<pre>
+   WRAPIT cquad90.stub cquad.f90
+</pre>
+<p>
+
+This should create a file called "cquad90.so".
+<p>
+
+<a name="Step_2_commercial"><b>Commercial library routine - Run
+<i>WRAPIT</i> to compile the separate wrapper text and link in the
+commercial library</b></a>:
+<p>
+
+To build a shared object that includes a call to one or more
+commercial library routines, you must include the list of commercial
+libraries on <i>WRAPIT</i> command line so the shared object will be
+properly linked:
+<p>
+
+<pre>
+   WRAPIT -l imsl_mp rline.stub
+</pre>
+<p>
+
+This should create a file called "rline.so". Note that if WRAPIT
+gives you an error about being unable to find the commercial library,
+then you may need to include the "-L" option along with the path
+to the library:
+<p>
+
+<pre>
+   WRAPIT -L /opt/lib -l imsl_mp rline.stub
+</pre>
+<p>
+
+<b>Note for all types of routines:</b>
+<p>
+
+If <i>WRAPIT</i> does not appear to work, then you can modify the
+<i>WRAPIT</i> script directly ($NCARG_ROOT/bin/WRAPIT) and change the
+paths to your appropriate local compilers. <i>WRAPIT</i> does not
+contain paths to any libraries, so they may have to be added depending
+upon your system.
+<p>
+
+<a name="Step_3"><h3>Step 3 - Call the shared object from an NCL
+script</h3></a><p>
+
+Before you can call external subroutines from your NCL script, you
+need to load the shared object you created in <a href="#Step_2_1">Step 2</a>. There are two ways to load a shared
+object:
+
+<ol>
+
+<li><a href="#UseExternalStatement">Use the <tt>external</tt>
+statement</a>
+
+<li><a href="#SetEnvironmentVariable">Use the NCL_DEF_LIB_DIR
+environment variable</a>
+
+</ol>
+
+<a name="UseExternalStatement"><b>Loading the shared object using
+<tt>external</tt>:</b></a>
+<p>
+
+At the top of your NCL script and before the "begin" statement, add an
+"external" statement to load the shared object, followed by a name you
+want to give the shared object, followed by the path to the shared
+object in double quotes.
+<p>
+
+The name of the shared object is arbitrary, but by convention, is
+capitalized.  If the shared object is in a different directory, be
+sure to include the path to it (you can use relative or absolute
+paths). If the shared object is in the same directory as your script,
+be sure to put a "./" in front of it.
+<p>
+
+Now, to call any one of your functions or procedures from your NCL
+script, precede it with two colons ("::") and the name you gave the
+shared object. The example below is from the Fortran 77 example, and
+assumes the shared object "ex01.so" is in the same directory
+as your script:
+<p>
+
+<pre>
+external EX01 "./ex01.so"
+ 
+begin
+;
+; Calculate three values of a quadratic equation
+;
+   nump = 3
+   x    = (/ -1., 0.0, 1.0 /)
+   qval = new(nump,float)              
+   EX01::cquad(-1., 2., 3., nump, x, qval) ; Call the NCL version of
+                                           ; your Fortran subroutine.
+   print("Polynomial value = " + qval)     ; Should be (/0,3,4/)
+ 
+;
+; Calculate an arc length.
+;
+   xc = (/ 0., 1., 2. /)
+   yc = (/ 0., 1., 0. /)
+   arclen = EX01::arcln(nump,xc,yc)     ; Call the NCL version of
+                                        ; your Fortran function.
+   print("Arc length = " + arclen)      ;  should be 2.82843
+end
+</pre>
+<p>
+
+     
+<a name="SetEnvironmentVariable"><b>Loading the shared object using an
+environment variable:</b></a><p>
+
+Create a directory on the machine you wish to run NCL, and put your
+shared object(s) in this directory.  Set the environment variable
+NCL_DEF_LIB_DIR to this path. For example:
+<p>
+
+<pre>
+setenv NCL_DEF_LIB_DIR /home/haley/shared_objects
+</pre>
+<p>
+
+NCL will recognize the path given by the NCL_DEF_LIB_DIR environment
+variable as another place to look for shared objects. You can include
+multiple directory paths by separating them with colons:
+
+<pre>
+setenv NCL_DEF_LIB_DIR /home/shea/shared_objects/:/home/haley/shared_objects
+</pre>
+<p>
+
+Now you can call the shared object just like a built-in NCL function:<p>
+
+<pre>
+begin
+;
+; Calculate three values of a quadratic equation
+;
+   nump = 3
+   x    = (/ -1., 0.0, 1.0 /)
+   qval = new(nump,float)              
+   cquad(-1., 2., 3., nump, x, qval)       ; Call the NCL version of
+                                           ; your Fortran subroutine.
+   print("Polynomial value = " + qval)     ; Should be (/0,3,4/)
+ 
+;
+; Calculate an arc length.
+;
+   xc = (/ 0., 1., 2. /)
+   yc = (/ 0., 1., 0. /)
+   arclen = arcln(nump,xc,yc)           ; Call the NCL version of
+                                        ; your Fortran function.
+   print("Arc length = " + arclen)      ;  should be 2.82843
+end
+</pre>
+<p><p>
+
+Be sure to see the section on <a href="#SpecialConsiderations">special considerations</a> for
+trouble shooting.<p>
+
+<a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+
+This section contains examples illustrating how to incorporate sample
+Fortran codes into NCL.
+
+<UL>
+
+<LI><a href="#Example_1">Example 1</a> -- Fortran
+subroutine and function
+
+<LI><a href="#Example_2">Example 2</a> -- Fortran embedded
+wrapit interface blocks
+
+<LI><a href="#Example_3">Example 3</a> -- Fortran
+subroutine from a commercial library
+
+<LI><a href="#Example_4">Example 4</a> -- Fortran subroutine with
+CHARACTER input and output arguments
+
+<LI><a href="#Example_5">Example 5</a> -- Fortran
+subroutine with a 2-dimensional array; printing
+
+<LI><a href="#Example_6">Example 6</a> -- C subroutine
+and function 
+
+
+</UL>
+<p>
+
+<H3><A NAME="Example_1">Example 1</A> -- Fortran subroutine and
+function</H3><p>
+
+Files required: <a href="Files/ex01.html"><TT>ex01.f</TT></a> /
+<a href="Files/ex01-2.html"><TT>ex01.stub</TT></a> /
+<a href="Files/ex01-3.html"><TT>ex01.ncl</TT></a>
+<p>
+
+Begin with the Fortran source (in file <a href="Files/ex01.html"><TT>ex01.f</TT></a>):
+
+<PRE>
+      SUBROUTINE CQUAD (A, B, C, NQ, X, QUAD)
+      REAL X(NQ),QUAD(NQ)
+C
+C  Calculate quadratic polynomial values.
+C
+      DO 10 I=1,NQ
+        QUAD(I) = A*X(I)**2 + B*X(I) + C
+   10 CONTINUE
+C
+      RETURN
+      END
+      FUNCTION ARCLN (NUMPNT, POINTX, POINTY)
+      DIMENSION POINTX(NUMPNT),POINTY(NUMPNT)
+C
+C  Calculate arc lengths.
+C
+      IF (NUMPNT .LT. 2) THEN
+        PRINT *, 'ARCLN: Number of points must be at least 2'
+        STOP
+      ENDIF
+      ARCLN = 0.
+      DO 10 I=2,NUMPNT
+        PDIST = SQRT((POINTX(I)-POINTX(I-1))**2 + 
+     +                        (POINTY(I)-POINTY(I-1))**2)
+        ARCLN = ARCLN + PDIST
+   10 CONTINUE
+C
+      RETURN
+      END
+</PRE>
+<p>
+
+This first example follows in detail the three step process
+described above.
+
+<P>
+<B>Step 1</B> - define the wrapit interface block.
+<P>
+
+Create a file <a href="Files/ex01-2.html"><TT>ex01.stub</TT></a> that
+contains the following two wrapit interface blocks:
+
+<PRE>
+C NCLFORTSTART
+      SUBROUTINE CQUAD (A,B,C,NQ,X,QUAD)
+      REAL X(NQ),QUAD(NQ)
+C NCLEND
+ 
+C NCLFORTSTART
+      FUNCTION ARCLN (NUMPNT,POINTX,POINTY)
+      DIMENSION POINTX(NUMPNT),POINTY(NUMPNT)
+C NCLEND
+</PRE>
+<p>
+
+<B>Step 2</B> - run WRAPIT
+
+<pre>
+  WRAPIT ex01.stub ex01.f
+</pre>
+<p>
+
+<P>
+<B>Step 3</B> - tell NCL where your shared object is.
+<P>
+
+The external statement in the
+following <a href="Files/ex01-3.html"><TT>ex01.ncl</TT></a> example
+script tells NCL where to look for the dynamic shared object you just
+created.
+
+
+<PRE>
+external EX01 "./ex01.so"
+ 
+begin
+;
+; calculate three values of a quadratic equation
+;
+   nump = 3
+   x = (/ -1., 0.0, 1.0 /)
+   qval = new(nump,float)              
+   EX01::cquad(-1, 2, 3, nump, x, qval) ; call the new NCL version of
+                                        ; your original Fortran subroutine
+   print("Polynomial value = " + qval)
+ 
+;
+; calculate an arc length.
+;
+   xc = (/ 0., 1., 2. /)
+   yc = (/ 0., 1., 0. /)
+   arclen = EX01::arcln(nump,xc,yc)     ; call the new NCL version of
+                                        ; your original Fortran function
+   print("Arc length = " + arclen)
+ 
+end
+</PRE>
+<p>
+
+If you submit the above script to the NCL interpreter, it produces the output:
+
+<PRE>
+opening: ./ex01.so
+(0)     Polynomial value = 0
+(1)     Polynomial value = 3
+(2)     Polynomial value = 4
+(0)     Arc length = 2.82843
+</PRE>
+<p>
+
+The numbers in parentheses at the left in the above printout are an
+artifact of how the NCL <a href="../Functions/Built-in/print.html"><strong>print</strong></a> function works and
+are of no relevance in this example.<p>
+
+<H3><A NAME="Example_2">Example 2</A> -- Fortran embedded wrapit
+interface blocks</H3><p>
+
+Files required: <a href="Files/ex02.html"><TT>ex02.f</TT></a> /
+<a href="Files/ex02-2.html"><TT>ex02.ncl</TT></a>
+<p>
+
+Instead of using a separate stub file as
+in <a href="#Example_1">example 1</a> above, you could
+have used the following code (in
+file <a href="Files/ex02.html"><TT>ex02.f</TT></a>) as input to WRAPIT:
+
+<PRE>
+C NCLFORTSTART
+      SUBROUTINE CQUAD (A,B,C,NQ,X,QUAD)
+      REAL X(NQ),QUAD(NQ)
+C NCLEND
+C
+C  Calculate quadratic polynomial values.
+C
+      DO 10 I=1,NQ
+        QUAD(I) = A*X(I)**2 + B*X(I) + C
+   10 CONTINUE
+C
+      RETURN
+      END
+
+C NCLFORTSTART
+      FUNCTION ARCLN (NUMPNT, POINTX, POINTY)
+      DIMENSION POINTX(NUMPNT),POINTY(NUMPNT)
+C NCLEND
+C
+C  Calculate arc lengths.
+C
+      IF (NUMPNT .LT. 2) THEN
+        PRINT *, 'ARCLN: Number of points must be at least 2'
+        STOP
+      ENDIF
+      ARCLN = 0.
+      DO 10 I=2,NUMPNT
+        PDIST = SQRT((POINTX(I)-POINTX(I-1))**2 +
+     +                        (POINTY(I)-POINTY(I-1))**2)
+        ARCLN = ARCLN + PDIST
+   10 CONTINUE
+C
+      RETURN
+      END
+</PRE>
+<p>
+
+In this example, the wrapit interface blocks are embedded directly
+into the Fortran code, thus avoiding the need to create a separate
+stub file containing them.  All that WRAPIT is looking for in
+its input is blocks delimited by comment lines containing
+<TT>NCLFORTSTART</TT> and <TT>NCLEND</TT>.<P>
+
+Now execute:
+
+<PRE>
+WRAPIT ex02.f
+</PRE>
+<p>
+
+and proceed with step 3 above.<p>
+
+<H3><A NAME="Example_3">Example 3</A> -- Fortran subroutine from a
+commercial library</H3><p>
+
+Suppose you are calling:
+
+<PRE>
+      SUBROUTINE LIBSUB(IARG1,RARG)
+</PRE>
+<p>
+
+from a commercial library named <TT>libcommercial.a</TT>.  Using the
+following wrapit interface block (in file <TT>libsub.stub</TT>):
+
+<PRE>
+C NCLFORTSTART
+      SUBROUTINE LIBSUB(IARG,RARG)
+      INTEGER IARG
+      REAL RARG
+C NCLEND
+</PRE>
+<p>
+
+To create a dynamic shared object named <TT>libsub.so</TT>, 
+use WRAPIT:
+
+<pre>
+  WRAPIT libsub.stub -l commercial
+</pre>
+<p>
+
+<H3><A NAME="Example_4">Example 4</A> -- Fortran subroutine with
+CHARACTER input and output arguments</H3><p>
+ 
+Files required: <a href="Files/ex04.html"><TT>ex04.f</TT></a> /
+<a href="Files/ex04-2.html"><TT>ex04.stub</TT></a> /
+<a href="Files/ex04-3.html"><TT>ex04.ncl</TT></a>
+<p>
+
+Start with a Fortran
+subroutine <a href="Files/ex04.html"><TT>ex04.f</TT></a> that takes an
+input string and returns a number of letters based on the length of
+the input string:
+
+<PRE>
+      SUBROUTINE EX04 (STRIN,STROUT)
+      CHARACTER*(*) STRIN
+      CHARACTER*26  STROUT
+      CHARACTER*26  ABET
+      DATA ABET/'ABCDEFGHIJKLMNOPQRSTUVWXYZ'/
+C
+      IMX = MIN(LEN(STRIN),26)
+      STROUT = ABET(1:IMX)
+C
+      RETURN
+      END
+</PRE>
+<p>
+
+You could use embedded wrapit interface blocks, as in <a href="#Example_2">example 2 above</a>, or use the following
+<a href="Files/ex04-2.html"><TT>ex04.stub</TT></a> wrapit interface block:
+
+<PRE>
+C NCLFORTSTART
+      SUBROUTINE EX04 (STRIN,STROUT)
+      CHARACTER*(*) STRIN
+      CHARACTER*26  STROUT
+C NCLEND
+</PRE>
+<p>
+
+to create the NCL wrapper and dynamic shared object (named
+<TT>ex04.so</TT>).  Passing the
+following <a href="Files/ex04-3.html"><TT>ex04.ncl</TT></a> NCL script
+to the NCL interpreter:
+
+<PRE>
+external EXAMPLE04_SO "./ex04.so"
+ 
+begin
+ 
+ cstr = new(26,character)        ;  create a character array of length 26
+ EXAMPLE04_SO::ex04("fifteen letters",cstr)
+ str = chartostring(cstr)
+ print(str)
+ 
+end
+</PRE>
+<p>
+
+produces the output:
+
+<PRE>
+opening: ./ex04.so
+ 
+ 
+Variable: str
+Type: string
+Total Size: 4 bytes
+            1 values
+Number of Dimensions: 1
+Dimensions and sizes:   [1]
+Coordinates: 
+(0)     ABCDEFGHIJKLMNO
+</PRE>
+<p>
+
+<H3><A NAME="Example_5">Example 5</A> -- subroutine with a
+2-dimensional array; printing</H3><p>
+
+Files required: <a href="Files/ex05.html"><TT>ex05.f</TT></a> /
+<a href="Files/ex05-2.html"><TT>ex05.stub</TT></a> /
+<a href="Files/ex05-3.html"><TT>ex05.ncl</TT></a>
+<p>
+
+Start with one subroutine <a href="Files/ex05.html"><TT>ex05.f</TT></a>
+that calculates a function of two variables and stores the results in
+a 2-dimensional array, and another subroutine that prints
+2-dimensional arrays by rows.
+
+<PRE>
+      SUBROUTINE EX05(M,N,X,Y,FXY)
+      REAL X(M),Y(N),FXY(M,N)
+C
+C  Calculate FXY(I,J) = 2*I+J
+C
+      DO 10 J=1,N
+        DO 20 I=1,M
+          FXY(I,J) = 2.*REAL(I) + REAL(J)
+   20   CONTINUE
+   10 CONTINUE
+C
+      RETURN
+      END
+      SUBROUTINE PRT2D(M,N,A)
+      REAL A(M,N)
+C
+C  Print the array A by rows using an F6.1 format with
+C  7 values per line.
+C
+      DO 10 J=1,N
+        PRINT *,'Row',J,':'
+        DO 20 I=1,M/7
+          WRITE(6,500) (A(LL,J),LL=(I-1)*7+1,I*7)
+  500     FORMAT(7F6.1)
+   20   CONTINUE
+        IF (MOD(M,7) .NE. 0) WRITE(6,500) (A(LL,J),LL=(M/7)*7+1,M)
+        PRINT *,' '
+   10 CONTINUE
+C
+      RETURN
+      END
+</PRE>
+<p>
+
+Use the following <a href="Files/ex05-2.html"><TT>ex05.stub</TT></a> wrapit interface block:
+
+<PRE>
+C NCLFORTSTART
+      SUBROUTINE EX05(M,N,X,Y,FXY)
+      REAL X(M),Y(N),FXY(M,N)
+C NCLEND
+C NCLFORTSTART
+      SUBROUTINE PRT2D(M,N,A)
+      REAL A(M,N)
+C NCLEND
+</PRE>
+<p>
+
+to create the NCL wrapper function and the dynamic shared object
+(named <TT>ex05.so</TT>).  Then the
+following <a href="Files/ex05-3.html"><TT>ex05.ncl</TT></a> NCL script:
+
+<PRE>
+external EX05 "./ex05.so"
+ 
+begin
+;
+; calculate three values of a quadratic equation
+;
+   m = 11
+   n = 3
+   x = new(m,float)
+   y = new(n,float)
+   fxy = new((/n,m/),float)
+   EX05::ex05(m,n,x,y,fxy)
+   EX05::prt2d(m,n,fxy)
+end
+</PRE>
+<p>
+
+will create the 2-dimensional array <TT>fxy</TT> in a manner
+compatible with other NCL procedures.  Passing the above NCL script to
+the NCL interpreter produces the output:
+
+<PRE>
+opening: ./ex05.so
+ Row  1:
+     3.0   5.0   7.0   9.0  11.0  13.0  15.0
+    17.0  19.0  21.0  23.0
+  
+ Row  2:
+     4.0   6.0   8.0  10.0  12.0  14.0  16.0
+    18.0  20.0  22.0  24.0
+  
+ Row  3:
+     5.0   7.0   9.0  11.0  13.0  15.0  17.0
+    19.0  21.0  23.0  25.0
+</PRE>
+<p>
+
+<H3><A NAME="Example_6">Example 6</A> -- C subroutine and function</H3><p>
+
+This example uses the same NCL code as examples 1 and 2, except this
+time, "cquad" and "arcln" are implemented in C. This example
+assumes that you know something about coding in C.
+<p>
+
+Files required: <a href="Files/ex01c.c"><TT>ex01c.c</TT></a> /
+<a href="Files/ex01W.c"><TT>ex01W.c</TT></a> /
+<a href="Files/ex01-2.html"><TT>ex01.stub</TT></a> /
+<a href="Files/ex01-3.html"><TT>ex01.ncl</TT></a>
+<p>
+
+<PRE>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+
+void *cquad(float a, float b, float c,int nq, float *x, float *quad)
+{
+  int i;
+/*
+ *  Calculate quadratic polynomial values.
+ */
+  for(i = 0; i &lt; nq; i++ ) quad[i] = a*pow(x[i],2) + b*x[i] + c;
+  }
+}
+
+float arcln(int numpnt, float *pointx, float *pointy)
+{
+  int i;
+  float pdist, a;
+/*
+ *  Calculate arc lengths.
+ */
+
+  if(numpnt &lt; 2) {
+    printf("arcln: number of points must be at least 2\n");
+    return;
+  }
+  a = 0.;
+  for( i=1; i &lt; numpnt; i++ ) {
+    pdist = sqrt(pow(pointx[i]-pointx[i-1],2) + pow(pointy[i]-pointy[i-1],2));
+    a += pdist;
+  }
+  return(a);
+}
+</PRE>
+<p>
+
+WRAPIT will not work on C code directly, but you can still wrap the C
+code using a Fortran stub and some modifications. Here are the five
+steps:
+<P>
+
+<ol>
+<li><b>Create a Fortran stub that contains the same calling sequence
+and types for the C subroutines and functions.</b>
+<p>
+
+<a href="Files/ex01-2.html"><TT>ex01.stub</TT></a>:
+
+<PRE>
+C NCLFORTSTART
+      subroutine cquad (a, b, c, nq, x, quad)
+      real a, b, c
+      real x(nq), quad(nq)
+C NCLEND
+C NCLFORTSTART
+      function arcln (numpnt, pointx, pointy)
+      integer numpnt
+      real pointx(numpnt),pointy(numpnt)
+C NCLEND
+</PRE>
+
+
+<li><b>Run "wrapit77" on the Fortran stub to create the C wrapper.</b>
+<p>
+
+<PRE>
+  wrapit77 < ex01.stub > ex01W.c
+</PRE>
+
+<li><b>Modify "ex01W.c" created by the previous command to make a few
+changes.</b>
+<p>
+
+The <a href="Files/ex01W.c"><TT>ex01W.c</TT></a> will contain lines
+with "NGCALLF". These are the lines you need to modify, as these lines
+are assuming you are calling a Fortran routine. For example, using,
+"ex01W.c" above, you would modify these three lines:
+<p>
+
+<PRE>
+        NGCALLF(cquad,CQUAD)(a,b,c,nq,x,quad);
+
+extern float NGCALLF(arcln,ARCLN)();
+
+        arcln_ret = NGCALLF(arcln,ARCLN)(numpnt,pointx,pointy);
+</PRE>
+
+to be:
+
+<PRE>
+        (void)cquad(*a,*b,*c,*nq,x,quad);
+
+extern float arcln(int numpnt, float *pointx, float *pointy);
+
+        arcln_ret = arcln(*numpnt,pointx,pointy);
+</PRE>
+
+You also need to add an "extern" statement for "cquad" before
+the "NhlErrorTypes cquad_W( void ){" line:
+<p>
+
+<PRE>
+extern void *cquad(float a, float b, float c,int nq, float *x, float *quad);
+NhlErrorTypes cquad_W( void ) {
+</PRE>
+
+<li><b>Run WRAPIT with the "-d" option on the "ex01.stub" file and
+examine its output</b>:
+<p>
+
+<PRE>
+  WRAPIT -d ex01.stub
+</PRE>
+
+to see what the the individual steps are for creating the "ex01.so"
+file. You will see a compilation line for a file called "WRAPIT.c".
+Use this compilation line on both the "ex01W.c" and "ex01c.c" files.
+(See next step.)
+<p>
+
+<li><b>Compile "ex01W.c", "ex01c.c", and create the "ex01.so" file.</b>
+<p>
+
+If "WRAPIT -d " echoed this for WRAPIT.c:
+<p>
+
+<PRE>
+  gcc -m64 -c -I/usr/local/include WRAPIT.c
+</PRE>
+
+then use these two lines to compile the two C files:
+<p>
+
+<PRE>
+  gcc -m64 -c -I/usr/local/include ex01W.c
+  gcc -m64 -c -I/usr/local/include ex01c.c
+</PRE>
+
+Finally, look at the end of the WRAPIT output to see how "ex01.so" is
+created, but substitute ex01W.o and ex01c.o for WRAPIT.o:
+<p>
+
+For example, if WRAPIT echoed this:
+
+<PRE>
+  gcc -m64 -bundle -flat_namespace -undefined suppress WRAPIT.o -o ex01.so -lgfortran
+</PRE>
+
+Then use this instead:
+<p>
+
+<PRE>
+  gcc -m64 -bundle -flat_namespace -undefined suppress ex01W.o ex01c.o -o ex01.so -lgfortran
+</PRE>
+
+You can create a Makefile with all the necessary compilations, so you
+don't have to do it by hand every time:
+<p>
+
+<PRE>
+ex01.so: ex01W.o ex01c.o
+	gcc -m64 -bundle -flat_namespace -undefined suppress ex01W.o ex01c.o -o ex01.so -lgfortran
+
+ex01c.o: ex01c.c
+	gcc -m64 -c -I{$NCARG_ROOT}/include ex01W.c
+
+ex01W.o: ex01W.c
+	gcc -m64 -c -I{$NCARG_ROOT}/include ex01c.c
+</PRE>
+</ol>
+<p>
+
+<a name="WRAPITOptions"></a>
+<h2>WRAPIT options</h2>
+<p>
+
+There are some command line options you can use with WRAPIT that are
+useful for debugging. These options must appear on the WRAPIT command
+line before the Fortran file names:
+
+<dl>
+<dt><b>-d</b>
+<dd>Turns on array bounds, turns off optimization, 
+displays some debug information, and prevents file clean up.<p>
+
+<dt><b>-g95</b>
+<dd>Use the g95 compiler.
+
+<dt><b>-gf</b>
+<dd>Use the gfortran compiler.
+<p>
+
+<dt><b>-g77</b>
+<dd>Use the g77 compiler.
+<p>
+
+<dt><b>-h</b> or <b>-help</b>
+<dd>Gives you LOTS of information about WRAPIT, including
+information about other options.<p>
+
+<dt><b>-in</b>
+<dd>Use the Intel compiler.<p>
+
+<dt><b>-l</b> &lt;libname&gt; 
+<dd>Passes a library name to the linker.<p>
+
+<dt><b>-L</b> &lt;libpath&gt;
+<dd>Passes a directory path to the linker. This may
+be useful if WRAPIT can't find the "gfortran" library.<p>
+
+<dt><b>-lf</b>
+<dd>Use the Lahey compiler.<p>
+
+<dt><b>-n</b> &lt;so name&gt;
+<dd>Assigns a name to the created shared object.<p>
+
+<dt><b>-pg</b>
+<dd>Use the Portland compiler.<p>
+
+<dt><b>-q32</b>
+<dd>Specifies 32-bit IRIX or AIX bit precision (the default
+is to use 64-bit precision, if available).<p>
+
+<dt><b>-m32</b>
+<dd>Specifies 32-bit precision for LINUX or MacOS systems.
+This only works on 32-bit LINUX or MacOS systems.<p>
+
+<dt><b>-m64</b>
+<dd>Specifies 64-bit precision for LINUX or MacOS systems.
+This only works on 64-bit LINUX systems or MacOS 10.6 or higher systems.<p>
+
+<dt><b>-r8</b>
+<dd>Promotes Fortran floats of real*4 to real*8 (if available).<p>
+
+</dl
+<p>
+
+<a name="SpecialConsiderations"></a>
+<h2>Special considerations</h2>
+<p>
+
+This section contains several things that you should know to avoid
+common problems.
+
+<ul>
+
+<li><b><a name="UniqueNames">Unique subroutine names</a></b><br><br>
+
+You need to make sure that the name of your subroutine doesn't have
+the same name as a subroutine name used internally by the "ncl"
+executable.  If it does, then your wrapped subroutine may not work
+properly, and you won't get any helpful error messages about it.
+<p>
+
+It's a good idea, then, to stay away from common names like "average"
+or "gamma".
+<p>
+
+To check that your subroutine name is not already part of internal NCL
+code, use the UNIX "nm" command on the "ncl" executable and search for
+your routine name.
+<p>
+
+For example, say you want to use "gamma" as your subroutine name. To
+check if "gamma" is already used by NCL:
+<p>
+
+<pre>
+    nm $NCARG_ROOT/bin/ncl | grep -i gamma
+</pre>
+<p>
+
+You will see some output like:
+
+<pre>
+    0000000100283a28 T _dgammaslatec_
+    00000001002b30df T _dsgamma_
+    0000000100272ed2 T _gamma_
+    0000000100dd1db3 t _gammafn
+    000000010014f5e1 T _gammainc_W
+    00000001001a3ed3 T _random_gamma_W
+                     U _tgamma
+</pre>
+<p>
+
+The "T" before the name means there's a routine with that name in the
+ncl executable. (The underscores should be ignored, as they are added
+internally by the compilers.) From this list, then, you can see
+there's a routine called "_gamma_". Hence "gamma" is already a used
+name, and you need to use a different name, like "mygamma" or "gamma2".
+<p>
+
+
+<li><b><a name="VariableNames">Variable names</a></b><br><br>
+
+Due to a bug in the parser, no variable between the NCLFORTSTART
+and NCLEND delimiters can be named "data".
+<p>
+
+<li><b><a name="ArrayDimensions">Array dimensions</a></b><br><br>
+
+<ul>
+<li>You can't have dimension subscripts with arithmetic operators:<p>
+
+<pre>
+C NCLFORTSTART
+      subroutine subby (X,Y,Z,N1,N2)
+      integer N1,N2
+      real X(N1),Y(N2),Z(N1+N2)
+C NCLEND
+</pre>
+
+To fix this, have the calling routine pass in an additional variable
+that is equal to "N1+N2", and use this instead:
+
+<pre>
+C NCLFORTSTART
+      subroutine subby (X,Y,Z,N1,N2,N1N2)
+      integer N1,N2
+      real X(N1),Y(N2),Z(N1N2)
+C NCLEND
+</pre>
+
+<li>You can't have the array dimensions and types on two separate lines:
+<p>
+
+<pre>
+C NCLFORTSTART
+      subroutine testit (X,N1)
+      integer N1
+      real X
+      dimension X(N1)
+C NCLEND
+</pre>
+
+Put them on the same line instead:<p>
+
+<pre>
+C NCLFORTSTART
+      subroutine testit (X,N1)
+      integer N1
+      real X(N1)
+C NCLEND
+</pre>
+
+<li>If you have a multi-dimensional array, you can't wrap a Fortran
+routine that uses the old-style method of setting the rightmost
+dimension to 1:
+
+<p>
+<pre>
+      subroutine subby (X,Y,N)
+      real X(N,1), Y(N,1)
+</pre>
+<p>
+
+To fix this, you can either modify "subby" directly to add an "M"
+dimension to the input list, or you can create a "driver" subroutine
+that calls "subby", and then wrap this instead:<p>
+
+<pre>
+C NCLFORTSTART
+      subroutine subbydriver (X,Y,N,M)
+      real X(N,M), Y(N,M)
+C NCLEND
+      call subby(X,Y,N)
+      return
+      end
+      subroutine subby (X,Y,N)
+      real X(N,1), Y(N,1)
+. . .
+</pre>
+
+</ul>
+
+<li><b><a name="ArrayIndexing">Array indexing</a></b><br><br>
+
+You can't wrap code that has array indexing in the variable
+declaration:
+
+<pre>
+C NCLFORTSTART
+      subroutine subbee (X,Y,N)
+      integer N
+      real X(0:N),Y(0:N)
+C NCLEND
+      ...
+</pre>
+
+To fix this, you can create a driver program with the same name
+(rename the original routine to something else):
+
+<pre>
+C NCLFORTSTART
+      subroutine subbee (X,Y,N1)
+      integer N1
+      real X(N1),Y(N1)
+C NCLEND
+      call subbee1(X,Y,N1-1)
+      END
+
+      subroutine subbee1 (X,Y,N)
+      integer N
+      real X(0:N),Y(0:N)
+      ...
+</pre>
+
+<li><b><a name="DimensionOrdering">Array dimensioning</a></b><br><br>
+
+For NCL arrays, the fastest-varying dimension is the rightmost,
+while for Fortran it is the leftmost dimension.  Therefore, if
+<tt>XA</tt> is a Fortran array dimensioned <tt>idim</tt> x
+<tt>jdim</tt>, this array will be dimensioned <tt>jdim</tt> x
+<tt>idim</tt> in NCL.  Also, Fortran array subscripts start at 1,
+whereas NCL array subscripts start at 0.  <a href="#Example_5">Example 5</a> in this section illustrates
+these concepts.
+
+<p>
+
+<li><b><a name="FunctionTypes">Function types</a></b><br><br>
+
+If you need to wrap a Fortran function that needs to be explicitly typed,
+then declare the type of the function on the FUNCTION line itself and
+not on a separate line.
+<p>
+
+For example, while the following stub code is perfectly valid Fortran
+code, it will not work with WRAPIT:
+
+<pre>
+C NCLFORTSTART
+      FUNCTION ARCLN (NUMPNT, POINTX, POINTY)
+      DOUBLE PRECISION POINTX(NUMPNT),POINTY(NUMPNT)
+      DOUBLE PRECISION ARCLN
+C NCLEND
+</pre>
+<p>
+
+Use this type of code instead:
+
+<pre>
+C NCLFORTSTART
+      DOUBLE PRECISION FUNCTION ARCLN (NUMPNT, POINTX, POINTY)
+      DOUBLE PRECISION POINTX(NUMPNT),POINTY(NUMPNT)
+C NCLEND
+</pre>
+<p>
+
+
+<li><b><a name="ParameterStatements">Parameter statements</a></b><br><br>
+
+WRAPIT can't deal with parameter statements. For example, WRAPIT will
+not be able to properly handle the following code:
+<p>
+
+<pre>
+C NCLFORTSTART
+      subroutine expansion(inp, outp, ntime)
+      integer ntime,nlon,nlat
+      parameter (nlon=144,nlat=60)
+      real inp(nlon,nlat,ntime,3), outp(6,nlon,nlat,ntime,3)
+C NCLEND
+</pre>
+<p>
+
+To fix this, you either need to hard-code the values for nlon and
+nlat, or pass them in to "expansion".
+<p>
+
+First option:<p>
+
+<pre>
+C NCLFORTSTART
+      subroutine expansion(inp, outp, ntime)
+      integer ntime
+      real inp(144,60,ntime,3), outp(6,144,60,ntime,3)
+C NCLEND
+</pre>
+<p>
+
+Second option:<p>
+
+<pre>
+C NCLFORTSTART
+      subroutine expansion(inp, outp, ntime, nlat, nlon)
+      integer ntime,nlon,nlat
+      real inp(nlon,nlat,ntime,3), outp(6,nlon,nlat,ntime,3)
+C NCLEND
+</pre>
+<p>
+
+<li><b><a name="StringArrays">Arrays of character strings</a></b><br><br>
+
+Currently, the wrapper code used by <i>WRAPIT</i> honors only
+non-dimensioned Fortran type CHARACTER variables.  You cannot pass
+arrays of NCL strings to Fortran, nor can you pass Fortran CHARACTER
+arrays from Fortran back to NCL.
+<p>
+
+<li><b><a name="StringArguments">Passing strings from NCL to
+Fortran</a></b><br><br>
+
+If you want to pass an NCL variable of type string to a Fortran
+procedure, then the argument to the Fortran procedure <i>must</i> be
+declared as <tt>CHARACTER*(*)</tt>.  See <a href="#Example_4">example 4</a> in this section.
+
+<p>
+
+<li><b><a name="CharacterArguments">Passing Fortran CHARACTER
+variables to NCL</a></b><br><br>
+
+If you want to pass a Fortran CHARACTER variable back to NCL, then
+the Fortran argument must be a variable of type <tt>CHARACTER</tt> of
+fixed length, and the corresponding NCL variable must be a
+<i>character array</i> of the same length.
+<p>
+
+Note that a declaration like "CHARACTER(LEN=40)" will not work. You
+must use "CHARACTER*40".
+<p>
+
+If you want to use the NCL character array as an NCL string, you will
+need to use the NCL conversion function
+<a href="../Functions/Built-in/chartostring.html"><strong>chartostring</strong></a>.  See <a href="#Example_4">example 4</a> in this section.  <p>
+
+<li><b><a name="ComplexNumbers">Complex numbers</a></b><br><br>
+
+NCL does not have a complex data type.  If you want to bring
+complex numbers into NCL, you will have to do it by bringing in the
+real and imaginary parts as separate arrays.  This will most likely
+require that you write an interface subroutine to your Fortran code
+that splits up the Fortran COMPLEX numbers into real and imaginary
+parts.  Although you will not be able to do arithmetic on the complex
+numbers in NCL, you can still do analysis on the real and imaginary
+parts separately.  <p>
+
+<li><b><a name="NameConflicts">Procedure name conflicts</a></b><br><br>
+
+If the procedure that you are incorporating into NCL has the same name
+as a <a href="../Functions/Built-in/index.html">currently
+existing built-in NCL procedure</a>, NCL will choose its
+built-in and not your procedure.  However, most UNIX <i>ld</i>
+commands recognize the
+<tt>-B symbolic</tt> flag, and using it when you create your dynamic
+shared object will force NCL to load your procedure in preference to
+its own built-ins.  The <tt>-B symbolic</tt> can cause <i>ld</i> to
+report missing entries that in fact are ultimately not missing.  It is
+probably best just to be careful to avoid defining a procedure with
+the same name as an NCL built-in.  <p>
+
+<li><b><a name="Termination">NCL termination</a></b><br><br>
+
+If a Fortran procedure that you have incorporated into NCL
+executes a STOP statement, or if a C function executes an
+<tt>exit</tt> statement, then the NCL interpreter will abort.  <p>
+
+<li><b><a name="UnsupportedSyntax">Unsupported Fortran 77 syntax in
+wrapit interface blocks</b><br><br>
+
+<ul>
+
+<li><b><a name="CommonBlocksNot">Fortran COMMON blocks</a></b><br>
+
+Fortran COMMON blocks are not allowed in a wrapit interface block.
+This would preclude your having adjustable arrays whose dimensions are
+passed in a COMMON block, or using COMMON to pass values for
+variables.<p>
+
+<li><b><a name="EntryStatements">Fortran ENTRY statements</a></b><br>
+
+There is no way to accommodate an ENTRY statement in a Fortran
+procedure.<p>
+
+<li><b><a name="AlternateReturn">Alternate return arguments</a></b><br>
+
+Subroutines with alternate return arguments are not allowed.<p>
+
+</ul>
+</ul>
+
+<a name="FixingCommonProblems"></a>
+<h2>Fixing common problems</h2>
+<p>
+
+<ul>
+<li>"A syntax error occurred while parsing"
+<p>
+
+Sometimes you'll get the above error and it will look like there's
+absolutely nothing wrong with the Fortran file or stub that you're
+trying to wrap.  The above error can occur if you have \r or ^M type
+characters at the end of each line (which are generally invisible in a
+UNIX editor). You can see these characters by typing "od -c" on your
+file or "cat -v":
+
+<pre>
+  od -c yourfile.f
+  cat -v yourfile.f
+</pre>
+<p>
+
+You'll see lines like:
+
+<pre>
+0000000    C       N   C   L   F   O   R   T   S   T   A   R   T  \r  \n
+0000020                            s   u   b   r   o   u   t   i   n   e
+0000040        t   e   s   t   i   t   (   x   ,   y   ,   z   ,   n   l
+0000060    a   t   ,   n   l   o   n   )  \r  \n                        
+0000100    r   e   a   l       x   (   n   l   a   t   ,   n   l   o   n
+0000120    )  \r  \n                           r   e   a   l       y   (
+0000140    n   l   a   t   ,   n   l   o   n   )  \r  \n                
+0000160            r   e   a   l       z   (   n   l   a   t   ,   n   l
+0000200    o   n   )  \r  \n                           i   n   t   e   g
+0000220    e   r       n   t   i   m   ,   n   l   a   t  \r  \n   C    
+0000240    N   C   L   E   N   D  \r  \n                                
+0000250
+</pre>
+<p>
+
+Note the "\r" at the end of the lines. These will cause a problem for
+wrapit77.
+<p>
+
+To fix these, try
+running <a href="http://sourceforge.net/projects/dos2unix/">dos2unix</a>
+or using
+the UNIX <a href="https://en.wikipedia.org/wiki/Tr_(Unix)">tr</a>
+command on the file to clean it up:
+<p>
+
+<pre>
+  dos2unix yourfile.f
+
+  tr -d '\r' < yourfile.f > yourfile_fix.f
+</pre>
+<p>
+
+Note that "dos2unix" can operate on the file and return the results in
+the same file. With the "tr" command, you need to redirect it to a
+new file and then run WRAPIT on the new file.
+<p>
+
+<li>"/usr/bin/ld: cannot find -lgfortran"
+<p>
+
+On some systems, WRAPIT uses the gfortran compiler by default.  The
+gfortran library (libgfortran.a) may be installed in a location that
+can't be automatically "seen" by WRAPIT.  You can use the UNIX
+"locate" command to find the gfortran library, and the the "-L" option
+with WRAPIT to indicate where it is.
+<p>
+
+For example, if:
+
+<pre>
+   locate libgfortran.a
+</pre>
+
+returns:<p>
+
+<pre>
+   /usr/lib/gcc/x86_64-redhat-linux/4.1.1/libgfortran.a
+</pre>
+
+then your WRAPIT command will look like this:
+<p>
+
+<pre>
+   WRAPIT -L /usr/lib/gcc/x86_64-redhat-linux/4.1.1 yourfile.f
+</pre>
+<p>
+
+<li>Getting an "undefined symbol" when you try to use WRAPIT. For example:
+<p>
+
+<pre>
+   ncl myscript.ncl
+
+   warning:An error occurred loading the external file ./besi0.so, file not loaded
+  ./besi0.so: undefined symbol: xermsg_
+</pre>
+
+This can possibly mean one of two things:
+
+<ol>
+
+<li>The Fortran routine you are trying to wrap has a direct call to
+"xermsg" (or "XERMSG") in it, but WRAPIT can't find the file or the
+library where this subroutine is defined.
+<p>
+
+<li>This subroutine is being called internally by your compiler, and
+WRAPIT needs some help in finding the library that this symbol is
+defined in.
+<p>
+
+</ol>
+
+If your situation is the first case, and your Fortran routine is calling
+this routine, then you may need to include an additional Fortran routine
+that has this symbol in it, or else link to a library that has this symbol.
+<p>
+
+To link to a Fortran routine with this symbol, include the *.f
+file on the WRAPIT line after the *.f file you are wrapping:
+
+<pre>
+  WRAPIT myfile.f myotherfile.f
+</pre>
+<p>
+
+To link to a library that has this symbol defined, you will need to
+use the "-l" option, and possibly the "-L" option to tell WRAPIT where
+the library is located. For example, if the symbol is in the library
+"libfoo.a", and "libfoo.a" is in "/home/foo/lib", then include the
+following at the end of your WRAPIT command line:
+
+<pre>
+  WRAPIT myfile.f -L /home/foo/lib -l foo
+</pre>
+<p>
+
+If your situation fits the second case, you will need to find out
+which system library contains this symbol, and use the information in
+the previous step about using "-L" and "-l" to link in an additional
+library.
+<p>
+
+To find out what system library a symbol resides in is not always
+trivial. You can try the "locate" command which may not be available
+on all systems:
+
+<pre>
+    locate <em>symbol_name</em>
+</pre>
+<p>
+
+If you don't have the "locate" command, then you can try googling the
+symbol, or using a combination of "nm" and "grep" to look for the
+symbol.  If you have a system administrator to ask about this, I
+highly recommend doing this first. Otherwise, you will need to search
+for the "lib*.a" files on your system, and then run "nm" and "grep":
+
+<pre>
+  nm lib<em>xxxx</em>.a | grep <em>symbol_name</em>
+</pre>
+<p>
+
+If the symbol exists in your library, the "nm" command will produce
+output that looks like one of these lines (note: the output is
+different for different types of systems):
+
+<pre>
+   00000000 T <em>symbol_name</em>
+
+    [5]     |         0|       8|FUNC |GLOB |0    |2      |<em>symbol_name</em>
+</pre>
+
+</ul>
+
+<a name="TroubleShooting"></a>
+<h2>Troubleshooting WRAPIT</h2>
+<p>
+
+To troubleshoot WRAPIT, try this simple test:
+
+<ol>
+
+<li>Download <a href="Files/ex.html">ex.f</a> and <a href="Files/ex-2.html">ex.ncl</a>.
+<p>
+
+<li>Type:
+<p>
+
+<pre>
+WRAPIT ex.f
+ncl ex.ncl
+</pre>
+
+If there were other options you were including on the WRAPIT command line,
+go ahead and include these.
+<p>
+
+This test should produce the following output:
+
+<pre>
+(0)     before i = 5
+(0)     before x = 1.3
+(0)     after i = 10
+(0)     after x = -11.045
+</pre>
+<p>
+
+<li>If you don't get this output then there may be something wrong
+with your version of WRAPIT or ncl.  Please email
+<a href="mailto:ncl-talk@ucar.edu">ncl-talk@ucar.edu</a> (you
+must <a href="http://mailman.ucar.edu/mailman/listinfo/ncl-talk">subscribe</a>
+first) and send all the output from running the above commands, along
+with what "uname -a" reports on your system.
+<p>
+
+<li>If the output from the above test looks good. then please review
+the "<a href="#FixingCommonProblems">Fixing common problems</a>"
+section to see what might be wrong with using WRAPIT on your own
+Fortran file.
+<p>
+
+</ol>
+
+<p>
+  
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Tools/WRAPIT.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:32:59 GMT -->
+</html>
+

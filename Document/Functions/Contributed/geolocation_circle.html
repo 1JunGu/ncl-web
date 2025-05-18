@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/geolocation_circle.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:13 GMT -->
+<head>
+<meta name="description" content="NCL contributed.ncl functions (graphics routines)">
+<meta name="keywords" content="geolocation_circle">
+<title>geolocation_circle</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>,
+<a class=crumb href="../graphics_routines.html">Graphics routines</a>
+<br>
+<h1>geolocation_circle</h1>
+
+<p>
+Create latitudes and longitudes that define concentric circles at user specified distances from a central location.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.5.0">version 6.5.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function geolocation_circle (
+		clat [*] : numeric,  
+		clon [*] : numeric,  
+		crad [*] : numeric,  
+		urad [1] : integer,  
+		N    [1] : integer,  
+		opt  [1] : logical   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>clat</em>
+<br>
+<em>clon</em>
+<p class=indent>Scalars or one-dimensional arrays containing the 'center' location latitudes or latitudes. 
+If these are arrays,they must be the same length. Missing values are not allowed.  
+</p>
+<p class=indent>
+Most commonly, these might be station or grid point locations or a time series
+of (say) low-pressure center locations.
+</p>
+<em>crad</em>
+<p class=indent>Scalar or one-dimensional array containing the radial distances for each circle. The units can be 
+degrees (great circle degrees) or kilometers (km).
+</p>
+<em>urad</em>
+<p class=indent>An integer which specifies the units of <em>crad</em>: =0 means degrees (dg); =1 mean kilometers (km)
+</p>
+<em>opt</em>
+<p class=indent>Currently, not used. Set to False.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A variable of type <b><i>list</i></b> containing <b>two</b> variables (say, Rlat and Rlon)
+which contain the geolocated latitudes and longitudes for each specified
+location pair at each radius.  
+<pre>
+       Rlat(<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(clat),<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(<em>crad</em>),<em>N</em>), 
+       Rlon(<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(clat),<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(<em>crad</em>),<em>N</em>)).
+
+</pre>
+Informational attributes are also returned.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<strong>geolocation_circle</strong> computes <em>N</em>
+latitude and longitudes at each specified  <em>crad</em>.
+The <a href="../Built-in/nggcog.html"><strong>nggcog</strong></a> is used for the computations.
+<p>
+The <a href="../Built-in/gc_inout.html"><strong>gc_inout</strong></a> function can be used to retain or exclude values within the radii.
+Some examples of using <a href="../Built-in/gc_inout.html"><strong>gc_inout</strong></a> for this purpose are at:
+<ul>
+<li> <a href="../../../Applications/unique.html"><b>Katrina_circle</b></a> 
+<li> <a href="https://test.www.ncl.ucar.edu/Applications/shapefiles.shtml"><b>shapefiles</b></a>: Examples 5, 9 and 13
+</ul>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Built-in/nggcog.html"><strong>nggcog</strong></a>,
+<a href="../Built-in/gc_inout.html"><strong>gc_inout</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<b>Example 1:</b> The plot created by the following script is 
+<a href="../../../Applications/Images/geolocation_circle.png"><b>here</b></a>.
+<PRE>
+
+; *********************************
+; Draw circles
+;**********************************
+
+;---One station with multiple radii
+
+    slat      =   30.192                     ; lat: station or storm
+    slon      =  280.477                     ; lon: station or storm
+    srad      = (/ 50, 150, 300, 500, 750/)  ; station radii (km)
+    srad_unit = 1                            ; km
+    N         = 180                          ; # of points; more points nicer 'circle'
+    opt       = False
+;---End input
+
+    nLoc = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(slat)                   ; # locations
+    nRad = <a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(srad)                   ; # radii
+
+    circle    = <strong>geolocation_circle</strong>(slat, slon, srad, srad_unit, N, opt) ; circle is type list
+
+;---Extract variables from 'list'
+    <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(circle)
+    circle_lat = circle[0]                   ; clarity: explicitly extract list variables
+    circle_lon = circle[1]
+
+;---Print and examine returned variables
+    <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(circle_lat)
+    <a href="../Built-in/print.html"><strong>print</strong></a>("------------------")
+    <a href="../Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(circle_lon)
+    <a href="../Built-in/print.html"><strong>print</strong></a>("------------------")
+ 
+;---Print the lat/lon for the last radius [ for fun ] 
+    <a href="../Built-in/print.html"><strong>print</strong></a>(circle_lat(nRad-1,:)+"  "+circle_lon(nRad-1,:))
+     
+;*************************************************
+; Plot
+;*************************************************
+
+    pltType          = "png" 
+    pltDir           = "./" 
+    pltName          = "geolocation_circle" 
+    pltPath          = pltDir + pltName
+
+;---Resources for background map
+    res              = True   
+    res@gsnDraw      = False                  
+    res@gsnFrame     = False    
+    res@gsnMaximize  = True    
+
+   ;res@mpProjection = "CylindricalEquidistant"            ; choose map projection
+   ;res@mpLimitMode  = "LatLon"
+    res@mpOutlineBoundarySets  = "GeophysicalAndUSStates"   ; add state boundaries
+    res@mpGeophysicalLineColor = "Gray"
+    res@mpUSStateLineColor     = "LightGray"
+    res@mpMinLatF    = slat - 7.5                          ; add 'buffer' around central location
+    res@mpMaxLatF    = slat + 7.5
+    res@mpMinLonF    = slon - 10
+    res@mpMaxLonF    = slon + 10
+    res@mpCenterLonF = (res@mpMinLonF  + res@mpMaxLonF )*0.5 
+    res@mpGeophysicalLineThicknessF  = 1.5
+    res@mpFillOn                     = False          
+
+;--Text for map
+    res@tiMainString   = "Center: ("+<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%5.1f", slat)+","+<a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%5.1f", slon)+")"
+
+    res@gsnStringFontHeightF = 0.0125 
+    res@gsnLeftString  = "Radii: km: "
+    res@gsnRightString = "dg: "
+    do nr=0,nRad-2
+       res@gsnLeftString  = res@gsnLeftString  + <a href="../Built-in/sprinti.html"><strong>sprinti</strong></a>("%2.2i", srad(nr))+","
+       res@gsnRightString = res@gsnRightString + sprintf("%4.2f", circle_lat@radii_converted_values(nr) )+","
+    end do
+    res@gsnLeftString  = res@gsnLeftString  + <a href="../Built-in/sprinti.html"><strong>sprinti</strong></a>("%2.2i", srad(nRad-1))
+    res@gsnRightString = res@gsnRightString + <a href="../Built-in/sprintf.html"><strong>sprintf</strong></a>("%4.2f", circle_lat@radii_converted_values(nRad-1) )
+
+;*****************************************************
+;               Plot
+;*****************************************************
+
+    wks  = <a href="../Built-in/gsn_open_wks.html"><strong>gsn_open_wks</strong></a>(pltType, pltPath)
+    plot = <a href="../Built-in/gsn_csm_map.html"><strong>gsn_csm_map</strong></a>(wks,res)       ; draw background map
+
+    plres  = True
+    plres@gsMarkerIndex = 2           ; Plus sign ( + )
+   ;plres@gsMarkerIndex = 15          ; Circle with x
+   ;plres@gsMarkerIndex = 16          ; Filled Circle
+    plres@gsMarkerSizeF = 10.       
+    plres@gsMarkerColor = "black"  
+    plot@$"marker"$     = <a href="../Built-in/gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a>(wks, plot, slon, slat, plres) ; "marker" is arbitrary
+
+    colors = (/ "magenta", "orange", "red", "DarkGreen", "blue"  /)
+    thick  = (/    1     ,  1.5    ,  2.0 ,   3.0      ,   4.0   /) 
+
+    do nl=0,nLoc-1
+      do nr=0,nRad-1
+         plres@gsLineColor      = colors(nr)
+         plres@gsLineThicknessF = thick(nr)
+         circ_id = "radii_"+nl+"_"+nr           ; any unique name
+         plot@$circ_id$ = <a href="../Built-in/gsn_add_polyline.html"><strong>gsn_add_polyline</strong></a>(wks, plot, circle_lon(nl,nr,:), circle_lat(nl,nr,:), plres)
+      end do       ; nr
+    end do         ; nl
+
+    <a href="../Built-in/draw.html"><strong>draw</strong></a>(plot)
+    <a href="../Built-in/frame.html"><strong>frame</strong></a>(wks)
+</PRE>
+<p>
+-------------------------------------------------------------------------</br>
+The (edited) output follows: 
+<pre>
+          Variable: circle
+          <b>Type: list <fifo> </b>
+          <b>Total items: 2    </b>        
+          
+          
+          Variable: circle_lat
+          Type: float
+          Total Size: 3600 bytes
+                      900 values
+          Number of Dimensions: 2
+          Dimensions and sizes:	<b>[location | 1] x [radii | 5] x [circle | 180]</b>
+          Coordinates: 
+          Number Of Attributes: 7
+            units :	degrees_north
+            long_name :	circle latitudes
+            radii_converted_values :	( 0.4522022, 1.356607, 2.713213, 4.522022, 6.783033 )
+            radii_converted_units :	great_circle_degrees
+            radii_input_values :	( 50, 150, 300, 500, 750 )
+            radii_input_units :	km
+            _FillValue :	9.96921e+36
+
+          ------------------
+          
+          Variable: circle_lon
+          Type: float
+          Total Size: 3600 bytes
+                      900 values
+          Number of Dimensions: 2
+          Dimensions and sizes:	<b>[location | 1] x [radii | 5] x [circle | 180]</b>
+          Coordinates: 
+          Number Of Attributes: 7
+            units :	degrees_east
+            long_name :	circle longitudes
+            radii_input_units :	km
+            radii_input_values :	( 50, 150, 300, 500, 750 )
+            radii_converted_units :	great_circle_degrees
+            radii_converted_values :	( 0.4522022, 1.356607, 2.713213, 4.522022, 6.783033 )
+            _FillValue :	9.96921e+36
+
+        ------------------
+
+          (0)	23.409   -79.523
+          (1)	23.4129  -79.2642
+          (2)	23.4247  -79.0057
+          (3)	23.4443  -78.7477
+          (4)	23.4717  -78.4905
+          (5)	23.5069  -78.2344
+          (6)	23.5499  -77.9796
+          (7)	23.6005  -77.7264
+          (8)	23.6589  -77.475
+          [SNIP]
+          (86)	36.9199  -78.4856
+          (87)	36.9469  -78.7809
+          (88)	36.9649  -79.0773
+          (89)	36.9739  -79.3744
+          (90)	36.9739  -79.6717
+          (91)	36.9649  -79.9688
+          (92)	36.9469  -80.2651
+          (93)	36.9199  -80.5604
+          (94)	36.8839  -80.854
+          [SNIP]
+          (172)	23.6005  -81.3196
+          (173)	23.5499  -81.0665
+          (174)	23.5069  -80.8117
+          (175)	23.4717  -80.5555
+          (176)	23.4443  -80.2983
+          (177)	23.4247  -80.0403
+          (178)	23.4129  -79.7818
+          (179)	23.409   -79.523
+</pre>
+<p>
+
+<b>Example 2:</b> The following illustrates multiple locations and radii. The full script is 
+<a href="../../../Applications/Scripts/poly_25.html"><b>here</b></a>. The created plot is <a href="../../../Applications/Images/geolocation_circle_2.png"><b>here</b></a>.
+<pre>
+
+;---Multiple locations (eg: time series of locations) and radii
+
+  slat      = (/ 27.0, 31.5, 34.7 /)       ; lat: stations or storm centers
+  slon      = (/273.5,280.0,284.3/)        ; lon: stations or storm centers
+  srad      = (/ 1, 3 /)                   ; radii (great circle degrees)
+  srad_unit = 0                            ; 0=degrees
+  N         = 90                           ; # of points; more points nicer 'circle'
+  opt       = False
+[SNIP]
+</pre>
+The (edited) output follows: 
+<pre>
+
+          Variable: circle_lat
+          Type: float
+          Total Size: 2160 bytes
+                      540 values
+          Number of Dimensions: 3
+          Dimensions and sizes:	<b>[location | 3] x [radii | 2] x [circle | 90]</b>
+          Coordinates: 
+          Number Of Attributes: 5
+            _FillValue :	9.96921e+36
+            radii_units_input :	great_circle_degrees
+            radii_input_values :	(  1,  3 )
+            long_name :	circle latitudes
+            units :	degrees_north
+
+         ------------------
+          
+          Variable: circle_lon
+          Type: float
+          Total Size: 2160 bytes
+                      540 values
+          Number of Dimensions: 3
+          Dimensions and sizes:	<b>[location | 3] x [radii | 2] x [circle | 90]</b>
+          Coordinates: 
+          Number Of Attributes: 5
+            _FillValue :	9.96921e+36
+            radii_input_values :	(  1,  3 )
+            radii_units_input :	great_circle_degrees
+            long_name :	circle longitudes
+            units :	degrees_east
+
+</pre>
+
+<b>Example 3:</b> Mask values using <a href="../Built-in/gc_inout.html"><strong>gc_inout</strong></a>. Plot data within defined radius only.  
+See: <a href="../../../Applications/polyg.html"><b>Examples polyg_29, polyg_30, polyg_31</b></a>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Contributed/geolocation_circle.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:15 GMT -->
+</html>

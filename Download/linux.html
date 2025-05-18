@@ -1,0 +1,664 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Download/linux.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:43:20 GMT -->
+<head>
+<meta name="description" content="How to install and run the NCAR Command Language on Linux systems">
+<meta name="keywords" content="NCL installation">
+<TITLE>Installing and running NCL under Linux</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL ></a>
+<a class=crumb href="index.html">Download</a>
+
+<H1>Running NCL under Linux systems</H1>
+
+This document contains helpful notes on choosing the
+correct NCL precompiled binary for your LINUX machine,
+and for running NCL on Linux systems:
+<p>
+
+<ul>
+
+<li><a href="#ChoosingBinary">Choosing the right NCL binary for your
+Linux system</a>
+
+<li><a href="#libgfortran">Dealing with missing libgfortran issue</a>
+
+<li><a href="#SharedLibraries">Dealing with missing lib<i>xxx</i>.so files</a>
+
+<li><a href="#InstallSoftware">Installing other software for Linux</a>
+
+<li><a href="list_of_binaries.html">Full list of available binaries</a>
+
+</ul>
+<p>
+
+<a name="ChoosingBinary"></a>
+<hr>
+<H2>Choosing the right NCL binary for your Linux system</H2>
+
+If you are installing pre-compiled NCL binaries on a Linux system,
+there are a <a href="list_of_binaries.html">number of binaries</a> to
+choose from. 
+<p>
+
+The binary filenames contain the type of Linux it was built on
+(RedHat/RHEL, Debian, CentOS, SuSE Linux), the "bitness" (32-bit or
+64-bit), and which version of the GNU or Intel compilers it was
+compiled with. The binary filenames look like this:
+<p>
+
+<blockquote>
+ncl_ncarg-6.6.2.Linux_RHEL6.4_x86_64_gnu472.tar.gz
+</blockquote>
+<p>
+
+The above binary was compiled on a 64-bit RedHat release 6.4
+system using GNU compilers version 4.7.2.
+<p>
+
+If you are not sure which Linux binary to download, we recommend
+trying one of these two binaries if you
+need <a href="../Applications/opendap.html">OPeNDAP</a> support:
+<p>
+
+<blockquote>
+ncl_ncarg-6.6.2-CentOS6.8_64bit_gnu447.tar.gz<br>
+ncl_ncarg-6.6.2-RHEL6.4_64bit_gnu447.tar.gz
+</blockquote>
+<p>
+
+or one of these two binaries if you don't need OPeNDAP support:
+<p>
+
+<blockquote>
+ncl_ncarg-6.6.2-CentOS6.8_64bit_nodap_gnu447.tar.gz<br>
+ncl_ncarg-6.6.2-RHEL6.4_64bit_nodap_gnu447.tar.gz
+</blockquote>
+<p>
+
+If you want to download a Linux binary that is close to the kind of
+system you have, then type the following commands from a terminal
+window to get the type of system you have (32-bit or 64-bit), the
+flavor of LINUX you are running (RedHat/RHEL, Debian, CentOS, etc),
+and the version of gcc and gfortran:
+<p>
+
+<pre>
+  uname -m
+  cat /etc/issue
+  lsb_release -d
+  gcc --version
+</pre>
+
+For example, if the above commands report "x86_64", "Debian 8", and
+"4.7.2", then you should download one of these binaries:
+<p>
+
+<blockquote>
+ncl_ncarg-6.6.2.Linux_Debian8.6_x86_64_gnu492.tar.gz
+ncl_ncarg-6.6.2.Linux_Debian8.6_x86_64_nodap_gnu492.tar.gz
+</blockquote>
+<p>
+
+You must match the bitness (32-bit or 64-bit). You can't use an
+"x86_64" binary on a system whose "uname -m" reports "i686".
+Secondly it's important to try to match your flavor of Linux if
+possible, and then match your version of gcc as close as possible.
+<p>
+
+If your flavor of Linux or "bitness" doesn't match, then you can
+usually use one of the other ones. For example, if you have a CentOS
+or Fedora system, then try a RedHat binary. If you have a Ubuntu
+system, try a Debian binary.
+<p>
+
+If you run into a problem, please
+email <a href="mailto:ncl-install@ucar.edu">ncl-install</a> (you
+must <a href="http://mailman.ucar.edu/mailman/listinfo/ncl-install">subscribe</a>
+first).
+<p>
+
+<a name="libgfortran"></a>
+<hr>
+<H2>Dealing with missing libgfortran issue</H2>
+
+For most Linux binaries, NCL was built using gcc and gfortran.  This
+may cause a dependency on a file called "libgfortran.so.<i>x</i>".
+<p>
+
+If you have a different version of gfortran installed on your system
+than what NCL was built with, then you may get an error message that
+"libgfortran.so.<i>x</i> can't be found".
+<p>
+
+If you see this, then you can try one of these things:
+
+<ol>
+
+<li>Trying googling part of the error message that you're getting,
+along the flavor of LINUX.c for example, "CentOS cannot open
+libgfortran.so.1".  You will usually get several hits with lots of
+good suggestions.<p>
+
+<li>Install the version of gfortran that your version of NCL was built
+with. (It is possible to have multiple versions of gfortran installed
+on the same system without conflict.)
+<p>
+<ul>
+<li>If you are using Debian or Ubuntu, you can use the "apt-file"
+command (you may need to install it first) to search for a package
+that contains the missing libgfortran file ("libgfortran.so.3" in
+this example):
+<p><pre>
+   sudo apt-get install apt-file
+   sudo apt-file update
+   apt-file search libgfortran.so.3
+</pre>
+<p>
+<li>If you are using Red Hat or CentOS, you can use the "yum provides"
+command to search for a package that contains the libgfortran file:
+<p><pre>
+   yum provides "*/libgfortran.so.3"
+</pre>
+</ul>
+<p>
+
+<li>Try to find the libgfortran.so.<i>x</i> file that it is
+complaining about. You can try the "locate" command.
+For example if the file is "libgfortran.so.1":
+<p>
+
+<pre>
+   locate libgfortran.so.1
+</pre>
+<p>
+
+If found, you can add this path to your LD_LIBRARY_PATH environment variable.
+<b>Important note</b>: it is generally recommended that you do not
+directly set LD_LIBRARY_PATH. If you have to do this, it may mean that
+gfortran may not be installed correctly on your system, and setting
+LD_LIBRARY_PATH is just a kludgy work-around.  However, if you just
+can't get it to work, then read on.
+<p>
+
+For example, if "libgfortran.so.1" is the file you need, and
+it is in /usr/local/lib, then look at the instructions
+below, depending on what shell you are running, and depending
+on whether LD_LIBRARY_PATH is already set:
+
+<pre>
+   env | grep LD_LIBRARY_PATH
+</pre>
+
+
+From csh or tcsh, if not set:
+
+<pre>
+    setenv LD_LIBRARY_PATH /usr/local/lib
+</pre>
+
+From csh or tcsh, if already set:
+
+<pre>
+    setenv LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/lib
+</pre>
+
+From bash or ksh, if not set:
+
+<pre>
+    export LD_LIBRARY_PATH=/usr/local/lib
+</pre>
+
+From bash or ksh, if already set:
+
+<pre>
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+</pre>
+
+From sh, if not set:
+
+<pre>
+    LD_LIBRARY_PATH=/usr/local/lib
+    export LD_LIBRARY_PATH
+</pre>
+
+From sh, if already set:
+
+<pre>
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+    export LD_LIBRARY_PATH
+</pre>
+
+<p>
+
+<li>If all else fails, then send email to <A
+HREF="mailto:ncl-install@ucar.edu">ncl-install@ucar.edu</A>.  You need
+to <a href="http://mailman.ucar.edu/mailman/listinfo/ncl-install">be a
+member</a> in order to post.
+
+</ol>
+<p>
+
+<a name="SharedLibraries"></a>
+<hr>
+<H2>Dealing with missing lib<i>xxx</i>.so files</H2>
+<p>
+
+Some of the NCL binaries are <a
+href="../Applications/opendap.html">OPeNDAP-enabled</a>, which means
+there are a number of dependencies on shared libraries. If you try to
+run "ncl" and get one or more errors about not finding
+"lib<i>xxx</i>.so" files, then you can try a few things.
+<p>
+
+If you don't need OPenDAP support, then you can try downloading a
+non-OPenDAP enabled binary.
+<p>
+
+If you need OPeNDAP support, you may need to install the "OpenSSL"
+software on your system, or find where it resides on your system and
+point to it.
+<p>
+
+To look for a particular missing file, try using the "locate" command:
+<p>
+
+<pre>
+  locate libcrypto.so.0.9.8
+</pre>
+<p>
+
+If you see the file, then read the previous section on the <a
+href="#libgfortran">libgfortran issue</a> to see how to point your
+LD_LIBRARY_PATH environment variable to this location.
+<p>
+
+If you can't find this file, then you may need to install
+OpenSSL on your system.
+<p>
+
+For example, on some Linux systems, you may be able to type:
+<p>
+
+<pre>
+  yum install openssl
+</pre>
+<p>
+
+or
+<p>
+
+<pre>
+  apt-get openssl
+  apt-get install openssl
+</pre>
+<p>
+
+For further information and more links about where to find software,
+see the previous section on dealing with the missing <a
+href="#libgfortran">libgfortran</a> issue. You may simply need to set
+your LD_LIBRARY_PATH environment variable, or you may need to install
+some system libraries.
+<p>
+
+<a name="InstallSoftware"></a>
+<hr>
+<H2>Installing other software for Linux systems</H2>
+<p>
+
+<ul>
+
+<li><b>cairo, X11, and other dependent libraries</b><p> - you need an
+X11 server in order to run ncl and display output to an X11 library,
+and you need the cairo, X11, and other development libraries in order
+to build NCL from source code.
+<p>
+
+Getting the development libraries on your system depends on what kind
+of Linux system you have. The commands below are samples of the types
+of commands you can use to install the required software.
+<p>
+
+<pre>
+   apt-get install x11-dev
+   apt-get install xorg-dev
+   apt-get install libx11-dev
+   apt-get install libcairo-devel
+   yum install libX11-devel
+   yum install cairo-devel
+</pre>
+<p>
+
+If you find other libraries are missing, like "bz2", then you may need
+additional libraries:<p>
+
+<pre>
+   apt-get install libbz2-dev
+   yum install libbz2-dev
+</pre>
+<p>
+
+<li><b>tcsh/csh</b><p> - you need tcsh or csh if you are trying to run one
+of the shell applications like <a
+href"/Document/Tools/ng4ex.shtml">ng4ex</a> or <a
+href"/Document/Tools/nhlcc.shtml">nhlcc</a>.
+<p>
+
+You can install these shells with a command like:
+<p>
+
+<pre>
+  apt-get install csh
+</pre>
+
+or 
+<p>
+
+<pre>
+  yum install tcsh 
+</pre>
+
+</ul>
+<p>
+
+<hr>
+<p>
+
+If any of these instructions are out-of-date, please send email
+to <a href="http://mailman.ucar.edu/mailman/listinfo/ncl-install">ncl-install</a>.
+
+<p>
+<hr>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Download/linux.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:43:20 GMT -->
+</html>

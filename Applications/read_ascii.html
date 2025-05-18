@@ -1,0 +1,1194 @@
+<html>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/read_ascii.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:16:04 GMT -->
+<head>
+<meta name="description" content="NCL file I/O example page. 
+Demonstrates how to read in ASCII data.">
+<meta name="keywords" content="NCL,file IO, ASCII.">
+<TITLE>NCL: File Handling: Reading ASCII data</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_io.html">File IO</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+
+<h1>NCL: Reading ASCII data</h1>
+
+<div class=text>
+
+<b>This document shows how to read various types of ASCII files using NCL.</b>
+<p>
+
+For examples of reading or writing other types of ASCII files, see:
+
+<ul>
+<li><a href="read_csv.html">Reading CSV files</a>
+<li><a href="write_ascii.html">Writing ASCII files</a>
+<li><a href="write_csv.html">Writing CSV files</a>
+</ul>
+<p>
+
+
+Here are a list of functions that are useful for reading various types
+of ASCII files:
+<ul>
+
+<li><a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a> - reads a file that contains ASCII
+representations of basic data types.
+<p>
+
+<li><a href="../Document/Functions/Built-in/str_fields_count.html"><strong>str_fields_count</strong></a> - Count the
+number of fields in a string, given a delimiter.
+<p>
+
+<li><a href="../Document/Functions/Built-in/str_get_cols.html"><strong>str_get_cols</strong></a> - Retrieve a particular
+column in a string, given a start and end index.
+<p>
+
+<li><a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a> - Retrieve a particular
+field in a string, given a delimiter.
+<p>
+
+<li><a href="../Document/Functions/Built-in/str_split_csv.html"><strong>str_split_csv</strong></a> - Splits strings into an array of
+strings based on a single delimiter.
+<p>
+
+<li><a href="../Document/Functions/Built-in/str_sub_str.html"><strong>str_sub_str</strong></a> - Replace a substring with
+another substring.
+<p>
+
+<li><a href="../Document/Functions/Contributed/readAsciiHead.html"><strong>readAsciiHead</strong></a> - reads an
+ASCII file and returns just the header.
+<p>
+
+<li><a href="../Document/Functions/Contributed/numAsciiCol.html"><strong>numAsciiCol</strong></a> - returns the
+number of columns in an ASCII file.
+<p>
+
+<li><a href="../Document/Functions/Contributed/numAsciiRow.html"><strong>numAsciiRow</strong></a> - returns the
+number of rows in an ASCII file.
+<p>
+
+<li><a href="http://en.wikipedia.org/wiki/Cut_(Unix)">Unix "cut"
+command</a> - allows you easily extract sections from a file.
+
+</ul>
+
+</div>
+
+<div class=text>
+
+<b>Here are the various ASCII files used by the examples on this page.</b>
+<p>
+
+<a href="Data/asc/asc1.txt">asc1.txt</a> - a very simple
+file with 14 integers, one per line. (<a href="#asc1">example</a>)<p>
+
+<a href="Data/asc/asc2.txt">asc2.txt</a> - a file with a header line,
+followed by 2 columns of integer and floating point data.
+(<a href="#asc2">example</a>)<p>
+
+<a href="Data/asc/asc3.txt">asc3.txt</a> - a file with several columns
+of integer, float, and string data.
+(<a href="#asc3">example</a>)<p>
+
+<a href="Data/asc/asc4.txt">asc4.txt</a> - a file containing
+population of cities, with some header and footer lines, and a mix of
+numeric data. The headers contain some numbers, and some of the
+numeric data contain commas. The columns are separated by tabs.
+(<a href="#asc4">example</a>)<p>
+
+<a href="Data/asc/asc5.txt">asc5.txt</a> - a file where the first
+row contains the name of each field separated by a delimiter, and the
+rest of the file contains the values of each field separated by the
+same delimiter.
+(<a href="#asc5">example</a>)<p>
+
+<a href="Data/asc/string1.txt">string1.txt</a> -
+a file containing lines of a poem (no numeric data).
+(<a href="#string1">example</a>)<p>
+
+<a href="Data/asc/pw.html">pw.dat</a> - a file with a header and
+four columns of lined-up numeric and non-numeric data. The "ID" column
+is non-numeric, but it does contain numbers as part of the the ID
+names.
+(<a href="#pw">example</a>)<p>
+
+<a href="Data/asc/asc6.txt">asc6.txt</a> - a file with 
+a header, and three columns of floating point data (lat, lon, temp).
+(<a href="#asc6">example</a>)<p>
+
+<a href="Data/asc/stn_latlon.html">stn_latlon.dat</a> - a file with 980
+rows and 10 columns of floating point data.
+(<a href="#stn_latlon">example</a>)<p>
+
+<a href="Data/asc/istasyontablosu_son.txt">istasyontablosu_son.txt</a>
+- a mix of numeric and non-numeric data in columns that are not lined
+up nicely.
+(<a href="#istasyontablosu_son">example</a>)<p>
+
+<a href="Data/asc/cygnss_test.txt">cygnss_test.txt</a> - 
+a file with an indeterminant number of headers that start with "%",
+followed by a single number containing a row count, followed by
+that many rows of data with 9 columns each.
+(<a href="#cygnss_test.txt">example</a>)<p>
+
+<a href="Data/asc/L3_aiavg_n7t_197901.txt">L3_aiavg_n7t_197901.txt</a>
+- a file with a mix of text, integers, and floats and no delimiters.
+(<a href="#L3_aiavg_n7t_197901">example</a>)<p>
+
+<a href="Data/asc/NCDC.Central_Iowa.1895-2016.txt">NCDC.Central_Iowa.1895-2016.txt</a>
+- a file with a mix of text, integers, and floats and no delimiters.
+This file was downloaded from the National Centers for Environmental Information (NCEI)
+which was previously known as the National Climatic Data Center (NCDC). Specifically,  
+this file was <a href="https://www7.ncdc.noaa.gov/CDO">downloaded</a> via the 
+<a href="https://www7.ncdc.noaa.gov/CDO/CDODivisionalSelect.jsp">
+<b>Climate data division selection tool</b></a>.
+(<a href="#NCDC.Central_Iowa.1895-2016">example</a>)<p>
+
+
+<a href="#asc7">reading multiple ASCII files into one NCL variable</a>
+
+</div>
+
+<div class=ex>
+<a name="asc1"></a>
+
+<a href="Data/asc/asc1.txt">asc1.txt</a> - a file with
+14 integers, one per line.
+<p>
+
+<pre>
+; Read data into a one-dimensional int array of length 14:
+  data = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>("asc1.txt",14,"integer")
+
+  npts = <a href="../Document/Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a>(data)   ; should be 14
+
+  <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>(data)     ; Print the values
+</pre>
+
+If you don't know how many data values you have, you can use the
+special "-1" value for the dimension size. When you use -1, data
+values will be read from left-to-right, top-to-bottom, into a 1D
+array, until there are no values left.
+<p>
+
+<pre>
+; Read data into a one-dimensional array of unknown length:
+  data = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>("asc1.txt",-1,"integer")
+
+  npts = <a href="../Document/Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a>(data)   ; should be 14
+</pre>
+
+</div>
+
+<div class=ex>
+<a name="string1"></a>
+
+<a href="Data/asc/string1.txt">string1.txt</a> - a file
+with no numerical data, just lines from a poem.
+<p>
+
+Use the special -1 value again, and a type of "string" to read in each
+line. When you read strings, each line in the file will be considered
+one string, regardless if it contains spaces, tabs, or any other kind
+of white space.
+<p>
+
+<pre>
+; Read poem into a one-dimensional string array of unknown length:
+  filename = "string1.txt"
+  poem     = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>(filename,-1,"string")
+  nlines   = <a href="../Document/Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a>(poem)
+
+  print("The poem in '" + filename + "' has " + nlines + " lines.")
+  print("This includes the title and the author.")
+  print(poem)    ; Print the lines
+</pre>
+
+</div>
+
+<div class=ex>
+<a name="asc2"></a>
+
+
+<a href="Data/asc/asc2.txt">asc2.txt</a> - a file with a header line,
+followed by 2 columns of integer and floating point data.
+<p>
+
+Even though this file contains multiple columns of data, when you use
+the special "-1" value as a dimension size, the values will be read
+into a one-dimensional array. The values will be read from from top to
+bottom, left to right.
+<p>
+
+In this file, the header line will be ignored because it doesn't
+contain any numerical data.
+<p>
+
+<pre>
+  data = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>("asc2.txt",-1,"float")
+  <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>(data)     ; Print the values
+</pre>
+
+To read this data into a 2D array dimensioned 17 x 2 (17 rows by 
+2 columns), use:
+<p>
+
+<pre>
+  data = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>("asc2.txt",(/17,2/),"float")
+  <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>(data)     ; Print the values
+</pre>
+
+</div>
+
+<div class=ex>
+<a name="stn_latlon"></a>
+
+<a href="Data/asc/stn_latlon.html">stn_latlon.dat</a> - a file with 980
+rows and 10 columns of floating point data.
+<p>
+
+The first two methods show how to read this file if you know the exact
+number of rows and columns, and the third method shows how to read
+this file if you don't.
+<p>
+
+<b>Method 1</b><p>
+
+<pre>
+; Read data into a 980 x 10 float array.
+  nrows = 980
+  ncols = 10
+  data  = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>("stn_latlon.dat",(/nrows,ncols/),"float")
+  <a href="../Document/Functions/Built-in/printVarSummary.html"><strong>printVarSummary</strong></a>(data)           ; Print information about file only.
+
+; Two ways to print the data.
+  <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>(data)                     ; Print data, one value per line
+  <a href="../Document/Functions/Built-in/write_matrix.html"><strong>write_matrix</strong></a>(data,ncols + "f7.2",0)   ; Formatted output
+</pre>
+
+<b>Method 2</b><p>
+
+This file is actually a file of latitude and longitude values, each
+dimensioned 70 x 70. The latitude values are written first on the
+file, followed by the longitude values. Given this information, here's
+another way to read in this file:
+
+<p>
+
+<pre>
+  nlat     = 70
+  nlon     = 70
+  latlon2d = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>("stn_latlon.dat",(/2,nlat,nlon/),"float")     ; 2 x 70 x 70
+  lat2d    = latlon2d(0,:,:)    ; 70 x 70
+  lon2d    = latlon2d(1,:,:)    ; 70 x 70
+</pre>
+<p>
+
+<b>Method 3</b><p>
+
+Use the special <a
+href="../Document/Functions/Contributed/contrib.html">contributed</a>
+functions <a href="../Document/Functions/Contributed/numAsciiCol.html"><strong>numAsciiCol</strong></a> and
+<a href="../Document/Functions/Contributed/readAsciiTable.html"><strong>readAsciiTable</strong></a> function to first
+calculate the number of columns, and then to read the data into an
+array dimensioned <i>nrows</i> x <i>ncols</i>.
+<p>
+
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl" ; This library is automatically loaded
+                                                            ; from NCL V6.2.0 onward.
+                                                            ; No need for user to explicitly load.
+
+  filename = "stn_latlon.dat"
+
+; Calculate the number of columns.
+  ncols = <a href="../Document/Functions/Contributed/numAsciiCol.html"><strong>numAsciiCol</strong></a>(filename)
+
+; Given the # of columns, we can use readAsciiTable to read this file.
+  data = <a href="../Document/Functions/Contributed/readAsciiTable.html"><strong>readAsciiTable</strong></a>(filename,ncols,"float",0)
+
+  nrows = <a href="../Document/Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a>(data(:,0))    ; calculate # of rows
+
+  <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>("'" + filename + "' has " + nrows + " rows and " + ncols + \
+        " columns of data.")
+</pre>
+
+</div>
+
+<div class=ex>
+<a name="pw"></a>
+
+<a href="Data/asc/pw.html">pw.dat</a> - a file with a header line
+and four columns of lined-up numeric and non-numeric data. The
+"ID" column is non-numeric, but it does contain numbers as part of the
+the ID names.
+<p>
+
+We need to parse out this first column so these numeric values don't
+get mixed in with our real data.
+<p>
+
+Note that as of <a href="../prev_releases.html#5.1.1">version
+5.1.1</a>, this kind of thing is much easier using
+the <a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a> function, which we'll demonstrate
+first.
+<p>
+
+<b>New method, version 5.1.1 and later</b>
+
+<p>
+
+<pre>
+; Read data into a big 1D string array
+  fname = "Data/asc/pw.dat"
+  data  = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>(fname,-1,"string")
+
+; Count the number of fields, just to show it can be done.
+  nfields = <a href="../Document/Functions/Built-in/str_fields_count.html"><strong>str_fields_count</strong></a>(data(1)," ")
+  <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>("number of fields = " + nfields)
+
+;
+; Skip first row of "data" because it's just a header line.
+;
+; Use a space (" ") as a delimiter in str_get_field. The first
+; field is field=1 (unlike str_get_cols, in which the first column
+; is column=0).
+;
+  lat = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a>(data(1::), 2," "))
+  lon = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a>(data(1::), 3," "))
+  pwv = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a>(data(1::), 4," "))
+</pre>
+<p>
+
+<b>Old method, before version 5.1.1</b>
+
+The following example will only work if your columns are lined up nicely.
+<p>
+
+<pre>
+; Read data into a big 1D string array, and convert to a character array.
+  data = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>("./pw.dat", -1, "string")
+  cdata = <a href="../Document/Functions/Built-in/stringtochar.html"><strong>stringtochar</strong></a>(data)
+;
+; The first row is just a header, so we can discard this.  
+; The data starts in the second row, which is represented 
+; by index 1.  
+; 
+; The latitude values fall in columns 6-12 (indices 7:13) 
+; The longitude values fall in columns 13-21 (indices 14:22) 
+; The pwv data values fall in columns 22-31 (indices 23:end)
+;
+; The "1:,"means start with the second row, and include all
+; values to the end.
+;
+  lat = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/charactertostring.html"><strong>charactertostring</strong></a>(cdata(1:,7:13)))
+  lon = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/charactertostring.html"><strong>charactertostring</strong></a>(cdata(1:,14:22)))
+  pwv  = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/charactertostring.html"><strong>charactertostring</strong></a>(cdata(1:,23:)))
+</pre>
+
+This file can also be read by using a combination of the NCL
+<a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a> function, and the Unix "cut"
+command. Again, however, the data must be lined up nicely.  With
+"cut", the first character is considered to be column 1 (and not 0).
+<p>
+
+<b>Another old method, before version 5.1.1</b>
+
+<p>
+
+<pre>
+  fname = "pw.dat"
+  clat  = <a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a>("cut -c7-13 " + fname)
+  clon  = <a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a>("cut -c14-22 " + fname)
+  cpw   = <a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a>("cut -c23-31 " + fname) 
+
+; Ignore the first value, since this is just a header.
+  lat = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(clat(1:))
+  lon = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(clon(1:))
+  pwv = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(cpw(1:))
+</pre>
+
+</div>
+
+<div class=ex>
+<a name="asc3"></a>
+
+<a href="Data/asc/asc3.txt">asc3.txt</a> - a file with several
+columns of integer, float, and string data.
+<p>
+
+The first column contains date values like "200306130209", which we
+want to parse into separate year, month, day, hour, and minute arrays.
+We also want to read the third-from-the-last column, which are the
+station names.  We will again use the Unix "cut" command in order
+to do this kind of parsing.
+<p>
+
+Note that as of <a href="../prev_releases.html#5.1.1">version
+5.1.1</a>, this kind of thing is much easier using
+the <a href="../Document/Functions/Built-in/str_get_cols.html"><strong>str_get_cols</strong></a> function, which we'll demonstrate
+first.
+<p>
+
+<b>New method, version 5.1.1 and later</b>
+
+<p>
+
+<pre>
+  fname  = "asc3.txt"
+  data   = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>(fname,-1,"string")
+  year   = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_cols.html"><strong>str_get_cols</strong></a>(data, 1,4))
+  month  = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_cols.html"><strong>str_get_cols</strong></a>(data,5,6))
+  day    = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_cols.html"><strong>str_get_cols</strong></a>(data,7,8))
+  hour   = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_cols.html"><strong>str_get_cols</strong></a>(data,9,10))
+  minute = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_cols.html"><strong>str_get_cols</strong></a>(data,11,12))
+  sta    = <a href="../Document/Functions/Built-in/str_get_cols.html"><strong>str_get_cols</strong></a>(data,100,102)
+
+</pre>
+<p>
+
+<b>Old method, before version 5.1.1</b>
+
+<p>
+
+<pre>
+  fname = "asc3.txt"
+  year   = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a>("cut -c1-4 " + fname))
+  month  = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a>("cut -c5-6 " + fname))
+  day    = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a>("cut -c7-8 " + fname))
+  hour   = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a>("cut -c9-10 " + fname))
+  minute = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a>("cut -c11-12 " + fname))
+  sta    = <a href="../Document/Functions/Built-in/systemfunc.html"><strong>systemfunc</strong></a>("cut -c100-102 " + fname)
+</pre>
+
+Note: you cannot use <a href="../Document/Functions/Built-in/stringtointeger.html"><strong>stringtointeger</strong></a> to convert
+numbers like "09" to "9", because the preceding "0" causes NCL to
+treat the number as an octal value and "9" is not a valid octal
+value.
+
+</div>
+
+<div class=ex>
+<a name="istasyontablosu_son"></a>
+
+<a
+href="Data/asc/istasyontablosu_son.txt">istasyontablosu_son.txt</a> -
+a mix of numeric and non-numeric data in columns that are not lined up
+nicely.
+<p>
+
+This file is pretty easy to read, because the non-numeric columns
+don't have a mix of alpha and numeric characters.  Here's a script to
+read the first, fifth, and sixth columns (latitude, longitude, and
+station numbers) into separate variables:
+
+<p>
+
+<pre>
+  stationfile="istasyontablosu_son.txt"
+
+; Read all data into a one-dimensional variable.
+  dummy = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>(stationfile,-1,"float")
+
+  ncol  = 6                                ; # of columns
+  npts  = <a href="../Document/Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a>(dummy)/ncol             ; # of points
+
+  stationdata = <a href="../Document/Functions/Built-in/onedtond.html"><strong>onedtond</strong></a>(dummy,(/npts,ncol/)) ; npts x ncol
+
+  stn = stationdata(:,0)     ; station numbers
+  lat = stationdata(:,4)     ; latitude values
+  lon = stationdata(:,5)     ; longitude values
+
+; Print the mins/maxs just to verify the data looks correct.
+  print("min/max stn = " + <a href="../Document/Functions/Built-in/min.html"><strong>min</strong></a>(stn) + "/" + <a href="../Document/Functions/Built-in/max.html"><strong>max</strong></a>(stn))
+  print("min/max lat = " + <a href="../Document/Functions/Built-in/min.html"><strong>min</strong></a>(lat) + "/" + <a href="../Document/Functions/Built-in/max.html"><strong>max</strong></a>(lat))
+  print("min/max lon = " + <a href="../Document/Functions/Built-in/min.html"><strong>min</strong></a>(lon) + "/" + <a href="../Document/Functions/Built-in/max.html"><strong>max</strong></a>(lon))
+</pre>
+<p>
+
+As of <a href="../prev_releases.html#5.1.1">version 5.1.1</a>, you can
+read fields from this file using <a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a>.
+
+<p>
+
+<pre>
+; Read all data into a one-dimensional variable.
+  stationfile = "istasyontablosu_son.txt"
+  data        = asciiread(stationfile,-1,"string")
+
+; Count the number of fields, just to show it can be done.
+  nfields = <a href="../Document/Functions/Built-in/str_fields_count.html"><strong>str_fields_count</strong></a>(data(0)," ")
+  <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>("number of fields = " + nfields)
+
+
+  stn = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a>(data,1," ")))     ; station numbers
+  lat = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a>(data,6," "))     ; latitude values
+  lon = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a>(data,7," "))     ; longitude values
+
+; Print the mins/maxs just to verify the data looks correct.
+  <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>("min/max stn = " + <a href="../Document/Functions/Built-in/min.html"><strong>min</strong></a>(stn) + "/" + <a href="../Document/Functions/Built-in/max.html"><strong>max</strong></a>(stn))
+  <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>("min/max lat = " + <a href="../Document/Functions/Built-in/min.html"><strong>min</strong></a>(lat) + "/" + <a href="../Document/Functions/Built-in/max.html"><strong>max</strong></a>(lat))
+  <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>("min/max lon = " + <a href="../Document/Functions/Built-in/min.html"><strong>min</strong></a>(lon) + "/" + <a href="../Document/Functions/Built-in/max.html"><strong>max</strong></a>(lon))
+
+</pre>
+
+</div>
+
+<div class=ex>
+<a name="cygnss_test.txt"></a>
+<a href="Data/asc/cygnss_test.txt">cygnss_test.txt</a> - 
+a file with an indeterminant number of headers that start with "%",
+followed by a single number containing a row count, followed by
+that many rows of data with 9 columns each.
+<p>
+
+The original version of file had over a million lines of data, and
+several blocks of headers and data. This sample file only has one
+block of headers and data. The script below will handle either. To see
+an example that plots this data, see example #17 on
+the <a href="polyg.html#ex17">primitives page</a>.
+<p>
+
+When reading large blocks of data that are nicely formatted into rows
+and columns, it is best to use <a href="../Document/Functions/Built-in/str_split_csv.html"><strong>str_split_csv</strong></a>,
+rather than parsing one line at a time
+with <a href="../Document/Functions/Built-in/str_split.html"><strong>str_split</strong></a> or <a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a>.
+<a href="../Document/Functions/Built-in/str_split_csv.html"><strong>str_split_csv</strong></a> requires that each column be
+separated by a single character delimiter,
+so <a href="../Document/Functions/Built-in/str_sub_str.html"><strong>str_sub_str</strong></a> is used to replace multiple spaces
+with just one space.
+<p>
+
+<pre>
+  lines  = asciiread("cygnss_test.txt",-1,"string")
+  nlines = dimsizes(lines)
+
+  ncols = 9
+  nl    = 0    ; line counter
+  do while(nl.lt.nlines)
+;---Read the first character of this line
+    first = str_get_cols(lines(nl),0,0)
+
+;---If it's a "%", then increment to next line.
+    if(first.eq."%") then
+      nl = nl + 1           ; increment line counter
+      continue
+    else
+;---Otherwise, get the number of rows and read the data.
+      nrows = toint(lines(nl))
+      nl = nl + 1           ; increment line counter
+      print("==================================================")
+      print("Reading " + nrows + " rows of data.")
+;
+; Clean up the strings so there's only one space between
+; each string, and no extra space at beginning or end.
+; This allows us to use str_split_csv to parse this
+; chunk of data. str_split_csv expects a single character
+; delimiter (a space in this case).
+;
+      lines(nl:nl+nrows-1) = str_sub_str(lines(nl:nl+nrows-1),"    "," ")
+      lines(nl:nl+nrows-1) = str_sub_str(lines(nl:nl+nrows-1),"   "," ")
+      lines(nl:nl+nrows-1) = str_sub_str(lines(nl:nl+nrows-1),"  "," ")
+      lines(nl:nl+nrows-1) = str_strip(lines(nl:nl+nrows-1))
+
+;---Parse the data into a 2D integer array
+      x := tofloat(str_split_csv(lines(nl:nl+nrows-1)," ",0))
+      nl = nl + nrows
+
+; . . .Do something here with 'x', like write it to a file. . .
+
+;---Print min/max of each column of data.
+      do i=0,ncols-1
+        print("Column " + (i+1) + " has min/max = " + min(x(:,i)) + \
+               "/" + max(x(:,i)))
+      end do
+    end if
+  end do
+</pre>
+
+</div>
+
+<div class=ex>
+<a name="L3_aiavg_n7t_197901"></a>
+<a href="Data/asc/L3_aiavg_n7t_197901.txt">L3_aiavg_n7t_197901.txt</a>
+- a file with a mix of text, integers, and floats and no
+delimiters<p>
+
+This file
+(<a href="ftp://toms.gsfc.nasa.gov/pub/nimbus7/">ftp://toms.gsfc.nasa.gov/pub/nimbus7/</a>)
+came from the Nimbus-7/TOMS instrument launched on October 1978. For
+more information, see
+the <a href="ftp://toms.gsfc.nasa.gov/pub/nimbus7/1README.txt">1README.txt</a>
+file in the same directory.
+<p>
+
+This is a complicated file to read given the lack of structure and
+delimiters. It took a combination of "do" loops
+and <a href="../Document/Functions/Built-in/str_get_cols.html"><strong>str_get_cols</strong></a> to parse the data.
+<p>
+
+The <a href="Scripts/L3_read.html">L3_read.ncl</a> reads in all the
+values, and optionally writes them to a NetCDF and/or generates a
+contour plot.
+
+</div>
+
+<div class=ex>
+<a name="NCDC.Central_Iowa.1895-2016"></a>
+<a href="Data/asc/NCDC.Central_Iowa.1895-2016.txt">NCDC.Central_Iowa.1895-2016.txt</a>
+- a file with a mix of text, integers, and floats and no delimiters.
+This file was downloaded from the National Centers for Environmental Information (NCEI)
+which was previously known as the National Climatic Data Center (NCDC). Specifically,  
+this file was <a href="https://www7.ncdc.noaa.gov/CDO">downloaded</a> via the 
+<a href="https://www7.ncdc.noaa.gov/CDO/CDODivisionalSelect.jsp">
+<b>Climate data division selection tool</b></a>.
+<p>
+The <a href="Scripts/read_NCDC_Central_Iowa.html">read_NCDC_Central_Iowa.ncl</a> reads in all the
+values. Specific variables are extracted for clarity..
+</div>
+
+<div class=ex>
+<a name="asc4"></a>
+
+<a href="Data/asc/asc4.txt">asc4.txt</a> - a file with some header and
+footer lines, and a mix of numeric data. The headers contain some
+numbers, and some of the numeric data contain commas. The columns
+are separated by tabs.
+<p>
+
+See what happens when you read this data using
+<a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a> and the special -1 value:
+
+<p>
+
+<pre>
+  data = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>("asc4.txt",-1,"float")
+  print(data)
+</pre>
+
+Notice that the number "15" in the header becomes the first data
+value read in. The number "2008" from "October 2008" becomes the
+second value, and so on. Also notice what happens to values
+with commas, like "1,321". This becomes two separate numbers,
+"1" and "321".
+<p>
+
+In <a href="../prev_releases.html#5.1.1">version 5.1.1</a>, 
+we added a suite of string functions that make reading this
+file much easier. You can use <a href="../Document/Functions/Built-in/str_sub_str.html"><strong>str_sub_str</strong></a>
+to replace the commas with an empty string,
+and <a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a> to read the desired fields,
+using a <tab> as the delimiter.
+
+<p>
+
+<pre>
+;;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"; This library is automatically loaded
+                                                             ; from NCL V6.2.0 onward.
+                                                             ; No need for user to explicitly load.
+begin
+;
+; Read population data into an array of strings, removing the 
+; first 4 lines and the last 2 lines (header and footer).
+;
+  data = <a href="../Document/Functions/Contributed/readAsciiTable.html"><strong>readAsciiTable</strong></a>("asc4.txt",1,"string",(/4,2/))
+
+; Replace commas with an empty string.
+  data = <a href="../Document/Functions/Built-in/str_sub_str.html"><strong>str_sub_str</strong></a>(data,",","")
+
+  country    = <a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a>(data,1,"	")
+  population = <a href="../Document/Functions/Built-in/stringtointeger.html"><strong>stringtointeger</strong></a>(<a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a>(data,2,"	"))
+  percentage = <a href="../Document/Functions/Built-in/stringtofloat.html"><strong>stringtofloat</strong></a>(<a href="../Document/Functions/Built-in/str_get_field.html"><strong>str_get_field</strong></a>(data,3,"	"))
+
+  <a href="../Document/Functions/Built-in/print.html"><strong>print</strong></a>(country + ": population: " + population + " (" + percentage + "%)")
+end
+
+</pre>
+<p>
+
+Before V5.1.1, it is not trivial to read this file. You have to first
+remove the commas, write a new data file, and then you can read this
+data easily with <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>.  Download the <a
+href="Scripts/read_asc4.html">read_asc4.ncl</a> script for an example
+of how to accomplish this.
+
+</div>
+
+<div class=ex>
+<a name="asc5"></a>
+
+<a href="Data/asc/asc5.txt">asc5.txt</a> - a data file where the first
+row contains the name of each field separated by a delimiter, and the
+rest of the file contains the values of each field separated by the
+same delimiter.
+<p>
+
+Download the <a HREF="Scripts/ascii_delim.html">ascii_delim.ncl</A>
+script to read in the "asc5.txt" and write it out to a netCDF file,
+using the field names as variable names on the netCDF file.
+<p>
+
+The script is rather lengthy; this is because it requires string
+parsing which is not one of NCL's strong suits. Also, there's a bit of
+checking involved to allow multiple types to be read in.
+<p>
+
+In order to write fields to a netCDF file, the netCDF field
+(variable) names cannot contain any tabs or spaces. Hence this script
+removes white spaces from the beginning and end of any field names and
+converts other white space to underscores ('_').  String or character
+values for the fields themselves are not modified.
+<p>
+
+Note: it is not generally recommended to read in complex ASCII files
+with NCL, but this example shows that it can be done.
+<p>
+
+If you want to use this script for your own purposes, you will need to
+modify the script to indicate 1) the input ASCII file name, 2) the
+number of fields, 3) the delimiter, 4) the type of each field,
+and 5) whether the field contains missing values.
+<p>
+
+To modify this script for your own data file, first search for the
+lines:
+
+<p>
+
+<PRE>
+;============================================================
+; Main code
+;============================================================
+</PRE>
+
+The lines you need to modify follow shortly:
+
+<p>
+
+<PRE>
+  filename  = "asc5.txt"                ; ASCII file to read.
+  nfields   = 6                         ; # of fields
+  delimiter = ","                       ; field delimiter
+  var_types      = new(nfields,string)
+  var_msg        = new(nfields,string)
+  var_strlens    = new(nfields,integer)   ; var to hold string lengths,
+                                          ; just in case.
+  .
+  .
+  .
+  var_msg        = ""              ; Default to no missing
+  var_msg(3)     = "-999"          ; Corresponds to field #4
+  var_types      = "integer"       ; Default to integer
+  var_types(1:2) = "float"         ; Second and third fields
+  var_types(4)   = "character"     ; Corresponds to field #5
+</PRE>
+
+Change "var_types" to whatever the types of your fields are, and
+"var_msg" to what the missing value should be (an empty string
+indicates no missing value).
+<p>
+
+The above code is defaulting all variable types to "integer", and then
+changing the 2nd and 3rd fields to type "float" and the fifth field to
+type "character" (which in this case is being used as a character
+array). The only field that will contain a missing value
+is the fourth field.
+<p>
+
+The allowable variable types are "integer", "float", "double",
+"string", or "character". Note that if you read in a variable as a
+string, it won't get written to the netCDF file because only character
+arrays can be written to a netCDF file.
+
+</div>
+
+<div class=ex>
+<a name="asc6"></a>
+
+<a href="Data/asc/asc6.txt">asc6.txt</a> - a data file with 
+a header, and three columns of floating point data (lat, lon, temp).
+<p>
+
+The temperature data on this file is dimensioned nlat x nlon (89 x
+240), and has a lat,lon value for each data value. The lat and lon
+data on this file are repetitious. That is, for each of the nlat (89)
+latitude values, you have the same nlon (240) longitude values. Hence
+you have 2130 rows of data, but lat and lon values are repeated.
+<p>
+
+Download the <a href="Scripts/read_asc6.html">read_asc6.ncl</a> script
+for an example of how to read this file, discard the repetitious data,
+and create a variable "temp2D" with one-dimensional latitude and
+longitude coordinate arrays.
+<p>
+
+Here's a quick look at the part of the code that reads in the data:
+
+<p>
+
+<pre>
+  nlat   =  89
+  nlon   = 240
+  data   = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>("asc6.txt",(/nlat*nlon,3/),"float")  
+  lat1d  = data(::nlon,0)
+  lon1d  = data(0:nlon-1,1)
+  temp1D = data(:,2)                      ; 1st create a 1d array
+  temp2D = <a href="../Document/Functions/Built-in/onedtond.html"><strong>onedtond</strong></a>(temp1D,(/nlat,nlon/)) ; convert 1D array to a 2D array
+</pre>
+
+</div>
+
+<div class=ex>
+<a name="asc7"></a>
+
+<b>How to read multiple ASCII files into one variable in NCL</b>.
+This example assumes the files contain the same number of columns,
+but not necessarily the same number of rows.
+<p>
+
+<pre>
+    dasc = "./"         ; input directory for ascii files
+    fasc = "2009*asc"   ; a unique identifier for files
+  ;;fasc = "*asc"
+
+    DASC = "./"         ; output dir
+    FASC = "BIG.asc"    ; output file name
+
+    <a href="../Document/Functions/Built-in/system.html"><strong>system</strong></a> ("/bin/rm -f "+DASC+FASC)   ; rm any pre-existing file
+
+; Use UNIX "cat" to concatenate the files into one file.
+    <a href="../Document/Functions/Built-in/system.html"><strong>system</strong></a> ("cd "+ dasc+" ; cat "+fasc+" > "+DASC+FASC)
+
+; You can now read the file via "asciiread".
+    nrows = <a href="../Document/Functions/Contributed/numAsciiRow.html"><strong>numAsciiRow</strong></a>(DASC+FASC)   ; contributed.ncl
+    ncols = <a href="../Document/Functions/Contributed/numAsciiCol.html"><strong>numAsciiCol</strong></a>(DASC+FASC)
+    data  = <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>(DASC+FASC,(/nrows,ncols/),"float")
+    print(data)
+
+  ;;system ("/bin/rm "+DASC+FASC)   ; rm the created file
+
+</pre>
+
+
+</div>
+
+<div class=ex>
+<a name="asc8"></a>
+
+How to read a very large (thousands of lines) ASCII file of numeric
+data that contains header and/or footer lines.
+<p>
+
+Ideally, you would
+use <a href="../Document/Functions/Contributed/readAsciiTable.html"><strong>readAsciiTable</strong></a> to read the
+data, stripping off the undesired headder and/or footer
+lines. However, this function can be very slow, as it has to read the
+data in as an array of strings (possibly multiple times) in order to
+parse it correctly.
+<p>
+
+The fastest way to read in numeric data is to
+use <a href="../Document/Functions/Built-in/asciiread.html"><strong>asciiread</strong></a>.  Since this function reads in every
+single value in a file, this means that any numbers that are in your
+header or footer lines will get read in as real values.
+
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/read_ascii.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:16:04 GMT -->
+</html>
+
+

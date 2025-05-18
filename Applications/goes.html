@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/goes.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:01:25 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+how to plot GOES data">
+<meta name="keywords" content="NCL, graphics, visualization, GOES">
+<TITLE>NCL: GOES</TITLE>
+</head>
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_data.html">Data sets</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+    <h1>NCL: GOES - Geostationary Operational Environmental Satellites</h1>
+
+    <div class=mainimage>
+    <img src="Images/goes_2_lg.png" align=left border=0></a>
+    </div>
+
+<div class=text>
+
+The National Weather Service (NWS) uses the GOES system for its United
+States weather monitoring and forecasting operations, and scientific
+researchers use the data to better understand land, atmosphere, ocean,
+and climate interactions.
+
+The GOES system uses geosynchronous satellites which—since the launch
+of SMS-1 in 1974—have been a basic element of U.S. weather monitoring
+and forecasting.
+<p>
+
+GOES satellites are currently available for operational use:
+<p>
+
+<pre>
+    1) GOES-12 is designated GOES-<b>S</b>outh, currently located at 60°W 
+    2) GOES-13 is designated GOES-<b>E</b>ast, currently located at 75°W. 
+       It provides most of the U.S. weather information.
+       In 12/2017 GOES-13 will be placed in a storage (graveyard) orbit at 60 degrees west longitude.
+    3) GOES 14 was placed in orbit on 7 July 2009, underwent Post-Launch Testing
+       until December 2009 and then was placed in on-orbit storage at 105° W.
+    4) GOES 15 is designated GOES-<b>W</b>est, currently located at 135°W over the Pacific Ocean.
+    5) GOES 16 replaces GOES-13 (12/2017) and is designated GOES-<b>E</b>ast (75.2°W).
+    6) GOES-17 will be designated GOES-<b>S</b> upon reaching geostationary orbit.
+</pre>
+<p>
+
+<b>FYI:</b> The GOES-East position was chosen primarily because it
+offers full coverage of the continental United States and provides
+optimal viewing of the states and cities in the plains, mid-west and
+east most impacted by severe weather events including Atlantic
+Hurricanes, thunderstorms and tornadoes, major winter storms, and
+flooding.
+
+</div>
+
+<div class=ex>
+<!--GOES_1-->
+<a name=ex1></a>
+<a href="Images/goes_1_lg.png">
+<img src="Images/goes_1_sm.png" align=left border=2></a>
+<a href="Scripts/goes_1.html">goes_1.ncl</a>: Plotting data from GOES-11.
+</div>
+
+<div class=ex>
+<!--GOES_2-->
+<a name=ex2></a>
+<a href="Images/goes_2_lg.png">
+<img src="Images/goes_2_sm.png" align=left border=2></a>
+<a href="Scripts/goes_2.html">goes_2.ncl</a>: 
+
+A GOES-12 plot. The script handles bogus values by assigning
+outliers to an _FillValue attribute. Since the lat/lon have
+missing values, you must set
+res@<a href="../Document/Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a> to
+"TriangularMesh".
+<p>
+
+The file has issues. Specifically, the lat and lon have
+bogus values:
+
+<pre>
+(0)    min(lat)=-79.7354   max(lat)=2.14329e+09  <===
+(0)    min(lon)=-156.169   max(lon)=2.14329e+09  <===
+
+%> ncdump -v lat,lon goes12.2008.328.024514.BAND_04.nc | less
+
+        float data(time, yc, xc) ;
+                data:long_name = "0-255 Brightness Temperature" ;
+                data:type = "VISR" ;
+                data:coordinates = "lon lat" ;
+        float lat(yc, xc) ;
+                lat:long_name = "lat" ;
+                lat:units = "degrees_north" ;
+        float lon(yc, xc) ;
+                lon:long_name = "lon" ;
+                lon:units = "degrees_east" ;
+</pre>
+
+There is no indication of a '_FillValue' or' missing_value' attribute
+for lat, lon or data.
+
+The data variable should have (we think):
+
+<pre>
+        data@_FillValue = 255 
+</pre>
+
+</div>
+
+<div class=ex>
+<!--GOES_3-->
+<a name=ex3></a>
+<a href="Images/goes_3_lg.png">
+<img src="Images/goes_3_sm.png" align=left border=2></a>
+<a href="Scripts/goes_3.html">goes_3.ncl</a>: 
+Plotting data from GOES-15t. The lat/lon data has the same issues as the GOES-12 plot
+above.
+<p>
+Additionally, the longitude values cross the dateline, so we fix
+these values by adding 360. Finally, to speed up plotting, we only
+plot every 10th value.
+</div>
+
+<div class=ex>
+<!--GOES_4-->
+<a name=ex4></a>
+<a href="Images/goes_4_lg.png">
+<img src="Images/goes_4_sm.png" align=left border=2></a>
+<a href="Scripts/goes_4.html">goes_4.ncl</a>: 
+Another GOES-12 plot for a very small region. 
+<p>
+</div>
+
+<div class=ex>
+<!--GOES_5-->
+<a name=ex5></a>
+<a href="Images/goes_5_lg.png">
+<img src="Images/goes_5_sm.png" align=left border=2></a>
+<a href="Scripts/goes_5.html">goes_5.ncl</a>: Plotting data from GOES-13.
+<p>
+</div>
+
+<div class=ex>
+<!--GOES_6-->
+<a name=ex6></a>
+<a href="Images/goes_6_lg.png">
+<img src="Images/goes_6_sm.png" align=left border=2></a>
+<a href="Scripts/goes_6.html">goes_6.ncl</a>: Plotting data from GOES-16. 
+This script requires <a href="Scripts/goesYXtoLatLon.html">goesYXtoLatLon.ncl</a>, which
+contains the function for calculating lat/lon values.
+<p>
+
+As with previous GOES data, the lat/lon can contain missing values, so
+you must plot this data setting res@<a href="../Document/Graphics/Resources/tr.html#trGridType"><em>trGridType</em></a>
+to "TriangularMesh".
+<p>
+
+The 2D data is 1500 x 2500. Out of curiosity, timimgs were inserted in
+the script to keep track of how long the script takes for various
+sections:
+
+<pre>
+  =====> CPU Elapsed Time: getting data: 1.06084 seconds <=====
+  =====> CPU Elapsed Time: graphics: 20.7621 seconds <=====
+  =====> CPU Elapsed Time: full script: 21.9095 seconds <=====</pre>
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/goes.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:01:28 GMT -->
+</html>
+

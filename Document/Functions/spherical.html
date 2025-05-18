@@ -1,0 +1,1085 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/spherical.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:26 GMT -->
+<head>
+<title>NCL Function Documentation: Spherical harmonic routines</title>
+</head>
+<body>
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="index.html" class="subitem">Category Listing</a></li>
+						<li><a href="list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+
+			      <div id="general_main">
+
+<h1>Spherical harmonic routines</h1>
+
+<table cellspacing=4 cellpadding=10 width=100% border=1>
+
+<!--dv2uvF-->
+<tr>
+<td valign=top>
+<a href="Built-in/dv2uvF-1.html">
+dv2uvF</a></td>
+<td>
+Computes the divergent (irrotational) wind components for a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--dv2uvf-->
+<tr>
+<td valign=top>
+<a href="Built-in/dv2uvf.html">
+dv2uvf</a></td>
+<td>
+Computes the divergent (irrotational) wind components for a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--dv2uvF_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dv2uvF_Wrap.html">
+dv2uvF_Wrap</a></td>
+<td>
+Computes the divergent (irrotational) wind components for a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> via spherical harmonics and retains metadata.
+</td>
+</tr>
+<!--dv2uvG-->
+<tr>
+<td valign=top>
+<a href="Built-in/dv2uvG-1.html">
+dv2uvG</a></td>
+<td>
+Computes the divergent (irrotational) wind components for a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--dv2uvg-->
+<tr>
+<td valign=top>
+<a href="Built-in/dv2uvg.html">
+dv2uvg</a></td>
+<td>
+Computes the divergent (irrotational) wind components for a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--dv2uvG_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/dv2uvG_Wrap.html">
+dv2uvG_Wrap</a></td>
+<td>
+Computes the divergent (irrotational) wind components for a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> via spherical harmonics and retains metadata.
+</td>
+</tr>
+<!--exp_tapersh-->
+<tr>
+<td valign=top>
+<a href="Built-in/exp_tapersh.html">
+exp_tapersh</a></td>
+<td>
+Performs tapering (filtering) of the spherical harmonic coefficients.
+</td>
+</tr>
+<!--exp_tapersh_wgts-->
+<tr>
+<td valign=top>
+<a href="Built-in/exp_tapersh_wgts.html">
+exp_tapersh_wgts</a></td>
+<td>
+Calculates weights which can be used to perform tapering (filtering) of spherical harmonic coefficients.
+</td>
+</tr>
+<!--exp_tapershC-->
+<tr>
+<td valign=top>
+<a href="Built-in/exp_tapershC.html">
+exp_tapershC</a></td>
+<td>
+Performs tapering (filtering) of the spherical harmonic coefficients.
+</td>
+</tr>
+<!--get_sphere_radius-->
+<tr>
+<td valign=top>
+<a href="Built-in/get_sphere_radius.html">
+get_sphere_radius</a></td>
+<td>
+Retrieves the radius of a sphere used in spherical harmonic routines.
+</td>
+</tr>
+<!--gradsf-->
+<tr>
+<td valign=top>
+<a href="Built-in/gradsf.html">
+gradsf</a></td>
+<td>
+Computes the gradient of an array that is on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> using spherical harmonics.
+</td>
+</tr>
+<!--gradsg-->
+<tr>
+<td valign=top>
+<a href="Built-in/gradsg.html">
+gradsg</a></td>
+<td>
+Computes the gradient of an array that is on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> using spherical  harmonics.
+</td>
+</tr>
+<!--igradsf-->
+<tr>
+<td valign=top>
+<a href="Built-in/igradsf.html">
+igradsf</a></td>
+<td>
+Computes a scalar array from its gradient components on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> using spherical harmonics.
+</td>
+</tr>
+<!--igradsF-->
+<tr>
+<td valign=top>
+<a href="Built-in/igradsF-1.html">
+igradsF</a></td>
+<td>
+Computes a scalar array from its gradient components on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> using spherical harmonics.
+</td>
+</tr>
+<!--igradsg-->
+<tr>
+<td valign=top>
+<a href="Built-in/igradsg.html">
+igradsg</a></td>
+<td>
+Computes a scalar array from its gradient components on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> using spherical harmonics.
+</td>
+</tr>
+<!--igradsG-->
+<tr>
+<td valign=top>
+<a href="Built-in/igradsG-1.html">
+igradsG</a></td>
+<td>
+Computes a scalar array from its gradient components on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> using spherical harmonics.
+</td>
+</tr>
+<!--ilapsf-->
+<tr>
+<td valign=top>
+<a href="Built-in/ilapsf.html">
+ilapsf</a></td>
+<td>
+Inverts the Laplacian (on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>) using spherical harmonics.
+</td>
+</tr>
+<!--ilapsF-->
+<tr>
+<td valign=top>
+<a href="Built-in/ilapsF-1.html">
+ilapsF</a></td>
+<td>
+Inverts the Laplacian (on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>) using spherical harmonics.
+</td>
+</tr>
+<!--ilapsF_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/ilapsF_Wrap.html">
+ilapsF_Wrap</a></td>
+<td>
+Inverts the Laplacian (on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>) using spherical harmonics and retains metadata.
+</td>
+</tr>
+<!--ilapsg-->
+<tr>
+<td valign=top>
+<a href="Built-in/ilapsg.html">
+ilapsg</a></td>
+<td>
+Inverts the Laplacian (on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>) using spherical harmonics.
+</td>
+</tr>
+<!--ilapsG-->
+<tr>
+<td valign=top>
+<a href="Built-in/ilapsG-1.html">
+ilapsG</a></td>
+<td>
+Inverts the Laplacian (on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>) using spherical harmonics.
+</td>
+</tr>
+<!--ilapsG_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/ilapsG_Wrap.html">
+ilapsG_Wrap</a></td>
+<td>
+Inverts the Laplacian (on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>) using spherical harmonics and retains metadata.
+</td>
+</tr>
+<!--ilapvf-->
+<tr>
+<td valign=top>
+<a href="Built-in/ilapvf.html">
+ilapvf</a></td>
+<td>
+Inverts the vector Laplacian (on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>) using spherical harmonics.
+</td>
+</tr>
+<!--ilapvg-->
+<tr>
+<td valign=top>
+<a href="Built-in/ilapvg.html">
+ilapvg</a></td>
+<td>
+Inverts the vector Laplacian (on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>) using spherical harmonics.
+</td>
+</tr>
+<!--lapsF-->
+<tr>
+<td valign=top>
+<a href="Built-in/lapsF-1.html">
+lapsF</a></td>
+<td>
+Computes the Laplacian using spherical harmonics, given a scalar z on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--lapsf-->
+<tr>
+<td valign=top>
+<a href="Built-in/lapsf.html">
+lapsf</a></td>
+<td>
+Computes the Laplacian using spherical harmonics, given a scalar z on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--lapsG-->
+<tr>
+<td valign=top>
+<a href="Built-in/lapsG-1.html">
+lapsG</a></td>
+<td>
+Computes the Laplacian using spherical harmonics, given a scalar z on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--lapsg-->
+<tr>
+<td valign=top>
+<a href="Built-in/lapsg.html">
+lapsg</a></td>
+<td>
+Computes the Laplacian using spherical harmonics, given a scalar z on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--lapvf-->
+<tr>
+<td valign=top>
+<a href="Built-in/lapvf.html">
+lapvf</a></td>
+<td>
+Computes the vector Laplacian using spherical harmonics, given a vector quantity (u,v) on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--lapvg-->
+<tr>
+<td valign=top>
+<a href="Built-in/lapvg.html">
+lapvg</a></td>
+<td>
+Computes the vector Laplacian using spherical harmonics, given a vector quantity (u,v) on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--lderuvf-->
+<tr>
+<td valign=top>
+<a href="Built-in/lderuvf.html">
+lderuvf</a></td>
+<td>
+Computes the latitudinal derivatives using spherical harmonics, given vector components (u,v) on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--lderuvg-->
+<tr>
+<td valign=top>
+<a href="Built-in/lderuvg.html">
+lderuvg</a></td>
+<td>
+Computes the latitudinal derivatives using spherical harmonics, given vector components (u,v) on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--rhomb_trunc-->
+<tr>
+<td valign=top>
+<a href="Built-in/rhomb_trunc.html">
+rhomb_trunc</a></td>
+<td>
+Performs rhomboidal truncation on spherical harmonic coefficients.
+</td>
+</tr>
+<!--rhomb_trunC-->
+<tr>
+<td valign=top>
+<a href="Built-in/rhomb_trunC-1.html">
+rhomb_trunC</a></td>
+<td>
+Performs rhomboidal truncation on spherical harmonic coefficients.
+</td>
+</tr>
+<!--set_sphere_radius-->
+<tr>
+<td valign=top>
+<a href="Built-in/set_sphere_radius.html">
+set_sphere_radius</a></td>
+<td>
+Sets the radius of a sphere used in spherical harmonic routines.
+</td>
+</tr>
+<!--sfvp2uvf-->
+<tr>
+<td valign=top>
+<a href="Built-in/sfvp2uvf.html">
+sfvp2uvf</a></td>
+<td>
+Computes the wind components given stream function and velocity potential (on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>) via spherical harmonics.
+</td>
+</tr>
+<!--sfvp2uvg-->
+<tr>
+<td valign=top>
+<a href="Built-in/sfvp2uvg.html">
+sfvp2uvg</a></td>
+<td>
+Computes the wind components given stream function and velocity potential (on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>) via spherical harmonics.
+</td>
+</tr>
+<!--shaeC-->
+<tr>
+<td valign=top>
+<a href="Built-in/shaeC-1.html">
+shaeC</a></td>
+<td>
+Computes spherical harmonic analysis of a scalar field on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--shaec-->
+<tr>
+<td valign=top>
+<a href="Built-in/shaec.html">
+shaec</a></td>
+<td>
+Computes spherical harmonic analysis of a scalar field on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--shagC-->
+<tr>
+<td valign=top>
+<a href="Built-in/shagC-1.html">
+shagC</a></td>
+<td>
+Computes spherical harmonic analysis of a scalar field on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--shagc-->
+<tr>
+<td valign=top>
+<a href="Built-in/shagc.html">
+shagc</a></td>
+<td>
+Computes spherical harmonic analysis of a scalar field on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--shsec-->
+<tr>
+<td valign=top>
+<a href="Built-in/shsec.html">
+shsec</a></td>
+<td>
+Computes spherical harmonic synthesis of a scalar quantity on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--shseC-->
+<tr>
+<td valign=top>
+<a href="Built-in/shseC-1.html">
+shseC</a></td>
+<td>
+Computes the spherical harmonic synthesis of a scalar quantity on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--shsgc-->
+<tr>
+<td valign=top>
+<a href="Built-in/shsgc.html">
+shsgc</a></td>
+<td>
+Computes spherical harmonic synthesis of a scalar quantity on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--shsgC-->
+<tr>
+<td valign=top>
+<a href="Built-in/shsgC-1.html">
+shsgC</a></td>
+<td>
+Computes the spherical harmonic synthesis of a scalar quantity on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--shsgc_R42-->
+<tr>
+<td valign=top>
+<a href="Built-in/shsgc_R42.html">
+shsgc_R42</a></td>
+<td>
+Computes spherical harmonic synthesis of a scalar quantity via rhomboidally truncated (R42) spherical harmonic coefficients onto a  (108x128) <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--shsgc_R42_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/shsgc_R42_Wrap.html">
+shsgc_R42_Wrap</a></td>
+<td>
+Computes spherical harmonic synthesis of a scalar quantity via rhomboidally truncated (R42) spherical harmonic coefficients onto a  (108x128) <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>. (creates metadata).
+</td>
+</tr>
+<!--tri_trunC-->
+<tr>
+<td valign=top>
+<a href="Built-in/tri_trunC-1.html">
+tri_trunC</a></td>
+<td>
+Performs triangular truncation on spherical harmonic coefficients.
+</td>
+</tr>
+<!--tri_trunc-->
+<tr>
+<td valign=top>
+<a href="Built-in/tri_trunc.html">
+tri_trunc</a></td>
+<td>
+Performs triangular truncation on spherical harmonic coefficients.
+</td>
+</tr>
+<!--uv2dvf-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2dvf.html">
+uv2dvf</a></td>
+<td>
+Computes the divergence using spherical harmonics given the u and v wind components on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--uv2dvF-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2dvF-1.html">
+uv2dvF</a></td>
+<td>
+Computes the divergence using spherical harmonics given the u and v wind components on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--uv2dvF_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/uv2dvF_Wrap.html">
+uv2dvF_Wrap</a></td>
+<td>
+Computes the divergence using spherical harmonics given the u and v wind components on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> (retains metadata).
+</td>
+</tr>
+<!--uv2dvg-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2dvg.html">
+uv2dvg</a></td>
+<td>
+Computes the divergence using spherical harmonics given the u and v wind components on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--uv2dvG-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2dvG-1.html">
+uv2dvG</a></td>
+<td>
+Computes the divergence using spherical harmonics given the u and v wind components on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--uv2dvG_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/uv2dvG_Wrap.html">
+uv2dvG_Wrap</a></td>
+<td>
+Computes the divergence using spherical harmonics given the u and v wind components on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> (retains metadata).
+</td>
+</tr>
+<!--uv2sfvpF-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2sfvpF-1.html">
+uv2sfvpF</a></td>
+<td>
+Computes the stream function and velocity potential via spherical harmonics given u and v on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--uv2sfvpf-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2sfvpf.html">
+uv2sfvpf</a></td>
+<td>
+Computes the stream function and velocity potential via spherical harmonics given u and v on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--uv2sfvpG-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2sfvpG-1.html">
+uv2sfvpG</a></td>
+<td>
+Computes the stream function and velocity potential via spherical harmonics given u and v on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--uv2sfvpg-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2sfvpg.html">
+uv2sfvpg</a></td>
+<td>
+Computes the stream function and velocity potential via spherical harmonics given u and v on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--uv2vrdvF-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2vrdvF-1.html">
+uv2vrdvF</a></td>
+<td>
+Computes the vorticity and divergence via spherical harmonics, given the u and v wind components on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--uv2vrdvf-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2vrdvf.html">
+uv2vrdvf</a></td>
+<td>
+Computes the vorticity and divergence via spherical harmonics, given the u and v wind components on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--uv2vrdvG-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2vrdvG-1.html">
+uv2vrdvG</a></td>
+<td>
+Computes the vorticity and divergence via spherical harmonics, given the u and v wind components on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--uv2vrdvg-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2vrdvg.html">
+uv2vrdvg</a></td>
+<td>
+Computes the vorticity and divergence via spherical harmonics, given the u and v wind components on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--uv2vrF-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2vrF-1.html">
+uv2vrF</a></td>
+<td>
+Computes the vorticity via spherical harmonics, given the u and v wind components on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--uv2vrf-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2vrf.html">
+uv2vrf</a></td>
+<td>
+Computes the vorticity via spherical harmonics, given the u and v wind components on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--uv2vrF_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/uv2vrF_Wrap.html">
+uv2vrF_Wrap</a></td>
+<td>
+Computes the vorticity via spherical harmonics, given the u and v wind components on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> (retains metadata).
+</td>
+</tr>
+<!--uv2vrG-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2vrG-1.html">
+uv2vrG</a></td>
+<td>
+Computes the vorticity via spherical harmonics, given the u and v wind components on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--uv2vrg-->
+<tr>
+<td valign=top>
+<a href="Built-in/uv2vrg.html">
+uv2vrg</a></td>
+<td>
+Computes the vorticity via spherical harmonics, given the u and v wind components on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--uv2vrG_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/uv2vrG_Wrap.html">
+uv2vrG_Wrap</a></td>
+<td>
+Computes the vorticity via spherical harmonics, given the u and v wind components on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> (retains metadata).
+</td>
+</tr>
+<!--vhaeC-->
+<tr>
+<td valign=top>
+<a href="Built-in/vhaeC-1.html">
+vhaeC</a></td>
+<td>
+Computes vector spherical harmonic analysis of vector fields on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--vhaec-->
+<tr>
+<td valign=top>
+<a href="Built-in/vhaec.html">
+vhaec</a></td>
+<td>
+Computes vector spherical harmonic analysis of vector fields on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--vhagC-->
+<tr>
+<td valign=top>
+<a href="Built-in/vhagC-1.html">
+vhagC</a></td>
+<td>
+Computes vector spherical harmonic analysis of vector fields on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--vhagc-->
+<tr>
+<td valign=top>
+<a href="Built-in/vhagc.html">
+vhagc</a></td>
+<td>
+Computes vector spherical harmonic analysis of vector fields on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--vhseC-->
+<tr>
+<td valign=top>
+<a href="Built-in/vhseC-1.html">
+vhseC</a></td>
+<td>
+Computes vector spherical harmonic syntheses of vector fields on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--vhsec-->
+<tr>
+<td valign=top>
+<a href="Built-in/vhsec.html">
+vhsec</a></td>
+<td>
+Computes vector spherical harmonic syntheses of vector fields on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--vhsgc-->
+<tr>
+<td valign=top>
+<a href="Built-in/vhsgc.html">
+vhsgc</a></td>
+<td>
+Computes vector spherical harmonic syntheses of vector fields on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--vhsgC-->
+<tr>
+<td valign=top>
+<a href="Built-in/vhsgC-1.html">
+vhsgC</a></td>
+<td>
+Computes vector spherical harmonic syntheses of vector fields on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> via spherical harmonics.
+</td>
+</tr>
+<!--vr2uvf-->
+<tr>
+<td valign=top>
+<a href="Built-in/vr2uvf.html">
+vr2uvf</a></td>
+<td>
+Computes the rotational wind components via spherical harmonics, given an array containing relative vorticity on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--vr2uvF-->
+<tr>
+<td valign=top>
+<a href="Built-in/vr2uvF-1.html">
+vr2uvF</a></td>
+<td>
+Computes the rotational wind components via spherical harmonics, given an array containing relative vorticity on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--vr2uvF_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/vr2uvF_Wrap.html">
+vr2uvF_Wrap</a></td>
+<td>
+Computes the rotational wind components via spherical harmonics, given an array containing relative vorticity on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a> (retains metadata).
+</td>
+</tr>
+<!--vr2uvg-->
+<tr>
+<td valign=top>
+<a href="Built-in/vr2uvg.html">
+vr2uvg</a></td>
+<td>
+Computes the rotational wind components via spherical harmonics, given an array containing relative vorticity on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--vr2uvG-->
+<tr>
+<td valign=top>
+<a href="Built-in/vr2uvG-1.html">
+vr2uvG</a></td>
+<td>
+Computes the rotational wind components via spherical harmonics, given an array containing relative vorticity on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--vr2uvG_Wrap-->
+<tr>
+<td valign=top>
+<a href="Contributed/vr2uvG_Wrap.html">
+vr2uvG_Wrap</a></td>
+<td>
+Computes the rotational wind components via spherical harmonics, given an array containing relative vorticity on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a> (retains metadata).
+</td>
+</tr>
+<!--vrdv2uvf-->
+<tr>
+<td valign=top>
+<a href="Built-in/vrdv2uvf.html">
+vrdv2uvf</a></td>
+<td>
+Computes the wind components via spherical harmonics, given vorticity and divergence on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--vrdv2uvF-->
+<tr>
+<td valign=top>
+<a href="Built-in/vrdv2uvF-1.html">
+vrdv2uvF</a></td>
+<td>
+Computes the wind components via spherical harmonics, given vorticity and divergence on a <a href="sphpk_grids.html#FixedGrids">fixed grid</a>.
+</td>
+</tr>
+<!--vrdv2uvg-->
+<tr>
+<td valign=top>
+<a href="Built-in/vrdv2uvg.html">
+vrdv2uvg</a></td>
+<td>
+Computes the wind components via spherical harmonics, given vorticity and divergence on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+<!--vrdv2uvG-->
+<tr>
+<td valign=top>
+<a href="Built-in/vrdv2uvG-1.html">
+vrdv2uvG</a></td>
+<td>
+Computes the wind components via spherical harmonics, given vorticity and divergence on a <a href="sphpk_grids.html#GaussianGrids">gaussian grid</a>.
+</td>
+</tr>
+
+</table><p>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/spherical.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:26 GMT -->
+</html>

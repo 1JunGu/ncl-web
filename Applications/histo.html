@@ -1,0 +1,866 @@
+<HTML>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/histo.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:58:34 GMT -->
+<Head>
+<meta name="description" content="NCL graphics examples page. Describes
+histogram template and its modification.">
+<meta name="keywords" content="NCL, graphics, visualization, histogram">
+</head>
+<TITLE>NCL Graphics: Histograms</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_special.html">Special plots</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+<br>
+<h1>NCL Graphics: Histograms</h1>
+
+<div class=mainimage>
+<img src="Images/histo_3_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+Histograms are bar plots, where each bar is a count of how many values
+of your data either fall in a range of values, or are exactly equal to a set
+of values. We refer to this as "binning" the data.
+<p>
+
+If you simply want to draw bars of your data and don't need to bin
+the data first, then see the <a href="bar.html">bar charts</a>
+example page. You may also want to check out the 
+<a href="binning.html">binning satellite and observational data</a>
+examples page, which talks about summing and averaging binned data.
+<p>
+
+<a href="../Document/Graphics/Interfaces/gsn_histogram.html"><strong>gsn_histogram</strong></a> is the function for
+creating histograms. The following options are specific to this
+function:
+<p>
+
+<ul>
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnHistogramBinIntervals"><em>gsnHistogramBinIntervals</em></a> (same as 
+<a href="../Document/Graphics/Resources/gsn.html#gsnHistogramClassIntervals"><em>gsnHistogramClassIntervals</em></a>) - array of
+bins to use for your data. If you don't set this, NCL will choose
+roughly 10 equally-spaced bins for binning your data.
+<p>
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnHistogramNumberOfBins"><em>gsnHistogramNumberOfBins</em></a> - number of
+bins to use. NCL will look at the min/max of your data and create an
+array of equally-spaced bins of this length. The default is
+approximately 10.
+<p>
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnHistogramDiscreteBinValues"><em>gsnHistogramDiscreteBinValues</em></a> (same
+as <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramDiscreteClassValues"><em>gsnHistogramDiscreteClassValues</em></a>) -
+instead of binning your data by ranges, this option allows you to bin
+your data by exact values.
+<p>
+
+<li><a href="../Document/Graphics/Resources/gsn.html#gsnHistogramBinWidth"><em>gsnHistogramBinWidth</em></a> - instead of
+indicating the number of bins or the ranges, you can specify a bin
+width. Depending on
+how <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramSelectNiceIntervals"><em>gsnHistogramSelectNiceIntervals</em></a> is
+set, you will either get bins of exactly this size, or approximately
+this size.
+<p>
+
+There are many other gsnHistogram<i>XXXX</i> resources.  See the
+<a href="../Document/Graphics/Resources/gsn.html">gsn resources</a>
+page for a full list.
+
+</ul>
+
+</div>
+
+<div class=ex>
+<!--Histogram_1-->
+<a name=ex1></a>
+<a href="Images/histo_1_1_lg.png">
+<img src="Images/histo_1_1_sm.png" align=left border=3></a>
+<a href="Images/histo_1_2_lg.png">
+<img src="Images/histo_1_2_sm.png" align=left border=3></a>
+<a href="Scripts/histo_1.html">histo_1.ncl</a>: 
+
+The first plot shows how to draw a default histogram, where we let NCL
+pick the bin intervals to use.
+<p>
+
+The dummy Y values are equal to:
+<p>
+
+<pre>
+  y = (/3.1, 0.5, 3.8, 3.4, 2.1, 1.5, 2.6, 2.3, 3.6, 1.7/)
+</pre>
+<p>
+
+and the intervals NCL chose were:
+
+<pre>
+   = (/0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2, 3.6, 4.0/)
+</pre>
+<p>
+
+Given these intervals and the ten y values, the bins represent:
+<p>
+
+<pre>
+  1 y value(s)  >= 0.4 and <  0.8   <i>(0.5)</i>
+  0 y value(s)  >= 0.8 and <  1.2   <i>()</i>
+  1 y value(s)  >= 1.2 and <  1.6   <i>(1.5)</i>
+  1 y value(s)  >= 1.6 and <  2.0   <i>(1.7)</i>
+  2 y value(s)  >= 2.0 and <  2.4   <i>(2.1,2.3)</i>
+  1 y value(s)  >= 2.4 and <  2.8   <i>(2.6)</i>
+  1 y value(s)  >= 2.8 and <  3.2   <i>(3.1)</i>
+  1 y value(s)  >= 3.2 and <  3.6   <i>(3.4)</i>
+  2 y value(s)  >= 3.6 and <= 4.0   <i>(3.6,3.8)</i>
+</pre>
+
+For the second plot, the bin intervals are manually set to (/0,1,2,3,4/)
+The plot represents:
+<p>
+
+<pre>
+  1 y value(s)  >= 0.0 and <  1.0   <i>(0.5)</i>
+  2 y value(s)  >= 1.0 and <  2.0   <i>(1.5,1.7)</i>
+  3 y value(s)  >= 2.0 and <  3.0   <i>(2.1,2.3,2.6)</i>
+  4 y value(s)  >= 3.0 and <= 4.0   <i>(3.1,3.4,3.6,3.8)</i>
+</pre>
+<p>
+
+</div>
+
+<div class=ex>
+<!--Histogram_2-->
+<a name=ex2></a>
+<a href="Images/histo_2_lg.png">
+<img src="Images/histo_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_2.html">histo_2.ncl</a>: Histograms can be
+panelled.
+<p>
+
+The leftmost two images
+use <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramNumberOfBins"><em>gsnHistogramNumberOfBins</em></a> to select
+the approximate number of bins. Note that you are getting less than
+the requested number of bins because NCL is trying to give you "nice"
+bin intervals. See example <a href="#ex4">histo_4.ncl</a> below for
+how to override this.
+<p>
+
+The rightmost image shows how to explicitly set the intervals using
+<a href="../Document/Graphics/Resources/gsn.html#gsnHistogramBinIntervals"><em>gsnHistogramBinIntervals</em></a>.
+</div>
+
+<div class=ex>
+<!--Histogram_3-->
+<a name=ex3></a>
+<a href="Images/histo_3_lg.png">
+<img src="Images/histo_3_sm.png" align=left border=3></a>
+
+<a href="Scripts/histo_3.html">histo_3.ncl</a>: 
+An example of using integer values for the discrete bin values.
+<p>
+
+By default, <a href="../Document/Graphics/Interfaces/gsn_histogram.html"><strong>gsn_histogram</strong></a> will bin
+your data into intervals. If you set <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramDiscreteBinValues"><em>gsnHistogramDiscreteBinValues</em></a>, then your data is
+assumed to already be "binned", and it just counts the number of
+values exactly equal to the mid points. The resource <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramDiscreteClassValues"><em>gsnHistogramDiscreteClassValues</em></a> behaves the same
+way.
+<p>
+
+In this example we used <a href="../Document/Functions/Built-in/ispan.html"><strong>ispan</strong></a> to create an integer
+array of bin values.
+<p>
+
+If you want to change the labels on the X axis, then you need to
+set <a href="../Document/Graphics/Resources/tm.html#tmXBLabels"><em>tmXBLabels</em></a> to the desired
+labels.  Note that in this example, only every other bar is labeled,
+so if you want to label every bar, you additionally need to set
+<a href="../Document/Graphics/Resources/tm.html#tmXBLabelStride"><em>tmXBLabelStride</em></a> to 1 (it is set internally to 2 in this case).
+
+</div>
+
+<div class=ex>
+<!--Histogram_4-->
+<a name=ex4></a>
+<a href="Images/histo_4_lg.png">
+<img src="Images/histo_4_sm.png" align=left border=3></a>
+<a href="Scripts/histo_4.html">histo_4.ncl</a>: 
+
+Overriding the default behavior to force the exact number of bins.
+This results in float labels.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnHistogramSelectNiceIntervals"><em>gsnHistogramSelectNiceIntervals</em></a> turns off
+the nice labels and allows the data to be binned in the exact number
+specified.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnHistogramComputePercentages"><em>gsnHistogramComputePercentages</em></a> = True,
+Then percentage values will be put on right axis.  This resource will
+include missing values in the calculation. If you do not want missing
+values included, then set <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramComputePercentagesNoMissing"><em>gsnHistogramComputePercentagesNoMissing</em></a> = True.
+If you would rather have a percent sign rather than "percent" label
+this axis, then set <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramPercentSign"><em>gsnHistogramPercentSign</em></a>= True.
+<p>
+
+<a href="../Document/Graphics/Resources/tm.html#tmXBLabelAngleF"><em>tmXBLabelAngleF</em></a> = 315., will rotate
+a tick mark label.
+
+</div>
+
+<div class=ex>
+<!--Histogram_5-->
+<a name=ex5></a>
+<a href="Images/histo_5_lg.png">
+<img src="Images/histo_5_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_5.html">histo_5.ncl</a>: Explicitly select the
+bin intervals.
+
+<p>
+<a href="../Document/Graphics/Resources/gsn.html#gsnHistogramClassIntervals"><em>gsnHistogramClassIntervals</em></a> allows the
+user to specify bin intervals. Note that with these different sized
+bins, the size of the histogram column remains the same by default.
+<p>
+
+If there is data outside the range of the bins you have chosen, they
+will not be counted. You can set <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramMinMaxBinsOn"><em>gsnHistogramMinMaxBinsOn</em></a> to get a bins that
+include all values that are greater than and less than the max and min
+bins you have selected.  This resource only works when <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramClassIntervals"><em>gsnHistogramClassIntervals</em></a> or <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramBinIntervals"><em>gsnHistogramBinIntervals</em></a> is also selected.
+</div>
+
+<div class=ex>
+<!--Histogram_6-->
+<a name=ex6></a>
+<a href="Images/histo_6_1_lg.png">
+<img src="Images/histo_6_1_sm.png" align=left border=2></a>
+<a href="Images/histo_6_2_lg.png">
+<img src="Images/histo_6_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_6.html">histo_6.ncl</a>: Compares two arrays.
+Both arrays are combined into a single array with the first dimension
+equal to 2.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnHistogramCompare"><em>gsnHistogramCompare</em></a>, will create two
+histograms, one set of bars drawn behind the other.
+<p>
+
+In the second frame, the colors for each bar are explicitly set with
+<a href="../Document/Graphics/Resources/gsn.html#gsnHistogramBarColors"><em>gsnHistogramBarColors</em></a>, a new
+resource only available in NCL V6.4.0 or later.
+<p>
+</div>
+
+<div class=ex>
+<!--Histogram_6a-->
+<a name=ex6a></a>
+<a href="Images/histo_6a_1_lg.png">
+<img src="Images/histo_6a_1_sm.png" align=left border=2></a>
+<a href="Images/histo_6a_2_lg.png">
+<img src="Images/histo_6a_2_sm.png" align=left border=2></a>
+<a href="Images/histo_6a_3_lg.png">
+<img src="Images/histo_6a_3_sm.png" align=left border=2></a>
+<a href="Images/histo_6a_4_lg.png">
+<img src="Images/histo_6a_4_sm.png" align=left border=2></a>
+<a href="Scripts/histo_6a.html">histo_6a.ncl</a>: This example
+uses the same data as the previous histo_6.ncl example, except
+it shows how to improve the look of a histogram by setting
+resources to increase the density of the fill patterns,
+increase the thickness of the fill pattern lines, and increase
+the thickness of the axis border and the tickmarks.
+<p>
+
+The histogram axes and filled bars are drawn internally by using calls
+to <a href="../Document/Graphics/Interfaces/gsn_csm_xy.html"><strong>gsn_csm_xy</strong></a> and
+<a href="../Document/Graphics/Interfaces/gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>, so by setting
+various <a href="../Document/HLUs/Classes/GraphicStyle.html">GraphicStyle</a>
+(gs<i>XXXX</i>)
+and <a href="../Document/HLUs/Classes/TickMark.html">TickMark</a>
+(tm<i>XXXX</i>) resources, this affects the look of the histogram
+bars. Here are the resources set in this example:
+<p>
+<pre>
+  <a href="../Document/Graphics/Resources/gs.html#gsFillScaleF"><em>gsFillScaleF</em></a>
+  <a href="../Document/Graphics/Resources/gs.html#gsEdgeThicknessF"><em>gsEdgeThicknessF</em></a>
+  <a href="../Document/Graphics/Resources/gs.html#gsFillLineThicknessF"><em>gsFillLineThicknessF</em></a>
+  <a href="../Document/Graphics/Resources/tm.html#tmBorderThicknessF"><em>tmBorderThicknessF</em></a>
+  <a href="../Document/Graphics/Resources/tm.html#tmXBMajorThicknessF"><em>tmXBMajorThicknessF</em></a>
+  <a href="../Document/Graphics/Resources/tm.html#tmYLMajorThicknessF"><em>tmYLMajorThicknessF</em></a>
+  <a href="../Document/Graphics/Resources/tm.html#tmXBMinorThicknessF"><em>tmXBMinorThicknessF</em></a>
+  <a href="../Document/Graphics/Resources/tm.html#tmYLMinorThicknessF"><em>tmYLMinorThicknessF</em></a>
+</pre>
+
+</div>
+
+<div class=ex>
+<!--Histogram_7-->
+<a name=ex7></a>
+<a href="Images/histo_7_lg.png">
+<img src="Images/histo_7_sm.png" align=left border=3></a>
+
+<a href="Scripts/histo_7.html">histo_7.ncl</a>: Demonstrates changing the
+color of the bins. 
+
+<p>
+<a href="../Document/Graphics/Resources/gs.html#gsFillColor"><em>gsFillColor</em></a> controls the color
+of the bins. If you set it equal to one color the entire histogram
+will be that color. If you set it to an array of colors it will cycle
+through that array and repeat if necessary.
+<p>
+
+<a href="../Document/Graphics/Resources/gs.html#gsFillIndex"><em>gsFillIndex</em></a> will change the fill
+pattern. Default is 0 or solid fill. There are many <a
+href="../Document/Graphics/fill_patterns.html">fill patterns</a> to
+choose from.  <a href="../Document/Graphics/Resources/gs.html#gsFillIndex"><em>gsFillIndex</em></a> will
+change the fill pattern. Default is 0 or solid fill.  There are many
+<a href="../Document/Graphics/fill_patterns.html">fill
+patterns</a> to choose from.
+
+</div>
+    
+<div class=ex>
+<!--Histogram_8-->
+<a name=ex8></a>
+<a href="Images/histo_8_lg.png">
+<img src="Images/histo_8_sm.png" align=left border=2></a>
+<a href="Scripts/histo_8.html">histo_8.ncl</a>: A horizontal histogram.
+<p>
+
+<a href="../Document/Graphics/Resources/gsn.html#gsnHistogramHorizontal"><em>gsnHistogramHorizontal</em></a> will draw a
+horizontal histogram.  </div>
+
+<div class=ex>
+<!--Histogram_9-->
+<a name=ex9></a>
+<a href="Images/histo_9_lg.png">
+<img src="Images/histo_9_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_9.html">histo_9.ncl</a>: A highly specialized
+plot that draws a histogram on top of a map.
+
+</div>
+
+<div class=ex>
+<!--Histogram_10-->
+<a name=ex10></a>
+<a href="Images/histo_10_lg.png">
+<img src="Images/histo_10_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_10.html">histo_10.ncl</a>: Demonstrates how to
+overlay multiple histograms on top of each other so that more than two
+histograms can be compared. If you only have two, see example 6.
+<p>
+
+First we set the color of the histograms to transparent using <a href="../Document/Graphics/Resources/gs.html#gsFillColor"><em>gsFillColor</em></a>, and then color the bin
+edges using <a href="../Document/Graphics/Resources/gs.html#gsEdgeColor"><em>gsEdgeColor</em></a>. With
+the various colors, you can distinguish the height of the various
+bins. The color of the last overlay will be the one on top .
+
+</div>
+
+<div class=ex>
+<!--Histogram_11-->
+<a name=ex11></a>
+<a href="Images/histo_11_1_lg.png">
+<img src="Images/histo_11_1_sm.png" align=left border=2></a>
+<a href="Images/histo_11_2_lg.png">
+<img src="Images/histo_11_2_sm.png" align=left border=2></a>
+<a href="Images/histo_11_3_lg.png">
+<img src="Images/histo_11_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_11.html">histo_11.ncl</a>: Demonstrates how to
+change the width of the histogram bars using the <a href="../Document/Graphics/Resources/gsn.html#gsnHistogramBarWidthPercent"><em>gsnHistogramBarWidthPercent</em></a> resource.
+
+</div>
+
+<div class=ex>
+<!--Histogram_12-->
+<a name=ex12></a>
+<a href="Images/histo_12_1_lg.png">
+<img src="Images/histo_12_1_sm.png" align=left border=2></a>
+<a href="Images/histo_12_2_lg.png">
+<img src="Images/histo_12_2_sm.png" align=left border=2></a>
+<a href="Images/histo_12_3_lg.png">
+<img src="Images/histo_12_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_12.html">histo_12.ncl</a>: Demonstrates how to
+add text at the top of each bar, using information returned from
+<a href="../Document/Graphics/Interfaces/gsn_histogram.html"><strong>gsn_histogram</strong></a>.
+<p>
+
+The third frame was added later, showing how to do a histogram
+comparison and lots of customization of tickmarks.
+
+</div>
+
+<div class=ex>
+<!--Histogram_13-->
+<a name=ex13></a>
+<a href="Images/histo_13_lg.png">
+<img src="Images/histo_13_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_13.html">histo_13.ncl</a>: The tickmarks on the
+bottom axis of a histogram are labelled by setting <a href="../Document/Graphics/Resources/tm.html#tmXBMode"><em>tmXBMode</em></a> to "Explicit", and setting <a href="../Document/Graphics/Resources/tm.html#tmXBValues"><em>tmXBValues</em></a> and <a href="../Document/Graphics/Resources/tm.html#tmXBLabels"><em>tmXBLabels</em></a> to internally calculated values.  The
+normal resources for trying to control precision and/or formatting
+will not work as expected.
+<p>
+
+This example demonstrates a kludgy method for reformatting the
+tickmark labels on the bottom axis, by using the "BinLocs" attribute
+returned by <a href="../Document/Graphics/Interfaces/gsn_histogram.html"><strong>gsn_histogram</strong></a>.
+
+</div>
+
+
+<div class=ex>
+<!--Histogram_14-->
+<a name=ex14></a>
+<a href="Images/histo_14_lg.png">
+<img src="Images/histo_14_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_14.html">histo_14.ncl</a>: As explained
+in the previous example, you don't have much control over the
+tickmarks on the bottom axis. This example shows how to
+work around this to add minor tickmarks.
+<p>
+
+The special resource "MidBarLocs" is used to get the X axis locations
+of the middle of each bar, so we can add a minor tickmark. We have to
+draw the plot twice, so we can get both major and minor
+tickmarks. Because the size of the plot will actually change the
+second time, we need to retrieve the
+<a href="../Document/Graphics/Resources/vp.html#vpXF"><em>vpXF</em></a>, <a href="../Document/Graphics/Resources/vp.html#vpYF"><em>vpYF</em></a>,
+<a href="../Document/Graphics/Resources/vp.html#vpWidthF"><em>vpWidthF</em></a>, and
+<a href="../Document/Graphics/Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> resources, and set these
+for the second plot.
+
+</div>
+
+<div class=ex>
+<!--Histogram_15-->
+<a name=ex15></a>
+<a href="Images/histo_15_1_lg.png">
+<img src="Images/histo_15_1_sm.png" align=left border=2></a>
+<a href="Images/histo_15_2_lg.png">
+<img src="Images/histo_15_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_15.html">histo_15.ncl</a>: Demonstrates how to
+control the labeling of the X axis.   You first have to create
+the histogram, and then the return plot it will have
+several attributes attached that provide information about the
+histogram:
+<p>
+
+<ul>
+
+<li>NumInBins - An array containing the number of elements in
+each bin or range.
+
+<li>BinLocs - An array containing the location value of each bin.
+
+<li>BeginBarLocs - An array that gives the X NDC position of
+the beginning of each bar.
+
+<li>MidBarLocs  - An array that gives the X NDC position of
+the midpoint of each bar.
+<li>EndBarLocs - An array that gives the X NDC position of
+the end of each bar.
+
+</ul>
+
+For this example, the MidBarLocs array was used to select which
+tickmarks to label, and the labels were created manually.
+
+</div>
+
+<div class=ex>
+<!--Histogram_16-->
+<a name=ex16></a>
+<a href="Images/histo_16_1_lg.png">
+<img src="Images/histo_16_1_sm.png" align=left border=2></a>
+<a href="Images/histo_16_2_lg.png">
+<img src="Images/histo_16_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_16.html">histo_16.ncl</a>: Demonstrates how
+to use return information from a histogram plot to further
+annotate it with text strings indicating the values of each bar.
+<p>
+The return information used is the <em>NumInBins</em> attribute for
+the number of values in each bar, and the <em>MidBarLocs</em>
+attribute for the X location for the midpoint of each bar.
+<p>
+
+The <a href="../Document/Graphics/Interfaces/gsn_add_text.html"><strong>gsn_add_text</strong></a> function is used to
+attach labels to the top of each bar (first plot), and then inside
+each bar (second plot).
+
+</div>
+
+<div class=ex>
+<!--Histogram_17-->
+<a name=ex17></a>
+<a href="Images/histo_17_lg.png">
+<img src="Images/histo_17_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_17.html">histo_17.ncl</a>: Demonstrates how
+to stack histograms.
+<p>
+
+This script does it the "lazy" way, by drawing one histogram on top of
+another. The key is to draw the histograms with the largest number of
+values in each bin first. Each histogram is created first, so we can
+calculate the largest bin value. We use this value to "fix" the Y axis
+for each plot.
+
+</div>
+
+<div class=ex>
+<a name=Katrina_circle></a>
+<a href="Images/Katrina_circle_hist_lg.png">
+<img src="Images/Katrina_circle_hist_sm.png" align=left border=2></a>
+<a href="Scripts/Katrina_circle_hist.html">Katrina_circle_hist.ncl</a>:
+This script plots the 5-day running average of precipitation for 
+an entire year (2005). Included is a histogram
+showing the distribution of values for each contour level.
+<p>
+
+See the <a href="unique.html#Katrina_circle">Unique examples page</a>
+for more details.
+<p>
+
+This code was contributed by Jake Huff, a Masters student in the
+Climate Extremes Modeling Group at Stony Brook University.
+
+</div>
+<div class=ex>
+<!--Histogram_18-->
+<a name=ex18></a>
+<a href="Images/histo_18_1_lg.png">
+<img src="Images/histo_18_1_sm.png" align=left border=2></a>
+<a href="Images/histo_18_2_lg.png">
+<img src="Images/histo_18_2_sm.png" align=left border=2></a>
+<a href="Images/histo_18_3_lg.png">
+<img src="Images/histo_18_3_sm.png" align=left border=2></a>
+
+<a href="Scripts/histo_18.html">histo_18.ncl</a>: Creates an animated
+histogram showing the distribution of temperature values across a
+series of timesteps. This particular variable has 1872 timesteps;
+only every 100th timestep is animated.
+<p>
+
+See the function "print_binned_info" in this script, which calculates
+the binned values given a data array and an array of values for
+binning. The "draw_histogram" procedure draws each histogram.
+<p>
+
+The "convert" tool from <a href="http://www.imagemagick.org/">ImageMagick</a>
+is used to convert a series of PNG images to an animated gif.
+<p>
+
+Only three of the frames are shown here. <a
+href="Images/histo_18.gif">Click here</a> for the animation.
+<p>
+<p>
+
+
+</div>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/histo.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:58:51 GMT -->
+</html>
+
+

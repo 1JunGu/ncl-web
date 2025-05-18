@@ -1,0 +1,87 @@
+;----------------------------------------------------------------------
+; goes_6.ncl
+;
+; Concepts illustrated:
+;   - Plotting data from a GOES-16 file
+;   - Calculating timings for various parts of a script
+;   - Using triangular meshes to create contours
+;   - Using 'short2flt' to unpack 'short' data
+;   - Subselecting a color map
+;   - Zooming in on a particular area on a map
+;----------------------------------------------------------------------
+; Because the lat/lon arrays have missing values, it is necessary to
+; plot this data with res@trGridType set to "TriangularMesh".
+;----------------------------------------------------------------------
+load "./goesYXtoLatLon.ncl"
+
+begin
+  code_start_time = get_cpu_time()
+
+;---Open file and read data
+  filename = "OR_ABI-L2-MCMIPC-M3_G16_s20172870002163_e20172870004536_c20172870005053.nc"
+  a = addfile(filename,"r")
+
+  get_data_start_time = get_cpu_time()
+
+  varname    = "CMI_C16"       ; arbitrarily chosen
+  data       = short2flt(a->$varname$)
+
+;---Calculate lat/lon based on information on file and GOES16 documentation.
+  latLon     = scaledgoesYXtoLatLon(a)
+  data@lat2d = latLon[0]        ; required for plotting
+  data@lon2d = latLon[1]
+
+  print_elapsed_time(get_data_start_time,"getting data")
+
+;---Always look at your data!
+  printVarSummary(data)
+  printMinMax(data,0)
+
+  graphics_start_time = get_cpu_time()
+  wks = gsn_open_wks("png","goes")
+
+;---Set some resources for plotting
+  res                   = True
+  res@gsnMaximize       = True           ; maximize plot in frame
+  res@cnFillOn          = True           ; turn on contour fill
+  res@cnLinesOn         = False          ; turn off contour lines
+  res@cnLineLabelsOn    = False          ; turn off line labels
+  res@cnFillMode        = "RasterFill"   ; for faster plotting
+  res@trGridType        = "TriangularMesh"  ; required
+
+;---Pick "nice" contour levels
+  mnmxint = nice_mnmxintvl( min(data), max(data), 18, False)
+  res@cnLevelSelectionMode = "ManualLevels"
+  res@cnMinLevelValF       = mnmxint(0)
+  res@cnMaxLevelValF       = mnmxint(1)
+  res@cnLevelSpacingF      = mnmxint(2)/4.   ; Increase the number of levels 
+                                             ; by choosing a smaller spacing.
+
+  cmap = read_colormap_file("WhBlGrYeRe")    ; colormap starts with white
+  res@cnFillPalette        = cmap(1:,:)      ; skip the white
+; res@cnFillPalette        = cmap            ; don't skip the white
+
+  res@gsnAddCyclic         = False           ; don't add longitude cyclic point
+
+;---Zoom in on map region of interest
+  res@mpLimitMode = "LatLon"
+  res@mpMinLonF   = a->geospatial_lat_lon_extent@geospatial_westbound_longitude-1
+  res@mpMaxLonF   = a->geospatial_lat_lon_extent@geospatial_eastbound_longitude+1
+  res@mpMinLatF   = a->geospatial_lat_lon_extent@geospatial_southbound_latitude-1
+  res@mpMaxLatF   = a->geospatial_lat_lon_extent@geospatial_northbound_latitude+1
+
+  res@pmTickMarkDisplayMode = "always"
+
+;---Set our own titles
+  res@tiMainString   = varname + " : " + data@standard_name
+  res@pmTitleZone    = 4     ; Move title down
+  res@gsnRightString = ""
+  res@gsnLeftString  = ""
+
+  plot = gsn_csm_contour_map(wks,data,res)
+
+;---Print timings
+  print_elapsed_time(graphics_start_time,"graphics")
+  print_elapsed_time(code_start_time,"full script")
+
+end

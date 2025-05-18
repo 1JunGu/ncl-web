@@ -1,0 +1,45 @@
+;************************************
+;
+; CSM_Graphics: ocean_1.ncl
+;
+;************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl" 
+;
+; This file still has to be loaded manually
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl" 
+;************************************
+begin
+;************************************
+ in = addfile("h_avg_Y0191_D000.00.nc","r")
+ T=in->T(0,0,:,{0:360})              ; get rid of cyclic points (req to plt)
+;************************************
+ wks = gsn_open_wks("png","ocean")   ; send graphics to PNG file
+ cmap = read_colormap_file("BlAqGrYeOrRe") ; read color data
+ res=True
+ res@cnFillOn             = True     ; turn on color fill
+ res@cnFillPalette        = cmap(8:,:) ; set color map
+ res@cnLinesOn            = False    ; turn off contour lines
+ res@cnLevelSelectionMode = "ManualLevels" ; set level type
+ res@cnMaxLevelValF       = 30.5
+ res@cnMinLevelValF       = -1.5
+ res@cnLevelSpacingF      = 0.5
+ res@lbOrientation        = "Vertical"
+ res@lbLabelFontHeightF   = 0.01
+ res@lbLabelStride        = 2
+ res@mpFillOn             = False    ; turn off gray continents
+ res@mpOutlineOn          = False    ; turn off continental outline
+ res@gsnDraw              = False    ; do not draw picture
+ res@gsnFrame             = False    ; do not advance frame
+
+ plot = gsn_csm_contour_map(wks,T,res)        ; create plot
+ draw(plot)
+ frame(wks)
+;************************************
+ 
+end
+
+

@@ -1,0 +1,355 @@
+;*************************************************
+; wind_6.ncl
+;
+; Concepts illustrated:
+;   - Specify pressure levels and time period
+;   - Read daily mean wind components from different files
+;   - Use regular subscripting ( indexing) and coordinate variables  {...}
+;   - Reorder the input (N==>S) data order to (S==>N) via NCL syntax  ::-1
+;   - Calculate the local vorticity tendency using spherical harmonics              
+;     These calculations require accurate assessment of zonal & meridional gradients
+;   - Write derived tendencies to netCDF file
+;   - Plot the local vorticity tendencies
+;   - Calculate EOFs
+;   - Plot EOF and corresponding time series ONLY if significant. Otherwise, no plot.
+;*************************************************
+; The vorticity tendency calculated here refers to:
+; http://snowball.millersville.edu/~adecaria/ESCI342/esci342_lesson13_vorticity_equation.pdf
+;
+; On the synoptic scale, scale analysis shows that the vertical advection term, [D] the 
+; solenoidal term, and the twisting/tilting term [E] are all an order of magnitude less than 
+; the next largest terms.  Therefore, we can ignore these terms and write the vorticity 
+; equation ( for the synoptic scale only).
+;*************************************************
+;   Data Source: ESRL Physical Sciences Division
+;        https://www.esrl.noaa.gov/psd/data/gridded/data.ncep.reanalysis.html
+;   NCEP Reanalysis data provided by the NOAA/OAR/ESRL PSD, Boulder, Colorado, USA, 
+;   from their Web site at https://www.esrl.noaa.gov/psd/
+;*************************************************
+; User specified time period and levels
+;*************************************************
+
+  ymdStrt = 20080201                        ; yyyymmdd -> ymd
+  ymdLast = 20080207
+  plev    = (/700, 300/)                    ; desired levels
+
+  scale   = 1e9                             ; arbitrary scale for the VERY small values 1e-9
+                                            ; primarily for plotting
+  pltDir  = "./"                            ; dir for output plots
+  pltType = "png"                           ; "x11", "png", "ps", others
+  pltName = "wind"    
+
+;*************************************************
+; Open file and read in data: data are on a rectilinear [2.5] grid
+; Read only user specified levels using coordinate subscripting 
+; Read data for a specific time period 
+;
+; Data Source: [pressure/daily]
+; https://www.esrl.noaa.gov/psd/thredds/catalog/Datasets/ncep.reanalysis/pressure/catalog.html
+;*************************************************
+  diruv   = "./"
+  fu      = addfile (diruv+"uwnd.2008.nc", "r")  ; daily mean values  
+  fv      = addfile (diruv+"vwnd.2008.nc", "r")  
+
+  YMD     = cd_calendar( fu->time, 2)       ; YMD for ENTIRE file
+  tStrt   = ind(YMD.eq.ymdStrt)             ; index for start
+  tLast   = ind(YMD.eq.ymdLast)             ;   "         "
+
+  u     = fu->uwnd(tStrt:tLast,{plev},:,:)  ; (time,level,lat,lon) 
+  v     = fv->vwnd(tStrt:tLast,{plev},:,:)  ; data are ordered N->S
+
+  dimuv = dimsizes(u)                       ; explicit dimension sizes [ not necessary ]
+  ntim  = dimuv(0)                          ; information only
+  klev  = dimuv(1)
+  nlat  = dimuv(2)
+  mlon  = dimuv(3)
+
+;*************************************************
+; NCL's spherical harmonic functions require S->N ordering
+; Reverse using NCL syntax   ::-1
+;*************************************************
+
+  u    = u(:,:,::-1,:)                      ; reorder
+  v    = v(:,:,::-1,:)
+
+  printVarSummary(u)                        ; S->N ordering
+  printMinMax(u,0)
+  print("--------")
+  printVarSummary(v)
+  printMinMax(v,0)
+  print("--------")
+
+;*************************************************
+; Calculate absolute vorticity on a fixed grid
+;*************************************************
+
+  cp  = coriolis_param(u&lat)    ; cp(nlat); coriolis parameter (coriolis force)           
+  printVarSummary(cp)
+  printMinMax(cp,0)
+  print("--------")
+
+  vr  = uv2vrF_Wrap(u,v)         ; relative vorticity; highly accurate spherical harmonics
+  vr@long_name = "relative vorticity"
+  vr@units     = "1/s" 
+                                  
+  va  = vr + conform(vr, cp, 2)  ; absolute vorticity; reshape 'cp' and add Coriolis parameter
+  va@long_name = "absolute vorticity"
+  va@units     = "1/s" 
+  copy_VarCoords(vr, va)
+
+  printVarSummary(vr)
+  printMinMax(vr,0)
+  print("--------")
+  printVarSummary(va)
+  printMinMax(va,0)
+  print("--------")
+
+;*************************************************
+; calculate wind divergence 
+;*************************************************    
+
+  duv  = uv2dvF_Wrap(u,v) 
+
+  printVarSummary(duv)
+  printMinMax(duv,0)
+  print("--------")
+
+;*************************************************
+; Calculate the left term: Advectio of absolute vorticity
+; Internally, gradients are calculated via spherical harmonics
+;*************************************************    
+
+;;long_name = "advection of absolute vorticity"
+  long_name = "advection of relative and planetary vorticity"
+  units     = "m/s2"
+
+  gridType  = 1   ; global fixed grid ordered S->N
+  opt_adv   = 0   ; return only the advected variable; no gradients
+  termBC    = advect_variable(u,v,va, gridType, long_name, units, opt_adv)
+
+  printVarSummary(termBC)  
+  printMinMax(termBC, 0)  
+  print("--------")
+
+;*************************************************
+; Calculate the right term
+;*************************************************    
+
+  termF  = va*duv                                              
+  termF@long_name = "generation of relative vorticity due to convergence"
+  termF@units     = "m/s2"
+  copy_VarCoords(vr, termF)
+  
+  printVarSummary(termF)
+  printMinMax(termF,0)
+  print("--------")
+
+;*************************************************
+; Calculate local vorticity tendency
+;*************************************************    
+
+  vrtend           = -(termBC +termF)               ; termA ==> vrt                                        
+  vrtend@long_name = "local vorticity tendency"
+  vrtend@units     =  termF@units
+  vrtend@reference = "http://snowball.millersville.edu/~adecaria/ESCI342/esci342_lesson13_vorticity_equation.pdf"
+  vrtend@info      = "Terms: A, B, C and F"
+  copy_VarCoords(vr, vrtend)
+  
+  printVarSummary(vrtend)      ; [time | 6] x [level | 2] x [lat | 73] x [lon | 144]
+  printMinMax(vrtend,0)
+  print("--------")
+
+;*************************************************
+; Write derived tendencies and individual terms to netCDF
+;*************************************************    
+
+   dirNc = "./"
+   filNc = "LocalVorticityTendencies.nc"
+   pthNc = dirNc + filNc
+
+   system("/bin/rm -f "+pthNc )   ; remove any pre-existing file
+   ncdf  = addfile(pthNc ,"c")    ; open output netCDF file
+
+   fAtt               = True            ; assign file attributes
+   fAtt@title         = "Local Vorticity Tendency"
+   fAtt@source_files  = "https://www.esrl.noaa.gov/psd/thredds/catalog/Datasets/ncep.reanalysis/pressure/catalog.html"
+   fAtt@reference     = "http://snowball.millersville.edu/~adecaria/ESCI342/esci342_lesson13_vorticity_equation.pdf"
+   fAtt@Conventions   = "None"
+   fAtt@creation_date = systemfunc ("date")
+   fileattdef( ncdf, fAtt )            ; copy file attributes
+   filedimdef(ncdf,"time",-1,True)     ; make 'time' UNLIMITED; recommended  for most applications
+
+   ncdf->VRTEND = vrtend  
+   ncdf->termF  = termF 
+   ncdf->termBC = termBC
+     
+;*************************************************
+; Calculate EOFs of local vorticity tendency over N. Hemisphere 
+; Create weights:  sqrt(cos(lat))   [or sqrt(gw) ] for covariance
+;*************************************************    
+
+  neof   =  3                                       ; number of EOFs to calculate
+  optEOF = False      
+  optETS = False
+
+  rad    = get_d2r(typeof(u&lat))
+  clat   = cos(rad*u&lat)                           ; (nlat)           
+  clat   = where(clat.lt.0, 0.0, clat)              ; avoid a potential numerical issue at pole
+  clat   = sqrt( clat )               
+
+  wvrt   = vrtend                                   ; copy meta data; (0,1,2,3)
+  wvrt   = wvrt*conform(wvrt, clat, 2)
+  wvrt   = wvrt*scale                               ; scale [not necessary] 
+  wvrt@long_name = "Wgt: "+wvrt@long_name
+
+  latS   = 20                                       ; N. Hem                                      
+  latN   = 90
+
+  wvrt_nh= wvrt(:,{plev(1)},{latS:latN},:)          ; N. Hem, 300 hPa; weighted values
+  eof    = eofunc_n_Wrap(wvrt_nh, neof, optEOF, 0)  
+  eof_ts = eofunc_ts_n_Wrap (wvrt_nh, eof, optETS, 0)
+
+  prinfo = True
+  sigpcv = eofunc_north(eof@pcvar, ntim, prinfo)    ; sigpcv(neof); True or False
+  print("--------")
+  printVarSummary(eof)
+  printVarSummary(eof_ts)
+  print("--------")
+
+  if (all(.not.sigpcv)) then
+      print("***")
+      print("*** No EOFs are significant ***")
+      print("***")
+  end if
+     
+;*************************************************
+; plot results
+;*************************************************    
+  vrtend      = vrtend*scale                     ; better plots [no 0.00000xyz]
+  vrtend@info = "vrt*1e9"                        ; tag variable with extra information
+
+  dimvrt = dimsizes(vrtend)                      ; dimension sizes
+  ntim   = dimvrt(0)
+  klev   = dimvrt(1)
+  nlat   = dimvrt(2)
+  mlon   = dimvrt(3)
+
+  plot   = new (klev,"graphic")
+  wks  = gsn_open_wks(pltType,pltDir+pltName)    ; send graphics to PNG file
+
+  res                      = True
+  res@gsnDraw              = False               ; don't draw till later
+  res@gsnFrame             = False               ; don't advance frame
+
+  res@cnFillOn             = True                ; color on
+  res@cnLinesOn            = False               ; turn off contour lines
+  res@cnFillPalette        = "ViBlGrWhYeOrRe"
+  res@gsnCenterString      = "scaled by 1e9"
+  res@lbOrientation        = "Vertical"          ; each level has different range
+
+; use different scales for each level. They are quite different
+
+  do nt=0,0                                      ; 1st time onle, else ntim-1
+     res@gsnLeftString     = cd_calendar(vrtend&time(nt), 3)
+     res@gsnRightString    = "[1e9*]"+vrtend@units
+
+     res@gsnCenterString   = plev(0)+" hPa"
+     symMinMaxPlt (vrtend(nt,{plev(0)},:,:),20,False,res)    ; symmetric min/max  
+     plot(0) =gsn_csm_contour_map(wks,vrtend(nt,{plev(0)},:,:),res)
+
+     res@gsnCenterString   = plev(1)+" hPa"
+     symMinMaxPlt (vrtend(nt,{plev(1)},:,:),20,False,res)    ; symmetric min/max   
+     plot(1) =gsn_csm_contour_map(wks,vrtend(nt,{plev(1)},:,:),res)
+  end do
+
+;************************************************
+; Create panel for local vorticity tendency
+;************************************************
+
+  resP                     = True                ; modify the panel plot
+  resP@gsnPanelMainString  = "Local Vorticity Tendency via Spherical Harmonics" 
+  gsn_panel(wks,plot,(/2,1/),resP)               ; now draw as one plot
+
+;************************************************
+; Create EOF plot(s) only on significant modes
+;************************************************
+;;if (all(.not.sigpcv)) then
+;;    print("***")
+;;    print("*** No EOFs are significant: No plots ***")
+;;    print("***")
+;;else
+      reseof                      = True
+      reseof@gsnPolar             = "NH"
+      reseof@gsnFrame             = False               ; don't advance frame
+      reseof@cnFillOn             = True                ; color on
+      reseof@cnLinesOn            = False               ; turn off contour lines
+      reseof@cnFillPalette        = "ViBlGrWhYeOrRe"
+      reseof@lbOrientation        = "Vertical"          ; Horizontal is default
+      reseof@mpFillOn             = False               ; turn off map fill
+      reseof@mpMinLatF            = latS
+      reseof@mpCenterLonF         = 270
+
+      rests                       = True      ; plot mods desired
+      rests@gsnFrame              = False     ; don't advance frame
+
+      rests@xyLineThicknesses     = (/2/)     ; Define line thicknesses 
+      rests@xyLineColors          = (/"black"/) ; Define line color
+      rests@xyMonoDashPattern     = True
+
+      rests@tmYLLabelFontHeightF  = 0.015     ; font height
+      rests@gsnTickMarksOn        = True      ; turn off tickmarks
+
+      rests@gsnYRefLine           = 0.        ; Y-value for ref. line
+      rests@gsnAboveYRefLineColor = "Red"     ; Color area above ref. line red
+      rests@gsnBelowYRefLineColor = "Blue"    ; Color area below ref. line blue
+
+      rests@tiYAxisOn             = True  
+      rests@tiYAxisString         = "Vorticity Tendency"
+ 
+; this controls the size and location of the second plot
+      rests@vpXF                  = 0.15   
+      rests@vpYF                  = 0.3     
+      rests@vpWidthF              = 0.7
+      rests@vpHeightF             = 0.18
+
+; extract day-of-year (ddd)
+      yyyy                        = ymdStrt/10000
+      yyyydddStrt                 = yyyymmdd_to_yyyyddd( ymdStrt )
+      yyyydddLast                 = yyyymmdd_to_yyyyddd( ymdLast )
+                                  ; ddd => day of current year
+      dddStrt                     = yyyydddStrt-(yyyydddStrt/1000)*1000
+      dddLast                     = yyyydddLast-(yyyydddLast/1000)*1000
+      day                         = ispan(dddStrt, dddLast, 1)
+      rests@tiXAxisOn             = True  
+      rests@tiXAxisString         = "Day of Year: "+yyyy 
+      rests@tmXBFormat            = "f"
+
+      rests@trXMinF               = dddStrt   ; set X-axis max and mins
+      rests@trXMaxF               = dddLast
+;;    rests@trYMinF               =           ; set Y-axis max and mins
+;;    rests@trYMaxF               =          
+;*****************************************************
+; Loop over significant EOFs only
+;*****************************************************
+      do ne=0,neof-1
+      ;;;if (sigpcv(ne)) then                           ; only significant EOFs
+             reseof@vpXF          = 0.2         
+             reseof@vpWidthF      = 0.6	    
+             reseof@vpYF          = 0.83
+             reseof@vpHeightF     = 0.465   
+             reseof@gsnLeftString = "EOF "+(ne+1)
+             reseof@gsnCenterString  = plev(1)+" hPa"
+             reseof@gsnRightString= sprintf("%5.1f", eof@pcvar(ne)) +"%"
+             if (sigpcv(ne)) then
+                 reseof@gsnLeftString = reseof@gsnLeftString+": Signifcant"
+             else
+                 reseof@gsnLeftString = reseof@gsnLeftString+": Not Signifcant"
+             end if
+             reseof@tiMainString  = "EOF: Local Vorticity Tendency"
+             symMinMaxPlt (eof(ne,:,:),20,False,reseof)    ; symmetric min/max  
+             pTop = gsn_csm_contour_map_polar(wks,eof(ne,:,:),reseof)
+             pBot = gsn_csm_xy (wks,day,eof_ts(ne,:), rests)
+             frame(wks)
+      ;;;end if
+      end do
+;;end if               ; if (all(.not.sigpcv)) then 

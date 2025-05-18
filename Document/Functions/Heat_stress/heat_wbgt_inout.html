@@ -1,0 +1,494 @@
+<html>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Heat_stress/heat_wbgt_inout.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:41 GMT -->
+<head>
+<meta name="description" content="Heat stress functions (heat stress)">
+<meta name="keywords" content="heat_wbgt_inout">
+<title>heat_wbgt_inout</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../heat_stress.html">Heat stress</a>
+<br>
+<h1>heat_wbgt_inout</h1>
+
+<p>
+Compute the composite Wet-Bulb Globe Temperature (WBGT) index with options for indoor or outdoor formulations.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#6.4.0">version 6.4.0</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/heat_stress.ncl"  ; This library is <b>automatically loaded</b>
+                                                             ; from NCL V6.5.0 onward.
+                                                             ; No need for user to explicitly load.
+
+	function heat_wbgt_inout (
+		tw         : numeric,  
+		tg         : numeric,  
+		ta         : numeric,  
+		iounit [2] : integer,  
+		opt    [1] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="../Built-in/dimsizes.html"><strong>dimsizes</strong></a>(<em>t</em>)] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>tw</em>
+<p class=indent>Scalar or array containing wet bulb temperature. Units see <em>iounit</em>
+</p>
+<em>tg</em>
+<p class=indent>Scalar or array containing 'globe' temperatures. It must have the same size, shape and units as <em>tw</em>.
+</p>
+<em>ta</em>
+<p class=indent>Scalar or array containing ambient temperature. It must have the same size, shape and units as <em>tw</em>.
+This argument is ignored when <em>opt</em>=0 or <em>opt</em>=1. Since it is ignored, 
+the <em>tw</em> can be used as a place holder.
+</p>
+<em>iounit</em>
+<p class=indent>An integer array of length 2 which specifies the units of the input <em>tw</em> and the returned heat_index:
+<ul>
+<li> <em>iounit(0)</em>=0 input <em>tw</em> (degC)   
+<li> <em>iounit(0)</em>=1 input <em>tw</em> (degK)
+<li> <em>iounit(0)</em>=2 input <em>tw</em> (Farenheit)
+</p>
+<p class=indent>
+<li> <em>iounit(1)</em>=0 returns units degC
+<li> <em>iounit(1)</em>=1 returns units degK
+<li> <em>iounit(1)</em>=2 returns units Farenheit
+</ul>
+</p>
+<em>opt</em>
+<p class=indent>Option to use indoor or outdoor formulations. Further, for the indoor formulation, an alternative set of
+weight factors can be specified.
+<ul>
+<li> <em>opt</em>=0:  Use standard two-parameter <b>indoor</b> values: WBGT = 0.70*<em>tw</em> + 0.30*<em>tg</em> 
+<li> <em>opt</em>=1:  Use alternative two-parameter <b>indoor</b> values: WBGT = 0.85*<em>tw</em> + 0.20*<em>tg</em> 
+<li> <em>opt</em>=2:  Use the standard three-parameter <b>outdoor</b> values: WBGT = 0.70*<em>tw</em> + 0.20*<em>tg</em> + 0.10*<em>td</em>
+</ul>
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+A scalar or an array of the same size and shape as <em>tw</em>. The output will be double 
+if <em>tw</em> or <em>tg</em> is of type double. The returned units are specified by <em>iounit</em>(1).
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<p>
+The WetBulb Globe Temperature (WBGT) is the ISO (1989) standard for quantifying thermal comfort.
+The WBGT is a measure of the heat stress in direct sunlight, which takes into account: 
+temperature, humidity, wind speed, sun angle and cloud cover (solar radiation). 
+If you work or exercise in direct sunlight, this is a good element to monitor. 
+Military agencies, OSHA and many nations use the WBGT as a guide to managing workload in direct sunlight.
+<P>
+<b>The WBGT is measured by a simple three-temperature element device. However, this instrument is 
+expensive and requires regular maintemence. Hence, the 'true' WBGT is rarely available.</b>
+Generally, an approximate WBGT is calculated or another index is used.
+<p>
+The following is from http://afcintl.com/pdfs/3M%20pdf/wbgt.pdf
+Per guidance published by the Occupational Safety and Health 
+Administration (OSHA), the outdoor, with solar load, WBGT Index 
+is a weighted sum of three component temperatures:  
+<ul>
+ 
+  <li> A natural wet bulb temperature (<em>tw</em>), measured by a thermometer 
+    bearing a wetted wick passively exposed to the ambient environment.  
+    The wet bulb temperature indicates the amount of cooling provided 
+    to the human subject through evaporation and accounts for 70% of 
+    the WBGT index.
+
+  <li> A globe temperature (<em>tg</em>) , measured by a thermometer inside a 
+    black sphere passively exposed to the ambient environment  The globe
+    temperature provides an indication of the mean radiant temperature 
+    of the environment and accounts for 20% of the WBGT Index.
+ 
+  <li> A dry bulb temperature (<em>ta</em>), measured by a standard air thermometer.
+    The dry bulb temperature is the temperature of the ambient air 
+    and accounts for 10% of the WBGT Index.
+
+</ul>
+THe 
+
+<pre>
+ REFERENCES: 
+    WWW: <a href="http://www.srh.noaa.gov/images/tsa/pubs/WBGTpaper2.pdf"><b>WGBT</b></a>
+
+    Buzan, J.R. et al (2015): 
+           Implementation and comparison of a suite of heat stress metrics
+           within the Community Land Model version 4.5
+           Geosci. Model Dev., 8, 151–170, 2015
+           www.geosci-model-dev.net/8/151/2015/
+           doi:10.5194/gmd-8-151-2015
+
+    Hot Environments—Estimation of the heat stress on working man, 
+             based on the WBGT-index (wet bulb globe temperature). 
+    ISO Standard 7243. Geneva: International Standards Organization.
+
+</pre>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Heat_stress-2.html"><b>Heat and Stress functions</b></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<p>
+<p>
+<B>Example 1:</B> 
+<p>
+<pre>
+   tw     = 13.7    ; C
+   tg     = 24.0    
+   io     = (/0,0/)
+
+   wbgt_0 = <strong>heat_wbgt_inout</strong>(tw, tg, tw, io, 0)   ; note use of tw as 'place-holder'
+   wbgt_1 = <strong>heat_wbgt_inout</strong>(tw, tg, tw, io, 1)
+
+   ta     = 20.0 
+   wbgt_2 = <strong>heat_wbgt_inout</strong>(tw, tg, ta, io, 2)   ; use 'ta'
+
+   <a href="../Built-in/print.html"><strong>print</strong></a>(wbgt_0)
+   print(wbgt_1)
+   print(wbgt_2)
+</pre>
+The output is:
+<pre>
+
+    Variable: wbgt_0
+    Type: float
+    Total Size: 4 bytes
+                1 values
+    Number of Dimensions: 1
+    Dimensions and sizes:   [1]
+    Coordinates: 
+    Number Of Attributes: 5
+      long_name :   WBGT: wet-bulb globe temperature
+     <b> info :        Indoors, or when solar radiation is negligible</b>
+      units :       degC
+     <b> coef :        ( 0.7, 0.3 )</b>
+      NCL : heat_wbgt_globe
+
+    (0)     16.79
+    
+    
+    Variable: wbgt_1
+    [SNIP]
+    Number Of Attributes: 5
+      long_name :   WBGT: wet-bulb globe temperature
+     <b> info :        Indoors, or when solar radiation is negligible</b>
+      units :       degC
+     <b> coef :        ( 0.85, 0.2 )</b>
+      NCL : heat_wbgt_globe
+
+    (0)     16.445
+    
+    
+    Variable: wbgt_2
+    [SNIP]
+    Number Of Attributes: 5
+      long_name :   WBGT: wet-bulb globe temperature
+      <b>info :        Outdoor</b>
+      units :       degC
+      <b>coef :        ( 0.7, 0.2, 0.1 )</b>
+      NCL : heat_wbgt_globe
+
+    (0)     16.39
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Heat_stress/heat_wbgt_inout.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:41 GMT -->
+</html>

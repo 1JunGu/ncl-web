@@ -1,0 +1,523 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/filwgts_lanczos.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:31 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (general applied math)">
+<meta name="keywords" content="filwgts_lanczos">
+<title>filwgts_lanczos</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>filwgts_lanczos</h1>
+
+<p>
+Calculates one-dimensional filter weights.
+</p>
+
+<p>
+<img src="https://www.ncl.ucar.edu/Images/new.gif"> <i>Available in <a href="../../../prev_releases.html#4.3.1">version 4.3.1</a> and later.</i>
+<p>
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function filwgts_lanczos (
+		nwt    [1] : integer,          
+		ihp    [1] : integer,          
+		fca    [1] : float or double,  
+		fcb    [1] : float or double,  
+		nsigma [1] : numeric           
+	)
+
+	<a href="../return_val.html">return_val</a> [nwt] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>nwt</em>
+<p class=indent>A scalar indicating the total number of weights (must be an odd
+number; <em>nwt</em> &gt;= 3). The more weights, the better the filter,
+but there is a greater loss of data.
+</p>
+<em>ihp</em>
+<p class=indent>A scalar indicating the low-pass filter: <em>ihp</em> = 0; high-pass
+<em>ihp</em> = 1; band-pass <em>ihp</em> = 2.
+</p>
+<em>fca</em>
+<p class=indent>A scalar indicating the cut-off frequency of the ideal high or
+low-pass filter: (0.0 &lt; <em>fca</em> &lt; 0.5).
+</p>
+<em>fcb</em>
+<p class=indent>A scalar used only when a band-pass filter is desired.  It is the
+second cut-off frequency (<em>fca</em> &lt; <em>fcb</em> &lt; 0.5).
+</p>
+<em>nsigma</em>
+<p class=indent>A scalar indicating the power of the sigma factor (<em>nsigma</em> >=
+0). Note: <em>nsigma</em>=1. is common.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+An array of length <em>nwt</em> is returned. The type will be double
+if <em>fca</em> is double, and float otherwise.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+Given a user-specified number of weights (must be odd),
+<strong>filwgts_lanczos</strong> returns a symmetrical set of
+weights.<P>
+
+The user may have to iterate using different numbers of weights to get
+the desired response. The usual caveats apply: the narrower the
+filter, the more weights required and, thus, the more data at each end
+that is lost.<P>
+
+The derived weights can be input to the function
+<a href="wgt_runave.html"><strong>wgt_runave</strong></a> to apply the filter to a series if data
+values.  Usually, the <em>kopt</em>=0 is chosen for
+<a href="wgt_runave.html"><strong>wgt_runave</strong></a> when applying the weights to, say, a
+time series.<P>
+
+The response function (frequency and amplitude) are returned as
+attributes of the returned weights (say, <em>wt</em>). Specifically:
+the attributes <em>wt</em>@<em>freq</em> and <em>wt</em>@<em>resp</em>
+are one-dimensional arrays of length (2*<em>nwt</em>+3) and the same
+type as <em>wt</em>. These may be plotted for a visual examination of
+the filter response.<P>
+
+<DL>
+<DT>Reference: C. Duchon 
+<DD>J. Applied Meteorology;  August,1979; pp 1016-1022
+<DD>Lanczos Filtering in One and Two Dimensions
+</DL>
+
+<PRE>
+                  i              low pass 
+             1.0  i---------   
+                  i        |  
+                  i        |
+                  i        |      
+                  i        |        
+             0.0  i________|______________________________
+                 0.0      fca                          0.5
+
+                  i              high pass
+             1.0  i              ----------------------
+                  i              |   
+                  i              |
+                  i              |
+                  i              |
+                  i              |  
+             0.0  i______________|________________________
+                 0.0            fca                    0.5
+
+                  i              band pass
+             1.0  i           |------------|      
+                  i           |            | 
+                  i           |            |   
+                  i           |            |     
+                  i           |            |           
+             0.0  i___________|____________|_______________
+                 0.0         fca          fcb          0.5
+</PRE>                                                          
+<p>
+In response to a question posted to ncl-talk.ucar.edu, Dave Allured (CU/CIRES),
+posted the following:
+<pre>
+     NCL's filter functions operate over discrete time steps in a time series.
+     Their time metric is time steps, *not* calendar time or real time.  This
+     is a common point of confusion about digital filters.
+
+     Therefore, the filters *do not care* about your time units or time
+     coordinate variable.  To get correct filter parameters, you must
+     manually (or with clever programming) express your time domain
+     parameters in terms of *time steps*.
+
+     For example, if the desired filter is 10 to 50 days, and the time
+     series is on 3-day time steps, then:
+
+            dt = 3 days per time step
+            t1 = 50 days  (low frequency cutoff, expressed in time domain)
+            t2 = 10 days  (high frequency cutoff, expressed in time domain)
+
+            fca = dt/t1 = 3./50. = 0.06 time steps  (low frequency cutoff)
+            fcb = dt/t2 = 3./10. = 0.30 time steps  (high frequency cutoff)
+</pre>
+More filter examples are discussed
+<a href="../../../Applications/filter.html">here</a>.
+
+<p>
+
+<b>Note:</b> this function is not a new one. It used to be 
+named "filwgts_lancos", and we renamed it to reflect the
+correct spelling of Cornelius Lanczos' name.
+<p>
+
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="bw_bandpass_filter.html"><strong>bw_bandpass_filter</strong></a>,
+<a href="filwgts_normal.html"><strong>filwgts_normal</strong></a>,
+<a href="wgt_runave_n.html"><strong>wgt_runave_n</strong></a>,
+<a href="wgt_runave.html"><strong>wgt_runave</strong></a>,
+<a href="../Contributed/wgt_runave_n_Wrap.html"><strong>wgt_runave_n_Wrap</strong></a>,
+<a href="../Contributed/wgt_runave_Wrap.html"><strong>wgt_runave_Wrap</strong></a>,
+<a href="../../../Applications/filter.html">filter applications</a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><p>
+
+This example generates the weights for a low pass filter using nine
+weights:
+
+<PRE>
+    nwt = 9
+    fca = 0.2
+    ihp = 0          
+    nsigma = 1.
+    wgt = <strong>filwgts_lanczos</strong> (nwt, ihp, fca, -999., nsigma)  
+</PRE>
+<p>
+
+<em>wgt</em>@<em>freq</em> and <em>wgt</em>@<em>resp</em> are returned
+as one-dimensional arrays containing a set of frequencies and the
+response at each frequency.<P>
+
+<B>Example 2</B><p>
+
+This example generates the weights for a high pass filter using seven
+weights:
+
+<PRE>
+    nwt = 7  
+    fca = 0.4
+    ihp = 1          
+    nsigma = 1.
+    wts = <strong>filwgts_lanczos</strong> (nwt, ihp, fca, -999., nsigma)  
+</PRE>
+<P>
+
+<B>Example 3</B><p>
+
+This example generates the weights for a band pass filter using 21
+weights:
+
+<PRE>
+    nwt = 21
+    fca = 0.2
+    fcb = 0.35
+    ihp = 2          
+    nsigma = 1.
+    wts = <strong>filwgts_lanczos</strong> (nwt, ihp, fca, fcb, nsigma)  
+</PRE>
+<p>
+
+<B>Example 4</B><p>
+
+The above examples focus on 'time'. However, the function can be used for any equally spaced set of values.
+Consider a set of values (<em>z</em>) spaced 100m apart and information from (say) 500m scales and larger
+are desired,  
+
+<PRE>
+    nwt = 17
+    ihp = 0
+    dz  = 100.0  ; m  ... grid spacing (separation)
+    d1  = 500.0  ; m
+    fca = dz/d1  ; = 0.2  
+
+    wts = <strong>filwgts_lanczos</strong> (nwt, ihp, fca, -999, 1.0)
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/filwgts_lanczos.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:31 GMT -->
+</html>

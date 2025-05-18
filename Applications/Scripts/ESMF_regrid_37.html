@@ -1,0 +1,290 @@
+======================================================================
+; ESMF_regrid_37.ncl
+;
+; Concepts illustrated:
+;   - Extract needed variables from a WRF file [curvilinear grid]
+;   - Create a rectilinear grid with 'nominally' the same curvilinear resolution 
+;   - Use ESMF [bilinear] to regrid the WRF curvilinear u and v 
+;     to the 'nominal' rectilinear grid
+;   - Use the weight file generated when regridding 'u' for the 'v' variable
+;   - Use NCL's ' uv2dv_cfd ' to compute the divergence on the rectilinear grid 
+;   - Use ESMF to regrid the ivergence on the nominal rectilinear grid
+;     back onto the original WRF curvilinear grid
+;   - Plot
+;======================================================================
+; Note: Technically, u and v must be regridded as a pair because there
+;       is some reorientation when wind components are interpolated
+;       to different latitude and longitude locations..
+;======================================================================
+;---No need to load these after 6.1.2
+;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+;load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+
+;---Must load the 'ESMF-regridding.ncl' library thru 6.4.0
+;---Automatically loaded from 6.5.0 onward
+load "$NCARG_ROOT/lib/ncarg/nclscripts/esmf/ESMF_regridding.ncl"
+;======================================================================
+begin
+
+;--- Addfiles
+  dir  = "./"
+  fil  = "wrfout_d04_2011-11-29_15:00:00.OneTime.nc"
+  path = dir + fil
+  a    = addfile(path,"r")
+
+  x    = 1530
+;;time = 3
+  time = 0                                ; one time step on this file
+
+;--- Get variables
+  lat2d = wrf_user_getvar(a, "XLAT", time)   ; (south_north,west_east)
+  lon2d = wrf_user_getvar(a, "XLONG",time)
+  u     = wrf_user_getvar(a,"ua",time)       ; (bottom_top,south_north,west_east)
+  v     = wrf_user_getvar(a,"va",time)
+ 
+  printVarSummary(u) 
+  printMinMax(u,0)
+  print("----")
+  printVarSummary(v) 
+  printMinMax(v,0)
+  print("----")
+
+;---Create the destination rectilinear lat[*]/lon[*] arrays
+;---Nominally, the same resolution
+
+  dims  = dimsizes(lat2d)
+  nlat  = dims(0)
+  nlon  = dims(1)
+
+  lat   = fspan(min(lat2d), max(lat2d) ,nlat)   ; approximately same resolution
+  lon   = fspan(min(lon2d), max(lon2d) ,nlon)
+  lat!0 = "lat"
+  lon!0 = "lon"
+
+;======================================================================
+; Part A: WRF (curvilinear) to Rectilinear regrid variable and generate  weights 
+;======================================================================
+
+;---Set up options for regridding
+    
+    InterpMethod= "bilinear"                    ; define interpolation method
+
+;---Title and filename options
+
+    Opt                = True
+    Opt@SrcTitle       = "WRF grid"   ; optional
+    Opt@WgtFileName    = "WRF_to_Rect.WgtFile_"+InterpMethod+"."+nlat+"_x_"+nlon+".nc"
+
+;---Source grid options
+    Opt@SrcFileName    = "WRF.SCRIP_grid_description."+nlat+"_x_"+nlon+".nc"  ; Name of source and
+    Opt@SrcRegional    = True
+    Opt@SrcGridLat     = lat2d
+    Opt@SrcGridLon     = lon2d
+
+;---Destination grid options
+    Opt@DstFileName    = "Rectilinear.SCRIP_grid_description."+nlat+"_x_"+nlon+".nc" ; destination files
+    Opt@DstGridType    = "rectilinear"
+    Opt@DstGridLat     = lat
+    Opt@DstGridLon     = lon
+    Opt@DstRegional    = True
+
+;---Specify other options  
+    Opt@ForceOverwrite = True
+    Opt@InterpMethod   = InterpMethod
+
+;---Perform the regrid: WRF ==> rectilinear (_reclin)
+    u_reclin = ESMF_regrid(u, Opt)     ; Do the regridding for u   
+
+;---Use the just generated weight file
+    v_reclin = ESMF_regrid_with_weights(v,Opt@WgtFileName,False)
+
+;---Print rectilinear variable information
+
+    printVarSummary(u_reclin)
+    print("u_reclin: min="+min(u_reclin)+"   max="+max(u_reclin))
+    print("----")
+
+    printVarSummary(v_reclin)
+    print("v_reclin: min="+min(v_reclin)+"   max="+max(v_reclin))
+    print("----")
+
+    nmsg = num(ismissing(u_reclin))
+    print("RectilinearGrid: nmsg="+nmsg)
+    print("----")
+
+;======================================================================
+; Calculate the divergence on a rectlinear grid
+;======================================================================
+
+    dv_reclin     = uv2dv_cfd (u_reclin,v_reclin,lat,lon,2)
+    dv_reclin@long_name  = "Divergence: Rectilinear Grid"
+    dv_reclin@units      = "s-1"
+    copy_VarCoords(u_reclin, dv_reclin)
+    printVarSummary(dv_reclin)
+    printMinMax(dv_reclin,0)
+    print("----")
+
+;======================================================================
+; Part B: Rectilinear to WRF: regridded variable and weight file
+;======================================================================
+
+;---For clarity, delete the above options and start again.
+    delete(Opt)
+
+;---Options for regridding rectilinear to WRF (curvilinear) grid
+    Opt                 = True
+
+;   The grid descriptions have been generated in 'Part A'
+;   but we still need to provide their names.
+    Opt@SkipSrcGrid     = True
+    Opt@SkipDstGrid     = True
+    Opt@DstFileName     = "WRF.SCRIP_grid_description."+nlat+"_x_"+nlon+".nc"         ; Name of source and
+    Opt@SrcFileName     = "Rectilinear.SCRIP_grid_description.nc" ; destination files
+    Opt@ForceOverwrite  = True
+
+    Opt@SrcTitle        = Opt@SrcFileName                  ; source grid
+    Opt@SrcMask2D       = where(ismissing(u_reclin),0,1)
+    Opt@SrcRegional     = True
+
+    Opt@DstGridType     = "curvilinear"
+    Opt@DstTitle        = "Rectilinear_to_WRF"
+    Opt@DstRegional     = True
+
+    Opt@InterpMethod    = InterpMethod
+    Opt@WgtFileName     = "Rect_to_WRF.WgtFile_"+InterpMethod+"."+nlat+"_x_"+nlon+".nc"
+
+    dv_wrf              = ESMF_regrid(dv_reclin,Opt)
+    dv_wrf@long_name    = "Divergence: WRF Grid"
+    printVarSummary(dv_wrf)
+    print("dv_wrf: min="+min(dv_wrf)+"   max="+max(dv_wrf))
+
+;=================================================================
+;--- Plotting
+;=================================================================
+
+  level = 50    ; arbitrary  ... pick a level  
+
+ ;wks = gsn_open_wks("png","d04_div_"+level+"_"+x)
+  wks = gsn_open_wks("png","ESMF_regrid")
+
+;=================================================================
+;--- Plot: basic contour ; no map
+;=================================================================
+
+  plt = new(2,graphic)                      ; create a plot array
+  res_csm                     = True            ; plot mods desired
+  res_csm@gsnDraw             = False           ; don't draw
+  res_csm@gsnFrame            = False           ; don't advance frame
+  res_csm@cnInfoLabelOn       = False           ; turn off cn info label
+  res_csm@cnFillOn            = True            ; turn on color
+  res_csm@cnFillMode          = "RasterFill"
+  res_csm@cnLinesOn           = True            ; True is default
+  res_csm@cnLineLabelsOn      = False
+  res_csm@lbLabelBarOn        = False           ; turn off individual cb's
+;;res_csm@cnFillPalette       = "BlAqGrWh2YeOrReVi22"     ;  22 colors; white in the middle
+  res_csm@cnFillPalette       = "ViBlGrWhYeOrRe"          ; 101 colors; white in the middle
+
+  symMinMaxPlt (dv_reclin(level,:,:),20,False,res_csm)
+  res_csm@cnLevelSpacingF = 0.5*res_csm@cnLevelSpacingF       ; for 'fun' ... modify 
+
+  plt(0) = gsn_csm_contour(wks,dv_reclin(level,:,:),res_csm) 
+  plt(1) = gsn_csm_contour(wks,dv_wrf(level,:,:)   ,res_csm)
+
+  resP                     = True                ; modify the panel plot
+  resP@gsnPanelMainString = "gsn_csm: quick look contour plots: dv: level="+level
+  resP@gsnPanelLabelBar    = True                ; add common colorbar
+  resP@lbLabelFontHeightF  = 0.007               ; make labels smaller
+  gsn_panel(wks,plt,(/1,2/),resP)               ; now draw as one plot
+
+;=================================================================
+;--- Plot: contour wit map using WRF information
+;=================================================================
+
+  res               = True
+;;res@gsnMaximize   = True   ; maximize plot in frame
+  res@gsnDraw       = False  ; will panel later
+  res@gsnFrame      = False
+
+  res@tiMainFont    = "helvetica"     ; default is helvetica-bold
+  res@gsnAddCyclic  = False
+
+  res@cnFillOn      = True  
+  res@cnFillMode    = "RasterFill"
+  res@cnFillPalette = res_csm@cnFillPalette
+  res@cnLinesOn     = False
+  res@cnLineLabelsOn= False
+
+  symMinMaxPlt (dv_reclin(level,:,:),20,False,res)
+  res@cnLevelSpacingF = 0.5*res@cnLevelSpacingF       ; for 'fun' ... modify 
+
+; res@lbOrientation = "Vertical"
+  res@lbLabelBarOn  = False        ; will add in panel
+
+  res@pmTickMarkDisplayMode = "Always"        ; nicer tickmarks
+  res@mpDataBaseVersion     = "MediumRes"     ; better and more map outlines
+  res@mpFillOn              =  False
+
+;----------------------------------------------------------------------
+; Set resources to zoom in on lat/lon area of interest using either
+; the WRF map projection defined on the WRF file, or by setting the
+; lat/lon limits ourselves.
+;----------------------------------------------------------------------
+
+  USE_WRF_PROJECTION = True
+  if(USE_WRF_PROJECTION) then
+    res = wrf_map_resources(a,res)
+
+;---Change some of the defaults set by wrf_map_resources.
+    res@mpOutlineBoundarySets       = "AllBoundaries"  ; more outlines
+    res@mpDataSetName               = "Earth..2"
+    res@mpGeophysicalLineColor      = "black"    ; gray
+    res@mpNationalLineColor         = "Black"    ; gray
+    res@mpNationalLineThicknessF    = 2.0        ; 0.5
+    res@mpGeophysicalLineThicknessF = 2.0        ; 0.5
+  else
+    res@mpProjection   = "CylindricalEquidistant"
+    res@mpMinLatF      = minLat2D
+    res@mpMaxLatF      = maxLat2D
+    res@mpMinLonF      = minLon2D
+    res@mpMaxLonF      = maxLon2D
+    res@tiMainOffsetYF = -0.03           ; Move the title down
+  end if
+
+;----------------------------------------------------------------------
+; Create both plots; draw later in panel
+;----------------------------------------------------------------------
+  res@tiMainString     = "Rectilinear (" + \
+                         str_join(tostring(dimsizes(dv_wrf))," x ") + ")"
+  plot_orig = gsn_csm_contour_map(wks,dv_wrf(level,:,:),res)
+
+  if(USE_WRF_PROJECTION) then
+;   res@tfDoNDCOverlay = True          ; old method
+    res@tfDoNDCOverlay = "NDCViewport" ; data will be plotted natively
+    delete(dv_wrf@lat2d)
+    delete(dv_wrf@lon2d)
+  end if
+
+  res@tiMainString = "Regridded WRF (" + InterpMethod + ": "+ \
+                      str_join(tostring(dimsizes(dv_wrf))," x ") + ")"
+  plot_regrid = gsn_csm_contour_map(wks,dv_wrf(level,:,:),res)
+ 
+;----------------------------------------------------------------------
+; Draw both plots in a single panel
+;----------------------------------------------------------------------
+  pres                    = True
+  pres@gsnMaximize        = True
+  pres@gsnPanelLabelBar   = True
+  pres@pmLabelBarWidthF   = 0.8    ; make labelbar longer
+  pres@gsnPanelMainFont   = "helvetica-bold" 
+  pres@lbLabelFontHeightF = 0.01
+
+  if(USE_WRF_PROJECTION) then
+    pres@gsnPanelMainString = "Native WRF map projection"
+  else
+    pres@gsnPanelMainString = "Cylindrical equidistant projection"
+  end if
+
+  gsn_panel(wks,(/plot_orig,plot_regrid/),(/1,2/),pres)
+
+end

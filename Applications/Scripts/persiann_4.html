@@ -1,0 +1,327 @@
+;***************************************************************
+; persiann_4.ncl
+;
+; Concepts illustrated:
+;   - Reading one or more PERSIANN hourly files; 0.04 resolotion 
+;   - Reading big endian binary files
+;   - Reading records written by a fortran direct access write
+;   - Counting missing values
+;   - Calculating areal averages
+;   - Explicitly setting contour levels
+;   - Creating netCDF files
+;***************************************************************
+; Dataset README:
+;***************************************************************
+;    ftp://persiann.eng.uci.edu/CHRSdata/PERSIANN-CCS/hrly/
+;
+;    ---README
+;    hrly global ccs data is in row centric format.
+;    
+;    name scheme:
+;    	rgccs1h0934923.bin.gz
+;    w/ YYDDDHH  date/time 
+;    The HH represents the beginning of the hrly time period like so:
+;    	HH:00 to HH:59
+;    
+;    data are organized into YYYY subdirectories.
+;    
+;    Format is:
+;        binary in row centric format.
+;        short integer
+;        data are big-endian.
+;        units mm/hr *100
+;    
+;    coverage is:
+;    60N to 60S and 0 to 360 Longitude
+;    3000 rows x 9000 cols
+;    
+;    first value is NW most pixel centered at .02 lon and 59.98 N lat.
+;    next value is N most lat + .06 lon at .10 lon  and so on.
+;    last value is SE corner  
+;    
+;    NOTES:  there are "realtime" data up near the current time.
+;    	the realtime data begin to be reprocessed using more consistent
+;    	input data after 2 days delay.  The reprocessing can require
+;    	up to 24 hours.  
+;    
+;    	Efforts are underway to clear out any leftover "realtime" data
+;    	from this dataset.
+;    	
+;    ----------
+;    12/17/09
+;    Dan Braithwaite
+;    dbraithw@uci.edu
+;    Center for Hydrometeorology and Remote Sensing (CHRS)
+;    Department of Civil and Environmental Engineering
+;    University of California, Irvine
+;
+;*********** Load Libraries ************************************
+;
+; These files are loaded by default in NCL V6.2.0 and newer
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl" 
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl" 
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl" 
+;**************************************************************
+begin
+;***************************************************************
+; User Input
+;***************************************************************
+                                             ; INPUT
+   diri   = "./"                             ; specify input directory
+   fili   = systemfunc("cd "+diri+"; ls rgccs1h*bin")
+   print(fili)
+   nfili  = dimsizes(fili)
+                                             ; OUTPUT
+   netCDF = True                             ; generate netCDF file
+   PLOT   = True                             ; generate plots
+
+   if (netCDF) then
+       ncDir   = "./"                        ; directory for netCDF output
+       ncShort = True                        ; True=>create "short"; False=>float
+   end if
+
+   if (PLOT) then
+       pltDir  = "./"                        ; directory for plot output
+       pltType = "png"                       ; send graphics to PNG file 
+   end if
+
+;***************************************************************
+; End User Input
+;***************************************************************
+
+   do nf=0,nfili-1
+;***************************************************************
+; Miscellaneous: Parse the file name to extract strings/ date info
+;                rgccs1h1801522.bin
+;                012345678901234567
+;***************************************************************
+     fili_root   = str_get_cols(fili(nf), 0,13)
+     yyyy        = toint( str_get_cols(fili(nf), 7, 8) )
+     ddd         = toint( str_get_cols(fili(nf), 9,11) )
+     hh          = toint( str_get_cols(fili(nf),12,13) )
+     yyyy        = yyyy + 2000             ; four digit year
+
+     monday      = monthday(yyyy,ddd)
+     mm          = monday/100               ; month
+     dd          = monday - (mm*100)        ; day
+;***************************************************************
+; Read (big endian) binary file
+;***************************************************************
+     setfileoption("bin","ReadByteOrder","BigEndian")
+
+     nlat  = 3000                          
+     mlon  = 9000
+     prc_s = fbindirread(diri+fili(nf),0, (/nlat,mlon/),"short")  ; (3000,9000)
+
+;***************************************************************
+; Scale and add meta data
+;***************************************************************
+     prc   = prc_s*0.01                          ; (3000,9000)
+     prc@_FillValue  = -999.0
+     prc@units       = "mm/hr"
+     prc@long_name   = "PERSIANN CSS precip"
+
+     prc_s@_FillValue= toshort(-999)
+     prc@long_name   = "PERSIANN CSS precip"
+     prc_s@units     = "(mm/hr)"
+     prc_s@scale_factor = 0.01                   ; COARDS & CF convention
+     prc_s@add_offset   = 0.0
+
+;***************************************************************
+; Negative values indicate missing (_FillValue)
+;***************************************************************
+     prc   = where(prc.lt.0, prc@_FillValue, prc)
+
+;***************************************************************
+; Create/Add coordinate variables. See above.   
+;***************************************************************
+     lat       =  59.98  - ispan(0,nlat-1,1)*0.04  
+     lon       =   0.02  + ispan(0,mlon-1,1)*0.04 
+     lat!0     = "lat"
+     lat&lat   =  lat
+     lat@units = "degrees_north"
+     lat@long_name = "latitude"
+                                          ; longitude
+     lon!0     = "lon"
+     lon&lon   =  lon
+     lon@units = "degrees_east"
+     lon@long_name = "longitude"
+
+    ;printVarSummary(lat)                 ; [59.98 .. -59.98]
+    ;printVarSummary(lon)                 ; [ 0.02 .. 359.98] 
+
+;***************************************************************
+; Associate the spatial coordinates with variables
+;***************************************************************
+
+     prc!0      = "lat"                   ; 1st ... name the dimensions
+     prc!1      = "lon"
+     prc&lat    =  lat                    ; create coordinate variable
+     prc&lon    =  lon                    ; create coordinate variable
+
+     prc_s!0    = "lat"                   ; 1st ... name the dimensions
+     prc_s!1    = "lon"
+     prc_s&lat  =  lat                    ; create coordinate variable
+     prc_s&lon  =  lon                    ; create coordinate variable
+
+;***************************************************************
+; Simple data exploration: 
+;    Are there missing data?
+;    Count the number of missing values in each variable
+;
+;    Calculate weighted areal averages: ignore missing grid points
+;    Print results
+;***************************************************************
+; For 'fun': Look at the data. Most values are 0.0 
+; Create a temporary array which contains only precip values; no 0.0
+;***************************************************************
+     opt_stat = True
+     opt_stat@PrintStat = True
+    ;stat_prc = stat_dispersion(prc, opt_stst )   ; lots of 0s
+
+     prc_rain   = prc
+     prc_rain   = where(prc_rain.lt.0.001, prc_rain@_FillValue, prc_rain) ; distribution non-zero days 
+     stat_rain = stat_dispersion(prc_rain, opt_stat )
+
+     ;; [snip]
+     ;; 	 [2]             Min=0.01
+     ;; 	 [3]          LowDec=0.09
+     ;; 	 [4]          LowOct=0.12
+     ;; 	 [5]          LowSex=0.19
+     ;; 	 [6]     LowQuartile=0.36
+     ;; 	 [7]          LowTri=0.57
+     ;; 	 [8]          Median=1.14
+     ;; 	 [9]         HighTri=2.09
+     ;; 	 [10]   HighQuartile=2.82
+     ;; 	 [11]        HighSex=3.99
+     ;; 	 [12]        HighOct=4.95
+     ;; 	 [13]        HighDec=5.76
+     ;; [snip]
+
+     nMsg_prc = num(ismissing(prc ))
+     rad      = 4.*atan(1.0)/180.
+     clat     = cos(lat*rad)    ; simple cosine weighting
+
+     prcAvg   = wgt_areaave(      prc, clat, 1.0, 0)
+     prcRain  = wgt_areaave( prc_rain, clat, 1.0, 0)
+
+     print(" ")
+     print("Number missing: nMsg_prc="+nMsg_prc)
+     print(" ")
+     print("Original 0.04 grid: prcAvg="+prcAvg+"  prcRain="+prcRain)
+     print(" ")
+
+;************************************************
+; Create plot ?
+; Mimic the plot style used by PERSIANN URL
+;************************************************
+     if (PLOT) then
+         setvalues NhlGetWorkspaceObjectId() 
+                   "wsMaximumSize" : 5000000000
+         end setvalues 
+     
+         pltName = fili_root                 ; "Persiann_"+ str_get_cols(fili(nf), 7, 13)
+    
+         wks    = gsn_open_wks(pltType, pltDir+pltName)
+         colors = (/ "black", "Snow","Sienna","Blue", "SkyBlue1","PaleTurquoise" \
+                 ,"SeaGreen3" ,"Yellow", "Red","HotPink"/) 
+     
+         res                      = True     ; plot mods desired
+         res@gsnMaximize          = True     ; make ps/eps/pdf large
+       
+         res@cnFillOn             = True     ; turn on color fill
+         res@cnFillPalette        = colors   ; set color map
+         res@cnLinesOn            = False    ; turn off contour lines
+        ;res@cnFillMode           = "CellFill"           ; Cell Mode
+         res@cnFillMode           = "RasterFill"         ; Raster Mode
+         res@cnLineLabelsOn       =  False       ; Turn off contour lines
+         res@cnLevelSelectionMode = "ExplicitLevels"              
+         res@cnLevels             = (/0, 0.1, 0.25, 0.5, 0.75, 1.00, 2.5, 5.0, 10.0 /) ; "mm/hr" 
+         res@cnMissingValFillPattern = 0
+         res@cnMissingValFillColor   = "black"
+     
+         res@mpMinLatF            = -60.     ; CMORPH limits [approx]
+         res@mpMaxLatF            =  60.
+         res@mpCenterLonF         = 210.
+         res@mpFillOn             = False
+         res@mpOutlineOn          = True
+         res@mpOutlineBoundarySets  = "National"   ; turn on country boundaries
+         res@mpGeophysicalLineColor = "black"      ; color of cont. outlines
+         res@mpGeophysicalLineThicknessF = 1.5     ; thickness of outlines
+         res@mpNationalLineColor  = "white"
+
+         res@tiMainString    = fili
+         res@gsnCenterString = "Areal Mean="+sprintf("%5.3f",  prcAvg)+" Rain="+sprintf("%5.3f",  prcRain)
+         plot    = gsn_csm_contour_map(wks,prc, res)
+     end if    ; PLOT
+    
+;************************************************
+; Create netCDF ?
+; Recommend to always create a 'time' dimension 
+;************************************************
+    
+     if (netCDF) then
+         ntim     = 1
+
+         tunits   = "hours since 1990-01-01 00:00:0.0"    ; arbitrary
+         time     = cd_inv_calendar(yyyy,mm,dd,hh, 0,0d0,tunits, 0)
+         time!0   = "time"
+
+         date     = yyyy*1000000 + mm*10000 + dd*100 + hh
+         date!0   = "time"
+         date@units = "yyyymmddhh"
+         
+         globeAtt              = 1
+         globeAtt@title        = "PERSIANN: CSS: Hourly"    
+         globeAtt@ftp          = "ftp://persiann.eng.uci.edu/CHRSdata/PERSIANN-CCS/hrly/"
+         globeAtt@acronym      = "PERSIANN: Precipitation Estimation from Remotely Sensed Information using Artificial Neural Networks"
+         globeAtt@description  = "http://chrsdata.eng.uci.edu/"
+         globeAtt@Conventions  = "CF 1.0"                    
+         globeAtt@NCL          = "Conversion from binary (short) to netCDF"
+         globeAtt@creation_date= systemfunc ("date" )
+       
+         ncFil  = fili_root+".nc"
+         NCFILE = ncDir + ncFil
+         system ("/bin/rm -f " +  NCFILE)    ; remove any pre-exist file 
+             
+       ;;setfileoption("nc","Format","NetCDF4Classic")
+         setfileoption("nc","Format","NetCDF4")          ; better compression
+         ncdf   = addfile(NCFILE,"c")     
+       
+         setfileoption(ncdf, "definemode", True)
+         fileattdef( ncdf, globeAtt )        ; create the global [file] attributes
+                                           
+         dimNames = (/"time", "lat", "lon" /)  
+         dimSizes = (/ ntim ,  nlat,  mlon /) 
+         dimUnlim = (/ True , False, False /)   
+         filedimdef(ncdf, dimNames  , dimSizes,  dimUnlim )
+       
+         filevardef   (ncdf, "time"  , typeof(time), getvardims(time) )
+         filevarattdef(ncdf, "time", time)
+       
+         filevardef   (ncdf, "lat", typeof(lat), getvardims(lat))
+         filevarattdef(ncdf, "lat", lat)
+            
+         filevardef   (ncdf, "lon", typeof(lon), getvardims(lon))
+         filevarattdef(ncdf, "lon", lon)
+       
+         filevardef   (ncdf, "date"  , typeof(date), getvardims(date) )
+         filevarattdef(ncdf, "date", date)
+       
+         filevardef   (ncdf, "PRC"  , typeof(prc_s), (/"time","lat","lon"/) )
+         filevarattdef(ncdf, "PRC", prc_s)
+
+         ncdf->time   = (/ time /)
+         ncdf->lat    = (/ lat /)
+         ncdf->lon    = (/ lon /)
+         ncdf->date   = (/ date /)
+         if (ncShort) then
+             ncdf->PRC(0:0,:,:) = (/ prc_s/)
+         else
+             ncdf->PRC(0:0,:,:) = (/ prc  /)
+         end if
+
+     end if    ; netCDF
+
+   end do      ; nf (file) loop
+end

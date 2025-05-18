@@ -1,0 +1,821 @@
+<html>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Tools/ncl_convert2nc.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:32:51 GMT -->
+<head>
+<title>NCL: ncl_convert2nc</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="index.html" class="subitem">Tools</a></li>
+					<li><a href="WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+
+<a class=crumb href="../../index-2.html">NCL Home ></a>
+<a class=crumb href="../index-2.html">Documentation ></a>
+<a class=crumb href="index-2.html">Tools </a>
+<br>
+
+<h1>ncl_convert2nc</h1>
+
+ncl_convert2nc converts one or more GRIB1, GRIB2, HDF 4, HDF-EOS 2, HDF-EOS 5, 
+netCDF, and/or shapefile files to netCDF formatted files.
+
+<h2>Synopsis</h2>
+<p>
+
+<pre>
+  ncl_convert2nc inputFile(s) OPTIONS
+    inputFile(s)          name(s) of data file(s) [required] 
+                          [valid types: GRIB1 GRIB2 HDF HDF-EOS netCDF shapefile]
+    [-i input_directory]  location of input file(s)  [default: current directory]
+    [-o output_directory] location of output file(s) [default: current directory]
+    [-e extension]        file type, defined by extension, to convert [example: grb]
+    [-u time_name]        name of the NCL-named time dimension to be UNLIMITED
+    [-U new_time_name]    if -u is specified: new name of UNLIMITED variable and dimension
+    [-sed sed1[,...]]     GRIB files only; set single element dimensions [default: none]
+                            choices are initial_time, forecast_time, level, ensemble,
+                            probability, all, none
+    [-itime]              GRIB files only; set initial time as a single element dimension
+                            (same as -sed initial_time)
+    [-ftime]              GRIB files only; set forecast time as a single element dimension
+                            (same as -sed forecast_time)
+    [-tps]                GRIB files only; remove suffix representing a time period (e.g. 2h)
+                            from statistically processed variables, leaving only type of
+                            processing as a suffix (e.g. _acc, _avg)
+    [-v var1[,...]]       user specified subset of variables [default: all variables]
+                          ncl_filedump can be used to determine desired variable names
+    [-L]                  support for writing large (>2Gb) netCDF files [default: no largefile support]
+    [-nc4]                output a netCDF 4 file
+    [-nc4c]               output a netCDF 4 "classic" format file 
+    [-cl compression_level]  compression level 0 - 9 [ default 0 - only meaningful for netCDF 4 output]
+    [-th size_in_megabytes]  theshold size: variables larger than specified size will be written incrementally
+                          in order to limit in-core memory requirements; 0 (the default) means no threshold
+    [-c comment]          text to be included in netCDF file attribute [default: no comment]
+    [-l]                  list some information about each variable as it is copied
+    [-d]                  upon exit: print contents of each netCDF file [like ncdump -h]
+    [-B] &lt;file&gt;           suppress informational messages; redirect messages to &lt;file&gt; if present
+                          [default: /dev/null]
+    [-h]                  this usage message
+
+</pre>
+
+<h2>Description</h2>
+<p>
+
+ncl_convert2nc converts one or more
+<a href="../Manuals/Ref_Manual/NclFormatSupport.html#GRIB">GRIB1 and GRIB2</a>,
+<a href="../Manuals/Ref_Manual/NclFormatSupport.html#HDF">HDF 4</a>,
+<a href="../Manuals/Ref_Manual/NclFormatSupport.html#HDF-EOS">HDF-EOS 2</a>, or
+<a href="../Manuals/Ref_Manual/NclFormatSupport.html#HDF-EOS5">HDF-EOS 5</a>
+files to 
+<a href="../Manuals/Ref_Manual/NclFormatSupport.html#netCDF">netCDF</a>
+formatted files.  Each input file must be a GRIB, HDF, HDF-EOS,
+HDF-EOS5, shapefile, or netCDF file that NCL can read.  The output filenames will
+have the same name as the input filenames, except the output filenames
+will have the '.nc' extension ('.nc4' if the output file is NetCDF 4).  Each valid input file 
+will result in the creation of a corresponding netCDF output file. 
+
+<p>
+
+As of version <a href="../../prev_releases.html#5.2.0">5.2.0</a>,
+<strong>ncl_convert2nc</strong> can function as a converter between
+different netCDF formats as well as to select a subset of the
+variables in a netCDF file or change the compression level of netCDF 4
+classic files.
+
+<p>
+
+Support was added for HDF-EOS5 files in version <a
+href="../../prev_releases.html#5.2.0">5.2.0</a>.
+<p>
+
+Beta test support was added for shapefile in version <a
+href="../../prev_releases.html#5.1.1">5.1.1</a>.  The NCL binaries for
+AIX, Cygwin, and Sun systems may not have shapefile support available.
+<p>
+
+Support was added for GRIB2 files in version <a
+href="../../prev_releases.html#4.3.0">4.3.0</a>.
+<p>
+
+<h2>Options</h2>
+<p>
+
+ncl_convert2nc accepts the following arguments and options:
+<p>
+<dl>
+<dt>   inputFile(s)
+<dd>      The name of the input GRIB, HDF, HDF-EOS and/or HDF-EOS5 file(s).  More than one input
+          filename may be specified; in this case, each file is processed individually.
+          Specify a file extension, e.g. <i>.grb</i> to indicate the type of data contained
+          in the input file.  For many files of the same type, use the <i>-e</i> option.
+          This argument is required.
+<p>
+
+<dt>   -i input_directory
+<dd>      The location of input files.  Defaults to the current working directory. 
+<p>
+
+<dt>   -o output_directory
+<dd>      The location where output files will be written.  Defaults to the current working directory. 
+<p>
+
+<dt>   -e extension
+<dd>      Specifies the file extension to be applied to input file(s) that do not have an
+          extension denoting their type.  The value for <i>extension</i> must be one of
+          the valid extensions for data types 
+          <a href="../Manuals/Ref_Manual/NclFormatSupport.html#GRIB">GRIB</a>,
+          <a href="../Manuals/Ref_Manual/NclFormatSupport.html#HDF">HDF</a>,
+          <a href="../Manuals/Ref_Manual/NclFormatSupport.html#HDF-EOS">HDF-EOS</a>, or
+          <a href="../Manuals/Ref_Manual/NclFormatSupport.html#HDF-EOS">HDF-EOS5</a>.
+<p>
+<dt>   -u time_name
+<dd>      The name of the NCL-named time dimension to be dimensioned as UNLIMITED.
+<p>
+
+<dt>   -U new_time_name
+<dd>      If '-u' is specified: new name of the NCL-named time dimension to be dimensioned as UNLIMITED.
+<p>
+
+<dt>   -sed sed1[,...]
+<dd>        Sets the single element record dimensions for GRIB files; choices are Initial_time,
+            Forecast_time, Level, Ensemble, Probability, All, and None.  The default is None.
+<p>
+<dt>    -itime
+<dd>      Set time record dimension to initial_time.  This allows a variable with
+          only a single initial time to be treated as a single element dimension.
+<p>
+
+<dt>    -ftime
+<dd>      Set time record dimension to initial_time.  This allows a variable with
+          only a single forecast time to be treated as a single element dimension.
+<p>
+
+<dt>    -tps
+<dd>        If specified, removes the suffix representing a time period (e.g. 2h) from statistically
+            processed variables, leaving only the type of processing as a suffix (e.g. "_acc",
+            "_avg", etc.) for GRIB files.  The default is True, which leaves the suffix in place.
+<p>
+
+<dt>   -v var1[,...]
+<dd>      Specifies one or more variable names to be included in the output netCDF
+          file.  One or more variables must be specified by name, in a comma-delimited
+          list (without blanks or other whitespace characters).  Named variables must be valid
+          within the input file.
+<p>
+
+<a name="LargeFile"></a>
+<dt>   -L
+<dd>      Specifies that the resultant netCDF output file may exceed 2Gb in size on
+          platforms that have "large file support" (LFS).  However, no single variable
+          may exceed 2Gb in the current implementation.
+<p>
+<dt>   -nc4
+<dd>      Specifies the netCDF 4 format for the output file.<br>
+          [NCL V6.5.0 and later]
+
+<p>
+
+<dt>   -nc4c
+<dd>      Specifies the netCDF 4 "classic" format for the output file.
+
+<p>
+
+<p>
+<dt>   -cl compression_level
+<dd>      Sets the compression level for all variables in a netCDF 4 file. The valid range is 0 - 9, with
+          0 meaning no compression and 9 meaning maximum compression. In practice, values above 5 produce
+          little addition compression but take much more time to complete.
+<p>
+
+<p>
+<dt>   -th size_in_megabytes
+<dd>      If greater than 0, sets a threshold size for variables being copied. Variables larger than the
+          threshold size will be copied in chunks to limit the in-core memory requirements needed for the 
+          copying operation. On machines without a lot of memory this option often can significantly shorten 
+          the time required. However, if writing a compressed netCDF 4 file, it can have the opposite effect 
+          because the the compression algorithm may be operating across the chunk boundaries.
+<p>
+
+<dt>   -c comment
+<dd>      User-supplied text to be included as a netCDF file attribute called "comment."
+<p>
+
+<dt>   -l 
+<dd>      List some information about each variable as it is processed. This can be used to guage the progress
+          of the conversion operation when large files are processed.
+
+<p>
+
+<dt>   -d 
+<dd>      Print the contents of each output netCDF file before exiting the process.
+
+<p>
+
+<dt>   -B &lt;file&gt;
+<dd>      Suppresses informational messages emitted by ncl_convert2nc.  If &gt;file&lt; is provided,
+          messages are redirected there.  Defaults to /dev/null (messages discarded).
+<p>
+
+
+<dt>   -h
+<dd>      Display a short message explaining the command usage, and exit.
+</dl>
+
+
+<h2>Examples</h2><p>
+
+<b>Example 1</b>
+<p>
+
+The following converts the input GRIB file 'U12345.grb' to a netCDF-formatted 
+file called 'U12345.nc' written in the current working directory.  The resultant
+netCDF file is shown (in part).
+
+<pre>
+          % ncl_convert2nc U12345.grb
+          [...]
+          filename:       U12345
+          path:   U12345.nc
+             file global attributes:
+                creation_date : Wed Jan  2 13:47:15 MST 2018
+                NCL_Version : 6.5.0
+                conventions : None
+                grib_source : U12345.grb
+                title : NCL: convert-GRIB-to-netCDF
+
+</pre>
+
+<b>Example 2</b>
+<p>
+
+The following converts the input GRIB files 'U12345' and 'U67890' to netCDF-formatted 
+files called 'U12345.nc' and 'U67890.nc' written in the current working directory.  It
+also creates a singly dimensioned element for initial time.  The resultant netCDF
+files are shown (in part).
+
+<pre>
+          % ncl_convert2nc U12345 U67890 -e grb -itime
+          [...]
+          filename:       U12345
+          path:   U12345.nc
+             file global attributes:
+                creation_date : Wed Nov  2 13:47:15 MST 2017
+                NCL_Version : 6.4.0
+                conventions : None
+                grib_source : U12345
+                title : NCL: convert-GRIB-to-netCDF
+
+          filename:       U67890
+          path:   U67890.nc
+             file global attributes:
+                creation_date : Wed Nov  2 13:48:21 MST 2017
+                NCL_Version : 6.4.0
+                conventions : None
+                grib_source : U67890
+                title : NCL: convert-GRIB-to-netCDF
+          dimensions:
+             initial_time0_hours = 1
+            
+</pre>
+
+<b>Example 3</b>
+<p>
+
+The following converts the input GRIB file 'U12345' to a netCDF-formatted 
+file called 'U12345.nc' written in the current working directory.  Note that
+specifying the input file as 'U12345.grb' tells <b>ncl_convert2nc</b> to treat
+the file as GRIB data, even though there is no extension to indicate this, nor
+is the <i>-e extension</i> option specified.  The resultant netCDF file is shown
+(in part).
+
+<pre>
+          % ncl_convert2nc U12345.grb
+          [...]
+          filename:       U12345
+          path:   U12345.nc
+             file global attributes:
+                creation_date : Wed Nov  2 13:47:15 MST 2017
+                NCL_Version : 6.4.0
+                conventions : None
+                grib_source : U12345
+                title : NCL: convert-GRIB-to-netCDF
+
+</pre>
+
+<b>Example 4</b>
+<p>
+
+The following converts the input GRIB file 'U12345.grb' and HDF file 'U67890.hdf' located
+in the directory /data/dss/INPUT to netCDF-formatted files called 'U12345.nc' and 'U67890.nc'
+written in the directory /data/dss/netCDF.  The resultant netCDF files are shown (in part).
+
+<pre>
+          % ncl_convert2nc U12345.grb U67890.hdf -i /data/dss/INPUT -o /data/dss/netCDF
+          [...]
+          filename:       U12345
+          path:   /data/dss/netCDF/U12345.nc
+             file global attributes:
+                creation_date : Wed Nov  2 13:47:15 MST 2017
+                NCL_Version : 6.4.0
+                conventions : None
+                grib_source : U12345.grb
+                title : NCL: convert-GRIB-to-netCDF
+
+          [...] 
+
+          filename:       U67890
+          path:   /data/dss/netCDF/U67890.nc
+             file global attributes:
+                creation_date : Wed Nov  2 13:48:12 MST 2017
+                NCL_Version : 6.4.0
+                conventions : None
+                hdf_source : U67890.hdf
+                title : NCL: convert-HDF-to-netCDF
+
+</pre>
+
+<b>Example 5</b>
+<p>
+
+The following converts the input GRIB file 'U12345.grb' and HDF-EOS file
+'/data/hdfeos/05062005.hdfeos' to netCDF-formatted files called 'U12345.nc' and
+'05062005.nc' written in the current working directory.  The resultant netCDF files
+are shown(in part).
+
+<pre>
+          % ncl_convert2nc U12345.grb /data/hdfeos/05062005.hdfeos
+          [...]
+          filename:       U12345
+          path:   U12345.nc
+             file global attributes:
+                creation_date : Wed Nov  2 13:47:15 MST 2017
+                NCL_Version : 6.4.0
+                conventions : None
+                grib_source : U12345.grb
+                title : NCL: convert-GRIB-to-netCDF
+
+          [...] 
+
+          filename:       05062005
+          path:   05062005.nc
+             file global attributes:
+                creation_date : Wed Nov  2 13:48:15 MST 2017
+                NCL_Version : 6.4.0
+                conventions : None
+                hdfeos_source : /data/hdfeos/05062005.hdfeos
+                title : NCL: convert-HDFEOS-to-netCDF
+
+</pre>
+
+<b>Example 6</b>
+<p>
+
+The following converts the input HDF file 'U12345.hdf' located in the current
+working directory to a netCDF-formatted file called 'U12345.nc' written in the
+current working directory and sets the netCDF 'comment' attribute to the text
+'Data Support Section: ds124.1'.  Any informational and/or warning messages are
+suppressed.  The resultant netCDF file is shown (in part).
+
+<pre>
+          % ncl_convert2nc U12345.hdf -c 'Data Support Section: ds124.1' -B
+
+          [...]
+
+          filename:       U12345
+          path:   U12345.nc
+             file global attributes:
+                comment: Data Support Section: ds124.1
+                creation_date : Wed Nov  2 13:47:15 MST 2017
+                NCL_Version : 6.4.0
+                conventions : None
+                hdf_source : U12345.hdf
+                title : NCL: convert-HDF-to-netCDF
+
+</pre>
+
+<b>Example 7</b>
+<p>
+
+The following converts the input GRIB file 'U12345.grb' located in the current
+working directory to a netCDF-formatted file called 'U12345.nc' written in the
+current working directory and writes only the variables 'PRES_6_SFC' and
+'PRES_6_TRO' to the output file.  The output file supports netCDF-formatted
+"large files;" that is, files larger than 2Gb in size.  The resultant netCDF
+file is shown (in part).
+
+<pre>
+          % ncl_convert2nc U12345.grb -v PRES_6_SFC,PRES_6_TRO -L
+          [...]
+          filename:       U12345
+          path:   U12345.nc
+             file global attributes:
+                creation_date : Wed Nov  2 13:47:15 MST 2017
+                NCL_Version : 6.4.0
+                conventions : None
+                grib_source : U12345.grb
+                title : NCL: convert-GRIB-to-netCDF
+
+          [...]
+
+          variables:
+             float PRES_6_SFC ( gridx_6, gridy_6 )
+                initial_time : 10/24/1995 (00:00)
+                forecast_time :        0
+                parameter_number :     1
+                grid_number :  6
+                level_indicator :      1
+                coordinates :  gridlat_6 gridlon_6
+                units :        Pa
+                long_name :    Pressure
+                center :       US National Weather Service - NCEP (WMC)
+                _FillValue :   -999
+
+             float PRES_6_TRO ( gridx_6, gridy_6 )
+                initial_time : 10/24/1995 (00:00)
+                forecast_time :        0
+                parameter_number :     1
+                grid_number :  6
+                level_indicator :      7
+                coordinates :  gridlat_6 gridlon_6
+                units :        Pa
+                long_name :    Pressure
+                center :       US National Weather Service - NCEP (WMC)
+                _FillValue :   -999
+
+</pre>
+
+<b>Example 8</b>
+<p>
+
+The following prints the <b>usage message</b>:
+
+<pre>
+           % ncl_convert2nc -h
+             ncl_convert2nc inputFile(s) OPTIONS
+               inputFile(s)          name(s) of data file(s) [required] 
+                                     [valid types: GRIB1 GRIB2 HDF HDF-EOS netCDF shapefile]
+               [-i input_directory]  location of input file(s)  [default: current directory]
+               [-o output_directory] location of output file(s) [default: current directory]
+               [-e extension]        file type, defined by extension, to convert [example: grb]
+               [-u time_name]        name of the NCL-named time dimension to be UNLIMITED
+               [-U new_time_name]    if -u is specified: new name of UNLIMITED variable and dimension
+               [-sed sed1[,...]]     GRIB files only; set single element dimensions [default: none]
+                                       choices are initial_time, forecast_time, level, ensemble,
+                                       probability, all, none
+               [-itime]              GRIB files only; set initial time as a single element dimension
+                                       (same as -sed initial_time)
+               [-ftime]              GRIB files only; set forecast time as a single element dimension
+                                       (same as -sed forecast_time)
+               [-tps]                GRIB files only; remove suffix representing a time period (e.g. 2h)
+                                       from statistically processed variables, leaving only type of
+                                       processing as a suffix (e.g. _acc, _avg)
+               [-v var1[,...]]       user specified subset of variables [default: all variables]
+                                     ncl_filedump can be used to determine desired variable names
+               [-L]                  support for writing large (>2Gb) netCDF files [default: no largefile support]
+               [-nc4]                output a netCDF 4 file
+               [-nc4c]               output a NetCDF 4 classic format file
+               [-cl] <compression level>  compression level 0 - 9 [ default 0 - only meaningful for NetCDF 4 output]
+               [-th] <size in megabytes> theshold size: variables larger than specified size will be written incrementally
+                                     in order to limit in-core memory requirements; 0 (the default) means no threshold
+               [-c comment]          text to be included in netCDF file attribute [default: no comment]
+               [-l]                  list some information about each variable as it is copied
+               [-d]                  upon exit: print contents of each netCDF file [like ncdump -h]
+               [-B] &lt;file&gt;           suppress informational messages; redirect messages to &lt;file&gt; if present 
+                                     [default: /dev/null]
+               [-h]                  this usage message
+
+</pre>
+
+<h2>See also</h2><p>
+
+<a href="ncl_filedump.html">ncl_filedump</a>
+<p>
+
+<h2>Troubleshooting</h2><p>
+
+If you try to convert a file to netCDF and get the following 
+error message:
+
+<pre>
+   ncendef: ncid 0: NetCDF: One or more variable sizes violate format
+   constraints
+</pre>
+
+Then you may have what qualifies as a "large file", and you need to
+use the "<a href="#LargeFile">-L</a>" option with ncl_convertnc.
+
+<p>
+
+<h2>Caveats</h2><p>
+
+To convert Community Climate Model (CCM) files, please use the <i>ccm2nc</i> tool, available
+at the <a href="http://www.cgd.ucar.edu/cms/ccm3/tools">CCM Software Tools</a> site.
+<p>
+It is important to note is that 
+<a href="../Manuals/Ref_Manual/NclFormatSupport.html#GRIB">GRIB</a> is a
+read-only format -- GRIB files can not be created using NCL.  This is because, in
+general, the community that NCL serves does not use GRIB as an archival format.
+<p>
+There is currently limited capability within NCL to write files in
+<a href="../Manuals/Ref_Manual/NclFormatSupport.html#HDF">HDF</a> format.
+<p>
+There is currently no capability within NCL to write files in
+<a href="../Manuals/Ref_Manual/NclFormatSupport.html#HDF-EOS">HDF-EOS</a> and 
+<a href="../Manuals/Ref_Manual/NclFormatSupport.html#HDF-EOS5">HDF-EOS5</a> format.
+<p>
+
+NCL does not currently support HDF 5 or netCDF 4 (except NetCDF 4 classic model)  data formats.
+<p>
+
+
+Files written using the 
+<a href="../Manuals/Ref_Manual/NclFormatSupport.html#netCDF">netCDF</a>-supported
+large file format may be greater than 2Gb in size; however, at this time NCL does not
+support writing single variables greater than 2Gb.
+<p>
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Tools/ncl_convert2nc.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:32:52 GMT -->
+</html>

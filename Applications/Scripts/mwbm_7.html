@@ -1,0 +1,711 @@
+;***************************************************************
+; mwbm_7.ncl     
+;
+; Concepts illustrated:
+;   - Read one or more CMIP6 files containing needed variables
+;   - Read Mississippi River Basin (MRB) shapefile
+;   - Using the MRB shapefile; Extract data within the Mississippi River Basin
+;   - Calculate maximum number of sun hours and potential evapotranspiration`
+;   - Use a simple USGS *monthly water balance model* 
+;   - Average all grid values within the MRB
+;   - Calculate trends
+;   - Calculate non-overlapping decadal and 30-year normal climatologies
+;   - Print and plot  the averaged results
+;***************************************************************
+; REFERENCE:
+; A Monthly Water-Balance Model Driven By a Graphical User Interface
+; G.J. McCabe and S.L. Markstrom (2007)
+; https://pubs.usgs.gov/of/2007/1088/pdf/of07-1088_508.pdf
+;***************************************************************
+; Data used: 600-yrs from the CMIP6-abrupt4xCO2
+;***************************************************************
+load "./shapefile_utils.ncl"
+load "./MWBM_DRIVER.ncl"
+;=============================================================================
+;                    Function with CESM/CAM temporal bug fix
+;=============================================================================
+undef("time_reassign_cv2var")
+function time_reassign_cv2var(f, timeName[1]:string, varName[1]:string)
+;
+;   f1   = addfile ("foo.nc","r")
+;   temp = time_reassign_cv2var(f1, "time", "T")
+; or
+;   f2   = addfiles(  fils   ,"r")
+;   temp = time_reassign_cv2var(f2, "time", "T")
+begin
+  if (.not.(typeof(f).eq."file" .or. typeof(f).eq."list")) then
+      print("getVar_time_reassign: FATAL: input argument f must be of type list or file: type is "+typeof(f)) 
+      exit
+  end if
+
+  time = time_reassign(f, timeName)   ; new time coordinate
+
+  if (typeof(f).eq."file") then
+      if (isfilevar(f,varName)) then
+          var = f->$varName$
+      else
+          print("time_reassign_cv2var: FATAL: variable "+varName+" on file") 
+          exit
+      end if
+  else                                ; must be type list
+      if (isfilevar(f[0],varName)) then
+          var = f[:]->$varName$       ; changed 4 March 2019:    f to f[:]
+      else
+          print("time_reassign_cv2var: FATAL: variable "+varName+" on file") 
+          exit
+      end if
+  end if
+
+  var&$timeName$ = time               ; rassign time coordinate variable (cv)
+  var@NCL = "function time_reassign_cv2var used to reassign time coordinate variable to mid-value of bounds"
+  return(var)
+end
+
+;===========================================================
+
+undef ("monClmSegment")
+function monClmSegment(x:numeric, nyrSeg[1]:integer)
+;
+;---Compute non-overlapping climatologies 
+;   Climate Normals: Traditionally, a Climate Normal is defined
+;                    as an average over a recent 30-year period 
+;
+local dimx, rnkx, ntim, klev,nlat, mlon, nSegMon, nSegment, xSegClm \
+    , nt, ntStrt, ntLast, clmSegStrt, clmSegLast, dimNames, tName, time
+begin
+  dimx = dimsizes(x)
+  rnkx = dimsizes(dimx)
+
+  ntim = dimx(0)
+  if (mod(ntim,12).ne.0) then
+      print("monClmSegment: dimsizes(time) must be a multiple of 12: ntim="+ntim)
+      exit
+  end if
+  nlat = dimx(rnkx-2)
+  mlon = dimx(rnkx-1)
+  if (rnkx.eq.4) then
+      klev = dimx(2)
+  end if
+
+  nSegMon  = nyrSeg*12
+  nSegment = ntim/nSegMon                         
+  if (mod(ntim,nSegMon).ne.0) then
+      nSegment = nSegment+1            ; will force 'overlap' segment                        
+  end if
+
+  dimNames   = getvardims(x) 
+  tName      = dimNames(0) 
+  time       = x&$tName$
+  clmSegStrt = new(nSegment,typeof(time),"No_FillValue")
+  clmSegLast = new(nSegment,typeof(time),"No_FillValue")
+
+  if (rnkx.eq.3) then
+      xSegClm  = new( (/nSegment,12,nlat,mlon/),typeof(x),getVarFillValue(x))  ; Segment climatologies
+      do nt=0,ntim-1,nSegMon
+         ntStrt = nt
+         ntLast = nt+nSegMon-1
+         if (ntLast.gt.(ntim-1)) then    ; ? rebase
+             ntStrt = ntim-nSegMon
+             ntLast = ntim-1
+         end if
+         xSegClm(nt/nSegMon,:,:,:) = clmMonTLL(x(ntStrt:ntLast,:,:))    
+         clmSegStrt(nt/nSegMon) = time(ntStrt)
+         clmSegLast(nt/nSegMon) = time(ntLast)
+      end do
+  else
+      xSegClm  = new( (/nSegment,12,klev,nlat,mlon/),typeof(x),getVarFillValue(x))  ; Segment climatologies
+      do nt=0,ntim-1,nSegMon
+         ntStrt = nt
+         ntLast = nt+nSegMon-1
+         if (ntLast.gt.(ntim-1)) then   ; ? rebase
+             ntStrt = ntim-nSegMon
+             ntLast = ntim-1
+         end if
+         xSegClm(nt/nSegMon,:,:,:,:) = clmMonTLL(x(ntStrt:ntLast,:,:,:))    
+         clmSegStrt(nt/nSegMon) = time(ntStrt)
+         clmSegLast(nt/nSegMon) = time(ntLast)
+      end do
+  end if
+  xSegClm!0       = "clmSegment"
+  xSegClm@NCL_tag = "monClmSegment"
+
+  clmSegStrt!0         = "clmSegStrt"
+  clmSegStrt@long_name = "Segment Start Time"
+  clmSegStrt@units     = time@units
+  delete(clmSegStrt@_FillValue)
+
+  clmSegLast!0         = "clmSegLast"
+  clmSegLast&clmSegLast=  clmSegLast
+  clmSegLast@long_name = "Segment Last Time"
+  clmSegLast@units     = time@units
+  delete(clmSegLast@_FillValue)
+
+  return([/xSegClm, clmSegStrt, clmSegLast /])
+end
+
+;=============================================================================
+;                            MAIN
+;=============================================================================
+  CMIP6        = "CMIP6-abrupt4xCO2"
+
+;---Mississipi River Basin (MRB) Shapefile
+;---Open: read MRB lat/lon values.
+  
+  REGION       = "MRB"       ; (/"Mississipi_River_Basin"/) 
+  shp_dir      = ncargpath("data") + "/shp/"
+  shp_filename = shp_dir + "mrb.shp"
+ ;fmsh = addfile(shp_filename,"r")
+ ;mrb_lon      = fmsh->x
+ ;mrb_lat      = fmsh->y
+ ;printMinMax(mrb_lon,0)    ; min=-114.0676067274104   max=-77.83628053033944
+ ;printMinMax(mrb_lon,0)    ; min=  28.9300332210523   max= 49.00003302690424
+ 
+;---Specify Mississippi River Basin 'box'  
+
+  lonL    =  240            ; slightly larger region; model uses 0-360 ; lonL=-120W = 360-120=240
+  lonR    =  285            ;                                          ; lonE= -75W = 360- 75=285 
+  latS    =   25
+  latN    =   52
+
+; CMIP6 
+
+  diri    = "/project/yampa02/asphilli/b.e21.BCO2x4cmip6.f09_g17.CMIP6-abrupt4xCO2/"
+
+  fPRECT  = "b.e21.BCO2x4cmip6.f09_g17.CMIP6-abrupt4xCO2.001.cam.h0.PRECT*nc"
+  fPRECSC = "b.e21.BCO2x4cmip6.f09_g17.CMIP6-abrupt4xCO2.001.cam.h0.PRECSC*nc"
+  fPRECSL = "b.e21.BCO2x4cmip6.f09_g17.CMIP6-abrupt4xCO2.001.cam.h0.PRECSL*nc"
+  fTREFHT = "b.e21.BCO2x4cmip6.f09_g17.CMIP6-abrupt4xCO2.001.cam.h0.TREFHT*nc"
+
+  filprc  = systemfunc("cd "+diri+" ; ls "+fPRECT )  ; Total (convective & large-scale) prc rate (liq + ice)" 
+  filsnc  = systemfunc("cd "+diri+" ; ls "+fPRECSC)  ; Convective snow rate (water equivalent)
+  filsnl  = systemfunc("cd "+diri+" ; ls "+fPRECSL)  ; Large scale snow rate (water equivalent)
+  filtmp  = systemfunc("cd "+diri+" ; ls "+fTREFHT)  ; Reference temperature
+      
+  pthprc  =  diri + filprc
+  pthsnc  =  diri + filsnc
+  pthsnl  =  diri + filsnl
+  pthtmp  =  diri + filtmp
+
+  nfils   = dimsizes(filprc)
+
+  nfStrt  = 0
+  nfLast = nfils-1   ; all files
+
+  fprc    = addfiles(pthprc(nfStrt:nfLast), "r")            ; span one-or-more files
+  fsnc    = addfiles(pthsnc(nfStrt:nfLast), "r")
+  fsnl    = addfiles(pthsnl(nfStrt:nfLast), "r")
+  ftmp    = addfiles(pthtmp(nfStrt:nfLast), "r")
+                                                            ; correct the dates
+  prc     = time_reassign_cv2var(fprc, "time", "PRECT" )    ; full grid
+  snoc    = time_reassign_cv2var(fsnc, "time", "PRECSC")   
+  snol    = time_reassign_cv2var(fsnl, "time", "PRECSL")   
+  tmp     = time_reassign_cv2var(ftmp, "time", "TREFHT")
+
+  prc    := prc(:,{latS:latN},{lonL:lonR})                  ; convenience
+  snoc   := snoc(:,{latS:latN},{lonL:lonR})
+  snol   := snol(:,{latS:latN},{lonL:lonR})
+  tmp    := tmp(:,{latS:latN},{lonL:lonR})
+
+  printVarSummary(tmp)  
+  printMinMax(tmp,0)
+  print("nmsg_tmp="+num(ismissing(tmp)))
+  print("---------")
+
+  sno           = snoc + snol    ; Richard Neale: Total snow is PRECSC+PRESCL (conv + large scale).
+  sno@long_name = "Total Snow"
+  sno@info      = "Total snow is PRECSC+PRESCL (conv + large scale): Rich Neale (3/5/19)"
+  copy_VarCoords(snoc, sno)
+  delete( [/ snoc, snol /] )
+
+;---Extract/Create assorted 'time' variables
+
+  time    = prc&time
+  ntim    = dimsizes(time)
+
+  yyyymmdd= cd_calendar(time, -2)
+  yyyy    = yyyymmdd/10000
+  yyyymm  = yyyymmdd/100
+  mmdd    = yyyymmdd - (yyyy*10000)
+  mm      = mmdd/100
+  dd      = mmdd - mm*100
+
+  yyyy@calendar = time@calendar
+  dmm     = days_in_month(yyyy, mm) 
+  doy     = day_of_year(yyyy, mm, dd)  
+
+  DMM  = conform(prc, dmm, 0)
+  DOY  = conform(prc, doy, 0)
+
+;---Change units to those rquired by the Monthly Water Balance Model
+
+  tmp       = tmp - 273.15
+  tmp@units = "degC"
+
+  prc       = prc*86400*DMM*1000    ; [m]*86400 [sec/day] * dmm [day/month] * 1000 [mm/m]
+  prc@long_name = "Prc Total"       ; short name for plot
+  prc@units = "mm"
+  
+  sno = sno*86400*DMM*1000    
+  sno@long_name = "Snow Total"
+  sno@units = "mm"
+   
+; flip CESM 0-360 longitude coordinate values to -180 to +180
+; The shapefile polygon uses -180 to +180
+
+  tmp_flip = tmp(0,:,:)
+  tmp_flip&lon  = (/ tmp_flip&lon - 360 /) 
+
+  printVarSummary(tmp_flip)    ; [lat | 28] x [lon | 37]
+  print("nmsg_tmp_flip="+num(ismissing(tmp_flip)))
+  print("-----------")         ; lat: [25.92 .. 51.36]
+                               ; lon: [-120  .. -75]
+;---Create shapefile mask
+
+  opt_shape = True
+  opt_shape@return_mask = True 
+  opt_shape@minlat = latS
+  opt_shape@maxlat = latN
+  opt_shape@minlon = lonL-360   ; polygons use -180 to 180
+  opt_shape@maxlon = lonR-360  
+  opt_shape@debug  = True 
+
+  mrb_mask  = shapefile_mask_data(tmp_flip,shp_filename,opt_shape)
+
+  printVarSummary(mrb_mask)   ; [28][37]   ... no meta data
+  printMinMax(mrb_mask,0)     ; min=0   max=1
+  print("-----------")
+
+;---These are some initial parameters used by the MWBM
+;---Read MWBM documentation
+
+  npt       = dimsizes(REGION)
+  PRESTOR   = (/   0 /)       
+  WHC       = (/ 150 /)       
+  TRAIN     = conform_dims( npt,  3.3, -1)   ; not used here
+  TSNOW     = conform_dims( npt,-10.0, -1)   ;  "   "    "
+  MELTMAX   = (/ 0.0 /)                      ;  "   "    "
+  REMAIN    = (/ 0.0 /)
+  DROFRAC   = conform_dims( npt, 0.05, -1) 
+  RUNOFF_FAC= conform_dims( npt, 0.50, -1) 
+
+  opt_mwbm   = True   
+  opt_mwbm@PRESTOR  = PRESTOR
+  opt_mwbm@WHC      = WHC
+  opt_mwbm@TRAIN    = TRAIN
+  opt_mwbm@TSNOW    = TSNOW
+  opt_mwbm@MELTMAX  = MELTMAX
+  opt_mwbm@REMAIN   = REMAIN
+  opt_mwbm@DROFRAC  = conform_dims( npt, 0.05, -1) 
+  opt_mwbm@RUNOFF_FACTOR= conform_dims( npt, 0.50, -1) 
+
+; Extract current region
+
+  TMP := tmp(:,{latS:latN},{lonL:lonR}) 
+  PRC := prc(:,{latS:latN},{lonL:lonR}) 
+  SNO := sno(:,{latS:latN},{lonL:lonR}) 
+
+printVarSummary(TMP)
+
+  dimTMP = dimsizes(TMP)
+  nlat   = dimTMP(1)
+  mlon   = dimTMP(2)
+    
+; Pre-Compute Sunlight hours: strictly a function of latitude and day-of-year
+; Needed for the Hamon Potential Evapotranspiration
+
+  sunhrx := daylight_fao56(doy, TMP&lat)       ; max daylight/sun hr per day
+  sunhrx := conform( PRC, sunhrx, (/0,1/))
+  copy_VarCoords(PRC, sunhrx)
+
+; Pre-Compute Potential Evapotranspiration
+
+  pet := refevt_hamon_mwbm(TMP, sunhrx, (/0,0/))
+  pet  = pet*conform(pet,dmm,0)                             ; mm/month
+  pet@units = "mm/month"
+
+; MWBM: Transfer initial MWBM setting via 'opt_mwbm'  
+
+  MWBM  = mwbm_driver(PRC, TMP, pet, SNO, mrb_mask, opt_mwbm)      ; Type: list <fifo> Total items: 10
+                                                                   ; Ten variables returned
+  print("##################################################")
+  printVarSummary(MWBM)
+  print("##################################################")
+      
+  pmpe     = MWBM[0]
+  sms      = MWBM[1]
+  aet      = MWBM[2]
+  deficit  = MWBM[3]
+  snstor   = MWBM[4]
+  surplus  = MWBM[5]
+  runoff   = MWBM[6]
+  rodirect = MWBM[7]
+  smelt    = MWBM[8]
+  rain     = MWBM[9]
+
+;---Explore soil moisture storage (sms) statistical properties
+
+  opt = True
+  opt@PrintStat = True
+  stat_sms = stat_dispersion(sms, opt )
+
+;---Average region: No need to areally weight but I did it anyway
+  
+  d2r         = get_d2r(typeof(TMP))
+  wgt         = cos(d2r*TMP&lat)
+
+  tmpAvg     := wgt_areaave_Wrap(TMP, wgt, 1.0, 0)
+  prcAvg     := wgt_areaave_Wrap(PRC, wgt, 1.0, 0)
+  snoAvg     := wgt_areaave_Wrap(SNO, wgt, 1.0, 0)
+  petAvg     := wgt_areaave_Wrap(pet, wgt, 1.0, 0)
+  aetAvg     := wgt_areaave_Wrap(aet, wgt, 1.0, 0)
+  pmpeAvg    := wgt_areaave_Wrap(pmpe,wgt, 1.0, 0)
+  rainAvg    := wgt_areaave_Wrap(rain,wgt, 1.0, 0)
+  surplusAvg := wgt_areaave_Wrap(surplus, wgt, 1.0, 0)
+  runoffAvg  := wgt_areaave_Wrap(runoff , wgt, 1.0, 0)
+  deficitAvg := wgt_areaave_Wrap(deficit, wgt, 1.0, 0)
+  snstorAvg  := wgt_areaave_Wrap(snstor , wgt, 1.0, 0)
+  smsAvg     := wgt_areaave_Wrap(sms    , wgt, 1.0, 0)
+
+;---Print values: Areal avg [unweighted for test]
+
+  print(" YYYY MM dmm doy     T    PRC    PET    diff  PRAIN  PSNOW  SURPLUS RUNOFF DEFICIT SNSTOR   SMS")
+  print("-----")
+ 
+  print(sprinti("%5.0i",yyyy)   +sprinti("%3.0i", mm)     \
+    +sprinti("%4.0i",dmm)       +sprinti("%4.0i",doy)     \
+    +sprintf("%7.1f", tmpAvg)   +sprintf("%7.2f", prcAvg) \
+    +sprintf("%7.2f", petAvg)   +sprintf("%7.2f",pmpeAvg) \
+    +sprintf("%7.1f", rainAvg)  +sprintf("%7.1f", snoAvg) \
+    +sprintf("%7.2f",surplusAvg)+sprintf("%7.2f",runoffAvg) \
+    +sprintf("%8.2f",deficitAvg)                          \
+    +sprintf("%8.2f",snstorAvg) +sprintf("%7.1f",  smsAvg))  
+
+;=============================================================================
+;===============> YEAR-MONTH TIME SERIES PLOTS <==============================
+;=============================================================================
+  nvar          = 10
+  plot          = new (nvar , "graphic")
+  pltType       = "png"        ; "pdf", "x11", "ps", "png"
+  pltDir        = "./"
+  pltName       = "MWBM_"+REGION+"_"+CMIP6+".TREND"
+
+  yrfrac        = yyyymm_to_yyyyfrac(yyyymm, 0.0)  ; x-axis
+
+  wks             = gsn_open_wks (pltType, pltDir+pltName)
+  resxy           = True                   ; plot mods desired
+  resxy@gsnDraw   = False                  ; don't draw yet      
+  resxy@gsnFrame  = False                  ; don't advance frame yet      
+
+  resxy@vpHeightF = 0.4                    ; change aspect ratio of plot
+  resxy@vpWidthF  = 0.8                  
+  resxy@vpXF      = 0.15                   ; start plot at x ndc coord 
+  resxy@trXMinF   = yrfrac(0)
+  resxy@trXMaxF   = yrfrac(ntim-1)
+  resxy@tiMainString   = pltName+": "+yyyymm(0)+"-"+yyyymm(ntim-1)
+
+  rain  := prc - sno
+  rain@long_name = "Rain"
+  rain@units     = prc@units  
+
+  plot(0) = gsn_csm_xy (wks,yrfrac, tmpAvg    ,resxy)  ; source variable    
+  plot(1) = gsn_csm_xy (wks,yrfrac, prcAvg    ,resxy)  ;   "       "
+  petAvg@long_name = "Pot. Evapotranspiration"
+  plot(2) = gsn_csm_xy (wks,yrfrac, petAvg    ,resxy)  ;   "       "
+  plot(3) = gsn_csm_xy (wks,yrfrac, snoAvg    ,resxy)  ;   "       "
+;;plot(?) = gsn_csm_xy (wks,yrfrac, rainAvg   ,resxy)  ; derived variable   
+  plot(4) = gsn_csm_xy (wks,yrfrac, aetAvg    ,resxy)    
+  plot(5) = gsn_csm_xy (wks,yrfrac, snstorAvg ,resxy)    
+  plot(6) = gsn_csm_xy (wks,yrfrac, runoffAvg ,resxy)    
+  plot(7) = gsn_csm_xy (wks,yrfrac, smsAvg    ,resxy)    
+  plot(8) = gsn_csm_xy (wks,yrfrac, surplusAvg,resxy)    
+  plot(9) = gsn_csm_xy (wks,yrfrac, deficitAvg,resxy)    
+
+  res1                     = True
+  res2                     = True
+  res2@gsnAttachPlotsXAxis = True
+  amid  = gsn_attach_plots(plot(0),(/plot(1),plot(2),plot(3)/),res1,res2)   ; 4 plots [source data]
+  draw(plot(0))            ; 'base' plot   
+  frame(wks)
+
+  amid := gsn_attach_plots(plot(4),(/plot(5),plot(6)/),res1,res2)           ; 3 plots
+  draw(plot(4))            ; 'base' plot   
+  frame(wks)
+
+  amid := gsn_attach_plots(plot(7),(/plot(8),plot(9)/),res1,res2)           ; 3 plots
+  draw(plot(7))            ; 'base' plot   
+  frame(wks)
+
+;============================================================================
+;======= Annual and TREND  PLOTS ==================================================
+;============================================================================
+
+;---Trend: use both regression and Mann-Kendall 
+;---Use areal-annual means
+
+  opt_m2a    = 1                              ; annual monthly avg
+  tmpAnn     = month_to_annual(tmpAvg    , opt_m2a)
+  prcAnn     = month_to_annual(prcAvg    , opt_m2a)
+  petAnn     = month_to_annual(petAvg    , opt_m2a)
+  snoAnn     = month_to_annual(snoAvg    , opt_m2a)
+  aetAnn     = month_to_annual(aetAvg    , opt_m2a)
+  rainAnn    = month_to_annual(rainAvg   , opt_m2a)
+  snstorAnn  = month_to_annual(snstorAvg , opt_m2a)
+  runAnn     = month_to_annual(runoffAvg , opt_m2a)
+  smsAnn     = month_to_annual(smsAvg    , opt_m2a)
+  surAnn     = month_to_annual(surplusAvg, opt_m2a)
+  defAnn     = month_to_annual(deficitAvg, opt_m2a)
+
+  yyyyAnn     = yyyy(::12)
+  nAnn        = dimsizes(yyyyAnn)
+
+  tmpAnn&year = yyyyAnn
+  prcAnn&year = yyyyAnn
+  petAnn&year = yyyyAnn
+  rainAnn&year= yyyyAnn
+  snoAnn&year = yyyyAnn
+  aetAnn&year = yyyyAnn
+  runAnn&year = yyyyAnn
+  smsAnn&year = yyyyAnn
+  surAnn&year = yyyyAnn
+  defAnn&year = yyyyAnn
+  snstorAnn&year  = yyyyAnn
+
+  printVarSummary(smsAnn)
+
+  restr           = True                   ; plot mods desired
+  restr@gsnDraw   = False
+  restr@gsnFrame  = False
+  restr@vpHeightF = 0.4                    ; change aspect ratio of plot
+  restr@vpWidthF  = 0.8                  
+  restr@vpXF      = 0.15                   ; start plot at x ndc coord 
+  restr@trXMinF   = yyyyAnn(0)
+  restr@trXMaxF   = yyyyAnn(nAnn-1)
+  restr@tmXBFormat     = "f" 
+  restr@tmYLFormat     = "f" 
+ ;restr@tiMainString   = "MWBM: "+CMIP6+": "+REGION+": "+yyyyAnn(0)+"-"+yyyyAnn(nAnn-1)
+
+  restr@xyDashPatterns    = 0                      ; solid line 
+  restr@xyLineColors      = (/"black", "red", "blue"/) 
+  restr@xyLineThicknesses = (/1,3,3/)                
+   
+  txres                   =  True
+  txres@txJust            = "CenterCenter"
+  txres@txFontThicknessF  = 2.0      ; default=1.00
+  txres@txFontHeightF     = 0.0225   ; default=0.05
+
+  plot_trend = new(nvar,"graphic")
+
+  ntrend = nvar
+  trplt  = new( (/ntrend,nAnn/), "float")
+
+  do nv=0,nvar-1
+     if (nv.eq.0) then
+         xAnn = tmpAnn
+         xAnn@long_name = "Annual Tmp"
+     elseif (nv.eq.1) then
+         xAnn = prcAnn
+         xAnn@long_name = "Annual PRC"
+     elseif (nv.eq.2) then
+         xAnn = snoAnn
+         xAnn@long_name = "Annual Snow"
+     elseif (nv.eq.3) then
+         xAnn = petAnn
+         xAnn@long_name = "Annual PET"
+     elseif (nv.eq.4) then
+         xAnn = aetAnn
+         xAnn@long_name = "Annual AET"
+     elseif (nv.eq.5) then
+         xAnn = defAnn
+         xAnn@long_name = "Annual Deficit"
+     elseif (nv.eq.6) then
+         xAnn = runAnn
+         xAnn@long_name = "Annual Runoff"
+     elseif (nv.eq.7) then
+         xAnn = smsAnn
+         xAnn@long_name = "Annual SMS"
+     elseif (nv.eq.8) then
+         xAnn = snstorAnn
+         xAnn@long_name = "Annual Snow Storage"
+     end if 
+
+     rc   = regline(yyyyAnn, xAnn)
+     p    = trend_manken(xAnn, False, 0)
+  
+     trplt(0,:) = xAnn
+     trplt(1,:) = rc*(yyyyAnn-rc@xave) + rc@yave
+     trplt(2,:) = p(1)*(yyyyAnn-rc@xave) + rc@yave
+  
+     plot_trend(nv) = gsn_csm_xy(wks,yyyyAnn,trplt,restr)
+     text           = "p="+sprintf("%5.3f",p(0))+" Trend: MK="+sprintf("%5.3f",p(1))+" RC="+sprintf("%5.3f",rc)
+
+     getvalues plot_trend(nv)
+        "trYMaxF" : trYMaxF
+     end getvalues
+
+     xxloc = 0.5*(yyyyAnn(0)+yyyyAnn(nAnn-1))
+     yyloc = 0.975*trYMaxF 
+     plot_trend@$unique_string("dum")$ = gsn_add_text(wks,plot_trend(nv),text, xxloc , yyloc, txres)
+  end do
+      
+  restrP                     = True                ; modify the panel plot
+  restrP@gsnMaximize         = True
+  restrP@gsnPanelMainString  = "MWBM: "+CMIP6+": "+REGION+": "+yyyyAnn(0)+"-"+yyyyAnn(nAnn-1)
+;;gsn_panel(wks,plot_trend,(/3,3/),restrP)
+
+;********************************************
+; create attached panel plots
+;********************************************
+ 
+  res1                     = True
+  res2                     = True
+  res2@gsnAttachPlotsXAxis = True
+  amid := gsn_attach_plots(plot_trend(0),(/plot_trend(1),plot_trend(2)/),res1,res2)
+ ;draw(plot_trend(0))
+ ;frame(wks)
+  amid := gsn_attach_plots(plot_trend(3),(/plot_trend(4),plot_trend(5)/),res1,res2)
+ ;draw(plot_trend(3))
+ ;frame(wks)
+  amid := gsn_attach_plots(plot_trend(6),(/plot_trend(7),plot_trend(8)/),res1,res2)
+ ;draw(plot_trend(6))
+ ;frame(wks)
+
+  plt_trend    = new(3,"graphic")    ; clarity ... explicitly save the attached plots
+  plt_trend(0) = plot_trend(0)
+  plt_trend(1) = plot_trend(3)
+  plt_trend(2) = plot_trend(6)
+  gsn_panel(wks,plt_trend,(/1,3/),restrP)
+
+;============================================================================
+;=======    SPATIAL  PLOTS ==================================================
+;============================================================================
+
+;---Set values outside MRB to _FillValue
+
+  TMP  = mask(TMP, mrb_mask, 1)
+  PRC  = mask(PRC, mrb_mask, 1)
+  SNO  = mask(SNO, mrb_mask, 1)
+
+  month = (/"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"/)
+
+;---Monthly Climatology: ALL years
+
+  smsClm = clmMonTLL(sms)               ; Overall REGION climatology
+  printVarSummary(smsClm)               ; (12,lat,lon)
+  printMinMax(smsClm,0)
+  print("-----")
+
+  rescn                      = True     ; plot mods desired
+  rescn@gsnDraw              = False        ; do not draw picture
+  rescn@gsnFrame             = False        ; do not advance frame
+
+  rescn@cnFillOn             = True     ; turn on color fill
+  rescn@cnLinesOn            = False    ; turn of contour lines
+  rescn@cnLineLabelsOn       = False    ; turn of contour line labels
+  rescn@lbLabelBarOn         = False    ; turn off individual cb's
+  rescn@gsnAddCyclic         = False    ; data already has cyclic point
+  rescn@mpMinLatF            = latS     ; range to zoom in on
+  rescn@mpMaxLatF            = latN
+  rescn@mpMinLonF            = lonL
+  rescn@mpMaxLonF            = lonR
+  rescn@mpCenterLonF         = 0.5*(lonL+lonR)
+  rescn@pmTickMarkDisplayMode = "Always"; use NCL default lat/lon labels
+
+  rescn@cnLevelSelectionMode = "ExplicitLevels"              
+  rescn@cnLevels             = (/ 2,5,10,15,20,30,40,50,75,100,125 /)
+  rescn@cnFillPalette        = (/"PaleTurquoise","PaleGreen","SeaGreen3" ,"Yellow" \   ; contour colors
+                                ,"Orange","HotPink","Red","Violet", "Purple", "Blue"\
+                                ,"Brown","Black" /)                                    ; one more color than contour 
+
+  nsea = 4
+  plotClm = new(nsea,"graphic")
+  np   = 0
+  do nmo=0,11,3
+     rescn@gsnCenterString = month(nmo)
+     plotClm(np) = gsn_csm_contour_map(wks,smsClm(nmo,:,:), rescn)
+     np = np+1  
+  end do
+      
+;--create panel with selected monthly climatologies (ALL years)
+
+  rescnP                     = True                ; modify the panel plot
+  rescnP@gsnPanelMainString  = "MWBM: "+CMIP6+": Climatology:: "+yyyyAnn(0)+"-"+yyyyAnn(nAnn-1)
+  rescnP@gsnPanelLabelBar    = True                ; add common colorbar
+  gsn_panel(wks,plotClm,(/2,2/),rescnP)
+
+;************************************************
+;---30-year climatologies: Last climatology may be overlapping
+;---Climate Normals: Traditionally, a Climate Normal is defined
+;                    as an average over a recent 30-year period 
+;************************************************
+
+  SMS30     = monClmSegment(sms, 30)   ; 30-year Normal climatologies
+  sms30     = SMS30[0]
+  clmStrt30 = SMS30[1]          
+  clmLast30 = SMS30[2]
+  printVarSummary(sms30)      ;  [clmSegment | 4] x [month | 12] x [lat | 28] x [lon | 37]
+  print("=====")
+
+  dim30     = dimsizes(sms30)
+  n30Seg    = dim30(0)
+  n30SegStrt= 0
+  n30SegLast= n30Seg-1
+
+  smsDiff30 = sms30(n30SegLast,:,:,:)-sms30(n30SegStrt,:,:,:)
+  copy_VarMeta(sms30(0,:,:,:), smsDiff30)
+  smsDiff30@long_name = "SMS Difference"
+
+  printVarSummary(smsDiff30)  ;  [month | 12] x [lat | 28] x [lon | 37]
+  printMinMax(smsDiff30,0)
+  print("=====")
+
+  optsd = True
+  optsd@PrintStat = True
+  smsDiff_dispersion = stat_dispersion(smsDiff30, optsd )
+
+;---Plot: First 30-year climatology
+
+  np   = 0
+  do nmo=0,11,3
+     rescn@gsnCenterString = month(nmo)
+     plotClm(np) = gsn_csm_contour_map(wks,sms30(n30SegStrt,nmo,:,:), rescn)
+     np = np+1  
+  end do
+ 
+  ym30Strt = cd_calendar(clmStrt30(0),-1)     
+  ym30Last = cd_calendar(clmLast30(0),-1)     
+  rescnP@gsnPanelMainString  = "MWBM: "+CMIP6+": Initial-30 Years: "+ym30Strt+"-"+ym30Last
+  gsn_panel(wks,plotClm,(/2,2/),rescnP)
+
+;---Plot: Last 30-year climatology
+
+  np   = 0
+  do nmo=0,11,3
+     rescn@gsnCenterString = month(nmo)
+     plotClm(np) = gsn_csm_contour_map(wks,sms30(n30SegLast,nmo,:,:), rescn)
+     np = np+1  
+  end do
+
+  ym30Strt = cd_calendar(clmStrt30(n30Seg-1),-1)     
+  ym30Last = cd_calendar(clmLast30(n30Seg-1),-1)     
+  rescnP@gsnPanelMainString  = "MWBM: "+CMIP6+": Last-30 Years: "+ym30Strt+"-"+ym30Last
+  gsn_panel(wks,plotClm,(/2,2/),rescnP)
+
+;---Plot: Difference
+
+  delete([/rescn@cnLevelSelectionMode, rescn@cnLevels, rescn@cnFillPalette /])
+
+  rescn@cnLevelSelectionMode = "ManualLevels"     ; set manual contour levels
+  rescn@cnMinLevelValF       = -10.0              ; set min contour level
+  rescn@cnMaxLevelValF       =  10.0              ; set max contour level
+  rescn@cnLevelSpacingF      =   0.5              ; set contour spacing
+  rescn@cnFillPalette        = "cmp_flux"
+  
+  np   = 0
+  do nmo=0,11,3
+     rescn@gsnCenterString = month(nmo)
+     plotClm(np) = gsn_csm_contour_map(wks,smsDiff30(nmo,:,:), rescn)
+     np = np+1  
+  end do
+
+  rescnP@gsnPanelMainString  = "MWBM: "+CMIP6+": Difference: (last_30 - init_30) years"
+  gsn_panel(wks,plotClm,(/2,2/),rescnP)

@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/center_finite_diff.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:14 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (general applied math)">
+<meta name="keywords" content="center_finite_diff">
+<title>center_finite_diff</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../math.html">General applied math</a>
+<br>
+<h1>center_finite_diff</h1>
+
+<p>
+Performs a centered finite difference operation on the rightmost dimension.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function center_finite_diff (
+		q        : numeric,  
+		r        : numeric,  
+		rCyclic  : logical,  
+		opt      : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="dimsizes.html"><strong>dimsizes</strong></a>(q)] :  numeric
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>q</em>
+<p class=indent>A multi-dimensional array.
+</p>
+<em>r</em>
+<p class=indent>A scalar, one-dimensional, or multi-dimensional array
+containing the coordinates along which <em>q</em> is to be
+differenced. Does need not be equally spaced from a computational
+point of view. 
+
+<ul>
+<li>scalar: <em>r</em> assumed to be the (constant) distance between 
+adjacent points.</li>
+<li>one-dimensional (and the same size as the rightmost dimension of 
+<em>q</em>): applied to all dimensions of <em>q</em>.
+</li>
+<li>multi-dimensional: then it must be the same size as <em>q</em>.</li>
+</ul>
+</p>
+<em>rCyclic</em>
+<p class=indent>True: <em>q</em> treated as cyclic in <em>r</em> and the end values 
+and all the returned values will be calculated via centered differences.   
+False: <em>q</em> NOT 
+treated as cyclic in <em>r</em> and the end values will use a one-sided
+difference scheme for the end points. <em>q</em> should not include a 
+cyclic point.
+
+<pre>
+   result(n) = (q(n+1)-q(n))/(r(n+1)-r(n))  for the initial value
+   result(m) = (q(m)-q(m-1))/(r(m)-r(m-1))  for the last value
+</pre>
+</p>
+<em>opt</em>
+<p class=indent>Reserved for future use. Currently not used. Set to an integer.
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+Performs a centered finite difference operation on the rightmost dimension.
+If  
+<a href="../../Language/fillval.html">missing values</a>
+are present, the calculation will occur at all points possible, but 
+coordinates which could not be used will set to missing. 
+
+<pre>
+result(n) = (q(n+1)-q(n-1))/(r(n+1)-r(n-1))
+</pre>
+<p>
+
+<b>Use <a href="center_finite_diff_n.html"><strong>center_finite_diff_n</strong></a> if the dimension to do the
+calculation on is not the rightmost dimension and reordering is not
+desired. This function can be significantly faster
+than <strong>center_finite_diff</strong>.</b>
+<p>
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="center_finite_diff_n.html"><strong>center_finite_diff_n</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B>
+<P>
+<PRE>
+   q = (/30,33,39,36,41,37/)     
+   r = 2.                                 ; constant
+
+   dqdr = <strong>center_finite_diff</strong> (q,r,False,0)
+</pre>
+<p>
+
+Result:
+
+<pre>
+   dqdr(0) = (33-30)/2 = 1.5
+   dqdr(1) = (39-30)/4 = 2.25
+   dqdr(2) = (36-33)/4 = 0.75
+   dqdr(3) = (41-39)/4 = 0.5
+   dqdr(4) = (37-36)/4 = 0.25  
+   dqdr(5) = (37-41)/2 = -2.0
+</pre>
+
+<B>Example 2:</B>
+<P>
+<PRE>
+   theta = (/ 298,299,300,302,...,345,355,383/)   ; potential temp.
+   p     = (/1000,950,900,850,...,200,150,100/)   ; pressure (hPa)
+
+   dtdp  = <strong>center_finite_diff</strong> (theta,p,False,0)
+</PRE>
+
+<B>Example 3</B>
+<p>
+p is not equally spaced. Demonstrates defining the appropriate 
+pressure levels when the r coordinate is not equally spaced.  
+The end points are computed via a one-sided difference.
+<PRE>
+   theta = (/ 297, 298,300,302,...,345,350,355,383/)   ; potential temp.
+   p     = (/1013,1000,900,850,...,200,175,150,100/)   ; pressure (hPa)
+
+   dtdp  = <strong>center_finite_diff</strong> (theta,p,False,0)
+
+   np    = <a href="dimsizes.html"><strong>dimsizes</strong></a>(p)
+   pPlot = <a href="new.html"><strong>new</strong></a> ( np, "float" )
+                                                       ; arithmetic mean
+   pPlot(0)      = (p(0)+p(1))*0.5                     ; set bottom
+   pPlot(np-1)   = (p(np-1)+p(np-2))*0.5               ; set top    
+   pPlot(1:np-2) = (p(0:np-3) + p(2:np-1))*0.5         ; mid points 
+
+; or 
+                                                              ; log (mass) wgted
+   pPlot(0)      = <a href="exp.html"><strong>exp</strong></a>((<a href="log.html"><strong>log</strong></a>(p(0))+<a href="log.html"><strong>log</strong></a>(p(1)))*0.5)             ; set bottom
+   pPlot(np-1)   = <a href="exp.html"><strong>exp</strong></a>((<a href="log.html"><strong>log</strong></a>(p(np-1))+<a href="log.html"><strong>log</strong></a>(p(np-2)))*0.5)       ; set top    
+   pPlot(1:np-2) = <a href="exp.html"><strong>exp</strong></a>((<a href="log.html"><strong>log</strong></a>(p(0:np-3)) + <a href="log.html"><strong>log</strong></a>(p(2:np-1)))*0.5) ; mid points 
+</PRE>
+
+<B>Example 4</B>
+<p>
+Let T be four-dimensional with dimensions time,level,lat,lon. P is one-dimensional.
+Perform the finite differencing only in the vertical (level) dimension. This
+requires that T be <a href="../../Language/reorder.html">reordered</a>
+to put level in the rightmost dimension.
+<p>
+
+Note: in V5.2.0 or later you can use <a href="center_finite_diff_n.html"><strong>center_finite_diff_n</strong></a>
+to avoid having to reorder the data.
+<p>
+
+<PRE>
+   dTdP = <strong>center_finite_diff</strong>(T(time|:,lat|:,lon|:,lev|:),P,False,0)
+;  returns dTdP (time,lat,lon,lev). this variable can be reordered
+;  again to place it back in the original order
+
+; In version 5.2.0 or later:
+;   dTdP = <a href="center_finite_diff_n.html"><strong>center_finite_diff_n</strong></a>(T,P,False,0,1)
+;  returns dTdP (time,lev,lat,lon)
+</PRE>
+  
+<B>Example 5</B>
+<p>
+Now P is also four-dimensional and requires 
+<a href="../../Language/reorder.html">reordering</a>:
+
+<PRE>
+   dTdP = <strong>center_finite_diff</strong> (T(time|:,lat|:,lon|:,lev|:)  \
+                             ,P(time|:,lat|:,lon|:,lev|:), False,0)
+; returns dTdP(time,lat,lon,lev)
+
+; In version 5.2.0 or later:
+;   dTdP = <a href="center_finite_diff_n.html"><strong>center_finite_diff_n</strong></a>(T,P,False,0,1)
+;  returns dTdP (time,lev,lat,lon)
+</PRE>
+  
+<B>Example 6</B>
+Assume that the longitude 
+<a href="../../Language/cv.html">coordinate variable</a>
+associated with T in the examples above is cyclic and is equally spaced 
+in degrees but not in physical space.
+
+<PRE>
+   dlon = (lon(2)-lon(1))*0.0174533 ; convert to radians
+                                    ; pre-allocate space
+   dTdX = <a href="new.html"><strong>new</strong></a> ( (/ntim,klev,nlat,mlon/), <a href="typeof.html"><strong>typeof</strong></a>(T), T@_FillValue)
+
+   do nl=0,nlat-1                      ; loop over each latitude
+      dX = 6378388.*<a href="cos.html"><strong>cos</strong></a>(0.0174533*lat(nl))*dlon  ; constant at this latitude
+      dTdX(:,:,nl,:) = <strong>center_finite_diff</strong> (T(:,:,nl;,:), dX , True,0)
+  end do
+; result: dTdX(time,lev,lat,lon)
+</PRE>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/center_finite_diff.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:14 GMT -->
+</html>

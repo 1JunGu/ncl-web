@@ -1,0 +1,102 @@
+;----------------------------------------------------------------------
+; polyg_25.ncl
+;
+; Concepts illustrated:
+;   - Calculate latitude/longitude arrays that define the location 
+;     of a circles around multiple central locations .
+;   - Extracting variables from a variable of type 'list'
+;   - Drawing the circles with different colors and thicknesses
+;   - Adding a polymarker [ 'filled-circle'+ ] to identify the central locations
+;----------------------------------------------------------------------
+
+;---Multiple locations (eg: time series of locations)
+
+  slat      = (/ 27.0, 31.5, 34.7 /)       ; lat: stations or storm centers
+  slon      = (/273.5,280.0,284.3/)        ; lon: stations or storm centers
+  srad      = (/ 1, 3 /)                   ; radii (great circle degrees)
+  srad_unit = 0                            ; 0=degrees
+  N         = 90                           ; # of points; more points nicer 'circle'
+  opt       = False
+;---End input
+
+  circle    = geolocation_circle(slat, slon, srad, srad_unit, N, opt) ; circle is type list
+
+  nLoc      = dimsizes(slat)               ; # of locations
+  nRad      = dimsizes(srad)               ; # of circles at each location
+
+  printVarSummary(circle)                  ; list containing two variables
+  circle_lat = circle[0]                   ; For clarity: explicitly extract list elements
+  circle_lon = circle[1]
+
+  printVarSummary(circle_lat)
+  print("------------------")
+  printVarSummary(circle_lon)
+  print("------------------")
+  
+;*************************************************
+; Plot
+;*************************************************
+
+  pltType          = "png" 
+  pltDir           = "./" 
+  pltName          = "poly" 
+  pltPath          = pltDir + pltName
+
+  res              = True   
+  res@gsnDraw      = False                  
+  res@gsnFrame     = False    
+  res@gsnMaximize  = True    
+
+ ;res@mpProjection = "CylindricalEquidistant"            ; choose map projection
+ ;res@mpLimitMode  = "LatLon"                            ; default
+  res@mpOutlineBoundarySets = "GeophysicalAndUSStates"   ; add state boundaries
+  res@mpGeophysicalLineColor= "Gray"
+  res@mpUSStateLineColor    = "LightGray"
+  res@mpMinLatF    = min(slat) - 5.0                          ; add arbitrary 'buffer'
+  res@mpMaxLatF    = max(slat) + 5.0
+  res@mpMinLonF    = min(slon) - 5.0
+  res@mpMaxLonF    = max(slon) + 5.0
+  res@mpCenterLonF = (res@mpMinLonF  + res@mpMaxLonF )*0.5 
+  res@mpGeophysicalLineThicknessF  = 1.5
+  res@mpFillOn                     = False          
+
+  res@tiMainString     = "Multiple Centers; Two Radii"
+  res@gsnStringFontHeightF = 0.0125 
+
+  res@gsnCenterString  = "Radii: dg: "
+  do nr=0,nRad-2
+     res@gsnCenterString  = res@gsnCenterString  + sprintf("%3.1f", srad(nr))+","
+  end do
+  res@gsnCenterString  = res@gsnCenterString  + sprintf("%3.1f", srad(nRad-1))
+
+;*****************************************************
+;               Plot
+;*****************************************************
+
+  wks  = gsn_open_wks(pltType, pltPath)
+  plot = gsn_csm_map(wks,res)
+
+  plres  = True
+ ;plres@gsMarkerIndex = 2           ; Plus sign ( + )
+ ;plres@gsMarkerIndex = 15          ; Circle with x
+  plres@gsMarkerIndex = 16          ; Filled Circle
+  plres@gsMarkerSizeF = 10.       
+  plres@gsMarkerColor = "black"  
+  plot@$"marker"$ = gsn_add_polymarker(wks, plot, slon, slat, plres) ; name is arbitrary
+
+  colors = (/ "red" ,"blue" /)
+  thick  = (/  2.0  , 3.0   /) 
+  
+;---Loop and attach a unique identifier to each 'object'
+  do nl=0,nLoc-1
+    do nr=0,nRad-1
+      plres@gsLineColor      = colors(nr)
+      plres@gsLineThicknessF = thick(nr)
+
+      circ_nl_nr = "StaRad_"+ sprinti("%0.2i", nl)+"_"+sprinti("%0.2i", nr)  ; something unique
+      plot@$circ_nl_nr$ = gsn_add_polyline(wks, plot, circle_lon(nl,nr,:), circle_lat(nl,nr,:), plres)
+    end do
+  end do
+
+  draw(plot)
+  frame(wks)

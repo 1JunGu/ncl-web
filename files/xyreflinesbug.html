@@ -1,0 +1,28 @@
+; This script won't run unless you download the gsn_csm_640_fix.ncl
+; file and uncomment this line.
+load "./gsn_csm_640_fix.ncl"
+
+begin
+  f     = addfile ("$NCARG_ROOT/lib/ncarg/data/cdf/uv300.nc","r")
+  u     = f->U 
+
+  yref = (/10,30/)
+  xref = -30
+  nyref = dimsizes(yref) 
+  nxref = dimsizes(xref) 
+
+  wks   = gsn_open_wks ("png","xyreflinesbug")
+
+  res                  = True
+  res@xyLineThicknessF = 3.0
+  res@gsnYRefLine      = yref
+  res@gsnXRefLine      = xref
+  res@tiMainString     = nyref + " Y ref line(s), " + nxref + " X ref line(s)"
+  res@gsnYRefLineColor = "MediumPurple"
+  res@gsnXRefLineColor = "Orange"
+  res@gsnXRefLineThicknessF = 3.0
+  res@gsnYRefLineThicknessF = 3.0
+  plot1 = gsn_csm_xy (wks,u&lat,u(0,:,{82}),res)
+
+end
+

@@ -1,0 +1,144 @@
+;*************************************************
+; grid_fill_5.ncl
+;*************************************************
+;
+; Concepts illustrated:
+;   - Create grid lat/lon coordinates
+;   - Read one or more composite gridded satellite swath files [ loop ]
+;   - Use "poisson_grid_fill" to fill 'gaps' 
+;   - Use NCL's builtin land-sea mask to out oceans/inland water/ice 
+;   - Illustrating before and after application of poisson_grid_fill
+;*************************************************
+; SMOPS: soil Moisture Operational Products System 
+; https://www.ospo.noaa.gov/Products/land/smops/
+; Values over land only
+;---------------------------------------
+; Creating Coordinates for SMOPS data
+; They are *NOT* in the netCDF file
+;---------------------------------------
+
+  nlat			    = 720
+  latitude		    = latGlobeFo(nlat, "lat", "latitude", "degrees_north")
+  latitude = latitude(::-1)                             ; data are North-to-South
+  printVarSummary(latitude)
+  printMinMax(latitude,0)
+	
+  mlon	                    = 1440
+  longitude		    = lonGlobeFo(mlon, "longitude", "longitude", "degrees_east")  ; 0->360
+  longitude		    = (/ longitude - 180. /)  ; subtract 180 from all values 
+  longitude&longitude	    = longitude               ; update coordinates       printVarSummary(lon)
+  printVarSummary(longitude)
+  printMinMax(longitude,0)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Set up plot resources
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  pltType = "png"
+  pltDir  = "./"
+  pltName = "grid_fill"
+  pltPath = pltDir + pltName
+
+  wks  = gsn_open_wks(pltType,pltPath)      ; send graphics to PNG file
+  plot = new(3,graphic)                     ; create a plot array
+  
+  res                     = True
+  res@gsnDraw             = False           ; don't draw
+  res@gsnFrame            = False           ; don't advance frame
+  res@cnFillPalette       = "WhiteBlueGreenYellowRed"
+  res@cnInfoLabelOn       = False           ; turn off cn info label
+  res@cnFillOn            = True            ; turn on color
+  res@cnFillMode          = "RasterFill"    ; Raster Mode
+  res@cnLinesOn           =  False          ; Turn off contour lines
+  res@cnLineLabelsOn      =  False          ; Turn off contour line labels
+  res@cnMissingValFillColor = "yellow"      ; make _FillValue 'stand out'
+
+  res@lbLabelBarOn        = False           ; turn off individual cb's
+
+  res@cnLevelSelectionMode =  "ManualLevels"   
+  res@cnMinLevelValF       =  0.0 
+  res@cnMaxLevelValF       =  1.0
+  res@cnLevelSpacingF      =  0.025
+
+  resP                     = True                ; panel plot
+  resP@gsnMaximize         = True
+  resP@gsnPanelLabelBar    = True                ; add common colorbar
+  resP@lbLabelFontHeightF  = 0.007               ; make labels smaller
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Read/open NCL'ls crude (1x1) land-sea mask
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  a    = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/landsea.nc","r")
+  lsdata = a->LSMASK
+  lsm  = landsea_mask(lsdata, latitude, longitude)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; poisson_grid_fill parameters
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  nscan = 2000             ; usually *much* fewer
+  eps   = 0.001            ; variable depended
+  gtype = True             ; cyclic
+  guess = 0                ; use zonal means
+  relc  = 0.6              ; standard relaxation coef
+  iopt  = 0
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Loop and Open each file(s)
+; latitude/longitude are not in the netCDF file: must be added
+; non-CF convention FillValue must be added: _FillValue
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  SMOPS_dir                 = "./"
+  SMOPS_fnames              = systemfunc("cd "+SMOPS_dir+ " ; ls NPR_SMOPS_CMAP_*.nc")
+  nSMOPS                    = dimsizes(SMOPS_fnames)
+  print(SMOPS_fnames)
+  print("---")
+
+  do i=0,nSMOPS-1
+     print("=======================================================")
+     SMOPS_fi		= addfile(SMOPS_dir+SMOPS_fnames(i), "r")
+     sm	               := SMOPS_fi->Blended_SM          ; type short 
+     sm@_FillValue     := sm@FillValue                  ; add correct attribute 
+     sm                := short2flt( sm )
+     sm!0		= "latitude"
+     sm!1		= "longitude"
+     sm&latitude	=  latitude
+     sm&longitude	=  longitude 
+     printVarSummary(sm)
+     printMinMax(sm, 0)
+     print("---")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Use "poisson_grid_fill" to fill in the mosaic gaps
+; .    https://www.ncl.ucar.edu/Applications/grid_fill.shtml
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+     sm_pois      := sm                                 ; replicate for plot
+     poisson_grid_fill(sm_pois, gtype, guess, nscan, eps, relc, iopt)
+     printVarSummary(sm_pois)
+     printMinMax(sm_pois, 0)
+     print("---")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Use NCl's coarse builtin function to mask out water
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ 
+     sm_new  = sm_pois                                  ; replicate for plot
+     sm_new  = where(lsm.eq.0 , sm_new@_FillValue , sm_new)
+     sm_new  = where(lsm.eq.2 , sm_new@_FillValue , sm_new)
+     sm_new  = where(lsm.eq.4 , sm_new@_FillValue , sm_new)
+
+     res@gsnCenterString = "Original"
+     plot(0) = gsn_csm_contour_map(wks,sm,res) 
+     res@gsnCenterString = "Full Poisson"
+     plot(1) = gsn_csm_contour_map(wks,sm_pois,res) 
+     res@gsnCenterString = "After Mask"
+     plot(2) = gsn_csm_contour_map(wks,sm_new ,res) 
+
+;************************************************
+; create panel
+;************************************************
+    resP@gsnPanelMainString  = SMOPS_fnames(i) 
+    gsn_panel(wks,plot,(/3,1/),resP)               ; now draw as one plot
+  end do

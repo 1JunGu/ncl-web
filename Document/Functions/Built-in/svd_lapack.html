@@ -1,0 +1,657 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/svd_lapack.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:15 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (singular value decomposition)">
+<meta name="keywords" content="svd_lapack">
+<title>svd_lapack</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../svd.html">Singular value decomposition</a>
+<br>
+<h1>svd_lapack</h1>
+
+<p>
+Calculates the singular value decomposition of a general rectangular
+matrix.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function svd_lapack (
+		A        : numeric,  
+		jobu [1] : string,   
+		jobv [1] : string,   
+		optv [1] : integer,  
+		U [*][*] : numeric,  
+		V [*][*] : numeric   
+	)
+
+	<a href="../return_val.html">return_val</a> [*] :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>A</em>
+<p class=indent>An <em>N</em> (column) x <em>M</em> (row) matrix which will be
+overwritten by the function. If the original <em>A</em> matrix is to
+be subsequently used by the user, then a copy should be made prior to
+invoking this function.</p>
+<p class=indent>
+
+If <em>A</em> has more than two dimensions, then all but the rightmost
+dimension will be collapsed into one single dimension (which we are
+referring to as <em>N</em>).
+</p>
+<em>jobu</em>
+<br>
+<em>jobv</em>
+<p class=indent>For now, these are dummy options. They will be set to "S" and "S".
+</p>
+<em>optv</em>
+<p class=indent>If <em>optv</em> = 0, then <em>V</em> will contain the
+transpose(<em>V</em>) as is returned by the LAPACK routine. If
+<em>optv</em> = 1, then the <em>V</em> array will be returned.
+</p>
+<em>U</em>
+<p class=indent><em>(output)</em><br>
+A two-dimensional array dimensioned min(<em>M</em>,<em>N</em>) x
+<em>M</em>.  that will contain the left singular vectors.  The user
+must pre-allocate space for this array.
+</p>
+<em>V</em>
+<p class=indent><em>(output)</em><br>
+A two-dimensional array dimensioned <em>N</em> x <em>N</em> that will
+contain the right singular vectors.  The user must pre-allocate space
+for this array.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The return value is a one-dimensional array of length
+min(<em>N</em>,<em>M</em>). It will be of type double if <em>A</em> is
+double, and float otherwise.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function calculates the singular value decomposition of a general
+rectangular matrix. The singular values and the left and right
+singular vectors are returned.<p>
+
+<BLOCKQUOTE>
+A = U * S * transpose(V)
+</BLOCKQUOTE>
+
+where S is an N x M matrix which is zero except for its min(M,N)
+diagonal elements, U is an M x M orthogonal matrix, and V is an N x N
+orthogonal matrix.  The diagonal elements of S are the singular values
+of A; they are real and non-negative, and are returned in descending
+order.  The first min(M,N) columns of U and V are the left and right
+singular vectors of A.<P>
+
+Note that the source LAPACK routine (dgesvd) returns V**T, not V.
+However, setting <em>optv</em>=1 will result in the return of V.<P>
+
+Missing values are <i>not</i> allowed, and the routine will exit
+if any are encountered.<P>
+
+
+
+
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Note:</B> remember that NCL is row-major in terms of how it
+interprets arrays. This means that the rightmost dimension varies the
+fastest.<P>
+
+<B>Example 1</B><P>
+
+<pre>
+; Data source
+; IMSL
+; User's Manual
+; Version 1,  April 1987
+; Page 280 
+
+begin
+; create a simple 2D array for example
+  a1D = (/1., 3., 4., 2., 1., 1., 2., 2., 3., 1., 5., 2., 1., 1., 1., \
+              3., 2., 2., 4., 3., 4., 1., 2., 3./)
+
+  nra = 6      ; number rows    of matrix 'a'
+  nca = 4      ; number columns
+  a   = <a href="onedtond.html"><strong>onedtond</strong></a>(a1D, (/nca,nra/) )  ; reshape to 2D
+ 
+;          a= ( 4  1  2  1 )
+;             ( 3  1  2  3 )
+;             ( 4  1  3  4 )
+;             ( 1  3  1  2 )
+;             ( 2  2  5  1 )
+;             ( 3  2  2  1 )
+  
+  u   = <a href="new.html"><strong>new</strong></a> ( (/nca,nra/) , <a href="typeof.html"><strong>typeof</strong></a>(a) )  ; pre-allocate space 
+  v   = <a href="new.html"><strong>new</strong></a> ( (/nca,nca/) , <a href="typeof.html"><strong>typeof</strong></a>(a) )  ; for returned arrays
+
+  s   = <strong>svd_lapack</strong> (a, "S" , "S", 0,  u, v)
+
+  <a href="delete.html"><strong>delete</strong></a> (a)   ; no longer needed. it was overwritten
+end
+</pre>
+<p>
+
+The output would be:<P>
+
+<PRE>
+ S: singular values: s@info= 0
+
+ 11.4850178
+  3.2697501
+  2.6533556
+  2.0887298
+ 
+ U: left singular vectors
+  1   -0.3805    0.1197    0.4391    0.5654
+  2   -0.4038    0.3451   -0.0566   -0.2148
+  3   -0.5451    0.4293    0.0514   -0.4321
+  4   -0.2648   -0.0683   -0.8839    0.2153
+  5   -0.4463   -0.8168    0.1419   -0.3213
+  6   -0.3546   -0.1021   -0.0043    0.5458
+
+ V: right singular vectors: return V transpose
+  1   -0.4443   -0.5581   -0.3244   -0.6212
+  2    0.5555   -0.6543   -0.3514    0.3739
+  3   -0.4354    0.2775   -0.7321    0.4444
+  4   -0.5518   -0.4283    0.4851    0.5261
+</PRE>
+
+<B>Note:</B> if <em>optv</em>=1, then V will be transposed:<P>
+
+<PRE>
+ V: right singular vectors (v) ==> what IMSL returns:
+  1   -0.4443    0.5555   -0.4354   -0.5518
+  2   -0.5581   -0.6543    0.2775   -0.4283
+  3   -0.3244   -0.3514   -0.7321    0.4851
+  4   -0.6212    0.3739    0.4444    0.5261
+</PRE>
+
+<B>Example 2</B><P>
+
+Assume <em>x</em> is dimensioned <em>ntim</em> x <em>nlat</em> x
+<em>mlon</em> with <a href="../../Manuals/Ref_Manual/NclVariables.html#Dimensions">named dimensions</a> "time", "lat", and
+"lon". If the user wishes "time" to be the number of rows (rightmost
+dimension), and both spatial dimensions (i.e. lat and lon) to be the
+number of columns, then <a href="../../Manuals/Ref_Manual/NclVariables.html#NamedSubscripting">dimension reordering</a> should be
+used:<P>
+
+<pre>
+  nca = nlat*mlon                        ; for clarity only
+  nra = ntim
+      
+  u   = <a href="new.html"><strong>new</strong></a> ( (/nca,nra/) , <a href="typeof.html"><strong>typeof</strong></a>(x) )  ; pre-allocate space 
+  v   = <a href="new.html"><strong>new</strong></a> ( (/nca,nca/) , <a href="typeof.html"><strong>typeof</strong></a>(x) )  ; for returned arrays
+
+  s   = <strong>svd_lapack</strong> (x(lat|:,lon|:,time|:), "S" , "S", 0,  u, v)
+</pre>
+<p>
+
+Here, NCL creates a temporary array to pass to the function.<P> 
+
+<B>Note:</B> 4D arrays, like <em>time</em> x <em>lev</em> x
+<em>lat</em> x <em>lon</em>, would be approached in the same way.<P>
+
+<B>Example 3</B><P>
+
+Same as example 2, except that "time" is to be the number of columns,
+and both spatial dimensions (i.e. lat and lon) are to be the number of
+rows. Here, NCL's built-in reshaping functions,
+<a href="ndtooned.html"><strong>ndtooned</strong></a> and <a href="onedtond.html"><strong>onedtond</strong></a>, must be
+used:<P>
+
+<PRE>
+  nca = ntim                             ; for clarity only
+  nra = nlat*mlon
+      
+  u   = <a href="new.html"><strong>new</strong></a> ( (/nca,nra/) , <a href="typeof.html"><strong>typeof</strong></a>(x) )  ; pre-allocate space 
+  v   = <a href="new.html"><strong>new</strong></a> ( (/nca,nca/) , <a href="typeof.html"><strong>typeof</strong></a>(x) )  ; for returned arrays
+
+  xTemp = <a href="onedtond.html"><strong>onedtond</strong></a>( <a href="ndtooned.html"><strong>ndtooned</strong></a>(x), (/nca,nra/))
+
+  s   = <strong>svd_lapack</strong> (xTemp, "S" , "S", 0,  u, v)
+  <a href="delete.html"><strong>delete</strong></a> (xTemp)
+</PRE>
+
+The creation of <em>xTemp</em> results in a 2D array where the spatial
+dimensions are the rightmost dimensions.<P>
+
+<B>Example 4</B><P>
+
+Assume that a user has an ensemble of five arrays, and that the arrays
+are of size <em>ntim</em> x <em>lat</em> x <em>lon</em> and have named
+dimensions "time", "lat", and "lon". Further, assume that they are on
+five netCDF files.  There are several ways to do this
+(i.e. <a href="addfiles.html"><strong>addfiles</strong></a>), but here we will do it
+explicitly. Also, because these files may be large, we may reorder on
+input to minimize any subsequent temporary arrays. The downside is
+that input may be slower.<P>
+
+[1] "time" is to be the "column":<P>
+
+<PRE>
+   a   = <a href="new.html"><strong>new</strong></a> ( (/ncase,nlat,mlon,ntim/) , float)
+   a!0 = "case"    ; name dimension
+
+   f0  = <a href="addfile.html"><strong>addfile</strong></a> ("ensemble_0.nc" ,"r")
+   f1  = <a href="addfile.html"><strong>addfile</strong></a> ("ensemble_1.nc" ,"r")
+   f2  = <a href="addfile.html"><strong>addfile</strong></a> ("ensemble_2.nc" ,"r")
+   f3  = <a href="addfile.html"><strong>addfile</strong></a> ("ensemble_3.nc" ,"r")
+   f4  = <a href="addfile.html"><strong>addfile</strong></a> ("ensemble_4.nc" ,"r")
+
+   a(0,:,:,:) = f0->x(lat|:,lon|:,time|:) 
+   a(1,:,:,:) = f1->x(lat|:,lon|:,time|:)        
+   a(2,:,:,:) = f2->x(lat|:,lon|:,time|:)
+   a(3,:,:,:) = f3->x(lat|:,lon|:,time|:)
+   a(4,:,:,:) = f4->x(lat|:,lon|:,time|:)
+
+   nca = ncase*nlat*mlon                 ; for clarity only
+   nra = ntim
+      
+   u   = <a href="new.html"><strong>new</strong></a> ( (/nca,nra/) , <a href="typeof.html"><strong>typeof</strong></a>(x) )  ; pre-allocate space 
+   v   = <a href="new.html"><strong>new</strong></a> ( (/nca,nca/) , <a href="typeof.html"><strong>typeof</strong></a>(x) )  ; for returned arrays
+
+   s   = <strong>svd_lapack</strong> (a , "S" , "S", 0,  u, v)
+   <a href="delete.html"><strong>delete</strong></a> (a)
+</PRE>
+-------
+
+<B>Example 5: ncl-talk</B> question & answer<P>
+
+
+Can anyone tell me why the singular value decomposition (<strong>svd_lapack</strong>) below yields different eigenvalues than the eigenanalysis (<a href="eofunc.html"><strong>eofunc</strong></a>, <a href="eofunc_ts.html"><strong>eofunc_ts</strong></a>), while both output the exact same EOFs and PCs? Can't see what I'm doing wrong.  Code and output are below.
+
+<p>
+<pre>
+
+;######################################################################################
+;                   ### data array A=(/ntime,nspace/) ###
+;######################################################################################
+    A   = (/ (/-2.,1./),(/7.,-8./),(/-3.,0./),(/5.,-9./) /)
+    A!0 = "time"
+    A!1 = "space"
+    ntime  = 4        ;### number of rows, time dimension 0 ###
+    nspace = 2        ;### number of columns, space dimension 1 ###
+
+    Aprime = <a href="dim_rmvmean_n.html"><strong>dim_rmvmean_n</strong></a>(A,0)
+
+    ;### singular value decomposition of Aprime ###    
+    ;### Aprime=(u)(s)(vtranspose)-----> (4x2)=(4x2)(2x2)(2x2) ###
+
+    u            = <a href="new.html"><strong>new</strong></a> ( (/ntime,nspace/) , float )           ;### columns of u are PC eigenvectors ###
+    vtranspose   = <a href="new.html"><strong>new</strong></a> ( (/nspace,nspace/) , float )          ;### rows of vtranspose are EOF eigenvectors ###
+    s            = <strong>svd_lapack</strong> (Aprime, "S" , "S", 0,  vtranspose, u)        ;### s^2=eigenvalues
+                                                                            ;### s is returned with only the non-zero (diagonal) values
+
+    <a href="print.html"><strong>print</strong></a>("for SVD")
+    <a href="print.html"><strong>print</strong></a>("U:")
+    <a href="write_matrix.html"><strong>write_matrix</strong></a> (u, "2f10.4", False)
+
+    <a href="print.html"><strong>print</strong></a>("V:")
+    <a href="write_matrix.html"><strong>write_matrix</strong></a> (vtranspose, "2f10.4", False)
+    <a href="print.html"><strong>print</strong></a>("lambda:")
+    <a href="print.html"><strong>print</strong></a>(s^2)
+
+    At  = <a href="transpose.html"><strong>transpose</strong></a>(A)          ;### make time the rightmost dimension ###
+    eof = <a href="eofunc.html"><strong>eofunc</strong></a>(At,2,False)    ;### rows of eof are EOFs ###
+    eoftranspose = <a href="transpose.html"><strong>transpose</strong></a>(eof)
+    pc  = <a href="eofunc_ts_Wrap.html"><strong>eofunc_ts_Wrap</strong></a>(At,eof,False)    ;### rows of pc are PCs ###
+    pctranspose  = <a href="transpose.html"><strong>transpose</strong></a>(pc)           ;### for similarity to SVD matrices, now columns of pc are PCs ###
+    pc_colsum    = <a href="dim_sum_n.html"><strong>dim_sum_n</strong></a>(pctranspose^2,0)    ;### square each component and sum the columns ###
+    pctranspose(:,0) = pctranspose(:,0)/<a href="sqrt.html"><strong>sqrt</strong></a>(pc_colsum(0))    ;### normalize PC1
+    pctranspose(:,1) = pctranspose(:,1)/<a href="sqrt.html"><strong>sqrt</strong></a>(pc_colsum(1))    ;### normalize PC2
+
+    <a href="print.html"><strong>print</strong></a>("for eofunc")
+    <a href="print.html"><strong>print</strong></a>("U:")
+    <a href="write_matrix.html"><strong>write_matrix</strong></a> (pctranspose, "2f10.4", False)
+
+    <a href="print.html"><strong>print</strong></a>("V:")
+    <a href="write_matrix.html"><strong>write_matrix</strong></a> (eof, "2f10.4", False)
+    <a href="print.html"><strong>print</strong></a>("lambda:")
+    <a href="print.html"><strong>print</strong></a>(eof@eval)
+;######################################################################################
+
+</pre>
+
+OUPUT IS:<p>
+
+(0)    <b>for SVD</b>
+(0)    U:
+<p>
+    0.5010    0.4050
+   -0.5261    0.5745
+    0.4983   -0.3748
+   -0.4732   -0.6046
+<p>
+(0)    V:
+<p>
+   -0.6898    0.7240
+    0.7240    0.6898
+<p>
+(0)    <i>lambda:</i>
+(0)    153.4626
+(1)    3.287447
+      
+<p>
+(0)    <b>for eofunc</b>
+(0)    U:
+<p> 
+    0.5010    0.4050
+   -0.5261    0.5745
+    0.4983   -0.3748
+   -0.4732   -0.6046
+<p>
+(0)    V:
+<p>
+   -0.6898    0.7240
+    0.7240    0.6898
+<p>
+(0)    <i>lambda</i>:
+(0)    51.15419
+(1)    1.095816
+<p>
+<p>
+<B>ANSWER:</B><p>
+
+They should be different by a factor of 1/(n-1), since eofunc is computing the covariance matrix itself. In your case, that factor is exactly 1/3.
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/svd_lapack.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:16 GMT -->
+</html>

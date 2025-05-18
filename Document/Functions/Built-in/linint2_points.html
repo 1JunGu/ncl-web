@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/linint2_points.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:44 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (interpolation)">
+<meta name="keywords" content="linint2_points">
+<title>linint2_points</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../regrid.html">Regridding</a>,
+<a class=crumb href="../interp.html">Interpolation</a>
+<br>
+<h1>linint2_points</h1>
+
+<p>
+Interpolates from a rectilinear grid to an unstructured
+grid or locations using bilinear interpolation.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function linint2_points (
+		xi            : numeric,  
+		yi            : numeric,  
+		fi            : numeric,  
+		fiCyclicX [1] : logical,  
+		xo        [*] : numeric,  
+		yo        [*] : numeric,  
+		Option    [1] : integer   
+	)
+
+	<a href="../return_val.html">return_val</a>  :  float or double
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>xi</em>
+<p class=indent>A strictly monotonically increasing array that specifies the X
+[longitude] coordinates of the <em>fi</em> array.
+</p>
+<em>yi</em>
+<p class=indent>A strictly monotonically increasing array that specifies the Y
+[latitude] coordinates of the <em>fi</em> array.
+</p>
+<em>fi</em>
+<p class=indent>An array of two or more dimensions. The two rightmost dimensions
+(<em>nyi</em> x <em>nxi</em>) are the dimensions to be used in the
+interpolation. If missing values are present, the attribute
+<em>fi</em>@<a href="../../Language/fillval.html">_FillValue</a> must be set appropriately.
+</p>
+<em>fiCyclicX</em>
+<p class=indent>An option to indicate whether the rightmost dimension of <em>fi</em>
+is cyclic.
+</p>
+<p class=indent>
+
+This should be set to True only if you have global data, but your
+longitude values don't quite wrap all the way around the globe.  For
+example, if your longitude values go from, say, -179.75 to 179.75, or
+0.5 to 359.5, then you would set this to True.
+</p>
+<em>xo</em>
+<p class=indent>One-dimensional array that specifies the X (longitude) coordinates of
+the unstructured grid.
+</p>
+<em>yo</em>
+<p class=indent>One-dimensional array that specifies the Y (latitude) coordinates of
+the unstructured grid.  It must be the same length as <em>xo</em>.
+</p>
+<em>Option</em>
+<p class=indent>Reserved for future use. Currently not used.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+The returned value will have the same dimensions as <em>fi</em>,
+except for the rightmost dimension which will have the same dimension
+size as the length of <em>yo</em> and <em>xo</em>.  The return type
+will be double if <em>fi</em> is double, and float otherwise.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+<strong>linint2_points</strong> uses 
+<a href="https://en.wikipedia.org/wiki/Bilinear_interpolation"><b>bilinear interpolation</b></a> 
+to interpolate from
+a <a href="../../glossary.html#RectilinearGrid">rectilinear</a> grid to
+an <a href="../../glossary.html#UnstructuredGrid">unstructured</a> grid.<p>
+
+If missing values are present, then <strong>linint2_points</strong>
+will perform the piecewise linear interpolation at all points
+possible, but will return missing values at coordinates which could
+not be used. If one or more of the four closest grid points
+to a particular (<em>xo</em>,<em>yo</em>) coordinate pair are missing,
+then the return value for this coordinate pair will be missing.<P>
+
+If the user inadvertently specifies output coordinates
+(<em>xo</em>,<em>yo</em>) that are outside those of the input
+coordinates (<em>xi</em>,<em>yi</em>), the output value at this
+coordinate pair will be set to missing as no extrapolation is
+performed.<P>
+
+<strong>linint2_points</strong> is different from
+<a href="linint2.html"><strong>linint2</strong></a> in that <em>xo</em> and <em>yo</em> are
+coordinate pairs, and need not be monotonically increasing.  It is
+also different in the dimensioning of the return array (see examples
+below).<P>
+
+This function could be used if the user wanted to interpolate
+gridded data to, say, the location of rawinsonde sites or
+buoy/xbt locations.<P>
+
+<B>Warning:</B> if <em>xi</em> contains longitudes, then the
+<em>xo</em> values must be in the same range. In addition, if the
+<em>xi</em> values span 0 to 360, then the <em>xo</em> values must
+also be specified in this range (i.e. -180 to 180 will not work).<P>
+
+Use the <a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a> function if metadata retention is desired.
+The interface is identical.<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a>,
+<a href="linint1.html"><strong>linint1</strong></a>, <a href="linint2.html"><strong>linint2</strong></a>,
+<a href="linmsg.html"><strong>linmsg</strong></a>, <a href="../ESMF/ESMF_regrid.html"><strong>ESMF_regrid</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<B>Example 1</B><p>
+
+Assume <em>fi</em> is dimensioned <em>ny</em> x <em>nx</em> (30 x 80),
+and that the rightmost dimension is not to be treated as cyclic.<P>
+
+<pre>
+  xi = (/30,33,35,39,....., 80/)     [does not have to be equally spaced]
+  yi = (/0,1,2,3,....,28,29 /)
+
+  xo = (any coordinates between 30 and 80)  [inclusive]
+  yo = (any coordinates between 0 and 29)  [inclusive]
+
+  xo = (/ 30.5, 78.0, 41.78 /)
+  yo = (/  7.1,  4.3, 27.42 /)
+
+  fo = <strong>linint2_points</strong>(xi,yi,fi, False, xo,yo, 0)
+
+  ; Use <a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a> if metadata retention is desired
+  ; fo = <a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a>(xi,yi,fi, False, xo,yo, 0)
+</pre>
+<p>
+
+<em>fo</em> will be a 1D array of length 3 containing the interpolated
+values for each (<em>xo</em>, <em>yo</em>) coordinate pair.  If there
+had been only one coordinate pair, <em>fo</em> would be returned as a
+scalar.<P>
+
+<B>Example 2</B><p>
+
+Assume <em>fi</em> is dimensioned <em>ntim</em> x <em>nlvl</em> x
+<em>nlat</em> x <em>mlon</em> (<em>ntim</em>=50, <em>nlvl</em>=30,
+<em>nlat</em>=64, <em>mlon</em>=128), and that the rightmost dimension
+is to be treated as cyclic.  The user should <i>not</i> add a cyclic
+point for the rightmost dimension. <strong>linint2_points</strong>
+will interpolate at all times and levels:
+
+<pre>
+  lon = (/ 0., 2.8125, .... , 357,0125 /)
+  lat = (/ -87.8638, ... ,87.8638 /)
+
+  LON = (/ 135.3, 14.9, 55.4, 341.2 , 23.5/)        ; length 5
+  LAT = (/  93.0,-87.5, 22.5, -31.4 ,-89.0 /)       ; length 5
+
+  fo = <strong>linint2_points</strong> (lon,lat,fi, True, LON, LAT, 0)   ; => fo(ntim,nlvl,5)
+
+  ; Use <a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a> if metadata retention is desired
+  ; fo = <a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a> (lon,lat,fi, True, LON, LAT, 0)   ; => fo(ntim,nlvl,5)
+</pre>
+<p>
+
+The returned array will be of size <em>ntim</em> x <em>nlvl</em> x
+5. Note that one of the coordinate pairs (the last one) was outside
+the boundaries of the input grid. The <em>fo</em> value for this
+coordinate pair would be set to missing.<P>
+
+<B>Example 3</B><p>
+
+Assume <em>fi</em> is dimensioned <em>ntim</em> x <em>nlvl</em> x 
+<em>nlat</em> x <em>mlon</em> as above. Use the
+<a href="gc_latlon.html"><strong>gc_latlon</strong></a> function to calculate the latitudes and
+longitudes of a great circle path from (20,30) to (60,45).  Further
+assume the rightmost dimension of <em>fi</em> is to be treated as
+cyclic.  <strong>linint2_points</strong> will interpolate at all
+times and levels:
+
+<pre>
+  lon = (/ 0., 2.8125, .... , 357,0125 /)
+  lat = (/ -87.8638, ... ,87.8638 /)
+  
+  NPTS   = 100  ; user specified number of points
+  dist = <a href="gc_latlon.html"><strong>gc_latlon</strong></a>(20., 30.,  60., 45., NPTS, 2)
+
+  fo  = <strong>linint2_points</strong>(lon,lat,fi, True, dist@gclon, dist@gclat, 2)
+
+  ; Use <a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a> if metadata retention is desired
+  ; fo  = <a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a>(lon,lat,fi, True, dist@gclon, dist@gclat, 2)
+</pre>
+<p>
+
+The returned array <em>fo</em> will be of size <em>ntim</em> x
+<em>nlvl</em> x <em>NPTS</em>. In this case, the two rightmost
+dimensions would represent a cross section along the great circle at
+each time.<P>
+
+<B>Example 4</B><p>
+
+Assume <em>S</em> is dimensioned <em>lev</em> x <em>lat</em> x
+<em>lon</em> (24 x 180 x 360). Further, assume <em>lat</em> and
+<em>lon</em> are one-dimensional coordinate variables spanning -89.5
+to 89.5 and 0.5 to 359.5 respectively. If it is desired to interpolate
+<em>S</em> (salinity) to the POP X1 grid, you must first get the
+coordinates of the target POP grid:
+
+<PRE>
+; get two-dimensional lat and lon coordinates from a X1 or X3  file
+
+  f = <a href="addfile.html"><strong>addfile</strong></a> ("/fs/cgd/data0/shea/pop/rmp_OneD_to_POPX1_C.nc","r")
+  lon_pop = f->dst_grid_center_lon    ; this is one-dim  
+  lat_pop = f->dst_grid_center_lat    
+  if (<a href="isatt.html"><strong>isatt</strong></a>(lon_pop,"units") .and. lon_pop@units.eq."radians") then
+    lon_pop = lon_pop*57.29578
+    lat_pop = lat_pop*57.29578
+    lon_pop@units = "degrees_east"
+    lat_pop@units = "degrees_north"
+  end if
+
+; perform the interpolation: complete the data object for netCDF and plots
+
+  sfcSalt_1D  = <strong>linint2_points</strong> (lon,lat,sfc_salt,True, lon_pop, lat_pop, 0) 
+
+  ; Use <a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a> if metadata retention is desired
+  ; sfcSalt_1D  = <a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a> (lon,lat,sfc_salt,True, lon_pop, lat_pop, 0)
+
+  sfcSalt_pop = <a href="onedtond.html"><strong>onedtond</strong></a>( sfcSalt_1D , (/ny,nx/) )
+  <a href="delete.html"><strong>delete</strong></a> (sfcSalt_1D)                    ; no longer needed
+</pre>
+<p>
+
+<B>Example 5</B><P>
+
+Assume <em>fi</em> is dimensioned <em>time</em> x <em>lev</em> x
+<em>lat</em> x <em>lon</em> as in example 2, where <em>lat</em> and
+<em>lon</em> are 1D strictly monotonically increasing coordinate
+variables. Further assume <em>lon2d</em> and <em>lat2d</em> are 2D
+arrays of size <em>N</em> x <em>M</em> associated with some arbitrary
+grid.<p>
+
+<strong>linint2_points</strong> can be used to interpolate from a
+standard grid (<em>fi</em>) where the <em>xi</em> and <em>yi</em>
+arrays are strictly monotonically increasing 1D arrays, to an
+arbitrary grid where the output coordinates are two-dimensional.<p>
+
+For example, to interpolate a scalar quantity from a global grid to a
+grid that has points that must be expressed as two-dimensional
+latitude/longitude arrays (e.g. points associated with a Lambert
+Conformal grid), the <a href="ndtooned.html"><strong>ndtooned</strong></a> and
+<a href="onedtond.html"><strong>onedtond</strong></a> functions can be used to reshape assorted
+arrays:
+
+<PRE>
+  lat2d = f->LAT2D              ; (N,M)
+  lon2d = f->LON2D               
+  
+  LAT1D = <a href="ndtooned.html"><strong>ndtooned</strong></a>(lat2d)       ; (N*M)
+  LON1D = <a href="ndtooned.html"><strong>ndtooned</strong></a>(lon2d)
+
+  FO = <strong>linint2_points</strong> (lon,lat,fi, False, LON1D,LAT1D, 0)  ; FO(ntim,klev,N*M)
+
+  ; Use <a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a> if metadata retention is desired
+  ; FO = <a href="../Contributed/linint2_points_Wrap.html"><strong>linint2_points_Wrap</strong></a> (lon,lat,fi, False, LON1D,LAT1D, 0)  ; FO(ntim,klev,N*M)
+  
+  fo = <a href="onedtond.html"><strong>onedtond</strong></a>( <a href="ndtooned.html"><strong>ndtooned</strong></a>(FO), (/ntim,klev,N,M/) )
+  
+  <a href="delete.html"><strong>delete</strong></a>(LAT1D)
+  <a href="delete.html"><strong>delete</strong></a>(LON1D)
+  <a href="delete.html"><strong>delete</strong></a>(FO)
+</pre>
+<p>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/linint2_points.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:44 GMT -->
+</html>

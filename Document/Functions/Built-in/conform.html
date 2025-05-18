@@ -1,0 +1,711 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/conform.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:17 GMT -->
+<head>
+<meta name="description" content="NCL built-in functions (array manipulators)">
+<meta name="keywords" content="conform">
+<title>conform</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../../Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../../Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../../Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../../Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../../Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../../Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../../Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../../Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../../Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../../Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../../Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../../Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../../Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../../Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../../Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../../Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../../Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../../Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../../Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../../Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../../Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../../Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../../Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../../Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../../Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../../Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../../Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../../Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../../Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../../Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../../Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../../Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../../Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../../Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../../Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../../Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Functions ></a>
+<a class=crumb href="../array_manip.html">Array manipulators</a>
+<br>
+<h1>conform</h1>
+
+<p>
+Expands an array or scalar so that it conforms to the shape of
+the given variable.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+	function conform (
+		x     ,           
+		r     ,           
+		ndim  : integer   
+	)
+
+	<a href="../return_val.html">return_val</a> [<a href="dimsizes.html"><strong>dimsizes</strong></a>(<em>x</em>)] :  <a href="typeof.html"><strong>typeof</strong></a>(<em>r</em>)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>x</em>
+<p class=indent>An array of any dimensionality.
+</p>
+<em>r</em>
+<p class=indent>A scalar or an array whose dimensions must be a subset of any of the
+dimensions of <em>x</em>.
+</p>
+<em>ndim</em>
+<p class=indent>An array of dimension indexes to indicate which dimensions of
+<em>x</em> match the dimensions in <em>r</em>. Dimension numbering
+starts at the left and must be increasing. The leftmost dimension
+index is 0, the next dimension index is 1, and so on.  If <em>r</em>
+is a scalar, then <em>ndim</em> can have the special value of -1
+(see below).
+</p>
+<p class=indent>
+
+As of version <a href="../../../prev_releases.html#6.4.0">6.4.0</a>,
+<em>ndim</em> can contain dimension indexes who sizes in <em>r</em>
+reference <a href="../../glossary.html#DegenerateDimension">degenerate dimensions</a>.
+The degenerate dimensions will be automatically
+expanded to the corresponding dimension size indicated
+by the size of <em>x</em> (see below).
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+<font color=red>Note: it may be preferable to use the
+<a href="conform_dims.html"><strong>conform_dims</strong></a> function.</font> This function takes
+as its first argument the <i>dimension sizes</i> of the new array you
+want to conform to, rather than the array itself.
+<p>
+
+This function will create a new variable that has the same
+dimensionality as <em>x</em> and the same type as <em>r</em>. The
+values of <em>r</em> will be copied to all of the other
+dimensions.<p>
+
+If <em>r</em> is a scalar and <em>ndims</em> is -1,
+then the scalar value will be copied to all elements of a new array of
+the same size as <em>x</em>.<p>
+
+One use of this function is to create a new (and often temporary)
+variable so that it can be used for something like multiplication
+between two variables.<p>
+
+The <strong>conform</strong> function is designed to merge values
+from two <em>pre-existing</em> arrays. It can not be used to duplicate
+an array multiple times. Use the <a href="conform_dims.html"><strong>conform_dims</strong></a>
+function, or else use an (inefficient) loop.  For example, if you have
+an array that you want to create <em>K</em> copies of and put in a new
+variable, then you can do:
+<p>
+
+<pre>
+  xCopy = <a href="conform_dims.html"><strong>conform_dims</strong></a>((/K,N,M/), x, (/1,2/))
+</pre>
+
+or use NCL's <a href="new.html"><strong>new</strong></a> and <a href="typeof.html"><strong>typeof</strong></a>
+functions:
+
+<pre>
+    xCopy = <a href="new.html"><strong>new</strong></a> ( (/K,N,M/), <a href="typeof.html"><strong>typeof</strong></a>(x)) 
+    do k=0,K-1
+       xCopy(k,:,:) = x
+    end do
+</pre>
+<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="conform_dims.html"><strong>conform_dims</strong></a>,
+<a href="reshape.html"><strong>reshape</strong></a>,
+<a href="reshape_ind.html"><strong>reshape_ind</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<b>Example 1</b><p>
+
+If you have a 3D array <em>x</em> with sizes <em>ntim</em> x
+<em>nlat</em> x <em>mlon</em> and an array <em>t</em> of length
+<em>ntim</em>, then the following line:
+
+<pre>
+    tConform = <strong>conform</strong> (x,t,0) 
+</pre>
+<p>
+
+will yield an array <em>tConform</em> that is dimensioned
+<em>ntim</em> x <em>nlat</em> x <em>mlon</em> where the contents of
+<em>t</em> are propagated to all dimensions of <em>x</em>.<p>
+
+<b>Example 2</b><p>
+
+Assume you have a 4D array <em>x</em> with <a href="../../Manuals/Ref_Manual/NclVariables.html#NamedSubscripting">named
+dimensions</a> "time", "lev", "lat" and "lon" and dimensioned
+<em>ntim</em> x <em>klev</em> x <em>nlat</em> x <em>mlon</em>. Assume
+you also have a 2D array <em>dp</em> of size <em>ntim</em> x
+<em>klev</em>, and that you want to reorder <em>x</em> to be
+<em>ntim</em> x <em>nlat</em> x <em>nlon</em> x <em>klev</em>. <p>
+
+You can use <strong>conform</strong> to work on the reordered grid,
+in which the <em>ndim</em> arguments refer to the reordered grid:<p>
+
+<pre>
+    dpC = <strong>conform</strong> (x(time|:,lat|:,lon|:,lev|:), dp, (/0,3/)) 
+</pre>
+<p>
+
+The <em>dpC</em> array will be dimensioned <em>ntim</em> x
+<em>nlat</em> x <em>mlon</em> x <em>klev</em>.<p>
+
+<b>Example 3</b><p>
+
+Assume T is a 4D array with dimensions <em>ntim</em> x <em>klev</em> x
+<em>nlat</em> x <em>mlon</em> and <em>dp</em> is an array of length
+<em>klev</em>. If you want to compute the column pressure weighted
+mean temperature at all times, then use:
+
+<pre>
+  dpC = <strong>conform</strong>(T, dp, 1)  ; => (ntim,klev,nlat,mlon)
+  T_wgtAve = <a href="dim_sum.html"><strong>dim_sum</strong></a>(T*dpC)/<a href="dim_sum.html"><strong>dim_sum</strong></a>(dpC)
+</pre>
+<p>
+                     
+<b>Example 4</b><p>
+
+The <strong>conform</strong> function can easily be used for
+integration when combined with other functions like
+<a href="dim_sum.html"><strong>dim_sum</strong></a>. Remember that any values that match the
+<a href="../../Language/fillval.html">_FillValue</a> attribute will be omitted from the sum.<p>
+
+For example, if you have an array <em>q</em> dimensioned <em>nt</em> x
+<em>ny</em> x <em>nx</em> x <em>nz</em> and an array <em>dz</em> of
+length <em>nz</em>, then use:
+
+<pre>
+  qInt = <a href="dim_sum.html"><strong>dim_sum</strong></a>(q*<strong>conform</strong>(q,dz,3))  ; qInt(nt,ny,nx)
+</pre>
+<p>
+
+If you have an array <em>x</em> dimensioned <em>ntim</em> x
+<em>nlev</em> x <em>nlat</em> x <em>nlon</em> and an array
+<em>dp</em> of length <em>lev</em>, and you want to use <a href="../../Manuals/Ref_Manual/NclVariables.html#NamedSubscripting">dimension
+reordering</a>:
+
+<pre>
+  xLev = x(time|:,lat|:,lon|:,lev|:)   ; reorder so lev is rightmost
+  xInt = <a href="dim_sum.html"><strong>dim_sum</strong></a>( xLev*<strong>conform</strong>(xLev, dp, 3 )) ; xInt(ntim,nlat,mlon)
+  <a href="delete.html"><strong>delete</strong></a> (xLev)                        ; only needed on a temporary basis
+</pre>
+<p>
+
+<b>Example 5</b><p>
+
+If <em>x</em> is dimensioned <em>ntim</em> x <em>nlat</em> x
+<em>nlon</em>, and <em>w</em> is of length <em>nlat</em> and contains
+gaussian weights or the cosine of the latitude, then to perform a
+weighted average, use:
+
+<pre>
+  sw   = <a href="sum.html"><strong>sum</strong></a>(w)                                 ; sum all weights
+  xTmp = x(time|:,lon|:,lat|:)                  ; temporary array
+  xHov = <a href="dim_sum.html"><strong>dim_sum</strong></a>(xTmp, <strong>conform</strong>(xTmp,w,2) )/sw   ; xHov(ntim,mlon)
+  <a href="delete.html"><strong>delete</strong></a> (xTmp)
+</pre>
+<p>
+
+If <em>lat</em> and <em>lon</em> are <a href="../../Manuals/Ref_Manual/NclVariables.html#Coordinates">coordinate
+arrays</a> associated with <em>x</em>, then <a href="../../Manuals/Ref_Manual/NclVariables.html#CoordinateSubscripts">coordinate
+subscripting</a> can be used to select a subset of the data.<p>
+
+For example, assume the region defined by 90E-270E and 30N-60N is of
+interest:
+
+<pre>
+  latS = 30.    ; for clarity put ranges in variables
+  latN = 60.    ; this also facilitates possible future changes
+  lonE = 90.
+  lonW = 270.
+
+  sw   = <a href="sum.html"><strong>sum</strong></a>(w({latS:latN}))            ; sum only weights appropriate
+                                        ; for the range being used
+
+  xTmp = x(time|:,{lon|lonE:lonW},{lat|latS:latN})
+  xHov = <a href="dim_sum.html"><strong>dim_sum</strong></a>(xTmp, <strong>conform</strong>(xTmp,w({latS:latN}),2))/sw  ; xHov(ntim,mlon)
+</pre>
+<p>
+
+<b>Example 6</b><p>
+
+Assume you have two grids <em>grid1</em> and <em>grid2</em>
+dimensioned <em>ntim</em> x <em>nlat</em> x <em>nlon</em>, where
+<em>ntim</em> is the number of different grids.  To get a pattern
+correlation based on gaussian weights or cosine-of-latitude, where
+<em>wgt</em>(<em>nlat</em>) is the weight for each latitude, use the
+<a href="escorc.html"><strong>escorc</strong></a> function:
+
+<pre>
+   wNew = <a href="ndtooned.html"><strong>ndtooned</strong></a>( <strong>conform</strong>(grid1, wgt, 2) )  
+
+   r = <a href="new.html"><strong>new</strong></a> ( ntim, <a href="typeof.html"><strong>typeof</strong></a>(grid1) )
+     
+   do nt=0,ntim-1
+      r(nt) = <a href="escorc.html"><strong>escorc</strong></a>(<a href="ndtooned.html"><strong>ndtooned</strong></a>(grid1(nt,:,:))*wNew,<a href="ndtooned.html"><strong>ndtooned</strong></a>(grid2(nt,:,:))*wNew)
+   end do
+</pre>
+<p>
+
+<b>Example 7</b><p>
+
+Assume <em>x</em> is dimensioned <em>ntim</em> x <em>klev</em> x <em>nlat</em> <em>mlon</em>, and that <em>s</em> is a scalar. Then the statement:
+
+<pre>
+   xsALL = <strong>conform</strong>(x, s, -1)
+</pre>
+<p>
+
+will create an array <em>xsAll</em> dimensioned <em>ntim</em> x
+<em>klev</em> x <em>nlat</em> x <em>mlon</em> with every element set
+to <em>s</em>.<p>
+
+<b>Example 8</b><p>
+Compute the weighted areal average at each time and level for
+T(Time, bottom_top, south_north, west_east)
+using the simple cosine of the latitude, here, 
+XLAT(Time, south_north, west_east). The example is WRF data.
+
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+
+    f    = <a href="addfile.html"><strong>addfile</strong></a>("wrfout_d01_000000.nc", "r")
+    T = f->T                           ; (25, 27, 81, 90)
+    clat = f->XLAT(0,:,:)                      ; (81, 90)
+    cwgt = <a href="cos.html"><strong>cos</strong></a>(0.01745329*clat)        ; (81, 90)
+
+    dimT = <a href="dimsizes.html"><strong>dimsizes</strong></a>(T)
+    ntim = dimT(0)
+    klev = dimT(1)
+
+    wsum = <a href="sum.html"><strong>sum</strong></a>(cwgt)
+    Twgt = <a href="new.html"><strong>new</strong></a> ( (/ntim,klev/) , <a href="typeof.html"><strong>typeof</strong></a>(T), <a href="../Contributed/getVarFillValue.html"><strong>getVarFillValue</strong></a>(T))
+
+    do nt=0,ntim-1
+      do kl=0,klev-1
+         Twgt(nt,kl) = <a href="sum.html"><strong>sum</strong></a>(T(nt,kl,:,:)*cwgt)/wsum
+      end do
+    end do
+    <a href="../Contributed/copy_VarMeta.html"><strong>copy_VarMeta</strong></a>(T, Twgt)
+    <a href="print.html"><strong>print</strong></a>(Twgt)
+</pre> 
+The above produces
+<pre> 
+Variable: Twgt
+Type: float
+Total Size: 2700 bytes
+            675 values
+Number of Dimensions: 2
+Dimensions and sizes:   [Time | 25] x [bottom_top | 27]
+Coordinates: 
+Number Of Attributes: 6
+  stagger :     
+  units :       K
+  description : perturbation potential temperature (theta-t0)
+  MemoryOrder : XYZ
+  FieldType :   104
+  _FillValue :  -999
+(0,0)   -6.996241
+(0,1)   -4.767268
+(0,2)   -2.842787
+(0,3)   -1.192483
+(0,4)   0.229194
+(0,5)   1.300664
+(0,6)   2.470911
+(0,7)   4.1338
+(0,8)   6.054388
+(0,9)   8.339536
+(0,10)  11.13617
+(0,11)  13.89123
+(0,12)  16.63777
+(0,13)  19.96977
+(0,14)  22.83082
+(0,15)  25.32654
+(0,16)  27.35651
+(0,17)  29.55136
+(0,18)  31.52806
+(0,19)  36.67001
+(0,20)  49.73418
+(0,21)  68.90263
+(0,22)  87.66518
+(0,23)  106.7193
+(0,24)  130.8514
+(0,25)  158.7196
+(0,26)  192.2489
+(1,0)   -6.356514
+(1,1)   -4.663289
+(1,2)   -2.846265
+(1,3)   -1.206751
+[SNIP]
+</pre>
+<p>
+<b>Example 9</b><p>
+Compute the global weighted areal average temperature
+at each time step and level in a POP grid. Then compute the same for
+user specified regions.  POP files come with the area of each grid cell. 
+<p>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+
+    f     = <a href="addfile.html"><strong>addfile</strong></a>("TEMP.nc", "r")
+    t     = f->TEMP                     ; (time, z_t, nlat, nlon)         
+    tarea = f->TAREA                    ; (nlat, nlon) 
+
+    dimt = <a href="dimsizes.html"><strong>dimsizes</strong></a>(t)
+    ntim = dimt(0)
+    kz   = dimt(1)
+
+; Global averages at each time and depth
+
+    wsum = <a href="sum.html"><strong>sum</strong></a>(tarea)
+    twg  = <a href="new.html"><strong>new</strong></a> ( (/ntim,kz/) , <a href="typeof.html"><strong>typeof</strong></a>(t), <a href="../Contributed/getVarFillValue.html"><strong>getVarFillValue</strong></a>(t))
+
+    do nt=0,ntim-1
+      do k=0,kz-1
+         twg(nt,k) = <a href="sum.html"><strong>sum</strong></a>(t(nt,k,:,:)*tarea)/wsum
+      end do
+    end do
+    <a href="../Contributed/copy_VarMeta.html"><strong>copy_VarMeta</strong></a>(t, twg)
+    twg@long_name = "Global Avg: "+t@long_name
+
+    <a href="print.html"><strong>print</strong></a>(twg)          ; [time] x [z_t]
+
+; Regional averages
+
+    regmsk = f->REGION_MASK       ; (nlat, nlon)
+
+    region = (/ 1, 2, 3, 6 /)     ; specify desired
+    nreg   = <a href="dimsizes.html"><strong>dimsizes</strong></a>(region)
+    twr  = <a href="new.html"><strong>new</strong></a> ( (/ntim,kz,nreg/) , <a href="typeof.html"><strong>typeof</strong></a>(t), <a href="../Contributed/getVarFillValue.html"><strong>getVarFillValue</strong></a>(t))
+    
+    do nr=0,nreg-1
+       treg  = <a href="mask.html"><strong>mask</strong></a>(t    , regmsk.ne.region(nr), False) 
+       areg  = <a href="mask.html"><strong>mask</strong></a>(tarea, regmsk.ne.region(nr), False)
+       wsum  = <a href="sum.html"><strong>sum</strong></a>(areg)
+       if (.not.<a href="ismissing.html"><strong>ismissing</strong></a>(wsum) .and. wsum.gt.0.0) then
+           do nt=0,ntim-1
+             do k=0,kz-1
+                twr(nt,k,nr) = <a href="sum.html"><strong>sum</strong></a>(treg(nt,k,:,:)*areg)/wsum
+             end do
+           end do
+       end if
+    end do
+
+    <a href="../Contributed/copy_VarMeta.html"><strong>copy_VarMeta</strong></a>(t(:,:,0,0), twr(:,:,0))
+    twr!2 = "region"
+    twr&amp;region = region
+
+    <a href="print.html"><strong>print</strong></a>(twr)             ; [time] x [z_t] x [region]
+
+</pre>
+
+<b>Example 10</b><p>
+
+Assume ntim1=100 and ntim2=1, and that T1 is a 4D array with
+dimensions <em>ntim1</em> x <em>klev</em> x
+<em>nlat</em> x <em>mlon</em> and <em>dp</em> is an array with
+dimensions <em>ntim2 x klev</em>.  Note that <em>ntim2</em> is a
+degenerate dimension.
+<p>
+
+In NCL V6.3.0 and earlier, if you want to conform dp to the same size of T1,
+you must first subscript <em>dp</em> to collapse the degenerate dimension:
+<p>
+
+<pre>
+  dpC = <strong>conform</strong>(T, dp(0,:), 1)   ; => (ntim1,klev,nlat,mlon)
+</pre>
+<p>
+
+In NCL V6.3.0 and later, you don't need to collapse the degenerate dimension:
+
+<pre>
+  dpC = <strong>conform</strong>(T, dp, (/0,1/))  ; => (ntim1,klev,nlat,mlon)
+</pre>
+<p>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Functions/Built-in/conform.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:17 GMT -->
+</html>

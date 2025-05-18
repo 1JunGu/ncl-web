@@ -1,0 +1,130 @@
+;**********************************************************************
+; This function returns true if a reference line is set and any
+; of the above/below/left/right fill resources are set.
+; 
+; It also checks if both X/Y ref line fill is set, because this is
+; not allowed currently (maybe never?).
+;**********************************************************************
+undef("is_ref_line_fill_set")
+function is_ref_line_fill_set(reftype,rfres)
+local xref_line_name,xgrt_res_name,xlss_res_name,yref_line_name,ygrt_res_name,ylss_res_name
+begin
+  yref_line_name = "gsnYRefLine"
+  ygrt_res_name  = "gsnAboveYRefLineColor"
+  ylss_res_name  = "gsnBelowYRefLineColor"
+  xref_line_name = "gsnXRefLine"
+  xgrt_res_name  = "gsnRightXRefLineColor"
+  xlss_res_name  = "gsnLeftXRefLineColor"
+
+  if((isatt(rfres,yref_line_name).and.(isatt(rfres,ygrt_res_name).or.\
+                                       isatt(rfres,ylss_res_name))).and.\
+     (isatt(rfres,xref_line_name).and.(isatt(rfres,xgrt_res_name).or.\
+                                       isatt(rfres,xlss_res_name)))) then
+    print("is_ref_line_fill_set: Error: you cannot set color fill around both")
+    print("           gsnXRefLine and gsnYRefLine in the same plot.")
+    exit
+  else if( (reftype.eq."y".and.isatt(rfres,yref_line_name).and.\
+                             (isatt(rfres,ygrt_res_name).or.\
+                              isatt(rfres,ylss_res_name))).or.\
+          (reftype.eq."x".and.isatt(rfres,xref_line_name).and.\
+                             (isatt(rfres,xgrt_res_name).or.\
+                              isatt(rfres,xlss_res_name)))) then
+    return(True)          ; Only fill for this ref line is set
+  else
+    return(False)         ; Neither X nor Y ref line fill is set
+  end if
+  end if
+end
+
+;**********************************************************************
+; This function sets a bunch of variables for drawing an X or Y 
+; reference line and/or filling curves above/below or to the right/left
+; of a reference line.
+;**********************************************************************
+undef("get_ref_line_options")
+function get_ref_line_options(wks,x,y,reftype[1]:string,ncurves,rfres)
+local nref, imsg, fmsg, tmpdims, nref, set_ref_line_color
+begin
+  imsg = new(1,integer)
+  fmsg = new(1,float)
+  cmsg = new(4,float)
+  nref                   = 0
+  ref_line               = fmsg
+  ref_line_on            = False
+  ref_line_color         = cmsg
+  ref_line_pattern       = imsg
+  ref_line_thickness     = fmsg
+  ref_grtr_curve_fill_on = False
+  ref_less_curve_fill_on = False
+  ref_fill_color_g       = cmsg   ; greater than
+  ref_fill_color_l       = cmsg   ; less than
+
+;
+; If neither gsnYRefLine or gsnXRefLine are set, but gsnXYBarChart has 
+; been set, then assume the user wants a Y reference line, and return 
+; a default value for Y ref line.
+;
+  bar_chart        = get_res_value_keep(rfres,"gsnXYBarChart",False)
+  bar_outline_only = get_res_value_keep(rfres,"gsnXYBarChartOutlineOnly",False)
+  if(.not.isatt(rfres,"gsnYRefLine").and..not.isatt(rfres,"gsnXRefLine")) then
+    if(reftype.eq."y".and.bar_chart.and..not.bar_outline_only) then
+      ref_line = get_res_value_keep(rfres,"trYMinF",min(y))
+;      print("get_ref_line_options: warning: you've set gsnXYBarChart=True, but haven't")
+;      print("    specified an X or Y reference line. Will assume a default Y reference")
+;      print("    line of " + ref_line)
+      nref               := 1
+      ref_line_on        = True
+      ref_line_color     := convert_color_to_rgba(wks,"foreground")
+      ref_line_pattern   := 0
+      ref_line_thickness := 1.
+    end if
+    return([/ref_line,ref_line_on,ref_line_color,ref_line_pattern,\
+             ref_line_thickness,ref_grtr_curve_fill_on,\
+             ref_less_curve_fill_on,ref_fill_color_g,ref_fill_color_l/])
+  end if
+
+;---Check for the case where we just want a reference line, and no fill.
+  ref_fill_on = is_ref_line_fill_set(reftype,rfres)
+  if(bar_outline_only.or.(.not.bar_chart.and..not.bar_outline_only.and..not.ref_fill_on).or.\
+      (reftype.eq."x".and..not.isatt(rfres,"gsnXRefLine").or.\
+       reftype.eq."y".and..not.isatt(rfres,"gsnYRefLine"))) then
+    if( (reftype.eq."y".and.isatt(rfres,"gsnYRefLine")).or.\
+        (reftype.eq."x".and.isatt(rfres,"gsnXRefLine"))) then
+      ref_line_on        = True
+      ref_line           := get_res_value_keep(rfres,"gsn" + str_upper(reftype)+"RefLine",0)
+      nref               = dimsizes(ref_line)
+      ref_line_color     := get_ref_line_color(wks,reftype,nref,rfres)
+      ref_line_pattern   := get_ref_line_pattern(wks,reftype,nref,rfres)
+      ref_line_thickness := get_ref_line_thickness(wks,reftype,nref,rfres)
+    end if
+    return([/ref_line,ref_line_on,ref_line_color,ref_line_pattern,\
+             ref_line_thickness,ref_grtr_curve_fill_on,\
+             ref_less_curve_fill_on,ref_fill_color_g,ref_fill_color_l/])
+  end if
+
+;---If we've made it to here, then we're looking at either filled curves or a bar chart.
+  if(reftype.eq."y") then
+    fill_string_g = "above"
+    fill_string_l = "below"
+  else
+    fill_string_g = "right"
+    fill_string_l = "left"
+  end if
+  ref_line_on = True
+  ref_line    := get_res_value_keep(rfres,"gsn" + str_upper(reftype)+"RefLine",0)
+  nref         = dimsizes(ref_line)
+  ref_line_color       := get_ref_line_color(wks,reftype,nref,rfres)
+  ref_line_pattern     := get_ref_line_pattern(wks,reftype,nref,rfres)
+  ref_line_thickness   := get_ref_line_thickness(wks,reftype,nref,rfres)
+  ref_fill_color_g     := get_ref_line_fill_color(wks,fill_string_g,ncurves,\
+                           nref,rfres)
+  ref_fill_color_l     := get_ref_line_fill_color(wks,fill_string_l,ncurves,\
+                           nref,rfres)
+  ref_grtr_curve_fill_on = .not.any(ismissing(ref_fill_color_g))
+  ref_less_curve_fill_on = .not.any(ismissing(ref_fill_color_l))
+
+  return([/ref_line,ref_line_on,ref_line_color,ref_line_pattern,\
+           ref_line_thickness,ref_grtr_curve_fill_on,\
+           ref_less_curve_fill_on,ref_fill_color_g,\
+           ref_fill_color_l/])
+end

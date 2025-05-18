@@ -1,0 +1,389 @@
+;----------------------------------------------------------------------
+; gpm_2.ncl
+;
+; Concepts illustrated:
+;   - Reading a GPM HDF5 file containing swath data
+;   - Reading group data off an HDF5 file using two methods
+;   - Creating a single 'time' variable that is CF conforming
+;   - Exploring the data
+;   - Using 'stat_dispersion' and 'nice_mnmxintvl' for information and graphics
+;   - Plotting trajectories
+;   - Plotting values at each scan (time) for the trajectory           
+;   - Plotting cross sections at different rays 
+;=====================================================================
+; GPM: Global Pecipitation Mision: Swath
+;=====================================================================
+; http://www.eorc.jaxa.jp/GPM/doc/product/FileNamingConventions_e.pdf
+;
+; FILE NAME: GPMxxx_sss_YYMMDDhhmm_hhmm_nnnnnn_LLS_aaa_VVv.h5 
+;
+; GPMxxx       - Mission ID [GPM]; Satellite ID [eg: COR]
+; sss          - Sensor ID [eg: KUR]
+; YYMMDDhhmm   - Swath (Scene) start 
+; hhmm         - Swath (Scene) end
+; nnnnnn       - Orbit Number 
+; LLS          - Process Level [eg: L2, 1B, 1C]; Process Type [eg: S] 
+; aaa          - Algorithm name & Developer 
+; VVv          - Product Version
+;
+; https://gpm1.gesdisc.eosdis.nasa.gov/data/doc/README.GPM.pdf
+; https://pps.gsfc.nasa.gov/GPMprelimdocs.html
+; http://www.eorc.jaxa.jp/GPM/doc/data_utilization/GPM_data_util_handbook_appendix3_E.pdf
+; See: Figure 1.3-1 
+; -----------------
+; nscan - Number of scans ['times'] 
+; nrays - Number of rays ['channels'] in each scan     
+;         Cross scan along path; 49 with ray=25 [NCL index 24] the center 
+; nbins - Number of range bins in the ray 
+;         Each ray has 176 bins; Think vertical levels
+;
+; For each scan (time), there are 49 rays (sample) at 176 [bin levels]
+;=====================================================================
+   opt_sd = True                    ; Miscellaneous Setting(s); used later
+   opt_sd@PrintStat = True
+
+;---User variable specifications
+
+   var      = "zFactorCorrected"
+   varGroup = "/NS/SLV/"
+   varPath  = varGroup + var                ; HDF5 path to variable
+
+;---File 
+
+   diri  = "./"
+   fili  = "GPMCOR_KUR_1711170417_0549_021135_L2S_DU2_05A.h5"
+   pthi  = diri + fili
+
+; Parse the file name 
+
+   dlim  = "_."
+   nfld  = str_fields_count(fili,dlim)     ; nfld=9 ; print("nfld ="+nfld)
+   id    = str_get_field(fili, 1, dlim)
+   sss   = str_get_field(fili, 2, dlim)
+   ymdhm = str_get_field(fili, 3, dlim)
+   hm    = str_get_field(fili, 4, dlim)
+   orbit = str_get_field(fili, 5, dlim)
+   LLS   = str_get_field(fili, 6, dlim)
+   aaa   = str_get_field(fili, 7, dlim)
+   VVv   = str_get_field(fili, 8, dlim)
+
+; Open file 
+
+   f     = addfile( pthi, "r")
+
+; Time      
+
+   DayOfMonth = f->/NS/ScanTime/DayOfMonth 
+   DayOfYear  = f->/NS/ScanTime/DayOfYear
+   Hour       = f->/NS/ScanTime/Hour
+   MilliSecond= f->/NS/ScanTime/MilliSecond
+   Minute     = f->/NS/ScanTime/Minute
+   Month      = f->/NS/ScanTime/Month
+   Second     = f->/NS/ScanTime/Second
+   SecondOfDay= f->/NS/ScanTime/SecondOfDay 
+   Year       = f->/NS/ScanTime/Year 
+   ntim       = dimsizes(Year)            ; same as 'nscan'
+
+;---Create CF conforming 'time' variable [not necessary]
+;---Make it a classic netCDF coordinate variable
+;---Units is arbitrary [could be: seconds, minutes, hours, days]
+;---Any 'Year' could be used as a base ... eg: 1900, 2000,....2012
+;   Here the year of the sample
+
+   units  = "minutes since "+Year(0)+"-"   +    sprinti("%0.2i",Month(0))+"-"     \
+          +  sprinti("%0.2i",DayOfMonth(0))+" "+sprinti("%0.2i", Hour(0))+":00:00" 
+   print("units="+units)
+   print("---")
+
+   SecondMilliSecond = Second + (MilliSecond/1000.)   ; finer time resolution
+
+   time   = cd_inv_calendar(Year,Month,DayOfMonth,Hour,Minute,SecondMilliSecond,units, 0)
+   time!0 = "time"
+   time&time = time
+   delete(time@_FillValue)                  ; not needed
+   print(time(0:99))                        ; 100 sample times
+   print("---")
+
+   eTime  = time(ntim-1) - time(0)          ; elapsed time
+   print("units="+units)
+   print("Swath_Start="+sprintf("%6.2f", time(0))+" "      \
+        +"Swath_End="+sprintf("%7.2f", time(ntim-1))+" "   \
+        +"Elapsed Time="+sprintf("%7.2f", eTime)+" minutes") 
+   print("---")
+  
+;---Swath trajectory + 49 ray locations for each 'channel'
+                                            ; for each scan, there are 49 rays
+   lat2d = f->/NS/Latitude                  ; (nscan,nray), (7935,49) 
+   lon2d = f->/NS/Longitude                 ;      "     ;       "
+   lat2d@units = "degrees_east"
+   lon2d@units = "degrees_north"
+
+   printVarSummary(lat2d)
+   printMinMax(lat2d,0)                     ; min=-66.2812   max=66.2799
+   print("---")
+
+   printVarSummary(lon2d)
+   printMinMax(lon2d,0)                     ; min=-180   max=180
+   print("---")
+                                            ; crude feel for swath width
+   printMinMax(lat2d(3500,:),0)             ; swath lat span:  min=56.9722   max=58.8101
+   printMinMax(lat2d(2500,:),0)             ;                  min=20.8134   max=21.8638
+   print("---")
+
+   printMinMax(lon2d(3500,:),0)             ; swath lon span:	min=34.8122   max=37.3806
+   printMinMax(lon2d(2500,:),0)             ;                   min=0.818679   max=2.92879
+   print("---")
+
+;---Import the specified variable
+
+   x       = f->$var$                       ; [nscan | 7935] x [nray | 49] x [nbin | 176]
+   x@long_name = var                        ; variables on file have no @long_name 
+   printVarSummary(x)                     
+   printMinMax(x,0)                         ;       min=13.43   max=59.57   [dBZ]   
+   print("---")
+
+   nMsg    = num(ismissing(x))              ; There are a *lot* of missing values
+   print(var+": nMsg="+nMsg)
+   print("---")
+
+   dimx    = dimsizes(x)
+   nscan   = dimx(0)                        ; same as 'ntim'
+   nray    = dimx(1)
+   nbin    = dimx(2)
+
+;=========================================
+;           PLOT SETTINGS
+;=========================================
+
+   midRAY  = nray/2                         ; truncated [midRAY=24]
+   RAY     = (/ 0, midRAY, nray-1 /)        ; indices [0-48] --> ray numbers [1-49]
+   nRAY    = dimsizes(RAY)
+   pltType = "png"                          ; "x11"
+   pltDir  = "./"
+
+;=========================================
+;       Explicitly identify 'nscan' with 'time'
+;=========================================
+   x!0     = "time"
+   x&time  =  time                          ; make 'time' a coordinate variable
+   printVarSummary(x)                       ; [time | 7935] x [nray | 49] x [nbin | 176]
+   print("---")
+
+;=========================================
+;     PLOTTING                         
+;=========================================
+ ;;pltName = id+"_"+sss+"_"+orbit+"_trajectory"
+   pltName = "gpm" 
+   pltPath = pltDir + pltName
+   wks     = gsn_open_wks(pltType ,pltPath)   
+      
+;=========================================
+;     SWATH: trajectory , time series
+;=========================================
+
+;---Simple trajectory plot
+
+   tres                      = True         ; plot mods desired
+   tres@gsnDraw              = False
+   tres@gsnFrame             = False
+   tres@gsnMaximize          = True         ; maximize plot
+
+ ;;tres@mpFillOn             = False        ; do not fill land with light gray [default]
+   tres@mpGridAndLimbOn      = True
+   tres@mpGridLatSpacingF    = 45
+   tres@mpGridLonSpacingF    = 45
+   tres@mpGridLineDashPattern=  2
+
+   tres@tiMainString         = fili      
+   tres@tiMainFontHeightF    = 0.016 
+   tres@gsnLeftString        = var
+   tres@gsnRightString       = "RAY="+(midRAY+1)
+   map_traj = gsn_csm_map(wks, tres)   ; blank map
+
+; http://www.ncl.ucar.edu/Document/Graphics/Images/markers.png
+
+   polyres                   = True
+   polyres@gsMarkerIndex     =  1                ; period
+   polyres@gsMarkerSizeF     = 0.025  ; 0.010
+                                                 ; add trajectory to blank map
+   traj  = gsn_add_polymarker(wks,map_traj,lon2d(:,midRAY),lat2d(:,midRAY),polyres)
+   draw(map_traj)
+   frame(wks)
+
+;---Trajectory colored by the maximum bin value at each scan:  max[nray x nbin]
+;---For each scan (time) find the maximum over the associated (nray,nbin)
+
+   xScanMax = dim_max_n_Wrap(x,(/1,2/))
+   xScanMax@long_name = var+": Max Value at Each Scan"
+   printVarSummary(xScanMax)
+   printMinMax(xScanMax,0)
+   print("---")
+
+;---Statistical distribution of all maximum [ray x bin] values
+;---Avoid outliers use Low and High dectiles: statsd(3), statsd(13)
+;---Get nice bin intervals
+
+   statsd  = stat_dispersion(xScanMax, opt_sd )
+   mnmxint = nice_mnmxintvl(statsd(3), statsd(13), 20, False)
+  ;print(mnmxint)
+
+   xLow    = mnmxint(0)
+   xHigh   = mnmxint(1)
+   xIntvl  = mnmxint(2)
+   nIntvl  = toint( (xHigh-xLow)/xIntvl + 1)
+   xBins   = fspan(xLow, xHigh, nIntvl)
+
+   binColors = (/  "black" ,"gray40", "blue", "aquamarine", "yellow"   \                
+                 , "orange", "green", "pink", "magenta"   , "red", "brown" /)
+   nbinColors= dimsizes(binColors)
+
+;---For each bin add the appopriate colored marker  
+;---Must check for a bin where no values were encountered (=> _FillValue)
+
+   tres@gsnLeftString = xScanMax@long_name
+   map_scan = gsn_csm_map(wks, tres)   ; blank map
+
+   object = new(nIntvl,"graphic")                ; graphic object place holder
+   do k=0,nIntvl-2
+      ji        := ind(xScanMax.ge.xBins(k) .and. xScanMax.lt.xBins(k+1))
+      nji        = dimsizes(ji)
+      if (nji.gt.1 .or. .not.ismissing(ji)) then 
+          polyres@gsMarkerColor  = binColors(k)
+          object(k)  = gsn_add_polymarker(wks,map_scan,lon2d(ji,midRAY),lat2d(ji,midRAY),polyres)
+      end if
+   end do
+   draw(map_scan)
+
+;---Explicitly create and locate label bar based on 'map' ViewPort information
+
+   getvalues map_scan                            ; get 'map' ViewPort information
+      "vpXF"      : vpx
+      "vpYF"      : vpy
+      "vpWidthF"  : vpw
+      "vpHeightF" : vph
+   end getvalues
+
+   lbres                    = True      ; Set up a resource list for the labelbar.
+   lbres@vpWidthF           = vpw       ; size for map
+   lbres@vpHeightF          = 0.075     ; make thinner
+   
+  ;lbres@lbBoxLinesOn       = False
+   lbres@lbFillColors       = binColors
+                                        ; label at end
+   lbLabelStrings           = new(nIntvl+1,"string")
+   lbLabelStrings(0:nIntvl-1) = tostring(toint(xBins))
+   lbLabelStrings(nIntvl)   = ""                 ; rightmost label 
+   lbres@lbLabelStrings     = lbLabelStrings
+
+   lbres@lbOrientation      = "Horizontal"
+   lbres@lbLabelAlignment   = "ExternalEdges"
+   lbres@lbLabelAutoStride  = False              ; every label
+   lbres@lbMonoFillPattern  = True
+   lbres@lbPerimOn          = False
+   lbres@lbLabelFontHeightF = 0.0125
+
+   xpos = (1.-vpw)/2 + 0.025
+   ypos = (vpy-vph)  - 0.040
+
+   gsn_labelbar_ndc (wks,nIntvl,binColors(0:nIntvl-1),xpos,ypos,lbres)
+   frame(wks)
+
+; Time series plot ... Better as scatter plot because many missing values
+
+   rests          = True                   ; plot mods desired
+   rests@vpHeightF= 0.4                    ; change aspect ratio of plot
+   rests@vpWidthF = 0.7                  
+  ;rests@vpXF     = 0.15                   ; start plot at x ndc coord 
+   rests@tiXAxisString = time@units
+   rests@tiYAxisString = x@long_name+": "+xScanMax@units
+   rests@tiMainString  = xScanMax@long_name
+
+
+   delt    = time(1)-time(0)
+   toffset = 5*delt                        ; arbitrary not needed
+   rests@trXMinF       = time(0) - toffset
+   rests@trXMaxF       = time(ntim-1) + toffset
+
+  ;plot = gsn_csm_xy (wks,xScanMax&time, xScanMax,rests)   ; lines 
+
+   rests@xyMarkLineModes   = "Markers"                
+   rests@xyMarkers         =  16                      ; Marker Type   
+   rests@xyMarkerColor     = "blue"                   ; Marker Color
+   rests@xyMarkerSizeF     = 0.0050                   ; Marker Size (default 0.01)
+   plot = gsn_csm_xy (wks,xScanMax&time, xScanMax,rests) 
+
+   nXBLabels = 10
+   nXBSkip   = ntim/nXBLabels
+   XBLabels  = new(nXBLabels+1,"string")
+   XBValues  = new(nXBLabels+1,typeof(time))
+
+   nn = 0
+   do nt=0,ntim-1,nXBSkip
+      xx = lon2d(nt,midRAY)
+      yy = lat2d(nt,midRAY)           
+      XBValues(nn) = time(nt)
+      XBLabels(nn) = sprintf("%5.1f", yy)+"~C~"+sprintf("%5.1f", xx)
+      nn = nn + 1
+   end do
+   rests@tmXBMode   = "Explicit"
+   rests@tmXBValues = XBValues
+   rests@tmXBLabels = XBLabels
+   rests@tiXAxisString = "trajectory: [lat,lon]"
+   rests@tiXAxisFontHeightF   = 0.020 
+   rests@tiYAxisFontHeightF   = rests@tiXAxisFontHeightF
+   rests@tmXBLabelFontHeightF = 0.015
+
+   plot = gsn_csm_xy (wks,xScanMax&time, xScanMax,rests) 
+
+;=========================================
+;         RAY X-SECTION
+;=========================================
+   do nr=0,nRAY-1       ;plot one ray for test
+
+      xsec = x(nray|RAY(nr),nbin|:,time|:)           ; reshape  
+      printVarSummary(x)                          ; [nbin | 176] x [time | 7935]
+      printMinMax(xsec,0)
+      print("---")
+
+      statsd = stat_dispersion(xsec, opt_sd )
+
+      resx                      = True               ; plot mods desired
+      resx@gsnMaximize          = True               ; maximize plot
+      resx@gsnAddCyclic         = False              ; data not cyclic
+
+      resx@cnFillOn             = True               ; turn on color fill
+      resx@cnFillMode           = "RasterFill"       ; Raster Mode
+      resx@cnLinesOn            = False              ; turn off contour lines
+      resx@cnLineLabelsOn       = False              ; turn off contour line labels
+      resx@cnInfoLabelOn        = False
+ 
+      resx@cnFillPalette        = "BlGrYeOrReVi200"            
+      resx@tiYAxisString        = "Bin Number"
+      resx@tiXAxisString        = time@units         ; "Scan Number"
+      resx@tiXAxisFontHeightF   = 0.020 
+      resx@tiYAxisFontHeightF   = resx@tiXAxisFontHeightF 
+      resx@lbLabelBarOn         = True  
+      resx@lbOrientation        = "Vertical"         ; "Horizontal"
+      if (isatt(resx,"lbOrientation") .and. resx@lbOrientation.eq."Horizontal") then
+          resx@tiXAxisOffsetYF          = .17
+          resx@pmLabelBarOrthogonalPosF = 0.025    
+      end if
+      resx@trYMinF = 80
+
+      mnmxint = nice_mnmxintvl(statsd(3), statsd(13), 20, False)
+
+      resx@cnLevelSelectionMode = "ManualLevels"     ; set manual contour levels
+      resx@cnMinLevelValF       =  mnmxint(0)        ; set min contour level
+      resx@cnMaxLevelValF       =  mnmxint(1)        ; set max contour level
+      resx@cnLevelSpacingF      =  mnmxint(2)        ; set contour spacing
+      resx@cnMissingValFillColor= "gray90"
+
+      resx@tiMainString         = fili
+      resx@tiMainFontHeightF    = 0.016 
+
+      resx@gsnLeftString        = var
+      resx@gsnCenterString      = "nRay="+RAY(nr)
+      resx@vpHeightF            = 0.5                ; change aspect ratio of plot
+      resx@vpWidthF             = 0.8                  
+      map  = gsn_csm_contour(wks, xsec, resx)        ; Y [bin]  x  TIME
+   end do

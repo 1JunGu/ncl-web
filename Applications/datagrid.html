@@ -1,0 +1,740 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/datagrid.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:59:21 GMT -->
+<head>
+<meta name="description" content="NCL graphics examples page. Describes
+drawing lat/lon grid lines on maps">
+<meta name="keywords" content="NCL, graphics, visualization, resources,
+grid, maps">
+<TITLE>NCL Graphics: Drawing locations of data values via markers or lines</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_maps.html">Maps and map projections</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+
+<h1>NCL: Drawing locations of data values via markers or lines</h1>
+
+<div class=mainimage>
+<img src="Images/datagrid_6_lg.png" align=left border=0></a>
+</div>
+
+<div class=text>
+
+The <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> procedure
+takes an existing plot and a data variable, and draws the plot again
+but with markers or grid lines drawn at the grid locations of your
+data.
+<p>
+
+It will query your data variable and/or the resource list in order to
+get the grid location information, by looking for one of the
+following:
+<p>
+<ul>
+<li>Coordinate arrays attached to the <em>data</em> variable
+<li>Special "lat2d" / "lon2d" attributes attached to the <em>data</em> variable
+<li>Special "lat1d" / "lon1d" attributes attached to the <em>data</em> variable
+<li><b>gsnCoordsLat</b> / <b>gsnCoordsLon</b> attached to
+the <em>res</em> resource list
+<li><b>gsnCoordsX</b> / <b>gsnCoordsY</b> attached to
+the <em>res</em> resource list
+</ul>
+<p>
+
+This procedure recognizes several additional special attributes:
+<p>
+
+<ul>
+<li><b>gsnCoordsAttachAsLines</b> - by default, the grid locations
+will be drawn as filled dots, unless this resource is set to True,
+in which case lines will be drawn.
+<p>
+
+<li><b>gsnCoordsAttach</b> - by default, when this procedure is called, the
+plot is drawn immediately, the markers or lines are drawn on top, and
+the frame is advanced.  If this resource is set to True, then the
+markers or lines are only <i>attached</i> to the plot, and nothing gets drawn.
+You will need to call <a href="../Document/Functions/Built-in/draw.html"><strong>draw</strong></a> and <a href="../Document/Functions/Built-in/frame.html"><strong>frame</strong></a>
+yourself. This is useful if you need to panel plots with coordinate
+locations added. See <a href="#ex6">datagrid_6.ncl</a> below.
+<p>
+
+<li><b>gsnCoordsMissingColor</b> / <b>gsnCoordsNonMissingColor</b> -
+By default, if you are drawing the locations as markers, they will all
+get drawn in black. These resources allow you to set colors for marker
+locations where your data is or isn't missing.
+<p>
+
+</ul>
+<p>
+
+
+In <a href="../prev_releases.html#6.6.0">NCL version
+6.6.0</a>, <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> was
+updated to allow the drawing of unstructured meshes, like triangular
+or hexagonal meshes.  There are several examples below.
+<p>
+
+For other examples of using <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a>, see
+the <a href="plot_data_on_map.html">Plotting data on a map</a> examples page.
+
+
+</div>
+
+<div class=ex>
+<!--Datagrid_1-->
+<a name=ex1></a>
+<a href="Images/datagrid_1_1_lg.png">
+<img src="Images/datagrid_1_1_sm.png" align=left border=2></a>
+<a href="Images/datagrid_1_2_lg.png">
+<img src="Images/datagrid_1_2_sm.png" align=left border=2></a>
+<a href="Images/datagrid_1_3_lg.png">
+<img src="Images/datagrid_1_3_sm.png" align=left border=2></a>
+<a href="Scripts/datagrid_1.html">datagrid_1.ncl</a>:  This
+script draws the lat/lon locations of a global
+<a href="../Document/glossary.html#RectilinearGrid">rectilinear grid</a> in three
+ways: 1) as points, 2) as lines, and 3) as every 3rd line.
+
+</div>
+
+<div class=ex>
+<!--Datagrid_2-->
+<a name=ex2></a>
+<a href="Images/datagrid_2_1_lg.png">
+<img src="Images/datagrid_2_1_sm.png" align=left border=2></a>
+<a href="Images/datagrid_2_2_lg.png">
+<img src="Images/datagrid_2_2_sm.png" align=left border=2></a>
+<a href="Images/datagrid_2_3_lg.png">
+<img src="Images/datagrid_2_3_sm.png" align=left border=2></a>
+<a href="Scripts/datagrid_2.html">datagrid_2.ncl</a>: This script shows
+how to add lines at locations of three WRF-ARW
+variables which are on different lat/lon grids:
+<p>
+
+<pre>
+  hgt [south_north | 197] x [west_east | 206]
+  u   [south_north | 197] x [west_east_stag | 207]
+  v   [south_north_stag | 198] x [west_east | 206]
+</pre>
+
+Since WRF data is on a 
+<a href="../Document/glossary.html#CurvilinearGrid">curvilinear grid</a> 
+you must read the lat/lon values off the file
+and attach them as special lat2d / lon2d attributes
+before calling <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--Datagrid_3-->
+<a name=ex3></a>
+<a href="Images/datagrid_3_lg.png">
+<img src="Images/datagrid_3_sm.png" align=left border=3></a>
+<a href="Scripts/datagrid_3.html">datagrid_3.ncl</a>:  This
+example plots the same three WRF grids as the previous example,
+except it plots them on one map plot that has been zoomed in
+so you can see the grid better.  The HGT lat/lon locations are drawn
+in dots instead of lines.
+<p>
+
+</div>
+
+
+<div class=ex>
+<!--Datagrid_4-->
+<a name=ex4></a>
+<a href="Images/datagrid_4_lg.png">
+<img src="Images/datagrid_4_sm.png" align=left border=3></a>
+<a href="Scripts/datagrid_4.html">datagrid_4.ncl</a>:  This
+script draws a WRF lat/lon grid on top of a filled contour 
+plot of the HGT variable, using the native map projection
+defined on the WRF output file.
+
+</div>
+
+<div class=ex>
+<!--Datagrid_5-->
+<a name=ex5></a>
+<a href="Images/datagrid_5_1_lg.png">
+<img src="Images/datagrid_5_1_sm.png" align=left border=3></a>
+<a href="Images/datagrid_5_2_lg.png">
+<img src="Images/datagrid_5_2_sm.png" align=left border=3></a>
+<a href="Scripts/datagrid_5.html">datagrid_5.ncl</a>: This script draws
+the lat/lon grid of a temperature variable on a regional rectilinear
+grid using two methods: 1) black lines and 2) red markers where the
+data is missing, and black markers where it isn't.
+
+
+</div>
+
+<div class=ex>
+<!--Datagrid_6-->
+<a name=ex6></a>
+<a href="Images/datagrid_6_lg.png">
+<img src="Images/datagrid_6_sm.png" align=left border=3></a>
+<a href="Scripts/datagrid_6.html">datagrid_6.ncl</a>: This script uses
+the USA_adm0.shp shapefile (downloaded
+from <a href="http://www.gadm.org/country">gadm.org/country</a>) to
+mask data on a rectilinear grid over the United States. Both the
+original data and the masked data have the lat/lon locations drawn as
+markers, with the red points indicating missing data locations.
+<p>
+
+The special <b>gsnCoordsAttach</b> resoure is set to True, so the markers
+are actually attached to both plots. This is so we can panel the plots
+later and have the markers still be visible.
+</div>
+
+<div class=ex>
+<!--shapefiles_16-->
+<a name=ex16></a>
+<a href="Images/shapefiles_16_lg.png">
+<img src="Images/shapefiles_16_sm.png" align=left border=3></a>
+<a href="Scripts/shapefiles_16.html">shapefiles_16.ncl</a>: This
+is another example of drawing data locations after you've
+masked the data against a shapefile.
+<p>
+
+In this case, dummy data is used to create a coarse (32 x 64) grid and
+fine (64 x 128) grid. Both grids are masked against
+a Mississippi River Basin shapefile.  Finally, 
+<a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> is used to draw the
+lat/lon grid as a set of markers on all four plots.
+<p>
+
+See examples <a href="shapefiles.html#ex21">shapefiles_21.ncl</a> and 
+See examples <a href="shapefiles.html#ex22">shapefiles_22.ncl</a> for 
+more examples of masked shapefiles with data locations drawn.
+
+</div>
+
+<div class=ex>
+<!--Datagrid_7-->
+<a name=ex7></a>
+<a href="Images/datagrid_7_lg.png">
+<img src="Images/datagrid_7_sm.png" align=left border=3></a>
+<a href="Scripts/datagrid_7.html">datagrid_7.ncl</a>: This
+script draws markers for a contour plot that's
+not over a map. Since the data is rectilinear,
+the coordinate arrays are already attached to "u".
+Note that the <a href="../Document/Graphics/Resources/cn.html#cnFillOpacityF"><em>cnFillOpacityF</em></a>
+resource is set to 0.5 to draw the filled contours partially transparent.
+
+</div>
+
+<div class=ex>
+<!--contour1d_1-->
+<a name=1></a>
+<a href="Images/contour1d_1_1_lg.png">
+<img src="Images/contour1d_1_1_sm.png" align=left border=2></a>
+<a href="Images/contour1d_1_2_lg.png">
+<img src="Images/contour1d_1_2_sm.png" align=left border=2></a>
+<a href="Scripts/contour1d_1.html">contour1d_1.ncl</a>:
+
+The data in this example is a one-dimensional (1D) array with
+corresponding 1D lat/lon arrays. 
+<p>
+
+Since the "pw" data already has lat1d / lon1d attributes attached for
+creating the contour plot, it's easy to plot the data locations using
+<a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a>.
+
+</div>
+
+<div class=ex>
+<!--ESMF_32-->
+<a name=ex32></a>
+<a href="Images/ESMF_regrid_32_lg.png">
+<img src="Images/ESMF_regrid_32_sm.png" align=left border=2></a>
+<a href="Scripts/ESMF_regrid_32.html">ESMF_regrid_32.ncl</a>: Drawing
+lat/lon locations on plots of regridded data can be useful for
+debugging purposes.  This particular example regrids WRF output
+temperature data to both a 1.0 and 0.5 degree grid, and compares them
+in a panel plot.
+
+
+</div>
+
+<div class=ex>
+<!--Datagrid_8-->
+<a name=ex8></a>
+<a href="Images/datagrid_8_1_lg.png">
+<img src="Images/datagrid_8_1_sm.png" align=left border=3></a>
+<a href="Images/datagrid_8_2_lg.png">
+<img src="Images/datagrid_8_2_sm.png" align=left border=3></a>
+<a href="Images/datagrid_8_3_lg.png">
+<img src="Images/datagrid_8_3_sm.png" align=left border=3></a>
+<a href="Images/datagrid_8_4_lg.png">
+<img src="Images/datagrid_8_4_sm.png" align=left border=3></a>
+<a href="Scripts/datagrid_8.html">datagrid_8.ncl</a>: This
+script shows how <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a>
+can be used to help guess at the correct map projection parameters
+needed to plot data in a native lambert conformal map projection.
+<p>
+
+When plotting native data over an LC projection, you need  to
+provide a meridian and two parallels:
+<p>
+
+<a href="../Document/Graphics/Resources/mp.html#mpLambertParallel1F"><em>mpLambertParallel1F</em></a><br>
+<a href="../Document/Graphics/Resources/mp.html#mpLambertParallel2F"><em>mpLambertParallel2F</em></a><br>
+<a href="../Document/Graphics/Resources/mp.html#mpLambertMeridianF"><em>mpLambertMeridianF</em></a><br>
+<p>
+
+These values are usually available on the same file that the data is
+on. If not, then you may need to guess at these values.
+<p>
+
+To help with the guessing process, you can draw the lat/lon grid
+of your data using the given map projection parameters. If the
+lat/lon grid lines are parallel and perpendicular to the
+rectangle that the plot is drawn in, then you likely have the
+correct parameters.
+<p>
+
+In this example, the meridian and one of the parallel values was
+provided, but the other parallel value didn't look right. We used a do
+loop to loop through four possible values, and drew the lat/lon lines
+as thick purple lines for each plot.
+<p>
+
+If you click on the leftmost plot (res@mpLambertParallel1F=34), you'll
+see the farmost right vertical grid line sticking out in the lower
+right corner, so this is likely not the correct value. The
+second-from-the-left plot (res@mpLambertParallel1F=35) is a little
+better, but the vertical line still sticks out a little in the lower
+right. In the rightmost plot (res@mpLambertParallel1F=37), the
+vertical lines stick out at the upper left corner.
+<p>
+
+The second-from-the-right plot (res@mpLambertParallel1F=36) seems to
+be the best fit.  Of course, you could fine tune this example by
+trying other values close to 36, like 35.8, 35.9, 36, 36.1, etc.
+
+
+</div>
+
+<div class=ex>
+<!--geodesic_1-->
+<a name=1></a>
+<a href="Images/geo_1_1_lg.png">
+<img src="Images/geo_1_1_sm.png" align=left border=2></a>
+<a href="Images/geo_1_2_lg.png">
+<img src="Images/geo_1_2_sm.png" align=left border=2></a>
+
+<a href="Scripts/geo_1.html">geo_1.ncl</a>: This particular geodesic
+grid has 2562 cells, each with 5 edges. The lat/lon cell centers are
+defined as 1D arrays called <em>grid_center_lat</em>
+and <em>grid_center_lon</em> on the file, while the cell edges are
+defined as 2D arrays dimensioned 2562 x 6 (ncells x nvertices), called
+<em>grid_corner_lat</em> and <em>grid_corner_lon</em>.
+<p>
+
+To plot this data over a map, 
+<a href="../Document/Graphics/Resources/sf.html#sfXArray"><em>sfXArray</em></a> and
+<a href="../Document/Graphics/Resources/sf.html#sfYArray"><em>sfYArray</em></a> are set to the mesh
+centers (grid_center_lat and grid_center_lon), while
+<a href="../Document/Graphics/Resources/sf.html#sfXCellBounds"><em>sfXCellBounds</em></a> and
+<a href="../Document/Graphics/Resources/sf.html#sfYCellBounds"><em>sfYCellBounds</em></a> are set to the cell
+corners (grid_corner_lat and grid_corner_lon). Both sets of lat/lon
+arrays are in radians, so they have to first be converted to degrees.
+<p>
+
+The second image draws the cell centers as filled dots, and the
+geodesic mesh as polylines. Note that the cell edges have to first be
+closed before drawing them.
+<p>
+
+See the next example which uses an updated version
+of <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> to draw the mesh
+edges and centers.
+
+</div>
+
+<div class=ex>
+<!--geodesic_1-->
+<a name=1></a>
+<a href="Images/geo_660_1_lg.png">
+<img src="Images/geo_660_1_sm.png" align=left border=2></a>
+<a href="Scripts/geo_1_660.html">geo_1_660.ncl</a>: This example shows
+how to use <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a> to draw
+the mesh edges of the second image from the previous example.
+<p>
+
+This functionality was added in <a href="../prev_releases.html#6.6.0">NCL version 6.6.0</a>.
+     
+</div>
+
+<div class=ex>
+<!--Datagrid_9-->
+<a name=ex9></a>
+<a href="Images/datagrid_9_1_lg.png">
+<img src="Images/datagrid_9_1_sm.png" align=left border=3></a>
+<a href="Images/datagrid_9_2_lg.png">
+<img src="Images/datagrid_9_2_sm.png" align=left border=3></a>
+<a href="Scripts/datagrid_9.html">datagrid_9.ncl</a>: This is another
+example of drawing the edges of an unstructured mesh, except
+this one is of the MPAS mesh, in which cells can have different numbers
+of edges. 
+<p>
+
+The first image is the "t2m" variable plotted over the full grid. 
+An area of interest is highlighted on this plot, which is what the
+second image represents. 
+<p>
+
+The MPAS edges and cell centers were only added to the second plot,
+because this particular MPAS mesh has over two million cells which
+would create a very dense plot if you drew all the edges. An area of
+interest was selected using the special gsnCoordsMinLat,
+gsnCoordsMaxLat, gsnCoordsMinLon, and gsnCoordsMaxLon resources,
+making the drawing of the mesh less dense and significantly faster.
+<p>
+
+This functionality was added in <a href="../prev_releases.html#6.6.0">NCL version 6.6.0</a>.
+
+</div>
+
+<div class=ex>
+<!--Datagrid_10-->
+<a name=ex10></a>
+<a href="Images/datagrid_10_lg.png">
+<img src="Images/datagrid_10_sm.png" align=left border=3></a>
+<a href="Scripts/datagrid_10.html">datagrid_10.ncl</a>: This is an
+example of drawing the edges and centers of an ICON triangular mesh
+using <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a>. 
+<p>
+
+This ICON data only has 20,480 triangular cells, so the whole mesh
+is drawn in this case. See datagrid_11.ncl below for an example
+of drawing an ICON mesh with close to three million cells.
+<p>
+
+This functionality was added in <a href="../prev_releases.html#6.6.0">NCL version 6.6.0</a>.
+
+</div>
+
+<div class=ex>
+<!--Datagrid_11-->
+<a name=ex11></a>
+<a href="Images/datagrid_11_lg.png">
+<img src="Images/datagrid_11_sm.png" align=left border=3></a>
+<a href="Scripts/datagrid_11.html">datagrid_11.ncl</a>: This is an
+example of drawing the edges and centers of an ICON triangular mesh
+using <a href="../Document/Graphics/Interfaces/gsn_coordinates.html"><strong>gsn_coordinates</strong></a>. 
+<p>
+
+This data has almost three million triangles which would create a very
+dense plot if you drew all the edges. As with the previous MPAS
+example, an area of interest was selected using the special
+gsnCoordsMinLat, gsnCoordsMaxLat, gsnCoordsMinLon, and gsnCoordsMaxLon
+resources, making the drawing of the mesh less dense and significantly
+faster.
+<p>
+
+This functionality was added in <a href="../prev_releases.html#6.6.0">NCL version 6.6.0</a>.
+
+</div>
+
+
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/datagrid.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:59:33 GMT -->
+</html>
+
+

@@ -1,0 +1,1042 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/hdf5.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:07 GMT -->
+<head>
+<meta name="description" content="NCL file IO example page. Demonstrates
+how to read and write HDF5 data">
+<TITLE>Reading and writing HDF5</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Document/Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Document/Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="list_models.html" class="subitem">Models</a></li>
+						<li><a href="list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Document/Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Document/Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Document/Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Document/Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Document/Graphics/Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Document/Graphics/Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Document/Graphics/Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Document/Graphics/Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Document/Graphics/Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Document/Graphics/Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Document/Graphics/Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Document/Graphics/Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Document/Graphics/Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Document/Graphics/Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Document/Graphics/Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Document/Graphics/Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Document/Graphics/Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Document/Graphics/Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Document/Graphics/Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Document/Graphics/Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Document/Graphics/Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Document/Graphics/Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Document/Graphics/Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Document/Graphics/Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Document/Graphics/Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Document/Graphics/Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Document/Graphics/Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Document/Graphics/Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Document/Graphics/Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../Document/Graphics/hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../Document/Graphics/color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../Document/Graphics/font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Document/Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Document/Graphics/Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Document/Graphics/Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../Document/Graphics/map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../Document/Graphics/rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Document/Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Document/Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Document/Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Document/Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Document/Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Document/Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../Document/index.html" class="subitem">Documentation</a></li>
+						<li><a href="../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+	<a class=crumb href="../index-2.html">NCL Home></a>
+<a class=crumb href="index-2.html">Application examples></a>
+<a class=crumb href="list_io.html">File IO</a> ||
+<a href="Data/index.html">Data files for some examples</a><p>
+<font size=-1>Example pages containing:
+<a href="concepts_list.html">tips</a> |
+<a href="res_list.html">resources</a> | 
+<a href="func_list.html">functions/procedures</a></font>
+
+	<h1>Reading and writing HDF5</h1>
+
+	<p>
+	NCL now fully support all HDF5 features. The features added to NCL including:
+	support group, and support new data types as: string, vlen, compound, enum, and opaque.
+	Here are some examples of these new features:
+	</p>
+
+	<h2>Read and write with groups</h2>
+
+	<p>
+	If run command:
+<pre>
+ncl_filedump ncl_wrt_uvt.h5
+</pre>
+	show something like:
+<pre>
+......
+      group <GROUPNAME>
+      float T ( DIM_000, DIM_002, DIM_003, DIM_001 )
+....
+</pre>
+	Then it means this file have a group GROUPNAME in it, where GROUPNAME is a string for the name of that group.
+	User can use:
+<pre>
+f = addfile("ncl_wrt_uvt.h5", "r")
+g = f=>GROUPNAME
+<p>
+	to access the group, where "=>" is an operator, which to read this group. After this, variable "g" is a
+	group, which functions vary like a file.
+<p>
+<p>
+
+	Below is a sample to read HDF5 file with group in it:
+<pre>
+ setfileoption("h5", "FileStructure", "Advanced")
+
+ fn = "ncl_wrt_uvt.h5"
+
+ fi = addfile(fn, "r")
+
+;printVarSummary(fi)
+;print(fi)
+
+ time = fi->time
+ lev = fi->lev
+ lat = fi->lat
+ lon = fi->lon
+
+ t = fi->T
+ u = fi->U
+ v = fi->V
+
+;===================================================================
+
+ g1 = fi=>/grp1
+
+;print(g1)
+;printVarSummary(g1)
+
+;time = g1->time
+;lev = g1->lev
+;lat = g1->lat
+;lon = g1->lon
+
+ t = g1->T
+ u = g1->U
+ v = g1->V
+
+;===================================================================
+
+ wks  = gsn_open_wks("x11", "xy")
+
+ res              = True
+ res@tiMainString = "Basic plot" 
+
+ uf = fi->U
+
+ uf!0 = "time"
+ uf!1 = "lev"
+ uf!2 = "lat"
+ uf!3 = "lon"
+
+ plot1 = gsn_csm_contour(wks, uf(0, 0, :, :), False)
+
+ ug = g1->U
+
+ ug!0 = "time"
+ ug!1 = "lev"
+ ug!2 = "lat"
+ ug!3 = "lon"
+
+ plot2 = gsn_csm_contour(wks, ug(0, 0, :, :), False)
+
+ print("uf(0, 0, 0, 0) = " + uf(0, 0, 0, 0))
+ print("ug(0, 0, 0, 0) = " + ug(0, 0, 0, 0))
+
+;print(time)
+;print(lev)
+;print(lat)
+ print(lon(::18))
+
+</pre>
+	</p>
+
+
+	<p>
+	Write HDF5 file with group:
+<pre>
+ setfileoption("nc", "FileStructure", "Advanced")
+
+ fn = "/Users/huangwei/myncl/nc4_work/wrtgroup/nc4uvt.nc"
+
+ fi = addfile(fn, "r")
+
+;printVarSummary(fi)
+;print(fi)
+
+ time = fi->time
+ lev = fi->lev
+ lat = fi->lat
+ lon = fi->lon
+
+ t = fi->T
+ u = fi->U
+ v = fi->V
+
+;printVarSummary(t)
+;printVarSummary(u)
+;printVarSummary(v)
+
+;print("t(0,0,0,0) = " + t(0,0,0,0))
+;print("u(0,1,1,1) = " + u(0,1,1,1))
+;print("v(0,2,2,2) = " + v(0,2,2,2))
+
+;print("t&lat(0) = " + t&lat(0))
+;print("t@units = " + t@units)
+;print("u@units = " + u@units)
+;print("v@units = " + v@units)
+
+;u1 = fi->U(::2)
+;v1 = fi->V(3:121:3)
+
+ ntim  = dimsizes(time)	; get dimension sizes
+ nlev  = dimsizes(lev)
+ nlat  = dimsizes(lat)
+ nlon  = dimsizes(lon)
+
+;------------------------------------------------------------
+ setfileoption("h5", "FileStructure", "Advanced")
+
+ fon = "ncl_wrt_uvt.h5"
+ system("/bin/rm -f " + fon) ; remove if exists
+ fo = addfile(fon, "c")
+
+;===================================================================
+; explicitly declare file definition mode. Improve efficiency.
+;===================================================================
+;setfileoption(fo,"CompressionLevel", 6)
+;setfileoption(fo,"CacheSize", 3200000)
+;setfileoption(fo,"CacheNelems", 1027)
+;setfileoption(fo,"CachePreemption", 0.25)
+
+; create global attributes of the file
+;===================================================================
+ fAtt               = True            ; assign file attributes
+ fAtt@title         = "NCL generated netCDF file"
+ fAtt@source_file   = fn
+ fAtt@Conventions   = "None"
+;fAtt@creation_date = systemfunc ("date")
+ fileattdef(fo, fAtt)      ; copy file attributes
+
+;===================================================================
+; predefine the coordinate variables and their dimensionality
+; Note: to get an UNLIMITED record dimension, we set the dimensionality
+; to -1 (or the actual size) and set the dimension name to True.
+;===================================================================
+ dimNames = (/"time", "lev", "lat", "lon"/)
+ dimSizes = (/ 1 ,   nlev,  nlat,  nlon /)
+ dimUnlim = (/ True , False, False, False/)
+ filedimdef(fo, dimNames, dimSizes, dimUnlim)
+
+;===================================================================
+
+ mtim = 1
+ mlat = nlat/2
+ mlon = nlon/2
+ mlev = nlev/2
+ chunkSizes = (/ mtim, mlev, mlat, mlon /)
+;dimUnlim(0) = False
+ filechunkdimdef(fo,dimNames,chunkSizes,dimUnlim)
+
+;===================================================================
+
+ grpnames = (/"grp1", "group2", "g3"/)
+
+ filegrpdef(fo, grpnames)
+
+; predefine the the dimensionality of the variables to be written out
+;===================================================================
+; Here we are using NCL functions to facilitate defining
+; each variable's dimension name(s) and type.
+;===================================================================
+ filevardef(fo, "time", typeof(time), getvardims(time))
+ filevarattdef(fo,"time", time)                   ; copy time attributes
+ fo->time   = (/time/)
+
+ filevardef(fo, "lev", typeof(lev), getvardims(lev) )
+ filevarattdef(fo,"lev", lev)                     ; copy lev attributes
+ fo->lev    = (/lev/)
+
+ filevardef(fo, "lat", typeof(lat), getvardims(lat))
+ filevarattdef(fo,"lat", lat)                     ; copy lat attributes
+ fo->lat    = (/lat/)
+
+ filevardef(fo, "lon", typeof(lon), getvardims(lon))
+ filevarattdef(fo,"lon", lon)                     ; copy lon attributes
+ fo->lon    = (/lon/)
+
+ filevardef(fo, "T", typeof(t), getvardims(t))
+ filevarattdef(fo,"T", t)                         ; copy T attributes
+ filevarchunkdef(fo, "T", chunkSizes)
+ filevarcompressleveldef(fo, "T", 2)
+ fo->T      = (/t/)
+;print(fo)
+;printVarSummary(t)
+;exit
+
+ filevardef(fo, "U", typeof(u), getvardims(u))
+ filevarattdef(fo,"U", u)                         ; copy U attributes
+;filevarchunkdef(fo, "U", chunkSizes)
+;filevarcompressleveldef(fo, "U", 4)
+ fo->U      = (/u/)
+
+ filevardef(fo, "V", typeof(v), getvardims(v))
+ filevarattdef(fo,"V", v)                         ; copy V attributes
+;filevarchunkdef(fo, "V", chunkSizes)
+;filevarcompressleveldef(fo, "V", 6)
+;filevarchunkcachedef(fo, "V", 3200000, 1027, 0.75)
+ fo->V      = (/v/)
+
+;printVarSummary(fo)
+;print(fo)
+
+;===================================================================
+
+ g1 = fo=>/grp1
+
+ fileattdef(g1, fAtt)
+ filedimdef(g1, dimNames, dimSizes, dimUnlim)
+ filechunkdimdef(g1,dimNames,chunkSizes,dimUnlim)
+
+ filevardef(g1, "time", typeof(time), getvardims(time))
+ filevarattdef(g1,"time", time)                   ; copy time attributes
+ g1->time   = (/time/)
+
+;print(g1)
+
+ filevardef(g1, "lev", typeof(lev), getvardims(lev) )
+ filevarattdef(g1,"lev", lev)                     ; copy lev attributes
+ g1->lev    = (/lev/)
+
+ filevardef(g1, "lat", typeof(lat), getvardims(lat))
+ filevarattdef(g1,"lat", lat)                     ; copy lat attributes
+ g1->lat    = (/lat/)
+
+ filevardef(g1, "lon", typeof(lon), getvardims(lon))
+ filevarattdef(g1,"lon", lon)                     ; copy lon attributes
+ g1->lon    = (/lon/)
+
+ filevardef(g1, "T", typeof(t), getvardims(t))
+ filevarattdef(g1,"T", t)                         ; copy T attributes
+ filevarchunkdef(g1, "T", chunkSizes)
+ filevarcompressleveldef(g1, "T", 2)
+ g1->T      = (/t/)
+
+ filevardef(g1, "U", typeof(u), getvardims(u))
+ filevarattdef(g1,"U", u)                         ; copy U attributes
+;filevarchunkdef(g1, "U", chunkSizes)
+;filevarcompressleveldef(g1, "U", 4)
+ g1->U      = (/u/)
+
+ filevardef(g1, "V", typeof(v), getvardims(v))
+ filevarattdef(g1,"V", v)                         ; copy V attributes
+;filevarchunkdef(g1, "V", chunkSizes)
+;filevarcompressleveldef(g1, "V", 6)
+;filevarchunkcachedef(g1, "V", 3200000, 1027, 0.75)
+ g1->V      = (/v/)
+
+;===================================================================
+; output only the data values since the dimensionality and such have
+; been predefined. The "(/", "/)" syntax tells NCL to only output the
+; data values to the predefined locations on the file.
+;====================================================================
+
+;printVarSummary(g1)
+;print(g1)
+</pre>
+	</p>
+
+	<h2>Read and write string</h2>
+
+	<p>
+	Write string:
+<pre>
+ setfileoption("nc", "FileStructure", "Advanced")
+
+ fn = "./tst_strings.nc"
+
+ f = addfile(fn, "r")
+
+;atts = getvaratts(f)
+;print(atts)
+
+;print(f)
+;printVarSummary(f)
+
+ strs = f->universal_declaration_of_human_rights
+
+;print(strs)
+
+ delete(f)
+
+;===================================================================
+
+ fn = "ncl_wrt_string.h5"
+ system("/bin/rm -f " + fn)
+ fo = addfile(fn, "c")
+
+ fAtt               = True
+ fAtt@title         = "NCL generated HDF5 file"
+ fAtt@source_file   = fn
+ fAtt@Conventions   = "None"
+ fAtt@creation_date = systemfunc("date")
+
+;print(fAtt)
+
+ fileattdef(fo, fAtt)
+
+;===================================================================
+ nstrs    = dimsizes(strs)
+ dimNames = (/"Sentence"/)
+ dimSizes = (/ nstrs    /)
+ dimUnlim = (/ False    /)
+ filedimdef(fo, dimNames, dimSizes, dimUnlim)
+
+ strsdims = getvardims(strs)
+
+ strsdims = "Sentence"
+
+ filevardef(fo, "h5_string", typeof(strs), strsdims)
+
+ fo->h5_string = (/strs/)
+
+</pre>
+	</p>
+
+	<p>
+	Read string:
+<pre>
+ setfileoption("h5", "FileStructure", "Advanced")
+
+ fn = "./ncl_wrt_string.h5"
+
+ f = addfile(fn, "r")
+
+ print(f)
+ printVarSummary(f)
+
+ strs = f->h5_string
+
+ print(strs)
+</pre>
+	</p>
+
+	<h2>Read and write compound</h2>
+
+	<p>
+	If command:
+<pre>
+ncl_filedump SDScompound.h5
+</pre>
+	produces something like:
+<pre>
+......
+   dimensions:
+      ......
+   variables:
+      compound <COMPOUNDNAME>      (a_name, c_name, b_name) (......)
+......
+</pre>
+	Then this file contains compound data. where COMPOUNDNAME is name of this compound data.
+        The names within the parentheses are called compound data components.
+        To accesee these components, NCL uses "." to access those components, as demostrated below.
+<p>
+<p>
+	Read compound in HDF5:
+<pre>
+ f = addfile("SDScompound.h5", "r")
+
+;print(f)
+
+ da = f->/ArrayOfStructures.a_name
+ db = f->/ArrayOfStructures.b_name
+ dc = f->/ArrayOfStructures.c_name
+</pre>
+	</p>
+
+
+	<p>
+	Write compound in HDF5:
+<pre>
+ setfileoption("h5", "FileStructure", "Advanced")
+
+ f = addfile("SDScompound.h5", "r")
+
+ print(f)
+
+ ia = f->/ArrayOfStructures.a_name
+ fb = f->/ArrayOfStructures.b_name
+ dc = f->/ArrayOfStructures.c_name
+
+;print(ia)
+;print(fb)
+;print(dc)
+
+ delete(f)
+
+;===================================================================
+
+ fon = "ncl_wrtH5comp.h5"
+ system("/bin/rm -f " + fon)
+ fo = addfile(fon, "c")
+
+ fAtt               = True            ; assign file attributes
+ fAtt@title         = "NCL generated HDF5 file with compound"
+ fAtt@source_file   = fon
+ fAtt@Conventions   = "None"
+ fAtt@creation_date = systemfunc("date")
+
+;print(fAtt)
+
+ fileattdef(fo, fAtt)
+
+;===================================================================
+
+ nvals   = dimsizes(ia)
+
+ dimNames = (/"DimName"/)
+ dimSizes = (/ nvals   /)
+ dimUnlim = (/ False    /)
+ filedimdef(fo, dimNames, dimSizes, dimUnlim)
+
+ var_name = "h5_compound"
+ mem_name = (/"ia", "fb", "dc"/)
+ mem_type = (/"integer", "float", "double"/)
+ mem_size = (/1, 1, 1/)
+ filecompounddef(fo, "h5_compound_var", var_name, dimNames, \
+                 mem_name, mem_type, mem_size)
+
+ complist = new(dimSizes, list)
+;printVarSummary(complist)
+
+ do n = 0, nvals - 1
+    ListPush(complist(n), (/ia(n)/))
+    ListPush(complist(n), (/fb(n)/))
+    ListPush(complist(n), (/dc(n)/))
+ end do
+
+;printVarSummary(complist)
+;print(complist)
+
+ fo->$var_name$ = complist
+
+ delete(fo)
+
+</pre>
+	</p>
+
+	<p>
+	<h2>Read and write ENUM</h2>
+	<p>
+	<p>
+	
+	Write ENUM:
+<pre>
+ setfileoption("h5", "FileStructure", "Advanced")
+
+ fn = "./tst_enums.nc"
+
+ fi = addfile(fn, "r")
+
+ print(fi)
+;printVarSummary(fi)
+
+ v = fi->primary_cloud
+
+ enum_name = v@enum_name
+ enum_value = v@enum_value
+
+ print(enum_value)
+
+ print(v)
+
+ print(enum_name)
+ print(enum_value)
+
+ nv = dimsizes(v)
+ 
+ print(nv)
+
+ tc = dimsizes(enum_value)
+
+;do n = 0, nv - 1
+;   m = ind(v(n) .eq. enum_value)
+;   print("v{key, value} = {" + enum_value(m) + "," + enum_name(m) + "}")
+;end do
+
+;===================================================================
+
+ fn = "ncl_wrt_enum.h5"
+ system("/bin/rm -f " + fn)
+ fo = addfile(fn, "c")
+
+ fAtt               = True            ; assign file attributes
+ fAtt@title         = "NCL generated netCDF file with enum"
+ fAtt@source_file   = fn
+ fAtt@Conventions   = "None"
+ fAtt@creation_date = systemfunc("date")
+
+;print(fAtt)
+
+ fileattdef(fo, fAtt)
+
+;===================================================================
+ nvals   = dimsizes(v)
+ dimNames = (/"types"/)
+ dimSizes = (/ nvals   /)
+ dimUnlim = (/ False    /)
+ filedimdef(fo, dimNames, dimSizes, dimUnlim)
+
+ var_name = "cloud"
+ fileenumdef(fo, "enum_var", var_name, dimNames, enum_name, enum_value)
+
+ fo->$var_name$ = (/v/)
+
+</pre>
+	</p>
+
+	<p>
+	Read ENUM:
+<pre>
+ setfileoption("h5", "FileStructure", "Advanced")
+
+ fn = "ncl_wrt_enum.h5"
+
+ f = addfile(fn, "r")
+
+ print(f)
+;printVarSummary(f)
+
+ v = f->cloud
+ print(v)
+
+ exit
+
+ enum_name = v@enum_name
+ enum_value = v@enum_value
+
+ print(enum_name)
+ print(enum_value)
+</pre>
+	</p>
+
+	<h2>Read and write opaque</h2>
+
+	<p>
+	read opaque data:
+<pre>
+ setfileoption("h5", "FileStructure", "Advanced")
+
+ fn = "./ncl_wrt_opaque.h5"
+
+ f = addfile(fn, "r")
+
+ print(f)
+;printVarSummary(f)
+
+ v = f->opaque_variable
+
+ print(v)
+
+</pre>
+	</p>
+
+	<p>
+	write opaque data:
+<pre>
+ fn = "./tst_opaques.nc"
+
+ fi = addfile(fn, "r")
+
+ print(fi)
+;printVarSummary(fi)
+
+ v = fi->var_defined_by_netcdf_user
+
+ nv = dimsizes(v)
+ 
+ print(v)
+ print(nv)
+
+ var_size = 1
+ do n = 1, dimsizes(nv) - 1
+    var_size = nv(n) * var_size
+ end do
+
+ print(var_size)
+
+;===================================================================
+ setfileoption("h5", "FileStructure", "Advanced")
+
+ fn = "ncl_wrt_opaque.h5"
+ system("/bin/rm -f " + fn)
+ fo = addfile(fn, "c")
+
+ fAtt               = True            ; assign file attributes
+ fAtt@title         = "NCL generated netCDF file with enum"
+ fAtt@source_file   = fn
+ fAtt@Conventions   = "None"
+ fAtt@creation_date = systemfunc("date")
+
+;print(fAtt)
+
+ fileattdef(fo, fAtt)
+
+;===================================================================
+ nvals   = nv(0)
+ dimNames = (/"opaque_base_size"/)
+ dimSizes = (/ nvals   /)
+ dimUnlim = (/ False    /)
+ filedimdef(fo, dimNames, dimSizes, dimUnlim)
+
+ var_name = "opaque_variable"
+ fileopaquedef(fo, "opaque_type", var_name, var_size, dimNames)
+
+ fo->$var_name$ = (/v/)
+</pre>
+	</p>
+
+	<h2>Read and write opaque</h2>
+
+	<p>
+	Write VLEN:
+<pre>
+ setfileoption("h5", "FileStructure", "Advanced")
+
+ fn = "h5ex_t_vlen.h5"
+
+ f = addfile(fn, "r")
+
+;print(f)
+;printVarSummary(f)
+
+ v = f->DS1
+
+;print(v)
+
+ a = v[0]
+;print(a)
+
+ b = v[1]
+;print(b)
+
+;===================================================================
+ setfileoption("h5", "FileStructure", "Advanced")
+
+ fn = "ncl_wrt_vlen.h5"
+ system("/bin/rm -f " + fn)
+ fo = addfile(fn, "c")
+
+ fAtt               = True
+ fAtt@title         = "NCL generated HDF5 file"
+ fAtt@source_file   = fn
+ fAtt@Conventions   = "None"
+ fAtt@creation_date = systemfunc("date")
+
+;print(fAtt)
+
+ fileattdef(fo, fAtt)
+
+;===================================================================
+ nelm = ListCount(v)
+ print(nelm)
+
+ dimNames = (/"dimension"/)
+ dimSizes = (/ nelm  /)
+ dimUnlim = (/ False /)
+ filedimdef(fo, dimNames, dimSizes, dimUnlim)
+
+ vlen_name = "vlen_name"
+ var_name = "vlen_var"
+ filevlendef(fo, vlen_name, var_name, "integer", dimNames)
+
+ fo->$var_name$ = v
+</pre>
+	</p>
+
+        <p>
+        Read VLEN:
+<pre>
+ setfileoption("h5", "FileStructure", "Advanced")
+
+ fn = "h5ex_t_vlen.h5"
+
+ f = addfile(fn, "r")
+
+;print(f)
+;printVarSummary(f)
+
+ v = f->DS1
+
+ print(v)
+
+ a = v[0]
+ print(a)
+
+ b = v[1]
+ print(b)
+</pre>
+        </p>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</BODY>
+
+<!-- Mirrored from www.ncl.ucar.edu/Applications/hdf5.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:07 GMT -->
+</HTML>
+
