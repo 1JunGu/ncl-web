@@ -1,0 +1,113 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;
+;  Open a netCDF file containing the grid and data from the HOMME
+;  (High-Order Multiscale Modeling Environment) model, formerly
+;  called SEAM (Spectral Element Atmosphere Model).
+;
+  f     = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/seam.nc","r")
+  lat1d = ndtooned(f->lat2d)          ; Pull off lat/lon variable and
+  lon1d = ndtooned(f->lon2d)          ; convert both to 1D.
+  ps1d  = ndtooned(f->ps(0,:,:))      ; Read some data; convert to 1D.
+
+;
+; Open a file to send output to. You can use "ps", "pdf", "x11",
+; or "ncgm".
+;
+; It will also look for a "seam.res" file, where you can set 
+; resources that you want set all the time, like the font, or
+; the background/foreground colors.
+;
+  wks = gsn_open_wks("ncgm","seam")
+
+;
+; The first call below selects a colormap, and the second reverses it.
+; The colors go from violet at the low values to blue at the high
+; values.
+;
+; To see the various colormaps, go to:
+;
+; http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml
+;
+  gsn_define_colormap(wks,"BlAqGrYeOrReVi200")
+  gsn_reverse_colormap(wks)
+
+;
+; Set some plot resources.  Order doesn't matter here.
+;
+; Any time you don't want a plot drawn, just set the resources:
+;
+;  res@gsnDraw  = False
+;  res@gsnFrame = False
+;
+; Of course, you'll have to remember to delete these resource
+; settings or change them to True if you want later plots to
+; be drawn.
+;
+  res                     = True
+  res@gsnMaximize         = True         ; Maximize size of plot in frame
+  res@gsnSpreadColors     = True         ; Use full colormap, but start
+  res@gsnSpreadColorStart = 24           ; at color index 24.
+
+  res@sfXArray            = lon1d        ; Required to tell NCL where to
+  res@sfYArray            = lat1d        ; overlay data on globe.
+
+  res@cnFillOn            = True         ; Turn on contour fill
+  res@cnFillMode          = "AreaFill"   ; Style of fill. You can also
+                                         ; use "CellFill" and "RasterFill"
+  res@cnLinesOn           = False        ; Turn off contour lines
+  res@cnLineLabelsOn      = False        ; Turn off contour line labels
+
+  res@lbLabelAutoStride   = True         ; Clean up labelbar labels.
+  res@lbBoxLinesOn        = False        ; Turn of labelbar box lines.
+
+  res@tiMainString        = "SEAM grid surface pressure"    ; Title
+
+  contour = gsn_csm_contour(wks,ps1d,res)     ; Draw a contour plot.
+
+  res@mpProjection          = "Orthographic"
+  res@mpDataBaseVersion     = "MediumRes"      ; Improve the resolution
+                                               ; of the map outlines 
+                                               ; Default is "LowRes".
+
+  res@mpPerimOn             = False       ; Turn off map perimeter
+  res@mpCenterLatF          =  40         ; Rotate map.
+  res@mpCenterLonF          = -130
+
+  res@pmTickMarkDisplayMode = "Always"    ; Turn on map tickmarks
+
+  map = gsn_csm_contour_map(wks,ps1d,res)   ; Draw contours over a map.
+
+;
+; Try some other contour resource settings to show how the
+; contour fill can be adjusted.
+;
+  res@cnFillMode      = "RasterFill"
+  res@cnMaxLevelCount = 255 
+
+  map = gsn_csm_contour_map(wks,ps1d,res)
+
+;
+; Change the map projection.
+;
+  res@mpProjection = "CylindricalEquidistant"
+  res@mpCenterLatF = 0
+  map = gsn_csm_contour_map_ce(wks,ps1d,res)
+
+;
+; Turn on smoothing.
+;
+  res@cnRasterSmoothingOn = True
+  res@tiMainString        = "Surface pressure with smoothing on" 
+
+  map = gsn_csm_contour_map_ce(wks,ps1d,res)
+
+;
+; Change the map projection again.
+;
+  res@mpProjection = "LambertEqualArea"
+  res@mpCenterLatF = 40
+  map = gsn_csm_contour_map(wks,ps1d,res)
+end

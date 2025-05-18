@@ -1,0 +1,76 @@
+;----------------------------------------------------------------------
+; The purpose of this script is to generate a plot using
+; the three levels of map resolutions in NCL: 
+;
+;    - "LowRes" (default)
+;    - "MediumRes"
+;    - "HighRes" (requires download of "RANGS/GSHHS" database)
+;
+; See: http://www.ncl.ucar.edu/Document/Graphics/rangs.shtml
+;----------------------------------------------------------------------
+
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"   
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"   
+
+begin
+  prefix = get_script_prefix_name()
+ 
+;----------------------------------------------------------------------
+; Read data
+;----------------------------------------------------------------------
+  minlon   =   4
+  maxlon   =  20
+  minlat   =  55
+  maxlat   =  70
+  filename = ncargpath("data") + "/cdf/uv300.nc"
+  a        = addfile(filename,"r")
+  u        = a->U(1,:,:)
+
+;----------------------------------------------------------------------
+; Set some map resources
+;----------------------------------------------------------------------
+  res                       = True
+  
+  res@gsnMaximize           = True           ; maximize plot in frame
+
+  res@cnFillOn              = True           ; turn on contour fill
+  res@cnLinesOn             = False          ; turn off contour lines
+  res@cnLineLabelsOn        = False          ; turn off contour labels
+  res@lbLabelBarOn          = False          ; turn off labelbar
+
+  res@mpFillDrawOrder       = "PostDraw"     ; draw map fill last
+
+  res@gsnRightString        = ""             ; turn off special titles
+  res@gsnLeftString         = ""
+
+  res@mpLimitMode           = "LatLon"
+  res@mpMinLatF             = minlat
+  res@mpMaxLatF             = maxlat 
+  res@mpMinLonF             = minlon
+  res@mpMaxLonF             = maxlon
+
+  res@pmTickMarkDisplayMode = "Always"      ; tickmarks for some maps
+  res@gsnAddCyclic          = False         ; don't add longitude cyclic point
+
+  resolutions = (/"Low","Medium","High"/) + "Res"
+  do i=0,dimsizes(resolutions)-1
+;---Get PNG filename and open file
+    png_name = prefix + "." + resolutions(i)
+    wks = gsn_open_wks("png",png_name)
+
+;---Create the plot
+    res@mpDataBaseVersion = resolutions(i)
+;    res@gsnCenterString   = resolutions(i)
+    plot = gsn_csm_contour_map(wks,u({minlat-2:maxlat+2},{minlon-2:maxlon+3}),res)
+
+;----------------------------------------------------------------------
+; Trim white space from the PNG file, and create a smaller version 
+; for the web.
+;----------------------------------------------------------------------
+    delete(wks)
+    lg_png_name  = png_name + ".png"
+    sm_png_name  = png_name + ".sm.png"
+    system("convert -trim " + lg_png_name + " " + lg_png_name)
+    system("convert -geometry 250x250 " + lg_png_name + " " + sm_png_name)
+  end do
+end

@@ -1,0 +1,115 @@
+;----------------------------------------------------------------------
+; The purpose of this script is to generate a plot using
+; every map projection in NCL. It also does a couple of special
+; ones: masked lambert conformal, and polar stereographic.
+;----------------------------------------------------------------------
+
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"   
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"   
+
+begin
+  prefix = get_script_prefix_name()
+
+;----------------------------------------------------------------------
+; Set list of map projections. Not including "PseudoMollweide" here.
+;----------------------------------------------------------------------
+  projections = (/"Orthographic","Stereographic","PolarStereographic",\
+                  "LambertEqualArea","Gnomonic","AzimuthalEquidistant",\
+                  "Satellite","Mercator","CylindricalEquidistant",\
+                  "LambertConformal","MaskedLambertConformal",\
+                  "Robinson","CylindricalEqualArea","RotatedMercator",\
+                  "Aitoff","Hammer","Mollweide","WinkelTripel"/)
+  nproj = dimsizes(projections)
+ 
+;----------------------------------------------------------------------
+; Read data
+;----------------------------------------------------------------------
+  filename = ncargpath("data") + "/cdf/uv300.nc"
+  a        = addfile(filename,"r")
+  u        = a->U(1,:,:)
+
+
+;----------------------------------------------------------------------
+; Set some resources common to all map projections.
+;----------------------------------------------------------------------
+  res                      = True
+  
+  res@gsnMaximize          = True           ; maximize plot in frame
+
+  res@cnFillOn             = True           ; turn on contour fill
+  res@cnLinesOn            = False          ; turn off contour lines
+  res@cnLineLabelsOn       = False          ; turn off contour labels
+  res@lbLabelBarOn         = False          ; turn off labelbar
+
+  res@mpDataBaseVersion    = "MediumRes"    ; better map outlines
+  res@mpGridAndLimbOn      = True           ; turn on limb and grid lines
+  res@mpGridLineColor      = -1             ; ...but don't draw grid lines...
+  res@mpPerimOn            = False          ; turn off map perimeter
+  res@mpFillDrawOrder      = "PostDraw"     ; draw map fill last
+
+  res@gsnRightString       = ""             ; turn off special titles
+  res@gsnLeftString        = ""
+  res@tiMainFontHeightF    = 0.02           ; change size of main title
+
+; res@pmTickMarkDisplayMode = "Always"      ; tickmarks for some maps
+
+;----------------------------------------------------------------------
+; Loop through the map projections and draw contours over that 
+; projection. Some projections require additional resources to be set.
+;----------------------------------------------------------------------
+  do i=0,nproj-1
+;---Open PNG file to draw to
+    map_name  = prefix + "." + str_lower(projections(i))
+    wks       = gsn_open_wks("png",map_name)
+
+;---Set some map resources.
+    mpres := res
+    mpres@tiMainString = projections(i)
+    mpres@mpProjection = projections(i)
+
+;---Check for special projections to set additional resources.
+    if(projections(i).eq."LambertConformal") then
+      mpres@mpLambertParallel1F = 33.0         ; two parallels
+      mpres@mpLambertParallel2F = 45.0
+      mpres@mpLambertMeridianF  = -95.0        ; central meridian
+      mpres@mpLimitMode         = "LatLon"
+      mpres@mpMinLatF           = 24.0         ; map area
+      mpres@mpMaxLatF           = 50.0         ; latitudes
+      mpres@mpMinLonF           = -125.0       ; and
+      mpres@mpMaxLonF           = -65.0        ; longitudes
+      mpres@mpOutlineBoundarySets = "AllBoundaries"
+      mpres@mpDataSetName       = "Earth..3"
+    else if(projections(i).eq."PolarStereographic") then
+      delete(mpres@mpProjection)
+      mpres@gsnPolar= "NH"
+    else if(projections(i).eq."MaskedLambertConformal") then
+      mpres@mpProjection            = "LambertConformal"
+      mpres@gsnMaskLambertConformal = True
+      mpres@mpMinLatF               = 10
+      mpres@mpMaxLatF               = 50
+      mpres@mpMinLonF               = -15
+      mpres@mpMaxLonF               = 45
+      mpres@mpOutlineBoundarySets   = "AllBoundaries"
+      mpres@mpDataSetName           = "Earth..3"
+    end if
+    end if
+    end if
+;----------------------------------------------------------------------
+; Here's the call to draw the contours over the map.
+; The "u" variable contains lat/lon coordinate arrays,
+; so that's how NCL knows where to project the data
+; on the map.
+;----------------------------------------------------------------------
+    plot = gsn_csm_contour_map(wks,u,mpres)
+  
+;----------------------------------------------------------------------
+; Trim white space from the PNG file, and create a smaller version 
+; for the web.
+;----------------------------------------------------------------------
+    delete(wks)
+    lg_png_name  = map_name + ".png"
+    sm_png_name  = map_name + ".sm.png"
+    system("convert -trim " + lg_png_name + " " + lg_png_name)
+    system("convert -geometry 250x250 " + lg_png_name + " " + sm_png_name)
+  end do
+end

@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Graphics/Interfaces/gsn_contour_shade.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:17 GMT -->
+<head>
+<meta name="description" content="NCL gsn functions (color routines)">
+<meta name="keywords" content="gsn_contour_shade">
+<title>gsn_contour_shade</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Graphics</a> >
+<a class=crumb href="index-2.html">
+Graphical Interfaces</a> 
+<h1>gsn_contour_shade</h1>
+
+<p>
+Shades contour regions given low and/or high values using colors or patterns.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"  ; This library is <b>automatically loaded</b>
+                                                          ; from NCL V6.2.0 onward.
+                                                          ; No need for user to explicitly load.
+
+	function gsn_contour_shade (
+		plot    [1] : graphic,  
+		lowval  [1] : numeric,  
+		highval [1] : numeric,  
+		opt     [1] : string    
+	)
+
+	<a href="../../Functions/return_val.html">return_val</a> [1] :  graphic
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>plot</em>
+<p class=indent>The plot to be modified.
+</p>
+<em>lowval</em>
+<p class=indent>Starting with the first contour less than or equal to <em>lowval</em>, all
+areas less than that first contour will be shaded with the color or pattern 
+specified in <em>opt@gsnShadeLow</em>. Alternatively, <em>opt@gsnShadeMid</em> 
+can be set, and starting with the first contour greater than or equal to 
+<em>lowval</em>, all areas <i>between</i> that first contour and the last contour 
+less than or equal to <em>highval</em> will be shaded with the 
+color or pattern specified in <em>opt@gsnShadeMid</em>.
+</p>
+<em>highval</em>
+<p class=indent>Starting with the first contour greater than or equal to <em>highval</em>, all
+areas greater than that first contour will be shaded with the color or pattern specified
+in <em>opt@gsnShadeHigh</em>. Alternatively, <em>opt@gsnShadeMid</em> 
+can be set, and starting with the first contour less than or equal to 
+<em>highval</em>, all areas <i>between</i> that first contour and the last contour 
+greater than or equal to <em>lowval</em> will be shaded with the 
+color or pattern specified in <em>opt@gsnShadeMid</em>.
+</p>
+<em>opt</em>
+<p class=indent>A variable containing a list of special plot resources, attached as attributes.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+<em>plot</em> is returned with the modifications described
+above.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function will color or
+<a href="../Images/fillpatterns.png">pattern</a>
+shade regions defined via the arguments <em>lowval</em>
+and/or <em>highval</em>. The type of shading (color or pattern), the
+exact colors/patterns, and which of the three possible regions will be
+shaded (.le.<em>lowval</em>,
+.ge.<em>lowval</em>.and..le.<em>highval</em>, .ge.<em>highval</em>) are
+determined by the special resource list attached to <em>opt</em>.
+<p>
+The list of possible resources that can be attached to <em>opt</em> are:
+<ul>
+
+<li><i><b>gsnShadeFillDotSizeF</b></i> : set to a scalar floating point value (in 
+               <a href="../../glossary.html#NDC">NDC</a> units) to control
+               the size of the dots when doing a stipple pattern fill
+               (<a href="../Images/fillpatterns.png">pattern
+               #17</a>).<p>
+
+               The default value of 0.0 causes the dots to be drawn
+               using a workstation dependent minimum dot size. Caveat:
+               individual dots are not clipped around the edges of
+               fill areas; this becomes more noticeable as the dot
+               size increases.<p>
+
+               <font color="red"><i>Available in <a href="../../../prev_releases.html#6.5.0">version 6.5.0</a> and later.</i></font>
+<p>
+
+
+<li><i><b>gsnShadeFillType</b></i> : can be set to "color" for color fill, or
+               "pattern" for pattern fill.  "color" is the
+               default. (This resource is case sensitive, do not
+               capitalize "color" or "pattern".)
+<p>
+
+<li><i><b>gsnShadeFillScaleF</b></i> : set to a scalar floating point value to
+               control the density for pattern fill. This resource will
+               be applied across all three levels (Low, Mid High) of shading.<p>
+
+               A value greater than 1.0 makes the pattern spacing bigger
+               than the default spacing, resulting in a fill that
+               appears less dense. A value less than 1.0 has the
+               opposite effect. Values less than or equal to 0.0 are
+               invalid.<p>
+
+               <font color="red"><i>Available in <a href="../../../prev_releases.html#6.5.0">version 6.5.0</a> and later.</i></font>
+<p>
+
+<li><i><b>gsnShadeFillScales</b></i> : set to three floating point values to
+               control the density for pattern fill for gsnShadeLow,
+               gsnShadeMid, and gsnShadeHigh respectively. If any of these
+               resources are not in use, then use any value as it will simply
+               be ignored.<p>
+
+               Values greater than 1.0 make the pattern spacing bigger
+               than the default spacing, resulting in a fill that
+               appears less dense. Values less than 1.0 have the
+               opposite effect. Values less than or equal to 0.0 are
+               invalid.<p>
+
+               <font color="red"><i>Available in <a href="../../../prev_releases.html#6.5.0">version 6.5.0</a> and later.</i></font>
+<p>
+
+<li><i><b>gsnShadeLow</b></i> : a pattern or color index, named color
+                     (e.g. "blue"), or <a href="../../glossary.html#RGB">RGB</a> / 
+                     <a href="../../glossary.html#RGBA">RGBA</a> tuple
+                     representing what color/pattern to use when
+                     filling areas less than the first contour less
+                     than or equal to <em>lowval</em>.
+<p>
+		       
+<li><i><b>gsnShadeMid</b></i> : a pattern or color index, named color
+                       (e.g. "blue"), or RGB/RGBA tuple representing
+                       what color/pattern to use when filling areas
+                       greater than the first contour greater than or
+                       equal to <em>lowval</em> and less than the
+                       first contour less than or equal
+                       to <em>highval</em>.
+<p>
+
+<li><i><b>gsnShadeHigh</b></i> : a pattern or color index, named color
+                       (e.g. "blue"), or RGB/RGBA tuple representing
+                       what color/patterm to use when filling areas
+                       greater than the first contour greater than or
+                       equal to <em>highval</em>.
+</ul>		       
+<p>
+One or more of the following resources <em>must</em> be set: <i>gsnShadeLow</i>, <i>gsnShadeMid</i>, 
+<i>gsnShadeHigh</i>. Otherwise the <em>plot</em> is returned without modifications and a warning
+message is generated.
+<p>
+
+Important notes:
+<ul>
+<li>The shading will always begin at a contour, and not necessarily at the specified 
+<em>lowval</em> or <em>highval</em>. Check your plot to make sure that the results 
+are what you expected. 
+<p>
+
+<li>You cannot mix and match color and shading with this routine.
+For an example of drawing shaded and filled contours, see
+example <a href="../../../Applications/coneff.html#ex14">coneff_14.ncl</a>.
+<p>
+
+<li>This routine only modifies the color or shading of existing
+contours, and does not change any existing labelbar, if present.
+<p>
+</ul>
+
+Recognition of RGB/A tuples for color was added
+in <a href="../../../prev_releases.html#6.2.1">version 6.2.1</a>.
+<p>
+
+A bug was fixed in <a href="../../../prev_releases.html#6.2.0">version 6.2.0</a>
+that didn't allow you to use the <i>gsnShadeHigh</i>, <i>gsnShadeMid</i>, and
+<i>gsnShadeLow</i> resources together.
+<p>
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="../../Functions/Shea_util/ColorNegDashZeroPosContour.html"><strong>ColorNegDashZeroPosContour</strong></a>,
+<a href="../../Functions/Shea_util/ColorShadeLeGeContour.html"><strong>ColorShadeLeGeContour</strong></a>,
+<a href="../../Functions/Shea_util/ShadeGeLeContour.html"><strong>ShadeGeLeContour</strong></a>,
+<a href="../../Functions/Shea_util/ShadeGtContour.html"><strong>ShadeGtContour</strong></a>,
+<a href="../../Functions/Shea_util/ShadeLtContour.html"><strong>ShadeLtContour</strong></a>,
+<a href="../../Functions/Shea_util/ShadeLtGtContour.html"><strong>ShadeLtGtContour</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+<example name="Example 1">
+<b>Example 1</b><p>
+
+For application examples, see:
+<ul>
+<li><a href="../../../Applications/coneff.html#ex13">Description of coneff_13</a><br>
+"<a href="../../../Applications/Scripts/coneff_13.html">coneff_13.ncl</a>"
+(<a href="../../../Applications/Images/coneff_13_1_lg.png">frame 1</a> / 
+<a href="../../../Applications/Images/coneff_13_2_lg.png">frame 2</a>)
+<p>
+<li><a href="../../../Applications/wavelet.html#ex3">Description of wavelet_3</a><br>
+"<a href="../../../Applications/Scripts/wavelet_3.html">wavelet_3.ncl</a>"
+</ul>
+<p>
+
+<example name = "Example 2">
+<b>Example 2</b><p>
+The following will shade areas less than the first contour less than or equal
+to -5. with the color referenced by color index 14, and shade areas greater
+than the first contour greater than or equal to 10. with red.
+<p>
+
+<pre>
+res = True
+.......
+res@<a href="../Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a> = False
+res@<a href="../Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a> = False
+plot = <a href="gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>(wks,data,res)
+
+opt = True
+opt@gsnShadeFillType = "color"        ; color is the default
+opt@gsnShadeLow      = 14             ; color index 14
+opt@gsnShadeHigh     = "red"          ; named color
+plot = <strong>gsn_contour_shade</strong>(plot,-5.,10.,opt)
+<a href="../../Functions/Built-in/draw.html"><strong>draw</strong></a>(plot)
+<a href="../../Functions/Built-in/frame.html"><strong>frame</strong></a>(wks)
+</pre>
+</example>
+
+<example name = "Example 3">
+<b>Example 3</b><p>
+
+Same as example 2, except use an RGB tuple to define the color red.
+<p>
+
+<pre>
+res = True
+.......
+res@<a href="../Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a> = False
+res@<a href="../Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a> = False
+plot = <a href="gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>(wks,data,res)
+
+opt = True
+opt@gsnShadeFillType = "color"        ; color is the default
+opt@gsnShadeLow      = 14
+opt@gsnShadeHigh     = (/1.,0,0/)
+plot = <strong>gsn_contour_shade</strong>(plot,-5.,10.,opt)
+<a href="../../Functions/Built-in/draw.html"><strong>draw</strong></a>(plot)
+<a href="../../Functions/Built-in/frame.html"><strong>frame</strong></a>(wks)
+</pre>
+</example>
+
+<example name = "Example 4">
+<b>Example 4</b><p>
+Using the same resource list defined in Example 1, the following example will pattern 
+fill areas greater than the first contour greater than or equal to 20. with fill pattern #2.
+<p>
+
+<pre>
+plot = <a href="gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>(wks,data,res)
+
+opt = True
+opt@gsnShadeFillType = "pattern"      ; pattern fill
+opt@gsnShadeHigh = 2                  ; use pattern #2   
+plot = <strong>gsn_contour_shade</strong>(plot,-999.,20.,opt)
+<a href="../../Functions/Built-in/draw.html"><strong>draw</strong></a>(plot)
+<a href="../../Functions/Built-in/frame.html"><strong>frame</strong></a>(wks)
+</pre>
+</example>
+
+<example name = "Example 5">
+<b>Example 5</b><p>
+Using the same resource list defined in Example 1, the following example will pattern 
+fill areas greater than the first contour greater than or equal to 5., and less than or equal to 
+10. with fill pattern #2.
+<p>
+
+<pre>
+plot = <a href="gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>(wks,data,res)
+
+opt = True
+opt@gsnShadeFillType = "pattern"      ; pattern fill
+opt@gsnShadeMid = 2                   ; use pattern #2   
+plot = <strong>gsn_contour_shade</strong>(plot,5.,10.,opt)
+<a href="../../Functions/Built-in/draw.html"><strong>draw</strong></a>(plot)
+<a href="../../Functions/Built-in/frame.html"><strong>frame</strong></a>(wks)
+</pre>
+</example>
+
+<example name = "Example 6">
+<b>Example 6</b><p>
+
+The following example will pattern fill areas less than the first
+contour less than or equal to -15 with fill pattern #4 shaded
+blue. Note that at present there is no direct way to specify a pattern
+fill color
+into <strong>gsn_contour_shade</strong>. One can get
+around this limitation by
+setting <a href="../Resources/cn.html#cnFillColor"><em>cnFillColor</em></a>
+and <a href="../Resources/cn.html#cnFillOn"><em>cnFillOn</em></a> = False in the
+original plot's resource list. Note that only a single pattern fill
+color can be specified. If multiple fill pattern colors are needed,
+<strong>gsn_contour_shade</strong> cannot be used.
+<p>
+
+<pre>
+res = True
+.......
+res@<a href="../Resources/cn.html#cnFillOn"><em>cnFillOn</em></a> = False
+res@<a href="../Resources/cn.html#cnFillColor"><em>cnFillColor</em></a> = "blue"
+res@<a href="../Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a> = False
+res@<a href="../Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a> = False
+plot = <a href="gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>(wks,data,res)
+
+opt = True
+opt@gsnShadeFillType = "pattern"        ; color is the default
+opt@gsnShadeLow = 4                     ; use fill pattern #4
+plot = <strong>gsn_contour_shade</strong>(plot,-15.,-999.,opt)
+<a href="../../Functions/Built-in/draw.html"><strong>draw</strong></a>(plot)
+<a href="../../Functions/Built-in/frame.html"><strong>frame</strong></a>(wks)
+</pre>
+</example>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Graphics/Interfaces/gsn_contour_shade.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:18:17 GMT -->
+</html>

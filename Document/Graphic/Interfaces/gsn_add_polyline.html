@@ -1,0 +1,751 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Graphics/Interfaces/gsn_add_polyline.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:13 GMT -->
+<head>
+<meta name="description" content="NCL gsn functions (graphics routines)">
+<meta name="keywords" content="gsn_add_polyline">
+<title>gsn_add_polyline</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Graphics</a> >
+<a class=crumb href="index-2.html">
+Graphical Interfaces</a> 
+<h1>gsn_add_polyline</h1>
+
+<p>
+Attaches a polyline to the given plot.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"  ; This library is <b>automatically loaded</b>
+                                                          ; from NCL V6.2.0 onward.
+                                                          ; No need for user to explicitly load.
+
+	function gsn_add_polyline (
+		wks  [1] : graphic,  
+		plot [1] : graphic,  
+		x    [*] : numeric,  
+		y    [*] : numeric,  
+		res  [1] : logical   
+	)
+
+	<a href="../../Functions/return_val.html">return_val</a> [*] :  graphic
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>wks</em>
+<p class=indent>A <a href="../../HLUs/Classes/Workstation.html"><strong>Workstation</strong></a>
+identifier.  The identifier is one returned either from calling
+<a href="gsn_open_wks.html"><strong>gsn_open_wks</strong></a> or calling <a href="../../Manuals/Ref_Manual/NclStatements.html#Create">create</a> to
+create a Workstation object.
+</p>
+<em>plot</em>
+<p class=indent>A plot identifier created by using one of the many <a href="index-2.html">gsn</a> functions, or by calling <a href="../../Manuals/Ref_Manual/NclStatements.html#Create">create</a> to
+create a <a href="../../HLUs/Classes/View.html"><strong>View</strong></a> object.
+</p>
+<em>x</em>
+<br>
+<em>y</em>
+<p class=indent>One-dimensional arrays of the same length containing the X and Y
+coordinates of the polyline, and must be in the range of the X/Y
+coordinates of the data in <em>plot</em>.  If you are adding the line
+to a map, then X should correspond to longitude values, and Y to
+latitude values.
+</p>
+<em>res</em>
+<p class=indent>A variable containing an optional list of polyline resources, attached
+as attributes. Set to True if you want the attached attributes to be
+applied, and False if you either don't have any resources to set, or
+you don't want the resources applied.
+</p>
+<a name="Return"></a>
+<h2>Return value</h2>
+<p>
+An array or scalar representing the ids of each polyline attached will be
+returned.  If you call any of the <a href="gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>, <strong>gsn_add_polyline</strong>, or <a href="gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a> functions in the same NCL
+script, you must assign each of their return values to a unique
+variable name.  There's more information on this below in the <a
+href="#Examples">examples</a> section.
+</p><a name="Description"></a>
+<h2>Description</h2>
+<p>
+This function creates and attaches polylines to the given plot.  If
+you have no missing values in your data, then only one polyline is
+attached.  If missing values are encountered in the middle of
+the <em>x</em> and/or <em>y</em> arrays, then the points are ignored
+and the polyline will be disconnected at this pair.  This causes
+multiple line segments to be created. This function
+will return a scalar or an array of type "graphic" depending
+on how many line segements are created.
+<p>
+
+This function only attaches the polyline(s) to the plot. Hence, you
+can only see the polylines when you call <a href="../../Functions/Built-in/draw.html"><strong>draw</strong></a> on
+the plot you attached them to.
+<p>
+
+If you are attaching a polyline to a plot and not seeing it on the
+plot, then you may want to check
+the <a href="../../../Applications/draworder.html">draw order</a> of the
+various elements of your plot.  For example, if you are attaching the
+polyline to a map and you have
+<a href="../Resources/mp.html#mpFillDrawOrder"><em>mpFillDrawOrder</em></a> set to "PostDraw",
+then this may cause your line to be hidden behind the map fill. You
+can also try specifying the draw order of the line itself, relative
+to elements of the plot you're attaching it to. The resource for this
+is <a href="../Resources/tf.html#tfPolyDrawOrder"><em>tfPolyDrawOrder</em></a>, and it can be
+set to one of "PreDraw", "Draw", or "PostDraw" (the default is
+"PostDraw"). See example 4 below.
+<p>
+
+The value(s) returned from this function must be assigned to a unique
+variable. This is necessary so that the polyline(s) "live" for the
+duration of the NCL script.  This is especially imperative if the call
+to <strong>gsn_add_polyline</strong> is inside a
+function or procedure. Please see the <a href="#Examples">examples</a>
+section below for more information.
+<p>
+
+There are many line <a href="../dash_patterns.html">dash patterns</a>
+available, and you can use the <a href="../Resources/gs.html#gsLineDashPattern"><em>gsLineDashPattern</em></a> resource to change the
+dash pattern. The default is a solid line.  You can also create your
+own dash pattern using the <a href="../../Functions/Built-in/NhlNewDashPattern.html"><strong>NhlNewDashPattern</strong></a>
+function.<p>
+
+If you resize the plot (i.e., by passing the plot to <a href="gsn_panel.html"><strong>gsn_panel</strong></a> or setting the <a href="../Resources/vp.html#vpWidthF"><em>vpWidthF</em></a> or <a href="../Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> resources), then the polyline will be
+automatically resized with the plot.<p>
+
+<font color=red>Note: there is a potential incompatible change
+in <a href="../../../prev_releases.html#6.2.0">NCL version 6.2.0</a>, when
+attaching lines or polygons to a map.</font> This change
+affects <a href="gsn_polyline.html"><strong>gsn_polyline</strong></a>,
+<strong>gsn_add_polyline</strong>,
+<a href="gsn_polygon.html"><strong>gsn_polygon</strong></a>,
+and <a href="gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>.
+<p>
+
+Previously, drawing a polyline around the equator, for example, could
+be specified using 2-element arrays. For example:
+<p>
+
+<pre>
+  lnid = <strong>gsn_add_polyline</strong>(wks,map,(/0,360/),(/0,0/),lnres)
+</pre>
+
+Now, however, in order to eliminate a number of ambiguous situations
+and to make user code simpler in most cases, a new behavior has been
+introduced: the line between two points on the globe always follows
+the shortest path. In the example above, the behavior in NCL V6.2.0
+leads to a 0-length line. The recommended approach now for drawing a
+line around the equator is to use four points, such that the distance
+from one to the next is always less than 180 degrees. For example:<p>
+
+<pre>
+  lnid = <strong>gsn_add_polyline</strong>(wks,map,(/0,120,240,360/),(/0,0,0,0/),lnres)
+</pre>
+
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="gsn_polygon.html"><strong>gsn_polygon</strong></a>,
+<a href="gsn_polymarker.html"><strong>gsn_polymarker</strong></a>,
+<a href="gsn_polyline.html"><strong>gsn_polyline</strong></a>,
+<a href="gsn_polygon_ndc.html"><strong>gsn_polygon_ndc</strong></a>,
+<a href="gsn_polymarker_ndc.html"><strong>gsn_polymarker_ndc</strong></a>,
+<a href="gsn_polyline_ndc.html"><strong>gsn_polyline_ndc</strong></a>,
+<a href="gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>,
+<a href="gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a>,
+<strong>gsn_add_polyline</strong>,
+<a href="gsn_text.html"><strong>gsn_text</strong></a>,
+<a href="gsn_text_ndc.html"><strong>gsn_text_ndc</strong></a>,
+<a href="gsn_add_text.html"><strong>gsn_add_text</strong></a>,
+<a href="gsn_add_shapefile_polylines.html"><strong>gsn_add_shapefile_polylines</strong></a>,
+<a href="gsn_add_shapefile_polymarkers.html"><strong>gsn_add_shapefile_polymarkers</strong></a>,
+<a href="gsn_add_shapefile_polygons.html"><strong>gsn_add_shapefile_polygons</strong></a>,
+<a href="../../Functions/Built-in/NhlNewMarker.html"><strong>NhlNewMarker</strong></a>,
+<a href="../../Functions/Built-in/NhlNewDashPattern.html"><strong>NhlNewDashPattern</strong></a>
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+For some application examples, see the <a href="../../../Applications/polyg.html">polyline</a> examples, or see
+"<a href="../../../Applications/Scripts/xy_13.html">xy_13.ncl</a>"
+(<a href="../../../Applications/Images/xy_13_lg.png">view
+example</a>).<p>
+
+<b>Example 1</b><p>
+
+This example shows how to add several lines to a plot, and how to make
+sure every call to <strong>gsn_add_polyline</strong>
+is returned to a unique variable using an array.
+<p>
+
+Note that this won't work if you add the lines from within an NCL
+function or procedure. In this case, you have to make sure the
+variables "live" outside the function or procedure by attaching them
+to a return value of a function, or to an input variable. This is
+demonstrated in example 2.
+<P>
+
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+
+begin
+;
+; Create workstation.
+;
+  wks = <a href="gsn_open_wks.html"><strong>gsn_open_wks</strong></a>("x11","addlines")
+
+;
+; Create some dummy data.
+;
+  npts = 500
+  x    = <a href="../../Functions/Built-in/fspan.html"><strong>fspan</strong></a>(0,npts-1,npts)
+  y    = 500.+ 0.9 * x * <a href="../../Functions/Built-in/sin.html"><strong>sin</strong></a>(0.031415926535898*x)
+
+  xyres             = True
+  xyres@<a href="../Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a>     = False
+  xyres@<a href="../Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a>    = False
+  xyres@<a href="../Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> = True
+
+  xy = <a href="gsn_y.html"><strong>gsn_y</strong></a>(wks,y,xyres)
+
+;
+; Initialize some data for adding several polylines to plot.
+;
+  plx = (/<a href="../../Functions/Built-in/min.html"><strong>min</strong></a>(x),<a href="../../Functions/Built-in/max.html"><strong>max</strong></a>(x)/)
+  ply = (/300,300/)
+
+  yvalues = (/     300,     450,  510,   670,    720,    910/)
+  colors  = (/"orange","purple","red","blue","brown","green"/)
+  nvalues = <a href="../../Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a>(yvalues)
+
+  plres = True
+;
+; When adding the polylines, Make sure each variable name is unique.
+; You can do this via an array of type "graphic".
+;
+  dum = <a href="../../Functions/Built-in/new.html"><strong>new</strong></a>(nvalues,graphic)
+
+  do i=0,nvalues-1
+    plres@<a href="../Resources/gs.html#gsLineColor"><em>gsLineColor</em></a> = colors(i)
+    ply = (/yvalues(i),yvalues(i)/)
+    dum(i) = <strong>gsn_add_polyline</strong>(wks, xy, plx, ply, plres)
+  end do
+
+  <a href="../../Functions/Built-in/draw.html"><strong>draw</strong></a>(xy)   ; Drawing the XY plot will also draw the lines we just added.
+  <a href="../../Functions/Built-in/frame.html"><strong>frame</strong></a>(wks)
+end
+
+
+</pre>
+
+<b>Example 2</b><p>
+
+This example is identical to example 1 except the polylines are being
+added from within a procedure. This is not the most efficient way to
+do things, but this example is merely to show how to make sure the
+polylines "live" outside a function or procedure.  If you don't do
+this, then you will get several warning messages of the form:
+
+<pre>
+warning:TransformPostDraw: tfPolyDrawList element 0 is invalid
+warning:TransformPostDraw: tfPolyDrawList element 1 is invalid
+</pre>
+
+and you wouldn't see any polylines.
+
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+
+;
+; This procedure adds a line to a plot, making sure that it is returned
+; to a unique variable name, and that this variable is retained even
+; outside this procedure call.
+;
+procedure add_line(wks,plot,x,yval,line_color)
+local plres, str, y
+begin
+  plres = True
+  plres@<a href="../Resources/gs.html#gsLineColor"><em>gsLineColor</em></a> = line_color   ; Set the line color.
+
+  y   = (/yval,yval/)
+  str = <a href="../../Functions/Built-in/unique_string.html"><strong>unique_string</strong></a>("polyline")   ; "unique_string" will return a unique
+                                    ; string every time it is called from
+                                    ;  within a single NCL session.
+;
+; You can then use this unique string as an attribute variable name
+; that gets attached to the plot variable. This ensures that this
+; value will live for the duration of the script.
+;
+  plot@$str$ = <strong>gsn_add_polyline</strong>(wks, plot, x, y, plres)
+end
+
+begin
+;
+; Create workstation.
+;
+  wks = <a href="gsn_open_wks.html"><strong>gsn_open_wks</strong></a>("x11","addlines")
+
+;
+; Create some dummy data.
+;
+  npts = 500
+  x    = <a href="../../Functions/Built-in/fspan.html"><strong>fspan</strong></a>(0,npts-1,npts)
+  y    = 500.+ 0.9 * x * <a href="../../Functions/Built-in/sin.html"><strong>sin</strong></a>(0.031415926535898*x)
+
+  xyres             = True
+  xyres@<a href="../Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a>     = False
+  xyres@<a href="../Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a>    = False
+  xyres@<a href="../Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> = True
+
+  xy = <a href="gsn_y.html"><strong>gsn_y</strong></a>(wks,y,xyres)
+
+;
+; Create X and Y values for polylines.  Also set up color array.
+;
+  xvalues = (/<a href="../../Functions/Built-in/min.html"><strong>min</strong></a>(x),<a href="../../Functions/Built-in/max.html"><strong>max</strong></a>(x)/)
+
+  yvalues = (/     300,     450,  510,   670,    720,    910/)
+  colors  = (/"orange","purple","red","blue","brown","green"/)
+  nvalues = <a href="../../Functions/Built-in/dimsizes.html"><strong>dimsizes</strong></a>(yvalues)
+
+  do i=0,nvalues-1
+    add_line(wks,xy,xvalues,yvalues(i),colors(i))
+  end do
+
+  <a href="../../Functions/Built-in/draw.html"><strong>draw</strong></a>(xy)   ; Drawing the XY plot will also draw the lines we just added.
+  <a href="../../Functions/Built-in/frame.html"><strong>frame</strong></a>(wks)
+end
+
+
+</pre>
+
+
+<b>Example 3</b><p>
+
+This example uses the three functions <strong>gsn_add_polyline</strong>, <a href="gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>, and <a href="gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a> to add
+some primitives to an XY plot:<p>
+
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+
+begin
+;
+; Open X11 window
+;
+  wks = <a href="gsn_open_wks.html"><strong>gsn_open_wks</strong></a>("x11","add_primitive")
+
+;
+; Create some dummy data.
+;
+  npts = 500
+  x    = <a href="../../Functions/Built-in/fspan.html"><strong>fspan</strong></a>(0,npts-1,npts)
+  y    = 500.+ 0.9 * x * <a href="../../Functions/Built-in/sin.html"><strong>sin</strong></a>(0.031415926535898*x)
+
+  xyres = True
+  xyres@<a href="../Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> = True
+  xy = <a href="gsn_y.html"><strong>gsn_y</strong></a>(wks,y,xyres)
+
+;
+; Create data for primitives.
+;
+  plx = x
+  ply = 500. + 0.5 * x * <a href="../../Functions/Built-in/sin.html"><strong>sin</strong></a>(0.031415926535898*x)
+  pgx = (/ 100., 200., 200., 100., 100. /)
+  pgy = (/ 200., 200., 300., 300., 200. /)
+  pmx = (/ 200., 150., 200., 250. /)
+  pmy = (/ 900., 800., 700., 800. /)
+
+;
+; Set up three separate resource lists, although we could have 
+; used the same one here.
+;
+  pmres                  = True
+  plres                  = True
+  pgres                  = True
+  plres@<a href="../Resources/gs.html#gsLineColor"><em>gsLineColor</em></a>      = "orange"
+  plres@<a href="../Resources/gs.html#gsLineThicknessF"><em>gsLineThicknessF</em></a> = 2.0
+  pgres@<a href="../Resources/gs.html#gsFillColor"><em>gsFillColor</em></a>      = "Navy"
+  pmres@<a href="../Resources/gs.html#gsMarkerIndex"><em>gsMarkerIndex</em></a>    = 12
+  pmres@<a href="../Resources/gs.html#gsMarkerSizeF"><em>gsMarkerSizeF</em></a>    = 0.02
+  pmres@<a href="../Resources/gs.html#gsMarkerColor"><em>gsMarkerColor</em></a>    = "yellow"
+
+;
+; Make sure each variable name is unique.
+;
+  dum1 = <strong>gsn_add_polyline</strong>  (wks, xy, plx, ply, plres)
+  dum2 = <a href="gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>   (wks, xy, pgx, pgy, pgres)
+  dum3 = <a href="gsn_add_polymarker.html"><strong>gsn_add_polymarker</strong></a>(wks, xy, pmx, pmy, pmres)
+
+  <a href="../../Functions/Built-in/draw.html"><strong>draw</strong></a>(xy)
+  <a href="../../Functions/Built-in/frame.html"><strong>frame</strong></a>(wks)
+
+;
+; Resize the plot and draw in the middle of the frame, and
+; see how the primitives automatically get adjusted as well.
+; 
+  setvalues xy
+    "<a href="../Resources/vp.html#vpXF"><em>vpXF</em></a>"        : 0.3
+    "<a href="../Resources/vp.html#vpYF"><em>vpYF</em></a>"        : 0.7
+    "<a href="../Resources/vp.html#vpWidthF"><em>vpWidthF</em></a>"    : 0.4
+    "<a href="../Resources/vp.html#vpHeightF"><em>vpHeightF</em></a>"   : 0.4
+  end setvalues
+
+  <a href="../../Functions/Built-in/draw.html"><strong>draw</strong></a>(xy)
+  <a href="../../Functions/Built-in/frame.html"><strong>frame</strong></a>(wks)
+end
+</pre>
+<p>
+
+<b>Example 4</b></p>
+
+[This example will only work for any version of NCL later than V5.1.1.]
+<p>
+
+Try uncommenting the setting of the <a href="../Resources/tf.html#tfPolyDrawOrder"><em>tfPolyDrawOrder</em></a> resource below, and watch
+how this changes the order of when the yellow box is drawn with
+respect to the map outlines, map fill, and contour lines. You can also
+play with the <a href="../Resources/cn.html#cnLineDrawOrder"><em>cnLineDrawOrder</em></a> and
+<a href="../Resources/mp.html#mpOutlineDrawOrder"><em>mpOutlineDrawOrder</em></a> resources to
+further control the draw order of individual plot elements.
+<p>
+
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;
+; Open a netCDF file and read some data.
+;
+  a   = <a href="../../Functions/Built-in/addfile.html"><strong>addfile</strong></a>("$NCARG_ROOT/lib/ncarg/data/cdf/meccatemp.cdf","r")
+  t   = a->t(0,:,:)                     ; Read first time step
+
+  wks = <a href="gsn_open_wks.html"><strong>gsn_open_wks</strong></a>("x11","draw_order")
+
+  res                      = True
+
+  res@<a href="../Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a>              = False
+  res@<a href="../Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a>             = False
+
+  res@<a href="../Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a>          = True  
+  res@<a href="../Resources/gsn.html#gsnAddCyclic"><em>gsnAddCyclic</em></a>          = False   ; Don't add longitude cyclic pt.
+
+  res@<a href="../Resources/mp.html#mpOutlineOn"><em>mpOutlineOn</em></a>          = True
+
+;  res@<a href="../Resources/cn.html#cnLineDrawOrder"><em>cnLineDrawOrder</em></a>      = "Draw"  ; These resources can be one of 
+;  res@<a href="../Resources/cn.html#cnFillDrawOrder"><em>cnFillDrawOrder</em></a>       = "Draw"  ; "PreDraw", "Draw" or "PostDraw".
+;  res@<a href="../Resources/mp.html#mpOutlineDrawOrder"><em>mpOutlineDrawOrder</em></a>   = "Draw"
+;  res@<a href="../Resources/mp.html#mpFillDrawOrder"><em>mpFillDrawOrder</em></a>      = "PreDraw"
+
+  plot = <a href="gsn_csm_contour_map.html"><strong>gsn_csm_contour_map</strong></a>(wks,t,res)
+
+  gres                 = True
+  gres@<a href="../Resources/gs.html#gsFillColor"><em>gsFillColor</em></a>     = "yellow"
+;  gres@<a href="../Resources/tf.html#tfPolyDrawOrder"><em>tfPolyDrawOrder</em></a> = "Draw"  ; this can be used for polylines, polymarkers, or polygons
+
+  lat = (/-25,  35, 35, -25, -25/)
+  lon = (/-45, -45,  5,   5, -45/)
+  dum = <a href="gsn_add_polygon.html"><strong>gsn_add_polygon</strong></a>(wks,plot,lon,lat,gres)
+
+  <a href="../../Functions/Built-in/draw.html"><strong>draw</strong></a>(plot)
+  <a href="../../Functions/Built-in/frame.html"><strong>frame</strong></a>(wks)
+end
+</pre>
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Graphics/Interfaces/gsn_add_polyline.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:13 GMT -->
+</html>

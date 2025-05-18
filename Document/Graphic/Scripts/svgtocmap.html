@@ -1,0 +1,105 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"
+
+; Purpose:
+; Convert a .svg file from the http://soliton.vm.bytemark.co.uk/pub/cpt-city/index.html into a colormap table that can be used with NCL
+; Input: cmap name (string) and the number of colors in the output (N, integer)
+; Output: Nx3 array
+; The program reads the svg file, retrieves the usefull floats (offset, R, G, and B, and opacity)
+; We correct the offset array so that sharp gradients are handled (fs2006.svg for example)
+; And we interpolate the RGB values with N interpolation points
+
+undef("svgconv")
+function svgconv(finname:string,ncolors:integer)
+
+begin
+
+  dirin="$SVG/"
+  print(dirin+finname+".svg")
+
+  delim=" " ; definition of the string delimiter 
+  lines=asciiread(dirin+finname+".svg",-1,"float") ; read all the floats of the file
+  nfloats=dimsizes(lines) ; number of floats
+  
+  do indl=0,nfloats-5 ; test all lines for the start/end ones
+    ;Look for the line that start with 0 (offset=0%)
+    ;and end with 1 (opacity=1%)
+    if(lines(indl).eq.0.and.(lines(indl+4).eq.1))
+      indstart=indl
+    end if
+    ;Look for the line that start with 100 (offset=100%)
+    ;and end with 1 (opacity=1%)
+    if(lines(indl).eq.100.and.(lines(indl+4).eq.1))
+      indend=indl+4
+    end if
+  end do
+
+  ; We retrive useful data
+  tableint=lines(indstart:indend)
+  noff=dimsizes(tableint)/5 ; number of offsets in the file
+  
+  table=onedtond(tableint,(/noff,5/)); reshape the file as noffset*5 with
+  ;table(:,0): offset
+  ;table(:,1): red
+  ;table(:,2): blue
+  ;table(:,3): green
+  ;table(:,4): opacity (useless here)
+   
+  ; Here we correct the offset vector to get rid off of identical offset values
+  ; defining sharp gradients. The value 1e-5 is arbitrary but seems to work fine
+  offset=table(:,0)
+  do indoff=0,noff-2
+    if(offset(indoff).eq.offset(indoff+1))
+      offset(indoff)=offset(indoff)-1e-5 
+    end if
+  end do
+
+  r=table(:,1)
+  g=table(:,2)
+  b=table(:,3)
+  
+  ; offset value to which colors is interpolated
+  offint=fspan(0,100,ncolors)
+  
+  ;interpolation of the colors 
+  rout=linint1(offset,r,False,offint,0)
+  gout=linint1(offset,g,False,offint,0)
+  bout=linint1(offset,b,False,offint,0)
+
+  ;output of the colormap arrays
+  cmapout=new((/ncolors+2,3/),typeof(rout))
+
+  cmapout(0,:)=1
+  cmapout(1,:)=0
+  cmapout(2:,0)=rout/255.
+  cmapout(2:,1)=gout/255.
+  cmapout(2:,2)=bout/255.
+
+  cmapout@offset=offset
+
+  return cmapout
+  
+end
+
+undef("svgticks")
+function svgticks(cmap:numeric,lmin:float,lmax:float)
+
+begin
+  
+  off=cmap@offset
+  noff=dimsizes(off)
+  lout=new(noff-1,float)
+  
+  dl=lmax-lmin
+  cpt=0
+  do p=1,noff-1
+    lout(cpt)=lmin+off(p)*dl
+  end do
+
+  return lout
+
+end
+
+

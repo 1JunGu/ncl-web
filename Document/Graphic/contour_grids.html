@@ -1,0 +1,743 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Graphics/contour_grids.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:41 GMT -->
+<head>
+<meta name="description" content="NCL graphics contouring non-uniform grids">
+<meta name="keywords" content="NCL, graphics, visualization, contour, grids">
+<TITLE>NCL Graphics: contouring non-uniform grids</TITLE>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+    <a class=crumb href="../../index-2.html">NCL Home ></a>
+<a class=crumb href="../index-2.html">Documentation ></a>
+<a class=crumb href="index-2.html">Graphics </a>
+
+<br>
+
+<h1>Non-uniform grids that NCL can contour</h1>
+
+This document describes most of the various grids that can now be
+contoured by NCL. Many of these grids can only be contoured with
+version 4.2.0.a032 or later. (Go to the <a href="../../Download/index.html">download
+section</a> to get the latest version.)<p>
+
+In recent years, many new non-uniform grids have become popular and
+these are being processed by new algorithms to reduce them to triangle
+meshes and to contour directly on these triangles, rather than
+interpolating to a uniform grid and contouring.  Contouring and
+triangulation algorithms have been developed locally by Dave Kennison.
+Dave Brown of SCD has also developed algorithms based on work of
+Kennison and work of Jonathan Richard Shewchuk who is in the Computer
+Science Division at the University of California at Berkeley.  <p>
+
+The new triangular mesh functionality gives us access to a huge
+customer base previously unsupported by NCL. Two important examples
+include finite element grids which are used by NOAA and other agencies
+in coastal and tidal hindcast and forecast modeling. It also includes
+geodesic grids which Dave Randall and colleagues at CSU, in
+conjunction with the Naval Postgraduate School, are investigating as
+possible replacements to the current grids used in the CESM.<p>
+
+Here is a list of the grids which are described in detail in
+subsequent pages. Some of these grids have an NCL example
+included. <p>
+
+<ul>
+<li><a href="#LatLon">Lat/Lon</a>
+<li><a href="#Geodesic">Geodesic</a> (<a href="#GeodesicExample">NCL example</a>)
+<li><a href="#Gaussian">Gaussian</a>
+<li><a href="#Icosahedral">Icosahedral</a>
+<li><a href="#ISCCP">ISCCP</a>
+<li><a href="#Orca">ORCA</a>
+<li><a href="#POP">POP</a>
+<li><a href="#Seam">SEAM</a> (<a href="#SeamExample">NCL example</a>)
+<li><a href="#Triangular">Triangular mesh</a> (<a href="#TriangularExamples">NCL examples</a>)
+<li><a href="#Tripole">Tripole</a>
+<li><a href="#Adaptive">Adaptive</a> (<a href="#AdaptiveExample">NCL example</a>)
+<li><a href="#Arpege">Arpege</a>
+</ul>
+
+<p>
+
+This document is primarily a reformatting of a document produced by Dave
+Kennison.
+
+<hr>
+<h2><a name=LatLon>Lat/lon</a> grids</h2>
+
+
+<p>
+<img src="Images/ctllg3_07.gif">
+<p>
+
+    These are the old traditional rectangular grids, with longitude varying
+    with one of the two dimensions and latitude varying with the other.  It
+    is easy to turn such a grid into a triangular mesh by simply splitting
+    each rectangular grid element in half.
+
+<hr>
+<h2><a name="Geodesic">Geodesic</a> grids (see also 
+<a href="#Icosahedral">"Icosahedral grids"</a>, below)</h2>
+
+<p>
+<img src="Images/ctgeo1_05.gif">
+</p>
+    David Randall, Ross Heikes, and Todd Ringler at Colorado State University
+    are big names in this area.  See 
+    <a href="http://kiwi.atmos.colostate.edu/BUGS">
+    "http://kiwi.atmos.colostate.edu/BUGS"</a>.
+<p>
+    Most geodesic grids appear to be formed by elaborating an
+    icosahedron; each of the 20 faces of the icosahedron is subdivided into
+    smaller triangles in a more or less obvious way.
+<p>
+    Some users think of the geodesic grid as a triangular mesh and others think
+    of it as a bunch of polygonal patches (mostly hexagonal, a few pentagonal),
+    each of which has a vertex of the triangular mesh at its center (i. e., the
+    Voronoi cells).
+<p>
+    Randall, Heikes, and Ringler found a way to slightly deform the geodesic
+    grid so as to make all of its triangles have more nearly the same size -
+    the specific techniques have not been detailed.
+<p>
+    It is possible to form geodesic grids starting from other regular solids
+    (an octohedron, for example).  These are not as common, but here are some
+    sites of interest.
+<p>
+      An interesting site containing a bibliography of papers about global
+      grids, compiled for the "International Conference on Discrete Global
+      Grids" by Denis White, at the University of Oregon:
+<p>
+	<a href="http://www.ncgia.ucsb.edu/globalgrids/bib.html">http://www.ncgia.ucsb.edu/globalgrids/bib.html</a>
+<p>
+      Another article by White (co-authored with one Kevin Sahr, at
+      Southern Oregon University):
+<p>
+	<a href="http://bufo.geo.orst.edu/tc/firma/gg/pubs/gdggs98.pdf">http://bufo.geo.orst.edu/tc/firma/gg/pubs/gdggs98.pdf</a>
+<p>
+      It discusses "Discrete Global Grid Systems" based on the various Platonic
+      solids.
+<p>
+      A page maintained by Kevin Sahr, with lots of info about DGG's:
+<p>
+	<a href="http://www.sou.edu/cs/sahr/dgg/">http://www.sou.edu/cs/sahr/dgg/</a>
+
+<h2><a name="GeodesicExample"></a>NCL example</h2>
+
+<table BORDER=1 CELLPADDING=5>
+<tr>
+<th COLSPAN=3>script: <a href="Scripts/geodesic.html">geodesic.ncl</a>
+
+<tr>
+<td><a href="Images/geodesic.1.gif"><img src="Images/geodesic.sm.1.gif"./Images/></a>
+<td><a href="Images/geodesic.2.gif"><img src="Images/geodesic.sm.2.gif"./Images/></a>
+<td><a href="Images/geodesic.3.gif"><img src="Images/geodesic.sm.3.gif"></a>
+
+<tr>
+<td align=center>frame 1
+<td align=center>frame 2
+<td align=center>frame 3
+
+</table>
+
+<hr>
+<h2><a name="Gaussian">Gaussian</a> grids</h2>
+
+    Paul Swarztrauber is working with these grids.  Much like a simple
+    <a href="#LatLon">lat/lon grid</a>, but with lines spaced irregularly in latitude.
+
+<hr>
+<h2><a name="Icosahedral">Icosahedral grids (see also <a href="#Geodesic">"Geodesic grids"</a>, above)</a></h2>
+
+    These are special cases of geodesic grids.
+<p>
+    References to "twisted icosahedral grids," are in the literature,
+    but we have not encountered such to date.
+<p>
+    There are also references to "stretched icosahedral grids".  
+    Examples are at:
+<p>
+      <a href="http://www.mco.ne.jp/~okirodo/pdf/2608Tomita.pdf">http://www.mco.ne.jp/~okirodo/pdf/2608Tomita.pdf</a>
+<p>
+    They start with a geodesic grid and then deform it by
+    pulling it towards some point of interest on the globe, so that, near that
+    point, you get more triangles, and, away from that point, you get fewer.
+<p>
+    Some names and organizations associated with these grids come 
+    from an "International Workshop on the Next-Generation Climate Model":
+<p>
+      Detlev Majewski, Deutscher Wetterdienst<br>
+      Hirofumi Tomita, Frontier Research System<br>
+      Motohiko Tsugawa, Frontier Research System<br>
+      Koji Goto, Frontier Research System<br>
+      John McGregor, CSIRO, Australia<br>
+      Masaki Satoh, Saitama Institute of Technology<br>
+      Richard Peltier, University of Toronto, Canada<br>
+<p>
+
+    The Japanese seem to be heavily into these grids.
+<p>
+    The site:
+<p>
+      <a href="http://www.cacr.caltech.edu/Publications/newsletters/update/update1/sect_d.html">http://www.cacr.caltech.edu/Publications/newsletters/update/update1/sect_d.html</a>
+<p>
+    contains a paper titled "Argonne Scientists Develop Parallel Method for
+    Simulating Atmospheric Circulation", which makes the point that using an
+    icosahedral grid lends itself to the use of massively parallel computer
+    architectures.
+
+<hr>
+<h2><a name="ISCCP">ISCCP grids</a></h2>
+
+
+<p>
+<img src="Images/ctiscp_12.gif">
+<p>
+
+    "ISCCP" stands for "International Satellite Cloud Climatology
+    Project."  The format seems to be an international standard 
+    for exchanging global data.
+<p>
+    Dennis Shea gave us an example of this grid.  It is generated
+    on a cylindrical equidistant projection of the globe.  First, horizontal
+    lines are drawn, dividing the projection into 72 strips, each of which
+    is 2.5 degrees of latitude in width.  Then, each strip is divided, using
+    vertical lines, into N pieces of equal size, where N is chosen so as to
+    make each piece of the strip have an actual area, on the globe, as close
+    as possible to the area of a 2.5-by-2.5-degree square on the equator.
+    (The strips nearest the equator are divided into 144 pieces, while the
+    strips nearest the poles are divided into only 3 pieces.)  Each element
+    of this grid is therefore the little patch on the globe defined by two
+    lines of constant latitude and two lines of constant longitude.
+
+<hr>
+<h2><a name="Orca">ORCA grids</a></h2>
+    Christophe Cassou from the Centre National de la Recherche
+    Scientifique (CNRS/CERFACS) in Toulouse uses this grid.
+<p>
+    The ORCA example we have came from Cristophe Cassou.  This grid is common
+    in Europe (particularly in France).  The IPSL (Institut 
+    Pierre-Simon Laplace) model uses it.
+<p>
+    This grid could be described as a tripole grid (<a href="#Tripole">see below</a>) that
+    is further modified by the arbitrary displacement of some portions of the
+    grid to achieve finer resolution over areas of interest (typically, ocean
+    areas).
+
+<hr>
+<h2><a name="POP">POP grids</a></h2>
+
+<p>
+<img src="Images/ctpopg_03.gif">
+<p>
+    These grids may be thought of as rectangular arrays wrapped around the
+    globe in the usual way, with one subscript, call it I, associated with
+    longitude and the other subscript, call it J, associated with latitude,
+    and then deformed in such a way as to move the top edge of the array to
+    a circle centered somewhere other than over the North Pole (typically,
+    over Greenland or Canada) and the bottom edge of the array to a circle
+    that is centered on the South Pole, but lies entirely within Antarctica.
+    The lines defined by the rows and columns of the rectangular arrays are
+    locally orthogonal to each other.
+<p>
+    The site <a href="http://www.cgd.ucar.edu/csm/models/ocn-pop/grids.shtml">"http://www.cgd.ucar.edu/csm/models/ocn-pop/grids.shtml"</a>
+    is of
+    interest.  "POP" stands
+    for "Parallel Ocean Program" and it was developed at Los Alamos.
+<p>
+    POP grids are used extensively locally in oceanographic and ice models.
+<p>
+    Here is a site with a lot of useful information, both historical
+    and descriptive:
+<p>
+      <a href="http://climate.lanl.gov/Models/POP/">http://climate.lanl.gov/Models/POP/</a>
+<p>
+    Technically, the POP grids are called "displaced-pole" grids, as opposed
+    to "tripole" grids.
+
+<hr>
+<h2><a name="Seam">SEAM (Spectral Element Atmospheric Model) grids</a></h2>
+
+<p>
+<img src="Images/ctwng2_06.gif">
+<p>
+
+    Used heavily in the HOMME (High-order Multiscale Modeling Environment).
+<p>
+    Some names:
+<p>
+       Steve Thomas, NCAR<br>
+       Jim Edwards, IBM & NCAR<br>
+       Rich Loft, NCAR<br>
+       Bill Spotz, NCAR<br>
+       Joseph J. Tribbia, NCAR<br>
+       Aimee Fournier, NCAR & University of Maryland<br>
+       Mark Taylor, Los Alamos National Laboratory<br>
+       Houjun Wang, NCAR & University of Maryland<br>
+       Ferdinand Baer, University of Maryland<br>
+<p>
+    Some Web sites:
+<p>
+       <a href="http://www.cgd.ucar.edu/gds/wanghj/taylor/doe/seam.html">http://www.cgd.ucar.edu/gds/wanghj/taylor/doe/seam.html</a><br>
+
+       <a href="http://www.nersc.gov/news/annual_reports/annrep99/25sh_baer.html">http://www.nersc.gov/news/annual_reports/annrep99/25sh_baer.html</a><br>
+
+       <a href="http://www.osti.gov/scidac/updates2004/ber_9.html">http://www.osti.gov/scidac/updates2004/ber_9.html</a><br>
+
+       <a href="http://www.seam.com/p_visiseam.htm">http://www.seam.com/p_visiseam.htm</a><br>
+
+       <a href="http://www.cs.sandia.gov/capabilities/ClimateSimulation/MPSAtmosphereModel.html">http://www.cs.sandia.gov/capabilities/ClimateSimulation/MPSAtmosphereModel.html</a><br>
+<p>
+    Houjun Wang gave us two different examples, both
+    of which are developed from a cube embedded inside the globe.  The
+    examples shown on the first Web site above show various techniques
+    for constructing the initial set of quadrilaterals and for subdividing
+    some of the quadrilaterals into smaller quadrilaterals in regions where
+    higher resolution is desired.
+<p>
+    What characterizes a SEAM grid, though, is the way in which the set of
+    quadrilaterals representing the globe (or some portion thereof), are
+    subdivided into "spectral elements" that are used in implementing the
+    model you're writing.  I ran into a paper describing the use of spectral
+    element methods on the triangles of a geodesic grid.
+
+<h2><a name="SeamExample"></a>NCL example</h2>
+
+<table BORDER=1 CELLPADDING=5>
+<tr>
+<th COLSPAN=6>script: <a href="Scripts/seam.html">seam.ncl</a>
+
+<tr>
+<td><a href="Images/seam.1.gif"><img src="Images/seam.sm.1.gif"></a>
+<td><a href="Images/seam.2.gif"><img src="Images/seam.sm.2.gif"></a>
+<td><a href="Images/seam.3.gif"><img src="Images/seam.sm.3.gif"></a>
+<td><a href="Images/seam.4.gif"><img src="Images/seam.sm.4.gif"></a>
+<td><a href="Images/seam.5.gif"><img src="Images/seam.sm.5.gif"></a>
+<td><a href="Images/seam.6.gif"><img src="Images/seam.sm.6.gif"></a>
+
+<tr>
+<td align=center>frame 1
+<td align=center>frame 2
+<td align=center>frame 3
+<td align=center>frame 4
+<td align=center>frame 5
+<td align=center>frame 6
+
+</table>
+
+<hr>
+<h2><a name="Triangular">Triangular meshes:</a></h2>
+
+<p>
+<img src="Images/ctcbay.gif">
+<p>
+
+    Simona Bordoni, Department of Atmospheric Sciences, UCLA - satellite
+    "swaths".  These are actually defined by rectangular arrays of latitudes
+    and longitudes from which some points (generally speaking, those over
+    land) are missing; these are much easier to handle as triangular meshes,
+    so that the missing portions of the mesh can simply be omitted.
+<p>
+    Tom Gross, NOAA/NOS/CSDL/MMAP, also program manager for the Chesapeake
+    Community Model, Chesapeake Research Consortium (tom.gross@noaa.gov) -
+    Chesapeake Bay example.
+<p>
+    Brett Estrade, Naval Research Laboratory, Stennis Space Center, Mississippi
+    (estrade@nrlssc.navy.mil) - North Carolina coastline.
+<p>
+    Daniel Sheltraw, University of New Mexico (sheltraw@unm.edu) - arbitrary
+    object in 3-space.  His particular application involved drawing contours
+    on an isosurface of a magnetic field.
+
+<h2><a name="TriangularExamples"></a>NCL examples</h2>
+
+<table BORDER=1 CELLPADDING=5>
+<tr>
+<th COLSPAN=2>script: <a href="Scripts/ctnccl.html">ctnccl.ncl</a>
+<th COLSPAN=2>script: <a href="Scripts/chspkbay.html">chspkbay.ncl</a>
+
+<tr>
+<td><a href="Images/ctnccl.1.gif"><img src="Images/ctnccl.sm.1.gif"></a>
+<td><a href="Images/ctnccl.2.gif"><img src="Images/ctnccl.sm.2.gif"></a>
+<td><a href="Images/chspkbay.1.gif"><img src="Images/chspkbay.sm.1.gif"></a>
+<td><a href="Images/chspkbay.2.gif"><img src="Images/chspkbay.sm.2.gif"></a>
+
+<tr>
+<td align=center>frame 1
+<td align=center>frame 2
+<td align=center>frame 1
+<td align=center>frame 2
+
+</table>
+
+
+<hr>
+<h2><a name="Tripole">Tripole grids</a></h2>
+
+<p>
+<img src="Images/ctorca_03.gif">
+<p>
+    These grids are somewhat like the POP grids, but the top row of the
+    rectangular array, instead of mapping to a circle on the globe, maps
+    to a degenerate circle forming a line passing through the North Pole.
+    The end points of this line are two of the three "poles" of the grid,
+    the other one being at the South Pole.  Tripole grids seem to be used
+    by the same people who use POP grids and they are the starting point
+    for the ORCA grids.
+
+<hr>
+<h2><a name="Adaptive">Adaptive grids</a></h2>
+
+    We have worked with an adaptive grid that comes from Christiane 
+    Jablonowski with ECMWF. (cjablono@ucar.edu).
+    Christiane's grid is constructed using boundary lines which are
+    all either horizontal or vertical on a cylindrical equidistant projection
+    of the globe.  First, the rectangular area covered by the projection is
+    divided into smaller rectangles, all of which are the same size.  Some
+    (but not all) of these rectangles are subdivided into four smaller
+    rectangles of equal size, and some (but, again, not all) of those are
+    subdivided into even smaller rectangles of equal size.
+
+<h2><a name="AdaptiveExample"></a>NCL example</h2>
+
+<table BORDER=1 CELLPADDING=5>
+<tr>
+<th COLSPAN=4>script: <a href="Scripts/adaptive.html">adaptive.ncl</a>
+data file: <a
+HREF="fvgcm_amr.delp.000240.000.html">fvgcm_amr.delp.000240.000.nc</a><br>
+
+<tr>
+<td><a href="Images/adaptive.1.gif"><img src="Images/adaptive.sm.1.gif"></a>
+<td><a href="Images/adaptive.2.gif"><img src="Images/adaptive.sm.2.gif"></a>
+<td><a href="Images/adaptive.3.gif"><img src="Images/adaptive.sm.3.gif"></a>
+<td><a href="Images/adaptive.4.gif"><img src="Images/adaptive.sm.4.gif"></a>
+
+<tr>
+<td align=center>frame 1
+<td align=center>frame 2
+<td align=center>frame 3
+<td align=center>frame 4
+
+</table>
+
+<hr>
+<h2><a name="Arpege">ARPEGE grids:</a></h2>
+
+    We have plotted such a grid that came from from Christophe Cassou.
+    An organization that seems to use these is "Meteo-France".
+<p>
+    This grid is similar to the ISCCP grid, but with somewhat finer
+    resolution.  Also, the grid is rotated with respect to the globe 
+    so as to put its poles somewhere other than at the North and South Pole.
+<p>
+    This grid is being handled using Dave Brown's adaptation of a code
+    called "<a
+    href="http://www-2.cs.cmu.edu/~quake/triangle.html">Triangle</a>,"
+    written by Jonathan Richard Shewchuk.
+
+<h2><a name="SeamExample"></a>NCL example</h2>
+
+<table BORDER=1 CELLPADDING=5>
+<tr>
+<th COLSPAN=2>script: <a href="Scripts/arpege.html">arpege.ncl</a>
+
+<tr>
+<td><a href="Images/arpege.1.png"><img src="Images/arpege.sm.1.png"></a>
+<td><a href="Images/arpege.2.png"><img src="Images/arpege.sm.2.png"></a>
+
+<tr>
+<td align=center>frame 1
+<td align=center>frame 2
+
+</table>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Graphics/contour_grids.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:54 GMT -->
+</html>

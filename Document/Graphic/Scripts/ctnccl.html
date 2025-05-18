@@ -1,0 +1,76 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;
+;  Open a netCDF file containing data off the coast of North Carolina.
+;
+;  This data is from the Naval Research Laboratory at the Stennis
+;  Space Center. For more information about this grid, see the
+;  article "Application of a Shelf-Scale Modeul to Wave-Induced
+;  Circulation: Rip Currents" (Mark Cobb and Cheryl Ann Blain,
+;  Ocean Dynamics and Prediction Branch).
+;
+  f   = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/ctnccl.nc","r")
+  dat = f->dat
+
+;
+; Create colormap.
+;
+  cmap = new((/104,3/),float)
+  cmap(0,:) = (/1.,1.,1./)
+  cmap(1,:) = (/0.,0.,0./)
+  cmap(2,:) = (/.5,.5,.5/)
+  cmap(3,:) = (/.8,.8,.8/)
+
+  iofc = 151
+  iolc = 250
+  do i=151,250
+    p = (1.*iolc-i)/(1.*iolc-1.*iofc)
+    q = (i-1.*iofc)/(1.*iolc-1.*iofc)
+    cmap(i-147,:) = (/0.,p,q/)
+  end do
+
+  wks = gsn_open_wks("ncgm","ctnccl")
+  gsn_define_colormap(wks,cmap)
+
+  res                     = True
+  res@gsnMaximize         = True
+  res@gsnSpreadColors     = True
+  res@gsnSpreadColorStart = 4
+
+  res@sfXArray            = f->lon
+  res@sfYArray            = f->lat
+  res@sfElementNodes      = f->ele
+  res@sfFirstNodeIndex    = 1
+
+  res@cnFillOn            = True
+  res@cnFillMode          = "RasterFill"
+  res@cnRasterSmoothingOn = True
+
+  res@lbLabelAutoStride   = True
+
+  contour = gsn_csm_contour(wks,dat,res)
+
+;
+; Get ready to overlay on a CE map.
+;
+  getvalues contour@data
+    "sfXCActualStartF" : xs
+    "sfXCActualEndF"   : xe
+    "sfYCActualStartF" : ys
+    "sfYCActualEndF"   : ye
+  end getvalues
+
+  res@mpDataBaseVersion     = "MediumRes"
+  res@mpLimitMode           = "LatLon"
+  res@mpMinLonF             = xs
+  res@mpMaxLonF             = xe
+  res@mpMinLatF             = ys
+  res@mpMaxLatF             = ye
+  res@mpPerimOn             = False
+
+  res@pmTickMarkDisplayMode = "Always"
+
+  map = gsn_csm_contour_map(wks,dat,res)
+end

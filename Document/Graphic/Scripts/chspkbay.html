@@ -1,0 +1,81 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;
+;  Open a netCDF file containing the Chesapeake Bay data.
+;
+;  This data is from the Chesapeake Community Model Program Quoddy
+;  model:
+;
+;    http://ccmp.chesapeake.org
+;
+;  using the NOAA/NOS standardized hydrodynamic model NetCDF format:
+;
+;    https://sourceforge.net/projects/oceanmodelfiles
+;
+  f     = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/ctcbay.nc","r")
+  depth = f->depth
+
+  wks = gsn_open_wks("ncgm","chspkbay")
+  gsn_define_colormap(wks,"rainbow+gray")
+
+  res                     = True
+  res@gsnMaximize         = True
+  res@gsnSpreadColors     = True
+  res@gsnSpreadColorStart = 15         ; start with lighter purple
+  res@gsnSpreadColorEnd   = -2         ; make sure not to include gray
+
+  res@sfXArray            = f->lon
+  res@sfYArray            = f->lat
+  res@sfElementNodes      = f->ele
+  res@sfFirstNodeIndex    = 1
+
+  res@cnFillOn            = True 
+  res@cnLinesOn           = False
+
+  res@lbOrientation       = "Vertical"
+  res@lbLabelAutoStride   = True
+
+  contour = gsn_csm_contour(wks,depth,res)
+
+;
+; Get ready to overlay on a cylindrical equidistant map.
+;
+  getvalues contour@data
+    "sfXCActualStartF" : xs
+    "sfXCActualEndF"   : xe
+    "sfYCActualStartF" : ys
+    "sfYCActualEndF"   : ye
+  end getvalues
+
+;
+; If you want high resolution map coastlines, download the RANGS/GSHHS
+; files from:
+;
+;     http://www.io-warnemuende.de/homepages/rfeistel/index.html
+;
+; The files you need are:
+;
+;   rangs(0).zip    gshhs(0).zip
+;   rangs(1).zip    gshhs(1).zip
+;   rangs(2).zip    gshhs(2).zip
+;   rangs(3).zip    gshhs(3).zip
+;   rangs(4).zip    gshhs(4).zip
+;
+; Once you unzip these files, put them in the directory
+; $NCARG_ROOTlib/ncarg/database/rangs
+;
+; Now you can change the following resource to "HighRes".
+;
+  res@mpDataBaseVersion     = "MediumRes"
+  res@mpLimitMode           = "LatLon"
+  res@mpMinLonF             = xs
+  res@mpMaxLonF             = xe
+  res@mpMinLatF             = ys
+  res@mpMaxLatF             = ye
+
+  res@pmTickMarkDisplayMode = "Always"
+
+  map = gsn_csm_contour_map(wks,depth,res)
+end

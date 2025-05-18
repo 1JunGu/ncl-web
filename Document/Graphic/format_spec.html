@@ -1,0 +1,602 @@
+<html>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Graphics/format_spec.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:30 GMT -->
+<head>
+<meta name="description" content="NCL format specifications">
+<meta name="keywords" content="NCL, string format, specification">
+<title>Format conversion specification strings</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../index-2.html">NCL Home ></a>
+<a class=crumb href="../index-2.html">Documentation ></a>
+<a class=crumb href="index-2.html">Graphics </a>
+
+<br>
+
+<h1>Format conversion specification strings</h1>
+
+NCL and the HLU library provide facilities for creating formatted
+strings representing numerical data items using a format conversion
+specifier that is modeled after and extends C language print format
+specifiers.  They support very detailed control of the appearance of
+numerical output, including access to typographical features such as
+superscripting for exponents. Specifying formatting requirements in
+this fashion is somewhat tedious and is seen as an interim solution.
+Eventually, a <strong>Format</strong> object class may be created that
+will allow you to specify format conversions using resources tied to
+each formatting option. However, the string conversion specification
+does have the virtue of compactness and will continue to be
+supported. Currently, NCL and the HLU library only support formatting
+for floating point values. However, reasonable output can be generated
+for integers as well if they are first converted to an equivalent
+floating point value. Both the <strong>ContourPlot</strong> and
+<strong>TickMark</strong> classes use the format conversion facilities
+to control the appearance of their numerical labels. As yet, there are
+no public entry points allowing the user to directly specify format
+conversions.
+
+<p>Note that a number of the format options relate to an output field
+width defined in terms of a character count within which the converted
+number is to fit. These options do not have well-defined
+behavior for variable-width (proportionally spaced) fonts. Also, as in
+standard C (and unlike Fortran), the conversion is printed even if it
+contains more characters than the number specified for the field width.
+
+<p>Within a string, a C-language conversion specifier is signaled by
+the presence of an '%' character. You supply conversion specifier
+strings as the value of string resources specifying the format for
+some set of numbers that will appear in the output plot. In this
+context, a leading signal character is unnecessary and is not
+understood. When conversion specifiers are recognized within
+strings, they will be signaled--as in C--using the '%' character.
+
+<p>After the signal character, C conversion specifiers consist of a
+number of 'flag' characters followed by one or two conversion
+'fields': for floating point numbers these specify the output field
+width and (depending on what follows) either the number of significant
+digits or the number of digits following the decimal point. A C
+conversion specifier string ends with a one-character conversion
+specifier, possibly preceded by a one-character conversion qualifier.
+Conversion specifiers slightly modify and significantly extend this
+general model. The format specification eliminates the alternate
+interpretation of the second C conversion field, but uses additional
+flag characters to signal several more conversion fields. As in C, the
+conversion string ends with a one-character conversion specifier,
+although currently NCL and the HLU library recognize fewer conversion
+specifiers than C and do not support any conversion qualifier
+characters.
+
+<p>The default approachh, when only a minimal format conversion string
+is specified, is to output the value using the least number of
+characters possible. It must be noted that although the format
+specification is in general a superset of corresponding features from
+the C language standard, it does not claim to follow the C standard in
+every detail.
+
+<h3>Flag characters</h3>
+
+In general, NCL and the HLU library try to give the format flag
+characters used by C the same basic meaning as C does. This table of
+format flag characters gives their conventional names and meaning:
+
+<pre>
++---------------------------------------------------------------+
+|		Format flag characters				|
+|---------------------------------------------------------------|
+| CHARACTER	| NAME and EFFECT				|
+|===============================================================|
+|	+	| Plus: generate a leading plus sign for	|
+|		| positive values.				|
+|---------------------------------------------------------------|
+|	-	| Minus: left-justify the conversion within the |
+|		| field.					|
+|---------------------------------------------------------------|
+|	#	| Pound: force a trailing decimal point.	| 
+|		| 						|
+|---------------------------------------------------------------|
+|	0	| Zero: first, fill with zeros to account for 	|
+|		| all significant digits to the right of the	|
+|		| decimal point; then, if field width is 	|
+|		| greater than the current string length, fill	|
+|		| to field width, left or right depending on	|
+|		| the justification.				|
+|---------------------------------------------------------------|
+|    &lt;space&gt;    | Space: generate a leading space for positive  |
+|		| values if the '+' flag is not also present.	|
+|---------------------------------------------------------------|
+|	!	| Exclamation: If exponential format is in 	|
+|		| effect force mantissas of 1 to print.		|
+|---------------------------------------------------------------|
+|	,	| Comma: use comma (',') as the decimal point 	|
+|		| instead of dot ('.').				|
+|---------------------------------------------------------------|
+|	@	| At-sign: force initial or trailing zero where |
+|		| a decimal point would otherwise be the first  |
+|		| or last character.				|
+|---------------------------------------------------------------|
+|	&	| Ampersand: the character following this flag	|
+|		| becomes the fill character used instead of	|
+|		| spaces to fill in otherwise unoccupied places	|
+|		| within the width of the field. 		| 
++---------------------------------------------------------------+
+</pre>
+
+Note that the way NCL/the HLUs handle filling of the output field
+using zeros ('0') is different from the way they fill using arbitrary
+characters specified with the Ampersand flag. When zero is the fill
+character, sign characters ('+' or '-' or &lt;space&gt;) precede any
+leading zeros. When any other fill character is used, the sign
+characters follow any leading instances of the fill character.
+
+<h3>Conversion fields</h3><p>
+
+The use of the term <em>field</em> could be somewhat confusing in this
+context. What is meant here are certain options specified using
+numbers within the format conversion string itself. Some of these
+fields specify attributes of the "field" within which the converted
+number is printed in the output plot. Wherever the context does not
+make it clear, the phrases "conversion field" and "output field" will
+be used to differentiate between the two uses of the word.
+
+<p>As with C-language format conversion specifiers, any digits
+immediately following the recognized flag characters (other than an
+initial zero ('0'), since it is a flag character) specify the width in
+characters of the output field. All other conversion fields are
+preceded by a special character signaling the conversion field type,
+and may appear in any order following any flags and/or field width
+specification digits. The digits making up each conversion field are
+interpreted as a single integer read from left to right. Note that for
+all conversion fields, an asterisk ('*') character may take the place
+of the digits, and implies that the field value is to be determined
+dynamically. The code internal to the object that calls the actual
+formatting routine would then be allowed to supply a value for the
+conversion field based on its own criteria. If it chooses not to
+supply a value for any dynamic conversion field, the formatting
+routine will act as if the field had not been specified at all. As a
+special shortcut, you can give <em>all</em> otherwise unspecified
+conversion fields the dynamic attribute by either replacing or
+following the the output field width conversion field with the
+characters '*+'. Some of the conversion fields have default values;
+others are ignored when left unspecified. Here is a table of the
+conversion fields:
+
+<pre>
++---------------------------------------------------------------+
+|		Conversion fields				|
+|---------------------------------------------------------------|
+| SIGNAL CHAR	| NAME and MEANING				|
+|===============================================================|
+|    &lt;none&gt;     | Field width: specifies the output field       |
+|		| width in characters. By default, the output 	|
+|		| field width is equal to the width required	|
+|		| to represent the string. The field width	|
+|		| conversion field must directly follow any 	|
+|		| format conversion flags.			|
+|---------------------------------------------------------------|
+|	.	| Significant digits: specifies the number of 	|
+|		| significant digits used to express the 	|
+|		| output value. Note that for the 'f', 'e', and |
+|		| 'E' conversion specifiers this is a departure |
+|		| from the C standard where the '.' field 	|
+|		| specifies the number of digits to the right 	|
+|		| of the decimal point. Use the leftmost 	|
+|		| significant digit field (';') in conjunction  |
+|		| with the significant digit field to specify a |
+|		| constant number of fraction digits. Remember 	|
+|		| that zeroes to the right of the rightmost 	|
+|		| non-zero digit will not be included in the    |
+|		| output string unless the zero flag character  |
+|		| ('0') is specified. Default: 6		|
+|---------------------------------------------------------------|
+|	;	| Leftmost significant digit: specifies the 	|
+|		| digit position (in a decimal system) that is  |
+|		| to be considered the leftmost significant     |
+|		| digit. The units position (the digit directly |
+|		| to the left of the decimal point) is counted  |
+|		| as digit position 0, and positions are 	|
+|		| counted positively towards the left. This	|
+|		| conversion field allows you to format a group |
+|		| of numbers in a uniform fashion, usually	|
+|		| based on the value of the largest number in	|
+|		| the group. To achieve this, you would 	|
+|		| normally set the field using the dynamic 	|
+|		| specifier--the asterisk character ('*')--so	|
+|		| that the code invoking the formatting routine |
+|		| can specify this conversion field based on	|
+|		| its knowledge of each number's value relative	|
+|		| to the group of numbers with which it is 	|
+|		| associated. If left unspecified, the leftmost |
+|		| significant digit is the digit position of 	|
+|		| the number's actual most significant digit. 	|
+|---------------------------------------------------------------|
+|	^	| Exponent field specifier: this conversion	|
+|		| field is unusual in that one or two exponent  |
+|		| flag characters may precede the field value.	|
+|		| Directly after the signal character, either  	|
+|		| the letter 'a' or the letter 's' may appear.	|
+|		| Next may appear the character '+'. If no 	|
+|		| letter appears, the exponent field is written	|
+|		| in the form 'exxx...' or 'Exxx...', depending,|
+|		| as in the C language, on the case of the final|
+|		| conversion specifier character. The letter 'a'|
+|		| means that the exponent is written in 	|
+|		| 'asterisk' format: 'x10**xxx...'. The letter	|
+|		| 's' causes it to be written as a superscript	|
+|		| using low-level library function codes. This  |
+|		| format cannot be rendered in ascii, but looks |
+|		| approximately like 'x10^^^'. The plus		|
+|		| character indicates that positive 		|
+|		| exponent values should be preceded by a '+'	|
+|		| sign. The numerical value specifies the 	| 
+|		| number of digits to use in the exponent. If	|
+|		| unspecified, the exponent will be expressed 	|
+|		| using the fewest digits possible.		|
+|---------------------------------------------------------------|
+|	?	| Exponent switch length: When the conversion	|
+|		| specifier is 'g' or 'G', this conversion 	|
+|		| field specifies that the non-exponential 	|
+|		| format should be used as long as it requires  |
+|		| no more characters than the field's value to 	|
+|		| express. Otherwise, the format using the  	|
+|		| fewest characters should be used. Default: 5	|
+|---------------------------------------------------------------|
+|	~	| Point Position: If an output field width is 	|
+|		| specified this conversion field specifies	|
+|		| the position, counting from the left edge of	|
+|		| output field, where the decimal point is to 	|
+|		| appear. If it is not possible to place the	|
+|		| decimal point in the requested position,	|
+|		| it will be placed as near to it as possible. 	|
+|		| Note that use of this conversion field 	|
+|		| overrides any justification flags. As long as |
+|		| a fixed font is used, this field allows you   |
+|		| to align vertical columns of numbers based on |
+|		| the decimal point position.			|
++---------------------------------------------------------------+
+</pre>
+
+ 
+<h3>Conversion specifiers</h3>
+
+Following the conversion fields, a conversion string ends with
+a one-character conversion string. Five characters are currently 
+recognized:
+
+<pre>
++---------------------------------------------------------------+
+|		Conversion specifiers				|
+|---------------------------------------------------------------|
+| CHARACTER	| NAME and MEANING				|
+|===============================================================|
+|	f	| Floating point format: the number is 		|
+|		| expressed in non-exponential format 		|
+|		| regardless of its size.			|
+|---------------------------------------------------------------|
+|	e	| Exponential format, lowercase: the number is  |
+|		| expressed using a exponential format. If the	|
+|		| letters 'a' or 's' do not appear as part of 	|
+|		| the exponential conversion field, the exponent|
+|		| is preceded by the character 'e' (lowercase). |
+|---------------------------------------------------------------|
+|	E	| Exponential format, uppercase: the number is  |
+|		| expressed using a exponential format. If the	|
+|		| letters 'a' or 's' do not appear as part of 	|
+|		| the exponential conversion field, the exponent|
+|		| is preceded by the character 'E' (uppercase). |
+|---------------------------------------------------------------|
+|	g	| Generic format, lowercase: if the number can  |
+|		| be expressed in a non-exponential format using|
+|		| fewer digits than the value specified by the 	|
+|		| exponent switch length conversion field 	|
+|		| (default: 5), then the non-exponential 	|
+|		| format is used. Otherwise the format using	|
+|		| the fewest characters is used. If the 	|
+|		| exponential format is used and the		|
+|		| letters 'a' or 's' do not appear as part of 	|
+|		| the exponential conversion field, the exponent|
+|		| is preceded by the character 'e' (lowercase). |
+|---------------------------------------------------------------|
+|	G	| Generic format, uppercase: if the number can  |
+|		| be expressed in a non-exponential format using|
+|		| fewer digits than the value specified by the 	|
+|		| exponent switch length conversion field 	|
+|		| (default: 5), then the non-exponential 	|
+|		| format is used. Otherwise the format using	|
+|		| the fewest characters is used. If the 	|
+|		| exponential format is used and the		|
+|		| letters 'a' or 's' do not appear as part of 	|
+|		| the exponential conversion field, the exponent|
+|		| is preceded by the character 'E' (uppercase). |
++---------------------------------------------------------------+
+</pre>
+<p>
+
+					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Graphics/format_spec.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 15:19:30 GMT -->
+</html>

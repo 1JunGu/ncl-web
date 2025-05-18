@@ -1,0 +1,75 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;
+; This grid came to us via Dave Randall, Todd Ringler, and Ross Heikes
+; of CSU. The data for this mesh were originally downloaded from:
+;
+;   http://kiwi.atmos.colostate.edu:16080/BUGS/projects/geodesic/
+;
+; The above URL doesn't seem to be active anymore. Here's a new URL:
+;
+;   http://kiwi.atmos.colostate.edu/BUGS/geodesic/interpolate.html
+;
+  r2d = 57.2957795             ; radians to degrees
+  f = addfile("$NCARG_ROOT/lib/ncarg/data/cdf/hswm_d000000p000.g2.nc","r")
+
+  wks = gsn_open_wks("ncgm","geodesic")
+  gsn_define_colormap(wks,"gui_default")
+
+  x  = f->grid_center_lon * r2d
+  y  = f->grid_center_lat * r2d
+  cx = f->grid_corner_lon * r2d
+  cy = f->grid_corner_lat * r2d
+  ke = f->kinetic_energy(2,:)
+  ix = ispan(0,dimsizes(x) -1,1)
+
+  res                      = True
+  res@gsnMaximize          = True
+  res@gsnSpreadColors      = True
+
+  res@sfXArray             = x
+  res@sfYArray             = y
+  res@sfXCellBounds        = cx
+  res@sfYCellBounds        = cy
+
+  res@cnFillOn             = True
+  res@cnFillMode           = "RasterFill"
+  res@cnLinesOn            = False
+  res@cnLineLabelsOn       = False
+  res@cnMaxLevelCount      = 22
+
+  res@lbLabelAutoStride    = True
+  res@lbBoxLinesOn         = False
+
+  res@tiMainString         = "2562 Element Geodesic grid - kinetic energy"
+
+  res@mpProjection      = "Orthographic"
+  res@mpDataBaseVersion = "MediumRes"
+  res@mpCenterLatF      =  40
+  res@mpCenterLonF      = -100
+  res@mpGridAndLimbOn   = True
+
+  map = gsn_csm_contour_map(wks,ke,res)
+
+;
+; It is faster to use a setvalues call to set these resources,
+; than to call gsn_csm_contour_map again.  We are just using
+; gsn_csm_contour_map here for convenience.
+;
+; Turn on smoothing.
+;
+  res@cnRasterSmoothingOn = True
+  res@tiMainString        = "Smooth raster contouring"
+
+  map = gsn_csm_contour_map(wks,ke,res)
+
+;
+; Change the type of contour fill.
+;
+  res@cnFillMode   = "AreaFill"
+  res@tiMainString = "Area fill contouring"
+
+  map = gsn_csm_contour_map(wks,ke,res)
+end

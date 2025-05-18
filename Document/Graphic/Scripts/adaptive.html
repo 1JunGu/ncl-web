@@ -1,0 +1,83 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+
+begin
+;
+; This NCL script illustrates how to create contours of an adaptive
+; mesh, given to us by Christiane Jablonowski of NCAR/UCAR.
+;
+; The adaptive mesh refinement (AMR) strategy utilizes a block-data
+; structure on the sphere.
+;
+  f = addfile("fvgcm_amr.delp.000240.000.nc","r")
+  H = f->H
+
+  wks = gsn_open_wks("ncgm","adaptive")
+  gsn_define_colormap(wks,"BlAqGrYeOrReVi200")
+
+  res                       = True
+  res@gsnMaximize           = True
+  res@gsnSpreadColors       = True
+
+  res@sfXArray              = f->lon
+  res@sfYArray              = f->lat
+
+  res@cnFillOn              = True
+  res@cnFillMode            = "RasterFill"
+  res@cnLinesOn             = False
+  res@cnLineLabelsOn        = False
+  res@cnMaxLevelCount       = 255
+;  res@cnVerboseTriangleInfo = True
+
+  res@lbBoxLinesOn          = False
+  res@lbLabelAutoStride     = True
+
+  res@tiMainString          = "Adaptive grid " + f->H@long_name
+
+  contour = gsn_csm_contour(wks,H,res)
+
+;
+; Get ready to overlay on a map.
+;
+  getvalues contour@data
+    "sfXCActualStartF" : xs
+    "sfXCActualEndF"   : xe
+    "sfYCActualStartF" : ys
+    "sfYCActualEndF"   : ye
+  end getvalues
+
+  res@mpProjection      = "Orthographic"
+  res@mpDataBaseVersion = "MediumRes"
+  res@mpLimitMode       = "LatLon"
+  res@mpMinLonF         = xs
+  res@mpMaxLonF         = xe
+  res@mpMinLatF         = ys
+  res@mpMaxLatF         = ye
+  res@mpCenterLatF      = 40
+  res@mpCenterLonF      = -130
+
+  map = gsn_csm_contour_map(wks,H,res)
+
+;
+; Change to a CE projection.
+;
+  delete(res@mpProjection)
+
+  res@mpCenterLatF = 0
+  res@mpCenterLonF = 0
+
+  map = gsn_csm_contour_map_ce(wks,H,res)
+
+;
+; Turn on smoothing.  Use "setvalues" since it is faster than
+; calling "gsn_csm_contour_map_ce" again.
+;
+  setvalues map@contour
+    "cnRasterSmoothingOn" : True
+  end setvalues
+  setvalues map
+    "tiMainString" : H@long_name + " smoothing on" 
+  end setvalues
+  draw(map)
+  frame(wks)
+end

@@ -1,0 +1,604 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Graphics/Interfaces/gsn_panel.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:13 GMT -->
+<head>
+<meta name="description" content="NCL gsn functions (graphics routines)">
+<meta name="keywords" content="gsn_panel">
+<title>gsn_panel</title>
+</head>
+
+<body>
+	
+	<!-- main navigation include -->
+		<!-- NCL CSS -->
+	<link rel="stylesheet" href="../../../styles/ncl.css" type="text/css" media="all">
+	
+	
+		<!-- Equal Height Columns -->
+		<script type="text/javascript" src="../../../scripts/column_height_equal.js"></script>
+		
+		<!-- DOJO Expandable Tree Nav -->
+
+		<script type="text/javascript" src="../../../scripts/dojo/dojo.js"></script>
+		<script type="text/javascript">
+		
+		dojo.require("dojo.widget.TreeV3");
+		dojo.require("dojo.widget.TreeNodeV3");
+		dojo.require("dojo.widget.TreeLinkExtension");
+		dojo.require("dojo.widget.TreeBasicControllerV3");
+		dojo.hostenv.writeIncludes();
+
+		</script>
+		
+
+		<div id="top_colorbar"><!-- begin top_colorbar -->
+		</div><!-- end top_colorbar -->
+
+
+	<div id="nav_org_wrap"><!-- begin nav_org_wrap -->
+	<div id="nav_org"><!-- begin nav_org -->
+
+		<ul class="menubar">
+
+
+			<li><a class="trigger" href="../../../internal/index.html">&nbsp;</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ucar.edu/">UCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.ncar.ucar.edu/">NCAR</a>
+			</li>
+
+			<li><a class="trigger" href="http://www.cisl.ucar.edu/">CISL</a>
+			</li>
+		</ul>
+
+	</div><!-- end nav_org -->
+
+	<div id="search"><!-- begin search -->
+
+		<ul class="menubar">
+
+			<li><a class="trigger" href="../../../Download/index.html">Download</a>
+			</li>
+
+			<li><a class="trigger" href="../../../citation.html">Citing NCL</a>
+			</li>
+
+			<li><a class="trigger" href="../../../contributors.html">Contributors</a>
+			</li>
+
+		</ul>
+
+	</div><!-- end search -->
+
+	</div><!-- end nav_org_wrap -->
+	
+	
+	
+
+		<div id="nav_main_wrap"><!-- begin nav_main_wrap -->
+
+		<div id="nav_main"><!-- begin nav_main -->
+			<ul id="menubar_main">
+
+				<li>
+				<a href="../../Pivot_to_Python/september_2019_update.html" class="triggeryw">&#9733; UPDATED LETTER TO NCL USERS</a>
+				<li>
+				<a href="../../../index.html" class="triggeron">NCL</a>
+					<ul>
+                                          <li><a href="../../Pivot_to_Python/index.html">Pivot to Python</a>
+					  <li><a href="../../../overview.html" class="subitem">Overview</a></li>
+						<li><a href="../../../get_started.html" class="subitem">Getting Started</a> </li>
+						<li><a href="../../../gallery.html" class="subitem">Gallery</a></li>
+						<li><a href="../../../Download/index.html" class="subitem">Download</a></li>
+						<li><a href="../../../current_release.html" class="subitem">What's New</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>						
+						<li><a href="../../../citation.html" class="subitem">Citing NCL</a></li>
+					</ul>
+
+				</li>
+
+				<li>
+				<a href="../../../Applications/index.html" class="trigger">Examples</a>
+					<ul>
+						<li><a href="../../../Applications/index.html" class="subitem" title="Examples">All Examples</a></li>
+						<li><a href="../../../Applications/Templates/index.html" class="subitem">Templates</a></li>
+						<li><a href="../../../Applications/list_io.html" class="subitem">File I/O</a></li>
+						<li><a href="../../../Applications/list_data.html" class="subitem">Datasets</a></li>
+						<li><a href="../../../Applications/list_maps.html" class="subitem">Maps</a></li>
+						<li><a href="../../../Applications/list_models.html" class="subitem">Models</a></li>
+						<li><a href="../../../Applications/list_dataP.html" class="subitem">Data Analysis</a></li>
+						<li><a href="../../../Applications/list_ptypes.html" class="subitem">Plot Types</a></li>
+						<li><a href="../../../Applications/list_tech.html" class="subitem">Plot Techniques</a></li>
+						<li><a href="../../../Applications/list_special.html" class="subitem">Special Plots</a></li>
+						<li><a href="../../../Applications/list_grids.html" class="subitem">Non-uniform Grids</a></li>
+						<li><a href="../../../Applications/list_misc.html" class="subitem">Miscellaneous</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../Functions/list_alpha.html" class="trigger">Functions</a>
+					<ul>
+						<li><a href="../../Functions/list_alpha.html" class="subitem">Alphabetical Listing</a></li>
+						<li><a href="../../Functions/index.html" class="subitem">Category Listing</a></li>
+						<li><a href="../../Functions/list_type.html" class="subitem">Function-Type Listing</a></li>						
+					</ul>
+				</li>
+				
+				<li>
+				<a href="../Resources/index.html" class="trigger">Resources</a>
+					<ul>
+					  <li><a href="../Resources/list_alpha_res.html" class="subitem">Complete Listing</a></li>
+					
+						<li><a href="../Resources/am.html" class="subitem">am (annotation manager)</a></li>
+						<li><a href="../Resources/app.html" class="subitem">app (app)</a></li>
+						<li><a href="../Resources/ca.html" class="subitem">ca (coordinate array)</a></li>
+						<li><a href="../Resources/cn.html" class="subitem">cn (contour)</a></li>
+						<li><a href="../Resources/ct.html" class="subitem">ct (coordinate array table)</a></li>
+						<li><a href="../Resources/dc.html" class="subitem">dc (data comm)</a></li>
+						
+						<li><a href="../Resources/err.html" class="subitem">err (error)</a></li>
+						<li><a href="../Resources/gs.html" class="subitem">gs (graphics styles)</a></li>
+						<li><a href="../Resources/gsn.html" class="subitem">gsn (gsn high-level interfaces)</a></li>
+						<li><a href="../Resources/lb.html" class="subitem">lb (label bar)</a></li>
+						<li><a href="../Resources/lg.html" class="subitem">lg (legends)</a></li>
+						<li><a href="../Resources/mp.html" class="subitem">mp (maps)</a></li>
+						
+						<li><a href="../Resources/pm.html" class="subitem">pm (plot manager)</a></li>
+						<li><a href="../Resources/pr.html" class="subitem">pr (primitives)</a></li>
+						<li><a href="../Resources/sf.html" class="subitem">sf (scalar field)</a></li>
+						<li><a href="../Resources/st.html" class="subitem">st (streamline)</a></li>
+						<li><a href="../Resources/tf.html" class="subitem">tf (transform)</a></li>
+						<li><a href="../Resources/ti.html" class="subitem">ti (title)</a></li>
+						
+						<li><a href="../Resources/tm.html" class="subitem">tm (tickmark)</a></li>
+						<li><a href="../Resources/tr.html" class="subitem">tr (transformation)</a></li>
+						<li><a href="../Resources/tx.html" class="subitem">tx (text)</a></li>
+						<li><a href="../Resources/vc.html" class="subitem">vc (vectors)</a></li>
+						<li><a href="../Resources/vf.html" class="subitem">vf (vector field)</a></li>
+						<li><a href="../Resources/vp.html" class="subitem">vp (view port)</a></li>
+						
+						<li><a href="../Resources/wk.html" class="subitem">wk (workstation)</a></li>
+						<li><a href="../Resources/ws.html" class="subitem">ws (workspace)</a></li>
+						<li><a href="../Resources/xy.html" class="subitem">xy (xy plots)</a></li>						
+					</ul>
+        </li>
+
+				<li>
+				<a href="../../../links.html" class="trigger">Popular Links</a>
+					<ul>
+					<li><a href="../hlures.html" class="subitem">.hluresfile</a></li>
+					<li><a href="../color_table_gallery.html" class="subitem">Color Tables</a></li>
+					<li><a href="../font_tables.html" class="subitem">Font Tables</a></li>	
+					<li><a href="../../Language/error_messages.html" class="subitem">Error Messages</a></li>	
+					<li><a href="../Images/dashpatterns.png" class="subitem">Dash Pattern Table</a></li>	
+					<li><a href="../Images/fillpatterns.png" class="subitem">Fill Pattern Table</a></li>	
+					<li><a href="../Images/markers.png" class="subitem">Marker Table</a></li>
+					<li><a href="../map_projections.html" class="subitem">Map Projections</a></li>
+					<li><a href="../rangs.html" class="subitem">High Resolution Map Database</a></li>
+					<li><a href="../../../Applications/editor.html" class="subitem">Editor Enhancements</a></li>
+					<li><a href="../../Tools/ncl_convert2nc.html">ncl_convert2nc</a></li>
+					<li><a href="../../Tools/ncl_filedump.html">ncl_filedump</a></li>
+					<li><a href="../../Tools/index.html" class="subitem">Tools</a></li>
+					<li><a href="../../Tools/WRAPIT.html" class="subitem">WRAPIT</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../announcements.html" class="trigger">What's New</a>
+					<ul>
+					        <li><a href="../../../announcements.html" class="subitem">Announcements</a></li>
+						<li><a href="../../../current_release.html" class="subitem">In Latest Release</a></li>
+						<li><a href="../../../new_applications.html" class="subitem">In Application Examples</a></li>
+						<li><a href="../../../future_release.html" class="subitem">In Next Release</a></li>	
+						<li><a href="../../../prev_releases.html" class="subitem">In Previous Releases</a></li>
+					</ul>
+				</li>
+	
+
+				<li>
+				<a href="../../../Support/index.html" class='trigger'>Support</a>
+					<ul>
+						<li><a href="../../../Support/email_lists.html" class="subitem">Email Lists</a></li>
+						<li><a href="../../../Applications/editor.html" class="subitem">Editor enhancements</a></li>
+						<li><a href="../../Language/error_messages.html" class="subitem">Error messages</a></li>
+						<li><a href="../../Manuals/index.html" class="subitem">Manuals</a></li>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="../../../Training/index.html" class="subitem">Training</a></li>
+						<li><a href="../../../Training/Webinars/index.html" class="subitem">Webinars</a></li>
+						<li><a href="../../../Training/Workshops/index.html" class="subitem">Workshops</a></li>
+						<li><a href="../../index.html" class="subitem">Documentation</a></li>
+						<li><a href="../../../FAQ/index.html" class="subitem">FAQ</a></li>
+						<li><a href="../../../ftp_files.html" class="subitem">Uploading files via ftp</a></li>
+						<li><a href="../../../report_bug.html" class="subitem">Report Bugs</a></li>
+					</ul>
+				</li>
+
+				<li>
+				<a href="../../../External/index.html" class='trigger'>External</a>
+					<ul>
+						<li><a href="https://www2.cisl.ucar.edu/resources/computational-systems/geyser-and-caldera/visualization/using-ncl-the-cheyenne-environment">NCL on Cheyenne</a>
+						<li><a href="http://climatedataguide.ucar.edu/" class="subitem">Climate Data Guide</a></li>
+						<li><a href="https://code.zmaw.de/projects/cdo/" class="subitem">Climate Data Operators</a></li>
+						<li><a href="http://www.earthsystemmodeling.org/" class="subitem">Earth System Modeling Framework</a></li>
+						<li><a href="http://nco.sourceforge.net/" class="subitem">NetCDF Operators</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/" class="subitem">PyNGL</a></li>
+						<li><a href="http://www.pyngl.ucar.edu/Nio.shtml" class="subitem">PyNIO</a></li>
+					</ul>
+				</li>
+
+
+			<!-- end menubar_main -->		
+			</ul>
+		
+		<!-- end nav_main -->	
+		</div>
+		
+	<!-- end nav_main_wrap -->	
+  	</div>
+		
+			
+
+	
+	<div id="wrap"><!-- begin wrap -->
+	<div id="content"><!-- begin content -->
+	
+	<!-- ######### BEGIN EDITABLE PAGE CONTENT ######### -->
+
+			<div id="subheader"><!-- begin subheader -->
+			<map name="ncl-home">
+<area shape="rect" coords="0,0,65,40" href="../../../index-2.html">
+<area shape="rect" coords="540,0,615,40" href="http://www.ncar.ucar.edu/">
+<area shape="rect" coords="625,0,665,40" href="http://www.nsf.gov/">
+</map>
+
+	<div id="nclheader">
+	<img src="https://www.ncl.ucar.edu/Images/NCL_NCAR_NSF_banner.png" height=40 "NCL Website header" usemap="#ncl-home">
+	</div>
+
+
+			<div id="googlesearch">
+<form style="float:right" id="cse-search-box" action="http://google.com/cse">
+  <input type="hidden" name="cx" value="016712339613867830978:igijo92w2zo" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" size="31" maxlength="255" id="searchbox" /><label for="searchbox">Search</label>
+  <input type="hidden" name="hq" value="site:www.ncl.ucar.edu">
+</form>
+			</div><!-- end googlesearch -->
+
+			</div><!-- end subheader -->
+			
+			      <div id="general_main">
+
+<a class=crumb href="../../../index-2.html">NCL Home ></a>
+<a class=crumb href="../../index-2.html">Documentation ></a>
+<a class=crumb href="../index-2.html">Graphics</a> >
+<a class=crumb href="index-2.html">
+Graphical Interfaces</a> 
+<h1>gsn_panel</h1>
+
+<p>
+Draws multiple plots of identical size on a single frame.
+</p>
+
+<a name="Prototype"></a>
+<h2>Prototype</h2>
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"  ; This library is <b>automatically loaded</b>
+                                                          ; from NCL V6.2.0 onward.
+                                                          ; No need for user to explicitly load.
+
+	procedure gsn_panel (
+		wks       : graphic,  
+		plots [*] : graphic,  
+		dims  [*] : integer,  
+		res   [1] : logical   
+	)
+</pre>
+<a name="Arguments"></a>
+<h2>Arguments</h2>
+<em>wks</em>
+<p class=indent>A <a href="../../HLUs/Classes/Workstation.html"><strong>Workstation</strong></a>
+identifier.  The identifier is one returned either from calling
+<a href="gsn_open_wks.html"><strong>gsn_open_wks</strong></a> or calling <a href="../../Manuals/Ref_Manual/NclStatements.html#Create">create</a> to
+create a Workstation object.
+</p>
+<em>plots</em>
+<p class=indent>An array of plot identifiers, each one created by using one of the
+many <a href="index-2.html">gsn</a> functions, or by
+calling <a href="../../Manuals/Ref_Manual/NclStatements.html#Create">create</a> to create a <a href="../../HLUs/Classes/View.html"><strong>View</strong></a>
+object.</p>
+<p class=indent>
+</p>
+<em>dims</em>
+<p class=indent>An array of integers indicating the configuration of the plots on the
+frame.  <em>dims</em> can either be two integers representing the
+number of rows and columns of the paneled plots, or a list of integers
+representing the number of plots per row.
+</p>
+<em>res</em>
+<p class=indent>A variable containing an optional list of resources to apply to the
+paneled plots, attached as attributes. Set to True if you want the
+attached attributes to be applied, and False if you either don't have
+any resources to set, or you don't want the resources applied.
+</p>
+<a name="Description"></a>
+<h2>Description</h2>
+<p>
+This procedure draws multiple plots of <i>identical size</i> on a
+single frame. The plots are drawn from left to right, top to
+bottom. If the plots are not the same size, then unexpected results
+may occur.<p>
+
+The configuration of the plots on the frame are specified via the
+<em>dims</em> parameter. The default is for <em>dims</em> to represent
+the number of rows and columns of the plots. If the resource <a href="../Resources/gsn.html#gsnPanelRowSpec"><em>gsnPanelRowSpec</em></a> is set to True, then
+<em>dims</em> will represent the number of plots per row. <p>
+
+This procedure works best if each plot is same size or very close to
+the same size. The first valid plot in the list will be the one used
+to determine the scale factor for resizing all the plots.  For plots
+that are very different in size, it is better to use the resources
+<a href="../Resources/vp.html#vpXF"><em>vpXF</em></a>, <a href="../Resources/vp.html#vpYF"><em>vpYF</em></a>, <a href="../Resources/vp.html#vpWidthF"><em>vpWidthF</em></a>,
+and <a href="../Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> to position and resize
+each plot. See example 20 on the <a
+href="../../../Applications/panel.html">panel applications page</a>.  If your
+plots are close to the same size, you can use the resource <a href="../Resources/gsn.html#gsnPanelScalePlotIndex"><em>gsnPanelScalePlotIndex</em></a> to indicate which plot is
+used to determine the scale factor for resizing all the plots.
+<p>
+When using <strong>gsn_panel</strong> 
+you should not set <a href="../Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> to True 
+in the resource lists that control the look of the <i>individual</i> plots. 
+When paneling, <a href="../Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> should only 
+be set in the panel resource list.
+<p>
+If any of the plots are missing, then the location where the plot
+would normally be will be blank.<p>
+
+There are many resources specific to this procedure. See the <a href="../Resources/gsn.html">gsnPanel
+resources</a> for a full list.
+<p>
+
+<h3>Common labelbar</h3><br>
+A panel feature is to turn on a common labelbar by setting the special
+panel resource <a href="../Resources/gsn.html#gsnPanelLabelBar"><em>gsnPanelLabelBar</em></a> to True.
+<p>
+
+<strong>gsn_panel</strong> assumes that all of your
+plots are representable by the same labelbar, so you want to make
+sure that each plot has the same contour levels. You
+can use <a href="../Resources/cn.html#cnLevelSelectionMode"><em>cnLevelSelectionMode</em></a>
+and its associated resources to accomplish this. 
+Also, you'll want to set the <a href="../Resources/lb.html#lbLabelBarOn"><em>lbLabelBarOn</em></a> resource to False for each
+individual plot before you panel them, so you don't get both
+individual labelbars and a panel labelbar.
+<p>
+
+Weird quirk: if you have an array that holds all of your plot ids, the
+labelbar information is retrieved from the last valid plot in this
+array, even if you are plotting only a subset of plots from this
+array.
+<p>
+
+Some resources you can use to control labelbar appearance:
+
+<ul>
+
+<li>width of labelbar - <a href="../Resources/pm.html#pmLabelBarWidthF"><em>pmLabelBarWidthF</em></a>
+
+<li>height of labelbar - <a href="../Resources/pm.html#pmLabelBarHeightF"><em>pmLabelBarHeightF</em></a>
+
+<li>font height of labelbar labels - <a href="../Resources/lb.html#lbLabelFontHeightF"><em>lbLabelFontHeightF</em></a>
+
+<li>move labelbar perpendicularly to plot - <a href="../Resources/pm.html#pmLabelBarOrthogonalPosF"><em>pmLabelBarOrthogonalPosF</em></a>
+
+<li>move labelbar parallel to plot - <a href="../Resources/pm.html#pmLabelBarParallelPosF"><em>pmLabelBarParallelPosF</em></a>
+
+</ul>
+<p>
+
+<h3>Main title</h3><br>
+
+To add a main title, use
+<a href="../Resources/gsn.html#gsnPanelMainString"><em>gsnPanelMainString</em></a> resource.  This 
+resource was introduced in <a href="../../../prev_releases-2.html#6.4.0">V6.4.0</a>;
+you must use the old "txString" resource if you have an older version.
+Other "gsnPanelMain" resources are also recognized in V6.4.0. Here
+are a few:
+<p>
+
+<ul>
+<li><a href="../Resources/gsn.html#gsnPanelMainFont"><em>gsnPanelMainFont</em></a> - sets the font (default "helvetica")
+<li><a href="../Resources/gsn.html#gsnPanelMainFontHeightF"><em>gsnPanelMainFontHeightF</em></a> - sets the font height
+<li><a href="../Resources/gsn.html#gsnPanelMainFontColor"><em>gsnPanelMainFontColor</em></a> - sets the font color
+</ul>
+
+<p>
+
+For older versions of NCL, the "txString" is recognized as a special
+resource for this procedure, and not in the normal way
+that <a href="../Resources/tx.html#txString"><em>txString</em></a> is normally used.
+<p>
+
+Some resources you can use to control the main title appearance:
+
+<ul>
+
+<li>height of title - <a href="../Resources/tx.html#txFontHeightF"><em>txFontHeightF</em></a>
+
+<li>move title perpendicularly to plot - <a href="../Resources/tx.html#txPosYF"><em>txPosYF</em></a>
+
+<li>move title parallel to plot - <a href="../Resources/tx.html#txPosXF"><em>txPosXF</em></a>
+
+</ul>
+
+<h3>Figure strings</h3><br>
+
+You can add individual figure strings to each paneled plot by setting
+the special <a href="../Resources/gsn.html#gsnPanelFigureStrings"><em>gsnPanelFigureStrings</em></a>
+resource to an array of labels.  They will be applied to the plots
+from top to bottom, left to right.
+<p>
+
+Some resources you can use to control the figure strings:
+
+<ul>
+
+<li>height of figure strings - <a href="../Resources/gsn.html#gsnPanelFigureStringsFontHeightF"><em>gsnPanelFigureStringsFontHeightF</em></a>
+
+<li>justification point of figure strings - <a href="../Resources/am.html#amJust"><em>amJust</em></a>
+
+<li>move figure strings up or down - <a href="../Resources/am.html#amOrthogonalPosF"><em>amOrthogonalPosF</em></a>
+
+<li>move figure strings left or right - <a href="../Resources/am.html#amParallelPosF"><em>amParallelPosF</em></a>
+
+</ul>
+
+<h3>Plot Rotation</h3><br>
+
+If you want to change the rotation of the plots to landscape or
+portrait mode for PS or PDF, you need to set <a href="../Resources/gsn.html#gsnMaximize"><em>gsnMaximize</em></a> to True, and then set <a href="../Resources/gsn.html#gsnOrientation"><em>gsnOrientation</em></a> to "landscape" or "portrait". 
+<p>
+
+<h3>Paneling control</h3><br>
+
+There are special resources that you can use in
+<strong>gsn_panel</strong> to control the location
+and appearance of paneled plots:
+<p>
+
+By default, the paneled plots will fill up as much of a
+unit square as possible. To force the paneling to only
+use part of the unit square, set one or more of the
+following resources:
+
+<ul>
+<li><a href="../Resources/gsn.html#gsnPanelTop"><em>gsnPanelTop</em></a> - default = 1.0
+<li><a href="../Resources/gsn.html#gsnPanelBottom"><em>gsnPanelBottom</em></a> - default = 0.0
+<li><a href="../Resources/gsn.html#gsnPanelLeft"><em>gsnPanelLeft</em></a> - default = 0.0
+<li><a href="../Resources/gsn.html#gsnPanelRight"><em>gsnPanelRight</em></a> - default = 1.0
+</ul>
+
+The X,Y location of the top left corner of each paneled
+plot is calculated by <strong>gsn_panel</strong>. You
+can change these locations with the following resources:
+
+<ul>
+<li><a href="../Resources/gsn.html#gsnPanelXF"><em>gsnPanelXF</em></a>
+<li><a href="../Resources/gsn.html#gsnPanelYF"><em>gsnPanelYF</em></a>
+</ul>
+
+<p>
+
+To increase or decrease the amount of white space between paneled
+plots, use the resources:
+
+<ul>
+<li><a href="../Resources/gsn.html#gsnPanelYWhiteSpacePercent"><em>gsnPanelYWhiteSpacePercent</em></a> - default = 1.0 (1%)
+<li><a href="../Resources/gsn.html#gsnPanelXWhiteSpacePercent"><em>gsnPanelXWhiteSpacePercent</em></a> - default = 1.0 (1%)
+</ul>
+<p>
+
+
+<h3>Debugging</h3><br>
+
+If <strong>gsn_panel</strong> is not behaving as expected, you can
+set the <a href="../Resources/gsn.html#gsnPanelDebug"><em>gsnPanelDebug</em></a> to True. This will
+cause a bunch of output to be printed by <strong>gsn_panel</strong>
+indicating what X, Y positions (<a href="../Resources/vp.html#vpXF"><em>vpXF</em></a> and
+<a href="../Resources/vp.html#vpYF"><em>vpYF</em></a>) and height, width (<a href="../Resources/vp.html#vpHeightF"><em>vpHeightF</em></a> and <a href="../Resources/vp.html#vpWidthF"><em>vpWidthF</em></a>) values are being set for each plot.
+<p>
+
+You can then use this information to do your own paneling using vp*
+resources, and bypass <strong>gsn_panel</strong> entirely.  Of
+course, if you are generating a common labelbar or title, you will
+need to construct these yourself.
+<p>
+
+For several panel examples, see the suite of <a href="../../../Applications/panel.html">panel plot examples</a>
+in the applications section.
+
+
+</p><a name="See_also"></a>
+<h2>See Also</h2>
+<p>
+<a href="gsn_attach_plots.html"><strong>gsn_attach_plots</strong></a>
+
+<br>
+Special <a href="../Resources/gsn.html">gsn</a> resources
+</p><a name="Examples"></a>
+<h2>Examples</h2>
+<p>
+Run the script below for a couple of simple panel examples:
+
+<pre>
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+
+begin
+  PI = 3.14159
+  x  = <a href="../../Functions/Built-in/ispan.html"><strong>ispan</strong></a>(1,64,1)
+  y1 = <a href="../../Functions/Built-in/sin.html"><strong>sin</strong></a>(PI*x/32.)
+  y2 = <a href="../../Functions/Built-in/cos.html"><strong>cos</strong></a>(PI*x/32.)
+  y3 = <a href="../../Functions/Built-in/sin.html"><strong>sin</strong></a>(PI*x/64.)
+
+  wks = <a href="gsn_open_wks.html"><strong>gsn_open_wks</strong></a>("x11","panel")
+
+  xyres          = True
+  xyres@<a href="../Resources/gsn.html#gsnDraw"><em>gsnDraw</em></a>  = False
+  xyres@<a href="../Resources/gsn.html#gsnFrame"><em>gsnFrame</em></a> = False
+
+  xyres@<a href="../Resources/xy.html#xyLineColor"><em>xyLineColor</em></a> = "red"
+  xy1 = <a href="gsn_y.html"><strong>gsn_y</strong></a>(wks,y1,xyres)
+
+  xyres@<a href="../Resources/xy.html#xyLineColor"><em>xyLineColor</em></a> = "blue"
+  xy2 = <a href="gsn_y.html"><strong>gsn_y</strong></a>(wks,y2,xyres)
+
+  xyres@<a href="../Resources/xy.html#xyLineColor"><em>xyLineColor</em></a> = "green"
+  xy3 = <a href="gsn_y.html"><strong>gsn_y</strong></a>(wks,y3,xyres)
+
+;
+; Panel the plots, first using rows x columns, then using
+; number of plots per row
+;
+  panel_res                       = True
+  panel_res@<a href="../Resources/gsn.html#gsnPanelMainString"><em>gsnPanelMainString</em></a>         = "rows x columns"  ; use "txString" for older versions
+  panel_res@<a href="../Resources/gsn.html#gsnPanelFigureStrings"><em>gsnPanelFigureStrings</em></a> = (/"A","B","C"/)
+  <strong>gsn_panel</strong>(wks,(/xy1,xy2,xy3/),(/3,1/),panel_res)
+
+  panel_res@<a href="../Resources/gsn.html#gsnPanelMainString"><em>gsnPanelMainString</em></a>         = "plots per row" ; use "txString" for older versions
+  panel_res@<a href="../Resources/gsn.html#gsnPanelRowSpec"><em>gsnPanelRowSpec</em></a> = True
+  <strong>gsn_panel</strong>(wks,(/xy1,xy2,xy3/),(/2,1/),panel_res)
+
+end
+</pre>
+<p>
+
+For some application examples, see the suite of <a href="../../../Applications/panel.html">panel plot examples</a>.
+</p>					</div>
+
+					<p>&nbsp;</p>
+
+		<!-- begin footer -->
+		<div id="footer">
+		
+		<a href="mailto:ncladmin@ucar.edu">Contact the Webmaster</a>
+
+
+
+		<!-- end footer -->
+		</div>
+
+           <br class="clearboth"/>
+
+	   <!-- end content -->
+	</div>
+<!-- end wrap -->
+</div>
+</body>
+
+<!-- Mirrored from www.ncl.ucar.edu/Document/Graphics/Interfaces/gsn_panel.shtml by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2025 14:55:13 GMT -->
+</html>
